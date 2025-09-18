@@ -51,7 +51,7 @@ export default function Home() {
                   </p>
                 </CardHeader>
                 <CardFooter className="mt-auto">
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="outline" className="w-full bg-primary text-primary-foreground" asChild>
                     <Link href="/farm/1">View Details</Link>
                   </Button>
                 </CardFooter>
@@ -77,7 +77,7 @@ export default function Home() {
                   </p>
                 </CardHeader>
                 <CardFooter className="mt-auto">
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="outline" className="w-full bg-primary text-primary-foreground" asChild>
                     <Link href="/farm/2">View Details</Link>
                   </Button>
                 </CardFooter>
@@ -103,7 +103,7 @@ export default function Home() {
                   </p>
                 </CardHeader>
                 <CardFooter className="mt-auto">
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="outline" className="w-full bg-primary text-primary-foreground" asChild>
                     <Link href="/farm/3">View Details</Link>
                   </Button>
                 </CardFooter>

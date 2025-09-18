@@ -5,34 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, MapPin, ChevronRight } from "lucide-react"
-
-const farmCategories = [
-  "Apple Picking",
-  "Pumpkin Patches",
-  "Berry Picking",
-  "Corn Mazes",
-  "Christmas Trees",
-  "Strawberry Picking",
-  "Blueberry Picking",
-  "Peach Picking",
-  "Cherry Picking",
-  "Grape Picking",
-  "Sunflower Fields",
-  "Lavender Fields",
-]
-
-const locations = [
-  "Hudson Valley, NY",
-  "Lancaster County, PA",
-  "Sonoma County, CA",
-  "Napa Valley, CA",
-  "Door County, WI",
-  "Finger Lakes, NY",
-  "Burlington, VT",
-  "Asheville, NC",
-  "Portland, OR",
-  "Austin, TX",
-]
+import { farmCategories, locations } from "@/data/search-data"
 
 export default function SearchBox() {
   const [categoryQuery, setCategoryQuery] = useState("")
@@ -68,7 +41,7 @@ export default function SearchBox() {
 
   return (
     <>
-      {/* Mobile Search Form */}
+      {/* Mobile Search Form - Vertical Layout */}
       <div className="md:hidden max-w-md mx-auto space-y-3">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
@@ -135,19 +108,81 @@ export default function SearchBox() {
         </Button>
       </div>
 
-      {/* Desktop CTA Button */}
-      <div className="hidden md:block">
-        <Button
-          size="lg"
-          className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground"
-          style={{ backgroundColor: "#16a34a" }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#15803d")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#16a34a")}
-          onClick={handleFindFarmsClick}
-        >
-          Find Farms Near You
-          <ChevronRight className="ml-2 h-5 w-5" />
-        </Button>
+      {/* Desktop Search Form - Horizontal Layout */}
+      <div className="hidden md:block max-w-4xl mx-auto">
+        <div className="flex gap-4 items-end">
+          <div className="flex-1 relative">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
+              <Input
+                placeholder="e.g., apples, pumpkins, Christmas trees"
+                className="pl-10 h-12 text-base"
+                value={categoryQuery}
+                onChange={(e) => setCategoryQuery(e.target.value)}
+                onFocus={() => setShowCategorySuggestions(true)}
+                onBlur={() => setTimeout(() => setShowCategorySuggestions(false), 200)}
+                onKeyPress={handleKeyPress}
+              />
+              {showCategorySuggestions && categoryQuery && filteredCategories.length > 0 && (
+                <div className="absolute top-full left-0 right-0 bg-background border border-border rounded-md shadow-lg z-20 mt-1">
+                  {filteredCategories.map((category, index) => (
+                    <button
+                      key={index}
+                      className="w-full text-left px-4 py-2 hover:bg-muted transition-colors text-sm"
+                      onClick={() => {
+                        setCategoryQuery(category)
+                        setShowCategorySuggestions(false)
+                      }}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="flex-1 relative">
+            <div className="relative">
+              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
+              <Input
+                placeholder="Enter city or zip code"
+                className="pl-10 h-12 text-base"
+                value={locationQuery}
+                onChange={(e) => setLocationQuery(e.target.value)}
+                onFocus={() => setShowLocationSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowLocationSuggestions(false), 200)}
+                onKeyPress={handleKeyPress}
+              />
+              {showLocationSuggestions && locationQuery && filteredLocations.length > 0 && (
+                <div className="absolute top-full left-0 right-0 bg-background border border-border rounded-md shadow-lg z-20 mt-1">
+                  {filteredLocations.map((location, index) => (
+                    <button
+                      key={index}
+                      className="w-full text-left px-4 py-2 hover:bg-muted transition-colors text-sm"
+                      onClick={() => {
+                        setLocationQuery(location)
+                        setShowLocationSuggestions(false)
+                      }}
+                    >
+                      {location}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="flex-shrink-0">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 px-8"
+              onClick={handleSearch}
+            >
+              Search Farms
+            </Button>
+          </div>
+        </div>
       </div>
     </>
   )

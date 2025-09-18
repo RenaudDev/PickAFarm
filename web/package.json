@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-farm-data.js",
+    "prebuild": "node scripts/generate-farm-data.js && node scripts/generate-search-data.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-data": "node scripts/generate-farm-data.js"
+    "generate-data": "node scripts/generate-farm-data.js",
+    "generate-search-data": "node scripts/generate-search-data.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
