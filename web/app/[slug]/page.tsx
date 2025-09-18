@@ -245,16 +245,6 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-secondary/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Find Your Perfect Farm?</h2>
-          <p className="text-muted-foreground text-lg mb-8">
-            Browse farms near you and discover the best local agricultural experiences.
-          </p>
-          {/* CTA Button will be rendered by CategoryPageClient */}
-        </div>
-      </section>
 
       <FarmFooter />
     </div>
