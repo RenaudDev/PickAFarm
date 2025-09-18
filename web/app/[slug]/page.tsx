@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 
 // Mock data - in real app this would come from props/API
 const categoryData = {
-  "christmas-tree": {
+  "christmas-tree-farms": {
     name: "Christmas Tree Farms",
     totalFarms: 47,
     description:
@@ -95,7 +95,7 @@ const categoryData = {
 
 export default async function CategoryLandingPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const category = categoryData[slug as keyof typeof categoryData] || categoryData["christmas-tree"]
+  const category = categoryData[slug as keyof typeof categoryData] || categoryData["christmas-tree-farms"]
 
   return (
     <div className="min-h-screen bg-background">
