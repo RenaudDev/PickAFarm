@@ -109,7 +109,7 @@ export default function SearchBox() {
       </div>
 
       {/* Desktop Search Form - Horizontal Layout */}
-      <div className="hidden md:block max-w-4xl mx-auto">
+      <div className="hidden md:block max-w-3xl mx-auto">
         <div className="flex gap-4 items-end">
           <div className="flex-1 relative">
             <div className="relative">

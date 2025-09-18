@@ -123,20 +123,20 @@ function SearchResultsContent() {
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
 
-      <main className="flex-1 max-w-7xl mt-12 mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 max-w-6xl mx-auto text-center">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{getPageTitle()}</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-2">{getPageTitle()}</h1>
             <p className="text-muted-foreground">
               {filteredFarms.length} farm{filteredFarms.length !== 1 ? "s" : ""} found
             </p>
           </div>
-          <Button className="mt-4 md:mt-0 bg-primary hover:bg-primary/90 text-primary-foreground">
+          
+        </div>
+        <Button className="mt-4 md:mt-0 bg-primary hover:bg-primary/90 text-primary-foreground">
             <Bell className="w-4 h-4 mr-2" />
             Get Notified
           </Button>
-        </div>
-
         <div className="flex flex-col sm:flex-row gap-4 mb-8 p-4 bg-card rounded-lg shadow-sm border">
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-muted-foreground" />
