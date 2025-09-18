@@ -123,7 +123,7 @@ function SearchResultsContent() {
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
 
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 max-w-7xl mt-12 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{getPageTitle()}</h1>
@@ -192,7 +192,7 @@ function SearchResultsContent() {
               <CardContent className="pt-0 flex-1 flex flex-col">
                 <CardDescription className="mb-6 text-base leading-relaxed flex-1">{farm.description}</CardDescription>
                 <div className="flex gap-2 mt-auto">
-                  <Button variant="outline" className="flex-1 bg-transparent">
+                  <Button variant="outline" className="flex-1 bg-primary text-primary-foreground">
                     View Details
                   </Button>
                   <Button size="sm" variant="ghost" className="px-3">
