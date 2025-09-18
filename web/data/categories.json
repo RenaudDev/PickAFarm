@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "christmas-tree",
+    "name": "Christmas Trees",
+    "farmCount": 1
+  },
+  {
+    "slug": "apple-orchards",
+    "name": "Apple Orchards", 
+    "farmCount": 1
+  },
+  {
+    "slug": "pumpkin-patches",
+    "name": "Pumpkin Patches",
+    "farmCount": 1
+  },
+  {
+    "slug": "berry-farms",
+    "name": "Berry Farms",
+    "farmCount": 1
+  }
+]
