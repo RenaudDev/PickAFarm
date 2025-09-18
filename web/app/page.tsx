@@ -151,11 +151,11 @@ export default function Home() {
             <div className="hidden md:block">
               <Button
                 size="lg"
-                className="px-8 py-3 text-lg text-white"
+                className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground"
                 style={{ backgroundColor: "#16a34a" }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#15803d")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#16a34a")}
-                onClick={() => router.push("/search")}
+                onClick={() => router.push("/results")}
               >
                 Find Farms Near You
                 <ChevronRight className="ml-2 h-5 w-5" />
