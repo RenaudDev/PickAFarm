@@ -1,38 +1,11 @@
 [
   {
-    "slug": "apple-orchard"
+    "slug": "apple-orchards"
   },
   {
-    "slug": "u-pick"
+    "slug": "pumpkin-patches"
   },
   {
-    "slug": "family-farm"
-  },
-  {
-    "slug": "berry-farm"
-  },
-  {
-    "slug": "strawberries"
-  },
-  {
-    "slug": "blueberries"
-  },
-  {
-    "slug": "christmas-trees"
-  },
-  {
-    "slug": "cut-your-own"
-  },
-  {
-    "slug": "pre-cut"
-  },
-  {
-    "slug": "pumpkin-patch"
-  },
-  {
-    "slug": "corn-maze"
-  },
-  {
-    "slug": "fall-activities"
+    "slug": "berry-farms"
   }
 ]

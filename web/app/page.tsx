@@ -9,36 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { MapPin, Users, Wheat, Apple, TreePine, Grape } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
 import farmsData from "../data/farms.json"
-
-// Function to get category counts from farm data
-function getCategoryStats() {
-  const categoryCount: Record<string, number> = {}
-  
-  farmsData.forEach(farm => {
-    try {
-      const categories = JSON.parse(farm.categories)
-      if (Array.isArray(categories)) {
-        categories.forEach(category => {
-          categoryCount[category] = (categoryCount[category] || 0) + 1
-        })
-      }
-    } catch {
-      // Handle non-JSON categories (fallback)
-      if (farm.categories) {
-        const categories = farm.categories.split(',').map(cat => cat.trim())
-        categories.forEach(category => {
-          categoryCount[category] = (categoryCount[category] || 0) + 1
-        })
-      }
-    }
-  })
-  
-  // Convert to array and sort by count
-  return Object.entries(categoryCount)
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 4) // Top 4 categories
-}
+import categoriesData from "../data/categories.json"
 
 // Icon mapping for categories
 const getCategoryIcon = (categoryName: string) => {
@@ -54,8 +25,17 @@ const getCategoryIcon = (categoryName: string) => {
   return iconMap[categoryName] || Wheat
 }
 
+// Function to get top categories from generated categories data
+function getTopCategories() {
+  // Filter categories that have farms and sort by farm count
+  return categoriesData
+    .filter(category => category.totalFarms > 0)
+    .sort((a, b) => b.totalFarms - a.totalFarms)
+    .slice(0, 4) // Top 4 categories
+}
+
 export default function Home() {
-  const topCategories = getCategoryStats()
+  const topCategories = getTopCategories()
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -77,21 +57,23 @@ export default function Home() {
         <section className="py-16 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Popular Farm Experiences</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {topCategories.map((category, index) => {
                 const IconComponent = getCategoryIcon(category.name)
                 return (
-                  <Card key={index} className="text-center hover:shadow-md transition-shadow cursor-pointer group">
-                    <CardContent className="pt-6">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <IconComponent className="h-8 w-8 text-primary" />
-                      </div>
-                      <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {category.count} {category.count === 1 ? 'farm' : 'farms'}
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <Link key={index} href={`/${category.slug}`}>
+                    <Card className="text-center hover:shadow-md transition-shadow cursor-pointer group h-full">
+                      <CardContent className="pt-6">
+                        <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                          <IconComponent className="h-8 w-8 text-primary" />
+                        </div>
+                        <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {category.totalFarms} {category.totalFarms === 1 ? 'farm' : 'farms'}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 )
               })}
             </div>

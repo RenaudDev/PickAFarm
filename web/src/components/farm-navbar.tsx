@@ -18,19 +18,19 @@ function FarmNavbar() {
 
           <div className="flex items-center space-x-6">
             <div className="hidden lg:flex items-center space-x-6">
-              <a href="#" className="text-foreground hover:text-accent font-medium transition-colors">
+              <a href="/" className="text-foreground hover:text-accent font-medium transition-colors">
                 Home
               </a>
-              <a href="#" className="text-foreground hover:text-accent font-medium transition-colors">
+              <a href="about-us" className="text-foreground hover:text-accent font-medium transition-colors">
                 About
               </a>
-              <a href="#" className="text-foreground hover:text-accent font-medium transition-colors">
+              <a href="contact-us" className="text-foreground hover:text-accent font-medium transition-colors">
                 Contact
               </a>
             </div>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+            <a href="#" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
               List Your Farm
-            </Button>
+            </a>
           </div>
         </div>
 
