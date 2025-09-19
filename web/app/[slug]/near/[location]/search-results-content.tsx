@@ -43,12 +43,25 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
   // Filter farms by category if specified
   const filteredFarms = category 
     ? locationData.farms.filter(farm => {
-        const farmCategories = JSON.parse(farm.categories || '[]')
+        // Handle both JSON array and plain string formats for categories
+        let farmCategories: string[] = []
+        try {
+          // Try to parse as JSON first
+          farmCategories = JSON.parse(farm.categories || '[]')
+          // If it's a string, wrap it in an array
+          if (typeof farmCategories === 'string') {
+            farmCategories = [farmCategories]
+          }
+        } catch (error) {
+          // If JSON parsing fails, treat as plain string
+          farmCategories = farm.categories ? [farm.categories] : []
+        }
+        
         const categoryMap: Record<string, string[]> = {
           'apple-orchards': ['Apple Orchard', 'Apple Picking'],
           'pumpkin-patches': ['Pumpkin Patch'],
           'berry-farms': ['Berry Farm', 'Berry Picking'],
-          'christmas-tree-farms': ['Christmas Trees']
+          'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree']
         }
         const matchingCategories = categoryMap[category] || []
         return matchingCategories.some(catName => 
@@ -137,7 +150,19 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
         {sortedFarms.map((farm) => {
-          const farmCategories = JSON.parse(farm.categories || '[]')
+          // Handle both JSON array and plain string formats for categories
+          let farmCategories: string[] = []
+          try {
+            // Try to parse as JSON first
+            farmCategories = JSON.parse(farm.categories || '[]')
+            // If it's a string, wrap it in an array
+            if (typeof farmCategories === 'string') {
+              farmCategories = [farmCategories]
+            }
+          } catch (error) {
+            // If JSON parsing fails, treat as plain string
+            farmCategories = farm.categories ? [farm.categories] : []
+          }
           
           return (
             <Card
