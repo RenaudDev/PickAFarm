@@ -34,7 +34,7 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <Suspense fallback={<div>Loading search results...</div>}>
+      <Suspense fallback={<div>Loading search results....</div>}>
         <SearchResultsContent params={resolvedParams} />
       </Suspense>
       <FarmFooter />
