@@ -4,18 +4,14 @@ compatibility_date = "2024-09-17"
 
 [vars]
 ENVIRONMENT = "development"
+GITHUB_OWNER = "RenaudDev"
+GITHUB_REPO  = "PickAFarm"
+GITHUB_EVENT = "rebuild-farms" # repository_dispatch event type
 
 [[d1_databases]]
 binding = "DB"
 database_name = "pickafarm-db"
 database_id = "175c8757-6538-4bb7-ba4a-a7e4590e6478"
 
-[vars]
-GITHUB_OWNER = "RenaudDev"
-GITHUB_REPO  = "PickAFarm"
-GITHUB_EVENT = "rebuild-farms" # repository_dispatch event type
-
-# Optional: Used by Cloudflare Pages to detect static output dir
-# This silences the warning shown during Pages builds
 [pages]
 pages_build_output_dir = "web/out"
