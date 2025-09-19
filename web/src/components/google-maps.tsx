@@ -61,9 +61,22 @@ export default function GoogleMaps({
 
   // Memoize filtered farms to prevent unnecessary recalculations
   const filteredFarms = useMemo(() => {
-    if (!categoryFilter) return locationData.farms
+    if (!categoryFilter) {
+      // Filter out farms with invalid coordinates
+      return locationData.farms.filter(farm => 
+        farm.latitude != null && 
+        farm.longitude != null && 
+        !isNaN(farm.latitude) && 
+        !isNaN(farm.longitude)
+      )
+    }
 
     return locationData.farms.filter(farm => {
+      // First check if coordinates are valid
+      if (farm.latitude == null || farm.longitude == null || isNaN(farm.latitude) || isNaN(farm.longitude)) {
+        return false
+      }
+
       // Handle both JSON array and plain string formats for categories
       let farmCategories: string[] = []
       try {
@@ -82,7 +95,7 @@ export default function GoogleMaps({
         'apple-orchards': ['Apple Orchard', 'Apple Picking'],
         'pumpkin-patches': ['Pumpkin Patch'],
         'berry-farms': ['Berry Farm', 'Berry Picking'],
-        'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree']
+        'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree', 'Christmas Tree Farms']
       }
       const matchingCategories = categoryMap[categoryFilter] || []
       return matchingCategories.some(catName => 
@@ -93,17 +106,41 @@ export default function GoogleMaps({
     })
   }, [locationData.farms, categoryFilter])
 
-  // Memoize center coordinates
-  const center = useMemo(() => ({
-    lat: locationData.coordinates.latitude,
-    lng: locationData.coordinates.longitude
-  }), [locationData.coordinates.latitude, locationData.coordinates.longitude])
+  // Memoize center coordinates with validation
+  const center = useMemo(() => {
+    const lat = locationData.coordinates.latitude
+    const lng = locationData.coordinates.longitude
+    
+    // Validate center coordinates
+    if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) {
+      console.error('Invalid center coordinates:', { lat, lng })
+      // Fallback to Toronto coordinates
+      return { lat: 43.7315, lng: -79.2845 }
+    }
+    
+    return { lat, lng }
+  }, [locationData.coordinates.latitude, locationData.coordinates.longitude])
 
-  // Load Google Maps script
+  // Improved Google Maps script loading with better race condition handling
   useEffect(() => {
     // Check if Google Maps is already loaded
     if (window.google && window.google.maps) {
-      initializeMap()
+      setIsLoaded(true)
+      return
+    }
+
+    // Check if script is already being loaded
+    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]')
+    if (existingScript) {
+      // Script is already loading, wait for it
+      const checkLoaded = () => {
+        if (window.google && window.google.maps) {
+          setIsLoaded(true)
+        } else {
+          setTimeout(checkLoaded, 100)
+        }
+      }
+      checkLoaded()
       return
     }
 
@@ -115,16 +152,16 @@ export default function GoogleMaps({
     
     script.onload = () => {
       setIsLoaded(true)
-      initializeMap()
+    }
+
+    script.onerror = () => {
+      console.error('Failed to load Google Maps script')
     }
 
     document.head.appendChild(script)
 
     return () => {
-      // Cleanup script if component unmounts
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
+      // Don't remove script on unmount as other components might need it
     }
   }, []) // Empty dependency array - only run once
 

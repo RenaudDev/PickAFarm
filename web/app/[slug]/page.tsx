@@ -264,7 +264,7 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
 
       {/* Informational Content Block */}
       <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">About {enrichedCategory.name}</h2>
           <div className="prose prose-lg max-w-none">
             <div className="grid md:grid-cols-2 gap-8 items-start">
@@ -297,7 +297,7 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
 
       {/* FAQ Section */}
       <section className="py-16 px-4 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="space-y-4">
             {enrichedCategory.faqs.map((faq, index) => (
