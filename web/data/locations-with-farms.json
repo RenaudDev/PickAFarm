@@ -1,0 +1,988 @@
+[
+  {
+    "name": "Ajax",
+    "slug": "ajax",
+    "population": 126666,
+    "coordinates": {
+      "latitude": 43.8611288,
+      "longitude": -79.0259267
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "ajax-ontario-canada",
+    "full_location": "Ajax, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Ajax, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Ajax, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 25
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Aurora",
+    "slug": "aurora",
+    "population": 62057,
+    "coordinates": {
+      "latitude": 44.00648,
+      "longitude": -79.450396
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "aurora-ontario-canada",
+    "full_location": "Aurora, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Aurora, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Aurora, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 33
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Barrie",
+    "slug": "barrie",
+    "population": 147829,
+    "coordinates": {
+      "latitude": 44.38935559999999,
+      "longitude": -79.6903316
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "barrie-ontario-canada",
+    "full_location": "Barrie, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Barrie, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Barrie, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 80
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Brampton",
+    "slug": "brampton",
+    "population": 656480,
+    "coordinates": {
+      "latitude": 43.7315479,
+      "longitude": -79.7624177
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "brampton-ontario-canada",
+    "full_location": "Brampton, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Brampton, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Brampton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 38
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Burlington",
+    "slug": "burlington",
+    "population": 186948,
+    "coordinates": {
+      "latitude": 43.3255196,
+      "longitude": -79.7990319
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "burlington-ontario-canada",
+    "full_location": "Burlington, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Burlington, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Burlington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 61
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Caledon",
+    "slug": "caledon",
+    "population": 76581,
+    "coordinates": {
+      "latitude": 43.8701204,
+      "longitude": -79.8670882
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "caledon-ontario-canada",
+    "full_location": "Caledon, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Caledon, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Caledon, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 49
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Cambridge",
+    "slug": "cambridge",
+    "population": 138479,
+    "coordinates": {
+      "latitude": 43.3616211,
+      "longitude": -80.3144276
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "cambridge-ontario-canada",
+    "full_location": "Cambridge, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Cambridge, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Cambridge, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 93
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Clarington",
+    "slug": "clarington",
+    "population": 101427,
+    "coordinates": {
+      "latitude": 43.9345347,
+      "longitude": -78.6000336
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "clarington-ontario-canada",
+    "full_location": "Clarington, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Clarington, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Clarington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 59
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Gatineau",
+    "slug": "gatineau",
+    "population": 291041,
+    "coordinates": {
+      "latitude": 45.4765446,
+      "longitude": -75.7012723
+    },
+    "province": "Quebec",
+    "province_slug": "quebec",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "gatineau-quebec-canada",
+    "full_location": "Gatineau, Quebec, Canada",
+    "seo_title": "Pick Your Own Farms near Gatineau, Quebec",
+    "meta_description": "Find the best pick-your-own farms near Gatineau, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-002-maple-ridge-farm",
+        "name": "Maple Ridge Christmas Tree Farm",
+        "slug": "maple-ridge-christmas-tree-farm",
+        "url": "/farm/maple-ridge-christmas-tree-farm",
+        "latitude": 45.3311,
+        "longitude": -75.9481,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Christmas Trees\", \"Cut Your Own\", \"Pre-Cut\"]",
+        "featured": false,
+        "distance_km": 25
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Guelph",
+    "slug": "guelph",
+    "population": 143740,
+    "coordinates": {
+      "latitude": 43.5448048,
+      "longitude": -80.24816659999999
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "guelph-ontario-canada",
+    "full_location": "Guelph, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Guelph, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Guelph, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 80
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Halton Hills",
+    "slug": "halton-hills",
+    "population": 62951,
+    "coordinates": {
+      "latitude": 43.65027250000001,
+      "longitude": -79.9036321
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "halton-hills-ontario-canada",
+    "full_location": "Halton Hills, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Halton Hills, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Halton Hills, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 51
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Hamilton",
+    "slug": "hamilton",
+    "population": 569353,
+    "coordinates": {
+      "latitude": 43.2557206,
+      "longitude": -79.8711024
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "hamilton-ontario-canada",
+    "full_location": "Hamilton, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Hamilton, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Hamilton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 71
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Kawartha Lakes",
+    "slug": "kawartha-lakes",
+    "population": 79247,
+    "coordinates": {
+      "latitude": 44.359798,
+      "longitude": -78.7433799
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "kawartha-lakes-ontario-canada",
+    "full_location": "Kawartha Lakes, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Kawartha Lakes, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Kawartha Lakes, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 82
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Markham",
+    "slug": "markham",
+    "population": 338503,
+    "coordinates": {
+      "latitude": 43.8599076,
+      "longitude": -79.3349945
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "markham-ontario-canada",
+    "full_location": "Markham, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Markham, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Markham, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 15
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Milton",
+    "slug": "milton",
+    "population": 132979,
+    "coordinates": {
+      "latitude": 43.5182991,
+      "longitude": -79.8774042
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "milton-ontario-canada",
+    "full_location": "Milton, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Milton, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Milton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 53
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Mississauga",
+    "slug": "mississauga",
+    "population": 717961,
+    "coordinates": {
+      "latitude": 43.5852972,
+      "longitude": -79.64498379999999
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "mississauga-ontario-canada",
+    "full_location": "Mississauga, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Mississauga, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Mississauga, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 33
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Newmarket",
+    "slug": "newmarket",
+    "population": 87942,
+    "coordinates": {
+      "latitude": 44.05918700000001,
+      "longitude": -79.46125599999999
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "newmarket-ontario-canada",
+    "full_location": "Newmarket, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Newmarket, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Newmarket, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 39
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Niagara Falls",
+    "slug": "niagara-falls",
+    "population": 94415,
+    "coordinates": {
+      "latitude": 43.0895577,
+      "longitude": -79.0849436
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "niagara-falls-ontario-canada",
+    "full_location": "Niagara Falls, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Niagara Falls, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Niagara Falls, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 73
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Niagara-on-the-Lake",
+    "slug": "niagara-on-the-lake",
+    "population": 17000,
+    "coordinates": {
+      "latitude": 43.2549988,
+      "longitude": -79.0772616
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "niagara-on-the-lake-ontario-canada",
+    "full_location": "Niagara-on-the-Lake, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Niagara-on-the-Lake, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Niagara-on-the-Lake, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 56
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Oakville",
+    "slug": "oakville",
+    "population": 213759,
+    "coordinates": {
+      "latitude": 43.467517,
+      "longitude": -79.6876659
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "oakville-ontario-canada",
+    "full_location": "Oakville, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Oakville, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Oakville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 44
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Oshawa",
+    "slug": "oshawa",
+    "population": 175383,
+    "coordinates": {
+      "latitude": 43.8975974,
+      "longitude": -78.8635999
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "oshawa-ontario-canada",
+    "full_location": "Oshawa, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Oshawa, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Oshawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 38
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Ottawa",
+    "slug": "ottawa",
+    "population": 1017449,
+    "coordinates": {
+      "latitude": 45.4200572,
+      "longitude": -75.7003397
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "ottawa-ontario-canada",
+    "full_location": "Ottawa, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Ottawa, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Ottawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-002-maple-ridge-farm",
+        "name": "Maple Ridge Christmas Tree Farm",
+        "slug": "maple-ridge-christmas-tree-farm",
+        "url": "/farm/maple-ridge-christmas-tree-farm",
+        "latitude": 45.3311,
+        "longitude": -75.9481,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Christmas Trees\", \"Cut Your Own\", \"Pre-Cut\"]",
+        "featured": false,
+        "distance_km": 22
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Pickering",
+    "slug": "pickering",
+    "population": 99186,
+    "coordinates": {
+      "latitude": 43.83841839999999,
+      "longitude": -79.086902
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "pickering-ontario-canada",
+    "full_location": "Pickering, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Pickering, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Pickering, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 20
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Richmond Hill",
+    "slug": "richmond-hill",
+    "population": 202022,
+    "coordinates": {
+      "latitude": 43.8688079,
+      "longitude": -79.41371529999999
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "richmond-hill-ontario-canada",
+    "full_location": "Richmond Hill, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Richmond Hill, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Richmond Hill, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 18
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "St. Catharines",
+    "slug": "st-catharines",
+    "population": 136803,
+    "coordinates": {
+      "latitude": 43.1599795,
+      "longitude": -79.2470299
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "st-catharines-ontario-canada",
+    "full_location": "St. Catharines, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near St. Catharines, Ontario",
+    "meta_description": "Find the best pick-your-own farms near St. Catharines, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 64
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Toronto",
+    "slug": "toronto",
+    "population": 2794356,
+    "coordinates": {
+      "latitude": 43.653226,
+      "longitude": -79.3831843
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "toronto-ontario-canada",
+    "full_location": "Toronto, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Toronto, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Toronto, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 12
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Vaughan",
+    "slug": "vaughan",
+    "population": 323103,
+    "coordinates": {
+      "latitude": 43.82622809999999,
+      "longitude": -79.5561668
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "vaughan-ontario-canada",
+    "full_location": "Vaughan, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Vaughan, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Vaughan, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 24
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Welland",
+    "slug": "welland",
+    "population": 55750,
+    "coordinates": {
+      "latitude": 42.9921579,
+      "longitude": -79.2482555
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "welland-ontario-canada",
+    "full_location": "Welland, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Welland, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Welland, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 82
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Whitby",
+    "slug": "whitby",
+    "population": 138501,
+    "coordinates": {
+      "latitude": 43.8997643,
+      "longitude": -78.9400809
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "whitby-ontario-canada",
+    "full_location": "Whitby, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Whitby, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Whitby, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zoho-001-johnsons-orchard",
+        "name": "Johnson's Apple Orchard",
+        "slug": "johnsons-apple-orchard",
+        "url": "/farm/johnsons-apple-orchard",
+        "latitude": 43.7315,
+        "longitude": -79.2845,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "[\"Apple Orchard\", \"U-Pick\", \"Family Farm\"]",
+        "featured": true,
+        "distance_km": 33
+      }
+    ],
+    "farmCount": 1
+  }
+]
