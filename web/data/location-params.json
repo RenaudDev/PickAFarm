@@ -1,0 +1,329 @@
+[
+  {
+    "location": "toronto-ontario-canada"
+  },
+  {
+    "location": "ottawa-ontario-canada"
+  },
+  {
+    "location": "mississauga-ontario-canada"
+  },
+  {
+    "location": "brampton-ontario-canada"
+  },
+  {
+    "location": "hamilton-ontario-canada"
+  },
+  {
+    "location": "london-ontario-canada"
+  },
+  {
+    "location": "markham-ontario-canada"
+  },
+  {
+    "location": "vaughan-ontario-canada"
+  },
+  {
+    "location": "kitchener-ontario-canada"
+  },
+  {
+    "location": "windsor-ontario-canada"
+  },
+  {
+    "location": "oakville-ontario-canada"
+  },
+  {
+    "location": "richmond-hill-ontario-canada"
+  },
+  {
+    "location": "burlington-ontario-canada"
+  },
+  {
+    "location": "oshawa-ontario-canada"
+  },
+  {
+    "location": "greater-sudbury-ontario-canada"
+  },
+  {
+    "location": "barrie-ontario-canada"
+  },
+  {
+    "location": "guelph-ontario-canada"
+  },
+  {
+    "location": "whitby-ontario-canada"
+  },
+  {
+    "location": "cambridge-ontario-canada"
+  },
+  {
+    "location": "st-catharines-ontario-canada"
+  },
+  {
+    "location": "milton-ontario-canada"
+  },
+  {
+    "location": "kingston-ontario-canada"
+  },
+  {
+    "location": "ajax-ontario-canada"
+  },
+  {
+    "location": "waterloo-ontario-canada"
+  },
+  {
+    "location": "thunder-bay-ontario-canada"
+  },
+  {
+    "location": "brantford-ontario-canada"
+  },
+  {
+    "location": "chatham-kent-ontario-canada"
+  },
+  {
+    "location": "clarington-ontario-canada"
+  },
+  {
+    "location": "pickering-ontario-canada"
+  },
+  {
+    "location": "niagara-falls-ontario-canada"
+  },
+  {
+    "location": "newmarket-ontario-canada"
+  },
+  {
+    "location": "peterborough-ontario-canada"
+  },
+  {
+    "location": "kawartha-lakes-ontario-canada"
+  },
+  {
+    "location": "caledon-ontario-canada"
+  },
+  {
+    "location": "sault-ste-marie-ontario-canada"
+  },
+  {
+    "location": "sarnia-ontario-canada"
+  },
+  {
+    "location": "norfolk-county-ontario-canada"
+  },
+  {
+    "location": "halton-hills-ontario-canada"
+  },
+  {
+    "location": "aurora-ontario-canada"
+  },
+  {
+    "location": "welland-ontario-canada"
+  },
+  {
+    "location": "belleville-ontario-canada"
+  },
+  {
+    "location": "north-bay-ontario-canada"
+  },
+  {
+    "location": "timmins-ontario-canada"
+  },
+  {
+    "location": "leamington-ontario-canada"
+  },
+  {
+    "location": "niagara-on-the-lake-ontario-canada"
+  },
+  {
+    "location": "montreal-quebec-canada"
+  },
+  {
+    "location": "quebec-city-quebec-canada"
+  },
+  {
+    "location": "laval-quebec-canada"
+  },
+  {
+    "location": "gatineau-quebec-canada"
+  },
+  {
+    "location": "longueuil-quebec-canada"
+  },
+  {
+    "location": "sherbrooke-quebec-canada"
+  },
+  {
+    "location": "levis-quebec-canada"
+  },
+  {
+    "location": "saguenay-quebec-canada"
+  },
+  {
+    "location": "trois-rivieres-quebec-canada"
+  },
+  {
+    "location": "terrebonne-quebec-canada"
+  },
+  {
+    "location": "saint-jean-sur-richelieu-quebec-canada"
+  },
+  {
+    "location": "brossard-quebec-canada"
+  },
+  {
+    "location": "repentigny-quebec-canada"
+  },
+  {
+    "location": "saint-jerome-quebec-canada"
+  },
+  {
+    "location": "drummondville-quebec-canada"
+  },
+  {
+    "location": "granby-quebec-canada"
+  },
+  {
+    "location": "mirabel-quebec-canada"
+  },
+  {
+    "location": "blainville-quebec-canada"
+  },
+  {
+    "location": "saint-hyacinthe-quebec-canada"
+  },
+  {
+    "location": "vancouver-british-columbia-canada"
+  },
+  {
+    "location": "surrey-british-columbia-canada"
+  },
+  {
+    "location": "burnaby-british-columbia-canada"
+  },
+  {
+    "location": "richmond-british-columbia-canada"
+  },
+  {
+    "location": "abbotsford-british-columbia-canada"
+  },
+  {
+    "location": "coquitlam-british-columbia-canada"
+  },
+  {
+    "location": "kelowna-british-columbia-canada"
+  },
+  {
+    "location": "langley-british-columbia-canada"
+  },
+  {
+    "location": "saanich-british-columbia-canada"
+  },
+  {
+    "location": "delta-british-columbia-canada"
+  },
+  {
+    "location": "nanaimo-british-columbia-canada"
+  },
+  {
+    "location": "kamloops-british-columbia-canada"
+  },
+  {
+    "location": "chilliwack-british-columbia-canada"
+  },
+  {
+    "location": "victoria-british-columbia-canada"
+  },
+  {
+    "location": "maple-ridge-british-columbia-canada"
+  },
+  {
+    "location": "north-vancouver-british-columbia-canada"
+  },
+  {
+    "location": "new-westminster-british-columbia-canada"
+  },
+  {
+    "location": "prince-george-british-columbia-canada"
+  },
+  {
+    "location": "port-coquitlam-british-columbia-canada"
+  },
+  {
+    "location": "north-vancouver-british-columbia-canada"
+  },
+  {
+    "location": "whistler-british-columbia-canada"
+  },
+  {
+    "location": "calgary-alberta-canada"
+  },
+  {
+    "location": "edmonton-alberta-canada"
+  },
+  {
+    "location": "red-deer-alberta-canada"
+  },
+  {
+    "location": "strathcona-county-alberta-canada"
+  },
+  {
+    "location": "lethbridge-alberta-canada"
+  },
+  {
+    "location": "airdrie-alberta-canada"
+  },
+  {
+    "location": "wood-buffalo-alberta-canada"
+  },
+  {
+    "location": "st-albert-alberta-canada"
+  },
+  {
+    "location": "grande-prairie-alberta-canada"
+  },
+  {
+    "location": "medicine-hat-alberta-canada"
+  },
+  {
+    "location": "canmore-alberta-canada"
+  },
+  {
+    "location": "winnipeg-manitoba-canada"
+  },
+  {
+    "location": "steinbach-manitoba-canada"
+  },
+  {
+    "location": "halifax-nova-scotia-canada"
+  },
+  {
+    "location": "cape-breton-nova-scotia-canada"
+  },
+  {
+    "location": "saskatoon-saskatchewan-canada"
+  },
+  {
+    "location": "regina-saskatchewan-canada"
+  },
+  {
+    "location": "moncton-new-brunswick-canada"
+  },
+  {
+    "location": "saint-john-new-brunswick-canada"
+  },
+  {
+    "location": "fredericton-new-brunswick-canada"
+  },
+  {
+    "location": "st-johns-newfoundland-and-labrador-canada"
+  },
+  {
+    "location": "charlottetown-prince-edward-island-canada"
+  },
+  {
+    "location": "whitehorse-yukon-canada"
+  },
+  {
+    "location": "yellowknife-northwest-territories-canada"
+  }
+]

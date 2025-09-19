@@ -1,0 +1,1866 @@
+{
+  "metadata": {
+    "totalProvinces": 12,
+    "totalCities": 109,
+    "generatedAt": "2025-09-15T12:27:27.780Z",
+    "description": "Canadian cities transformed for location page generation",
+    "urlStructure": "category/near/city-province-canada",
+    "lastUpdated": "2025-09-18T17:12:09.490Z",
+    "totalLocationPages": 109
+  },
+  "locationPages": [
+    {
+      "name": "Toronto",
+      "slug": "toronto",
+      "population": 2794356,
+      "coordinates": {
+        "latitude": 43.653226,
+        "longitude": -79.3831843
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "toronto-ontario-canada",
+      "full_location": "Toronto, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Toronto, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Toronto, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Ottawa",
+      "slug": "ottawa",
+      "population": 1017449,
+      "coordinates": {
+        "latitude": 45.4200572,
+        "longitude": -75.7003397
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "ottawa-ontario-canada",
+      "full_location": "Ottawa, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Ottawa, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Ottawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Mississauga",
+      "slug": "mississauga",
+      "population": 717961,
+      "coordinates": {
+        "latitude": 43.5852972,
+        "longitude": -79.64498379999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "mississauga-ontario-canada",
+      "full_location": "Mississauga, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Mississauga, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Mississauga, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Brampton",
+      "slug": "brampton",
+      "population": 656480,
+      "coordinates": {
+        "latitude": 43.7315479,
+        "longitude": -79.7624177
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "brampton-ontario-canada",
+      "full_location": "Brampton, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Brampton, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Brampton, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Hamilton",
+      "slug": "hamilton",
+      "population": 569353,
+      "coordinates": {
+        "latitude": 43.2557206,
+        "longitude": -79.8711024
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "hamilton-ontario-canada",
+      "full_location": "Hamilton, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Hamilton, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Hamilton, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "London",
+      "slug": "london",
+      "population": 422324,
+      "coordinates": {
+        "latitude": 42.9849233,
+        "longitude": -81.2452768
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "london-ontario-canada",
+      "full_location": "London, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near London, Ontario",
+      "meta_description": "Find the best pick-your-own farms near London, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Markham",
+      "slug": "markham",
+      "population": 338503,
+      "coordinates": {
+        "latitude": 43.8599076,
+        "longitude": -79.3349945
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "markham-ontario-canada",
+      "full_location": "Markham, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Markham, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Markham, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Vaughan",
+      "slug": "vaughan",
+      "population": 323103,
+      "coordinates": {
+        "latitude": 43.82622809999999,
+        "longitude": -79.5561668
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "vaughan-ontario-canada",
+      "full_location": "Vaughan, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Vaughan, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Vaughan, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Kitchener",
+      "slug": "kitchener",
+      "population": 256885,
+      "coordinates": {
+        "latitude": 43.4510934,
+        "longitude": -80.4925804
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "kitchener-ontario-canada",
+      "full_location": "Kitchener, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Kitchener, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Kitchener, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Windsor",
+      "slug": "windsor",
+      "population": 229660,
+      "coordinates": {
+        "latitude": 42.3141129,
+        "longitude": -83.03675059999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "windsor-ontario-canada",
+      "full_location": "Windsor, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Windsor, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Windsor, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Oakville",
+      "slug": "oakville",
+      "population": 213759,
+      "coordinates": {
+        "latitude": 43.467517,
+        "longitude": -79.6876659
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "oakville-ontario-canada",
+      "full_location": "Oakville, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Oakville, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Oakville, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Richmond Hill",
+      "slug": "richmond-hill",
+      "population": 202022,
+      "coordinates": {
+        "latitude": 43.8688079,
+        "longitude": -79.41371529999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "richmond-hill-ontario-canada",
+      "full_location": "Richmond Hill, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Richmond Hill, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Richmond Hill, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Burlington",
+      "slug": "burlington",
+      "population": 186948,
+      "coordinates": {
+        "latitude": 43.3255196,
+        "longitude": -79.7990319
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "burlington-ontario-canada",
+      "full_location": "Burlington, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Burlington, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Burlington, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Oshawa",
+      "slug": "oshawa",
+      "population": 175383,
+      "coordinates": {
+        "latitude": 43.8975974,
+        "longitude": -78.8635999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "oshawa-ontario-canada",
+      "full_location": "Oshawa, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Oshawa, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Oshawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Greater Sudbury",
+      "slug": "greater-sudbury",
+      "population": 166004,
+      "coordinates": {
+        "latitude": 46.4917317,
+        "longitude": -80.99302899999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "greater-sudbury-ontario-canada",
+      "full_location": "Greater Sudbury, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Greater Sudbury, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Greater Sudbury, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Barrie",
+      "slug": "barrie",
+      "population": 147829,
+      "coordinates": {
+        "latitude": 44.38935559999999,
+        "longitude": -79.6903316
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "barrie-ontario-canada",
+      "full_location": "Barrie, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Barrie, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Barrie, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Guelph",
+      "slug": "guelph",
+      "population": 143740,
+      "coordinates": {
+        "latitude": 43.5448048,
+        "longitude": -80.24816659999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "guelph-ontario-canada",
+      "full_location": "Guelph, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Guelph, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Guelph, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Whitby",
+      "slug": "whitby",
+      "population": 138501,
+      "coordinates": {
+        "latitude": 43.8997643,
+        "longitude": -78.9400809
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "whitby-ontario-canada",
+      "full_location": "Whitby, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Whitby, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Whitby, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Cambridge",
+      "slug": "cambridge",
+      "population": 138479,
+      "coordinates": {
+        "latitude": 43.3616211,
+        "longitude": -80.3144276
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "cambridge-ontario-canada",
+      "full_location": "Cambridge, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Cambridge, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Cambridge, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "St. Catharines",
+      "slug": "st-catharines",
+      "population": 136803,
+      "coordinates": {
+        "latitude": 43.1599795,
+        "longitude": -79.2470299
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "st-catharines-ontario-canada",
+      "full_location": "St. Catharines, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near St. Catharines, Ontario",
+      "meta_description": "Find the best pick-your-own farms near St. Catharines, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Milton",
+      "slug": "milton",
+      "population": 132979,
+      "coordinates": {
+        "latitude": 43.5182991,
+        "longitude": -79.8774042
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "milton-ontario-canada",
+      "full_location": "Milton, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Milton, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Milton, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Kingston",
+      "slug": "kingston",
+      "population": 132485,
+      "coordinates": {
+        "latitude": 44.2334401,
+        "longitude": -76.49302949999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "kingston-ontario-canada",
+      "full_location": "Kingston, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Kingston, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Kingston, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Ajax",
+      "slug": "ajax",
+      "population": 126666,
+      "coordinates": {
+        "latitude": 43.8611288,
+        "longitude": -79.0259267
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "ajax-ontario-canada",
+      "full_location": "Ajax, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Ajax, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Ajax, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Waterloo",
+      "slug": "waterloo",
+      "population": 121436,
+      "coordinates": {
+        "latitude": 43.4642578,
+        "longitude": -80.5204096
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "waterloo-ontario-canada",
+      "full_location": "Waterloo, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Waterloo, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Waterloo, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Thunder Bay",
+      "slug": "thunder-bay",
+      "population": 108843,
+      "coordinates": {
+        "latitude": 48.3808951,
+        "longitude": -89.2476823
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "thunder-bay-ontario-canada",
+      "full_location": "Thunder Bay, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Thunder Bay, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Thunder Bay, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Brantford",
+      "slug": "brantford",
+      "population": 104688,
+      "coordinates": {
+        "latitude": 43.1394191,
+        "longitude": -80.263623
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "brantford-ontario-canada",
+      "full_location": "Brantford, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Brantford, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Brantford, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Chatham-Kent",
+      "slug": "chatham-kent",
+      "population": 103988,
+      "coordinates": {
+        "latitude": 42.4078419,
+        "longitude": -82.1910374
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "chatham-kent-ontario-canada",
+      "full_location": "Chatham-Kent, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Chatham-Kent, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Chatham-Kent, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Clarington",
+      "slug": "clarington",
+      "population": 101427,
+      "coordinates": {
+        "latitude": 43.9345347,
+        "longitude": -78.6000336
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "clarington-ontario-canada",
+      "full_location": "Clarington, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Clarington, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Clarington, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Pickering",
+      "slug": "pickering",
+      "population": 99186,
+      "coordinates": {
+        "latitude": 43.83841839999999,
+        "longitude": -79.086902
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "pickering-ontario-canada",
+      "full_location": "Pickering, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Pickering, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Pickering, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Niagara Falls",
+      "slug": "niagara-falls",
+      "population": 94415,
+      "coordinates": {
+        "latitude": 43.0895577,
+        "longitude": -79.0849436
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "niagara-falls-ontario-canada",
+      "full_location": "Niagara Falls, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Niagara Falls, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Niagara Falls, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Newmarket",
+      "slug": "newmarket",
+      "population": 87942,
+      "coordinates": {
+        "latitude": 44.05918700000001,
+        "longitude": -79.46125599999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "newmarket-ontario-canada",
+      "full_location": "Newmarket, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Newmarket, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Newmarket, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Peterborough",
+      "slug": "peterborough",
+      "population": 83651,
+      "coordinates": {
+        "latitude": 44.3047061,
+        "longitude": -78.3199606
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "peterborough-ontario-canada",
+      "full_location": "Peterborough, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Peterborough, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Peterborough, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Kawartha Lakes",
+      "slug": "kawartha-lakes",
+      "population": 79247,
+      "coordinates": {
+        "latitude": 44.359798,
+        "longitude": -78.7433799
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "kawartha-lakes-ontario-canada",
+      "full_location": "Kawartha Lakes, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Kawartha Lakes, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Kawartha Lakes, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Caledon",
+      "slug": "caledon",
+      "population": 76581,
+      "coordinates": {
+        "latitude": 43.8701204,
+        "longitude": -79.8670882
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "caledon-ontario-canada",
+      "full_location": "Caledon, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Caledon, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Caledon, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Sault Ste. Marie",
+      "slug": "sault-ste-marie",
+      "population": 72051,
+      "coordinates": {
+        "latitude": 46.5136494,
+        "longitude": -84.33575259999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "sault-ste-marie-ontario-canada",
+      "full_location": "Sault Ste. Marie, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Sault Ste. Marie, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Sault Ste. Marie, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Sarnia",
+      "slug": "sarnia",
+      "population": 72047,
+      "coordinates": {
+        "latitude": 42.974536,
+        "longitude": -82.4065901
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "sarnia-ontario-canada",
+      "full_location": "Sarnia, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Sarnia, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Sarnia, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Norfolk County",
+      "slug": "norfolk-county",
+      "population": 67490,
+      "coordinates": {
+        "latitude": 42.7967232,
+        "longitude": -80.4136271
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "norfolk-county-ontario-canada",
+      "full_location": "Norfolk County, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Norfolk County, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Norfolk County, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Halton Hills",
+      "slug": "halton-hills",
+      "population": 62951,
+      "coordinates": {
+        "latitude": 43.65027250000001,
+        "longitude": -79.9036321
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "halton-hills-ontario-canada",
+      "full_location": "Halton Hills, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Halton Hills, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Halton Hills, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Aurora",
+      "slug": "aurora",
+      "population": 62057,
+      "coordinates": {
+        "latitude": 44.00648,
+        "longitude": -79.450396
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "aurora-ontario-canada",
+      "full_location": "Aurora, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Aurora, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Aurora, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Welland",
+      "slug": "welland",
+      "population": 55750,
+      "coordinates": {
+        "latitude": 42.9921579,
+        "longitude": -79.2482555
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "welland-ontario-canada",
+      "full_location": "Welland, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Welland, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Welland, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Belleville",
+      "slug": "belleville",
+      "population": 55071,
+      "coordinates": {
+        "latitude": 44.1627589,
+        "longitude": -77.3832315
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "belleville-ontario-canada",
+      "full_location": "Belleville, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Belleville, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Belleville, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "North Bay",
+      "slug": "north-bay",
+      "population": 52662,
+      "coordinates": {
+        "latitude": 46.3091152,
+        "longitude": -79.4608204
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "north-bay-ontario-canada",
+      "full_location": "North Bay, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near North Bay, Ontario",
+      "meta_description": "Find the best pick-your-own farms near North Bay, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Timmins",
+      "slug": "timmins",
+      "population": 42000,
+      "coordinates": {
+        "latitude": 48.4758208,
+        "longitude": -81.3304953
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "timmins-ontario-canada",
+      "full_location": "Timmins, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Timmins, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Timmins, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Leamington",
+      "slug": "leamington",
+      "population": 28000,
+      "coordinates": {
+        "latitude": 42.0530892,
+        "longitude": -82.59980019999999
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "leamington-ontario-canada",
+      "full_location": "Leamington, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Leamington, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Leamington, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Niagara-on-the-Lake",
+      "slug": "niagara-on-the-lake",
+      "population": 17000,
+      "coordinates": {
+        "latitude": 43.2549988,
+        "longitude": -79.0772616
+      },
+      "province": "Ontario",
+      "province_slug": "ontario",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "niagara-on-the-lake-ontario-canada",
+      "full_location": "Niagara-on-the-Lake, Ontario, Canada",
+      "seo_title": "Pick Your Own Farms near Niagara-on-the-Lake, Ontario",
+      "meta_description": "Find the best pick-your-own farms near Niagara-on-the-Lake, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Montreal",
+      "slug": "montreal",
+      "population": 1762949,
+      "coordinates": {
+        "latitude": 45.5018869,
+        "longitude": -73.56739189999999
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "montreal-quebec-canada",
+      "full_location": "Montreal, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Montreal, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Montreal, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Quebec City",
+      "slug": "quebec-city",
+      "population": 549459,
+      "coordinates": {
+        "latitude": 46.8130816,
+        "longitude": -71.20745959999999
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "quebec-city-quebec-canada",
+      "full_location": "Quebec City, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Quebec City, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Quebec City, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Laval",
+      "slug": "laval",
+      "population": 438366,
+      "coordinates": {
+        "latitude": 45.6066487,
+        "longitude": -73.712409
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "laval-quebec-canada",
+      "full_location": "Laval, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Laval, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Laval, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Gatineau",
+      "slug": "gatineau",
+      "population": 291041,
+      "coordinates": {
+        "latitude": 45.4765446,
+        "longitude": -75.7012723
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "gatineau-quebec-canada",
+      "full_location": "Gatineau, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Gatineau, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Gatineau, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Longueuil",
+      "slug": "longueuil",
+      "population": 254483,
+      "coordinates": {
+        "latitude": 45.5135059,
+        "longitude": -73.4329187
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "longueuil-quebec-canada",
+      "full_location": "Longueuil, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Longueuil, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Longueuil, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Sherbrooke",
+      "slug": "sherbrooke",
+      "population": 172950,
+      "coordinates": {
+        "latitude": 45.4042669,
+        "longitude": -71.89367399999999
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "sherbrooke-quebec-canada",
+      "full_location": "Sherbrooke, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Sherbrooke, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Sherbrooke, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Lévis",
+      "slug": "levis",
+      "population": 149683,
+      "coordinates": {
+        "latitude": 46.7582576,
+        "longitude": -71.2397151
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "levis-quebec-canada",
+      "full_location": "Lévis, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Lévis, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Lévis, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saguenay",
+      "slug": "saguenay",
+      "population": 144723,
+      "coordinates": {
+        "latitude": 48.4276054,
+        "longitude": -71.0600102
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saguenay-quebec-canada",
+      "full_location": "Saguenay, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Saguenay, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Saguenay, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Trois-Rivières",
+      "slug": "trois-rivieres",
+      "population": 139163,
+      "coordinates": {
+        "latitude": 46.34298200000001,
+        "longitude": -72.5420716
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "trois-rivieres-quebec-canada",
+      "full_location": "Trois-Rivières, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Trois-Rivières, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Trois-Rivières, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Terrebonne",
+      "slug": "terrebonne",
+      "population": 119944,
+      "coordinates": {
+        "latitude": 45.6929818,
+        "longitude": -73.63311019999999
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "terrebonne-quebec-canada",
+      "full_location": "Terrebonne, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Terrebonne, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Terrebonne, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saint-Jean-sur-Richelieu",
+      "slug": "saint-jean-sur-richelieu",
+      "population": 97873,
+      "coordinates": {
+        "latitude": 45.305771,
+        "longitude": -73.2544903
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saint-jean-sur-richelieu-quebec-canada",
+      "full_location": "Saint-Jean-sur-Richelieu, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Saint-Jean-sur-Richelieu, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Saint-Jean-sur-Richelieu, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Brossard",
+      "slug": "brossard",
+      "population": 91525,
+      "coordinates": {
+        "latitude": 45.4514357,
+        "longitude": -73.4619103
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "brossard-quebec-canada",
+      "full_location": "Brossard, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Brossard, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Brossard, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Repentigny",
+      "slug": "repentigny",
+      "population": 86100,
+      "coordinates": {
+        "latitude": 45.7532854,
+        "longitude": -73.4400814
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "repentigny-quebec-canada",
+      "full_location": "Repentigny, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Repentigny, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Repentigny, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saint-Jérôme",
+      "slug": "saint-jerome",
+      "population": 80213,
+      "coordinates": {
+        "latitude": 45.775357,
+        "longitude": -74.004948
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saint-jerome-quebec-canada",
+      "full_location": "Saint-Jérôme, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Saint-Jérôme, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Saint-Jérôme, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Drummondville",
+      "slug": "drummondville",
+      "population": 79258,
+      "coordinates": {
+        "latitude": 45.8811739,
+        "longitude": -72.4847355
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "drummondville-quebec-canada",
+      "full_location": "Drummondville, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Drummondville, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Drummondville, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Granby",
+      "slug": "granby",
+      "population": 69025,
+      "coordinates": {
+        "latitude": 45.40322889999999,
+        "longitude": -72.7340662
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "granby-quebec-canada",
+      "full_location": "Granby, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Granby, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Granby, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Mirabel",
+      "slug": "mirabel",
+      "population": 61108,
+      "coordinates": {
+        "latitude": 45.65189590000001,
+        "longitude": -74.09016960000001
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "mirabel-quebec-canada",
+      "full_location": "Mirabel, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Mirabel, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Mirabel, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Blainville",
+      "slug": "blainville",
+      "population": 59819,
+      "coordinates": {
+        "latitude": 45.6688961,
+        "longitude": -73.8728751
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "blainville-quebec-canada",
+      "full_location": "Blainville, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Blainville, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Blainville, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saint-Hyacinthe",
+      "slug": "saint-hyacinthe",
+      "population": 57239,
+      "coordinates": {
+        "latitude": 45.6306875,
+        "longitude": -72.9563391
+      },
+      "province": "Quebec",
+      "province_slug": "quebec",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saint-hyacinthe-quebec-canada",
+      "full_location": "Saint-Hyacinthe, Quebec, Canada",
+      "seo_title": "Pick Your Own Farms near Saint-Hyacinthe, Quebec",
+      "meta_description": "Find the best pick-your-own farms near Saint-Hyacinthe, Quebec. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Vancouver",
+      "slug": "vancouver",
+      "population": 662248,
+      "coordinates": {
+        "latitude": 49.2827291,
+        "longitude": -123.1207375
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "vancouver-british-columbia-canada",
+      "full_location": "Vancouver, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Vancouver, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Surrey",
+      "slug": "surrey",
+      "population": 568322,
+      "coordinates": {
+        "latitude": 49.1913466,
+        "longitude": -122.8490125
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "surrey-british-columbia-canada",
+      "full_location": "Surrey, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Surrey, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Surrey, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Burnaby",
+      "slug": "burnaby",
+      "population": 249125,
+      "coordinates": {
+        "latitude": 49.2488091,
+        "longitude": -122.9805104
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "burnaby-british-columbia-canada",
+      "full_location": "Burnaby, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Burnaby, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Burnaby, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Richmond",
+      "slug": "richmond",
+      "population": 209937,
+      "coordinates": {
+        "latitude": 49.1665898,
+        "longitude": -123.133569
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "richmond-british-columbia-canada",
+      "full_location": "Richmond, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Richmond, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Richmond, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Abbotsford",
+      "slug": "abbotsford",
+      "population": 153524,
+      "coordinates": {
+        "latitude": 49.0504377,
+        "longitude": -122.3044697
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "abbotsford-british-columbia-canada",
+      "full_location": "Abbotsford, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Abbotsford, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Abbotsford, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Coquitlam",
+      "slug": "coquitlam",
+      "population": 148625,
+      "coordinates": {
+        "latitude": 49.2837626,
+        "longitude": -122.7932065
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "coquitlam-british-columbia-canada",
+      "full_location": "Coquitlam, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Coquitlam, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Coquitlam, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Kelowna",
+      "slug": "kelowna",
+      "population": 144576,
+      "coordinates": {
+        "latitude": 49.8863235,
+        "longitude": -119.4965917
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "kelowna-british-columbia-canada",
+      "full_location": "Kelowna, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Kelowna, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Kelowna, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Langley",
+      "slug": "langley",
+      "population": 132603,
+      "coordinates": {
+        "latitude": 49.1041779,
+        "longitude": -122.6603519
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "langley-british-columbia-canada",
+      "full_location": "Langley, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Langley, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Langley, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saanich",
+      "slug": "saanich",
+      "population": 117735,
+      "coordinates": {
+        "latitude": 48.4527784,
+        "longitude": -123.3754551
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saanich-british-columbia-canada",
+      "full_location": "Saanich, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Saanich, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Saanich, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Delta",
+      "slug": "delta",
+      "population": 108455,
+      "coordinates": {
+        "latitude": 49.09521549999999,
+        "longitude": -123.0264759
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "delta-british-columbia-canada",
+      "full_location": "Delta, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Delta, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Delta, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Nanaimo",
+      "slug": "nanaimo",
+      "population": 99863,
+      "coordinates": {
+        "latitude": 49.1658836,
+        "longitude": -123.9400647
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "nanaimo-british-columbia-canada",
+      "full_location": "Nanaimo, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Nanaimo, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Nanaimo, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Kamloops",
+      "slug": "kamloops",
+      "population": 97902,
+      "coordinates": {
+        "latitude": 50.674522,
+        "longitude": -120.3272674
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "kamloops-british-columbia-canada",
+      "full_location": "Kamloops, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Kamloops, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Kamloops, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Chilliwack",
+      "slug": "chilliwack",
+      "population": 93203,
+      "coordinates": {
+        "latitude": 49.1579401,
+        "longitude": -121.9514666
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "chilliwack-british-columbia-canada",
+      "full_location": "Chilliwack, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Chilliwack, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Chilliwack, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Victoria",
+      "slug": "victoria",
+      "population": 91867,
+      "coordinates": {
+        "latitude": 48.4284207,
+        "longitude": -123.3656444
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "victoria-british-columbia-canada",
+      "full_location": "Victoria, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Victoria, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Victoria, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Maple Ridge",
+      "slug": "maple-ridge",
+      "population": 90990,
+      "coordinates": {
+        "latitude": 49.2193226,
+        "longitude": -122.598398
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "maple-ridge-british-columbia-canada",
+      "full_location": "Maple Ridge, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Maple Ridge, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Maple Ridge, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "North Vancouver",
+      "slug": "north-vancouver",
+      "population": 88168,
+      "coordinates": {
+        "latitude": 49.3199816,
+        "longitude": -123.0724139
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "north-vancouver-british-columbia-canada",
+      "full_location": "North Vancouver, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near North Vancouver, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near North Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "New Westminster",
+      "slug": "new-westminster",
+      "population": 78916,
+      "coordinates": {
+        "latitude": 49.2057179,
+        "longitude": -122.910956
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "new-westminster-british-columbia-canada",
+      "full_location": "New Westminster, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near New Westminster, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near New Westminster, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Prince George",
+      "slug": "prince-george",
+      "population": 76708,
+      "coordinates": {
+        "latitude": 53.9170641,
+        "longitude": -122.7496693
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "prince-george-british-columbia-canada",
+      "full_location": "Prince George, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Prince George, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Prince George, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Port Coquitlam",
+      "slug": "port-coquitlam",
+      "population": 61498,
+      "coordinates": {
+        "latitude": 49.2628382,
+        "longitude": -122.7810708
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "port-coquitlam-british-columbia-canada",
+      "full_location": "Port Coquitlam, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Port Coquitlam, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Port Coquitlam, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "North Vancouver",
+      "slug": "north-vancouver",
+      "population": 58120,
+      "coordinates": {
+        "latitude": 49.3199816,
+        "longitude": -123.0724139
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "north-vancouver-british-columbia-canada",
+      "full_location": "North Vancouver, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near North Vancouver, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near North Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Whistler",
+      "slug": "whistler",
+      "population": 12000,
+      "coordinates": {
+        "latitude": 50.11616859999999,
+        "longitude": -122.9535117
+      },
+      "province": "British Columbia",
+      "province_slug": "british-columbia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "whistler-british-columbia-canada",
+      "full_location": "Whistler, British Columbia, Canada",
+      "seo_title": "Pick Your Own Farms near Whistler, British Columbia",
+      "meta_description": "Find the best pick-your-own farms near Whistler, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Calgary",
+      "slug": "calgary",
+      "population": 1306784,
+      "coordinates": {
+        "latitude": 51.04473309999999,
+        "longitude": -114.0718831
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "calgary-alberta-canada",
+      "full_location": "Calgary, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Calgary, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Calgary, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Edmonton",
+      "slug": "edmonton",
+      "population": 1010899,
+      "coordinates": {
+        "latitude": 53.5460983,
+        "longitude": -113.4937266
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "edmonton-alberta-canada",
+      "full_location": "Edmonton, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Edmonton, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Edmonton, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Red Deer",
+      "slug": "red-deer",
+      "population": 100844,
+      "coordinates": {
+        "latitude": 52.2690328,
+        "longitude": -113.8114955
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "red-deer-alberta-canada",
+      "full_location": "Red Deer, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Red Deer, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Red Deer, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Strathcona County",
+      "slug": "strathcona-county",
+      "population": 99225,
+      "coordinates": {
+        "latitude": 53.53267760000001,
+        "longitude": -113.1553199
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "strathcona-county-alberta-canada",
+      "full_location": "Strathcona County, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Strathcona County, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Strathcona County, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Lethbridge",
+      "slug": "lethbridge",
+      "population": 98406,
+      "coordinates": {
+        "latitude": 49.6956181,
+        "longitude": -112.8451067
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "lethbridge-alberta-canada",
+      "full_location": "Lethbridge, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Lethbridge, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Lethbridge, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Airdrie",
+      "slug": "airdrie",
+      "population": 74100,
+      "coordinates": {
+        "latitude": 51.29269679999999,
+        "longitude": -114.0134113
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "airdrie-alberta-canada",
+      "full_location": "Airdrie, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Airdrie, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Airdrie, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Wood Buffalo",
+      "slug": "wood-buffalo",
+      "population": 72326,
+      "coordinates": {
+        "latitude": 57.6066083,
+        "longitude": -111.6495855
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "wood-buffalo-alberta-canada",
+      "full_location": "Wood Buffalo, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Wood Buffalo, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Wood Buffalo, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "St. Albert",
+      "slug": "st-albert",
+      "population": 68232,
+      "coordinates": {
+        "latitude": 53.6539037,
+        "longitude": -113.6292701
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "st-albert-alberta-canada",
+      "full_location": "St. Albert, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near St. Albert, Alberta",
+      "meta_description": "Find the best pick-your-own farms near St. Albert, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Grande Prairie",
+      "slug": "grande-prairie",
+      "population": 64141,
+      "coordinates": {
+        "latitude": 55.170691,
+        "longitude": -118.7884808
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "grande-prairie-alberta-canada",
+      "full_location": "Grande Prairie, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Grande Prairie, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Grande Prairie, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Medicine Hat",
+      "slug": "medicine-hat",
+      "population": 63271,
+      "coordinates": {
+        "latitude": 50.0290218,
+        "longitude": -110.7031976
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "medicine-hat-alberta-canada",
+      "full_location": "Medicine Hat, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Medicine Hat, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Medicine Hat, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Canmore",
+      "slug": "canmore",
+      "population": 15000,
+      "coordinates": {
+        "latitude": 51.08836660000001,
+        "longitude": -115.3479101
+      },
+      "province": "Alberta",
+      "province_slug": "alberta",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "canmore-alberta-canada",
+      "full_location": "Canmore, Alberta, Canada",
+      "seo_title": "Pick Your Own Farms near Canmore, Alberta",
+      "meta_description": "Find the best pick-your-own farms near Canmore, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Winnipeg",
+      "slug": "winnipeg",
+      "population": 749607,
+      "coordinates": {
+        "latitude": 49.8954221,
+        "longitude": -97.1385145
+      },
+      "province": "Manitoba",
+      "province_slug": "manitoba",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "winnipeg-manitoba-canada",
+      "full_location": "Winnipeg, Manitoba, Canada",
+      "seo_title": "Pick Your Own Farms near Winnipeg, Manitoba",
+      "meta_description": "Find the best pick-your-own farms near Winnipeg, Manitoba. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Steinbach",
+      "slug": "steinbach",
+      "population": 17000,
+      "coordinates": {
+        "latitude": 49.5303097,
+        "longitude": -96.69120509999999
+      },
+      "province": "Manitoba",
+      "province_slug": "manitoba",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "steinbach-manitoba-canada",
+      "full_location": "Steinbach, Manitoba, Canada",
+      "seo_title": "Pick Your Own Farms near Steinbach, Manitoba",
+      "meta_description": "Find the best pick-your-own farms near Steinbach, Manitoba. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Halifax",
+      "slug": "halifax",
+      "population": 439819,
+      "coordinates": {
+        "latitude": 44.8857087,
+        "longitude": -63.1005273
+      },
+      "province": "Nova Scotia",
+      "province_slug": "nova-scotia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "halifax-nova-scotia-canada",
+      "full_location": "Halifax, Nova Scotia, Canada",
+      "seo_title": "Pick Your Own Farms near Halifax, Nova Scotia",
+      "meta_description": "Find the best pick-your-own farms near Halifax, Nova Scotia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Cape Breton",
+      "slug": "cape-breton",
+      "population": 93694,
+      "coordinates": {
+        "latitude": 46.2486851,
+        "longitude": -60.851817
+      },
+      "province": "Nova Scotia",
+      "province_slug": "nova-scotia",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "cape-breton-nova-scotia-canada",
+      "full_location": "Cape Breton, Nova Scotia, Canada",
+      "seo_title": "Pick Your Own Farms near Cape Breton, Nova Scotia",
+      "meta_description": "Find the best pick-your-own farms near Cape Breton, Nova Scotia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saskatoon",
+      "slug": "saskatoon",
+      "population": 266141,
+      "coordinates": {
+        "latitude": 52.157902,
+        "longitude": -106.6701577
+      },
+      "province": "Saskatchewan",
+      "province_slug": "saskatchewan",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saskatoon-saskatchewan-canada",
+      "full_location": "Saskatoon, Saskatchewan, Canada",
+      "seo_title": "Pick Your Own Farms near Saskatoon, Saskatchewan",
+      "meta_description": "Find the best pick-your-own farms near Saskatoon, Saskatchewan. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Regina",
+      "slug": "regina",
+      "population": 226404,
+      "coordinates": {
+        "latitude": 50.4452112,
+        "longitude": -104.6188944
+      },
+      "province": "Saskatchewan",
+      "province_slug": "saskatchewan",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "regina-saskatchewan-canada",
+      "full_location": "Regina, Saskatchewan, Canada",
+      "seo_title": "Pick Your Own Farms near Regina, Saskatchewan",
+      "meta_description": "Find the best pick-your-own farms near Regina, Saskatchewan. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Moncton",
+      "slug": "moncton",
+      "population": 79470,
+      "coordinates": {
+        "latitude": 46.0878165,
+        "longitude": -64.7782313
+      },
+      "province": "New Brunswick",
+      "province_slug": "new-brunswick",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "moncton-new-brunswick-canada",
+      "full_location": "Moncton, New Brunswick, Canada",
+      "seo_title": "Pick Your Own Farms near Moncton, New Brunswick",
+      "meta_description": "Find the best pick-your-own farms near Moncton, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Saint John",
+      "slug": "saint-john",
+      "population": 69895,
+      "coordinates": {
+        "latitude": 45.2733153,
+        "longitude": -66.0633081
+      },
+      "province": "New Brunswick",
+      "province_slug": "new-brunswick",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "saint-john-new-brunswick-canada",
+      "full_location": "Saint John, New Brunswick, Canada",
+      "seo_title": "Pick Your Own Farms near Saint John, New Brunswick",
+      "meta_description": "Find the best pick-your-own farms near Saint John, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Fredericton",
+      "slug": "fredericton",
+      "population": 63116,
+      "coordinates": {
+        "latitude": 45.9635895,
+        "longitude": -66.6431151
+      },
+      "province": "New Brunswick",
+      "province_slug": "new-brunswick",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "fredericton-new-brunswick-canada",
+      "full_location": "Fredericton, New Brunswick, Canada",
+      "seo_title": "Pick Your Own Farms near Fredericton, New Brunswick",
+      "meta_description": "Find the best pick-your-own farms near Fredericton, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "St. John's",
+      "slug": "st-johns",
+      "population": 110525,
+      "coordinates": {
+        "latitude": 47.5556097,
+        "longitude": -52.7452511
+      },
+      "province": "Newfoundland and Labrador",
+      "province_slug": "newfoundland-and-labrador",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "st-johns-newfoundland-and-labrador-canada",
+      "full_location": "St. John's, Newfoundland and Labrador, Canada",
+      "seo_title": "Pick Your Own Farms near St. John's, Newfoundland and Labrador",
+      "meta_description": "Find the best pick-your-own farms near St. John's, Newfoundland and Labrador. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Charlottetown",
+      "slug": "charlottetown",
+      "population": 38000,
+      "coordinates": {
+        "latitude": 46.23824,
+        "longitude": -63.13107040000001
+      },
+      "province": "Prince Edward Island",
+      "province_slug": "prince-edward-island",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "charlottetown-prince-edward-island-canada",
+      "full_location": "Charlottetown, Prince Edward Island, Canada",
+      "seo_title": "Pick Your Own Farms near Charlottetown, Prince Edward Island",
+      "meta_description": "Find the best pick-your-own farms near Charlottetown, Prince Edward Island. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Whitehorse",
+      "slug": "whitehorse",
+      "population": 28000,
+      "coordinates": {
+        "latitude": 60.7197137,
+        "longitude": -135.0522761
+      },
+      "province": "Yukon",
+      "province_slug": "yukon",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "whitehorse-yukon-canada",
+      "full_location": "Whitehorse, Yukon, Canada",
+      "seo_title": "Pick Your Own Farms near Whitehorse, Yukon",
+      "meta_description": "Find the best pick-your-own farms near Whitehorse, Yukon. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Yellowknife",
+      "slug": "yellowknife",
+      "population": 20000,
+      "coordinates": {
+        "latitude": 62.4539717,
+        "longitude": -114.3717886
+      },
+      "province": "Northwest Territories",
+      "province_slug": "northwest-territories",
+      "country": "Canada",
+      "country_slug": "canada",
+      "location_slug": "yellowknife-northwest-territories-canada",
+      "full_location": "Yellowknife, Northwest Territories, Canada",
+      "seo_title": "Pick Your Own Farms near Yellowknife, Northwest Territories",
+      "meta_description": "Find the best pick-your-own farms near Yellowknife, Northwest Territories. Fresh apples, berries, pumpkins and Christmas trees."
+    }
+  ]
+}
