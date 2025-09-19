@@ -9,11 +9,11 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // CORS headers for cross-origin requests
+    // CORS headers for cross-origin requests (reads can be public)
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-webhook-token",
     };
 
     // Handle preflight
@@ -22,12 +22,11 @@ export default {
     }
 
     try {
-      // API routes
       if (path.startsWith("/api/")) {
         return await handleAPIRequest(request, env, path, corsHeaders);
       }
 
-      // Default root response
+      // Root info
       return new Response(
         JSON.stringify({
           message: "PickAFarm API",
@@ -65,24 +64,12 @@ async function handleAPIRequest(request, env, path, corsHeaders) {
   if (apiPath === "") apiPath = "/";
 
   switch (apiPath) {
-    case "/farms":
-      return await handleFarms(request, env, method, corsHeaders);
-
-    case "/cities":
-      return await handleCities(request, env, method, corsHeaders);
-
-    case "/search":
-      return await handleSearch(request, env, method, corsHeaders);
-
-    case "/notifications":
-      return await handleNotifications(request, env, method, corsHeaders);
-
-    case "/zoho-webhook":
-      return await handleZohoWebhook(request, env, method, corsHeaders);
-
-    case "/zoho-fields":
-      return await handleZohoFields(request, env, method, corsHeaders);
-
+    case "/farms":         return await handleFarms(request, env, method, corsHeaders);
+    case "/cities":        return await handleCities(request, env, method, corsHeaders);
+    case "/search":        return await handleSearch(request, env, method, corsHeaders);
+    case "/notifications": return await handleNotifications(request, env, method, corsHeaders);
+    case "/zoho-webhook":  return await handleZohoWebhook(request, env, method, corsHeaders);
+    case "/zoho-fields":   return await handleZohoFields(request, env, method, corsHeaders);
     default:
       return new Response(
         JSON.stringify({ error: "Endpoint not found", apiPath }),
@@ -97,8 +84,7 @@ async function handleAPIRequest(request, env, path, corsHeaders) {
 async function handleFarms(request, env, method, corsHeaders) {
   if (method !== "GET") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -106,7 +92,7 @@ async function handleFarms(request, env, method, corsHeaders) {
     const url = new URL(request.url);
     const state = url.searchParams.get("state");
     const city = url.searchParams.get("city");
-    const category = url.searchParams.get("category"); // reserved for later
+    const category = url.searchParams.get("category"); // reserved
     const limit = parseInt(url.searchParams.get("limit") || "50");
 
     let query = `
@@ -140,11 +126,7 @@ async function handleFarms(request, env, method, corsHeaders) {
     const result = await stmt.bind(...params).all();
 
     return new Response(
-      JSON.stringify({
-        farms: result.results || [],
-        count: result.results?.length || 0,
-        filters: { state, city, category, limit },
-      }),
+      JSON.stringify({ farms: result.results || [], count: result.results?.length || 0, filters: { state, city, category, limit } }),
       { headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error) {
@@ -162,8 +144,7 @@ async function handleFarms(request, env, method, corsHeaders) {
 async function handleCities(request, env, method, corsHeaders) {
   if (method !== "GET") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -206,8 +187,7 @@ async function handleCities(request, env, method, corsHeaders) {
 async function handleSearch(request, env, method, corsHeaders) {
   if (method !== "GET") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -263,13 +243,25 @@ async function handleNotifications(request, env, method, corsHeaders) {
 }
 
 /* ============================
-   /api/zoho-webhook (NEW)
+   /api/zoho-webhook  (secured)
    ============================ */
 async function handleZohoWebhook(request, env, method, corsHeaders) {
   // Allow GET for quick probe in browser
   if (method === "GET") {
     return new Response(JSON.stringify({ ok: true, route: "/api/zoho-webhook" }), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Require the shared secret for POSTs
+  const url = new URL(request.url);
+  const tokenFromHeader = request.headers.get("x-webhook-token");
+  const tokenFromQuery  = url.searchParams.get("token");
+  const provided = tokenFromHeader || tokenFromQuery;
+
+  if (!provided || provided !== env.WEBHOOK_SHARED_SECRET) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -319,13 +311,12 @@ async function handleZohoWebhook(request, env, method, corsHeaders) {
 }
 
 /* ============================
-   /api/zoho-fields (NEW)
+   /api/zoho-fields
    ============================ */
 async function handleZohoFields(request, env, method, corsHeaders) {
   if (method !== "GET") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -348,8 +339,7 @@ async function handleZohoFields(request, env, method, corsHeaders) {
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 }
@@ -373,13 +363,13 @@ async function zohoAccessToken(env) {
 
 async function zohoFetchAccount(env, token, id) {
   const fields = [
-    "Account_Name", "Website", "Phone", "Email",
-    "Billing_Street", "Billing_City", "Billing_State", "Billing_Code", "Billing_Country",
-    "Description", "Google_My_Business", "Facebook", "Instagram", "PlaceID",
-    "Type_of_Farm", "Amenities", "Varieties", "Payment_Methods", "Services_Type",
-    "Pet_Friendly", "Year_Established", "Open_Date", "Close_Day",
-    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-    "Latitude", "Longitude", "Price_Range", "Slug"
+    "Account_Name","Website","Phone","Email",
+    "Billing_Street","Billing_City","Billing_State","Billing_Code","Billing_Country",
+    "Description","Google_My_Business","Facebook","Instagram","PlaceID",
+    "Type_of_Farm","Amenities","Varieties","Payment_Methods","Services_Type",
+    "Pet_Friendly","Year_Established","Open_Date","Close_Day",
+    "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
+    "Latitude","Longitude","Price_Range","Slug"
   ];
   const url = `https://www.zohoapis.com/crm/v3/Accounts/${encodeURIComponent(id)}?fields=${fields.join(",")}`;
   const res = await fetch(url, { headers: { Authorization: `Zoho-oauthtoken ${token}` } });
@@ -435,7 +425,7 @@ async function ensureUniqueSlug(env, base, id) {
 }
 
 /* ============================
-   D1 UPSERT
+   D1 UPSERT  (keeps verified/featured as-is)
    ============================ */
 async function upsertFarm(env, rec) {
   const id = rec.id;
@@ -444,8 +434,8 @@ async function upsertFarm(env, rec) {
   const desiredSlug = rec.Slug ? slugify(rec.Slug) : slugify(name);
   const slug = await ensureUniqueSlug(env, desiredSlug, id);
 
-  const categoriesCSV = toCSV(rec.Type_of_Farm);   // Christmas Tree Farm, Pumpkin Patch, ...
-  const typeCSV       = toCSV(rec.Services_Type);  // U-Pick, Pre-Cut, ...
+  const categoriesCSV = toCSV(rec.Type_of_Farm);
+  const typeCSV       = toCSV(rec.Services_Type);
   const amenitiesCSV  = toCSV(rec.Amenities);
   const varietiesCSV  = toCSV(rec.Varieties);
   const payCSV        = toCSV(rec.Payment_Methods);
@@ -453,9 +443,11 @@ async function upsertFarm(env, rec) {
   const pet = parsePetFriendly(rec.Pet_Friendly);
   const { min: priceMin, max: priceMax } = parsePriceRange(rec.Price_Range);
 
-  const lat = rec.Latitude != null && rec.Latitude !== "" ? Number(rec.Latitude) : null;
-  const lng = rec.Longitude != null && rec.Longitude !== "" ? Number(rec.Longitude) : null;
+  const lat = rec.Latitude  !== "" && rec.Latitude  != null ? Number(rec.Latitude)  : null;
+  const lng = rec.Longitude !== "" && rec.Longitude != null ? Number(rec.Longitude) : null;
 
+  // Note: we intentionally do NOT include verified/featured/active here on update,
+  // and we rely on table defaults for inserts (verified=0, featured=0, active=1).
   const sql = `
 INSERT INTO farms (
   zoho_record_id, name, slug,
@@ -463,10 +455,8 @@ INSERT INTO farms (
   opening_date, closing_date, type, amenities, varieties, pet_friendly, price_range, payment_methods,
   sunday_hours, monday_hours, tuesday_hours, wednesday_hours, thursday_hours, friday_hours, saturday_hours,
   description, street, city, postal_code, state, country, latitude, longitude, place_id, phone, email,
-  city_id, price_range_min, price_range_max, zoho_last_sync, zoho_webhook_token,
-  farmer_update_token, farmer_token_expires, last_farmer_update, farmer_update_frequency,
-  verified, featured, active, created_at, updated_at
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'),NULL,NULL,NULL,NULL,0,0,1,COALESCE(created_at, CURRENT_TIMESTAMP),CURRENT_TIMESTAMP)
+  city_id, price_range_min, price_range_max, zoho_last_sync
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
 ON CONFLICT(zoho_record_id) DO UPDATE SET
   name=excluded.name, slug=excluded.slug,
   website=excluded.website, location_link=excluded.location_link, facebook=excluded.facebook, instagram=excluded.instagram,
@@ -490,7 +480,7 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     rec.Sunday ?? null, rec.Monday ?? null, rec.Tuesday ?? null, rec.Wednesday ?? null, rec.Thursday ?? null, rec.Friday ?? null, rec.Saturday ?? null,
     rec.Description ?? null, rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null, rec.Billing_State ?? null, rec.Billing_Country ?? null,
     lat, lng, rec.PlaceID ?? null, rec.Phone ?? null, rec.Email ?? null,
-    null, priceMin, priceMax, new Date().toISOString(), null
+    null, priceMin, priceMax, new Date().toISOString()
   ).run();
 }
 
