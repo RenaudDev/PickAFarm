@@ -6,7 +6,7 @@ compatibility_date = "2024-09-17"
 ENVIRONMENT = "development"
 GITHUB_OWNER = "RenaudDev"
 GITHUB_REPO  = "PickAFarm"
-GITHUB_EVENT = "rebuild-farms" # repository_dispatch event type
+GITHUB_EVENT = "rebuild-farms"
 ZOHO_DC = "ca"
 
 [[d1_databases]]
