@@ -468,7 +468,7 @@ async function handleFarms(request, env, method) {
         f.name, f.slug, f.street,
         f.city as city_name, f.postal_code,
         f.state as state_province, f.country,
-        f.latitude, f.longitude, f.phone, f.email,
+        f.lat, f.lng, f.phone, f.email,
         f.website, f.facebook, f.instagram,
         f.description, f.categories, f.type, f.amenities, f.varieties,
         f.pet_friendly, f.price_range,
