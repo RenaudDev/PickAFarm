@@ -524,7 +524,7 @@ case '/zoho-fields':
     }
   
     try {
-      // get access token from refresh
+      // get access token refresh
       const url = new URL("https://accounts.zoho.com/oauth/v2/token");
       url.searchParams.set("grant_type", "refresh_token");
       url.searchParams.set("client_id", env.ZOHO_CLIENT_ID);
