@@ -1,5 +1,5 @@
 /* ============================
-   Cloudflare Worker - ES Module Format with Production Webhook
+   Cloudflare Worker - ES Module Format
    ============================ */
 
 // Zoho Integration Functions
@@ -101,28 +101,7 @@ async function zohoFetchAccount(env, accessToken, accountId) {
   throw new Error("No account data found in response");
 }
 
-// Helper functions from production code
-function toCSV(v) {
-  if (v == null) return null;
-  if (Array.isArray(v)) return v.join(", ");
-  return String(v);
-}
-
-function parsePetFriendly(x) {
-  if (x == null || x === "") return null;
-  const s = String(x).trim().toLowerCase();
-  if (["true","yes","1"].includes(s)) return 1;
-  if (["false","no","0"].includes(s)) return 0;
-  return null;
-}
-
-function parsePriceRange(pr) {
-  if (!pr) return { min: null, max: null };
-  const nums = Array.from(String(pr).matchAll(/(\d+(\.\d+)?)/g)).map(m => parseFloat(m[1]));
-  if (!nums.length) return { min: null, max: null };
-  return { min: Math.min(...nums), max: Math.max(...nums) };
-}
-
+// Helper functions
 function slugify(name) {
   return String(name || "")
     .toLowerCase()
@@ -131,71 +110,43 @@ function slugify(name) {
     .slice(0, 120);
 }
 
-async function ensureUniqueSlug(env, base, id) {
-  let candidate = base || "farm";
-  let i = 2;
-  while (true) {
-    const row = await env.DB.prepare(
-      "SELECT 1 FROM farms WHERE slug = ? AND zoho_record_id != ?"
-    ).bind(candidate, id).first();
-    if (!row) return candidate;
-    candidate = `${base}-${i++}`;
-  }
-}
-
-// D1 Upsert function from production code
+// Simplified D1 Upsert function - only uses essential columns
 async function upsertFarm(env, rec) {
-  const id = rec.id; // zcrm_<id>
+  const d1Id = rec.id; // zcrm_<id>
   const name = rec.Account_Name || "";
-
-  const desiredSlug = rec.Slug ? slugify(rec.Slug) : slugify(name);
-  const slug = await ensureUniqueSlug(env, desiredSlug, id);
-
-  const categoriesCSV = toCSV(rec.Type_of_Farm);
-  const typeCSV = toCSV(rec.Services_Type);
-  const amenitiesCSV = toCSV(rec.Amenities);
-  const varietiesCSV = toCSV(rec.Varieties);
-  const payCSV = toCSV(rec.Payment_Methods);
-
-  const pet = parsePetFriendly(rec.Pet_Friendly);
-  const { min: priceMin, max: priceMax } = parsePriceRange(rec.Price_Range);
-
-  const lat = rec.Latitude !== "" && rec.Latitude != null ? Number(rec.Latitude) : null;
-  const lng = rec.Longitude !== "" && rec.Longitude != null ? Number(rec.Longitude) : null;
+  const slug = slugify(name);
 
   const sql = `
 INSERT INTO farms (
-  zoho_record_id, name, slug,
-  website, location_link, facebook, instagram, categories, established_in,
-  opening_date, closing_date, type, amenities, varieties, pet_friendly, price_range, payment_methods,
-  sunday_hours, monday_hours, tuesday_hours, wednesday_hours, thursday_hours, friday_hours, saturday_hours,
-  description, street, city, postal_code, state, country, latitude, longitude, place_id, phone, email,
-  city_id, price_range_min, price_range_max, zoho_last_sync
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
-ON CONFLICT(zoho_record_id) DO UPDATE SET
-  name=excluded.name, slug=excluded.slug,
-  website=excluded.website, location_link=excluded.location_link, facebook=excluded.facebook, instagram=excluded.instagram,
-  categories=excluded.categories, established_in=excluded.established_in, opening_date=excluded.opening_date, closing_date=excluded.closing_date,
-  type=excluded.type, amenities=excluded.amenities, varieties=excluded.varieties, pet_friendly=excluded.pet_friendly,
-  price_range=excluded.price_range, payment_methods=excluded.payment_methods,
-  sunday_hours=excluded.sunday_hours, monday_hours=excluded.monday_hours, tuesday_hours=excluded.tuesday_hours,
-  wednesday_hours=excluded.wednesday_hours, thursday_hours=excluded.thursday_hours, friday_hours=excluded.friday_hours, saturday_hours=excluded.saturday_hours,
-  description=excluded.description, street=excluded.street, city=excluded.city, postal_code=excluded.postal_code,
-  state=excluded.state, country=excluded.country, latitude=excluded.latitude, longitude=excluded.longitude, place_id=excluded.place_id,
-  phone=excluded.phone, email=excluded.email, city_id=excluded.city_id, price_range_min=excluded.price_range_min, price_range_max=excluded.price_range_max,
-  zoho_last_sync=excluded.zoho_last_sync, updated_at=CURRENT_TIMESTAMP;
+  zoho_record_id, name, slug, website, phone, email, description, 
+  street, city, postal_code, state, country, latitude, longitude,
+  facebook, instagram, categories, type, amenities, varieties,
+  pet_friendly, price_range, zoho_last_sync, updated_at
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+ON CONFLICT(zoho_record_id) DO UPDATE SET 
+  name=excluded.name, slug=excluded.slug, website=excluded.website,
+  phone=excluded.phone, email=excluded.email, description=excluded.description,
+  street=excluded.street, city=excluded.city, postal_code=excluded.postal_code,
+  state=excluded.state, country=excluded.country, latitude=excluded.latitude,
+  longitude=excluded.longitude, facebook=excluded.facebook, instagram=excluded.instagram,
+  categories=excluded.categories, type=excluded.type, amenities=excluded.amenities,
+  varieties=excluded.varieties, pet_friendly=excluded.pet_friendly, price_range=excluded.price_range,
+  zoho_last_sync=excluded.zoho_last_sync, updated_at=excluded.updated_at;
 `;
 
+  const lat = rec.Latitude !== "" && rec.Latitude != null ? Number(rec.Latitude) : null;
+  const lng = rec.Longitude !== "" && rec.Longitude != null ? Number(rec.Longitude) : null;
+  const petFriendly = rec.Pet_Friendly === "Yes" || rec.Pet_Friendly === true ? 1 : 0;
+
   await env.DB.prepare(sql).bind(
-    id, name, slug,
-    rec.Website ?? null, rec.Google_My_Business ?? null, rec.Facebook ?? null, rec.Instagram ?? null, categoriesCSV ?? null,
-    rec.Year_Established ? Number(rec.Year_Established) : null,
-    rec.Open_Date ?? null, rec.Close_Day ?? null, typeCSV ?? null, amenitiesCSV ?? null, varietiesCSV ?? null,
-    pet, rec.Price_Range ?? null, payCSV ?? null,
-    rec.Sunday ?? null, rec.Monday ?? null, rec.Tuesday ?? null, rec.Wednesday ?? null, rec.Thursday ?? null, rec.Friday ?? null, rec.Saturday ?? null,
-    rec.Description ?? null, rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null, rec.Billing_State ?? null, rec.Billing_Country ?? null,
-    lat, lng, rec.PlaceID ?? null, rec.Phone ?? null, rec.Email ?? null,
-    null, priceMin, priceMax
+    d1Id, name, slug,
+    rec.Website ?? null, rec.Phone ?? null, rec.Email ?? null, rec.Description ?? null,
+    rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null, 
+    rec.Billing_State ?? null, rec.Billing_Country ?? null, lat, lng,
+    rec.Facebook ?? null, rec.Instagram ?? null, rec.Type_of_Farm ?? null,
+    rec.Services_Type ?? null, rec.Amenities ?? null, rec.Varieties ?? null,
+    petFriendly, rec.Price_Range ?? null, 
+    new Date().toISOString(), new Date().toISOString()
   ).run();
 }
 
@@ -256,7 +207,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, x-webhook-token",
 };
 
-// Updated Production Webhook Handler
+// Production Webhook Handler
 async function handleZohoWebhook(request, env, method) {
   if (method === "GET") {
     return new Response(JSON.stringify({ 
@@ -508,13 +459,9 @@ async function handleFarms(request, env, method) {
         f.city as city_name, f.postal_code,
         f.state as state_province, f.country,
         f.latitude, f.longitude, f.phone, f.email,
-        f.website, f.facebook, f.instagram, f.location_link,
+        f.website, f.facebook, f.instagram,
         f.description, f.categories, f.type, f.amenities, f.varieties,
-        f.pet_friendly, f.price_range, f.price_range_min, f.price_range_max,
-        f.payment_methods,
-        f.established_in, f.opening_date, f.closing_date,
-        f.sunday_hours, f.monday_hours, f.tuesday_hours, f.wednesday_hours,
-        f.thursday_hours, f.friday_hours, f.saturday_hours,
+        f.pet_friendly, f.price_range,
         f.verified, f.featured, f.active, f.updated_at
       FROM farms f
       WHERE f.active = 1
@@ -607,21 +554,22 @@ async function handleSearch(request, env, method) {
       );
     }
 
+    // Simple search without FTS table for now
     const query = `
       SELECT 
         f.zoho_record_id as id,
         f.name, f.slug, f.street, f.description,
-        f.city as city_name, f.state as state_province,
-        farms_fts.rank
-      FROM farms_fts
-      JOIN farms f ON farms_fts.rowid = f.zoho_record_id
-      WHERE farms_fts MATCH ? AND f.active = 1
-      ORDER BY farms_fts.rank
+        f.city as city_name, f.state as state_province
+      FROM farms f
+      WHERE (f.name LIKE ? OR f.description LIKE ? OR f.city LIKE ?) 
+      AND f.active = 1
+      ORDER BY f.name ASC
       LIMIT ?
     `;
 
+    const searchTerm = `%${q}%`;
     const stmt = env.DB.prepare(query);
-    const result = await stmt.bind(q, limit).all();
+    const result = await stmt.bind(searchTerm, searchTerm, searchTerm, limit).all();
 
     return new Response(
       JSON.stringify({ farms: result.results || [], count: result.results?.length || 0, query: q }),
@@ -676,7 +624,7 @@ export default {
     if (url.pathname === "/") {
       return new Response(JSON.stringify({
         message: "PickAFarm API",
-        version: "1.1.0",
+        version: "1.2.0",
         endpoints: {
           farms: "/api/farms",
           cities: "/api/cities", 
