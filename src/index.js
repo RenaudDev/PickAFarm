@@ -12,9 +12,9 @@ async function zohoAccessToken(env) {
     throw new Error("Missing Zoho credentials: ZOHO_REFRESH_TOKEN, ZOHO_CLIENT_ID, or ZOHO_CLIENT_SECRET");
   }
 
-  // Use the correct Zoho data center
+  // Use the correct Zoho data center - for Canada, use zohocloud.ca for auth
   const dc = env.ZOHO_DC || 'com'; // You have 'ca' set in your env
-  const tokenUrl = `https://accounts.zoho.${dc}/oauth/v2/token`;
+  const tokenUrl = dc === 'ca' ? 'https://accounts.zohocloud.ca/oauth/v2/token' : `https://accounts.zoho.${dc}/oauth/v2/token`;
   
   const body = new URLSearchParams({
     refresh_token: refreshToken,
@@ -94,8 +94,8 @@ async function testZohoConnection(env) {
     const accessToken = await zohoAccessToken(env);
     const dc = env.ZOHO_DC || 'com';
     
-    // Test with a simple API call to get user info
-    const response = await fetch(`https://www.zohoapis.${dc}/crm/v2/users?type=CurrentUser`, {
+    // Test with accounts endpoint which matches your scope: ZohoCRM.modules.accounts.READ
+    const response = await fetch(`https://www.zohoapis.${dc}/crm/v2/Accounts?per_page=1`, {
       method: "GET",
       headers: {
         "Authorization": `Zoho-oauthtoken ${accessToken}`,
@@ -104,14 +104,16 @@ async function testZohoConnection(env) {
     });
 
     if (!response.ok) {
-      throw new Error(`Test API call failed: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`Test API call failed: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
     return {
       success: true,
-      user: data.users?.[0]?.full_name || "Unknown",
-      org: data.users?.[0]?.profile?.name || "Unknown",
+      message: "Successfully connected to Zoho CRM",
+      accounts_found: data.data ? data.data.length : 0,
+      first_account: data.data?.[0]?.Account_Name || "No accounts found",
       dc: dc
     };
   } catch (error) {
@@ -250,6 +252,88 @@ async function handleZohoWebhook(request, env, method) {
   }
 }
 
+// Token debug endpoint
+async function handleTokenDebug(request, env, method) {
+  if (method !== "GET") {
+    return new Response("Method not allowed", { status: 405 });
+  }
+
+  const refreshToken = env.ZOHO_REFRESH_TOKEN;
+  const clientId = env.ZOHO_CLIENT_ID;
+  const clientSecret = env.ZOHO_CLIENT_SECRET;
+  const dc = env.ZOHO_DC || 'com';
+
+  // Show token info (safely)
+  const tokenInfo = {
+    refresh_token_present: !!refreshToken,
+    refresh_token_length: refreshToken ? refreshToken.length : 0,
+    refresh_token_starts_with: refreshToken ? refreshToken.substring(0, 10) + "..." : null,
+    client_id_present: !!clientId,
+    client_secret_present: !!clientSecret,
+    dc: dc,
+    token_url: dc === 'ca' ? 'https://accounts.zohocloud.ca/oauth/v2/token' : `https://accounts.zoho.${dc}/oauth/v2/token`
+  };
+
+  // Try to get a token with detailed error info
+  if (refreshToken && clientId && clientSecret) {
+    try {
+      const tokenUrl = dc === 'ca' ? 'https://accounts.zohocloud.ca/oauth/v2/token' : `https://accounts.zoho.${dc}/oauth/v2/token`;
+      const body = new URLSearchParams({
+        refresh_token: refreshToken,
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: "refresh_token"
+      });
+
+      const response = await fetch(tokenUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: body.toString()
+      });
+
+      const responseText = await response.text();
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch {
+        responseData = { raw_response: responseText };
+      }
+
+      return new Response(JSON.stringify({
+        token_info: tokenInfo,
+        request_details: {
+          url: tokenUrl,
+          status: response.status,
+          status_text: response.statusText,
+          headers: Object.fromEntries(response.headers.entries())
+        },
+        response_data: responseData
+      }, null, 2), {
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+
+    } catch (error) {
+      return new Response(JSON.stringify({
+        token_info: tokenInfo,
+        error: "Request failed",
+        message: error.message
+      }, null, 2), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+  }
+
+  return new Response(JSON.stringify({
+    token_info: tokenInfo,
+    error: "Missing required credentials"
+  }, null, 2), {
+    headers: { "Content-Type": "application/json", ...corsHeaders }
+  });
+}
+
 // Main fetch handler (ES Module format)
 export default {
   async fetch(request, env, ctx) {
@@ -270,10 +354,23 @@ export default {
       return handleZohoDebug(request, env, method);
     }
 
+    if (url.pathname === "/api/token-debug") {
+      return handleTokenDebug(request, env, method);
+    }
+
+    if (url.pathname === "/api/mapping-test") {
+      return handleZohoMappingTest(request, env, method);
+    }
+
     // Default response
     return new Response(JSON.stringify({ 
       error: "Not found", 
-      available_endpoints: ["/api/zoho-webhook", "/api/zoho-debug"] 
+      available_endpoints: [
+        "/api/zoho-webhook", 
+        "/api/zoho-debug", 
+        "/api/token-debug", 
+        "/api/mapping-test"
+      ] 
     }), {
       status: 404,
       headers: { "Content-Type": "application/json", ...corsHeaders }
