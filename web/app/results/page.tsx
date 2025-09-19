@@ -2,11 +2,12 @@
 
 import { Suspense, useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
+import { CategoryIcon } from "@/lib/category-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Bell, MapPin, Star, ArrowUpDown, Filter, Wheat } from "lucide-react"
+import { Bell, MapPin, Star, ArrowUpDown, Filter } from "lucide-react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 
@@ -176,7 +177,7 @@ function SearchResultsContent() {
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center ml-3">
-                    <Wheat className="h-6 w-6 text-primary" />
+                    <CategoryIcon categoryName={searchParams.get("category") || 'General'} className="h-6 w-6 text-primary" />
                   </div>
                 </div>
 
@@ -206,7 +207,7 @@ function SearchResultsContent() {
 
         {filteredFarms.length === 0 && (
           <div className="text-center py-12">
-            <Wheat className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            <CategoryIcon categoryName={searchParams.get("category") || 'General'} className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-foreground mb-2">No farms found</h3>
             <p className="text-muted-foreground">Try adjusting your search criteria or browse all farms.</p>
           </div>

@@ -8,8 +8,8 @@
     "postal_code": "N5P 3S6",
     "state_province": "On",
     "country": "Canada",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 42.7505572,
+    "longitude": -81.0563934,
     "phone": "+1 226-240-0343",
     "email": "catfishcreekchristmastreefarm@gmail.com",
     "website": "https://www.catfishcreekchristmastreefarm.ca/",
@@ -25,6 +25,6 @@
     "verified": 0,
     "featured": 0,
     "active": 1,
-    "updated_at": "2025-09-19T16:52:19.466Z"
+    "updated_at": "2025-09-19T17:46:31.394Z"
   }
 ]
