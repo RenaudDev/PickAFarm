@@ -16,11 +16,21 @@ export async function generateStaticParams() {
     // If no categories have farms, use the first category to prevent build failure
     const categoriesToUse = categoriesWithFarms.length > 0 ? categoriesWithFarms : [categoriesData[0]]
     
-    // Generate all combinations using location_slug from locations-with-farms.json
+    // If locationsWithFarms is empty, provide fallback locations
+    const locationsToUse = locationsWithFarms.length > 0 ? locationsWithFarms : [
+      {
+        location_slug: 'london-ontario-canada'
+      },
+      {
+        location_slug: 'norfolk-county-ontario-canada'
+      }
+    ]
+    
+    // Generate all combinations using location_slug
     const params = []
     
     for (const category of categoriesToUse) {
-      for (const location of locationsWithFarms) {
+      for (const location of locationsToUse) {
         params.push({
           slug: category.slug,
           location: location.location_slug
