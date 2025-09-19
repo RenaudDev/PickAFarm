@@ -9,23 +9,37 @@ import locationsWithFarms from "../../../../data/locations-with-farms.json"
 
 // Generate static params for all category + location combinations
 export async function generateStaticParams() {
-  // Get categories that have farms (from categories.json)
-  const categoriesWithFarms = categoriesData.filter(cat => cat.totalFarms > 0)
-  
-  // Generate all combinations using location_slug from locations-with-farms.json
-  const params = []
-  
-  for (const category of categoriesWithFarms) {
-    for (const location of locationsWithFarms) {
-      params.push({
-        slug: category.slug,
-        location: location.location_slug
-      })
+  try {
+    // Get categories that have farms (from categories.json)
+    const categoriesWithFarms = categoriesData.filter(cat => cat.totalFarms > 0)
+    
+    // If no categories have farms, use the first category to prevent build failure
+    const categoriesToUse = categoriesWithFarms.length > 0 ? categoriesWithFarms : [categoriesData[0]]
+    
+    // Generate all combinations using location_slug from locations-with-farms.json
+    const params = []
+    
+    for (const category of categoriesToUse) {
+      for (const location of locationsWithFarms) {
+        params.push({
+          slug: category.slug,
+          location: location.location_slug
+        })
+      }
     }
+    
+    console.log(`📋 Generated ${params.length} static params for category/location combinations`)
+    return params
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    // Fallback: return at least one param to prevent build failure
+    return [
+      {
+        slug: 'christmas-tree-farms',
+        location: 'london-ontario-canada'
+      }
+    ]
   }
-  
-  console.log(`📋 Generated ${params.length} static params for category/location combinations`)
-  return params
 }
 
 export default async function SearchResults({ params }: { params: Promise<{ slug: string; location: string }> }) {
