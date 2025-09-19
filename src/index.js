@@ -102,6 +102,13 @@ async function zohoFetchAccount(env, accessToken, accountId) {
 }
 
 // Helper functions
+function toCSV(v) {
+  if (v == null) return null;
+  if (Array.isArray(v)) return v.join(", ");
+  if (typeof v === 'object') return JSON.stringify(v);
+  return String(v);
+}
+
 function slugify(name) {
   return String(name || "")
     .toLowerCase()
@@ -115,6 +122,12 @@ async function upsertFarm(env, rec) {
   const d1Id = rec.id; // zcrm_<id>
   const name = rec.Account_Name || "";
   const slug = slugify(name);
+
+  // Convert complex fields to strings
+  const categories = toCSV(rec.Type_of_Farm);
+  const type = toCSV(rec.Services_Type);
+  const amenities = toCSV(rec.Amenities);
+  const varieties = toCSV(rec.Varieties);
 
   const sql = `
 INSERT INTO farms (
@@ -143,8 +156,8 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     rec.Website ?? null, rec.Phone ?? null, rec.Email ?? null, rec.Description ?? null,
     rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null, 
     rec.Billing_State ?? null, rec.Billing_Country ?? null, lat, lng,
-    rec.Facebook ?? null, rec.Instagram ?? null, rec.Type_of_Farm ?? null,
-    rec.Services_Type ?? null, rec.Amenities ?? null, rec.Varieties ?? null,
+    rec.Facebook ?? null, rec.Instagram ?? null, 
+    categories, type, amenities, varieties,  // Use converted values
     petFriendly, rec.Price_Range ?? null, 
     new Date().toISOString(), new Date().toISOString()
   ).run();
