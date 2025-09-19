@@ -51,7 +51,20 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
     .map((location: any) => {
       // Count farms that match this category
       const matchingFarms = location.farms?.filter((farm: any) => {
-        const farmCategories = JSON.parse(farm.categories || '[]')
+        // Handle both JSON array and plain string formats for categories
+        let farmCategories: string[] = []
+        try {
+          // Try to parse as JSON first
+          farmCategories = JSON.parse(farm.categories || '[]')
+          // If it's a string, wrap it in an array
+          if (typeof farmCategories === 'string') {
+            farmCategories = [farmCategories]
+          }
+        } catch (error) {
+          // If JSON parsing fails, treat as plain string
+          farmCategories = farm.categories ? [farm.categories] : []
+        }
+        
         return matchingCategories.some(catName => 
           farmCategories.some((farmCat: string) => 
             farmCat.toLowerCase().includes(catName.toLowerCase())

@@ -64,12 +64,25 @@ export default function GoogleMaps({
     if (!categoryFilter) return locationData.farms
 
     return locationData.farms.filter(farm => {
-      const farmCategories = JSON.parse(farm.categories || '[]')
+      // Handle both JSON array and plain string formats for categories
+      let farmCategories: string[] = []
+      try {
+        // Try to parse as JSON first
+        farmCategories = JSON.parse(farm.categories || '[]')
+        // If it's a string, wrap it in an array
+        if (typeof farmCategories === 'string') {
+          farmCategories = [farmCategories]
+        }
+      } catch (error) {
+        // If JSON parsing fails, treat as plain string
+        farmCategories = farm.categories ? [farm.categories] : []
+      }
+      
       const categoryMap: Record<string, string[]> = {
         'apple-orchards': ['Apple Orchard', 'Apple Picking'],
         'pumpkin-patches': ['Pumpkin Patch'],
         'berry-farms': ['Berry Farm', 'Berry Picking'],
-        'christmas-tree-farms': ['Christmas Trees']
+        'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree']
       }
       const matchingCategories = categoryMap[categoryFilter] || []
       return matchingCategories.some(catName => 
@@ -209,7 +222,19 @@ export default function GoogleMaps({
 
     // Add farm markers
     filteredFarms.forEach((farm) => {
-      const farmCategories = JSON.parse(farm.categories || '[]')
+      // Handle both JSON array and plain string formats for categories
+      let farmCategories: string[] = []
+      try {
+        // Try to parse as JSON first
+        farmCategories = JSON.parse(farm.categories || '[]')
+        // If it's a string, wrap it in an array
+        if (typeof farmCategories === 'string') {
+          farmCategories = [farmCategories]
+        }
+      } catch (error) {
+        // If JSON parsing fails, treat as plain string
+        farmCategories = farm.categories ? [farm.categories] : []
+      }
       
       // Choose marker color based on farm type
       const getMarkerColor = (categories: string[]) => {
