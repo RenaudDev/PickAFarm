@@ -1,5 +1,5 @@
 /* ============================
-   Cloudflare Worker - ES Module Format
+   Cloudflare Worker - ES Module Format with Production Webhook
    ============================ */
 
 // Zoho Integration Functions
@@ -56,7 +56,19 @@ async function zohoFetchAccount(env, accessToken, accountId) {
 
   // Use the correct Zoho data center
   const dc = env.ZOHO_DC || 'com'; // You have 'ca' set
-  const apiUrl = `https://www.zohoapis.${dc}/crm/v2/Accounts/${accountId}`;
+  
+  // Updated to use all the fields from your production handler
+  const fields = [
+    "Account_Name","Website","Phone","Email",
+    "Billing_Street","Billing_City","Billing_State","Billing_Code","Billing_Country",
+    "Description","Google_My_Business","Facebook","Instagram","PlaceID",
+    "Type_of_Farm","Amenities","Varieties","Payment_Methods","Services_Type",
+    "Pet_Friendly","Year_Established","Open_Date","Close_Day",
+    "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
+    "Latitude","Longitude","Price_Range","Slug"
+  ];
+  
+  const apiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${encodeURIComponent(accountId)}?fields=${fields.join(",")}`;
 
   const response = await fetch(apiUrl, {
     method: "GET",
@@ -89,12 +101,125 @@ async function zohoFetchAccount(env, accessToken, accountId) {
   throw new Error("No account data found in response");
 }
 
+// Helper functions from production code
+function toCSV(v) {
+  if (v == null) return null;
+  if (Array.isArray(v)) return v.join(", ");
+  return String(v);
+}
+
+function parsePetFriendly(x) {
+  if (x == null || x === "") return null;
+  const s = String(x).trim().toLowerCase();
+  if (["true","yes","1"].includes(s)) return 1;
+  if (["false","no","0"].includes(s)) return 0;
+  return null;
+}
+
+function parsePriceRange(pr) {
+  if (!pr) return { min: null, max: null };
+  const nums = Array.from(String(pr).matchAll(/(\d+(\.\d+)?)/g)).map(m => parseFloat(m[1]));
+  if (!nums.length) return { min: null, max: null };
+  return { min: Math.min(...nums), max: Math.max(...nums) };
+}
+
+function slugify(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 120);
+}
+
+async function ensureUniqueSlug(env, base, id) {
+  let candidate = base || "farm";
+  let i = 2;
+  while (true) {
+    const row = await env.DB.prepare(
+      "SELECT 1 FROM farms WHERE slug = ? AND zoho_record_id != ?"
+    ).bind(candidate, id).first();
+    if (!row) return candidate;
+    candidate = `${base}-${i++}`;
+  }
+}
+
+// D1 Upsert function from production code
+async function upsertFarm(env, rec) {
+  const id = rec.id; // zcrm_<id>
+  const name = rec.Account_Name || "";
+
+  const desiredSlug = rec.Slug ? slugify(rec.Slug) : slugify(name);
+  const slug = await ensureUniqueSlug(env, desiredSlug, id);
+
+  const categoriesCSV = toCSV(rec.Type_of_Farm);
+  const typeCSV = toCSV(rec.Services_Type);
+  const amenitiesCSV = toCSV(rec.Amenities);
+  const varietiesCSV = toCSV(rec.Varieties);
+  const payCSV = toCSV(rec.Payment_Methods);
+
+  const pet = parsePetFriendly(rec.Pet_Friendly);
+  const { min: priceMin, max: priceMax } = parsePriceRange(rec.Price_Range);
+
+  const lat = rec.Latitude !== "" && rec.Latitude != null ? Number(rec.Latitude) : null;
+  const lng = rec.Longitude !== "" && rec.Longitude != null ? Number(rec.Longitude) : null;
+
+  const sql = `
+INSERT INTO farms (
+  zoho_record_id, name, slug,
+  website, location_link, facebook, instagram, categories, established_in,
+  opening_date, closing_date, type, amenities, varieties, pet_friendly, price_range, payment_methods,
+  sunday_hours, monday_hours, tuesday_hours, wednesday_hours, thursday_hours, friday_hours, saturday_hours,
+  description, street, city, postal_code, state, country, latitude, longitude, place_id, phone, email,
+  city_id, price_range_min, price_range_max, zoho_last_sync
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
+ON CONFLICT(zoho_record_id) DO UPDATE SET
+  name=excluded.name, slug=excluded.slug,
+  website=excluded.website, location_link=excluded.location_link, facebook=excluded.facebook, instagram=excluded.instagram,
+  categories=excluded.categories, established_in=excluded.established_in, opening_date=excluded.opening_date, closing_date=excluded.closing_date,
+  type=excluded.type, amenities=excluded.amenities, varieties=excluded.varieties, pet_friendly=excluded.pet_friendly,
+  price_range=excluded.price_range, payment_methods=excluded.payment_methods,
+  sunday_hours=excluded.sunday_hours, monday_hours=excluded.monday_hours, tuesday_hours=excluded.tuesday_hours,
+  wednesday_hours=excluded.wednesday_hours, thursday_hours=excluded.thursday_hours, friday_hours=excluded.friday_hours, saturday_hours=excluded.saturday_hours,
+  description=excluded.description, street=excluded.street, city=excluded.city, postal_code=excluded.postal_code,
+  state=excluded.state, country=excluded.country, latitude=excluded.latitude, longitude=excluded.longitude, place_id=excluded.place_id,
+  phone=excluded.phone, email=excluded.email, city_id=excluded.city_id, price_range_min=excluded.price_range_min, price_range_max=excluded.price_range_max,
+  zoho_last_sync=excluded.zoho_last_sync, updated_at=CURRENT_TIMESTAMP;
+`;
+
+  await env.DB.prepare(sql).bind(
+    id, name, slug,
+    rec.Website ?? null, rec.Google_My_Business ?? null, rec.Facebook ?? null, rec.Instagram ?? null, categoriesCSV ?? null,
+    rec.Year_Established ? Number(rec.Year_Established) : null,
+    rec.Open_Date ?? null, rec.Close_Day ?? null, typeCSV ?? null, amenitiesCSV ?? null, varietiesCSV ?? null,
+    pet, rec.Price_Range ?? null, payCSV ?? null,
+    rec.Sunday ?? null, rec.Monday ?? null, rec.Tuesday ?? null, rec.Wednesday ?? null, rec.Thursday ?? null, rec.Friday ?? null, rec.Saturday ?? null,
+    rec.Description ?? null, rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null, rec.Billing_State ?? null, rec.Billing_Country ?? null,
+    lat, lng, rec.PlaceID ?? null, rec.Phone ?? null, rec.Email ?? null,
+    null, priceMin, priceMax
+  ).run();
+}
+
+// GitHub dispatch function (optional)
+async function triggerGithub(env, payload) {
+  const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`;
+  const r = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ event_type: env.GITHUB_EVENT, client_payload: payload }),
+  });
+  if (!r.ok) throw new Error(`GitHub dispatch HTTP ${r.status}`);
+}
+
 async function testZohoConnection(env) {
   try {
     const accessToken = await zohoAccessToken(env);
     const dc = env.ZOHO_DC || 'com';
     
-    // Test with accounts endpoint which matches your scope: ZohoCRM.modules.accounts.READ
+    // Test with accounts endpoint which matches your scope
     const response = await fetch(`https://www.zohoapis.${dc}/crm/v2/Accounts?per_page=1`, {
       method: "GET",
       headers: {
@@ -128,8 +253,109 @@ async function testZohoConnection(env) {
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, x-webhook-token",
 };
+
+// Updated Production Webhook Handler
+async function handleZohoWebhook(request, env, method) {
+  if (method === "GET") {
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      route: "/api/zoho-webhook", 
+      mode: "production-ready",
+      features: ["zoho-fetch", "d1-integration", "cloudflare-rebuild"] 
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  if (method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Security check - require webhook token
+  const url = new URL(request.url);
+  const tokenFromHeader = request.headers.get("x-webhook-token");
+  const tokenFromQuery = url.searchParams.get("token");
+  const provided = tokenFromHeader || tokenFromQuery;
+  
+  if (!provided || provided !== env.WEBHOOK_SHARED_SECRET) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Parse request body
+  let payload = {};
+  try {
+    const ct = (request.headers.get("content-type") || "").toLowerCase();
+    if (ct.includes("application/json")) {
+      payload = await request.json();
+    } else if (ct.includes("application/x-www-form-urlencoded")) {
+      const text = await request.text();
+      payload = Object.fromEntries(new URLSearchParams(text));
+    } else {
+      const text = await request.text();
+      try { payload = JSON.parse(text); } catch { payload = {}; }
+    }
+  } catch {}
+
+  // Extract Zoho record ID
+  const zohoId = payload?.data?.[0]?.id ?? payload?.id ?? url.searchParams.get("id");
+  if (!zohoId) {
+    return new Response(JSON.stringify({ error: "Missing Zoho record id" }), {
+      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Normalize: API wants numeric; D1 PK uses zcrm_<id>
+  const rawId = String(zohoId);
+  const apiId = rawId.replace(/^zcrm_/, "");
+  const d1Id = rawId.startsWith("zcrm_") ? rawId : `zcrm_${rawId}`;
+
+  try {
+    // Step 1: Fetch from Zoho
+    const accessToken = await zohoAccessToken(env);
+    const record = await zohoFetchAccount(env, accessToken, apiId);
+    record.id = d1Id; // ensure D1 uses zcrm_...
+
+    // Step 2: Upsert to D1
+    await upsertFarm(env, record);
+
+    // Step 3: Trigger Cloudflare Pages rebuild
+    if (env.CLOUDFLARE_DEPLOY_HOOK) {
+      await fetch(env.CLOUDFLARE_DEPLOY_HOOK, { method: 'POST' });
+    }
+
+    // Step 4: Optional GitHub repository_dispatch
+    if (env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO && env.GITHUB_EVENT) {
+      await triggerGithub(env, { zoho_record_id: d1Id, reason: "zoho-account-updated" });
+    }
+
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      id: d1Id,
+      source: "zoho",
+      database: "updated", 
+      rebuild: env.CLOUDFLARE_DEPLOY_HOOK ? "triggered" : "not-configured"
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+
+  } catch (e) {
+    console.error("Webhook FAILED:", e);
+    return new Response(JSON.stringify({ 
+      error: "Zoho webhook failed", 
+      message: String(e),
+      zoho_id: apiId,
+      d1_id: d1Id
+    }), {
+      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+}
 
 // Debug endpoint
 async function handleZohoDebug(request, env, method) {
@@ -144,7 +370,9 @@ async function handleZohoDebug(request, env, method) {
           ZOHO_REFRESH_TOKEN: env.ZOHO_REFRESH_TOKEN ? "✓ Set" : "✗ Missing",
           ZOHO_CLIENT_ID: env.ZOHO_CLIENT_ID ? "✓ Set" : "✗ Missing",
           ZOHO_CLIENT_SECRET: env.ZOHO_CLIENT_SECRET ? "✓ Set" : "✗ Missing",
-          ZOHO_DC: env.ZOHO_DC || "com (default)"
+          ZOHO_DC: env.ZOHO_DC || "com (default)",
+          WEBHOOK_SHARED_SECRET: env.WEBHOOK_SHARED_SECRET ? "✓ Set" : "✗ Missing",
+          CLOUDFLARE_DEPLOY_HOOK: env.CLOUDFLARE_DEPLOY_HOOK ? "✓ Set" : "✗ Missing"
         },
         connection_test: testResult
       }, null, 2), {
@@ -159,7 +387,9 @@ async function handleZohoDebug(request, env, method) {
           ZOHO_REFRESH_TOKEN: env.ZOHO_REFRESH_TOKEN ? "✓ Set" : "✗ Missing",
           ZOHO_CLIENT_ID: env.ZOHO_CLIENT_ID ? "✓ Set" : "✗ Missing",
           ZOHO_CLIENT_SECRET: env.ZOHO_CLIENT_SECRET ? "✓ Set" : "✗ Missing",
-          ZOHO_DC: env.ZOHO_DC || "com (default)"
+          ZOHO_DC: env.ZOHO_DC || "com (default)",
+          WEBHOOK_SHARED_SECRET: env.WEBHOOK_SHARED_SECRET ? "✓ Set" : "✗ Missing",
+          CLOUDFLARE_DEPLOY_HOOK: env.CLOUDFLARE_DEPLOY_HOOK ? "✓ Set" : "✗ Missing"
         }
       }, null, 2), {
         status: 500,
@@ -172,84 +402,6 @@ async function handleZohoDebug(request, env, method) {
     status: 405,
     headers: { "Content-Type": "application/json", ...corsHeaders }
   });
-}
-
-// Your existing webhook handler (converted to ES module)
-async function handleZohoWebhook(request, env, method) {
-  const url = new URL(request.url);
-
-  // Allow a quick GET probe
-  if (method === "GET") {
-    return new Response(JSON.stringify({ ok: true, route: "/api/zoho-webhook", mode: "smoke-test" }), {
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
-  if (method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
-  // ---- Parse body robustly: JSON, form, or none (fallback to query) ----
-  const ct = (request.headers.get("content-type") || "").toLowerCase();
-  let payload = {};
-  try {
-    if (ct.includes("application/json")) {
-      payload = await request.json();
-    } else if (ct.includes("application/x-www-form-urlencoded")) {
-      const text = await request.text();
-      payload = Object.fromEntries(new URLSearchParams(text));
-    } else {
-      // try to parse whatever (or leave {})
-      const text = await request.text();
-      try { payload = JSON.parse(text); } catch { payload = {}; }
-    }
-  } catch {
-    payload = {};
-  }
-
-  // Accept id from JSON, form, or query string
-  const zohoId =
-    payload?.data?.[0]?.id ??
-    payload?.id ??
-    url.searchParams.get("id");
-
-  if (!zohoId) {
-    return new Response(JSON.stringify({ error: "Missing Zoho record id", hint: "send { id } in body or ?id=..." }), {
-      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
-  // Normalize ids (Zoho API expects numeric id; we return both)
-  const rawId = String(zohoId);
-  const apiId = rawId.replace(/^zcrm_/, "");
-
-  // ---- Only hit Zoho; do not touch D1/GitHub in smoke-test ----
-  try {
-    const accessToken = await zohoAccessToken(env);
-    const record = await zohoFetchAccount(env, accessToken, apiId);
-
-    // Return a compact summary so you see it works
-    const summary = {
-      id: record.id || `zcrm_${apiId}`,
-      Account_Name: record.Account_Name ?? null,
-      Phone: record.Phone ?? null,
-      Email: record.Email ?? null,
-      Website: record.Website ?? null,
-      City: record.Billing_City ?? null,
-      State: record.Billing_State ?? null,
-      Country: record.Billing_Country ?? null,
-    };
-
-    return new Response(JSON.stringify({ ok: true, source: "zoho", summary }, null, 2), {
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  } catch (e) {
-    return new Response(JSON.stringify({ ok: false, error: "Zoho fetch failed", message: String(e) }), {
-      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
 }
 
 // Token debug endpoint
@@ -334,7 +486,7 @@ async function handleTokenDebug(request, env, method) {
   });
 }
 
-// API Handler Functions
+// API Handler Functions (your existing functions)
 async function handleFarms(request, env, method) {
   if (method !== "GET") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
@@ -520,15 +672,11 @@ export default {
       return handleTokenDebug(request, env, method);
     }
 
-    if (url.pathname === "/api/mapping-test") {
-      return handleZohoMappingTest(request, env, method);
-    }
-
     // Root endpoint
     if (url.pathname === "/") {
       return new Response(JSON.stringify({
         message: "PickAFarm API",
-        version: "1.0.3",
+        version: "1.1.0",
         endpoints: {
           farms: "/api/farms",
           cities: "/api/cities", 
@@ -551,8 +699,7 @@ export default {
         "/api/search",
         "/api/zoho-webhook", 
         "/api/zoho-debug", 
-        "/api/token-debug", 
-        "/api/mapping-test"
+        "/api/token-debug"
       ] 
     }), {
       status: 404,
