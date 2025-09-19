@@ -164,7 +164,7 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
             Find the Best {enrichedCategory.name} Near You
           </h1>
           <div className="flex justify-center mb-6">
-            <div variant="primary" className="text-sm px-4 py-2">
+            <div className="text-sm px-4 py-2">
               {enrichedCategory.totalFarms} Farm  In Our Directory
             </div>
           </div>
