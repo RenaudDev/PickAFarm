@@ -70,6 +70,8 @@ async function handleAPIRequest(request, env, path, corsHeaders) {
     case "/notifications": return await handleNotifications(request, env, method, corsHeaders);
     case "/zoho-webhook":  return await handleZohoWebhook(request, env, method, corsHeaders);
     case "/zoho-fields":   return await handleZohoFields(request, env, method, corsHeaders);
+    case "/zoho-token-test":  return await handleZohoTokenTest(request, env, method, corsHeaders);
+
     default:
       return new Response(
         JSON.stringify({ error: "Endpoint not found", apiPath }),
@@ -553,3 +555,34 @@ async function triggerGithub(env, payload) {
   if (!res.ok) throw new Error(`GitHub dispatch HTTP ${res.status}`);
 }
 
+/* ============================
+   /api/zoho-token-test  (TEMP)
+   ============================ */
+   async function handleZohoTokenTest(request, env, method, corsHeaders) {
+    if (method !== "GET") {
+      return new Response(JSON.stringify({ error: "Method not allowed" }), {
+        status: 405,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+  
+    try {
+      // Use the same helper we wrote earlier
+      const accessToken = await zohoAccessToken(env);
+  
+      return new Response(
+        JSON.stringify(
+          { ok: true, access_token: accessToken.slice(0, 12) + "...", dc: env.ZOHO_DC },
+          null,
+          2
+        ),
+        { headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    } catch (err) {
+      return new Response(JSON.stringify({ error: "Failed to get token", message: err.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+  }
+  
