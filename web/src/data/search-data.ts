@@ -1,27 +1,12 @@
 // Auto-generated search data - do not edit manually
-// Generated at: 2025-09-18T23:54:42.837Z
+// Generated at: 2025-09-19T03:18:50.837Z
 
 export const farmCategories = [
-  "Apple Orchard",
-  "Berry Farm",
-  "Blueberries",
-  "Christmas Trees",
-  "Corn Maze",
-  "Cut Your Own",
-  "Fall Activities",
-  "Family Farm",
-  "Pre-Cut",
-  "Pumpkin Patch",
-  "Strawberries",
-  "U-Pick"
+  "Christmas Tree",
+  "Cut Your Own, Pre-Cut"
 ] as const;
 
-export const locations = [
-  "Fresno, California",
-  "Ottawa, Ontario",
-  "Rochester, New York",
-  "Toronto, Ontario"
-] as const;
+export const locations = [] as const;
 
 export type FarmCategory = typeof farmCategories[number];
 export type Location = typeof locations[number];
