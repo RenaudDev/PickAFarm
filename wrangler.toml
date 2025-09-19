@@ -7,7 +7,7 @@ ENVIRONMENT = "development"
 GITHUB_OWNER = "RenaudDev"
 GITHUB_REPO  = "PickAFarm"
 GITHUB_EVENT = "rebuild-farms" # repository_dispatch event type
-ZOHO_DEC = "ca"
+ZOHO_DC = "ca"
 
 [[d1_databases]]
 binding = "DB"

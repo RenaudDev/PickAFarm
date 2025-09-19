@@ -9,14 +9,14 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // CORS headers for cross-origin requests (reads can be public)
+    // CORS headers for reads (webhook is server-to-server but CORS won't hurt)
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization, x-webhook-token",
     };
 
-    // Handle preflight
+    // Preflight
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders });
     }
@@ -26,19 +26,19 @@ export default {
         return await handleAPIRequest(request, env, path, corsHeaders);
       }
 
-      // Root info
+      // Root banner (useful to confirm deploys)
       return new Response(
         JSON.stringify({
           message: "PickAFarm API",
-          version: "1.0.1",
-endpoints: {
-  farms: "/api/farms",
-  cities: "/api/cities",
-  search: "/api/search",
-  notifications: "/api/notifications",
-  zoho_webhook: "/api/zoho-webhook",
-  zoho_fields: "/api/zoho-fields",
-},
+          version: "1.0.2",
+          endpoints: {
+            farms: "/api/farms",
+            cities: "/api/cities",
+            search: "/api/search",
+            notifications: "/api/notifications",
+            zoho_webhook: "/api/zoho-webhook",
+            zoho_fields: "/api/zoho-fields",
+          },
         }),
         { headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
@@ -53,7 +53,7 @@ endpoints: {
 };
 
 /* ============================
-   ROUTER
+   Router
    ============================ */
 async function handleAPIRequest(request, env, path, corsHeaders) {
   const method = request.method;
@@ -91,9 +91,9 @@ async function handleFarms(request, env, method, corsHeaders) {
   try {
     const url = new URL(request.url);
     const state = url.searchParams.get("state");
-    const city = url.searchParams.get("city");
+    const city  = url.searchParams.get("city");
     const category = url.searchParams.get("category"); // reserved
-    const limit = parseInt(url.searchParams.get("limit") || "50");
+    const limit = parseInt(url.searchParams.get("limit") || "50", 10);
 
     let query = `
       SELECT 
@@ -126,7 +126,11 @@ async function handleFarms(request, env, method, corsHeaders) {
     const result = await stmt.bind(...params).all();
 
     return new Response(
-      JSON.stringify({ farms: result.results || [], count: result.results?.length || 0, filters: { state, city, category, limit } }),
+      JSON.stringify({
+        farms: result.results || [],
+        count: result.results?.length || 0,
+        filters: { state, city, category, limit },
+      }),
       { headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error) {
@@ -194,7 +198,7 @@ async function handleSearch(request, env, method, corsHeaders) {
   try {
     const url = new URL(request.url);
     const q = url.searchParams.get("q");
-    const limit = parseInt(url.searchParams.get("limit") || "20");
+    const limit = parseInt(url.searchParams.get("limit") || "20", 10);
 
     if (!q || q.length < 2) {
       return new Response(
@@ -243,22 +247,23 @@ async function handleNotifications(request, env, method, corsHeaders) {
 }
 
 /* ============================
-   /api/zoho-webhook  (secured)
+   /api/zoho-webhook  (secured, debug, ID-normalized)
    ============================ */
 async function handleZohoWebhook(request, env, method, corsHeaders) {
-  // Allow GET for quick probe in browser
+  const url = new URL(request.url);
+  const debug = url.searchParams.get("debug") === "1";
+
+  // Quick probe from browser
   if (method === "GET") {
     return new Response(JSON.stringify({ ok: true, route: "/api/zoho-webhook" }), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
-  // Require the shared secret for POSTs
-  const url = new URL(request.url);
+  // Require shared secret (header or query)
   const tokenFromHeader = request.headers.get("x-webhook-token");
   const tokenFromQuery  = url.searchParams.get("token");
   const provided = tokenFromHeader || tokenFromQuery;
-
   if (!provided || provided !== env.WEBHOOK_SHARED_SECRET) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401, headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -271,123 +276,56 @@ async function handleZohoWebhook(request, env, method, corsHeaders) {
     });
   }
 
-  let payload;
-  try {
-    payload = await request.json();
-  } catch {
-    return new Response(JSON.stringify({ error: "Bad JSON" }), {
-      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
-  // Zoho sends either { id } or { data: [{ id }] }
-  const zohoId = payload?.data?.[0]?.id ?? payload?.id;
-  if (!zohoId) {
-    return new Response(JSON.stringify({ error: "Missing Zoho record id" }), {
-      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
-  try {
-    const accessToken = await zohoAccessToken(env);
-    const record = await zohoFetchAccount(env, accessToken, zohoId);
-    await upsertFarm(env, record);
-
-    // Optional: trigger GitHub dispatch if configured
-    if (env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO && env.GITHUB_EVENT) {
-      await triggerGithub(env, { zoho_record_id: zohoId, reason: "zoho-account-updated" });
-    }
-
-    return new Response(JSON.stringify({ ok: true, id: zohoId }), {
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  } catch (e) {
-    console.error("Zoho webhook error:", e);
-    return new Response(
-      JSON.stringify({ error: "Zoho webhook failed", message: e.message || String(e) }),
-      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
-    );
-  }
-}
-async function handleZohoWebhook(request, env, method, corsHeaders) {
-  const url = new URL(request.url);
-  const debug = url.searchParams.get("debug") === "1";
-  const cfRay = request.headers.get("cf-ray");
-
-  // Browser probe
-  if (method === "GET") {
-    return new Response(JSON.stringify({ ok: true, route: "/api/zoho-webhook", cfRay }), {
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
-  // Secret check (leave as-is)
-  const tokenFromHeader = request.headers.get("x-webhook-token");
-  const tokenFromQuery  = url.searchParams.get("token");
-  const provided = tokenFromHeader || tokenFromQuery;
-  if (!provided || provided !== env.WEBHOOK_SHARED_SECRET) {
-    const body = { error: "Unauthorized", cfRay };
-    return new Response(JSON.stringify(body), { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } });
-  }
-
-  if (method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed", cfRay }), {
-      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
-  }
-
+  // Parse body JSON
   let payload;
   try {
     payload = await request.json();
   } catch (e) {
-    console.error("Webhook parse error:", e);
-    return new Response(JSON.stringify({ error: "Bad JSON", cfRay, detail: debug ? String(e) : undefined }), {
+    return new Response(JSON.stringify({ error: "Bad JSON", detail: debug ? String(e) : undefined }), {
       status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
+  // Accept { id } or { data: [{ id }] }
   const zohoId = payload?.data?.[0]?.id ?? payload?.id;
   if (!zohoId) {
-    console.error("Missing Zoho ID. Payload:", payload);
-    return new Response(JSON.stringify({ error: "Missing Zoho record id", cfRay, received: debug ? payload : undefined }), {
+    return new Response(JSON.stringify({ error: "Missing Zoho record id", received: debug ? payload : undefined }), {
       status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
+  // Normalize IDs: Zoho API uses numeric, D1 PK uses "zcrm_<id>"
+  const rawId = String(zohoId);
+  const apiId = rawId.replace(/^zcrm_/, "");
+  const d1Id  = rawId.startsWith("zcrm_") ? rawId : `zcrm_${rawId}`;
+
   try {
-    // Stage 1: token
-    const tokenStart = Date.now();
     const accessToken = await zohoAccessToken(env);
-    console.log("Zoho token OK in", Date.now() - tokenStart, "ms");
+    const record = await zohoFetchAccount(env, accessToken, apiId);
+    record.id = d1Id; // ensure D1 primary key uses zcrm_...
 
-    // Stage 2: fetch account
-    const fetchStart = Date.now();
-    const record = await zohoFetchAccount(env, accessToken, zohoId);
-    console.log("Zoho fetch OK in", Date.now() - fetchStart, "ms", "ID:", zohoId);
-
-    // Stage 3: upsert D1
-    const upsertStart = Date.now();
     await upsertFarm(env, record);
-    console.log("Upsert OK in", Date.now() - upsertStart, "ms", "ID:", zohoId);
 
-    // Stage 4: optional GitHub
+    // Optional: trigger GitHub rebuild event
     if (env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO && env.GITHUB_EVENT) {
-      await triggerGithub(env, { zoho_record_id: zohoId, reason: "zoho-account-updated" });
-      console.log("GitHub dispatch OK");
+      await triggerGithub(env, { zoho_record_id: d1Id, reason: "zoho-account-updated" });
     }
 
-    return new Response(JSON.stringify({ ok: true, id: zohoId, cfRay }), {
+    return new Response(JSON.stringify({ ok: true, id: d1Id }), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (e) {
     console.error("Zoho webhook FAILED:", e);
-    return new Response(JSON.stringify({ error: "Zoho webhook failed", message: String(e), cfRay, debug }), {
-      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
+    return new Response(JSON.stringify({
+      error: "Zoho webhook failed",
+      message: String(e),
+      debug
+    }), { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } });
   }
 }
+
 /* ============================
-   /api/zoho-fields
+   /api/zoho-fields (GET)
    ============================ */
 async function handleZohoFields(request, env, method, corsHeaders) {
   if (method !== "GET") {
@@ -398,13 +336,19 @@ async function handleZohoFields(request, env, method, corsHeaders) {
 
   try {
     const token = await zohoAccessToken(env);
-    const fRes = await fetch("https://www.zohoapis.ca/crm/v3/settings/fields?module=Accounts", {
+    const { API } = zohoBases(env);
+    const fRes = await fetch(`${API}/crm/v3/settings/fields?module=Accounts`, {
       headers: { Authorization: `Zoho-oauthtoken ${token}` },
     });
-    if (!fRes.ok) throw new Error(`Zoho fields HTTP ${fRes.status}`);
-    const fields = await fRes.json();
 
-    const simplified = (fields.fields || []).map((f) => ({
+    const raw = await fRes.text();
+    let payload; try { payload = JSON.parse(raw); } catch { payload = { raw }; }
+
+    if (!fRes.ok) {
+      throw new Error(`Zoho fields HTTP ${fRes.status}: ${raw}`);
+    }
+
+    const simplified = (payload.fields || []).map(f => ({
       api_name: f.api_name,
       field_label: f.field_label,
       data_type: f.data_type,
@@ -421,23 +365,55 @@ async function handleZohoFields(request, env, method, corsHeaders) {
 }
 
 /* ============================
-   ZOHO HELPERS
+   Zoho helpers (DC-aware)
    ============================ */
+function zohoBases(env) {
+  const dc = (env.ZOHO_DC || "com").trim().toLowerCase();
+
+  // OAuth "Accounts" base (CA uses zohocloud.ca)
+  const ACCOUNTS =
+    dc === "ca" ? "https://accounts.zohocloud.ca"
+    : dc === "eu" ? "https://accounts.zoho.eu"
+    : dc === "in" ? "https://accounts.zoho.in"
+    : dc === "au" ? "https://accounts.zoho.com.au"
+    : dc === "jp" ? "https://accounts.zoho.jp"
+    : dc === "sa" ? "https://accounts.zoho.sa"
+    : dc === "cn" ? "https://accounts.zoho.com.cn"
+    : "https://accounts.zoho.com";
+
+  // API base (CA uses zohoapis.ca)
+  const API =
+    dc === "ca" ? "https://www.zohoapis.ca"
+    : dc === "eu" ? "https://www.zohoapis.eu"
+    : dc === "in" ? "https://www.zohoapis.in"
+    : dc === "au" ? "https://www.zohoapis.com.au"
+    : dc === "jp" ? "https://www.zohoapis.jp"
+    : dc === "sa" ? "https://www.zohoapis.sa"
+    : dc === "cn" ? "https://www.zohoapis.com.cn"
+    : "https://www.zohoapis.com";
+
+  return { ACCOUNTS, API };
+}
+
 async function zohoAccessToken(env) {
-  const url = new URL("https://accounts.zohocloud.ca/oauth/v2/token");
+  const { ACCOUNTS } = zohoBases(env);
+  const url = new URL(`${ACCOUNTS}/oauth/v2/token`);
   url.searchParams.set("grant_type", "refresh_token");
   url.searchParams.set("client_id", env.ZOHO_CLIENT_ID);
   url.searchParams.set("client_secret", env.ZOHO_CLIENT_SECRET);
   url.searchParams.set("refresh_token", env.ZOHO_REFRESH_TOKEN);
 
   const res = await fetch(url, { method: "POST" });
-  if (!res.ok) throw new Error(`Zoho token HTTP ${res.status}`);
-  const j = await res.json();
-  if (!j.access_token) throw new Error("Zoho: no access_token");
-  return j.access_token;
+  const raw = await res.text();
+  let json; try { json = JSON.parse(raw); } catch { json = { raw }; }
+
+  if (!res.ok) throw new Error(`Zoho token HTTP ${res.status}: ${raw}`);
+  if (!json.access_token) throw new Error(`Zoho token error: ${JSON.stringify(json)}`);
+  return json.access_token;
 }
 
 async function zohoFetchAccount(env, token, id) {
+  const { API } = zohoBases(env);
   const fields = [
     "Account_Name","Website","Phone","Email",
     "Billing_Street","Billing_City","Billing_State","Billing_Code","Billing_Country",
@@ -447,17 +423,18 @@ async function zohoFetchAccount(env, token, id) {
     "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
     "Latitude","Longitude","Price_Range","Slug"
   ];
-  const url = `https://www.zohoapis.ca/crm/v3/Accounts/${encodeURIComponent(id)}?fields=${fields.join(",")}`;
+  const url = `${API}/crm/v3/Accounts/${encodeURIComponent(id)}?fields=${fields.join(",")}`;
   const res = await fetch(url, { headers: { Authorization: `Zoho-oauthtoken ${token}` } });
-  if (!res.ok) throw new Error(`Zoho fetch HTTP ${res.status}`);
-  const j = await res.json();
+  const body = await res.text();
+  let j; try { j = JSON.parse(body); } catch { j = { raw: body }; }
+  if (!res.ok) throw new Error(`Zoho fetch HTTP ${res.status}: ${JSON.stringify(j)}`);
   const rec = j?.data?.[0];
-  if (!rec) throw new Error("Zoho: empty record");
+  if (!rec) throw new Error(`Zoho: empty record for id ${id}`);
   return rec;
 }
 
 /* ============================
-   NORMALIZATION HELPERS
+   Normalization helpers
    ============================ */
 function toCSV(v) {
   if (v == null) return null;
@@ -475,7 +452,7 @@ function parsePetFriendly(x) {
 
 function parsePriceRange(pr) {
   if (!pr) return { min: null, max: null };
-  const nums = Array.from(String(pr).matchAll(/(\d+(\.\d+)?)/g)).map((m) => parseFloat(m[1]));
+  const nums = Array.from(String(pr).matchAll(/(\d+(\.\d+)?)/g)).map(m => parseFloat(m[1]));
   if (!nums.length) return { min: null, max: null };
   return { min: Math.min(...nums), max: Math.max(...nums) };
 }
@@ -501,7 +478,7 @@ async function ensureUniqueSlug(env, base, id) {
 }
 
 /* ============================
-   D1 UPSERT  (keeps verified/featured as-is)
+   D1 Upsert (keeps verified/featured untouched)
    ============================ */
 async function upsertFarm(env, rec) {
   const id = rec.id;
@@ -522,8 +499,7 @@ async function upsertFarm(env, rec) {
   const lat = rec.Latitude  !== "" && rec.Latitude  != null ? Number(rec.Latitude)  : null;
   const lng = rec.Longitude !== "" && rec.Longitude != null ? Number(rec.Longitude) : null;
 
-  // Note: we intentionally do NOT include verified/featured/active here on update,
-  // and we rely on table defaults for inserts (verified=0, featured=0, active=1).
+  // Note: We do NOT touch verified/featured/active here on update.
   const sql = `
 INSERT INTO farms (
   zoho_record_id, name, slug,
@@ -561,7 +537,7 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
 }
 
 /* ============================
-   GITHUB DISPATCH (optional)
+   GitHub dispatch (optional)
    ============================ */
 async function triggerGithub(env, payload) {
   const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`;
