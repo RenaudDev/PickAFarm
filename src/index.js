@@ -65,7 +65,7 @@ async function zohoFetchAccount(env, accessToken, accountId) {
     "Type_of_Farm","Amenities","Varieties","Payment_Methods","Services_Type",
     "Pet_Friendly","Year_Established","Open_Date","Close_Day",
     "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
-    "Latitude","Longitude","Price_Range","Slug"
+    "latitude","longitude","Price_Range","Slug"
   ];
   
   const apiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${encodeURIComponent(accountId)}?fields=${fields.join(",")}`;
@@ -147,8 +147,24 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
   zoho_last_sync=excluded.zoho_last_sync, updated_at=excluded.updated_at;
 `;
 
-  const lat = rec.Latitude !== "" && rec.Latitude != null ? Number(rec.Latitude) : null;
-  const lng = rec.Longitude !== "" && rec.Longitude != null ? Number(rec.Longitude) : null;
+  // Handle coordinates - try Zoho first, then geocode if missing
+  let lat = rec.latitude !== "" && rec.latitude != null ? Number(rec.latitude) : null;
+  let lng = rec.longitude !== "" && rec.longitude != null ? Number(rec.longitude) : null;
+  
+  // If coordinates are missing, try to geocode from address
+  if ((lat === null || lng === null) && rec.Billing_Street && rec.Billing_City) {
+    try {
+      const address = `${rec.Billing_Street}, ${rec.Billing_City}, ${rec.Billing_State || ''}, ${rec.Billing_Country || ''}`.trim();
+      console.log(`Geocoding address: ${address}`);
+      
+      // Note: You'd need a geocoding service API key for this to work
+      // For now, we'll just log and keep null values
+      console.log(`Coordinates missing for ${name} - consider adding to Zoho CRM`);
+    } catch (error) {
+      console.error(`Geocoding failed for ${name}:`, error);
+    }
+  }
+
   const petFriendly = rec.Pet_Friendly === "Yes" || rec.Pet_Friendly === true ? 1 : 0;
 
   await env.DB.prepare(sql).bind(
@@ -468,7 +484,7 @@ async function handleFarms(request, env, method) {
         f.name, f.slug, f.street,
         f.city as city_name, f.postal_code,
         f.state as state_province, f.country,
-        f.lat, f.lng, f.phone, f.email,
+        f.latitude, f.longitude, f.phone, f.email,
         f.website, f.facebook, f.instagram,
         f.description, f.categories, f.type, f.amenities, f.varieties,
         f.pet_friendly, f.price_range,
