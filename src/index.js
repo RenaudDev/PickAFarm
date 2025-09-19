@@ -334,6 +334,156 @@ async function handleTokenDebug(request, env, method) {
   });
 }
 
+// API Handler Functions
+async function handleFarms(request, env, method) {
+  if (method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    const url = new URL(request.url);
+    const state = url.searchParams.get("state");
+    const city = url.searchParams.get("city");
+    const category = url.searchParams.get("category");
+    const limit = parseInt(url.searchParams.get("limit") || "50", 10);
+
+    let query = `
+      SELECT 
+        f.zoho_record_id as id,
+        f.name, f.slug, f.street,
+        f.city as city_name, f.postal_code,
+        f.state as state_province, f.country,
+        f.latitude, f.longitude, f.phone, f.email,
+        f.website, f.facebook, f.instagram, f.location_link,
+        f.description, f.categories, f.type, f.amenities, f.varieties,
+        f.pet_friendly, f.price_range, f.price_range_min, f.price_range_max,
+        f.payment_methods,
+        f.established_in, f.opening_date, f.closing_date,
+        f.sunday_hours, f.monday_hours, f.tuesday_hours, f.wednesday_hours,
+        f.thursday_hours, f.friday_hours, f.saturday_hours,
+        f.verified, f.featured, f.active, f.updated_at
+      FROM farms f
+      WHERE f.active = 1
+    `;
+
+    const params = [];
+    if (state) { query += " AND f.state = ?"; params.push(state); }
+    if (city) { query += " AND f.city = ?"; params.push(city); }
+
+    query += " ORDER BY f.featured DESC, f.verified DESC, f.name ASC";
+    query += " LIMIT ?";
+    params.push(limit);
+
+    const stmt = env.DB.prepare(query);
+    const result = await stmt.bind(...params).all();
+
+    return new Response(
+      JSON.stringify({
+        farms: result.results || [],
+        count: result.results?.length || 0,
+        filters: { state, city, category, limit },
+      }),
+      { headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  } catch (error) {
+    console.error("Farms API Error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch farms", message: error.message }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+}
+
+async function handleCities(request, env, method) {
+  if (method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    const url = new URL(request.url);
+    const state = url.searchParams.get("state");
+
+    let query = `
+      SELECT 
+        c.id, c.name, c.slug, c.state_province, c.country, c.tier,
+        COUNT(f.zoho_record_id) as farm_count
+      FROM cities c
+      LEFT JOIN farms f ON c.name = f.city AND f.active = 1
+    `;
+
+    const params = [];
+    if (state) { query += " WHERE c.state_province = ?"; params.push(state); }
+
+    query += " GROUP BY c.id ORDER BY c.tier ASC, c.name ASC";
+
+    const stmt = env.DB.prepare(query);
+    const result = await stmt.bind(...params).all();
+
+    return new Response(
+      JSON.stringify({ cities: result.results || [], count: result.results?.length || 0 }),
+      { headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  } catch (error) {
+    console.error("Cities API Error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch cities", message: error.message }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+}
+
+async function handleSearch(request, env, method) {
+  if (method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    const url = new URL(request.url);
+    const q = url.searchParams.get("q");
+    const limit = parseInt(url.searchParams.get("limit") || "20", 10);
+
+    if (!q || q.length < 2) {
+      return new Response(
+        JSON.stringify({ error: "Search query must be at least 2 characters", farms: [], count: 0 }),
+        { headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const query = `
+      SELECT 
+        f.zoho_record_id as id,
+        f.name, f.slug, f.street, f.description,
+        f.city as city_name, f.state as state_province,
+        farms_fts.rank
+      FROM farms_fts
+      JOIN farms f ON farms_fts.rowid = f.zoho_record_id
+      WHERE farms_fts MATCH ? AND f.active = 1
+      ORDER BY farms_fts.rank
+      LIMIT ?
+    `;
+
+    const stmt = env.DB.prepare(query);
+    const result = await stmt.bind(q, limit).all();
+
+    return new Response(
+      JSON.stringify({ farms: result.results || [], count: result.results?.length || 0, query: q }),
+      { headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  } catch (error) {
+    console.error("Search API Error:", error);
+    return new Response(
+      JSON.stringify({ error: "Search failed", message: error.message, farms: [], count: 0 }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+}
+
 // Main fetch handler (ES Module format)
 export default {
   async fetch(request, env, ctx) {
@@ -346,6 +496,18 @@ export default {
     }
 
     // Route requests
+    if (url.pathname === "/api/farms") {
+      return handleFarms(request, env, method);
+    }
+    
+    if (url.pathname === "/api/cities") {
+      return handleCities(request, env, method);
+    }
+    
+    if (url.pathname === "/api/search") {
+      return handleSearch(request, env, method);
+    }
+    
     if (url.pathname === "/api/zoho-webhook") {
       return handleZohoWebhook(request, env, method);
     }
@@ -362,10 +524,31 @@ export default {
       return handleZohoMappingTest(request, env, method);
     }
 
+    // Root endpoint
+    if (url.pathname === "/") {
+      return new Response(JSON.stringify({
+        message: "PickAFarm API",
+        version: "1.0.3",
+        endpoints: {
+          farms: "/api/farms",
+          cities: "/api/cities", 
+          search: "/api/search",
+          zoho_webhook: "/api/zoho-webhook",
+          zoho_debug: "/api/zoho-debug",
+          token_debug: "/api/token-debug"
+        }
+      }), {
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
     // Default response
     return new Response(JSON.stringify({ 
       error: "Not found", 
       available_endpoints: [
+        "/api/farms",
+        "/api/cities", 
+        "/api/search",
         "/api/zoho-webhook", 
         "/api/zoho-debug", 
         "/api/token-debug", 
