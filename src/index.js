@@ -398,7 +398,7 @@ async function handleZohoFields(request, env, method, corsHeaders) {
 
   try {
     const token = await zohoAccessToken(env);
-    const fRes = await fetch("https://www.zohoapis.com/crm/v3/settings/fields?module=Accounts", {
+    const fRes = await fetch("https://www.zohoapis.ca/crm/v3/settings/fields?module=Accounts", {
       headers: { Authorization: `Zoho-oauthtoken ${token}` },
     });
     if (!fRes.ok) throw new Error(`Zoho fields HTTP ${fRes.status}`);
@@ -424,7 +424,7 @@ async function handleZohoFields(request, env, method, corsHeaders) {
    ZOHO HELPERS
    ============================ */
 async function zohoAccessToken(env) {
-  const url = new URL("https://accounts.zoho.com/oauth/v2/token");
+  const url = new URL("https://accounts.zohocloud.ca/oauth/v2/token");
   url.searchParams.set("grant_type", "refresh_token");
   url.searchParams.set("client_id", env.ZOHO_CLIENT_ID);
   url.searchParams.set("client_secret", env.ZOHO_CLIENT_SECRET);
@@ -447,7 +447,7 @@ async function zohoFetchAccount(env, token, id) {
     "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
     "Latitude","Longitude","Price_Range","Slug"
   ];
-  const url = `https://www.zohoapis.com/crm/v3/Accounts/${encodeURIComponent(id)}?fields=${fields.join(",")}`;
+  const url = `https://www.zohoapis.ca/crm/v3/Accounts/${encodeURIComponent(id)}?fields=${fields.join(",")}`;
   const res = await fetch(url, { headers: { Authorization: `Zoho-oauthtoken ${token}` } });
   if (!res.ok) throw new Error(`Zoho fetch HTTP ${res.status}`);
   const j = await res.json();
