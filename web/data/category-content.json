@@ -22,57 +22,5 @@
         "answer": "Prices vary by tree type, size, and location, typically ranging from $30-80 CAD. Premium varieties like Fraser Fir may cost more than traditional options like Balsam Fir."
       }
     ]
-  },
-  "Apple Orchards": {
-    "name": "Apple Orchards",
-    "slug": "apple-orchards",
-    "intro": "Apple orchards are a fall classic, offering a wide variety of apples for picking, from Honeycrisp to Granny Smith. Enjoy fresh-pressed cider, apple donuts, and family-friendly activities from late August through October.",
-    "description": "Experience the joy of picking your own apples at beautiful local orchards.",
-    "faqs": [
-      {
-        "question": "When is apple picking season?",
-        "answer": "Apple picking season typically runs from late August to late October, depending on the variety and region. Early season apples like Gala and McIntosh are ready in September, while late-season varieties like Fuji and Red Delicious are best in October."
-      },
-      {
-        "question": "What should I bring apple picking?",
-        "answer": "Wear comfortable clothes and closed-toe shoes. Bring a bag or basket for your apples, though many orchards provide these. Consider bringing wet wipes and a cooler for the drive home."
-      },
-      {
-        "question": "How much do apples typically cost?",
-        "answer": "Most orchards charge by the bag or bushel, typically ranging from $15-30 per bag depending on the variety and orchard. Some premium varieties may cost more."
-      }
-    ]
-  },
-  "Pumpkin Patches": {
-    "name": "Pumpkin Patches",
-    "slug": "pumpkin-patches",
-    "intro": "Pumpkin patches provide the perfect fall family outing, combining pumpkin picking with seasonal activities like corn mazes, hayrides, and petting zoos. Visit from September through October to find the perfect pumpkin for carving or decorating.",
-    "description": "Find the perfect pumpkin at local patches offering family activities and autumn traditions.",
-    "faqs": [
-      {
-        "question": "When is pumpkin picking season?",
-        "answer": "Pumpkin season typically runs from late September through October, with peak selection in early to mid-October before Halloween."
-      },
-      {
-        "question": "What activities are available at pumpkin patches?",
-        "answer": "Most pumpkin patches offer corn mazes, hayrides, petting zoos, and seasonal treats like apple cider and pumpkin pie. Many also have photo opportunities and fall decorations."
-      }
-    ]
-  },
-  "Berry Farms": {
-    "name": "Berry Farms",
-    "slug": "berry-farms",
-    "intro": "Berry farms offer seasonal picking experiences for strawberries, blueberries, raspberries, and blackberries. Enjoy the freshest berries straight from the vine while supporting local agriculture from late spring through early fall.",
-    "description": "Pick fresh berries at local farms offering seasonal u-pick experiences.",
-    "faqs": [
-      {
-        "question": "What berry seasons should I know about?",
-        "answer": "Strawberries are typically ready in June, blueberries in July-August, and raspberries/blackberries in late summer. Each farm may have slightly different timing based on variety and weather."
-      },
-      {
-        "question": "How much do berries cost to pick?",
-        "answer": "Most farms charge by the quart or pound, typically ranging from $8-18 per quart depending on the berry type and farm location."
-      }
-    ]
   }
 }

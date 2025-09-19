@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { CategoryIcon, CategoryIconList } from "@/lib/category-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Bell, MapPin, Star, ArrowUpDown, Filter, Wheat } from "lucide-react"
+import { Bell, MapPin, Star, ArrowUpDown, Filter } from "lucide-react"
 import GoogleMaps from "@/components/google-maps"
 
 // Import real location data
@@ -32,7 +33,7 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
     return (
       <main className="flex-1 max-w-7xl my-12 mx-auto">
         <div className="text-center py-12">
-          <Wheat className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+          <CategoryIcon categoryName={category} className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-foreground mb-2">Location not found</h3>
           <p className="text-muted-foreground">The location "{location}" could not be found.</p>
         </div>
@@ -172,11 +173,13 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex flex-wrap gap-1">
-                    {farmCategories.slice(0, 2).map((cat: string, index: number) => (
-                      <Badge key={index} variant="secondary" className="text-xs">
-                        {cat}
-                      </Badge>
-                    ))}
+                    <div className="flex items-center gap-2">
+                      <CategoryIconList 
+                        categories={farmCategories} 
+                        className="h-4 w-4 text-primary" 
+                        maxIcons={3}
+                      />
+                    </div>
                     {farm.featured && (
                       <Badge variant="default" className="text-xs bg-yellow-500 text-white">
                         Featured
@@ -189,13 +192,11 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
                   <div className="flex-1">
                     <CardTitle className="text-lg leading-tight mb-2">{farm.name}</CardTitle>
                     <div className="flex items-center text-sm text-muted-foreground mb-2">
-                      <MapPin className="h-3 w-3 mr-1" />
+                      <Bell className="h-3 w-3 mr-1" />
                       {farm.city}, {farm.province} • {farm.distance_km}km away
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center ml-3">
-                    <Wheat className="h-6 w-6 text-primary" />
-                  </div>
+                  
                 </div>
               </CardHeader>
 
@@ -207,9 +208,10 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
                     onClick={() => window.location.href = farm.url}
                   >
                     View Details
+                    
                   </Button>
-                  <Button size="sm" variant="ghost" className="px-3">
-                    <MapPin className="h-4 w-4" />
+                  <Button size="sm" variant="secondary" className="px-3">
+                  <Bell className="h-3 w-3 mr-1" />
                   </Button>
                 </div>
               </CardContent>
@@ -220,7 +222,7 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
 
       {sortedFarms.length === 0 && (
         <div className="text-center py-12 px-4 sm:px-6 lg:px-8">
-          <Wheat className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+          <CategoryIcon categoryName={category} className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-foreground mb-2">No farms found</h3>
           <p className="text-muted-foreground">
             {category 

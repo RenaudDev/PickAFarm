@@ -6,24 +6,11 @@ import { FarmFooter } from "@/components/farm-footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Users, Wheat, Apple, TreePine, Grape } from "lucide-react"
+import { MapPin, Users } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
-
-// Icon mapping for categories
-const getCategoryIcon = (categoryName: string) => {
-  const iconMap: Record<string, any> = {
-    'Apple Orchard': Apple,
-    'Berry Farm': Grape,
-    'Christmas Trees': TreePine,
-    'Pumpkin Patch': Wheat,
-    'Corn Maze': Wheat,
-    'U-Pick': Apple,
-    'Cut Your Own': TreePine,
-  }
-  return iconMap[categoryName] || Wheat
-}
+import { CategoryIcon } from "@/lib/category-icons"
 
 // Function to get top categories from generated categories data
 function getTopCategories() {
@@ -59,13 +46,12 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Popular Farm Experiences</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {topCategories.map((category, index) => {
-                const IconComponent = getCategoryIcon(category.name)
                 return (
                   <Link key={index} href={`/${category.slug}`}>
                     <Card className="text-center hover:shadow-md transition-shadow cursor-pointer group h-full">
                       <CardContent className="pt-6">
                         <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                          <IconComponent className="h-8 w-8 text-primary" />
+                          <CategoryIcon categoryName={category.name} className="h-8 w-8 text-primary" />
                         </div>
                         <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
                         <p className="text-sm text-muted-foreground">

@@ -116,11 +116,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                     Featured
                   </Badge>
                 )}
-                {farm.categories.map((category) => (
-                  <Badge key={category} variant="outline" className="px-3 py-1 font-medium">
-                    {category}
-                  </Badge>
-                ))}
+               
               </div>
 
               <div>

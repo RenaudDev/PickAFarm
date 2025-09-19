@@ -10,6 +10,7 @@ import { MapPin, Search, Wheat, Star, ChevronRight } from "lucide-react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import CategoryPageClient from "@/components/category-page-client"
+import { CategoryIcon } from "@/lib/category-icons"
 
 // Import categories data for static generation
 import categoriesData from "../../data/category-content.json"
@@ -160,6 +161,9 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
+          <div className="flex justify-center mb-6">
+            <CategoryIcon categoryName={enrichedCategory.name} className="h-16 w-16 text-primary" />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
             Find the Best {enrichedCategory.name} Near You
           </h1>
@@ -219,6 +223,9 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
       {enrichedCategory.featuredFarms && enrichedCategory.featuredFarms.length > 0 && (
         <section className="py-16 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
+            <div className="flex justify-center mb-6">
+              <CategoryIcon categoryName={enrichedCategory.name} className="h-16 w-16 text-primary" />
+            </div>
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Featured {enrichedCategory.name}</h2>
               <p className="text-muted-foreground">
