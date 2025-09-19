@@ -293,10 +293,7 @@ async function handleZohoWebhook(request, env, method) {
       await fetch(env.CLOUDFLARE_DEPLOY_HOOK, { method: 'POST' });
     }
 
-    // Step 4: Optional GitHub repository_dispatch
-    if (env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO && env.GITHUB_EVENT) {
-      await triggerGithub(env, { zoho_record_id: d1Id, reason: "zoho-account-updated" });
-    }
+    // GitHub integration removed - only using Cloudflare Pages rebuild
 
     return new Response(JSON.stringify({ 
       ok: true, 
