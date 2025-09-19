@@ -30,15 +30,15 @@ export default {
       return new Response(
         JSON.stringify({
           message: "PickAFarm API",
-          version: "1.0.0",
-          endpoints: {
-            farms: "/api/farms",
-            cities: "/api/cities",
-            search: "/api/search",
-            notifications: "/api/notifications",
-            zoho_webhook: "/api/zoho-webhook",
-            zoho_fields: "/api/zoho-fields",
-          },
+          version: "1.0.1",
+endpoints: {
+  farms: "/api/farms",
+  cities: "/api/cities",
+  search: "/api/search",
+  notifications: "/api/notifications",
+  zoho_webhook: "/api/zoho-webhook",
+  zoho_fields: "/api/zoho-fields",
+},
         }),
         { headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
@@ -309,7 +309,83 @@ async function handleZohoWebhook(request, env, method, corsHeaders) {
     );
   }
 }
+async function handleZohoWebhook(request, env, method, corsHeaders) {
+  const url = new URL(request.url);
+  const debug = url.searchParams.get("debug") === "1";
+  const cfRay = request.headers.get("cf-ray");
 
+  // Browser probe
+  if (method === "GET") {
+    return new Response(JSON.stringify({ ok: true, route: "/api/zoho-webhook", cfRay }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Secret check (leave as-is)
+  const tokenFromHeader = request.headers.get("x-webhook-token");
+  const tokenFromQuery  = url.searchParams.get("token");
+  const provided = tokenFromHeader || tokenFromQuery;
+  if (!provided || provided !== env.WEBHOOK_SHARED_SECRET) {
+    const body = { error: "Unauthorized", cfRay };
+    return new Response(JSON.stringify(body), { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } });
+  }
+
+  if (method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed", cfRay }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  let payload;
+  try {
+    payload = await request.json();
+  } catch (e) {
+    console.error("Webhook parse error:", e);
+    return new Response(JSON.stringify({ error: "Bad JSON", cfRay, detail: debug ? String(e) : undefined }), {
+      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  const zohoId = payload?.data?.[0]?.id ?? payload?.id;
+  if (!zohoId) {
+    console.error("Missing Zoho ID. Payload:", payload);
+    return new Response(JSON.stringify({ error: "Missing Zoho record id", cfRay, received: debug ? payload : undefined }), {
+      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    // Stage 1: token
+    const tokenStart = Date.now();
+    const accessToken = await zohoAccessToken(env);
+    console.log("Zoho token OK in", Date.now() - tokenStart, "ms");
+
+    // Stage 2: fetch account
+    const fetchStart = Date.now();
+    const record = await zohoFetchAccount(env, accessToken, zohoId);
+    console.log("Zoho fetch OK in", Date.now() - fetchStart, "ms", "ID:", zohoId);
+
+    // Stage 3: upsert D1
+    const upsertStart = Date.now();
+    await upsertFarm(env, record);
+    console.log("Upsert OK in", Date.now() - upsertStart, "ms", "ID:", zohoId);
+
+    // Stage 4: optional GitHub
+    if (env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO && env.GITHUB_EVENT) {
+      await triggerGithub(env, { zoho_record_id: zohoId, reason: "zoho-account-updated" });
+      console.log("GitHub dispatch OK");
+    }
+
+    return new Response(JSON.stringify({ ok: true, id: zohoId, cfRay }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  } catch (e) {
+    console.error("Zoho webhook FAILED:", e);
+    return new Response(JSON.stringify({ error: "Zoho webhook failed", message: String(e), cfRay, debug }), {
+      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+}
 /* ============================
    /api/zoho-fields
    ============================ */
