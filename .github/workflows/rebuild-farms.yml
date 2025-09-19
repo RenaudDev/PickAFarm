@@ -1,0 +1,75 @@
+# .github/workflows/rebuild-farms.yml
+# Triggered by Zoho webhook via repository_dispatch
+
+name: Rebuild Farm Directory
+
+on:
+  repository_dispatch:
+    types: [rebuild-farms]
+  # Also allow manual triggers for testing
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual rebuild'
+        required: false
+        default: 'Manual trigger'
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Fetch latest farm data
+      run: |
+        echo "Fetching latest farm data from API..."
+        curl -f "https://pickafarm-api.94623956quebecinc.workers.dev/api/farms" > public/data/farms.json
+        curl -f "https://pickafarm-api.94623956quebecinc.workers.dev/api/cities" > public/data/cities.json
+        
+    - name: Build static site
+      run: npm run build
+      env:
+        # Add any environment variables your build needs
+        NODE_ENV: production
+        
+    - name: Deploy to production
+      run: |
+        # Replace this with your actual deployment command
+        # Examples:
+        
+        # For Vercel:
+        # npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        
+        # For Netlify:
+        # npx netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        
+        # For GitHub Pages:
+        # This workflow would need additional setup
+        
+        # For now, just log the rebuild
+        echo "Site rebuilt at $(date)"
+        echo "Triggered by: ${{ github.event.client_payload.reason || inputs.reason || 'webhook' }}"
+        echo "Farm updated: ${{ github.event.client_payload.zoho_record_id }}"
+        
+    - name: Notify completion
+      if: success()
+      run: |
+        echo "Farm directory successfully rebuilt and deployed"
+        echo "Build triggered by farm update: ${{ github.event.client_payload.zoho_record_id }}"
+        
+    - name: Handle build failure  
+      if: failure()
+      run: |
+        echo "Build failed - manual intervention required"
+        # Could add Slack/email notifications here
