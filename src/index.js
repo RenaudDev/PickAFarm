@@ -134,8 +134,11 @@ INSERT INTO farms (
   zoho_record_id, name, slug, website, phone, email, description, 
   street, city, postal_code, state, country, latitude, longitude,
   facebook, instagram, categories, type, amenities, varieties,
-  pet_friendly, price_range, zoho_last_sync, updated_at
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+  pet_friendly, price_range, zoho_last_sync, updated_at,
+  payment_methods, opening_date, closing_date,
+  monday_hours, tuesday_hours, wednesday_hours,
+  thursday_hours, friday_hours, saturday_hours, sunday_hours
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 ON CONFLICT(zoho_record_id) DO UPDATE SET 
   name=excluded.name, slug=excluded.slug, website=excluded.website,
   phone=excluded.phone, email=excluded.email, description=excluded.description,
@@ -144,7 +147,10 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
   longitude=excluded.longitude, facebook=excluded.facebook, instagram=excluded.instagram,
   categories=excluded.categories, type=excluded.type, amenities=excluded.amenities,
   varieties=excluded.varieties, pet_friendly=excluded.pet_friendly, price_range=excluded.price_range,
-  zoho_last_sync=excluded.zoho_last_sync, updated_at=excluded.updated_at;
+  zoho_last_sync=excluded.zoho_last_sync, updated_at=excluded.updated_at,
+  payment_methods=excluded.payment_methods, opening_date=excluded.opening_date, closing_date=excluded.closing_date,
+  monday_hours=excluded.monday_hours, tuesday_hours=excluded.tuesday_hours, wednesday_hours=excluded.wednesday_hours,
+  thursday_hours=excluded.thursday_hours, friday_hours=excluded.friday_hours, saturday_hours=excluded.saturday_hours, sunday_hours=excluded.sunday_hours;
 `;
 
   // Handle coordinates - try Zoho first, then geocode if missing
@@ -175,7 +181,10 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     rec.Facebook ?? null, rec.Instagram ?? null, 
     categories, type, amenities, varieties,  // Use converted values
     petFriendly, rec.Price_Range ?? null, 
-    new Date().toISOString(), new Date().toISOString()
+    new Date().toISOString(), new Date().toISOString(),
+    rec.Payment_Methods ?? null, rec.Open_Date ?? null, rec.Close_Day ?? null,
+    rec.Monday ?? null, rec.Tuesday ?? null, rec.Wednesday ?? null,
+    rec.Thursday ?? null, rec.Friday ?? null, rec.Saturday ?? null, rec.Sunday ?? null
   ).run();
 }
 
@@ -488,7 +497,10 @@ async function handleFarms(request, env, method) {
         f.website, f.facebook, f.instagram,
         f.description, f.categories, f.type, f.amenities, f.varieties,
         f.pet_friendly, f.price_range,
-        f.verified, f.featured, f.active, f.updated_at
+        f.verified, f.featured, f.active, f.updated_at,
+        f.payment_methods, f.opening_date, f.closing_date,
+        f.monday_hours, f.tuesday_hours, f.wednesday_hours,
+        f.thursday_hours, f.friday_hours, f.saturday_hours, f.sunday_hours
       FROM farms f
       WHERE f.active = 1
     `;

@@ -108,7 +108,7 @@ async function generateLocationData() {
           id: farm.id,
           name: farm.name,
           slug: farm.slug,
-          url: `/farm/${farm.slug}`,
+          url: `/farms/${farm.slug}`,
           latitude: farm.latitude,
           longitude: farm.longitude,
           city: farm.city_name,

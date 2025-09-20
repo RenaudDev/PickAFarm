@@ -1,5 +1,5 @@
 // Auto-generated search data - do not edit manually
-// Generated at: 2025-09-19T20:51:18.224Z
+// Generated at: 2025-09-20T13:19:05.696Z
 
 export const farmCategories = [
   "Christmas Tree Farms",

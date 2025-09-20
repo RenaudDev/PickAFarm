@@ -7,8 +7,8 @@ async function generateFarmData() {
   console.log('🌾 Fetching farm data for build...');
   
   try {
-    // Fetch farm data from API
-    const response = await fetch('https://pickafarm-api.94623956quebecinc.workers.dev/api/farms');
+    // Fetch farm data from API with all fields
+    const response = await fetch('https://pickafarm-api.94623956quebecinc.workers.dev/api/farms?include_all_fields=true');
     
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status} ${response.statusText}`);
@@ -19,7 +19,7 @@ async function generateFarmData() {
       type: typeof data, 
       hasFarmsProperty: 'farms' in data,
       farmsLength: data.farms?.length,
-      sample: data.farms?.[0] 
+      sampleFields: data.farms?.[0] ? Object.keys(data.farms[0]) : 'no farms'
     });
     
     // Extract farms array from response object
@@ -31,6 +31,7 @@ async function generateFarmData() {
     }
     
     console.log(`✅ Fetched ${farms.length} farms from API`);
+    console.log(`📋 Sample farm fields:`, farms[0] ? Object.keys(farms[0]).join(', ') : 'No farms available');
     
     // Create data directory if it doesn't exist
     const dataDir = path.join(__dirname, '..', 'data');
@@ -43,8 +44,8 @@ async function generateFarmData() {
     fs.writeFileSync(farmsFilePath, JSON.stringify(farms, null, 2));
     console.log(`💾 Saved farm data to ${farmsFilePath}`);
     
-    // Generate farm IDs for static params
-    const farmIds = farms.map(farm => ({ id: farm.id.toString() }));
+    // Generate farm IDs for static params using slugs
+    const farmIds = farms.map(farm => ({ id: farm.slug || farm.id.toString() }));
     const paramsFilePath = path.join(dataDir, 'farm-params.json');
     fs.writeFileSync(paramsFilePath, JSON.stringify(farmIds, null, 2));
     console.log(`📋 Generated static params for ${farmIds.length} farms`);
