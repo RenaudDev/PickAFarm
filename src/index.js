@@ -129,6 +129,23 @@ async function upsertFarm(env, rec) {
   const amenities = toCSV(rec.Amenities);
   const varieties = toCSV(rec.Varieties);
 
+  // Convert payment methods to string if it's an array or object
+  const paymentMethods = rec.Payment_Methods ? 
+    (Array.isArray(rec.Payment_Methods) ? rec.Payment_Methods.join(', ') : String(rec.Payment_Methods)) : null;
+  
+  // Convert dates to strings if they exist
+  const openingDate = rec.Open_Date ? String(rec.Open_Date) : null;
+  const closingDate = rec.Close_Day ? String(rec.Close_Day) : null;
+  
+  // Convert operating hours to strings
+  const mondayHours = rec.Monday ? String(rec.Monday) : null;
+  const tuesdayHours = rec.Tuesday ? String(rec.Tuesday) : null;
+  const wednesdayHours = rec.Wednesday ? String(rec.Wednesday) : null;
+  const thursdayHours = rec.Thursday ? String(rec.Thursday) : null;
+  const fridayHours = rec.Friday ? String(rec.Friday) : null;
+  const saturdayHours = rec.Saturday ? String(rec.Saturday) : null;
+  const sundayHours = rec.Sunday ? String(rec.Sunday) : null;
+
   const sql = `
 INSERT INTO farms (
   zoho_record_id, name, slug, website, phone, email, description, 
@@ -173,18 +190,18 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
 
   const petFriendly = rec.Pet_Friendly === "Yes" || rec.Pet_Friendly === true ? 1 : 0;
 
-  await env.DB.prepare(sql).bind(
+  const result = await env.DB.prepare(sql).bind(
     d1Id, name, slug,
     rec.Website ?? null, rec.Phone ?? null, rec.Email ?? null, rec.Description ?? null,
-    rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null, 
+    rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null,
     rec.Billing_State ?? null, rec.Billing_Country ?? null, lat, lng,
     rec.Facebook ?? null, rec.Instagram ?? null, 
     categories, type, amenities, varieties,  // Use converted values
     petFriendly, rec.Price_Range ?? null, 
     new Date().toISOString(), new Date().toISOString(),
-    rec.Payment_Methods ?? null, rec.Open_Date ?? null, rec.Close_Day ?? null,
-    rec.Monday ?? null, rec.Tuesday ?? null, rec.Wednesday ?? null,
-    rec.Thursday ?? null, rec.Friday ?? null, rec.Saturday ?? null, rec.Sunday ?? null
+    paymentMethods, openingDate, closingDate,
+    mondayHours, tuesdayHours, wednesdayHours,
+    thursdayHours, fridayHours, saturdayHours, sundayHours
   ).run();
 }
 
