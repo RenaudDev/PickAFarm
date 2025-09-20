@@ -155,7 +155,7 @@ INSERT INTO farms (
   payment_methods, opening_date, closing_date,
   monday_hours, tuesday_hours, wednesday_hours,
   thursday_hours, friday_hours, saturday_hours, sunday_hours
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 ON CONFLICT(zoho_record_id) DO UPDATE SET 
   name=excluded.name, slug=excluded.slug, website=excluded.website,
   phone=excluded.phone, email=excluded.email, description=excluded.description,
@@ -192,12 +192,12 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
 
   const result = await env.DB.prepare(sql).bind(
     d1Id, name, slug,
-    rec.Website ?? null, rec.Phone ?? null, rec.Email ?? null, rec.Description ?? null,
-    rec.Billing_Street ?? null, rec.Billing_City ?? null, rec.Billing_Code ?? null,
-    rec.Billing_State ?? null, rec.Billing_Country ?? null, lat, lng,
-    rec.Facebook ?? null, rec.Instagram ?? null, 
-    categories, type, amenities, varieties,  // Use converted values
-    petFriendly, rec.Price_Range ?? null, 
+    rec.Website, rec.Phone, rec.Email, rec.Description,
+    rec.Billing_Street, rec.Billing_City, rec.Billing_Code,
+    rec.Billing_State, rec.Billing_Country, lat, lng,
+    rec.Facebook, rec.Instagram, 
+    categories, type, amenities, varieties,
+    petFriendly, rec.Price_Range, 
     new Date().toISOString(), new Date().toISOString(),
     paymentMethods, openingDate, closingDate,
     mondayHours, tuesdayHours, wednesdayHours,
