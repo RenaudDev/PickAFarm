@@ -26,6 +26,7 @@ import FarmFooter from "@/components/farm-footer"
 import FarmInteractiveElements from "@/components/farm-interactive-elements"
 import { CategoryIcon } from "@/lib/category-icons"
 import Link from "next/link"
+import FarmImage from "@/components/farm-image"
 import { notFound } from 'next/navigation'
 
 // Import farms data for static generation
@@ -196,7 +197,13 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
               locationLink={`https://maps.google.com/?q=${encodeURIComponent(`${farm.street}, ${farm.city_name}, ${farm.state_province}`)}`}
             />
           </div>
-
+          <div className="w-full h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border">
+            <FarmImage
+              farmSlug={farm.slug}
+              farmName={farm.name}
+              className="w-full h-full"
+            />
+          </div>
         </div>
         <div className="bg-primary border border-primary/50 p-4 rounded-xl mb-6">
           <p className="text-white font-medium">
