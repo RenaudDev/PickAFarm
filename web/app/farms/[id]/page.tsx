@@ -138,7 +138,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
     <div className="min-h-screen bg-background">
       <FarmNavbar />
 
-      <main className="container mx-auto px-4 py-12 max-w-7xl">
+      <main className="container mx-auto px-8 py-12 max-w-7xl">
         <div className="mb-12">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
             <div className="flex-1 space-y-4">
