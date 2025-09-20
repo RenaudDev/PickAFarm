@@ -273,7 +273,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                     {varieties.map((variety) => (
                       <Badge
                         key={variety}
-                        className="bg-green-50 text-green-700 border-green-200 px-3 text-sm font-medium"
+                        className="bg-primary text-white border-primary px-3 text-sm font-medium"
                       >
                         {variety}
                       </Badge>
