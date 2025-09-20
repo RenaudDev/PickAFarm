@@ -174,10 +174,6 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                     </span>
                   </div>
                   
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-primary" />
-                    <span>Family Farm</span>
-                  </div>
                   {/* Category Tags */}
                   <div className="flex flex-wrap gap-2">
                     {categories.map((category) => (
@@ -204,7 +200,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
         </div>
         <div className="bg-primary border border-primary/50 p-4 rounded-xl mb-6">
           <p className="text-white font-medium">
-            <strong>Opening Date:</strong> {farm.opening_date} • <strong>Closing Date:</strong> {farm.closing_date}
+          <Calendar className="w-5 h-5 text-primary" /><strong>Opening Date:</strong> {farm.opening_date} • <strong>Closing Date:</strong> {farm.closing_date}
           </p>
         </div>
 
