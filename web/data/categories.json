@@ -2,7 +2,7 @@
   {
     "slug": "christmas-tree-farms",
     "name": "Christmas Tree Farms",
-    "totalFarms": 1,
+    "totalFarms": 2,
     "description": "Find the perfect Christmas tree at local farms offering fresh-cut trees, family activities, and holiday traditions.",
     "intro": "Christmas tree farms offer a magical holiday experience where families can select and cut their own perfect tree. These farms typically operate seasonally from late November through December, providing fresh Fraser Firs, Noble Firs, and other premium varieties alongside festive activities like hot cocoa, hayrides, and holiday decorations.",
     "faqs": [
@@ -25,6 +25,16 @@
     ],
     "topCities": [],
     "featuredFarms": [
+      {
+        "id": "zcrm_38729000000230846",
+        "name": "Carr Family Christmas Tree Farm",
+        "slug": "carr-family-christmas-tree-farm",
+        "url": "/farms/carr-family-christmas-tree-farm",
+        "blurb": "Description coming soon ......",
+        "city": "Guysborough",
+        "province": "Nova Scotia",
+        "featured": false
+      },
       {
         "id": "zcrm_38729000000230847",
         "name": "Catfish Creek Christmas Tree Farm",

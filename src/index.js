@@ -205,6 +205,13 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
   ).run();
 }
 
+// Delete function
+async function deleteFarm(env, id) {
+  const sql = "DELETE FROM farms WHERE zoho_record_id = ?";
+  const result = await env.DB.prepare(sql).bind(id).run();
+  return result;
+}
+
 // GitHub dispatch function (optional)
 async function triggerGithub(env, payload) {
   const url = `https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`;
@@ -261,6 +268,116 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, x-webhook-token",
 };
+
+// Separate Delete Webhook Handler
+async function handleZohoDelete(request, env, method) {
+  if (method === "GET") {
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      route: "/api/zoho-delete", 
+      mode: "delete-endpoint",
+      expectedBody: {
+        action: "delete",
+        record_id: "38729000000230847",
+        module: "Accounts",
+        deleted_at: "2025-09-20T19:30:00Z"
+      }
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  if (method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Security check - require webhook token
+  const url = new URL(request.url);
+  const tokenFromHeader = request.headers.get("x-webhook-token");
+  const tokenFromQuery = url.searchParams.get("token");
+  const provided = tokenFromHeader || tokenFromQuery;
+  
+  if (!provided || provided !== env.WEBHOOK_SHARED_SECRET) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Parse delete request body
+  let payload = {};
+  try {
+    const ct = (request.headers.get("content-type") || "").toLowerCase();
+    if (ct.includes("application/json")) {
+      payload = await request.json();
+    } else {
+      const text = await request.text();
+      try { payload = JSON.parse(text); } catch { payload = {}; }
+    }
+  } catch {
+    return new Response(JSON.stringify({ error: "Invalid JSON payload" }), {
+      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Validate delete payload structure
+  if (payload.action !== "delete") {
+    return new Response(JSON.stringify({ 
+      error: "Invalid delete request", 
+      expected: { action: "delete", record_id: "..." }
+    }), {
+      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Extract record ID
+  const zohoId = payload.record_id;
+  if (!zohoId) {
+    return new Response(JSON.stringify({ error: "Missing record_id in delete request" }), {
+      status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Normalize: D1 PK uses zcrm_<id>
+  const rawId = String(zohoId);
+  const d1Id = rawId.startsWith("zcrm_") ? rawId : `zcrm_${rawId}`;
+
+  try {
+    // Delete from D1
+    const deleteResult = await deleteFarm(env, d1Id);
+    
+    // Trigger Cloudflare Pages rebuild
+    if (env.CLOUDFLARE_DEPLOY_HOOK) {
+      await fetch(env.CLOUDFLARE_DEPLOY_HOOK, { method: 'POST' });
+    }
+
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      action: "delete",
+      record_id: zohoId,
+      d1_id: d1Id,
+      module: payload.module || "Accounts",
+      deleted_at: payload.deleted_at || new Date().toISOString(),
+      database: "deleted", 
+      rowsAffected: deleteResult.changes || 0,
+      rebuild: env.CLOUDFLARE_DEPLOY_HOOK ? "triggered" : "not-configured"
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+
+  } catch (e) {
+    console.error("Delete webhook FAILED:", e);
+    return new Response(JSON.stringify({ 
+      error: "Delete operation failed", 
+      message: String(e),
+      record_id: zohoId,
+      d1_id: d1Id
+    }), {
+      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+}
 
 // Production Webhook Handler
 async function handleZohoWebhook(request, env, method) {
@@ -667,6 +784,10 @@ export default {
       return handleZohoWebhook(request, env, method);
     }
     
+    if (url.pathname === "/api/zoho-delete") {
+      return handleZohoDelete(request, env, method);
+    }
+    
     if (url.pathname === "/api/zoho-debug") {
       return handleZohoDebug(request, env, method);
     }
@@ -685,6 +806,7 @@ export default {
           cities: "/api/cities", 
           search: "/api/search",
           zoho_webhook: "/api/zoho-webhook",
+          zoho_delete: "/api/zoho-delete",
           zoho_debug: "/api/zoho-debug",
           token_debug: "/api/token-debug"
         }
@@ -701,6 +823,7 @@ export default {
         "/api/cities", 
         "/api/search",
         "/api/zoho-webhook", 
+        "/api/zoho-delete",
         "/api/zoho-debug", 
         "/api/token-debug"
       ] 

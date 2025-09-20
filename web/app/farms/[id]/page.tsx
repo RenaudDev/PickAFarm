@@ -26,7 +26,7 @@ import FarmFooter from "@/components/farm-footer"
 import FarmInteractiveElements from "@/components/farm-interactive-elements"
 import { CategoryIcon } from "@/lib/category-icons"
 import Link from "next/link"
-import FarmImage from "@/components/farm-image"
+import FarmImageServer from "@/components/farm-image-server"
 import { notFound } from 'next/navigation'
 
 // Import farms data for static generation
@@ -198,9 +198,10 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
             />
           </div>
           <div className="w-full h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border">
-            <FarmImage
+            <FarmImageServer
               farmSlug={farm.slug}
               farmName={farm.name}
+              farmCategories={farm.categories}
               className="w-full h-full"
             />
           </div>

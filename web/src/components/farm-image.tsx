@@ -7,19 +7,24 @@ import { TreePine } from 'lucide-react'
 interface FarmImageProps {
   farmSlug: string
   farmName: string
+  farmCategories?: string
   className?: string
 }
 
-export default function FarmImage({ farmSlug, farmName, className = "" }: FarmImageProps) {
+export default function FarmImage({ farmSlug, farmName, farmCategories = "", className = "" }: FarmImageProps) {
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [imageError, setImageError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   // Try different image formats
   const imageFormats = ['webp', 'jpg', 'jpeg', 'png']
+  
+  // Check if this is a Christmas Tree Farm
+  const isChristmasTreeFarm = farmCategories.toLowerCase().includes('christmas')
 
   useEffect(() => {
     const tryImageFormats = async () => {
+      // First, try farm-specific images
       for (const format of imageFormats) {
         try {
           const testSrc = `/images/farms/${farmSlug}.${format}`
@@ -33,13 +38,29 @@ export default function FarmImage({ farmSlug, farmName, className = "" }: FarmIm
           // Continue to next format
         }
       }
+      
+      // If no farm-specific image found and it's a Christmas Tree Farm, try default Christmas tree image
+      if (isChristmasTreeFarm) {
+        try {
+          const christmasTreeSrc = '/images/farms/christmas-tree.webp'
+          const response = await fetch(christmasTreeSrc, { method: 'HEAD' })
+          if (response.ok) {
+            setImageSrc(christmasTreeSrc)
+            setIsLoading(false)
+            return
+          }
+        } catch (error) {
+          // Continue to fallback
+        }
+      }
+      
       // No image found in any format
       setImageError(true)
       setIsLoading(false)
     }
 
     tryImageFormats()
-  }, [farmSlug])
+  }, [farmSlug, isChristmasTreeFarm])
 
   if (isLoading) {
     return (
