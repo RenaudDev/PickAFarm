@@ -25,6 +25,16 @@
     "verified": 0,
     "featured": 0,
     "active": 1,
-    "updated_at": "2025-09-19T17:46:31.394Z"
+    "updated_at": "2025-09-19T17:46:31.394Z",
+    "payment_methods": "Cash, Debit Card, E-Transfer",
+    "opening_date": null,
+    "closing_date": null,
+    "monday_hours": "8:00AM to 5:00PM",
+    "tuesday_hours": "By appointment",
+    "wednesday_hours": "By appointment",
+    "thursday_hours": "By appointment",
+    "friday_hours": "8:00AM to 5:00PM",
+    "saturday_hours": "8:00AM to 5:00PM",
+    "sunday_hours": "1:00PM to 5:00PM"
   }
 ]

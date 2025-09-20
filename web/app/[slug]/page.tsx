@@ -18,11 +18,31 @@ import locationsWithFarms from "../../data/locations-with-farms.json"
 
 // Generate static params using slugs from category-content.json
 export async function generateStaticParams() {
-  return Object.values(categoriesData)
-    .filter((category: any) => category.slug !== undefined) // Skip _default
-    .map((category: any) => ({
-      slug: category.slug
-    }))
+  try {
+    const validCategories = Object.values(categoriesData)
+      .filter((category: any) => {
+        // Only include categories that have a valid slug
+        return category && 
+               typeof category === 'object' && 
+               category.slug && 
+               typeof category.slug === 'string' &&
+               category.slug.length > 0 &&
+               // Exclude any system files or invalid slugs
+               !category.slug.includes('.') &&
+               !category.slug.startsWith('_') &&
+               category.slug !== 'favicon'
+      })
+      .map((category: any) => ({
+        slug: category.slug
+      }))
+
+    console.log('Generated static params for categories:', validCategories.map(c => c.slug))
+    return validCategories
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    // Return empty array as fallback to prevent build failures
+    return []
+  }
 }
 
 export default async function CategoryLandingPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -126,7 +146,7 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
             city: farm.city,
             province: farm.province,
             country: farm.country,
-            url: `/farm/${farm.slug}`,
+            url: `/farms/${farm.slug}`,
             blurb: farm.description || `Experience ${category.name.toLowerCase()} at this local farm.`,
             featured: farm.featured
           })

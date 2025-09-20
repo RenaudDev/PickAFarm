@@ -112,7 +112,7 @@ async function generateCategories() {
               id: farm.id,
               name: farm.name,
               slug: farm.slug,
-              url: `/farm/${farm.slug}`,
+              url: `/farms/${farm.slug}`,
               blurb: farm.description ? farm.description.substring(0, 120) + '...' : 'Farm description coming soon...',
               city: farm.city_name,
               province: farm.state_province,
