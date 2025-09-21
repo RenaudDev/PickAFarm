@@ -12,7 +12,7 @@ export function FarmFooter() {
               <span className="text-xl font-bold text-foreground">Pick A Farm</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Connecting communities with local farms. Discover fresh, sustainable produce and support your local
+              Connecting communities with local u-pick farms. Discover fresh, sustainable produce and support your local
               farmers.
             </p>
             <div className="flex space-x-4">
@@ -32,13 +32,13 @@ export function FarmFooter() {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Quick Links</h3>
             <div className="space-y-2">
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="/" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
                 Home
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="/about" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
                 About Us
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="/contact" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
                 Contact
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
@@ -51,18 +51,10 @@ export function FarmFooter() {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Popular Categories</h3>
             <div className="space-y-2">
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Organic Farms
+              <a href="/christmas-tree-farms/" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+                Christmas Tree Farms
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Dairy Farms
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Fruit Orchards
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Vegetable Farms
-              </a>
+              
             </div>
           </div>
 
@@ -74,13 +66,10 @@ export function FarmFooter() {
                 <Mail className="h-4 w-4 text-primary" />
                 <span>hello@pickafarm.com</span>
               </div>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Phone className="h-4 w-4 text-primary" />
-                <span>(555) 123-4567</span>
-              </div>
+              
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span>San Francisco, CA</span>
+                <span>Rigaud, Quebec, CA</span>
               </div>
             </div>
           </div>
@@ -88,15 +77,13 @@ export function FarmFooter() {
 
         {/* Bottom Section */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-4 md:space-y-0">
-          <p className="text-sm text-muted-foreground">© 2024 Pick A Farm. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground"> {new Date().getFullYear()} Pick A Farm. All rights reserved.</p>
           <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-6">
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <a href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            
+            <a href="/cookies" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Cookie Policy
             </a>
           </div>

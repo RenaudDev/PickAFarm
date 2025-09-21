@@ -43,7 +43,7 @@ export function generateMetadata({
   const allKeywords = [...DEFAULT_KEYWORDS, ...keywords].filter(Boolean)
   
   // Ensure title has site name
-  const fullTitle = title.includes("PickAFarm") || title.includes("Pick A Farm") || title.includes(" Near ") ? title : `${title} | PickAFarm`
+  const fullTitle = title.includes("PickAFarm") || title.includes("Pick A Farm") || title.includes(" Near ") || title.includes("Farms") || title.includes("Orchards") ? title : `${title} | PickAFarm`
   
   // Ensure image is absolute URL
   const imageUrl = image.startsWith('http') ? image : `${SITE_CONFIG.domain}${image}`
@@ -189,7 +189,7 @@ export function generateLocationMetadata(category: string, location: string, far
 
 // Category SEO metadata
 export function generateCategoryMetadata(category: string, categoryData: any, farmCount: number): Metadata {
-  const title = category
+  const title = `Find the Best ${category} Near You`
   const description = categoryData?.description || 
     `Discover ${farmCount} ${category.toLowerCase()} across Ontario and beyond. Find the perfect farm for pick-your-own fun, fresh produce, and family activities.`
   
@@ -215,7 +215,7 @@ export function generateCategoryMetadata(category: string, categoryData: any, fa
 // Homepage SEO metadata
 export function generateHomepageMetadata(): Metadata {
   return generateMetadata({
-    title: "Find Pick-Your-Own Farms Near You",
+    title: "Discover Local U-Pick Farms - Pick A Farm",
     description: "Discover the best pick-your-own farms, Christmas tree farms, and u-pick locations across Canada. Fresh produce, family activities, and seasonal fun await!",
     keywords: [
       "pick your own farms canada",

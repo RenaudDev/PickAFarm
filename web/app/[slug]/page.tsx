@@ -1,6 +1,7 @@
 import type React from "react"
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { Metadata } from "next"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -11,6 +12,7 @@ import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import CategoryPageClient from "@/components/category-page-client"
 import { CategoryIcon } from "@/lib/category-icons"
+import { generateCategoryMetadata } from "@/lib/seo-metadata"
 
 // Import categories data for static generation
 import categoriesData from "../../data/category-content.json"
@@ -43,6 +45,73 @@ export async function generateStaticParams() {
     // Return empty array as fallback to prevent build failures
     return []
   }
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  
+  // Find the category from the category-content.json data by slug
+  const category = Object.values(categoriesData).find((cat: any) => cat.slug === slug)
+  
+  if (!category) {
+    return {
+      title: 'Category Not Found | Pick A Farm',
+      description: 'The requested category could not be found.'
+    }
+  }
+
+  // Calculate total farms for this category across all locations
+  const getCategoryVariations = (categoryName: string): string[] => {
+    const variations = [categoryName]
+    
+    if (categoryName.includes('Christmas Tree')) {
+      variations.push('Christmas Tree', 'Christmas Trees', 'Christmas Tree Farms')
+    }
+    if (categoryName.includes('Apple')) {
+      variations.push('Apple', 'Apple Orchard', 'Apple Picking', 'Apple Orchards')
+    }
+    if (categoryName.includes('Pumpkin')) {
+      variations.push('Pumpkin', 'Pumpkin Patch', 'Pumpkin Patches')
+    }
+    if (categoryName.includes('Berry')) {
+      variations.push('Berry', 'Berry Farm', 'Berry Picking', 'Berry Farms')
+    }
+    
+    return variations
+  }
+
+  const matchingCategories = getCategoryVariations(category.name)
+  
+  // Count unique farms for this category
+  const uniqueFarmIds = new Set()
+  locationsWithFarms.forEach((location: any) => {
+    location.farms?.forEach((farm: any) => {
+      let farmCategories: string[] = []
+      try {
+        farmCategories = JSON.parse(farm.categories || '[]')
+        if (typeof farmCategories === 'string') {
+          farmCategories = [farmCategories]
+        }
+      } catch (error) {
+        farmCategories = farm.categories ? [farm.categories] : []
+      }
+      
+      const matches = matchingCategories.some(catName => 
+        farmCategories.some((farmCat: string) => 
+          farmCat.toLowerCase().includes(catName.toLowerCase())
+        )
+      )
+      
+      if (matches) {
+        uniqueFarmIds.add(farm.id)
+      }
+    })
+  })
+  
+  const farmCount = uniqueFarmIds.size
+  
+  return generateCategoryMetadata(category.name, category, farmCount)
 }
 
 export default async function CategoryLandingPage({ params }: { params: Promise<{ slug: string }> }) {

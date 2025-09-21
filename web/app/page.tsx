@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import { Metadata } from "next"
 
 import { FarmNavbar } from "@/components/farm-navbar"
 import { FarmFooter } from "@/components/farm-footer"
@@ -11,6 +12,7 @@ import SearchBoxWrapper from "@/components/search-box-wrapper"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import { CategoryIcon } from "@/lib/category-icons"
+import { generateHomepageMetadata } from "@/lib/seo-metadata"
 
 // Function to get top categories from generated categories data
 function getTopCategories() {
@@ -19,6 +21,11 @@ function getTopCategories() {
     .filter(category => category.totalFarms > 0)
     .sort((a, b) => b.totalFarms - a.totalFarms)
     .slice(0, 4) // Top 4 categories
+}
+
+// Generate metadata for SEO
+export function generateMetadata(): Metadata {
+  return generateHomepageMetadata()
 }
 
 export default function Home() {
@@ -34,7 +41,7 @@ export default function Home() {
               Discover Local U-Pick Farms
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-              Find fresh, local produce and family-friendly farm experiences near you. From apple orchards to pumpkin
+              Find fresh, local produce and family-friendly u-pick farm experiences near you. From apple orchards to pumpkin
               patches, discover the best farms in your area.
             </p>
             <SearchBoxWrapper />
@@ -70,23 +77,16 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <Users className="h-16 w-16 mx-auto mb-6 text-primary-foreground opacity-90" />
             <h2 className="text-3xl font-bold mb-4 text-balance text-primary-foreground">
-              Join the Pick-Your-Own Farm Community!
+            Get More Families to Your Farm
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto text-pretty text-primary-foreground">
-              Whether you're a farm owner offering pick-your-own experiences or a family seeking fresh, seasonal
-              adventures, Pick A Farm connects you with local agricultural fun.
+            Join thousands of pick-your-own farms across Canada reaching customers actively searching for agritourism experiences. List your farm and connect with families ready to pick, explore, and spend.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="secondary" className="px-8 py-3">
-                List Your Pick-Your-Own Farm
+                List Your Farm
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="px-8 py-3 bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-              >
-                Find Farm Experiences
-              </Button>
+              
             </div>
           </div>
         </section>
