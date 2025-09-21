@@ -1,3 +1,6 @@
+// Required for static export
+export const dynamic = 'force-static'
+
 export async function GET() {
   const baseUrl = 'https://pickafarm.com' // Update with your actual domain
   

@@ -1,5 +1,8 @@
 import { NextRequest } from 'next/server'
 
+// Required for static export
+export const dynamic = 'force-static'
+
 // Import static data
 import farmsData from '../../data/farms.json'
 import locationsData from '../../data/locations-with-farms.json'
