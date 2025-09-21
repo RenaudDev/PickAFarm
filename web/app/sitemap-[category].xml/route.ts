@@ -40,10 +40,13 @@ function farmMatchesCategory(farm: { categories?: string }, categorySlug: string
   return targets.some(t => farmCategories.some(fc => fc?.toLowerCase?.().includes(t.toLowerCase())))
 }
 
-export async function GET(request: NextRequest, { params }: { params: { category: string } }) {
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{ category: string }> }
+) {
   const baseUrl = 'https://pickafarm.com'
   const currentDate = new Date().toISOString()
-  const category = params.category
+  const { category } = await context.params
 
   // Validate category exists (optional, but keeps sitemap clean)
   const known = (categories as Array<{ slug: string }>).some(c => c.slug === category)
