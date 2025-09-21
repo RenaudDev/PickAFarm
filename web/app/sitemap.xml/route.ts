@@ -15,11 +15,23 @@ interface Farm {
 }
 
 interface Location {
+  name: string
   slug: string
-  city: string
-  state_province: string
+  population: number
+  coordinates: {
+    latitude: number
+    longitude: number
+  }
+  province: string
+  province_slug: string
   country: string
-  farm_count: number
+  country_slug: string
+  location_slug: string
+  full_location: string
+  seo_title: string
+  meta_description: string
+  farms: any[]
+  farmCount: number
 }
 
 interface CategoryData {
