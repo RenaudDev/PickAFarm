@@ -40,6 +40,24 @@ function farmMatchesCategory(farm: { categories?: string }, categorySlug: string
   return targets.some(t => farmCategories.some(fc => fc?.toLowerCase?.().includes(t.toLowerCase())))
 }
 
+// Generate static params for all categories
+export async function generateStaticParams() {
+  try {
+    const categoryParams = (categories as Array<{ slug: string }>).map(category => ({
+      category: category.slug
+    }))
+    
+    console.log(`📋 Generated ${categoryParams.length} static params for category sitemaps:`, categoryParams.map(p => p.category))
+    return categoryParams
+  } catch (error) {
+    console.error('Error generating static params for category sitemaps:', error)
+    // Fallback: return at least one param to prevent build failure
+    return [
+      { category: 'christmas-tree-farms' }
+    ]
+  }
+}
+
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ category: string }> }
