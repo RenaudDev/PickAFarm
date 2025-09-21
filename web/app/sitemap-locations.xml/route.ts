@@ -30,12 +30,20 @@ export async function GET(request: NextRequest) {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Location-based Pages -->
+  <!-- Category + Location Pages (/near/) -->
 ${locations.map(location => `  <url>
     <loc>${baseUrl}/near/${location.location_slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>`).join('\n')}
+
+  <!-- All Farms Near City Pages (/farms-near/) -->
+${locations.map(location => `  <url>
+    <loc>${baseUrl}/farms-near/${location.location_slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>`).join('\n')}
 
 </urlset>`
