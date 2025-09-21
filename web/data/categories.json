@@ -26,16 +26,6 @@
     "topCities": [],
     "featuredFarms": [
       {
-        "id": "zcrm_38729000000230846",
-        "name": "Carr Family Christmas Tree Farm",
-        "slug": "carr-family-christmas-tree-farm",
-        "url": "/farms/carr-family-christmas-tree-farm",
-        "blurb": "Description coming soon ......",
-        "city": "Guysborough",
-        "province": "Nova Scotia",
-        "featured": false
-      },
-      {
         "id": "zcrm_38729000000230847",
         "name": "Catfish Creek Christmas Tree Farm",
         "slug": "catfish-creek-christmas-tree-farm",
@@ -43,6 +33,16 @@
         "blurb": "Catfish Creek Christmas Tree Farm has a rich history rooted in family tradition. The land was first purchased in 1974 by...",
         "city": "St Thomas",
         "province": "On",
+        "featured": true
+      },
+      {
+        "id": "zcrm_38729000000230845",
+        "name": "Carole's Christmas Tree Farm",
+        "slug": "carole-s-christmas-tree-farm",
+        "url": "/farms/carole-s-christmas-tree-farm",
+        "blurb": "Carole’s Christmas Tree Farm has been family-owned and operated for more than 25 years, continuing a cherished tradition...",
+        "city": "Greater Napanee",
+        "province": "Ontario",
         "featured": false
       }
     ]

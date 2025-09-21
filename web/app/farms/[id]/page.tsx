@@ -26,7 +26,7 @@ import FarmFooter from "@/components/farm-footer"
 import FarmInteractiveElements from "@/components/farm-interactive-elements"
 import { CategoryIcon } from "@/lib/category-icons"
 import Link from "next/link"
-import FarmImageServer from "@/components/farm-image-server"
+import Image from "next/image"
 import { notFound } from 'next/navigation'
 
 // Import farms data for static generation
@@ -198,11 +198,14 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
             />
           </div>
           <div className="w-full h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border">
-            <FarmImageServer
-              farmSlug={farm.slug}
-              farmName={farm.name}
-              farmCategories={farm.categories}
-              className="w-full h-full"
+            <Image
+              src="/images/farms/christmas-tree.webp"
+              alt={`${farm.name} - Christmas Tree Farm`}
+              width={800}
+              height={500}
+              className="w-full h-full object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
           </div>
         </div>

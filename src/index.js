@@ -65,7 +65,7 @@ async function zohoFetchAccount(env, accessToken, accountId) {
     "Type_of_Farm","Amenities","Varieties","Payment_Methods","Services_Type",
     "Pet_Friendly","Year_Established","Open_Date","Close_Day",
     "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
-    "latitude","longitude","Price_Range","Slug"
+    "latitude","longitude","Price_Range","Slug","Featured","Verified"
   ];
   
   const apiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${encodeURIComponent(accountId)}?fields=${fields.join(",")}`;
@@ -146,6 +146,22 @@ async function upsertFarm(env, rec) {
   const saturdayHours = rec.Saturday ? String(rec.Saturday) : null;
   const sundayHours = rec.Sunday ? String(rec.Sunday) : null;
 
+  // Convert Pet_Friendly: "TRUE" = 1, "FALSE" = 0, null/undefined = null (3 states)
+  const petFriendly = rec.Pet_Friendly === "TRUE" ? 1 : (rec.Pet_Friendly === "FALSE" ? 0 : null);
+  
+  // Convert Featured and Verified: checkboxes (true = 1, false = 0)
+  const featured = rec.Featured === true ? 1 : 0;
+  const verified = rec.Verified === true ? 1 : 0;
+
+  console.log(`DEBUG - ${name} boolean fields:`, {
+    Pet_Friendly: rec.Pet_Friendly,
+    Featured: rec.Featured,
+    Verified: rec.Verified,
+    petFriendly,
+    featured,
+    verified
+  });
+
   const sql = `
 INSERT INTO farms (
   zoho_record_id, name, slug, website, phone, email, description, 
@@ -154,8 +170,9 @@ INSERT INTO farms (
   pet_friendly, price_range, zoho_last_sync, updated_at,
   payment_methods, opening_date, closing_date,
   monday_hours, tuesday_hours, wednesday_hours,
-  thursday_hours, friday_hours, saturday_hours, sunday_hours
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+  thursday_hours, friday_hours, saturday_hours, sunday_hours,
+  featured, verified
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 ON CONFLICT(zoho_record_id) DO UPDATE SET 
   name=excluded.name, slug=excluded.slug, website=excluded.website,
   phone=excluded.phone, email=excluded.email, description=excluded.description,
@@ -167,7 +184,8 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
   zoho_last_sync=excluded.zoho_last_sync, updated_at=excluded.updated_at,
   payment_methods=excluded.payment_methods, opening_date=excluded.opening_date, closing_date=excluded.closing_date,
   monday_hours=excluded.monday_hours, tuesday_hours=excluded.tuesday_hours, wednesday_hours=excluded.wednesday_hours,
-  thursday_hours=excluded.thursday_hours, friday_hours=excluded.friday_hours, saturday_hours=excluded.saturday_hours, sunday_hours=excluded.sunday_hours;
+  thursday_hours=excluded.thursday_hours, friday_hours=excluded.friday_hours, saturday_hours=excluded.saturday_hours, sunday_hours=excluded.sunday_hours,
+  featured=excluded.featured, verified=excluded.verified;
 `;
 
   // Handle coordinates - try Zoho first, then geocode if missing
@@ -188,8 +206,6 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     }
   }
 
-  const petFriendly = rec.Pet_Friendly === "Yes" || rec.Pet_Friendly === true ? 1 : 0;
-
   const result = await env.DB.prepare(sql).bind(
     d1Id, name, slug,
     rec.Website, rec.Phone, rec.Email, rec.Description,
@@ -201,7 +217,8 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     new Date().toISOString(), new Date().toISOString(),
     paymentMethods, openingDate, closingDate,
     mondayHours, tuesdayHours, wednesdayHours,
-    thursdayHours, fridayHours, saturdayHours, sundayHours
+    thursdayHours, fridayHours, saturdayHours, sundayHours,
+    featured, verified
   ).run();
 }
 

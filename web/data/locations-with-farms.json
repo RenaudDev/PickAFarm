@@ -1,5 +1,73 @@
 [
   {
+    "name": "Belleville",
+    "slug": "belleville",
+    "population": 55071,
+    "coordinates": {
+      "latitude": 44.1627589,
+      "longitude": -77.3832315
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "belleville-ontario-canada",
+    "full_location": "Belleville, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Belleville, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Belleville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230845",
+        "name": "Carole's Christmas Tree Farm",
+        "slug": "carole-s-christmas-tree-farm",
+        "url": "/farms/carole-s-christmas-tree-farm",
+        "latitude": 44.2452624,
+        "longitude": -76.8968722,
+        "city": "Greater Napanee",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 40
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Kingston",
+    "slug": "kingston",
+    "population": 132485,
+    "coordinates": {
+      "latitude": 44.2334401,
+      "longitude": -76.49302949999999
+    },
+    "province": "Ontario",
+    "province_slug": "ontario",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "kingston-ontario-canada",
+    "full_location": "Kingston, Ontario, Canada",
+    "seo_title": "Pick Your Own Farms near Kingston, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Kingston, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230845",
+        "name": "Carole's Christmas Tree Farm",
+        "slug": "carole-s-christmas-tree-farm",
+        "url": "/farms/carole-s-christmas-tree-farm",
+        "latitude": 44.2452624,
+        "longitude": -76.8968722,
+        "city": "Greater Napanee",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 32
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "London",
     "slug": "london",
     "population": 422324,
@@ -27,7 +95,7 @@
         "province": "On",
         "country": "Canada",
         "categories": "Christmas Tree Farms",
-        "featured": false,
+        "featured": true,
         "distance_km": 30
       }
     ],
@@ -61,7 +129,7 @@
         "province": "On",
         "country": "Canada",
         "categories": "Christmas Tree Farms",
-        "featured": false,
+        "featured": true,
         "distance_km": 53
       }
     ],
