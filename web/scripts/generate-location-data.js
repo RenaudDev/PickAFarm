@@ -121,6 +121,8 @@ async function generateLocationData() {
 
       return {
         ...loc,
+        // Regenerate location_slug using updated province_slug
+        location_slug: `${generateSlug(loc.name)}-${loc.province_slug}-${loc.country_slug}`,
         farms: nearby,
         farmCount: nearby.length
       };
