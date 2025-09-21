@@ -2,10 +2,56 @@ import React, { Suspense } from "react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import SearchResultsContent from "./search-results-content"
+import { generateLocationMetadata } from "@/lib/seo-metadata"
+import { Metadata } from "next"
 
 // Import data for static generation using correct relative paths
 import categoriesData from "../../../../data/categories.json"
 import locationsWithFarms from "../../../../data/locations-with-farms.json"
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; location: string }> }): Promise<Metadata> {
+  const { slug, location } = await params
+  
+  // Find the category data
+  const categoryData = categoriesData.find(cat => cat.slug === slug)
+  const categoryName = categoryData?.name || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+  
+  // Find the location data
+  const locationData = locationsWithFarms.find(loc => loc.location_slug === location)
+  const locationName = locationData?.full_location || location.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+  
+  // Get farm count for this category/location combination
+  const farmCount = locationData?.farms?.filter(farm => {
+    if (!slug) return true
+    
+    // Handle both JSON array and plain string formats for categories
+    let farmCategories: string[] = []
+    try {
+      farmCategories = JSON.parse(farm.categories || '[]')
+      if (typeof farmCategories === 'string') {
+        farmCategories = [farmCategories]
+      }
+    } catch (error) {
+      farmCategories = farm.categories ? [farm.categories] : []
+    }
+    
+    const categoryMap: Record<string, string[]> = {
+      'apple-orchards': ['Apple Orchard', 'Apple Picking'],
+      'pumpkin-patches': ['Pumpkin Patch'],
+      'berry-farms': ['Berry Farm', 'Berry Picking'],
+      'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree']
+    }
+    const matchingCategories = categoryMap[slug] || []
+    return matchingCategories.some(catName => 
+      farmCategories.some((farmCat: string) => 
+        farmCat.toLowerCase().includes(catName.toLowerCase())
+      )
+    )
+  }).length || 0
+  
+  return generateLocationMetadata(categoryName, locationName, farmCount)
+}
 
 // Generate static params for all category + location combinations
 export async function generateStaticParams() {

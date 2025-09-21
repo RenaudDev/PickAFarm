@@ -43,7 +43,7 @@ export function generateMetadata({
   const allKeywords = [...DEFAULT_KEYWORDS, ...keywords].filter(Boolean)
   
   // Ensure title has site name
-  const fullTitle = title.includes("PickAFarm") ? title : `${title} | PickAFarm`
+  const fullTitle = title.includes("PickAFarm") || title.includes("Pick A Farm") || title.includes(" Near ") ? title : `${title} | PickAFarm`
   
   // Ensure image is absolute URL
   const imageUrl = image.startsWith('http') ? image : `${SITE_CONFIG.domain}${image}`
@@ -128,10 +128,16 @@ export function generateMetadata({
 
 // Farm-specific SEO metadata
 export function generateFarmMetadata(farm: any): Metadata {
-  const title = farm.name
-  const description = farm.description 
-    ? `${farm.description.substring(0, 155)}...`
-    : `Visit ${farm.name} in ${farm.city_name}, ${farm.state_province}, offering ${farm.type || 'fresh produce'} and family activities.`
+  // Create a simple title with just farm name
+  const title = `${farm.name} | Pick A Farm`
+  
+  // Get category name and create singular/plural versions
+  const categoryName = farm.categories || ""
+  const categorySingular = categoryName.replace(/s$/, '') // Remove trailing 's' for singular
+  const categoryPlural = categoryName.endsWith('s') ? categoryName : `${categoryName}s` // Add 's' for plural if not already there
+  
+  // Create a better description with categories
+  const description = `${farm.name} is a ${categoryPlural.toLowerCase()} in ${farm.city_name}, ${farm.state_province}. Visit us to learn more.`
   
   const keywords = [
     farm.name.toLowerCase(),
@@ -139,6 +145,8 @@ export function generateFarmMetadata(farm: any): Metadata {
     farm.city_name?.toLowerCase(),
     farm.state_province?.toLowerCase(),
     farm.type?.toLowerCase(),
+    `${farm.categories?.toLowerCase()} ${farm.city_name?.toLowerCase()}`,
+    `${farm.categories?.toLowerCase()} ${farm.state_province?.toLowerCase()}`,
     ...(farm.varieties ? farm.varieties.split(',').map((v: string) => v.trim().toLowerCase()) : []),
     ...(farm.amenities ? farm.amenities.split(',').map((a: string) => a.trim().toLowerCase()) : [])
   ].filter(Boolean)
@@ -155,7 +163,7 @@ export function generateFarmMetadata(farm: any): Metadata {
 
 // Location-based SEO metadata
 export function generateLocationMetadata(category: string, location: string, farmCount: number): Metadata {
-  const title = `${category} near ${location}`
+  const title = `${category} Near ${location}`
   const description = `Find ${farmCount} ${category.toLowerCase()} near ${location}. Fresh produce, seasonal activities, and family fun at local pick-your-own farms.`
   
   const keywords = [

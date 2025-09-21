@@ -28,6 +28,8 @@ import { CategoryIcon } from "@/lib/category-icons"
 import Link from "next/link"
 import Image from "next/image"
 import { notFound } from 'next/navigation'
+import { generateFarmMetadata } from "@/lib/seo-metadata"
+import { Metadata } from "next"
 
 // Import farms data for static generation
 import farmsData from "../../../data/farms.json"
@@ -85,6 +87,23 @@ export async function generateStaticParams() {
   return farmsData.map((farm: FarmData) => ({
     id: farm.slug
   }))
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  
+  // Find the farm data based on the slug
+  const farm = farmsData.find((f: FarmData) => f.slug === id)
+  
+  if (!farm) {
+    return {
+      title: 'Farm Not Found | PickAFarm',
+      description: 'The requested farm could not be found.'
+    }
+  }
+  
+  return generateFarmMetadata(farm)
 }
 
 const getCategoryInfo = (categories: string) => {
