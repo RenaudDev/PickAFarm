@@ -2,7 +2,7 @@
   {
     "slug": "christmas-tree-farms",
     "name": "Christmas Tree Farms",
-    "totalFarms": 2,
+    "totalFarms": 19,
     "description": "Find the perfect Christmas tree at local farms offering fresh-cut trees, family activities, and holiday traditions.",
     "intro": "Christmas tree farms offer a magical holiday experience where families can select and cut their own perfect tree. These farms typically operate seasonally from late November through December, providing fresh Fraser Firs, Noble Firs, and other premium varieties alongside festive activities like hot cocoa, hayrides, and holiday decorations.",
     "faqs": [
@@ -26,24 +26,34 @@
     "topCities": [],
     "featuredFarms": [
       {
-        "id": "zcrm_38729000000230847",
-        "name": "Catfish Creek Christmas Tree Farm",
-        "slug": "catfish-creek-christmas-tree-farm",
-        "url": "/farms/catfish-creek-christmas-tree-farm",
-        "blurb": "Catfish Creek Christmas Tree Farm has a rich history rooted in family tradition. The land was first purchased in 1974 by...",
-        "city": "St Thomas",
-        "province": "On",
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "blurb": "Al-Dor Farms is a family-run farm in Glen Valley, just 5 km east of historic Fort Langley. Albert and Dorothy Anderson b...",
+        "city": "Langley Twp",
+        "province": "British Columbia",
         "featured": true
       },
       {
-        "id": "zcrm_38729000000230845",
-        "name": "Carole's Christmas Tree Farm",
-        "slug": "carole-s-christmas-tree-farm",
-        "url": "/farms/carole-s-christmas-tree-farm",
-        "blurb": "Carole’s Christmas Tree Farm has been family-owned and operated for more than 25 years, continuing a cherished tradition...",
-        "city": "Greater Napanee",
+        "id": "zcrm_38729000000230833",
+        "name": "Bachner Family Christmas Tree Farm",
+        "slug": "bachner-family-christmas-tree-farm",
+        "url": "/farms/bachner-family-christmas-tree-farm",
+        "blurb": "Bachner Family Christmas Tree Farm is rooted in a proud family tradition that began over 40 years ago, when Michael Bach...",
+        "city": "St Thomas",
         "province": "Ontario",
-        "featured": false
+        "featured": true
+      },
+      {
+        "id": "zcrm_38729000000230842",
+        "name": "Boisé Brabant",
+        "slug": "bois-brabant",
+        "url": "/farms/bois-brabant",
+        "blurb": "To enjoy the experience of cutting your own Christmas tree at Boisé Brabant, visitors are asked to book a date in advanc...",
+        "city": "Casselman",
+        "province": "Ontario",
+        "featured": true
       }
     ]
   }

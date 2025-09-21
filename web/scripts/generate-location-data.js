@@ -59,13 +59,14 @@ async function generateLocationData() {
       console.log(`📍 Loaded ${citiesData.metadata.totalCities} cities from ${citiesData.metadata.totalProvinces} provinces`);
       for (const [, provinceData] of Object.entries(citiesData.provinces)) {
         for (const city of provinceData.cities) {
+          const countrySlug = 'ca'; // Default for Canada, could be made configurable
           baseLocations.push({
             ...city,
             province: provinceData.name,
             province_slug: provinceData.slug,
             country: 'Canada',
-            country_slug: 'canada',
-            location_slug: `${city.slug}-${provinceData.slug}-canada`,
+            country_slug: countrySlug,
+            location_slug: `${city.slug}-${provinceData.slug}-${countrySlug}`,
             full_location: `${city.name}, ${provinceData.name}, Canada`,
             seo_title: `Pick Your Own Farms near ${city.name}, ${provinceData.name}`,
             meta_description: `Find the best pick-your-own farms near ${city.name}, ${provinceData.name}. Fresh apples, berries, pumpkins and Christmas trees.`
@@ -140,7 +141,7 @@ async function generateLocationData() {
     console.log(`💾 Saved filtered locations with nearby farms to ${filteredLocationsPath}`);
 
     // Params for Next.js generateStaticParams (city/near pages)
-    const params = filtered.map(l => ({ location: l.location_slug || generateSlug(`${l.name}-${l.province}-canada`) }));
+    const params = filtered.map(l => ({ location: l.location_slug || generateSlug(`${l.name}-${l.province}-${l.country_slug || 'ca'}`) }));
     const paramsPath = path.join(dataDir, 'location-params-filtered.json');
     fs.writeFileSync(paramsPath, JSON.stringify(params, null, 2));
     console.log(`📋 Generated static params for ${params.length} filtered location pages`);
