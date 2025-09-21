@@ -46,8 +46,9 @@ function FarmNavbar() {
 
         <div className="md:hidden">
           <div className="flex items-center justify-between h-16">
+          <a href="/">
             <div className="flex items-center space-x-2">
-              <a href="/">
+              
               <Image 
                 src="/android-chrome-192x192.png" 
                 alt="Pick A Farm Logo" 
@@ -56,8 +57,9 @@ function FarmNavbar() {
                 className="h-8 w-8"
               />
               <span className="text-xl font-bold text-foreground">Pick A Farm</span>
-              </a>
+              
             </div>
+            </a>
             <Button
               variant="ghost"
               size="sm"
