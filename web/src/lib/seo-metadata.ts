@@ -6,7 +6,8 @@ interface SEOConfig {
   keywords?: string[]
   image?: string
   url: string
-  type?: 'website' | 'article' | 'business.business'
+  type?: 'website' | 'article'
+  isBusiness?: boolean
   noIndex?: boolean
 }
 
@@ -34,6 +35,7 @@ export function generateMetadata({
   image = SITE_CONFIG.defaultImage,
   url,
   type = "website",
+  isBusiness = false,
   noIndex = false
 }: SEOConfig): Metadata {
   
@@ -116,8 +118,10 @@ export function generateMetadata({
       'ICBM': '43.6532, -79.3832', // Toronto coordinates as default
       
       // Business schema hints
-      'business:contact_data:locality': 'Ontario',
-      'business:contact_data:region': 'Canada',
+      ...(isBusiness ? {
+        'business:contact_data:locality': 'Ontario',
+        'business:contact_data:region': 'Canada',
+      } : {}),
     },
   }
 }
@@ -144,7 +148,8 @@ export function generateFarmMetadata(farm: any): Metadata {
     description,
     keywords,
     url: `${SITE_CONFIG.domain}/farms/${farm.slug}`,
-    type: "business.business"
+    type: "article",
+    isBusiness: true
   })
 }
 
