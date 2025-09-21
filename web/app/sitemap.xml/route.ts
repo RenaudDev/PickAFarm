@@ -47,7 +47,9 @@ export async function GET(request: NextRequest) {
   const activeFarms = (farmsData as Farm[]).filter(farm => farm.active === 1)
   
   // Get locations with farms
-  const locations = locationsData as Location[]
+  const allLocations = locationsData as Location[]
+  // Filter to only include locations that actually have farms
+  const locations = allLocations.filter(location => location.farms && location.farms.length > 0)
   
   // Get available categories from category-content.json
   const categoryData = categoryContent as CategoryData
