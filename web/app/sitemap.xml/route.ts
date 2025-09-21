@@ -20,27 +20,20 @@ interface Farm {
 interface Location {
   name: string
   slug: string
-  population: number
-  coordinates: {
-    latitude: number
-    longitude: number
-  }
-  province: string
-  province_slug: string
-  country: string
-  country_slug: string
   location_slug: string
   full_location: string
   seo_title: string
   meta_description: string
   farms: any[]
-  farmCount: number
 }
 
 interface CategoryData {
   [key: string]: {
     name: string
+    slug: string
+    intro: string
     description: string
+    faqs: any[]
   }
 }
 
@@ -56,8 +49,9 @@ export async function GET(request: NextRequest) {
   // Get locations with farms
   const locations = locationsData as Location[]
   
-  // Get available categories
-  const categories = Object.keys(categoryContent as CategoryData)
+  // Get available categories from category-content.json
+  const categoryData = categoryContent as CategoryData
+  const categories = Object.keys(categoryData)
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -76,9 +70,9 @@ export async function GET(request: NextRequest) {
   </url>
 
   <!-- Category + Location Pages (Highest Priority) -->
-${categories.flatMap(categorySlug => 
+${categories.flatMap(categoryKey => 
     locations.map(location => `  <url>
-    <loc>${baseUrl}/${categorySlug}/near/${location.slug}</loc>
+    <loc>${baseUrl}/${categoryData[categoryKey].slug}/near/${location.location_slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -86,8 +80,8 @@ ${categories.flatMap(categorySlug =>
 ).join('\n')}
 
   <!-- Category Pages -->
-${categories.map(categorySlug => `  <url>
-    <loc>${baseUrl}/${categorySlug}</loc>
+${categories.map(categoryKey => `  <url>
+    <loc>${baseUrl}/${categoryData[categoryKey].slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
