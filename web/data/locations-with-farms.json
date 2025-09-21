@@ -8,11 +8,11 @@
       "longitude": -77.3832315
     },
     "province": "Ontario",
-    "province_slug": "ontario",
+    "province_slug": "on",
     "country": "Canada",
     "country_slug": "canada",
     "location_slug": "belleville-ontario-canada",
-    "full_location": "Belleville, Ontario, Canada",
+    "full_location": "Belleville, ON, Canada",
     "seo_title": "Pick Your Own Farms near Belleville, Ontario",
     "meta_description": "Find the best pick-your-own farms near Belleville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
@@ -34,6 +34,74 @@
     "farmCount": 1
   },
   {
+    "name": "Brantford",
+    "slug": "brantford",
+    "population": 104688,
+    "coordinates": {
+      "latitude": 43.1394191,
+      "longitude": -80.263623
+    },
+    "province": "Ontario",
+    "province_slug": "on",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "brantford-ontario-canada",
+    "full_location": "Brantford, ON, Canada",
+    "seo_title": "Pick Your Own Farms near Brantford, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Brantford, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230847",
+        "name": "Catfish Creek Christmas Tree Farm",
+        "slug": "catfish-creek-christmas-tree-farm",
+        "url": "/farms/catfish-creek-christmas-tree-farm",
+        "latitude": 42.7505572,
+        "longitude": -81.0563934,
+        "city": "St Thomas",
+        "province": "On",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": true,
+        "distance_km": 78
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Cambridge",
+    "slug": "cambridge",
+    "population": 138479,
+    "coordinates": {
+      "latitude": 43.3616211,
+      "longitude": -80.3144276
+    },
+    "province": "Ontario",
+    "province_slug": "on",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "cambridge-ontario-canada",
+    "full_location": "Cambridge, ON, Canada",
+    "seo_title": "Pick Your Own Farms near Cambridge, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Cambridge, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230847",
+        "name": "Catfish Creek Christmas Tree Farm",
+        "slug": "catfish-creek-christmas-tree-farm",
+        "url": "/farms/catfish-creek-christmas-tree-farm",
+        "latitude": 42.7505572,
+        "longitude": -81.0563934,
+        "city": "St Thomas",
+        "province": "On",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": true,
+        "distance_km": 91
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Kingston",
     "slug": "kingston",
     "population": 132485,
@@ -42,11 +110,11 @@
       "longitude": -76.49302949999999
     },
     "province": "Ontario",
-    "province_slug": "ontario",
+    "province_slug": "on",
     "country": "Canada",
     "country_slug": "canada",
     "location_slug": "kingston-ontario-canada",
-    "full_location": "Kingston, Ontario, Canada",
+    "full_location": "Kingston, ON, Canada",
     "seo_title": "Pick Your Own Farms near Kingston, Ontario",
     "meta_description": "Find the best pick-your-own farms near Kingston, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
@@ -68,6 +136,40 @@
     "farmCount": 1
   },
   {
+    "name": "Kitchener",
+    "slug": "kitchener",
+    "population": 256885,
+    "coordinates": {
+      "latitude": 43.4510934,
+      "longitude": -80.4925804
+    },
+    "province": "Ontario",
+    "province_slug": "on",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "kitchener-ontario-canada",
+    "full_location": "Kitchener, ON, Canada",
+    "seo_title": "Pick Your Own Farms near Kitchener, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Kitchener, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230847",
+        "name": "Catfish Creek Christmas Tree Farm",
+        "slug": "catfish-creek-christmas-tree-farm",
+        "url": "/farms/catfish-creek-christmas-tree-farm",
+        "latitude": 42.7505572,
+        "longitude": -81.0563934,
+        "city": "St Thomas",
+        "province": "On",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": true,
+        "distance_km": 90
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "London",
     "slug": "london",
     "population": 422324,
@@ -76,11 +178,11 @@
       "longitude": -81.2452768
     },
     "province": "Ontario",
-    "province_slug": "ontario",
+    "province_slug": "on",
     "country": "Canada",
     "country_slug": "canada",
     "location_slug": "london-ontario-canada",
-    "full_location": "London, Ontario, Canada",
+    "full_location": "London, ON, Canada",
     "seo_title": "Pick Your Own Farms near London, Ontario",
     "meta_description": "Find the best pick-your-own farms near London, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
@@ -110,11 +212,11 @@
       "longitude": -80.4136271
     },
     "province": "Ontario",
-    "province_slug": "ontario",
+    "province_slug": "on",
     "country": "Canada",
     "country_slug": "canada",
     "location_slug": "norfolk-county-ontario-canada",
-    "full_location": "Norfolk County, Ontario, Canada",
+    "full_location": "Norfolk County, ON, Canada",
     "seo_title": "Pick Your Own Farms near Norfolk County, Ontario",
     "meta_description": "Find the best pick-your-own farms near Norfolk County, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
@@ -131,6 +233,40 @@
         "categories": "Christmas Tree Farms",
         "featured": true,
         "distance_km": 53
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Waterloo",
+    "slug": "waterloo",
+    "population": 121436,
+    "coordinates": {
+      "latitude": 43.4642578,
+      "longitude": -80.5204096
+    },
+    "province": "Ontario",
+    "province_slug": "on",
+    "country": "Canada",
+    "country_slug": "canada",
+    "location_slug": "waterloo-ontario-canada",
+    "full_location": "Waterloo, ON, Canada",
+    "seo_title": "Pick Your Own Farms near Waterloo, Ontario",
+    "meta_description": "Find the best pick-your-own farms near Waterloo, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230847",
+        "name": "Catfish Creek Christmas Tree Farm",
+        "slug": "catfish-creek-christmas-tree-farm",
+        "url": "/farms/catfish-creek-christmas-tree-farm",
+        "latitude": 42.7505572,
+        "longitude": -81.0563934,
+        "city": "St Thomas",
+        "province": "On",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": true,
+        "distance_km": 91
       }
     ],
     "farmCount": 1
