@@ -27,7 +27,7 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 }
 
 async function generateLocationData() {
-  console.log('🗺️  Building filtered location data (75km radius)...');
+  console.log('🗺️  Building filtered location data (50km radius)...');
   
   try {
     const dataDir = path.join(__dirname, '..', 'data');
@@ -86,7 +86,7 @@ async function generateLocationData() {
     const farms = JSON.parse(fs.readFileSync(farmsPath, 'utf8'));
     console.log(`🌾 Loaded ${farms.length} farms`);
 
-    const RADIUS_KM = 100; // configurable
+    const RADIUS_KM = 50; // configurable
 
     // For each location, collect farms within 75km
     const locationsWithFarms = baseLocations.map(loc => {
