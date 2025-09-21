@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Sprout, Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -11,11 +12,20 @@ function FarmNavbar() {
     <nav className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="hidden md:flex items-center justify-between h-16">
-          <div className="flex items-center space-x-2">
-            <Sprout className="h-8 w-8 text-primary" />
+        <a href="/">
+          <div className="flex items-center space-x-3">
+            
+            <Image 
+              src="/android-chrome-192x192.png" 
+              alt="Pick A Farm Logo" 
+              width={28} 
+              height={28} 
+              className="h-6 w-6"
+            />
             <span className="text-xl font-bold text-foreground">Pick A Farm</span>
+            
           </div>
-
+          </a>
           <div className="flex items-center space-x-6">
             <div className="hidden lg:flex items-center space-x-6">
               <a href="/" className="text-foreground hover:text-accent font-medium transition-colors">
@@ -37,8 +47,16 @@ function FarmNavbar() {
         <div className="md:hidden">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <Sprout className="h-8 w-8 text-primary" />
+              <a href="/">
+              <Image 
+                src="/android-chrome-192x192.png" 
+                alt="Pick A Farm Logo" 
+                width={32} 
+                height={32} 
+                className="h-8 w-8"
+              />
               <span className="text-xl font-bold text-foreground">Pick A Farm</span>
+              </a>
             </div>
             <Button
               variant="ghost"
