@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
   <!-- Category + Location Pages (/near/) -->
 ${locations.map(location => `  <url>
-    <loc>${baseUrl}/near/${location.location_slug}</loc>
+    <loc>${baseUrl}/farms-near/${location.location_slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
