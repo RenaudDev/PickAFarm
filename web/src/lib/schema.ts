@@ -7,15 +7,19 @@ interface FarmData {
   id: string;
   name: string;
   slug: string;
+  url?: string;
   street?: string;
   city: string;
   province: string;
+  country?: string;
   postal_code?: string;
   latitude?: number;
   longitude?: number;
   phone?: string;
   image_url?: string;
   categories?: string;
+  featured?: boolean;
+  distance_km?: number;
 }
 
 interface CategoryData {
@@ -27,6 +31,8 @@ interface LocationData {
   name: string;
   province: string;
   location_slug: string;
+  farms?: FarmData[];
+  full_location?: string;
 }
 
 /**

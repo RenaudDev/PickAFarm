@@ -2,6 +2,9 @@
  * Shared utilities for farm data processing
  */
 
+// Import the FarmData type from schema
+import type { FarmData } from './schema';
+
 // Category mapping for consistent filtering across the app
 const CATEGORY_MAP: Record<string, string[]> = {
   'apple-orchards': ['Apple Orchard', 'Apple Picking'],
@@ -27,7 +30,7 @@ export function parseFarmCategories(categories: string | null | undefined): stri
 /**
  * Filters farms by category slug
  */
-export function filterFarmsByCategory(farms: any[], categorySlug: string): any[] {
+export function filterFarmsByCategory(farms: FarmData[], categorySlug: string): FarmData[] {
   if (!categorySlug) return farms;
   
   const matchingCategories = CATEGORY_MAP[categorySlug] || [];
@@ -46,7 +49,7 @@ export function filterFarmsByCategory(farms: any[], categorySlug: string): any[]
 /**
  * Sorts farms with featured first, then by distance
  */
-export function sortFarms(farms: any[]): any[] {
+export function sortFarms(farms: FarmData[]): FarmData[] {
   return [...farms].sort((a, b) => {
     const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
     if (featuredDiff !== 0) return featuredDiff;
