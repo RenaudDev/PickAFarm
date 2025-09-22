@@ -10,26 +10,14 @@ export function FarmFooter() {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <Image 
-                src="/android-chrome-192x192.png" 
+                src="/images/Footer-pickafarm.webp" 
                 alt="Pick A Farm Logo" 
-                width={40} 
-                height={40} 
-                className="h-10 w-10"
+                width={100} 
+                height={100} 
+                className="h-64 w-64"
               />
-              <span className="text-xl font-bold text-foreground">Pick A Farm</span>
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Connecting communities with local u-pick farms. Discover fresh, sustainable produce and support your local
-              farmers.
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://www.facebook.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="https://www.instagram.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
+            
           </div>
 
           {/* Quick Links */}
@@ -75,6 +63,14 @@ export function FarmFooter() {
                 <MapPin className="h-4 w-4 text-primary" />
                 <span>Rigaud, Quebec, CA</span>
               </div>
+            </div>
+            <div className="flex space-x-4">
+              <a href="https://www.facebook.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="https://www.instagram.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
             </div>
           </div>
         </div>

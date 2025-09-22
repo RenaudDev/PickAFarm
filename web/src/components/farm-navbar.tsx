@@ -11,18 +11,18 @@ function FarmNavbar() {
   return (
     <nav className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="hidden md:flex items-center justify-between h-16">
+        <div className="hidden md:flex items-center justify-between h-24">
         <a href="/">
           <div className="flex items-center space-x-3">
             
             <Image 
-              src="/android-chrome-192x192.png" 
+              src="/images/navbarlogo1.webp" 
               alt="Pick A Farm Logo" 
-              width={28} 
+              width={56} 
               height={28} 
-              className="h-6 w-6"
+              className="h-20 w-60"
             />
-            <span className="text-xl font-bold text-foreground">Pick A Farm</span>
+            
             
           </div>
           </a>
@@ -45,18 +45,17 @@ function FarmNavbar() {
         </div>
 
         <div className="md:hidden">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
           <a href="/">
             <div className="flex items-center space-x-2">
               
               <Image 
-                src="/android-chrome-192x192.png" 
+                src="/images/navbarlogo1.webp" 
                 alt="Pick A Farm Logo" 
-                width={32} 
+                width={56} 
                 height={32} 
-                className="h-8 w-8"
+                className="h-16 w-36"
               />
-              <span className="text-xl font-bold text-foreground">Pick A Farm</span>
               
             </div>
             </a>
