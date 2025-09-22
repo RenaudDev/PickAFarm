@@ -103,9 +103,15 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
     return notFound()
   }
 
-  // Filter and sort farms using shared utilities
+  // Filter and sort farms using shared utilities (handles type conversion internally)
   const filteredFarms = filterFarmsByCategory(locationData.farms, resolvedParams.slug)
   const sortedFarms = sortFarms(filteredFarms)
+
+  // Create compatible locationData for the component
+  const compatibleLocationData = {
+    ...locationData,
+    farms: filteredFarms // Use the converted farms
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -137,7 +143,7 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
         </div>
       </div>
       <Suspense fallback={<div>Loading search results...</div>}>
-        <SearchResultsContent params={resolvedParams} initialFarms={sortedFarms} locationData={locationData} />
+        <SearchResultsContent params={resolvedParams} initialFarms={sortedFarms} locationData={compatibleLocationData} />
       </Suspense>
       <script
         type="application/ld+json"

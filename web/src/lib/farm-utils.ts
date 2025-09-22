@@ -58,15 +58,30 @@ export function parseFarmCategories(categories: string | null | undefined): stri
 }
 
 /**
- * Filters farms by category slug
+ * Filters farms by category slug - works with both ApiFarmData and FarmData
  */
-export function filterFarmsByCategory(farms: ApiFarmData[], categorySlug: string): FarmData[] {
-  if (!categorySlug) return convertApiFarmData(farms);
+export function filterFarmsByCategory(farms: FarmData[], categorySlug: string): FarmData[];
+export function filterFarmsByCategory(farms: ApiFarmData[], categorySlug: string): FarmData[];
+export function filterFarmsByCategory(farms: (ApiFarmData | FarmData)[], categorySlug: string): FarmData[] {
+  if (!categorySlug) {
+    // If no category filter, convert to FarmData if needed
+    return farms.map(farm => 
+      typeof farm.featured === 'boolean' 
+        ? { ...farm, featured: farm.featured ? 1 : 0 } as FarmData
+        : farm as FarmData
+    );
+  }
   
   const matchingCategories = CATEGORY_MAP[categorySlug] || [];
-  if (matchingCategories.length === 0) return convertApiFarmData(farms);
+  if (matchingCategories.length === 0) {
+    return farms.map(farm => 
+      typeof farm.featured === 'boolean' 
+        ? { ...farm, featured: farm.featured ? 1 : 0 } as FarmData
+        : farm as FarmData
+    );
+  }
   
-  const filteredApiFarms = farms.filter(farm => {
+  const filteredFarms = farms.filter(farm => {
     const farmCategories = parseFarmCategories(farm.categories);
     return matchingCategories.some(catName =>
       farmCategories.some(farmCat =>
@@ -75,7 +90,12 @@ export function filterFarmsByCategory(farms: ApiFarmData[], categorySlug: string
     );
   });
   
-  return convertApiFarmData(filteredApiFarms);
+  // Convert to FarmData format
+  return filteredFarms.map(farm => 
+    typeof farm.featured === 'boolean' 
+      ? { ...farm, featured: farm.featured ? 1 : 0 } as FarmData
+      : farm as FarmData
+  );
 }
 
 /**
