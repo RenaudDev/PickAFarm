@@ -8,23 +8,13 @@ import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Bell, MapPin, Star, ArrowUpDown, Filter } from "lucide-react"
 import GoogleMaps from "@/components/google-maps"
-
-interface Farm {
-  id: string;
-  name: string;
-  url: string;
-  city: string;
-  province: string;
-  distance_km: number;
-  featured: number;
-  categories: string;
-}
+import type { FarmData } from "@/lib/schema"
 
 interface LocationData {
   location_slug: string;
   full_location: string;
   name: string;
-  farms: Farm[];
+  farms: FarmData[];
 }
 
 interface SearchResultsContentProps {
@@ -32,7 +22,7 @@ interface SearchResultsContentProps {
     slug: string;
     location: string;
   };
-  initialFarms: Farm[];
+  initialFarms: FarmData[];
   locationData: LocationData | undefined;
 }
 
@@ -46,14 +36,14 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
     const newSortedFarms = [...initialFarms].sort((a, b) => {
       switch (sortBy) {
         case "distance":
-          return a.distance_km - b.distance_km;
+          return (a.distance_km || 0) - (b.distance_km || 0);
         case "name":
           return a.name.localeCompare(b.name);
         case "featured":
         default:
-          const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+          const featuredDiff = ((b.featured || 0) ? 1 : 0) - ((a.featured || 0) ? 1 : 0);
           if (featuredDiff !== 0) return featuredDiff;
-          return a.distance_km - b.distance_km;
+          return (a.distance_km || 0) - (b.distance_km || 0);
       }
     });
     setSortedFarms(newSortedFarms);
@@ -177,7 +167,7 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
                     <CardTitle className="text-lg leading-tight mb-2">{farm.name}</CardTitle>
                     <div className="flex items-center text-sm text-muted-foreground mb-2">
                       <Bell className="h-3 w-3 mr-1" />
-                      {farm.city}, {farm.province} • {farm.distance_km}km away
+                      {farm.city}, {farm.province} • {farm.distance_km || 0}km away
                     </div>
                   </div>
                   
