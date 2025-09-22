@@ -81,7 +81,7 @@ function FarmNavbar() {
                 <a href="/contact" className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium">
                   Contact
                 </a>
-                <a href="#" className="block px-4 py-2 text-primary hover:bg-muted rounded-md font-semibold">
+                <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="block px-4 py-2 text-primary hover:bg-muted rounded-md font-semibold">
                   List Your Farm
                 </a>
               </div>

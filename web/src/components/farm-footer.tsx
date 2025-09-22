@@ -33,7 +33,7 @@ export function FarmFooter() {
               <a href="/contact" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
                 Contact
               </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
                 List Your Farm
               </a>
             </div>
