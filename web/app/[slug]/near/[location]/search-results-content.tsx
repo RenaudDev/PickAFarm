@@ -9,101 +9,78 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Bell, MapPin, Star, ArrowUpDown, Filter } from "lucide-react"
 import GoogleMaps from "@/components/google-maps"
 
-// Import real location data
-import locationsWithFarms from "../../../../data/locations-with-farms.json"
+interface Farm {
+  id: string;
+  name: string;
+  url: string;
+  city: string;
+  province: string;
+  distance_km: number;
+  featured: number;
+  categories: string;
+}
+
+interface LocationData {
+  location_slug: string;
+  full_location: string;
+  name: string;
+  farms: Farm[];
+}
 
 interface SearchResultsContentProps {
   params: {
-    slug: string
-    location: string
-  }
+    slug: string;
+    location: string;
+  };
+  initialFarms: Farm[];
+  locationData: LocationData | undefined;
 }
 
-export default function SearchResultsContent({ params }: SearchResultsContentProps) {
-  const [sortBy, setSortBy] = useState("featured")
+export default function SearchResultsContent({ params, initialFarms, locationData }: SearchResultsContentProps) {
+  const [sortBy, setSortBy] = useState("featured");
+  const [sortedFarms, setSortedFarms] = useState(initialFarms);
 
-  const category = params.slug || ""
-  const location = params.location || ""
+  const category = params.slug || "";
 
-  // Find the location data from locations-with-farms.json
-  const locationData = locationsWithFarms.find(loc => loc.location_slug === location)
+  useEffect(() => {
+    const newSortedFarms = [...initialFarms].sort((a, b) => {
+      switch (sortBy) {
+        case "distance":
+          return a.distance_km - b.distance_km;
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "featured":
+        default:
+          const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+          if (featuredDiff !== 0) return featuredDiff;
+          return a.distance_km - b.distance_km;
+      }
+    });
+    setSortedFarms(newSortedFarms);
+  }, [sortBy, initialFarms]);
 
-  // If no location found, show error state
   if (!locationData) {
     return (
       <main className="flex-1 max-w-7xl my-12 mx-auto">
         <div className="text-center py-12">
           <CategoryIcon categoryName={category} className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-foreground mb-2">Location not found</h3>
-          <p className="text-muted-foreground">The location "{location}" could not be found.</p>
+          <p className="text-muted-foreground">The location "{params.location}" could not be found.</p>
         </div>
       </main>
     )
   }
 
-  // Filter farms by category if specified
-  const filteredFarms = category 
-    ? locationData.farms.filter(farm => {
-        // Handle both JSON array and plain string formats for categories
-        let farmCategories: string[] = []
-        try {
-          // Try to parse as JSON first
-          farmCategories = JSON.parse(farm.categories || '[]')
-          // If it's a string, wrap it in an array
-          if (typeof farmCategories === 'string') {
-            farmCategories = [farmCategories]
-          }
-        } catch (error) {
-          // If JSON parsing fails, treat as plain string
-          farmCategories = farm.categories ? [farm.categories] : []
-        }
-        
-        const categoryMap: Record<string, string[]> = {
-          'apple-orchards': ['Apple Orchard', 'Apple Picking'],
-          'pumpkin-patches': ['Pumpkin Patch'],
-          'berry-farms': ['Berry Farm', 'Berry Picking'],
-          'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree']
-        }
-        const matchingCategories = categoryMap[category] || []
-        return matchingCategories.some(catName => 
-          farmCategories.some((farmCat: string) => 
-            farmCat.toLowerCase().includes(catName.toLowerCase())
-          )
-        )
-      })
-    : locationData.farms
-
-  // Sort farms
-  const sortedFarms = [...filteredFarms].sort((a, b) => {
-    switch (sortBy) {
-      case "distance":
-        return a.distance_km - b.distance_km
-      case "name":
-        return a.name.localeCompare(b.name)
-      case "featured":
-        // First sort by featured status (featured first)
-        const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
-        if (featuredDiff !== 0) return featuredDiff
-        // Then sort by distance within each group
-        return a.distance_km - b.distance_km
-      default:
-        // Default: featured first, then by distance
-        const defaultFeaturedDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
-        if (defaultFeaturedDiff !== 0) return defaultFeaturedDiff
-        return a.distance_km - b.distance_km
-    }
-  })
-
   const getPageTitle = () => {
-    const categoryDisplay = category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-    const locationDisplay = locationData.full_location
+    const categoryDisplay = category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const locationDisplay = locationData.full_location;
     
-    if (category && location) {
-      return `${categoryDisplay} Near ${locationDisplay}`
-    } else if (location) {
-      return `Pick-Your-Own Farms Near ${locationDisplay}`
+    if (category && params.location) {
+      return `${categoryDisplay} Near ${locationDisplay}`;
+    } else if (params.location) {
+      return `Pick-Your-Own Farms Near ${locationDisplay}`;
     }
-    return "Farm Search Results"
+    return "Farm Search Results";
   }
 
   return (
