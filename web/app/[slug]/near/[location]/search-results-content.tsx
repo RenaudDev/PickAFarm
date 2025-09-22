@@ -11,10 +11,18 @@ import GoogleMaps from "@/components/google-maps"
 import type { FarmData } from "@/lib/schema"
 
 interface LocationData {
+  name: string;
+  slug: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+  province: string;
+  country: string;
   location_slug: string;
   full_location: string;
-  name: string;
   farms: FarmData[];
+  farmCount: number;
 }
 
 interface SearchResultsContentProps {
@@ -61,6 +69,42 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
     )
   }
 
+  // Prepare data for GoogleMaps component (expects featured as boolean and required coordinates)
+  type MapFarm = {
+    id: string;
+    name: string;
+    slug: string;
+    url: string;
+    latitude: number;
+    longitude: number;
+    city: string;
+    province: string;
+    country: string;
+    categories: string;
+    featured?: boolean;
+    distance_km: number;
+  };
+
+  type MapLocationData = Omit<LocationData, 'farms'> & { farms: MapFarm[] };
+
+  const mapLocationData: MapLocationData = {
+    ...locationData,
+    farms: locationData.farms.map((farm) => ({
+      id: farm.id,
+      name: farm.name,
+      slug: farm.slug,
+      url: farm.url,
+      latitude: farm.latitude ?? 0,
+      longitude: farm.longitude ?? 0,
+      city: farm.city,
+      province: farm.province,
+      country: farm.country || 'Canada',
+      categories: farm.categories || '',
+      featured: !!(farm.featured && farm.featured > 0),
+      distance_km: farm.distance_km ?? 0,
+    })),
+  };
+
   const getPageTitle = () => {
     const categoryDisplay = category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     const locationDisplay = locationData.full_location;
@@ -97,13 +141,13 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
           Near {locationData.name}
         </h2>
         <GoogleMaps
-          locationData={locationData}
+          locationData={mapLocationData}
           categoryFilter={category}
           radius={100}
           className="w-full h-96"
         />
       </div>
-        
+
       <div className="flex flex-col sm:flex-row gap-4 mb-8 p-4 bg-card rounded-lg shadow-sm border mx-4 sm:mx-6 lg:mx-8">
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-muted-foreground" />
@@ -147,11 +191,11 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex flex-wrap gap-1">
-                    {farm.featured && (
+                    {(farm.featured && farm.featured > 0) ? (
                       <Badge variant="default" className="text-xs bg-yellow-500 text-white mr-2">
                         Featured
                       </Badge>
-                    )}
+                    ) : null}
                     <div className="flex items-center gap-2">
                       <CategoryIconList 
                         categories={farmCategories} 

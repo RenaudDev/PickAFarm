@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Allow important pages
+Allow: /farms/
+Allow: /christmas-tree-farms/
+
+# Sitemap location
+Sitemap: https://pickafarm.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to smaller servers)
+Crawl-delay: 1

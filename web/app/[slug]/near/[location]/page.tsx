@@ -107,10 +107,11 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
   const filteredFarms = filterFarmsByCategory(locationData.farms, resolvedParams.slug)
   const sortedFarms = sortFarms(filteredFarms)
 
-  // Create compatible locationData for the component
+  // Create compatible locationData for the component with all required properties
   const compatibleLocationData = {
     ...locationData,
-    farms: filteredFarms // Use the converted farms
+    farms: filteredFarms, // Use the converted farms
+    farmCount: filteredFarms.length // Add the missing farmCount property
   }
 
   return (

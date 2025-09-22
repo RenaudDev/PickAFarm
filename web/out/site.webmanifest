@@ -1,0 +1,51 @@
+{
+  "name": "Pick A Farm - Find Local U-Pick Farms",
+  "short_name": "Pick A Farm",
+  "description": "Discover the best pick-your-own farms. Fresh produce, family activities, and seasonal fun await!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#22c55e",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-CA",
+  "categories": [
+    "agriculture",
+    "food",
+    "lifestyle",
+    "travel"
+  ],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Find Christmas Tree Farms",
+      "short_name": "Christmas Tree Farms",
+      "description": "Find christmas tree farms near you",
+      "url": "/christmas-tree-farms",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
