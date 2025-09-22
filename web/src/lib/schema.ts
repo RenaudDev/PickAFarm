@@ -22,6 +22,26 @@ interface FarmData {
   distance_km?: number;
 }
 
+// Type for raw farm data from API (with boolean featured)
+interface ApiFarmData {
+  id: string;
+  name: string;
+  slug: string;
+  url: string;
+  latitude?: number;
+  longitude?: number;
+  city: string;
+  province: string;
+  country?: string;
+  categories?: string;
+  featured?: boolean;     // Boolean from API
+  distance_km?: number;
+  street?: string;
+  postal_code?: string;
+  phone?: string;
+  image_url?: string;
+}
+
 interface CategoryData {
   name: string;
   slug: string;
@@ -31,7 +51,7 @@ interface LocationData {
   name: string;
   province: string;
   location_slug: string;
-  farms?: FarmData[];
+  farms?: ApiFarmData[];  // Use API farm type
   full_location?: string;
 }
 
@@ -73,6 +93,16 @@ export function generateBreadcrumbSchema(items: { name: string; item?: string }[
  */
 function validateFarmData(farm: FarmData): boolean {
   return !!(farm.name && farm.slug && farm.city && farm.province && farm.url);
+}
+
+/**
+ * Converts ApiFarmData to FarmData
+ */
+function convertFarmData(farm: ApiFarmData): FarmData {
+  return {
+    ...farm,
+    featured: farm.featured ? 1 : 0,
+  };
 }
 
 /**
@@ -210,4 +240,4 @@ export function generateCityPageSchema(
 }
 
 // Export types for use in other files
-export type { FarmData, CategoryData, LocationData };
+export type { FarmData, ApiFarmData, CategoryData, LocationData };

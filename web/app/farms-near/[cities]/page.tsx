@@ -74,8 +74,13 @@ export default async function FarmsNearCities({ params }: { params: Promise<{ ci
     return notFound()
   }
   
-  // Sort farms using shared utility
-  const sortedFarms = sortFarms(locationData.farms)
+  // Convert API farm data to component-compatible format and sort
+  const convertedFarms = locationData.farms?.map(farm => ({
+    ...farm,
+    featured: farm.featured ? 1 : 0, // Convert boolean to number
+  })) || []
+  
+  const sortedFarms = sortFarms(convertedFarms)
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

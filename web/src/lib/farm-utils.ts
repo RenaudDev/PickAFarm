@@ -5,6 +5,26 @@
 // Import the FarmData type from schema
 import type { FarmData } from './schema';
 
+// Type for raw farm data from API (with boolean featured)
+interface ApiFarmData {
+  id: string;
+  name: string;
+  slug: string;
+  url: string;
+  latitude?: number;
+  longitude?: number;
+  city: string;
+  province: string;
+  country?: string;
+  categories?: string;
+  featured?: boolean;
+  distance_km?: number;
+  street?: string;
+  postal_code?: string;
+  phone?: string;
+  image_url?: string;
+}
+
 // Category mapping for consistent filtering across the app
 const CATEGORY_MAP: Record<string, string[]> = {
   'apple-orchards': ['Apple Orchard', 'Apple Picking'],
@@ -12,6 +32,16 @@ const CATEGORY_MAP: Record<string, string[]> = {
   'berry-farms': ['Berry Farm', 'Berry Picking'],
   'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree'],
 };
+
+/**
+ * Converts API farm data to component-compatible format
+ */
+export function convertApiFarmData(apiFarms: ApiFarmData[]): FarmData[] {
+  return apiFarms.map(farm => ({
+    ...farm,
+    featured: farm.featured ? 1 : 0, // Convert boolean to number
+  }));
+}
 
 /**
  * Parses farm categories from JSON string or plain string
@@ -30,13 +60,13 @@ export function parseFarmCategories(categories: string | null | undefined): stri
 /**
  * Filters farms by category slug
  */
-export function filterFarmsByCategory(farms: FarmData[], categorySlug: string): FarmData[] {
-  if (!categorySlug) return farms;
+export function filterFarmsByCategory(farms: ApiFarmData[], categorySlug: string): FarmData[] {
+  if (!categorySlug) return convertApiFarmData(farms);
   
   const matchingCategories = CATEGORY_MAP[categorySlug] || [];
-  if (matchingCategories.length === 0) return farms;
+  if (matchingCategories.length === 0) return convertApiFarmData(farms);
   
-  return farms.filter(farm => {
+  const filteredApiFarms = farms.filter(farm => {
     const farmCategories = parseFarmCategories(farm.categories);
     return matchingCategories.some(catName =>
       farmCategories.some(farmCat =>
@@ -44,6 +74,8 @@ export function filterFarmsByCategory(farms: FarmData[], categorySlug: string): 
       )
     );
   });
+  
+  return convertApiFarmData(filteredApiFarms);
 }
 
 /**
