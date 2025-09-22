@@ -51,7 +51,7 @@ export function filterFarmsByCategory(farms: FarmData[], categorySlug: string): 
  */
 export function sortFarms(farms: FarmData[]): FarmData[] {
   return [...farms].sort((a, b) => {
-    const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+    const featuredDiff = (b.featured || 0) - (a.featured || 0);
     if (featuredDiff !== 0) return featuredDiff;
     return (a.distance_km || 0) - (b.distance_km || 0);
   });

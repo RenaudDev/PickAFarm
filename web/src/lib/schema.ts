@@ -7,7 +7,7 @@ interface FarmData {
   id: string;
   name: string;
   slug: string;
-  url?: string;
+  url: string;            // Required to match SearchResultsContent
   street?: string;
   city: string;
   province: string;
@@ -18,7 +18,7 @@ interface FarmData {
   phone?: string;
   image_url?: string;
   categories?: string;
-  featured?: boolean;
+  featured?: number;      // Number to match SearchResultsContent
   distance_km?: number;
 }
 
@@ -72,7 +72,7 @@ export function generateBreadcrumbSchema(items: { name: string; item?: string }[
  * Validates and sanitizes farm data for schema generation
  */
 function validateFarmData(farm: FarmData): boolean {
-  return !!(farm.name && farm.slug && farm.city && farm.province);
+  return !!(farm.name && farm.slug && farm.city && farm.province && farm.url);
 }
 
 /**
