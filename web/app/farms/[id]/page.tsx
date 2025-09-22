@@ -3,6 +3,14 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import {
   MapPin,
   Phone,
   Mail,
@@ -20,6 +28,7 @@ import {
   CheckCircle,
   Crown,
   TreePine,
+  Home,
 } from "lucide-react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
@@ -36,6 +45,9 @@ import farmsData from "../../../data/farms.json"
 
 // Import category content for mapping
 import categoryContent from "../../../data/category-content.json"
+
+// Import locations data for breadcrumb
+import locationsWithFarms from "../../../data/locations-with-farms.json"
 
 // Type definition for farm data
 type FarmData = {
@@ -154,10 +166,58 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
   // Parse categories (already a string, but getCategoryInfo expects it)
   const categories = getCategoryInfo(farm.categories || "")
 
+  // Find the nearest city for breadcrumb
+  const findNearestCity = () => {
+    // Look for a location that contains this farm
+    const locationWithFarm = locationsWithFarms.find(location => 
+      location.farms?.some(locationFarm => locationFarm.id === farm.id)
+    )
+    
+    if (locationWithFarm) {
+      return {
+        name: locationWithFarm.name,
+        province: locationWithFarm.province,
+        slug: locationWithFarm.location_slug
+      }
+    }
+    
+    // Fallback: use the farm's city_name if no location match found
+    return {
+      name: farm.city_name,
+      province: farm.state_province,
+      slug: `${farm.city_name.toLowerCase().replace(/\s+/g, '-')}-${farm.state_province.toLowerCase().replace(/\s+/g, '-')}-ca`
+    }
+  }
+  
+  const nearestCity = findNearestCity()
+
   return (
     <div className="min-h-screen bg-background">
       <FarmNavbar />
-
+      <div className="bg-muted/20 border-b">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                  <Home className="h-4 w-4" />
+                  <span className="hidden sm:inline">Home</span>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href={`/farms-near/${nearestCity.slug}`} className="hover:text-primary transition-colors">
+                  {nearestCity.name}, {nearestCity.province}
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="font-medium">{farm.name}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
       <main className="container mx-auto px-4 lg:px-8 py-12 max-w-7xl">
         <div className="mb-12">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">

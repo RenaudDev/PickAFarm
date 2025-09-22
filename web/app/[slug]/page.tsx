@@ -7,7 +7,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { MapPin, Search, Wheat, Star, ChevronRight } from "lucide-react"
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { MapPin, Search, Wheat, Star, ChevronRight, Home } from "lucide-react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import CategoryPageClient from "@/components/category-page-client"
@@ -17,6 +25,7 @@ import { generateCategoryMetadata } from "@/lib/seo-metadata"
 // Import categories data for static generation
 import categoriesData from "../../data/category-content.json"
 import locationsWithFarms from "../../data/locations-with-farms.json"
+import preGeneratedCategories from "../../data/categories.json"
 
 // Generate static params using slugs from category-content.json
 export async function generateStaticParams() {
@@ -232,7 +241,7 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
   // Add enriched data for the category
   const enrichedCategory = {
     ...category,
-    totalFarms,
+    totalFarms: preGeneratedCategories.find((cat: any) => cat.slug === slug)?.totalFarms || 0,
     topCities: locationsForCategory.map((loc: any) => ({
       name: loc.name,
       regionCode: loc.province,
@@ -246,7 +255,25 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
   return (
     <div className="min-h-screen bg-background">
       <FarmNavbar />
-
+      <div className="bg-muted/20 border-b">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                  <Home className="h-4 w-4" />
+                  <span className="hidden sm:inline">Home</span>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="font-medium">{enrichedCategory.name}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
+      
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
@@ -257,9 +284,9 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
             Find the Best {enrichedCategory.name} Near You
           </h1>
           <div className="flex justify-center mb-6">
-            <div className="text-sm px-4 py-2">
-              {enrichedCategory.totalFarms} Farm  In Our Directory
-            </div>
+          <div className="text-sm px-4 py-2">
+  {enrichedCategory.totalFarms} Farm{enrichedCategory.totalFarms !== 1 ? 's' : ''} In Our Directory
+</div>
           </div>
           <p className="text-muted-foreground text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
             {enrichedCategory.intro}

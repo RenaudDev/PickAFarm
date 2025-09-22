@@ -20,7 +20,7 @@ interface SearchResultsContentProps {
 }
 
 export default function SearchResultsContent({ params }: SearchResultsContentProps) {
-  const [sortBy, setSortBy] = useState("distance")
+  const [sortBy, setSortBy] = useState("featured")
 
   const category = params.slug || ""
   const location = params.location || ""
@@ -81,8 +81,15 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
       case "name":
         return a.name.localeCompare(b.name)
       case "featured":
-        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        // First sort by featured status (featured first)
+        const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        if (featuredDiff !== 0) return featuredDiff
+        // Then sort by distance within each group
+        return a.distance_km - b.distance_km
       default:
+        // Default: featured first, then by distance
+        const defaultFeaturedDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        if (defaultFeaturedDiff !== 0) return defaultFeaturedDiff
         return a.distance_km - b.distance_km
     }
   })
@@ -106,7 +113,7 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
         <div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{getPageTitle()}</h1>
           <p className="text-muted-foreground mb-4">
-            {sortedFarms.length} farm{sortedFarms.length !== 1 ? "s" : ""} found within 100km
+            {sortedFarms.length} farm{sortedFarms.length !== 1 ? "s" : ""} found nearby.
           </p>
           
           <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
@@ -173,6 +180,11 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex flex-wrap gap-1">
+                    {farm.featured && (
+                      <Badge variant="default" className="text-xs bg-yellow-500 text-white mr-2">
+                        Featured
+                      </Badge>
+                    )}
                     <div className="flex items-center gap-2">
                       <CategoryIconList 
                         categories={farmCategories} 
@@ -180,11 +192,6 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
                         maxIcons={3}
                       />
                     </div>
-                    {farm.featured && (
-                      <Badge variant="default" className="text-xs bg-yellow-500 text-white">
-                        Featured
-                      </Badge>
-                    )}
                   </div>
                 </div>
 

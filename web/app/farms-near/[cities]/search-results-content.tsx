@@ -127,8 +127,15 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
       case "name":
         return a.name.localeCompare(b.name)
       case "featured":
-        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        // First sort by featured status (featured first)
+        const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        if (featuredDiff !== 0) return featuredDiff
+        // Then sort by distance within each group
+        return a.distance_km - b.distance_km
       default:
+        // Default: featured first, then by distance
+        const defaultFeaturedDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        if (defaultFeaturedDiff !== 0) return defaultFeaturedDiff
         return a.distance_km - b.distance_km
     }
   })

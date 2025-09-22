@@ -4,7 +4,15 @@ import FarmFooter from "@/components/farm-footer"
 import SearchResultsContent from "./search-results-content"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
 import { Metadata } from "next"
-
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Home } from "lucide-react"
 // Import data for static generation using correct relative paths
 import categoriesData from "../../../../data/categories.json"
 import locationsWithFarms from "../../../../data/locations-with-farms.json"
@@ -101,9 +109,39 @@ export async function generateStaticParams() {
 export default async function SearchResults({ params }: { params: Promise<{ slug: string; location: string }> }) {
   const resolvedParams = await params
   
+  // Find the category and location data for breadcrumbs
+  const categoryData = categoriesData.find(cat => cat.slug === resolvedParams.slug)
+  const locationData = locationsWithFarms.find(loc => loc.location_slug === resolvedParams.location)
+  
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
+      <div className="bg-muted/20 border-b">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                  <Home className="h-4 w-4" />
+                  <span className="hidden sm:inline">Home</span>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href={`/${resolvedParams.slug}`} className="hover:text-primary transition-colors">
+                  {categoryData?.name || resolvedParams.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="font-medium">
+                  {locationData?.name || resolvedParams.location.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}, {locationData?.province || 'ON'}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
       <Suspense fallback={<div>Loading search results....</div>}>
         <SearchResultsContent params={resolvedParams} />
       </Suspense>

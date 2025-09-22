@@ -4,6 +4,15 @@ import FarmFooter from "@/components/farm-footer"
 import SearchResultsContent from "./search-results-content"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
 import { Metadata } from "next"
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Home } from "lucide-react"
 
 // Import data for static generation using correct relative paths
 import locationsWithFarms from "../../../data/locations-with-farms.json"
@@ -51,9 +60,33 @@ export async function generateStaticParams() {
 export default async function FarmsNearCities({ params }: { params: Promise<{ cities: string }> }) {
   const resolvedParams = await params
   
+  // Find the location data for breadcrumbs
+  const locationData = locationsWithFarms.find(loc => loc.location_slug === resolvedParams.cities)
+  
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
+      <div className="bg-muted/20 border-b">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                  <Home className="h-4 w-4" />
+                  <span className="hidden sm:inline">Home</span>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+             
+              <BreadcrumbItem>
+                <BreadcrumbPage className="font-medium">
+                  {locationData?.name || resolvedParams.cities.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}, {locationData?.province || 'ON'}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
       <Suspense fallback={<div>Loading farms near you...</div>}>
         <SearchResultsContent params={resolvedParams} />
       </Suspense>
