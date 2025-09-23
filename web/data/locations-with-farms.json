@@ -1,5 +1,247 @@
 [
   {
+    "name": "Richmond",
+    "slug": "richmond",
+    "population": 209937,
+    "coordinates": {
+      "latitude": 49.1665898,
+      "longitude": -123.133569
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "richmond-bc-ca",
+    "full_location": "Richmond, BC, Canada",
+    "seo_title": "U-Pick Farms near Richmond, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Richmond, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 38
+      },
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 41
+      },
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 44
+      },
+      {
+        "id": "zcrm_38729000000230841",
+        "name": "Boat Harbour Farm",
+        "slug": "boat-harbour-farm",
+        "url": "/farms/boat-harbour-farm",
+        "latitude": 49.097616,
+        "longitude": -123.805292,
+        "city": "Nanaimo",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 49
+      },
+      {
+        "id": "zcrm_38729000000274103",
+        "name": "Gogo's Christmas Tree Farm",
+        "slug": "gogo-s-christmas-tree-farm",
+        "url": "/farms/gogo-s-christmas-tree-farm",
+        "latitude": 49.0834014,
+        "longitude": -123.9921066,
+        "city": "Nanaimo",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 63
+      }
+    ],
+    "farmCount": 5
+  },
+  {
+    "name": "Burnaby",
+    "slug": "burnaby",
+    "population": 249125,
+    "coordinates": {
+      "latitude": 49.2488091,
+      "longitude": -122.9805104
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "burnaby-bc-ca",
+    "full_location": "Burnaby, BC, Canada",
+    "seo_title": "U-Pick Farms near Burnaby, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Burnaby, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 29
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 33
+      },
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 35
+      },
+      {
+        "id": "zcrm_38729000000230841",
+        "name": "Boat Harbour Farm",
+        "slug": "boat-harbour-farm",
+        "url": "/farms/boat-harbour-farm",
+        "latitude": 49.097616,
+        "longitude": -123.805292,
+        "city": "Nanaimo",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 62
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Delta",
+    "slug": "delta",
+    "population": 108455,
+    "coordinates": {
+      "latitude": 49.09521549999999,
+      "longitude": -123.0264759
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "delta-bc-ca",
+    "full_location": "Delta, BC, Canada",
+    "seo_title": "U-Pick Farms near Delta, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Delta, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 28
+      },
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 36
+      },
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 37
+      },
+      {
+        "id": "zcrm_38729000000230841",
+        "name": "Boat Harbour Farm",
+        "slug": "boat-harbour-farm",
+        "url": "/farms/boat-harbour-farm",
+        "latitude": 49.097616,
+        "longitude": -123.805292,
+        "city": "Nanaimo",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 57
+      }
+    ],
+    "farmCount": 4
+  },
+  {
     "name": "Norfolk County",
     "slug": "norfolk-county",
     "population": 67490,
@@ -13,8 +255,8 @@
     "country_slug": "ca",
     "location_slug": "norfolk-county-on-ca",
     "full_location": "Norfolk County, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Norfolk County, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Norfolk County, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Norfolk County, Ontario",
+    "meta_description": "Find the best U-Pick farms near Norfolk County, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230840",
@@ -76,6 +318,282 @@
     "farmCount": 4
   },
   {
+    "name": "North Vancouver",
+    "slug": "north-vancouver",
+    "population": 58120,
+    "coordinates": {
+      "latitude": 49.3199816,
+      "longitude": -123.0724139
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "north-vancouver-bc-ca",
+    "full_location": "North Vancouver, BC, Canada",
+    "seo_title": "U-Pick Farms near North Vancouver, British Columbia",
+    "meta_description": "Find the best U-Pick farms near North Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 36
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      },
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 44
+      },
+      {
+        "id": "zcrm_38729000000230841",
+        "name": "Boat Harbour Farm",
+        "slug": "boat-harbour-farm",
+        "url": "/farms/boat-harbour-farm",
+        "latitude": 49.097616,
+        "longitude": -123.805292,
+        "city": "Nanaimo",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 59
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Vancouver",
+    "slug": "vancouver",
+    "population": 662248,
+    "coordinates": {
+      "latitude": 49.2827291,
+      "longitude": -123.1207375
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "vancouver-bc-ca",
+    "full_location": "Vancouver, BC, Canada",
+    "seo_title": "U-Pick Farms near Vancouver, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 39
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      },
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 46
+      },
+      {
+        "id": "zcrm_38729000000230841",
+        "name": "Boat Harbour Farm",
+        "slug": "boat-harbour-farm",
+        "url": "/farms/boat-harbour-farm",
+        "latitude": 49.097616,
+        "longitude": -123.805292,
+        "city": "Nanaimo",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 54
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Abbotsford",
+    "slug": "abbotsford",
+    "population": 153524,
+    "coordinates": {
+      "latitude": 49.0504377,
+      "longitude": -122.3044697
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "abbotsford-bc-ca",
+    "full_location": "Abbotsford, BC, Canada",
+    "seo_title": "U-Pick Farms near Abbotsford, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Abbotsford, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 20
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 25
+      },
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 30
+      }
+    ],
+    "farmCount": 3
+  },
+  {
+    "name": "Barrie",
+    "slug": "barrie",
+    "population": 147829,
+    "coordinates": {
+      "latitude": 44.38935559999999,
+      "longitude": -79.6903316
+    },
+    "province": "Ontario",
+    "province_slug": "on",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "barrie-on-ca",
+    "full_location": "Barrie, ON, Canada",
+    "seo_title": "U-Pick Farms near Barrie, Ontario",
+    "meta_description": "Find the best U-Pick farms near Barrie, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000274098",
+        "name": "Drysdale's",
+        "slug": "drysdale-s",
+        "url": "/farms/drysdale-s",
+        "latitude": 44.2429952,
+        "longitude": -79.7926711,
+        "city": "Egbert",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Maple Syrup Farms",
+        "featured": true,
+        "distance_km": 18
+      },
+      {
+        "id": "zcrm_38729000000274102",
+        "name": "Georgian Bay Tree Farms",
+        "slug": "georgian-bay-tree-farms",
+        "url": "/farms/georgian-bay-tree-farms",
+        "latitude": 44.6553694,
+        "longitude": -79.7419433,
+        "city": "Oro-Medonte",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 30
+      },
+      {
+        "id": "zcrm_38729000000224616",
+        "name": "Crone's Tree Farm",
+        "slug": "crone-s-tree-farm",
+        "url": "/farms/crone-s-tree-farm",
+        "latitude": 44.1166623,
+        "longitude": -79.2997281,
+        "city": "Mount Albert",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      }
+    ],
+    "farmCount": 3
+  },
+  {
     "name": "Brampton",
     "slug": "brampton",
     "population": 656480,
@@ -89,8 +607,8 @@
     "country_slug": "ca",
     "location_slug": "brampton-on-ca",
     "full_location": "Brampton, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Brampton, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Brampton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Brampton, Ontario",
+    "meta_description": "Find the best U-Pick farms near Brampton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -151,8 +669,8 @@
     "country_slug": "ca",
     "location_slug": "brantford-on-ca",
     "full_location": "Brantford, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Brantford, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Brantford, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Brantford, Ontario",
+    "meta_description": "Find the best U-Pick farms near Brantford, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230840",
@@ -213,8 +731,8 @@
     "country_slug": "ca",
     "location_slug": "burlington-on-ca",
     "full_location": "Burlington, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Burlington, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Burlington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Burlington, Ontario",
+    "meta_description": "Find the best U-Pick farms near Burlington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -262,68 +780,6 @@
     "farmCount": 3
   },
   {
-    "name": "Burnaby",
-    "slug": "burnaby",
-    "population": 249125,
-    "coordinates": {
-      "latitude": 49.2488091,
-      "longitude": -122.9805104
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "burnaby-bc-ca",
-    "full_location": "Burnaby, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Burnaby, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Burnaby, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 29
-      },
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 35
-      },
-      {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 62
-      }
-    ],
-    "farmCount": 3
-  },
-  {
     "name": "Caledon",
     "slug": "caledon",
     "population": 76581,
@@ -337,8 +793,8 @@
     "country_slug": "ca",
     "location_slug": "caledon-on-ca",
     "full_location": "Caledon, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Caledon, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Caledon, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Caledon, Ontario",
+    "meta_description": "Find the best U-Pick farms near Caledon, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000274098",
@@ -386,6 +842,68 @@
     "farmCount": 3
   },
   {
+    "name": "Chilliwack",
+    "slug": "chilliwack",
+    "population": 93203,
+    "coordinates": {
+      "latitude": 49.1579401,
+      "longitude": -121.9514666
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "chilliwack-bc-ca",
+    "full_location": "Chilliwack, BC, Canada",
+    "seo_title": "U-Pick Farms near Chilliwack, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Chilliwack, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 42
+      },
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 47
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 52
+      }
+    ],
+    "farmCount": 3
+  },
+  {
     "name": "Clarington",
     "slug": "clarington",
     "population": 101427,
@@ -399,8 +917,8 @@
     "country_slug": "ca",
     "location_slug": "clarington-on-ca",
     "full_location": "Clarington, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Clarington, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Clarington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Clarington, Ontario",
+    "meta_description": "Find the best U-Pick farms near Clarington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224617",
@@ -448,21 +966,21 @@
     "farmCount": 3
   },
   {
-    "name": "Delta",
-    "slug": "delta",
-    "population": 108455,
+    "name": "Coquitlam",
+    "slug": "coquitlam",
+    "population": 148625,
     "coordinates": {
-      "latitude": 49.09521549999999,
-      "longitude": -123.0264759
+      "latitude": 49.2837626,
+      "longitude": -122.7932065
     },
     "province": "British Columbia",
     "province_slug": "bc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "delta-bc-ca",
-    "full_location": "Delta, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Delta, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Delta, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "coquitlam-bc-ca",
+    "full_location": "Coquitlam, BC, Canada",
+    "seo_title": "U-Pick Farms near Coquitlam, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Coquitlam, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230832",
@@ -476,7 +994,7 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 36
+        "distance_km": 16
       },
       {
         "id": "zcrm_38729000000230831",
@@ -490,21 +1008,21 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
         "featured": true,
-        "distance_km": 37
+        "distance_km": 24
       },
       {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
         "province": "British Columbia",
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 57
+        "distance_km": 28
       }
     ],
     "farmCount": 3
@@ -523,8 +1041,8 @@
     "country_slug": "ca",
     "location_slug": "gatineau-qc-ca",
     "full_location": "Gatineau, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Gatineau, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Gatineau, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Gatineau, Quebec",
+    "meta_description": "Find the best U-Pick farms near Gatineau, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230843",
@@ -585,8 +1103,8 @@
     "country_slug": "ca",
     "location_slug": "hamilton-on-ca",
     "full_location": "Hamilton, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Hamilton, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Hamilton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Hamilton, Ontario",
+    "meta_description": "Find the best U-Pick farms near Hamilton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -647,8 +1165,8 @@
     "country_slug": "ca",
     "location_slug": "kawartha-lakes-on-ca",
     "full_location": "Kawartha Lakes, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Kawartha Lakes, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Kawartha Lakes, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Kawartha Lakes, Ontario",
+    "meta_description": "Find the best U-Pick farms near Kawartha Lakes, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224617",
@@ -696,6 +1214,68 @@
     "farmCount": 3
   },
   {
+    "name": "Langley",
+    "slug": "langley",
+    "population": 132603,
+    "coordinates": {
+      "latitude": 49.1041779,
+      "longitude": -122.6603519
+    },
+    "province": "British Columbia",
+    "province_slug": "bc",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "langley-bc-ca",
+    "full_location": "Langley, BC, Canada",
+    "seo_title": "U-Pick Farms near Langley, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Langley, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 6
+      },
+      {
+        "id": "zcrm_38729000000230831",
+        "name": "Aldor Acres Christmas Trees",
+        "slug": "aldor-acres-christmas-trees",
+        "url": "/farms/aldor-acres-christmas-trees",
+        "latitude": 49.1521504,
+        "longitude": -122.5256467,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
+        "featured": true,
+        "distance_km": 11
+      },
+      {
+        "id": "zcrm_38729000000230832",
+        "name": "Alouette Tree Farm Ltd",
+        "slug": "alouette-tree-farm-ltd",
+        "url": "/farms/alouette-tree-farm-ltd",
+        "latitude": 49.2448335,
+        "longitude": -122.5829552,
+        "city": "Maple Ridge",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 17
+      }
+    ],
+    "farmCount": 3
+  },
+  {
     "name": "London",
     "slug": "london",
     "population": 422324,
@@ -709,8 +1289,8 @@
     "country_slug": "ca",
     "location_slug": "london-on-ca",
     "full_location": "London, ON, Canada",
-    "seo_title": "Pick Your Own Farms near London, Ontario",
-    "meta_description": "Find the best pick-your-own farms near London, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near London, Ontario",
+    "meta_description": "Find the best U-Pick farms near London, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224613",
@@ -758,21 +1338,21 @@
     "farmCount": 3
   },
   {
-    "name": "North Vancouver",
-    "slug": "north-vancouver",
-    "population": 88168,
+    "name": "Maple Ridge",
+    "slug": "maple-ridge",
+    "population": 90990,
     "coordinates": {
-      "latitude": 49.3199816,
-      "longitude": -123.0724139
+      "latitude": 49.2193226,
+      "longitude": -122.598398
     },
     "province": "British Columbia",
     "province_slug": "bc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "north-vancouver-bc-ca",
-    "full_location": "North Vancouver, BC, Canada",
-    "seo_title": "Pick Your Own Farms near North Vancouver, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near North Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "maple-ridge-bc-ca",
+    "full_location": "Maple Ridge, BC, Canada",
+    "seo_title": "U-Pick Farms near Maple Ridge, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Maple Ridge, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230832",
@@ -786,7 +1366,7 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 36
+        "distance_km": 3
       },
       {
         "id": "zcrm_38729000000230831",
@@ -800,41 +1380,41 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
         "featured": true,
-        "distance_km": 44
+        "distance_km": 9
       },
       {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
         "province": "British Columbia",
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 59
+        "distance_km": 19
       }
     ],
     "farmCount": 3
   },
   {
-    "name": "North Vancouver",
-    "slug": "north-vancouver",
-    "population": 58120,
+    "name": "New Westminster",
+    "slug": "new-westminster",
+    "population": 78916,
     "coordinates": {
-      "latitude": 49.3199816,
-      "longitude": -123.0724139
+      "latitude": 49.2057179,
+      "longitude": -122.910956
     },
     "province": "British Columbia",
     "province_slug": "bc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "north-vancouver-bc-ca",
-    "full_location": "North Vancouver, BC, Canada",
-    "seo_title": "Pick Your Own Farms near North Vancouver, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near North Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "new-westminster-bc-ca",
+    "full_location": "New Westminster, BC, Canada",
+    "seo_title": "U-Pick Farms near New Westminster, British Columbia",
+    "meta_description": "Find the best U-Pick farms near New Westminster, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230832",
@@ -848,7 +1428,21 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 36
+        "distance_km": 24
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 26
       },
       {
         "id": "zcrm_38729000000230831",
@@ -862,21 +1456,7 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
         "featured": true,
-        "distance_km": 44
-      },
-      {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 59
+        "distance_km": 29
       }
     ],
     "farmCount": 3
@@ -895,8 +1475,8 @@
     "country_slug": "ca",
     "location_slug": "oshawa-on-ca",
     "full_location": "Oshawa, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Oshawa, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Oshawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Oshawa, Ontario",
+    "meta_description": "Find the best U-Pick farms near Oshawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224617",
@@ -957,8 +1537,8 @@
     "country_slug": "ca",
     "location_slug": "ottawa-on-ca",
     "full_location": "Ottawa, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Ottawa, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Ottawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Ottawa, Ontario",
+    "meta_description": "Find the best U-Pick farms near Ottawa, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230843",
@@ -1006,21 +1586,21 @@
     "farmCount": 3
   },
   {
-    "name": "Richmond",
-    "slug": "richmond",
-    "population": 209937,
+    "name": "Port Coquitlam",
+    "slug": "port-coquitlam",
+    "population": 61498,
     "coordinates": {
-      "latitude": 49.1665898,
-      "longitude": -123.133569
+      "latitude": 49.2628382,
+      "longitude": -122.7810708
     },
     "province": "British Columbia",
     "province_slug": "bc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "richmond-bc-ca",
-    "full_location": "Richmond, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Richmond, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Richmond, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "port-coquitlam-bc-ca",
+    "full_location": "Port Coquitlam, BC, Canada",
+    "seo_title": "U-Pick Farms near Port Coquitlam, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Port Coquitlam, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230832",
@@ -1034,7 +1614,7 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 41
+        "distance_km": 15
       },
       {
         "id": "zcrm_38729000000230831",
@@ -1048,41 +1628,41 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
         "featured": true,
-        "distance_km": 44
+        "distance_km": 22
       },
       {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
         "province": "British Columbia",
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 49
+        "distance_km": 25
       }
     ],
     "farmCount": 3
   },
   {
-    "name": "Vancouver",
-    "slug": "vancouver",
-    "population": 662248,
+    "name": "Surrey",
+    "slug": "surrey",
+    "population": 568322,
     "coordinates": {
-      "latitude": 49.2827291,
-      "longitude": -123.1207375
+      "latitude": 49.1913466,
+      "longitude": -122.8490125
     },
     "province": "British Columbia",
     "province_slug": "bc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "vancouver-bc-ca",
-    "full_location": "Vancouver, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Vancouver, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Vancouver, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "surrey-bc-ca",
+    "full_location": "Surrey, BC, Canada",
+    "seo_title": "U-Pick Farms near Surrey, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Surrey, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230832",
@@ -1096,7 +1676,21 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 39
+        "distance_km": 20
+      },
+      {
+        "id": "zcrm_38729000000274099",
+        "name": "Fernridge Christmas Tree Forest",
+        "slug": "fernridge-christmas-tree-forest",
+        "url": "/farms/fernridge-christmas-tree-forest",
+        "latitude": 49.0529754,
+        "longitude": -122.6472499,
+        "city": "Langley Twp",
+        "province": "British Columbia",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 21
       },
       {
         "id": "zcrm_38729000000230831",
@@ -1110,21 +1704,7 @@
         "country": "Canada",
         "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
         "featured": true,
-        "distance_km": 46
-      },
-      {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 54
+        "distance_km": 24
       }
     ],
     "farmCount": 3
@@ -1143,8 +1723,8 @@
     "country_slug": "ca",
     "location_slug": "whitby-on-ca",
     "full_location": "Whitby, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Whitby, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Whitby, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Whitby, Ontario",
+    "meta_description": "Find the best U-Pick farms near Whitby, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -1192,54 +1772,6 @@
     "farmCount": 3
   },
   {
-    "name": "Abbotsford",
-    "slug": "abbotsford",
-    "population": 153524,
-    "coordinates": {
-      "latitude": 49.0504377,
-      "longitude": -122.3044697
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "abbotsford-bc-ca",
-    "full_location": "Abbotsford, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Abbotsford, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Abbotsford, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 20
-      },
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 30
-      }
-    ],
-    "farmCount": 2
-  },
-  {
     "name": "Ajax",
     "slug": "ajax",
     "population": 126666,
@@ -1253,8 +1785,8 @@
     "country_slug": "ca",
     "location_slug": "ajax-on-ca",
     "full_location": "Ajax, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Ajax, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Ajax, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Ajax, Ontario",
+    "meta_description": "Find the best U-Pick farms near Ajax, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -1301,8 +1833,8 @@
     "country_slug": "ca",
     "location_slug": "aurora-on-ca",
     "full_location": "Aurora, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Aurora, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Aurora, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Aurora, Ontario",
+    "meta_description": "Find the best U-Pick farms near Aurora, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -1336,54 +1868,6 @@
     "farmCount": 2
   },
   {
-    "name": "Barrie",
-    "slug": "barrie",
-    "population": 147829,
-    "coordinates": {
-      "latitude": 44.38935559999999,
-      "longitude": -79.6903316
-    },
-    "province": "Ontario",
-    "province_slug": "on",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "barrie-on-ca",
-    "full_location": "Barrie, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Barrie, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Barrie, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000274098",
-        "name": "Drysdale's",
-        "slug": "drysdale-s",
-        "url": "/farms/drysdale-s",
-        "latitude": 44.2429952,
-        "longitude": -79.7926711,
-        "city": "Egbert",
-        "province": "Ontario",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Maple Syrup Farms",
-        "featured": true,
-        "distance_km": 18
-      },
-      {
-        "id": "zcrm_38729000000224616",
-        "name": "Crone's Tree Farm",
-        "slug": "crone-s-tree-farm",
-        "url": "/farms/crone-s-tree-farm",
-        "latitude": 44.1166623,
-        "longitude": -79.2997281,
-        "city": "Mount Albert",
-        "province": "Ontario",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 43
-      }
-    ],
-    "farmCount": 2
-  },
-  {
     "name": "Cambridge",
     "slug": "cambridge",
     "population": 138479,
@@ -1397,8 +1881,8 @@
     "country_slug": "ca",
     "location_slug": "cambridge-on-ca",
     "full_location": "Cambridge, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Cambridge, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Cambridge, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Cambridge, Ontario",
+    "meta_description": "Find the best U-Pick farms near Cambridge, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -1432,198 +1916,6 @@
     "farmCount": 2
   },
   {
-    "name": "Chilliwack",
-    "slug": "chilliwack",
-    "population": 93203,
-    "coordinates": {
-      "latitude": 49.1579401,
-      "longitude": -121.9514666
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "chilliwack-bc-ca",
-    "full_location": "Chilliwack, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Chilliwack, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Chilliwack, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 42
-      },
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 47
-      }
-    ],
-    "farmCount": 2
-  },
-  {
-    "name": "Coquitlam",
-    "slug": "coquitlam",
-    "population": 148625,
-    "coordinates": {
-      "latitude": 49.2837626,
-      "longitude": -122.7932065
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "coquitlam-bc-ca",
-    "full_location": "Coquitlam, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Coquitlam, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Coquitlam, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 16
-      },
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 24
-      }
-    ],
-    "farmCount": 2
-  },
-  {
-    "name": "Langley",
-    "slug": "langley",
-    "population": 132603,
-    "coordinates": {
-      "latitude": 49.1041779,
-      "longitude": -122.6603519
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "langley-bc-ca",
-    "full_location": "Langley, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Langley, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Langley, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 11
-      },
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 17
-      }
-    ],
-    "farmCount": 2
-  },
-  {
-    "name": "Maple Ridge",
-    "slug": "maple-ridge",
-    "population": 90990,
-    "coordinates": {
-      "latitude": 49.2193226,
-      "longitude": -122.598398
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "maple-ridge-bc-ca",
-    "full_location": "Maple Ridge, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Maple Ridge, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Maple Ridge, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 3
-      },
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 9
-      }
-    ],
-    "farmCount": 2
-  },
-  {
     "name": "Markham",
     "slug": "markham",
     "population": 338503,
@@ -1637,8 +1929,8 @@
     "country_slug": "ca",
     "location_slug": "markham-on-ca",
     "full_location": "Markham, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Markham, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Markham, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Markham, Ontario",
+    "meta_description": "Find the best U-Pick farms near Markham, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -1685,8 +1977,8 @@
     "country_slug": "ca",
     "location_slug": "milton-on-ca",
     "full_location": "Milton, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Milton, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Milton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Milton, Ontario",
+    "meta_description": "Find the best U-Pick farms near Milton, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -1733,8 +2025,8 @@
     "country_slug": "ca",
     "location_slug": "mississauga-on-ca",
     "full_location": "Mississauga, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Mississauga, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Mississauga, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Mississauga, Ontario",
+    "meta_description": "Find the best U-Pick farms near Mississauga, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -1768,49 +2060,49 @@
     "farmCount": 2
   },
   {
-    "name": "New Westminster",
-    "slug": "new-westminster",
-    "population": 78916,
+    "name": "Nanaimo",
+    "slug": "nanaimo",
+    "population": 99863,
     "coordinates": {
-      "latitude": 49.2057179,
-      "longitude": -122.910956
+      "latitude": 49.1658836,
+      "longitude": -123.9400647
     },
     "province": "British Columbia",
     "province_slug": "bc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "new-westminster-bc-ca",
-    "full_location": "New Westminster, BC, Canada",
-    "seo_title": "Pick Your Own Farms near New Westminster, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near New Westminster, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "nanaimo-bc-ca",
+    "full_location": "Nanaimo, BC, Canada",
+    "seo_title": "U-Pick Farms near Nanaimo, British Columbia",
+    "meta_description": "Find the best U-Pick farms near Nanaimo, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
+        "id": "zcrm_38729000000274103",
+        "name": "Gogo's Christmas Tree Farm",
+        "slug": "gogo-s-christmas-tree-farm",
+        "url": "/farms/gogo-s-christmas-tree-farm",
+        "latitude": 49.0834014,
+        "longitude": -123.9921066,
+        "city": "Nanaimo",
         "province": "British Columbia",
         "country": "Canada",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 24
+        "distance_km": 10
       },
       {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
+        "id": "zcrm_38729000000230841",
+        "name": "Boat Harbour Farm",
+        "slug": "boat-harbour-farm",
+        "url": "/farms/boat-harbour-farm",
+        "latitude": 49.097616,
+        "longitude": -123.805292,
+        "city": "Nanaimo",
         "province": "British Columbia",
         "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 29
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 12
       }
     ],
     "farmCount": 2
@@ -1829,8 +2121,8 @@
     "country_slug": "ca",
     "location_slug": "newmarket-on-ca",
     "full_location": "Newmarket, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Newmarket, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Newmarket, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Newmarket, Ontario",
+    "meta_description": "Find the best U-Pick farms near Newmarket, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -1877,8 +2169,8 @@
     "country_slug": "ca",
     "location_slug": "oakville-on-ca",
     "full_location": "Oakville, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Oakville, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Oakville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Oakville, Ontario",
+    "meta_description": "Find the best U-Pick farms near Oakville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -1925,8 +2217,8 @@
     "country_slug": "ca",
     "location_slug": "peterborough-on-ca",
     "full_location": "Peterborough, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Peterborough, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Peterborough, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Peterborough, Ontario",
+    "meta_description": "Find the best U-Pick farms near Peterborough, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224617",
@@ -1973,8 +2265,8 @@
     "country_slug": "ca",
     "location_slug": "pickering-on-ca",
     "full_location": "Pickering, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Pickering, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Pickering, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Pickering, Ontario",
+    "meta_description": "Find the best U-Pick farms near Pickering, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -2008,54 +2300,6 @@
     "farmCount": 2
   },
   {
-    "name": "Port Coquitlam",
-    "slug": "port-coquitlam",
-    "population": 61498,
-    "coordinates": {
-      "latitude": 49.2628382,
-      "longitude": -122.7810708
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "port-coquitlam-bc-ca",
-    "full_location": "Port Coquitlam, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Port Coquitlam, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Port Coquitlam, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 15
-      },
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 22
-      }
-    ],
-    "farmCount": 2
-  },
-  {
     "name": "Richmond Hill",
     "slug": "richmond-hill",
     "population": 202022,
@@ -2069,8 +2313,8 @@
     "country_slug": "ca",
     "location_slug": "richmond-hill-on-ca",
     "full_location": "Richmond Hill, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Richmond Hill, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Richmond Hill, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Richmond Hill, Ontario",
+    "meta_description": "Find the best U-Pick farms near Richmond Hill, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -2104,54 +2348,6 @@
     "farmCount": 2
   },
   {
-    "name": "Surrey",
-    "slug": "surrey",
-    "population": 568322,
-    "coordinates": {
-      "latitude": 49.1913466,
-      "longitude": -122.8490125
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "surrey-bc-ca",
-    "full_location": "Surrey, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Surrey, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Surrey, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230832",
-        "name": "Alouette Tree Farm Ltd",
-        "slug": "alouette-tree-farm-ltd",
-        "url": "/farms/alouette-tree-farm-ltd",
-        "latitude": 49.2448335,
-        "longitude": -122.5829552,
-        "city": "Maple Ridge",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 20
-      },
-      {
-        "id": "zcrm_38729000000230831",
-        "name": "Aldor Acres Christmas Trees",
-        "slug": "aldor-acres-christmas-trees",
-        "url": "/farms/aldor-acres-christmas-trees",
-        "latitude": 49.1521504,
-        "longitude": -122.5256467,
-        "city": "Langley Twp",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms, Pumpkin Patches, Petting Zoo, Corn Farms",
-        "featured": true,
-        "distance_km": 24
-      }
-    ],
-    "farmCount": 2
-  },
-  {
     "name": "Toronto",
     "slug": "toronto",
     "population": 2794356,
@@ -2165,8 +2361,8 @@
     "country_slug": "ca",
     "location_slug": "toronto-on-ca",
     "full_location": "Toronto, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Toronto, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Toronto, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Toronto, Ontario",
+    "meta_description": "Find the best U-Pick farms near Toronto, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230837",
@@ -2213,8 +2409,8 @@
     "country_slug": "ca",
     "location_slug": "vaughan-on-ca",
     "full_location": "Vaughan, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Vaughan, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Vaughan, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Vaughan, Ontario",
+    "meta_description": "Find the best U-Pick farms near Vaughan, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224616",
@@ -2261,8 +2457,8 @@
     "country_slug": "ca",
     "location_slug": "belleville-on-ca",
     "full_location": "Belleville, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Belleville, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Belleville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Belleville, Ontario",
+    "meta_description": "Find the best U-Pick farms near Belleville, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230845",
@@ -2282,6 +2478,108 @@
     "farmCount": 1
   },
   {
+    "name": "Buffalo",
+    "slug": "buffalo",
+    "population": 258959,
+    "coordinates": {
+      "latitude": 42.88644679999999,
+      "longitude": -78.8783689
+    },
+    "province": "New York",
+    "province_slug": "new-york",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "buffalo-new-york-us",
+    "full_location": "Buffalo, NY, United States",
+    "seo_title": "U-Pick Farms near Buffalo, New York",
+    "meta_description": "Find the best U-Pick farms near Buffalo, New York. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230837",
+        "name": "BellyAcres Tree Farm",
+        "slug": "bellyacres-tree-farm",
+        "url": "/farms/bellyacres-tree-farm",
+        "latitude": 43.2116558,
+        "longitude": -79.2002116,
+        "city": "Niagara-on-the-Lake",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 45
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Charlottetown",
+    "slug": "charlottetown",
+    "population": 38000,
+    "coordinates": {
+      "latitude": 46.23824,
+      "longitude": -63.13107040000001
+    },
+    "province": "Prince Edward Island",
+    "province_slug": "pei",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "charlottetown-pei-ca",
+    "full_location": "Charlottetown, PEI, Canada",
+    "seo_title": "U-Pick Farms near Charlottetown, Prince Edward Island",
+    "meta_description": "Find the best U-Pick farms near Charlottetown, Prince Edward Island. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000274101",
+        "name": "Forrest Traditions",
+        "slug": "forrest-traditions",
+        "url": "/farms/forrest-traditions",
+        "latitude": 46.3450655,
+        "longitude": -63.3108616,
+        "city": "North Wiltshire",
+        "province": "Prince Edward Island",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 18
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Detroit",
+    "slug": "detroit",
+    "population": 688701,
+    "coordinates": {
+      "latitude": 42.331427,
+      "longitude": -83.0457538
+    },
+    "province": "Michigan",
+    "province_slug": "michigan",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "detroit-michigan-us",
+    "full_location": "Detroit, MI, United States",
+    "seo_title": "U-Pick Farms near Detroit, Michigan",
+    "meta_description": "Find the best U-Pick farms near Detroit, Michigan. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000230836",
+        "name": "Bastien Christmas Tree Farm",
+        "slug": "bastien-christmas-tree-farm",
+        "url": "/farms/bastien-christmas-tree-farm",
+        "latitude": 42.163715,
+        "longitude": -82.94904,
+        "city": "Essex",
+        "province": "Ontario",
+        "country": "Canada",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 20
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Drummondville",
     "slug": "drummondville",
     "population": 79258,
@@ -2295,8 +2593,8 @@
     "country_slug": "ca",
     "location_slug": "drummondville-qc-ca",
     "full_location": "Drummondville, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Drummondville, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Drummondville, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Drummondville, Quebec",
+    "meta_description": "Find the best U-Pick farms near Drummondville, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224618",
@@ -2329,8 +2627,8 @@
     "country_slug": "ca",
     "location_slug": "fredericton-nb-ca",
     "full_location": "Fredericton, NB, Canada",
-    "seo_title": "Pick Your Own Farms near Fredericton, New Brunswick",
-    "meta_description": "Find the best pick-your-own farms near Fredericton, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Fredericton, New Brunswick",
+    "meta_description": "Find the best U-Pick farms near Fredericton, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230834",
@@ -2363,8 +2661,8 @@
     "country_slug": "ca",
     "location_slug": "guelph-on-ca",
     "full_location": "Guelph, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Guelph, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Guelph, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Guelph, Ontario",
+    "meta_description": "Find the best U-Pick farms near Guelph, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -2397,8 +2695,8 @@
     "country_slug": "ca",
     "location_slug": "halton-hills-on-ca",
     "full_location": "Halton Hills, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Halton Hills, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Halton Hills, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Halton Hills, Ontario",
+    "meta_description": "Find the best U-Pick farms near Halton Hills, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -2431,8 +2729,8 @@
     "country_slug": "ca",
     "location_slug": "kingston-on-ca",
     "full_location": "Kingston, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Kingston, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Kingston, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Kingston, Ontario",
+    "meta_description": "Find the best U-Pick farms near Kingston, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230845",
@@ -2465,8 +2763,8 @@
     "country_slug": "ca",
     "location_slug": "kitchener-on-ca",
     "full_location": "Kitchener, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Kitchener, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Kitchener, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Kitchener, Ontario",
+    "meta_description": "Find the best U-Pick farms near Kitchener, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -2499,8 +2797,8 @@
     "country_slug": "ca",
     "location_slug": "leamington-on-ca",
     "full_location": "Leamington, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Leamington, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Leamington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Leamington, Ontario",
+    "meta_description": "Find the best U-Pick farms near Leamington, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230836",
@@ -2533,8 +2831,8 @@
     "country_slug": "ca",
     "location_slug": "lvis-qc-ca",
     "full_location": "Lévis, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Lévis, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Lévis, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Lévis, Quebec",
+    "meta_description": "Find the best U-Pick farms near Lévis, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224614",
@@ -2554,40 +2852,6 @@
     "farmCount": 1
   },
   {
-    "name": "Nanaimo",
-    "slug": "nanaimo",
-    "population": 99863,
-    "coordinates": {
-      "latitude": 49.1658836,
-      "longitude": -123.9400647
-    },
-    "province": "British Columbia",
-    "province_slug": "bc",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "nanaimo-bc-ca",
-    "full_location": "Nanaimo, BC, Canada",
-    "seo_title": "Pick Your Own Farms near Nanaimo, British Columbia",
-    "meta_description": "Find the best pick-your-own farms near Nanaimo, British Columbia. Fresh apples, berries, pumpkins and Christmas trees.",
-    "farms": [
-      {
-        "id": "zcrm_38729000000230841",
-        "name": "Boat Harbour Farm",
-        "slug": "boat-harbour-farm",
-        "url": "/farms/boat-harbour-farm",
-        "latitude": 49.097616,
-        "longitude": -123.805292,
-        "city": "Nanaimo",
-        "province": "British Columbia",
-        "country": "Canada",
-        "categories": "Christmas Tree Farms",
-        "featured": false,
-        "distance_km": 12
-      }
-    ],
-    "farmCount": 1
-  },
-  {
     "name": "Niagara Falls",
     "slug": "niagara-falls",
     "population": 94415,
@@ -2601,8 +2865,8 @@
     "country_slug": "ca",
     "location_slug": "niagara-falls-on-ca",
     "full_location": "Niagara Falls, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Niagara Falls, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Niagara Falls, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Niagara Falls, Ontario",
+    "meta_description": "Find the best U-Pick farms near Niagara Falls, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230837",
@@ -2635,8 +2899,8 @@
     "country_slug": "ca",
     "location_slug": "niagara-on-the-lake-on-ca",
     "full_location": "Niagara-on-the-Lake, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Niagara-on-the-Lake, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Niagara-on-the-Lake, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Niagara-on-the-Lake, Ontario",
+    "meta_description": "Find the best U-Pick farms near Niagara-on-the-Lake, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230837",
@@ -2669,8 +2933,8 @@
     "country_slug": "ca",
     "location_slug": "north-bay-on-ca",
     "full_location": "North Bay, ON, Canada",
-    "seo_title": "Pick Your Own Farms near North Bay, Ontario",
-    "meta_description": "Find the best pick-your-own farms near North Bay, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near North Bay, Ontario",
+    "meta_description": "Find the best U-Pick farms near North Bay, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224612",
@@ -2703,8 +2967,8 @@
     "country_slug": "ca",
     "location_slug": "quebec-city-qc-ca",
     "full_location": "Quebec City, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Quebec City, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Quebec City, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Quebec City, Quebec",
+    "meta_description": "Find the best U-Pick farms near Quebec City, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224614",
@@ -2737,8 +3001,8 @@
     "country_slug": "ca",
     "location_slug": "repentigny-qc-ca",
     "full_location": "Repentigny, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Repentigny, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Repentigny, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Repentigny, Quebec",
+    "meta_description": "Find the best U-Pick farms near Repentigny, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224618",
@@ -2771,8 +3035,8 @@
     "country_slug": "ca",
     "location_slug": "saint-hyacinthe-qc-ca",
     "full_location": "Saint-Hyacinthe, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Saint-Hyacinthe, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Saint-Hyacinthe, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Saint-Hyacinthe, Quebec",
+    "meta_description": "Find the best U-Pick farms near Saint-Hyacinthe, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224618",
@@ -2805,8 +3069,8 @@
     "country_slug": "ca",
     "location_slug": "sherbrooke-qc-ca",
     "full_location": "Sherbrooke, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Sherbrooke, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Sherbrooke, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Sherbrooke, Quebec",
+    "meta_description": "Find the best U-Pick farms near Sherbrooke, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224619",
@@ -2839,8 +3103,8 @@
     "country_slug": "ca",
     "location_slug": "st-catharines-on-ca",
     "full_location": "St. Catharines, ON, Canada",
-    "seo_title": "Pick Your Own Farms near St. Catharines, Ontario",
-    "meta_description": "Find the best pick-your-own farms near St. Catharines, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near St. Catharines, Ontario",
+    "meta_description": "Find the best U-Pick farms near St. Catharines, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230837",
@@ -2873,8 +3137,8 @@
     "country_slug": "ca",
     "location_slug": "steinbach-mb-ca",
     "full_location": "Steinbach, MB, Canada",
-    "seo_title": "Pick Your Own Farms near Steinbach, Manitoba",
-    "meta_description": "Find the best pick-your-own farms near Steinbach, Manitoba. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Steinbach, Manitoba",
+    "meta_description": "Find the best U-Pick farms near Steinbach, Manitoba. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224609",
@@ -2907,8 +3171,8 @@
     "country_slug": "ca",
     "location_slug": "terrebonne-qc-ca",
     "full_location": "Terrebonne, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Terrebonne, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Terrebonne, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Terrebonne, Quebec",
+    "meta_description": "Find the best U-Pick farms near Terrebonne, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224618",
@@ -2941,8 +3205,8 @@
     "country_slug": "ca",
     "location_slug": "trois-rivires-qc-ca",
     "full_location": "Trois-Rivières, QC, Canada",
-    "seo_title": "Pick Your Own Farms near Trois-Rivières, Quebec",
-    "meta_description": "Find the best pick-your-own farms near Trois-Rivières, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Trois-Rivières, Quebec",
+    "meta_description": "Find the best U-Pick farms near Trois-Rivières, Quebec. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224618",
@@ -2975,8 +3239,8 @@
     "country_slug": "ca",
     "location_slug": "waterloo-on-ca",
     "full_location": "Waterloo, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Waterloo, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Waterloo, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Waterloo, Ontario",
+    "meta_description": "Find the best U-Pick farms near Waterloo, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224611",
@@ -3009,8 +3273,8 @@
     "country_slug": "ca",
     "location_slug": "welland-on-ca",
     "full_location": "Welland, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Welland, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Welland, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Welland, Ontario",
+    "meta_description": "Find the best U-Pick farms near Welland, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230837",
@@ -3043,8 +3307,8 @@
     "country_slug": "ca",
     "location_slug": "windsor-on-ca",
     "full_location": "Windsor, ON, Canada",
-    "seo_title": "Pick Your Own Farms near Windsor, Ontario",
-    "meta_description": "Find the best pick-your-own farms near Windsor, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Windsor, Ontario",
+    "meta_description": "Find the best U-Pick farms near Windsor, Ontario. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000230836",
@@ -3077,8 +3341,8 @@
     "country_slug": "ca",
     "location_slug": "winnipeg-mb-ca",
     "full_location": "Winnipeg, MB, Canada",
-    "seo_title": "Pick Your Own Farms near Winnipeg, Manitoba",
-    "meta_description": "Find the best pick-your-own farms near Winnipeg, Manitoba. Fresh apples, berries, pumpkins and Christmas trees.",
+    "seo_title": "U-Pick Farms near Winnipeg, Manitoba",
+    "meta_description": "Find the best U-Pick farms near Winnipeg, Manitoba. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
         "id": "zcrm_38729000000224609",

@@ -158,5 +158,35 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://pickafarm.com/farms/fernridge-christmas-tree-forest</loc>
+    <lastmod>2025-09-22T14:44:20.640Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pickafarm.com/farms/fir-ever-green-tree-farm</loc>
+    <lastmod>2025-09-22T14:47:31.856Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pickafarm.com/farms/forrest-traditions</loc>
+    <lastmod>2025-09-23T07:51:27.906Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pickafarm.com/farms/georgian-bay-tree-farms</loc>
+    <lastmod>2025-09-23T07:57:11.405Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pickafarm.com/farms/gogo-s-christmas-tree-farm</loc>
+    <lastmod>2025-09-23T07:55:14.700Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
 </urlset>

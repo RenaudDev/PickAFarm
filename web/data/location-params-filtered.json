@@ -1,6 +1,27 @@
 [
   {
+    "location": "richmond-bc-ca"
+  },
+  {
+    "location": "burnaby-bc-ca"
+  },
+  {
+    "location": "delta-bc-ca"
+  },
+  {
     "location": "norfolk-county-on-ca"
+  },
+  {
+    "location": "north-vancouver-bc-ca"
+  },
+  {
+    "location": "vancouver-bc-ca"
+  },
+  {
+    "location": "abbotsford-bc-ca"
+  },
+  {
+    "location": "barrie-on-ca"
   },
   {
     "location": "brampton-on-ca"
@@ -12,16 +33,16 @@
     "location": "burlington-on-ca"
   },
   {
-    "location": "burnaby-bc-ca"
+    "location": "caledon-on-ca"
   },
   {
-    "location": "caledon-on-ca"
+    "location": "chilliwack-bc-ca"
   },
   {
     "location": "clarington-on-ca"
   },
   {
-    "location": "delta-bc-ca"
+    "location": "coquitlam-bc-ca"
   },
   {
     "location": "gatineau-qc-ca"
@@ -33,13 +54,16 @@
     "location": "kawartha-lakes-on-ca"
   },
   {
+    "location": "langley-bc-ca"
+  },
+  {
     "location": "london-on-ca"
   },
   {
-    "location": "north-vancouver-bc-ca"
+    "location": "maple-ridge-bc-ca"
   },
   {
-    "location": "north-vancouver-bc-ca"
+    "location": "new-westminster-bc-ca"
   },
   {
     "location": "oshawa-on-ca"
@@ -48,16 +72,13 @@
     "location": "ottawa-on-ca"
   },
   {
-    "location": "richmond-bc-ca"
+    "location": "port-coquitlam-bc-ca"
   },
   {
-    "location": "vancouver-bc-ca"
+    "location": "surrey-bc-ca"
   },
   {
     "location": "whitby-on-ca"
-  },
-  {
-    "location": "abbotsford-bc-ca"
   },
   {
     "location": "ajax-on-ca"
@@ -66,22 +87,7 @@
     "location": "aurora-on-ca"
   },
   {
-    "location": "barrie-on-ca"
-  },
-  {
     "location": "cambridge-on-ca"
-  },
-  {
-    "location": "chilliwack-bc-ca"
-  },
-  {
-    "location": "coquitlam-bc-ca"
-  },
-  {
-    "location": "langley-bc-ca"
-  },
-  {
-    "location": "maple-ridge-bc-ca"
   },
   {
     "location": "markham-on-ca"
@@ -93,7 +99,7 @@
     "location": "mississauga-on-ca"
   },
   {
-    "location": "new-westminster-bc-ca"
+    "location": "nanaimo-bc-ca"
   },
   {
     "location": "newmarket-on-ca"
@@ -108,13 +114,7 @@
     "location": "pickering-on-ca"
   },
   {
-    "location": "port-coquitlam-bc-ca"
-  },
-  {
     "location": "richmond-hill-on-ca"
-  },
-  {
-    "location": "surrey-bc-ca"
   },
   {
     "location": "toronto-on-ca"
@@ -124,6 +124,15 @@
   },
   {
     "location": "belleville-on-ca"
+  },
+  {
+    "location": "buffalo-new-york-us"
+  },
+  {
+    "location": "charlottetown-pei-ca"
+  },
+  {
+    "location": "detroit-michigan-us"
   },
   {
     "location": "drummondville-qc-ca"
@@ -148,9 +157,6 @@
   },
   {
     "location": "lvis-qc-ca"
-  },
-  {
-    "location": "nanaimo-bc-ca"
   },
   {
     "location": "niagara-falls-on-ca"

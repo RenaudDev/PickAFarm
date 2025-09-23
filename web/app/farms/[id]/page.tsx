@@ -46,6 +46,9 @@ import farmsData from "../../../data/farms.json"
 // Import category content for mapping
 import categoryContent from "../../../data/category-content.json"
 
+// Import categories data to validate against existing categories
+import categoriesData from "../../../data/categories.json"
+
 // Import locations data for breadcrumb
 import locationsWithFarms from "../../../data/locations-with-farms.json"
 
@@ -122,8 +125,8 @@ const getCategoryInfo = (categories: string) => {
   const categoryArray = categories.split(',').map(category => category.trim())
   
   return categoryArray.map(category => {
-    // Find matching category in category content object
-    const matchingCategory = Object.values(categoryContent).find((cat: any) => {
+    // Find matching category in categories.json (the actual valid categories)
+    const matchingCategory = categoriesData.find((cat: any) => {
       const catName = cat.name.toLowerCase()
       const categoryLower = category.toLowerCase()
       
@@ -135,17 +138,14 @@ const getCategoryInfo = (categories: string) => {
 
     if (matchingCategory) {
       return {
-        name: (matchingCategory as any).name,
-        slug: (matchingCategory as any).slug,
+        name: matchingCategory.name,
+        slug: matchingCategory.slug,
       }
     }
 
-    // Fallback: create slug from category name
-    return {
-      name: category,
-      slug: category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-    }
-  })
+    // Return null for categories that don't exist in categories.json
+    return null
+  }).filter(Boolean) // Remove null entries
 }
 
 export default async function FarmListingPage({ params }: { params: Promise<{ id: string }> }) {
@@ -302,7 +302,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                 <CardTitle className="text-2xl font-semibold mb-4">About This Farm</CardTitle>
                 
                 {/* Farm Type Badge */}
-                <div className="">
+                <div>
                   <Badge className="text-sm font-medium">
                     {farm.type}
                   </Badge>
