@@ -1,30 +1,27 @@
 [
   {
-    "location": "richmond-bc-ca"
+    "location": "brampton-on-ca"
   },
   {
-    "location": "burnaby-bc-ca"
+    "location": "caledon-on-ca"
   },
   {
-    "location": "delta-bc-ca"
-  },
-  {
-    "location": "norfolk-county-on-ca"
-  },
-  {
-    "location": "north-vancouver-bc-ca"
-  },
-  {
-    "location": "vancouver-bc-ca"
-  },
-  {
-    "location": "abbotsford-bc-ca"
+    "location": "vaughan-on-ca"
   },
   {
     "location": "barrie-on-ca"
   },
   {
-    "location": "brampton-on-ca"
+    "location": "ottawa-on-ca"
+  },
+  {
+    "location": "richmond-bc-ca"
+  },
+  {
+    "location": "toronto-on-ca"
+  },
+  {
+    "location": "aurora-on-ca"
   },
   {
     "location": "brantford-on-ca"
@@ -33,16 +30,13 @@
     "location": "burlington-on-ca"
   },
   {
-    "location": "caledon-on-ca"
-  },
-  {
-    "location": "chilliwack-bc-ca"
+    "location": "burnaby-bc-ca"
   },
   {
     "location": "clarington-on-ca"
   },
   {
-    "location": "coquitlam-bc-ca"
+    "location": "delta-bc-ca"
   },
   {
     "location": "gatineau-qc-ca"
@@ -51,16 +45,61 @@
     "location": "hamilton-on-ca"
   },
   {
+    "location": "london-on-ca"
+  },
+  {
+    "location": "milton-on-ca"
+  },
+  {
+    "location": "mississauga-on-ca"
+  },
+  {
+    "location": "newmarket-on-ca"
+  },
+  {
+    "location": "norfolk-county-on-ca"
+  },
+  {
+    "location": "north-vancouver-bc-ca"
+  },
+  {
+    "location": "oakville-on-ca"
+  },
+  {
+    "location": "richmond-hill-on-ca"
+  },
+  {
+    "location": "vancouver-bc-ca"
+  },
+  {
+    "location": "abbotsford-bc-ca"
+  },
+  {
+    "location": "cambridge-on-ca"
+  },
+  {
+    "location": "chilliwack-bc-ca"
+  },
+  {
+    "location": "coquitlam-bc-ca"
+  },
+  {
+    "location": "guelph-on-ca"
+  },
+  {
+    "location": "halton-hills-on-ca"
+  },
+  {
     "location": "kawartha-lakes-on-ca"
   },
   {
     "location": "langley-bc-ca"
   },
   {
-    "location": "london-on-ca"
+    "location": "maple-ridge-bc-ca"
   },
   {
-    "location": "maple-ridge-bc-ca"
+    "location": "markham-on-ca"
   },
   {
     "location": "new-westminster-bc-ca"
@@ -69,7 +108,10 @@
     "location": "oshawa-on-ca"
   },
   {
-    "location": "ottawa-on-ca"
+    "location": "perth-on-ca"
+  },
+  {
+    "location": "peterborough-on-ca"
   },
   {
     "location": "port-coquitlam-bc-ca"
@@ -84,55 +126,16 @@
     "location": "ajax-on-ca"
   },
   {
-    "location": "aurora-on-ca"
-  },
-  {
-    "location": "cambridge-on-ca"
-  },
-  {
-    "location": "markham-on-ca"
-  },
-  {
-    "location": "milton-on-ca"
-  },
-  {
-    "location": "mississauga-on-ca"
-  },
-  {
-    "location": "nanaimo-bc-ca"
-  },
-  {
-    "location": "newmarket-on-ca"
-  },
-  {
-    "location": "oakville-on-ca"
-  },
-  {
-    "location": "peterborough-on-ca"
+    "location": "kitchener-on-ca"
   },
   {
     "location": "pickering-on-ca"
   },
   {
-    "location": "richmond-hill-on-ca"
-  },
-  {
-    "location": "toronto-on-ca"
-  },
-  {
-    "location": "vaughan-on-ca"
+    "location": "waterloo-on-ca"
   },
   {
     "location": "belleville-on-ca"
-  },
-  {
-    "location": "buffalo-new-york-us"
-  },
-  {
-    "location": "charlottetown-pei-ca"
-  },
-  {
-    "location": "detroit-michigan-us"
   },
   {
     "location": "drummondville-qc-ca"
@@ -141,22 +144,64 @@
     "location": "fredericton-nb-ca"
   },
   {
-    "location": "guelph-on-ca"
+    "location": "montreal-qc-ca"
   },
   {
-    "location": "halton-hills-on-ca"
+    "location": "nanaimo-bc-ca"
+  },
+  {
+    "location": "saint-hyacinthe-qc-ca"
+  },
+  {
+    "location": "terrebonne-qc-ca"
+  },
+  {
+    "location": "trois-rivires-qc-ca"
+  },
+  {
+    "location": "blainville-qc-ca"
+  },
+  {
+    "location": "brossard-qc-ca"
+  },
+  {
+    "location": "buffalo-new-york-us"
+  },
+  {
+    "location": "cape-breton-sc-ca"
+  },
+  {
+    "location": "charlottetown-pei-ca"
+  },
+  {
+    "location": "chatham-kent-on-ca"
+  },
+  {
+    "location": "detroit-michigan-us"
+  },
+  {
+    "location": "falun-ab-ca"
+  },
+  {
+    "location": "granby-qc-ca"
   },
   {
     "location": "kingston-on-ca"
   },
   {
-    "location": "kitchener-on-ca"
+    "location": "laval-qc-ca"
   },
   {
     "location": "leamington-on-ca"
   },
   {
     "location": "lvis-qc-ca"
+  },
+  {
+    "location": "longueuil-qc-ca"
+  },
+  {
+    "location": "mirabel-qc-ca"
   },
   {
     "location": "niagara-falls-on-ca"
@@ -168,13 +213,25 @@
     "location": "north-bay-on-ca"
   },
   {
+    "location": "presque-isle-maine-us"
+  },
+  {
     "location": "quebec-city-qc-ca"
   },
   {
     "location": "repentigny-qc-ca"
   },
   {
-    "location": "saint-hyacinthe-qc-ca"
+    "location": "saint-john-nb-ca"
+  },
+  {
+    "location": "saint-jean-sur-richelieu-qc-ca"
+  },
+  {
+    "location": "saint-jrme-qc-ca"
+  },
+  {
+    "location": "salmon-arm-bc-ca"
   },
   {
     "location": "sherbrooke-qc-ca"
@@ -184,15 +241,6 @@
   },
   {
     "location": "steinbach-mb-ca"
-  },
-  {
-    "location": "terrebonne-qc-ca"
-  },
-  {
-    "location": "trois-rivires-qc-ca"
-  },
-  {
-    "location": "waterloo-on-ca"
   },
   {
     "location": "welland-on-ca"

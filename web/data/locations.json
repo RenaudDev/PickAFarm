@@ -27,6 +27,23 @@
       "meta_description": "Find the best U-Pick farms near Toronto, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
     },
     {
+      "name": "Perth",
+      "slug": "perth",
+      "population": 6469,
+      "coordinates": {
+        "latitude": 44.8988,
+        "longitude": -76.2486
+      },
+      "province": "Ontario",
+      "province_slug": "on",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "perth-ontario-ca",
+      "full_location": "Perth, ON, Canada",
+      "seo_title": "U-Pick Farms near Perth, Ontario",
+      "meta_description": "Find the best U-Pick farms near Perth, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
       "name": "Ottawa",
       "slug": "ottawa",
       "population": 1017449,
@@ -1489,6 +1506,23 @@
       "meta_description": "Find the best U-Pick farms near Red Deer, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
     },
     {
+      "name": "Falun",
+      "slug": "falun",
+      "population": 55344,
+      "coordinates": {
+        "latitude": 52.95499618,
+        "longitude": -113.826543
+      },
+      "province": "Alberta",
+      "province_slug": "ab",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "falun-ab-ca",
+      "full_location": "Falun, AB, Canada",
+      "seo_title": "U-Pick Farms near Falun, Alberta",
+      "meta_description": "Find the best U-Pick farms near Falun, Alberta. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
       "name": "Strathcona County",
       "slug": "strathcona-county",
       "population": 99225,
@@ -1725,6 +1759,40 @@
       "full_location": "Regina, SK, Canada",
       "seo_title": "U-Pick Farms near Regina, Saskatchewan",
       "meta_description": "Find the best U-Pick farms near Regina, Saskatchewan. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Miramichi",
+      "slug": "miramichi",
+      "population": 17537,
+      "coordinates": {
+        "latitude": 47.02895,
+        "longitude": -65.50186
+      },
+      "province": "New Brunswick",
+      "province_slug": "nb",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "miramichi-nb-ca",
+      "full_location": "Miramichi, NB, Canada",
+      "seo_title": "U-Pick Farms near Miramichi, New Brunswick",
+      "meta_description": "Find the best U-Pick farms near Miramichi, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Grand-Falls",
+      "slug": "grand-falls",
+      "population": 79470,
+      "coordinates": {
+        "latitude": 47.02895,
+        "longitude": -65.50186
+      },
+      "province": "New Brunswick",
+      "province_slug": "nb",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "grand-falls-nb-ca",
+      "full_location": "Grand-Falls, NB, Canada",
+      "seo_title": "U-Pick Farms near Grand-Falls, New Brunswick",
+      "meta_description": "Find the best U-Pick farms near Grand-Falls, New Brunswick. Fresh apples, berries, pumpkins and Christmas trees."
     },
     {
       "name": "Moncton",
@@ -4088,6 +4156,74 @@
       "full_location": "Burlington, VT, United States",
       "seo_title": "U-Pick Farms near Burlington, Vermont",
       "meta_description": "Find the best U-Pick farms near Burlington, Vermont. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Presque Isle",
+      "slug": "presque-isle",
+      "population": null,
+      "coordinates": {
+        "latitude": 46.681153,
+        "longitude": -68.015861
+      },
+      "province": "Maine",
+      "province_slug": "maine",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "presque-isle-maine-us",
+      "full_location": "Presque Isle, Maine, United States",
+      "seo_title": "U-Pick Farms near Presque Isle, Maine",
+      "meta_description": "Find the best U-Pick farms near Presque Isle, Maine. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Terrace",
+      "slug": "terrace",
+      "population": null,
+      "coordinates": {
+        "latitude": 54.518192,
+        "longitude": -128.603154
+      },
+      "province": "British Columbia",
+      "province_slug": "bc",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "terrace-bc-ca",
+      "full_location": "Terrace, BC, Canada",
+      "seo_title": "U-Pick Farms near Terrace, British Columbia",
+      "meta_description": "Find the best U-Pick farms near Terrace, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Bridgewater",
+      "slug": "bridgewater",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.379597,
+        "longitude": -64.52133
+      },
+      "province": "Nova Scotia",
+      "province_slug": "ns",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "bridgewater-ns-ca",
+      "full_location": "Bridgewater, NS, Canada",
+      "seo_title": "U-Pick Farms near Bridgewater, Nova Scotia",
+      "meta_description": "Find the best U-Pick farms near Bridgewater, Nova Scotia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Salmon Arm",
+      "slug": "salmon-arm",
+      "population": null,
+      "coordinates": {
+        "latitude": 50.700103,
+        "longitude": -119.283844
+      },
+      "province": "British Columbia",
+      "province_slug": "bc",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "salmon-arm-bc-ca",
+      "full_location": "Salmon Arm, BC, Canada",
+      "seo_title": "U-Pick Farms near Salmon Arm, British Columbia",
+      "meta_description": "Find the best U-Pick farms near Salmon Arm, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
     }
   ]
 }

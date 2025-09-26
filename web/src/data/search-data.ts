@@ -1,5 +1,5 @@
 // Auto-generated search data - do not edit manually
-// Generated at: 2025-09-23T09:18:01.482Z
+// Generated at: 2025-09-26T13:32:14.315Z
 
 export const farmCategories = [
   "Christmas Tree Farms",
@@ -10,8 +10,10 @@ export const farmCategories = [
   "Petting Zoo",
   "Pre-Cut",
   "Pre-Cut, Cut Your Own",
+  "Pre-Cut, Potted",
   "Pumpkin Patches",
   "You Choose We Cut, Cut Your Own",
+  "You Choose We Cut, Cut Your Own, Pre-Cut",
   "You Choose We Cut, Pre-Cut",
   "You Choose, We Cut"
 ] as const;
