@@ -3,27 +3,144 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load environment variables from .env.local if it exists
+const envPath = path.join(__dirname, '..', '.env.local');
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  envContent.split('\n').forEach(line => {
+    const [key, ...valueParts] = line.split('=');
+    if (key && valueParts.length > 0) {
+      process.env[key.trim()] = valueParts.join('=').trim();
+    }
+  });
+}
+
+// Load API credentials from environment variables
+const CLOUDFLARE_D1_TOKEN = process.env.CLOUDFLARE_D1_TOKEN;
+const CLOUDFLARE_D1_URL = process.env.CLOUDFLARE_D1_URL;
+
+// D1 Database functions using REST API
+async function fetchFarmsFromD1() {
+  if (!CLOUDFLARE_D1_URL || !CLOUDFLARE_D1_TOKEN) {
+    console.warn('Cloudflare D1 credentials not provided. Falling back to API.');
+    return null;
+  }
+
+  try {
+    console.log('🔍 Querying D1 database using REST API...');
+    
+    const query = `
+      SELECT 
+        zoho_record_id as id,
+        name, 
+        slug,
+        street,
+        city as city_name,
+        state as state_province,
+        country,
+        postal_code,
+        latitude,
+        longitude,
+        phone,
+        email,
+        website,
+        facebook,
+        instagram,
+        description,
+        categories,
+        type,
+        amenities,
+        varieties,
+        pet_friendly,
+        price_range,
+        verified,
+        featured,
+        active,
+        updated_at,
+        payment_methods,
+        opening_date,
+        closing_date,
+        monday_hours,
+        tuesday_hours,
+        wednesday_hours,
+        thursday_hours,
+        friday_hours,
+        saturday_hours,
+        sunday_hours
+      FROM farms 
+      WHERE active = 1
+    `;
+
+    const response = await fetch(CLOUDFLARE_D1_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${CLOUDFLARE_D1_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sql: query
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`D1 API request failed: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    // Handle different response structures
+    let farms = null;
+    if (data.success && data.result) {
+      if (Array.isArray(data.result) && data.result[0] && data.result[0].results) {
+        // D1 returns: { result: [{ results: [...] }] }
+        farms = data.result[0].results;
+      } else if (data.result.results) {
+        farms = data.result.results;
+      } else if (Array.isArray(data.result)) {
+        farms = data.result;
+      } else {
+        console.error('Unexpected D1 response structure:', data);
+        throw new Error('Invalid D1 response format');
+      }
+      
+      console.log(`✅ Fetched ${farms.length} farms from D1 database`);
+      return farms;
+    }
+    
+    throw new Error('Invalid D1 response format');
+  } catch (error) {
+    console.error('Failed to fetch farms from D1:', error.message);
+    return null;
+  }
+}
+
 async function generateFarmData() {
   console.log('🌾 Fetching farm data for build...');
   
   try {
-    // Fetch farm data from API with all fields
-    const response = await fetch('https://pickafarm-api.94623956quebecinc.workers.dev/api/farms?include_all_fields=true');
+    // Try to fetch from D1 first, fallback to API
+    let farms = await fetchFarmsFromD1();
     
-    if (!response.ok) {
-      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    if (!farms) {
+      console.log('📡 Falling back to API...');
+      // Fetch farm data from API with all fields
+      const response = await fetch('https://pickafarm-api.94623956quebecinc.workers.dev/api/farms?include_all_fields=true');
+      
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      console.log('📊 API Response:', { 
+        type: typeof data, 
+        hasFarmsProperty: 'farms' in data,
+        farmsLength: data.farms?.length,
+        sampleFields: data.farms?.[0] ? Object.keys(data.farms[0]) : 'no farms'
+      });
+      
+      // Extract farms array from response object
+      farms = data.farms;
     }
-    
-    const data = await response.json();
-    console.log('📊 API Response:', { 
-      type: typeof data, 
-      hasFarmsProperty: 'farms' in data,
-      farmsLength: data.farms?.length,
-      sampleFields: data.farms?.[0] ? Object.keys(data.farms[0]) : 'no farms'
-    });
-    
-    // Extract farms array from response object
-    const farms = data.farms;
     
     // Check if farms is actually an array
     if (!Array.isArray(farms)) {
