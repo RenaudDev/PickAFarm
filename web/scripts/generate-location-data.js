@@ -86,7 +86,7 @@ async function generateLocationData() {
     const farms = JSON.parse(fs.readFileSync(farmsPath, 'utf8'));
     console.log(`🌾 Loaded ${farms.length} farms`);
 
-    const RADIUS_KM = 65; // configurable
+    const RADIUS_KM = 100; // configurable
 
     // For each location, collect farms within 75km
     const locationsWithFarms = baseLocations.map(loc => {
