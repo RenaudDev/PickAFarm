@@ -2696,6 +2696,23 @@
       "meta_description": "Find the best U-Pick farms near Minneapolis, Minnesota. Fresh apples, berries, pumpkins and Christmas trees."
     },
     {
+      "name": "Rochester",
+      "slug": "rochester",
+      "population": 400070,
+      "coordinates": {
+        "latitude": 44.016369,
+        "longitude": -93.2650108
+      },
+      "province": "Minnesota",
+      "province_slug": "minnesota",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "rochester-minnesota-us",
+      "full_location": "Rochester, MN, United States",
+      "seo_title": "U-Pick Farms near Rochester, Minnesota",
+      "meta_description": "Find the best U-Pick farms near Rochester, Minnesota. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
       "name": "Tulsa",
       "slug": "tulsa",
       "population": 398121,
