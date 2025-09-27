@@ -202,7 +202,7 @@ CREATE TABLE notifications (
     
     -- Location preferences
     city_id TEXT REFERENCES cities(id), -- Preferred city
-    radius_miles INTEGER DEFAULT 25,
+    radius_miles INTEGER DEFAULT 100,
     
     -- Category preferences (JSON array of category IDs)
     preferred_categories TEXT, -- ["christmas-tree", "apple-orchard"]
