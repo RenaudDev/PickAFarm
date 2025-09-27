@@ -168,7 +168,7 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
         <GoogleMaps
           locationData={locationData}
           categoryFilter={null} // Show all farms
-          radius={65}
+          radius={100}
           className="w-full h-96"
         />
       </div>
