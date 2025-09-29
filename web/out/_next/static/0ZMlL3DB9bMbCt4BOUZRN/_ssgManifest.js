@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002F[slug]","\u002F[slug]\u002Fnear\u002F[location]","\u002Ffarms-near\u002F[cities]","\u002Ffarms\u002F[id]","\u002Fvarieties\u002F[variety]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

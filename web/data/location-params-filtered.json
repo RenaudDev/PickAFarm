@@ -207,10 +207,19 @@
     "location": "sherbrooke-qc-ca"
   },
   {
+    "location": "baltimore-maryland-us"
+  },
+  {
     "location": "trois-rivires-qc-ca"
   },
   {
+    "location": "bridgeport-connecticut-us"
+  },
+  {
     "location": "buffalo-new-york-us"
+  },
+  {
+    "location": "burlington-vermont-us"
   },
   {
     "location": "detroit-michigan-us"
@@ -228,7 +237,13 @@
     "location": "lvis-qc-ca"
   },
   {
+    "location": "philadelphia-pennsylvania-us"
+  },
+  {
     "location": "quebec-city-qc-ca"
+  },
+  {
+    "location": "rochester-new-york-us"
   },
   {
     "location": "salmon-arm-bc-ca"
@@ -237,13 +252,25 @@
     "location": "sarnia-on-ca"
   },
   {
+    "location": "washington-district-of-columbia-us"
+  },
+  {
     "location": "windsor-on-ca"
   },
   {
-    "location": "bridgewater-ns-ca"
+    "location": "yonkers-new-york-us"
   },
   {
-    "location": "burlington-vermont-us"
+    "location": "anaheim-california-us"
+  },
+  {
+    "location": "aurora-colorado-us"
+  },
+  {
+    "location": "boston-massachusetts-us"
+  },
+  {
+    "location": "bridgewater-ns-ca"
   },
   {
     "location": "cape-breton-sc-ca"
@@ -252,19 +279,49 @@
     "location": "charlottetown-pei-ca"
   },
   {
+    "location": "concord-new-hampshire-us"
+  },
+  {
+    "location": "denver-colorado-us"
+  },
+  {
     "location": "edmonton-ab-ca"
   },
   {
     "location": "falun-ab-ca"
   },
   {
+    "location": "fontana-california-us"
+  },
+  {
     "location": "halifax-ns-ca"
+  },
+  {
+    "location": "huntington-beach-california-us"
+  },
+  {
+    "location": "irvine-california-us"
+  },
+  {
+    "location": "jersey-city-new-jersey-us"
   },
   {
     "location": "kelowna-bc-ca"
   },
   {
+    "location": "long-beach-california-us"
+  },
+  {
     "location": "moncton-nb-ca"
+  },
+  {
+    "location": "moreno-valley-california-us"
+  },
+  {
+    "location": "new-york-new-york-us"
+  },
+  {
+    "location": "newark-new-jersey-us"
   },
   {
     "location": "north-bay-on-ca"
@@ -276,13 +333,28 @@
     "location": "red-deer-ab-ca"
   },
   {
-    "location": "rochester-new-york-us"
+    "location": "riverside-california-us"
+  },
+  {
+    "location": "rochester-minnesota-us"
+  },
+  {
+    "location": "sacramento-california-us"
   },
   {
     "location": "saint-john-nb-ca"
   },
   {
+    "location": "san-bernardino-california-us"
+  },
+  {
+    "location": "santa-ana-california-us"
+  },
+  {
     "location": "st-albert-ab-ca"
+  },
+  {
+    "location": "st-paul-minnesota-us"
   },
   {
     "location": "steinbach-mb-ca"
@@ -298,6 +370,9 @@
   },
   {
     "location": "toledo-ohio-us"
+  },
+  {
+    "location": "warwick-puerto-rico-us"
   },
   {
     "location": "winnipeg-mb-ca"
