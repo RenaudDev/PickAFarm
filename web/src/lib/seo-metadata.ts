@@ -155,7 +155,7 @@ export function generateFarmMetadata(farm: any): Metadata {
     title,
     description,
     keywords,
-    url: `${SITE_CONFIG.domain}/farms/${farm.slug}`,
+    url: `${SITE_CONFIG.domain}/farms/${farm.slug}/`,
     type: "article",
     isBusiness: true
   })
@@ -183,7 +183,7 @@ export function generateLocationMetadata(category: string, location: string, far
     title,
     description,
     keywords,
-    url: `${SITE_CONFIG.domain}/${categorySlug}/near/${locationSlug}`
+    url: `${SITE_CONFIG.domain}/${categorySlug}/near/${locationSlug}/`
   })
 }
 
@@ -208,7 +208,7 @@ export function generateCategoryMetadata(category: string, categoryData: any, fa
     title,
     description,
     keywords,
-    url: `${SITE_CONFIG.domain}/${categorySlug}`
+    url: `${SITE_CONFIG.domain}/${categorySlug}/`
   })
 }
 
@@ -225,6 +225,6 @@ export function generateHomepageMetadata(): Metadata {
       "fresh produce near me",
       "seasonal farm visits"
     ],
-    url: SITE_CONFIG.domain
+    url: `${SITE_CONFIG.domain}/`
   })
 }

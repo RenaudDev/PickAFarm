@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${locations.map(loc => `  <url>
-    <loc>${baseUrl}/${category}/near/${loc.location_slug}</loc>
+    <loc>${baseUrl}/${category}/near/${loc.location_slug}/</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

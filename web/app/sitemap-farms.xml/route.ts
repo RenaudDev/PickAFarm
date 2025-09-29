@@ -34,7 +34,7 @@ ${activeFarms.map(farm => {
     const lastmod = farm.updated_at || currentDate
     
     return `  <url>
-    <loc>${baseUrl}/farms/${farm.slug}</loc>
+    <loc>${baseUrl}/farms/${farm.slug}/</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>

@@ -38,7 +38,7 @@ function FarmNavbar() {
                 Contact
               </a>
             </div>
-            <a href="#" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2">
+            <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2">
               List Your Farm
             </a>
           </div>

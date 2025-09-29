@@ -83,9 +83,9 @@ export default function Home() {
             Join thousands of pick-your-own farms across Canada reaching customers actively searching for agritourism experiences. List your farm and connect with families ready to pick, explore, and spend.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="px-8 py-3">
+              <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="bg-secondary hover:bg-secondary/90 text-primary-foreground font-semibold px-4 py-2">
                 List Your Farm
-              </Button>
+              </a>
               
             </div>
           </div>

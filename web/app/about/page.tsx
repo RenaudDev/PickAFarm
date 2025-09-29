@@ -1,6 +1,14 @@
 import StaticPageLayout from "@/components/static-page-layout"
 import { Card, CardContent } from "@/components/ui/card"
 
+export const metadata = {
+  title: "About PickAFarm - Connecting Families with Local Farms",
+  description: "Connecting families with local farms for authentic agricultural experiences across Ontario and beyond.",
+  alternates: {
+    canonical: 'https://pickafarm.com/about/'
+  }
+}
+
 export default function AboutPage() {
   return (
     <StaticPageLayout
