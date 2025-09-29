@@ -12,7 +12,7 @@ export default async function BlogPage() {
     <div className="bg-background">
       <FarmNavbar />
 
-      <div className="container mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold mb-12">Blog</h1>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
