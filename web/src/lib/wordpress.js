@@ -23,3 +23,27 @@ export async function getVarietyPaths() {
     variety: variety.slug
   }));
 }
+
+export async function getAllPosts() {
+  const res = await fetch(`${WP_API_URL}/posts?_embed`, {
+    next: { revalidate: 3600 }
+  });
+  if (!res.ok) throw new Error('Failed to fetch posts');
+  return res.json();
+}
+
+export async function getPostBySlug(slug) {
+  const res = await fetch(`${WP_API_URL}/posts?slug=${slug}&_embed`, {
+    next: { revalidate: 3600 }
+  });
+  if (!res.ok) throw new Error('Failed to fetch post');
+  const data = await res.json();
+  return data[0];
+}
+
+export async function getPostPaths() {
+  const posts = await getAllPosts();
+  return posts.map(post => ({
+    posts: post.slug
+  }));
+}
