@@ -1,7 +1,7 @@
 const WP_API_URL = 'https://admin.pickafarm.com/wp-json/wp/v2';
 
 export async function getAllVarieties() {
-  const res = await fetch(`${WP_API_URL}/varieties?_embed`, {
+  const res = await fetch(`${WP_API_URL}/varieties?_embed&per_page=100`, {
     next: { revalidate: 3600 } // Cache for 1 hour
   });
   if (!res.ok) throw new Error('Failed to fetch varieties');
