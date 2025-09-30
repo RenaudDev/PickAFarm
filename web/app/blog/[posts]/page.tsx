@@ -5,11 +5,33 @@ import { FarmFooter } from "@/components/farm-footer"
 import { Separator } from "@/components/ui/separator"
 import { Calendar } from "lucide-react"
 import Image from "next/image"
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo-metadata';
+import { Metadata } from 'next';
 
 interface BlogPostProps {
   params: Promise<{
     posts: string
   }>
+}
+
+export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
+  const { posts: slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {};
+  }
+
+  const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
+  const description = post.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim();
+
+  return generateSEOMetadata({
+    title: post.title.rendered,
+    description: description,
+    image: featuredImage?.source_url,
+    url: `https://pickafarm.com/blog/${post.slug}`,
+    type: 'article',
+  });
 }
 
 export async function generateStaticParams() {
