@@ -38,6 +38,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { notFound } from 'next/navigation'
 import { generateFarmMetadata } from "@/lib/seo-metadata"
+import { getVarietySlug } from "@/lib/variety-mapper"
 import { Metadata } from "next"
 
 // Import farms data for static generation
@@ -359,17 +360,29 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                   <CardTitle className="text-xl font-semibold">Crop Varieties</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-3">
-                    {varieties.map((variety) => (
-                      <Badge
-                        key={variety}
-                        className="bg-primary text-white border-primary px-3 text-sm font-medium"
-                      >
-                        {variety}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
+  <div className="flex flex-wrap gap-3">
+    {varieties.map((variety) => {
+      const varietySlug = getVarietySlug(variety)
+      
+      if (varietySlug) {
+        return (
+          <Link key={variety} href={`/varieties/${varietySlug}`}>
+            <Badge className="bg-primary text-white border-primary px-3 text-sm font-medium cursor-pointer hover:bg-primary/90 transition-colors">
+              <TreePine className="w-3.5 h-3.5 mr-1.5" />
+              {variety}
+            </Badge>
+          </Link>
+        )
+      }
+      
+      return (
+        <Badge key={variety} className="bg-primary text-white border-primary px-3 text-sm font-medium">
+          {variety}
+        </Badge>
+      )
+    })}
+  </div>
+</CardContent>
               </Card>
 
               <Card className="shadow-sm border-0 bg-white">
