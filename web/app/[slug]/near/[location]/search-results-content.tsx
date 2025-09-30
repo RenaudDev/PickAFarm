@@ -6,9 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Bell, MapPin, Star, ArrowUpDown, Filter } from "lucide-react"
+import { Bell, MapPin, Star, ArrowUpDown, Filter, TreePine, ChevronRight } from "lucide-react"
 import GoogleMaps from "@/components/google-maps"
 import type { FarmData } from "@/lib/schema"
+import Link from "next/link"
+import farmsData from "../../../../data/farms.json"
+import { getVarietySlug } from "@/lib/variety-mapper"
 
 interface LocationData {
   name: string;
@@ -236,7 +239,62 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
             </Card>
           )
         })}
+            </div>
+
+{/* Browse by Variety */}
+{(() => {
+  // Calculate varieties inline
+  const varietyMap = new Map<string, number>()
+  locationData.farms.forEach((farm: any) => {
+    const fullFarm = farmsData.find((f: any) => f.id === farm.id)
+    if (fullFarm?.varieties) {
+      fullFarm.varieties.split(',').forEach((v: string) => {
+        const variety = v.trim()
+        varietyMap.set(variety, (varietyMap.get(variety) || 0) + 1)
+      })
+    }
+  })
+  const varieties = Array.from(varietyMap.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count)
+
+  if (varieties.length === 0) return null
+
+  return (
+    <div className="my-8 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-xl font-semibold mb-4">Varieties Available in {locationData.name}</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {varieties.map((variety) => {
+          const varietySlug = getVarietySlug(variety.name)
+          if (!varietySlug) return null
+          
+          return (
+            <Link key={variety.name} href={`/varieties/${varietySlug}`}>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-l-primary/50 hover:border-l-primary">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <TreePine className="w-8 h-8 text-primary" />
+                      <div>
+                        <h3 className="font-semibold text-sm">{variety.name}</h3>
+                        <p className="text-xs text-muted-foreground">
+                          {variety.count} farm{variety.count !== 1 ? "s" : ""}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          )
+        })}
       </div>
+    </div>
+  )
+})()}
+
+{sortedFarms.length === 0 && (
 
       {sortedFarms.length === 0 && (
         <div className="text-center py-12 px-4 sm:px-6 lg:px-8">
