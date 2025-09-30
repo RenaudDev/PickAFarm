@@ -17424,6 +17424,40 @@
     "farmCount": 1
   },
   {
+    "name": "Eau Claire",
+    "slug": "eau-claire",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.8113,
+      "longitude": -91.498809
+    },
+    "province": "Wisconsin",
+    "province_slug": "wisconsin",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "eau-claire-wisconsin-us",
+    "full_location": "Eau Claire, Wisconsin, United States",
+    "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292503",
+        "name": "Chippewa Valley Trees",
+        "slug": "chippewa-valley-trees",
+        "url": "/farms/chippewa-valley-trees",
+        "latitude": 44.850602,
+        "longitude": -91.2666389,
+        "city": "Cadott",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Apple Orchards, Vineyards",
+        "featured": false,
+        "distance_km": 19
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Edmonton",
     "slug": "edmonton",
     "population": 1010899,

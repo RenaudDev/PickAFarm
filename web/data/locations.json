@@ -26,6 +26,7 @@
       "seo_title": "U-Pick Farms near Toronto, Ontario",
       "meta_description": "Find the best U-Pick farms near Toronto, Ontario. Fresh apples, berries, pumpkins and Christmas trees."
     },
+  
     {
       "name": "Perth",
       "slug": "perth",
@@ -4241,6 +4242,23 @@
       "full_location": "Salmon Arm, BC, Canada",
       "seo_title": "U-Pick Farms near Salmon Arm, British Columbia",
       "meta_description": "Find the best U-Pick farms near Salmon Arm, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Eau Claire",
+      "slug": "eau-claire",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.8113,
+        "longitude": -91.498809
+      },
+      "province": "Wisconsin",
+      "province_slug": "wisconsin",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "eau-claire-wisconsin-us",
+      "full_location": "Eau Claire, Wisconsin, United States",
+      "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
+      "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
     }
   ]
 }

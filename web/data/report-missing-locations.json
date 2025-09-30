@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "name": "Eau Claire",
+    "slug": "eau-claire",
+    "population": null,
+    "coordinates": {
+      "latitude": 46.423669,
+      "longitude": -129.942709
+    },
+    "province": "Wisconsin",
+    "province_slug": "wisconsin",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "eau-claire-wisconsin-ca",
+    "full_location": "Eau Claire, Wisconsin, Canada",
+    "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+  }
+]
