@@ -6,32 +6,11 @@ import { Separator } from "@/components/ui/separator"
 import { Calendar } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { generateMetadata } from '@/lib/seo-metadata';
-import { Metadata } from 'next';
 
 interface VarietyPageProps {
-    params: {
+    params: Promise<{
       variety: string
-    }
-  }
-
-export async function generateMetadata({ params }: VarietyPageProps): Promise<Metadata> {
-    const variety = await getVarietyBySlug(params.variety);
-  
-    if (!variety) {
-      return {};
-    }
-  
-    const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
-    const description = variety.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim();
-  
-    return generateMetadata({
-      title: variety.title.rendered,
-      description: description,
-      image: featuredImage?.source_url,
-      url: `https://pickafarm.com/varieties/${variety.slug}`,
-      type: 'article',
-    });
+    }>
   }
 
 export async function generateStaticParams() {
@@ -40,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export default async function VarietyPage({ params }: VarietyPageProps) {
-    const { variety: varietySlug } = params;
+    const { variety: varietySlug } = await params;
     const variety = await getVarietyBySlug(varietySlug);
   
   if (!variety) notFound();
@@ -109,3 +88,4 @@ export default async function VarietyPage({ params }: VarietyPageProps) {
 <FarmFooter />
     </div>
   );
+}

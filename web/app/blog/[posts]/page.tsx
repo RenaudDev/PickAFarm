@@ -5,32 +5,11 @@ import { FarmFooter } from "@/components/farm-footer"
 import { Separator } from "@/components/ui/separator"
 import { Calendar } from "lucide-react"
 import Image from "next/image"
-import { generateMetadata } from '@/lib/seo-metadata';
-import { Metadata } from 'next';
 
 interface BlogPostProps {
-  params: {
+  params: Promise<{
     posts: string
-  }
-}
-
-export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
-  const post = await getPostBySlug(params.posts);
-
-  if (!post) {
-    return {};
-  }
-
-  const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
-  const description = post.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim();
-
-  return generateMetadata({
-    title: post.title.rendered,
-    description: description,
-    image: featuredImage?.source_url,
-    url: `https://pickafarm.com/blog/${post.slug}`,
-    type: 'article',
-  });
+  }>
 }
 
 export async function generateStaticParams() {
@@ -39,7 +18,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostProps) {
-  const { posts: slug } = params;
+  const { posts: slug } = await params;  // Changed this line
   const post = await getPostBySlug(slug);
   
   if (!post) notFound();
