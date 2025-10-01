@@ -4243,21 +4243,854 @@
       "meta_description": "Find the best U-Pick farms near Salmon Arm, British Columbia. Fresh apples, berries, pumpkins and Christmas trees."
     },
     {
+      "name": "Boone",
+      "slug": "boone",
+      "population": null,
+      "coordinates": {
+        "latitude": 36.218195,
+        "longitude": -81.683038
+      },
+      "province": "North Carolina",
+      "province_slug": "nc",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "boone-nc-us",
+      "full_location": "Boone, NC, United States",
+      "seo_title": "U-Pick Farms near Boone, North Carolina",
+      "meta_description": "Find the best U-Pick farms near Boone, North Carolina. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Schenectady",
+      "slug": "schenectady",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.814351,
+        "longitude": -73.938742
+      },
+      "province": "New York",
+      "province_slug": "ny",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "schenectady-ny-us",
+      "full_location": "Schenectady, NY, United States",
+      "seo_title": "U-Pick Farms near Schenectady, New York",
+      "meta_description": "Find the best U-Pick farms near Schenectady, New York. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Sheridan",
+      "slug": "sheridan",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.395833,
+        "longitude": -89.198056
+      },
+      "province": "Wisconsin",
+      "province_slug": "wi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "sheridan-wi-us",
+      "full_location": "Sheridan, WI, United States",
+      "seo_title": "U-Pick Farms near Sheridan, Wisconsin",
+      "meta_description": "Find the best U-Pick farms near Sheridan, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Green Bay",
+      "slug": "green-bay",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.513319,
+        "longitude": -88.013296
+      },
+      "province": "Wisconsin",
+      "province_slug": "wi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "green-bay-wi-us",
+      "full_location": "Green Bay, WI, United States",
+      "seo_title": "U-Pick Farms near Green Bay, Wisconsin",
+      "meta_description": "Find the best U-Pick farms near Green Bay, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Eugene",
+      "slug": "eugene",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.052121,
+        "longitude": -123.08967
+      },
+      "province": "Oregon",
+      "province_slug": "or",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "eugene-or-us",
+      "full_location": "Eugene, OR, United States",
+      "seo_title": "U-Pick Farms near Eugene, Oregon",
+      "meta_description": "Find the best U-Pick farms near Eugene, Oregon. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Oak Ridge",
+      "slug": "oak-ridge",
+      "population": null,
+      "coordinates": {
+        "latitude": 36.010356,
+        "longitude": -84.269645
+      },
+      "province": "Tennessee",
+      "province_slug": "tn",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "oak-ridge-tn-us",
+      "full_location": "Oak Ridge, TN, United States",
+      "seo_title": "U-Pick Farms near Oak Ridge, Tennessee",
+      "meta_description": "Find the best U-Pick farms near Oak Ridge, Tennessee. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Waynesville",
+      "slug": "waynesville",
+      "population": null,
+      "coordinates": {
+        "latitude": 35.488715,
+        "longitude": -82.988748
+      },
+      "province": "North Carolina",
+      "province_slug": "nc",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "waynesville-nc-us",
+      "full_location": "Waynesville, NC, United States",
+      "seo_title": "U-Pick Farms near Waynesville, North Carolina",
+      "meta_description": "Find the best U-Pick farms near Waynesville, North Carolina. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Kingston",
+      "slug": "kingston",
+      "population": null,
+      "coordinates": {
+        "latitude": 41.927037,
+        "longitude": -73.997361
+      },
+      "province": "New York",
+      "province_slug": "ny",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "kingston-ny-us",
+      "full_location": "Kingston, NY, United States",
+      "seo_title": "U-Pick Farms near Kingston, New York",
+      "meta_description": "Find the best U-Pick farms near Kingston, New York. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Greenwood",
+      "slug": "greenwood",
+      "population": null,
+      "coordinates": {
+        "latitude": 34.1954,
+        "longitude": -82.161788
+      },
+      "province": "South Carolina",
+      "province_slug": "sc",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "greenwood-sc-us",
+      "full_location": "Greenwood, SC, United States",
+      "seo_title": "U-Pick Farms near Greenwood, South Carolina",
+      "meta_description": "Find the best U-Pick farms near Greenwood, South Carolina. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Springdale",
+      "slug": "springdale",
+      "population": null,
+      "coordinates": {
+        "latitude": 36.174524,
+        "longitude": -94.139014
+      },
+      "province": "Arkansas",
+      "province_slug": "ar",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "springdale-ar-us",
+      "full_location": "Springdale, AR, United States",
+      "seo_title": "U-Pick Farms near Springdale, Arkansas",
+      "meta_description": "Find the best U-Pick farms near Springdale, Arkansas. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Flint",
+      "slug": "flint",
+      "population": null,
+      "coordinates": {
+        "latitude": 43.012527,
+        "longitude": -83.687456
+      },
+      "province": "Michigan",
+      "province_slug": "mi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "flint-mi-us",
+      "full_location": "Flint, MI, United States",
+      "seo_title": "U-Pick Farms near Flint, Michigan",
+      "meta_description": "Find the best U-Pick farms near Flint, Michigan. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Hilton Head Island",
+      "slug": "hilton-head-island",
+      "population": null,
+      "coordinates": {
+        "latitude": 32.216316,
+        "longitude": -80.752608
+      },
+      "province": "South Carolina",
+      "province_slug": "sc",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "hilton-head-island-sc-us",
+      "full_location": "Hilton Head Island, SC, United States",
+      "seo_title": "U-Pick Farms near Hilton Head Island, South Carolina",
+      "meta_description": "Find the best U-Pick farms near Hilton Head Island, South Carolina. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Norfolk",
+      "slug": "norfolk",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.032717,
+        "longitude": -97.416817
+      },
+      "province": "Nebraska",
+      "province_slug": "ne",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "norfolk-ne-us",
+      "full_location": "Norfolk, NE, United States",
+      "seo_title": "U-Pick Farms near Norfolk, Nebraska",
+      "meta_description": "Find the best U-Pick farms near Norfolk, Nebraska. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Walla Walla",
+      "slug": "walla-walla",
+      "population": null,
+      "coordinates": {
+        "latitude": 46.064581,
+        "longitude": -118.343021
+      },
+      "province": "Washington",
+      "province_slug": "wa",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "walla-walla-wa-us",
+      "full_location": "Walla Walla, WA, United States",
+      "seo_title": "U-Pick Farms near Walla Walla, Washington",
+      "meta_description": "Find the best U-Pick farms near Walla Walla, Washington. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Appleton",
+      "slug": "appleton",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.262271,
+        "longitude": -88.407105
+      },
+      "province": "Wisconsin",
+      "province_slug": "wi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "appleton-wi-us",
+      "full_location": "Appleton, WI, United States",
+      "seo_title": "U-Pick Farms near Appleton, Wisconsin",
+      "meta_description": "Find the best U-Pick farms near Appleton, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Augusta",
+      "slug": "augusta",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.316496,
+        "longitude": -69.76811
+      },
+      "province": "Maine",
+      "province_slug": "me",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "augusta-me-us",
+      "full_location": "Augusta, ME, United States",
+      "seo_title": "U-Pick Farms near Augusta, Maine",
+      "meta_description": "Find the best U-Pick farms near Augusta, Maine. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Morristown",
+      "slug": "morristown",
+      "population": null,
+      "coordinates": {
+        "latitude": 36.213981,
+        "longitude": -83.294892
+      },
+      "province": "Tennessee",
+      "province_slug": "tn",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "morristown-tn-us",
+      "full_location": "Morristown, TN, United States",
+      "seo_title": "U-Pick Farms near Morristown, Tennessee",
+      "meta_description": "Find the best U-Pick farms near Morristown, Tennessee. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Cordele",
+      "slug": "cordele",
+      "population": null,
+      "coordinates": {
+        "latitude": 31.963507,
+        "longitude": -83.782394
+      },
+      "province": "Georgia",
+      "province_slug": "ga",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "cordele-ga-us",
+      "full_location": "Cordele, GA, United States",
+      "seo_title": "U-Pick Farms near Cordele, Georgia",
+      "meta_description": "Find the best U-Pick farms near Cordele, Georgia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Harrisburg",
+      "slug": "harrisburg",
+      "population": null,
+      "coordinates": {
+        "latitude": 40.273191,
+        "longitude": -76.886701
+      },
+      "province": "Pennsylvania",
+      "province_slug": "pa",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "harrisburg-pa-us",
+      "full_location": "Harrisburg, PA, United States",
+      "seo_title": "U-Pick Farms near Harrisburg, Pennsylvania",
+      "meta_description": "Find the best U-Pick farms near Harrisburg, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Berkeley Springs",
+      "slug": "berkeley-springs",
+      "population": null,
+      "coordinates": {
+        "latitude": 39.62699,
+        "longitude": -78.227196
+      },
+      "province": "West Virginia",
+      "province_slug": "wv",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "berkeley-springs-wv-us",
+      "full_location": "Berkeley Springs, WV, United States",
+      "seo_title": "U-Pick Farms near Berkeley Springs, West Virginia",
+      "meta_description": "Find the best U-Pick farms near Berkeley Springs, West Virginia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Lebanon",
+      "slug": "lebanon",
+      "population": null,
+      "coordinates": {
+        "latitude": 40.339215,
+        "longitude": -76.42621
+      },
+      "province": "Pennsylvania",
+      "province_slug": "pa",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "lebanon-pa-us",
+      "full_location": "Lebanon, PA, United States",
+      "seo_title": "U-Pick Farms near Lebanon, Pennsylvania",
+      "meta_description": "Find the best U-Pick farms near Lebanon, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Bangor",
+      "slug": "bangor",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.801613,
+        "longitude": -68.771226
+      },
+      "province": "Maine",
+      "province_slug": "me",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "bangor-me-us",
+      "full_location": "Bangor, ME, United States",
+      "seo_title": "U-Pick Farms near Bangor, Maine",
+      "meta_description": "Find the best U-Pick farms near Bangor, Maine. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Cleveland",
+      "slug": "cleveland",
+      "population": null,
+      "coordinates": {
+        "latitude": 35.159518,
+        "longitude": -84.876611
+      },
+      "province": "Tennessee",
+      "province_slug": "tn",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "cleveland-tn-us",
+      "full_location": "Cleveland, TN, United States",
+      "seo_title": "U-Pick Farms near Cleveland, Tennessee",
+      "meta_description": "Find the best U-Pick farms near Cleveland, Tennessee. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Manistee",
+      "slug": "manistee",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.244447,
+        "longitude": -86.324253
+      },
+      "province": "Michigan",
+      "province_slug": "mi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "manistee-mi-us",
+      "full_location": "Manistee, MI, United States",
+      "seo_title": "U-Pick Farms near Manistee, Michigan",
+      "meta_description": "Find the best U-Pick farms near Manistee, Michigan. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Springfield",
+      "slug": "springfield",
+      "population": null,
+      "coordinates": {
+        "latitude": 39.800659,
+        "longitude": -89.644934
+      },
+      "province": "Illinois",
+      "province_slug": "il",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "springfield-il-us",
+      "full_location": "Springfield, IL, United States",
+      "seo_title": "U-Pick Farms near Springfield, Illinois",
+      "meta_description": "Find the best U-Pick farms near Springfield, Illinois. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Wyoming",
+      "slug": "wyoming",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.91336,
+        "longitude": -85.705309
+      },
+      "province": "Michigan",
+      "province_slug": "mi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "wyoming-mi-us",
+      "full_location": "Wyoming, MI, United States",
+      "seo_title": "U-Pick Farms near Wyoming, Michigan",
+      "meta_description": "Find the best U-Pick farms near Wyoming, Michigan. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
       "name": "Eau Claire",
       "slug": "eau-claire",
       "population": null,
       "coordinates": {
-        "latitude": 44.8113,
-        "longitude": -91.498809
+        "latitude": 46.423669,
+        "longitude": -129.942709
       },
       "province": "Wisconsin",
-      "province_slug": "wisconsin",
-      "country": "United States",
-      "country_slug": "us",
-      "location_slug": "eau-claire-wisconsin-us",
-      "full_location": "Eau Claire, Wisconsin, United States",
+      "province_slug": "wi",
+      "country": "Canada",
+      "country_slug": "ca",
+      "location_slug": "eau-claire-wi-ca",
+      "full_location": "Eau Claire, WI, Canada",
       "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
       "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Albany",
+      "slug": "albany",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.651809,
+        "longitude": -73.754471
+      },
+      "province": "New York",
+      "province_slug": "ny",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "albany-ny-us",
+      "full_location": "Albany, NY, United States",
+      "seo_title": "U-Pick Farms near Albany, New York",
+      "meta_description": "Find the best U-Pick farms near Albany, New York. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Staunton",
+      "slug": "staunton",
+      "population": null,
+      "coordinates": {
+        "latitude": 38.149423,
+        "longitude": -79.073705
+      },
+      "province": "Virginia",
+      "province_slug": "va",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "staunton-va-us",
+      "full_location": "Staunton, VA, United States",
+      "seo_title": "U-Pick Farms near Staunton, Virginia",
+      "meta_description": "Find the best U-Pick farms near Staunton, Virginia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Iowa Falls",
+      "slug": "iowa-falls",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.519887,
+        "longitude": -93.264574
+      },
+      "province": "Iowa",
+      "province_slug": "ia",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "iowa-falls-ia-us",
+      "full_location": "Iowa Falls, IA, United States",
+      "seo_title": "U-Pick Farms near Iowa Falls, Iowa",
+      "meta_description": "Find the best U-Pick farms near Iowa Falls, Iowa. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Marietta",
+      "slug": "marietta",
+      "population": null,
+      "coordinates": {
+        "latitude": 39.415352,
+        "longitude": -81.454844
+      },
+      "province": "Ohio",
+      "province_slug": "oh",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "marietta-oh-us",
+      "full_location": "Marietta, OH, United States",
+      "seo_title": "U-Pick Farms near Marietta, Ohio",
+      "meta_description": "Find the best U-Pick farms near Marietta, Ohio. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Lexington",
+      "slug": "lexington",
+      "population": null,
+      "coordinates": {
+        "latitude": 33.981537,
+        "longitude": -81.236211
+      },
+      "province": "South Carolina",
+      "province_slug": "sc",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "lexington-sc-us",
+      "full_location": "Lexington, SC, United States",
+      "seo_title": "U-Pick Farms near Lexington, South Carolina",
+      "meta_description": "Find the best U-Pick farms near Lexington, South Carolina. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Waterville",
+      "slug": "waterville",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.552011,
+        "longitude": -69.631712
+      },
+      "province": "Maine",
+      "province_slug": "me",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "waterville-me-us",
+      "full_location": "Waterville, ME, United States",
+      "seo_title": "U-Pick Farms near Waterville, Maine",
+      "meta_description": "Find the best U-Pick farms near Waterville, Maine. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Huntsville",
+      "slug": "huntsville",
+      "population": null,
+      "coordinates": {
+        "latitude": 34.72955,
+        "longitude": -86.585315
+      },
+      "province": "Alabama",
+      "province_slug": "al",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "huntsville-al-us",
+      "full_location": "Huntsville, AL, United States",
+      "seo_title": "U-Pick Farms near Huntsville, Alabama",
+      "meta_description": "Find the best U-Pick farms near Huntsville, Alabama. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Dalton",
+      "slug": "dalton",
+      "population": null,
+      "coordinates": {
+        "latitude": 34.769802,
+        "longitude": -84.970223
+      },
+      "province": "Georgia",
+      "province_slug": "ga",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "dalton-ga-us",
+      "full_location": "Dalton, GA, United States",
+      "seo_title": "U-Pick Farms near Dalton, Georgia",
+      "meta_description": "Find the best U-Pick farms near Dalton, Georgia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Old Town",
+      "slug": "old-town",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.934829,
+        "longitude": -68.645714
+      },
+      "province": "Maine",
+      "province_slug": "me",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "old-town-me-us",
+      "full_location": "Old Town, ME, United States",
+      "seo_title": "U-Pick Farms near Old Town, Maine",
+      "meta_description": "Find the best U-Pick farms near Old Town, Maine. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Fairfield",
+      "slug": "fairfield",
+      "population": null,
+      "coordinates": {
+        "latitude": 38.378937,
+        "longitude": -88.359768
+      },
+      "province": "Illinois",
+      "province_slug": "il",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "fairfield-il-us",
+      "full_location": "Fairfield, IL, United States",
+      "seo_title": "U-Pick Farms near Fairfield, Illinois",
+      "meta_description": "Find the best U-Pick farms near Fairfield, Illinois. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Peoria",
+      "slug": "peoria",
+      "population": null,
+      "coordinates": {
+        "latitude": 40.692693,
+        "longitude": -89.592778
+      },
+      "province": "Illinois",
+      "province_slug": "il",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "peoria-il-us",
+      "full_location": "Peoria, IL, United States",
+      "seo_title": "U-Pick Farms near Peoria, Illinois",
+      "meta_description": "Find the best U-Pick farms near Peoria, Illinois. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Blacksburg",
+      "slug": "blacksburg",
+      "population": null,
+      "coordinates": {
+        "latitude": 37.230067,
+        "longitude": -80.415075
+      },
+      "province": "Virginia",
+      "province_slug": "va",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "blacksburg-va-us",
+      "full_location": "Blacksburg, VA, United States",
+      "seo_title": "U-Pick Farms near Blacksburg, Virginia",
+      "meta_description": "Find the best U-Pick farms near Blacksburg, Virginia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "LaGrange",
+      "slug": "lagrange",
+      "population": null,
+      "coordinates": {
+        "latitude": 33.036222,
+        "longitude": -85.032244
+      },
+      "province": "Georgia",
+      "province_slug": "ga",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "lagrange-ga-us",
+      "full_location": "LaGrange, GA, United States",
+      "seo_title": "U-Pick Farms near LaGrange, Georgia",
+      "meta_description": "Find the best U-Pick farms near LaGrange, Georgia. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Binghamton",
+      "slug": "binghamton",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.09712,
+        "longitude": -75.911655
+      },
+      "province": "New York",
+      "province_slug": "ny",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "binghamton-ny-us",
+      "full_location": "Binghamton, NY, United States",
+      "seo_title": "U-Pick Farms near Binghamton, New York",
+      "meta_description": "Find the best U-Pick farms near Binghamton, New York. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Iowa City",
+      "slug": "iowa-city",
+      "population": null,
+      "coordinates": {
+        "latitude": 41.657826,
+        "longitude": -91.534617
+      },
+      "province": "Iowa",
+      "province_slug": "ia",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "iowa-city-ia-us",
+      "full_location": "Iowa City, IA, United States",
+      "seo_title": "U-Pick Farms near Iowa City, Iowa",
+      "meta_description": "Find the best U-Pick farms near Iowa City, Iowa. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Little Falls",
+      "slug": "little-falls",
+      "population": null,
+      "coordinates": {
+        "latitude": 45.980556,
+        "longitude": -94.369444
+      },
+      "province": "Minnesota",
+      "province_slug": "mn",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "little-falls-mn-us",
+      "full_location": "Little Falls, MN, United States",
+      "seo_title": "U-Pick Farms near Little Falls, Minnesota",
+      "meta_description": "Find the best U-Pick farms near Little Falls, Minnesota. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Bristol",
+      "slug": "bristol",
+      "population": null,
+      "coordinates": {
+        "latitude": 36.595106,
+        "longitude": -82.188744
+      },
+      "province": "Tennessee",
+      "province_slug": "tn",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "bristol-tn-us",
+      "full_location": "Bristol, TN, United States",
+      "seo_title": "U-Pick Farms near Bristol, Tennessee",
+      "meta_description": "Find the best U-Pick farms near Bristol, Tennessee. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Sioux Falls",
+      "slug": "sioux-falls",
+      "population": null,
+      "coordinates": {
+        "latitude": 43.546022,
+        "longitude": -96.731265
+      },
+      "province": "South Dakota",
+      "province_slug": "sd",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "sioux-falls-sd-us",
+      "full_location": "Sioux Falls, SD, United States",
+      "seo_title": "U-Pick Farms near Sioux Falls, South Dakota",
+      "meta_description": "Find the best U-Pick farms near Sioux Falls, South Dakota. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Stevens Point",
+      "slug": "stevens-point",
+      "population": null,
+      "coordinates": {
+        "latitude": 44.523579,
+        "longitude": -89.574563
+      },
+      "province": "Wisconsin",
+      "province_slug": "wi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "stevens-point-wi-us",
+      "full_location": "Stevens Point, WI, United States",
+      "seo_title": "U-Pick Farms near Stevens Point, Wisconsin",
+      "meta_description": "Find the best U-Pick farms near Stevens Point, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Chicopee",
+      "slug": "chicopee",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.148704,
+        "longitude": -72.607867
+      },
+      "province": "Massachusetts",
+      "province_slug": "ma",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "chicopee-ma-us",
+      "full_location": "Chicopee, MA, United States",
+      "seo_title": "U-Pick Farms near Chicopee, Massachusetts",
+      "meta_description": "Find the best U-Pick farms near Chicopee, Massachusetts. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Paragould",
+      "slug": "paragould",
+      "population": null,
+      "coordinates": {
+        "latitude": 36.052562,
+        "longitude": -90.48868
+      },
+      "province": "Arkansas",
+      "province_slug": "ar",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "paragould-ar-us",
+      "full_location": "Paragould, AR, United States",
+      "seo_title": "U-Pick Farms near Paragould, Arkansas",
+      "meta_description": "Find the best U-Pick farms near Paragould, Arkansas. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "Allentown",
+      "slug": "allentown",
+      "population": null,
+      "coordinates": {
+        "latitude": 40.602294,
+        "longitude": -75.47141
+      },
+      "province": "Pennsylvania",
+      "province_slug": "pa",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "allentown-pa-us",
+      "full_location": "Allentown, PA, United States",
+      "seo_title": "U-Pick Farms near Allentown, Pennsylvania",
+      "meta_description": "Find the best U-Pick farms near Allentown, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees."
+    },
+    {
+      "name": "East Lansing",
+      "slug": "east-lansing",
+      "population": null,
+      "coordinates": {
+        "latitude": 42.736979,
+        "longitude": -84.483865
+      },
+      "province": "Michigan",
+      "province_slug": "mi",
+      "country": "United States",
+      "country_slug": "us",
+      "location_slug": "east-lansing-mi-us",
+      "full_location": "East Lansing, MI, United States",
+      "seo_title": "U-Pick Farms near East Lansing, Michigan",
+      "meta_description": "Find the best U-Pick farms near East Lansing, Michigan. Fresh apples, berries, pumpkins and Christmas trees."
     }
   ]
 }

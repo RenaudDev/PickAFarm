@@ -53,8 +53,8 @@ function FarmNavbar() {
                 src="/images/navbarlogo1.webp" 
                 alt="Pick A Farm Logo" 
                 width={56} 
-                height={32} 
-                className="h-16 w-36"
+                height={28} 
+                className="h-16 w-42"
               />
               
             </div>
