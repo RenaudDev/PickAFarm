@@ -2,6 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import ReviewForm from '@/components/review-form'
+import ReviewsList from '@/components/review-list'
+
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -40,6 +43,7 @@ import { notFound } from 'next/navigation'
 import { generateFarmMetadata } from "@/lib/seo-metadata"
 import { getVarietySlug } from "@/lib/variety-mapper"
 import { Metadata } from "next"
+import { getReviews } from "@/lib/reviews"
 
 // Import farms data for static generation
 import farmsData from "../../../data/farms.json"
@@ -98,6 +102,9 @@ type FarmData = {
   [key: string]: any // Allow for additional dynamic fields
 }
 
+
+// Add this after the imports, before generateStaticParams
+
 // Generate static params using slugs from farms.json
 export async function generateStaticParams() {
   return farmsData.map((farm: FarmData) => ({
@@ -149,6 +156,7 @@ const getCategoryInfo = (categories: string) => {
   }).filter(Boolean) // Remove null entries
 }
 
+
 export default async function FarmListingPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   
@@ -159,6 +167,9 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
   if (!farm) {
     notFound()
   }
+
+  // ✅ Fetch reviews INSIDE the component
+  const reviewsData = await getReviews(farm.id)
 
   // Parse comma-separated strings into arrays
   const amenities = farm.amenities ? farm.amenities.split(',').map((a: string) => a.trim()) : []
@@ -186,7 +197,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
     return {
       name: farm.city_name,
       province: farm.state_province,
-      slug: `${farm.city_name.toLowerCase().replace(/\s+/g, '-')}-${farm.state_province.toLowerCase().replace(/\s+/g, '-')}-ca`
+      slug: `${farm.city_name.toLowerCase().replace(/\s+/g, '-')}-${farm.state_province.toLowerCase().replace(/\s+/g, '-')}-ca` 
     }
   }
   
@@ -399,6 +410,10 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                   </div>
                 </CardContent>
               </Card>
+
+              <ReviewsList farmId={farm.id} />
+  <ReviewForm farmId={farm.id} farmName={farm.name} />
+
             </div>
 
             

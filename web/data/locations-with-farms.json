@@ -5108,6 +5108,278 @@
     "farmCount": 19
   },
   {
+    "name": "Allentown",
+    "slug": "allentown",
+    "population": null,
+    "coordinates": {
+      "latitude": 40.602294,
+      "longitude": -75.47141
+    },
+    "province": "Pennsylvania",
+    "province_slug": "pa",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "allentown-pa-us",
+    "full_location": "Allentown, PA, United States",
+    "seo_title": "U-Pick Farms near Allentown, Pennsylvania",
+    "meta_description": "Find the best U-Pick farms near Allentown, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292450",
+        "name": "Bobwhite Acres",
+        "slug": "bobwhite-acres",
+        "url": "/farms/bobwhite-acres",
+        "latitude": 40.4471934,
+        "longitude": -75.4670278,
+        "city": "Coopersburg",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 17
+      },
+      {
+        "id": "zcrm_38729000000292388",
+        "name": "AGA Farms",
+        "slug": "aga-farms",
+        "url": "/farms/aga-farms",
+        "latitude": 40.422693,
+        "longitude": -75.233023,
+        "city": "Perkasie",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vineyards, Corn Mazes, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 28
+      },
+      {
+        "id": "zcrm_38729000000292567",
+        "name": "Crystal Spring Tree Farm",
+        "slug": "crystal-spring-tree-farm",
+        "url": "/farms/crystal-spring-tree-farm",
+        "latitude": 40.8160789,
+        "longitude": -75.7710404,
+        "city": "Lehighton",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 35
+      },
+      {
+        "id": "zcrm_38729000000292430",
+        "name": "Beck Tree Farms",
+        "slug": "beck-tree-farms",
+        "url": "/farms/beck-tree-farms",
+        "latitude": 40.514255,
+        "longitude": -75.871453,
+        "city": "Hamburg",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 35
+      },
+      {
+        "id": "zcrm_38729000000292431",
+        "name": "Beck's Christmas Trees",
+        "slug": "beck-s-christmas-trees",
+        "url": "/farms/beck-s-christmas-trees",
+        "latitude": 40.867375,
+        "longitude": -75.122741,
+        "city": "Mt Bethel",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 42
+      },
+      {
+        "id": "zcrm_38729000000292539",
+        "name": "Corkum Tree Farm",
+        "slug": "corkum-tree-farm",
+        "url": "/farms/corkum-tree-farm",
+        "latitude": 40.2093016,
+        "longitude": -75.433736,
+        "city": "Collegeville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 44
+      },
+      {
+        "id": "zcrm_38729000000292457",
+        "name": "Boswell's Tree Farm",
+        "slug": "boswell-s-tree-farm",
+        "url": "/farms/boswell-s-tree-farm",
+        "latitude": 40.182154,
+        "longitude": -75.406372,
+        "city": "Collegeville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 47
+      },
+      {
+        "id": "zcrm_38729000000292412",
+        "name": "Arader Farm",
+        "slug": "arader-farm",
+        "url": "/farms/arader-farm",
+        "latitude": 40.1746876,
+        "longitude": -75.4919201,
+        "city": "Collegeville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Corn Mazes",
+        "featured": false,
+        "distance_km": 48
+      },
+      {
+        "id": "zcrm_38729000000305782",
+        "name": "Woodsedge Tree Farm",
+        "slug": "woodsedge-tree-farm",
+        "url": "/farms/woodsedge-tree-farm",
+        "latitude": 40.841192,
+        "longitude": -74.997338,
+        "city": "Belvidere",
+        "province": "New Jersey",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 48
+      },
+      {
+        "id": "zcrm_38729000000292395",
+        "name": "Alger Tree Farm",
+        "slug": "alger-tree-farm",
+        "url": "/farms/alger-tree-farm",
+        "latitude": 40.73579,
+        "longitude": -74.777667,
+        "city": "Califon",
+        "province": "New Jersey",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 60
+      },
+      {
+        "id": "zcrm_38729000000292469",
+        "name": "Buck Run Evergreen Farms",
+        "slug": "buck-run-evergreen-farms",
+        "url": "/farms/buck-run-evergreen-farms",
+        "latitude": 40.589211,
+        "longitude": -76.247012,
+        "city": "Schuylkill Haven",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 66
+      },
+      {
+        "id": "zcrm_38729000000292505",
+        "name": "Chris' Trees",
+        "slug": "chris-trees",
+        "url": "/farms/chris-trees",
+        "latitude": 40.4494758,
+        "longitude": -74.5930919,
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 76
+      },
+      {
+        "id": "zcrm_38729000000292499",
+        "name": "Cerboâs Tree Farm",
+        "slug": "cerbo-s-tree-farm",
+        "url": "/farms/cerbo-s-tree-farm",
+        "latitude": 41.12843,
+        "longitude": -74.751604,
+        "city": "Branchville",
+        "province": "New Jersey",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vegetable Farms",
+        "featured": false,
+        "distance_km": 84
+      },
+      {
+        "id": "zcrm_38729000000292403",
+        "name": "Am-Jac Christmas Tree Farm",
+        "slug": "am-jac-christmas-tree-farm",
+        "url": "/farms/am-jac-christmas-tree-farm",
+        "latitude": 41.133944,
+        "longitude": -74.7234369,
+        "city": "Augusta",
+        "province": "New Jersey",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 86
+      },
+      {
+        "id": "zcrm_38729000000305754",
+        "name": "Wiggins Christmas Tree Farm",
+        "slug": "wiggins-christmas-tree-farm",
+        "url": "/farms/wiggins-christmas-tree-farm",
+        "latitude": 39.8674783,
+        "longitude": -75.8644051,
+        "city": "Cochranville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 88
+      },
+      {
+        "id": "zcrm_38729000000292524",
+        "name": "Clarks Christmas Tree Farm and Gift Shop",
+        "slug": "clarks-christmas-tree-farm-and-gift-shop",
+        "url": "/farms/clarks-christmas-tree-farm-and-gift-shop",
+        "latitude": 39.8354942,
+        "longitude": -75.9121587,
+        "city": "Cochranville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 93
+      },
+      {
+        "id": "zcrm_38729000000292448",
+        "name": "Blue Ridge Christmas Tree Farm",
+        "slug": "blue-ridge-christmas-tree-farm",
+        "url": "/farms/blue-ridge-christmas-tree-farm",
+        "latitude": 40.3912829,
+        "longitude": -76.5784427,
+        "city": "Annville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 97
+      },
+      {
+        "id": "zcrm_38729000000292471",
+        "name": "Bullock Farms",
+        "slug": "bullock-farms",
+        "url": "/farms/bullock-farms",
+        "latitude": 40.147023,
+        "longitude": -74.484506,
+        "city": "Cream Ridge",
+        "province": "New Jersey",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Corn Mazes",
+        "featured": false,
+        "distance_km": 98
+      }
+    ],
+    "farmCount": 18
+  },
+  {
     "name": "Brantford",
     "slug": "brantford",
     "population": 104688,
@@ -9144,6 +9416,194 @@
     "farmCount": 12
   },
   {
+    "name": "Chicopee",
+    "slug": "chicopee",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.148704,
+      "longitude": -72.607867
+    },
+    "province": "Massachusetts",
+    "province_slug": "ma",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "chicopee-ma-us",
+    "full_location": "Chicopee, MA, United States",
+    "seo_title": "U-Pick Farms near Chicopee, Massachusetts",
+    "meta_description": "Find the best U-Pick farms near Chicopee, Massachusetts. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292557",
+        "name": "Cranston's Christmas Tree Farm",
+        "slug": "cranston-s-christmas-tree-farm",
+        "url": "/farms/cranston-s-christmas-tree-farm",
+        "latitude": 42.5344255,
+        "longitude": -72.7914471,
+        "city": "Ashfield",
+        "province": "Massachusetts",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 45
+      },
+      {
+        "id": "zcrm_38729000000292538",
+        "name": "Corian Tree Farm LLC",
+        "slug": "corian-tree-farm-llc",
+        "url": "/farms/corian-tree-farm-llc",
+        "latitude": 41.8439455,
+        "longitude": -73.0516696,
+        "city": "New Hartford",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 50
+      },
+      {
+        "id": "zcrm_38729000000292571",
+        "name": "Davagian Tree Farm",
+        "slug": "davagian-tree-farm",
+        "url": "/farms/davagian-tree-farm",
+        "latitude": 42.1453455,
+        "longitude": -71.7765179,
+        "city": "Sutton",
+        "province": "Massachusetts",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 69
+      },
+      {
+        "id": "zcrm_38729000000292536",
+        "name": "Connwood Foresters, Inc.",
+        "slug": "connwood-foresters-inc",
+        "url": "/farms/connwood-foresters-inc",
+        "latitude": 41.5251901,
+        "longitude": -72.6983192,
+        "city": "Rockfall",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 70
+      },
+      {
+        "id": "zcrm_38729000000292398",
+        "name": "Allen Hill Farm",
+        "slug": "allen-hill-farm",
+        "url": "/farms/allen-hill-farm",
+        "latitude": 41.7688514,
+        "longitude": -71.9211019,
+        "city": "Brooklyn",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 71
+      },
+      {
+        "id": "zcrm_38729000000292482",
+        "name": "Canaan Conifers",
+        "slug": "canaan-conifers",
+        "url": "/farms/canaan-conifers",
+        "latitude": 42.3842882,
+        "longitude": -73.4217936,
+        "city": "Canaan",
+        "province": "NY",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 72
+      },
+      {
+        "id": "zcrm_38729000000292407",
+        "name": "Angevine Farm - Pumpkin Patch & Harvest Barn",
+        "slug": "angevine-farm-pumpkin-patch-harvest-barn",
+        "url": "/farms/angevine-farm-pumpkin-patch-harvest-barn",
+        "latitude": 41.72211,
+        "longitude": -73.32448,
+        "city": "Warren",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Vineyards",
+        "featured": false,
+        "distance_km": 76
+      },
+      {
+        "id": "zcrm_38729000000305791",
+        "name": "Yurechko Tree Farm",
+        "slug": "yurechko-tree-farm",
+        "url": "/farms/yurechko-tree-farm",
+        "latitude": 41.5939675,
+        "longitude": -71.9294128,
+        "city": "Griswold",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 83
+      },
+      {
+        "id": "zcrm_38729000000292512",
+        "name": "Christmas Hill Tree Farm",
+        "slug": "christmas-hill-tree-farm",
+        "url": "/farms/christmas-hill-tree-farm",
+        "latitude": 41.3590668,
+        "longitude": -72.7241383,
+        "city": "Guilford",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 88
+      },
+      {
+        "id": "zcrm_38729000000292582",
+        "name": "D.J. Hussey Farm",
+        "slug": "d-j-hussey-farm",
+        "url": "/farms/d-j-hussey-farm",
+        "latitude": 42.684888,
+        "longitude": -71.719719,
+        "city": "Townsend",
+        "province": "Massachusetts",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 94
+      },
+      {
+        "id": "zcrm_38729000000305766",
+        "name": "Windswept Tree Farm",
+        "slug": "windswept-tree-farm",
+        "url": "/farms/windswept-tree-farm",
+        "latitude": 41.591061,
+        "longitude": -73.476272,
+        "city": "New Milford",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vineyards",
+        "featured": false,
+        "distance_km": 95
+      },
+      {
+        "id": "zcrm_38729000000292530",
+        "name": "Cold Spring Tree Farm",
+        "slug": "cold-spring-tree-farm",
+        "url": "/farms/cold-spring-tree-farm",
+        "latitude": 42.1751244,
+        "longitude": -73.8107872,
+        "city": "Hudson",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 99
+      }
+    ],
+    "farmCount": 12
+  },
+  {
     "name": "Coquitlam",
     "slug": "coquitlam",
     "population": 148625,
@@ -9703,6 +10163,194 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 97
+      }
+    ],
+    "farmCount": 12
+  },
+  {
+    "name": "Lebanon",
+    "slug": "lebanon",
+    "population": null,
+    "coordinates": {
+      "latitude": 40.339215,
+      "longitude": -76.42621
+    },
+    "province": "Pennsylvania",
+    "province_slug": "pa",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "lebanon-pa-us",
+    "full_location": "Lebanon, PA, United States",
+    "seo_title": "U-Pick Farms near Lebanon, Pennsylvania",
+    "meta_description": "Find the best U-Pick farms near Lebanon, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292448",
+        "name": "Blue Ridge Christmas Tree Farm",
+        "slug": "blue-ridge-christmas-tree-farm",
+        "url": "/farms/blue-ridge-christmas-tree-farm",
+        "latitude": 40.3912829,
+        "longitude": -76.5784427,
+        "city": "Annville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 14
+      },
+      {
+        "id": "zcrm_38729000000292469",
+        "name": "Buck Run Evergreen Farms",
+        "slug": "buck-run-evergreen-farms",
+        "url": "/farms/buck-run-evergreen-farms",
+        "latitude": 40.589211,
+        "longitude": -76.247012,
+        "city": "Schuylkill Haven",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 32
+      },
+      {
+        "id": "zcrm_38729000000292545",
+        "name": "Country Barn Farm Market",
+        "slug": "country-barn-farm-market",
+        "url": "/farms/country-barn-farm-market",
+        "latitude": 40.0314728,
+        "longitude": -76.4002621,
+        "city": "Lancaster",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Corn Mazes, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 34
+      },
+      {
+        "id": "zcrm_38729000000292464",
+        "name": "Browns Christmas Tree Farm",
+        "slug": "browns-christmas-tree-farm",
+        "url": "/farms/browns-christmas-tree-farm",
+        "latitude": 40.006944,
+        "longitude": -76.694543,
+        "city": "York",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      },
+      {
+        "id": "zcrm_38729000000292430",
+        "name": "Beck Tree Farms",
+        "slug": "beck-tree-farms",
+        "url": "/farms/beck-tree-farms",
+        "latitude": 40.514255,
+        "longitude": -75.871453,
+        "city": "Hamburg",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 51
+      },
+      {
+        "id": "zcrm_38729000000305754",
+        "name": "Wiggins Christmas Tree Farm",
+        "slug": "wiggins-christmas-tree-farm",
+        "url": "/farms/wiggins-christmas-tree-farm",
+        "latitude": 39.8674783,
+        "longitude": -75.8644051,
+        "city": "Cochranville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 71
+      },
+      {
+        "id": "zcrm_38729000000292524",
+        "name": "Clarks Christmas Tree Farm and Gift Shop",
+        "slug": "clarks-christmas-tree-farm-and-gift-shop",
+        "url": "/farms/clarks-christmas-tree-farm-and-gift-shop",
+        "latitude": 39.8354942,
+        "longitude": -75.9121587,
+        "city": "Cochranville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 71
+      },
+      {
+        "id": "zcrm_38729000000292567",
+        "name": "Crystal Spring Tree Farm",
+        "slug": "crystal-spring-tree-farm",
+        "url": "/farms/crystal-spring-tree-farm",
+        "latitude": 40.8160789,
+        "longitude": -75.7710404,
+        "city": "Lehighton",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 77
+      },
+      {
+        "id": "zcrm_38729000000292412",
+        "name": "Arader Farm",
+        "slug": "arader-farm",
+        "url": "/farms/arader-farm",
+        "latitude": 40.1746876,
+        "longitude": -75.4919201,
+        "city": "Collegeville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Corn Mazes",
+        "featured": false,
+        "distance_km": 81
+      },
+      {
+        "id": "zcrm_38729000000292450",
+        "name": "Bobwhite Acres",
+        "slug": "bobwhite-acres",
+        "url": "/farms/bobwhite-acres",
+        "latitude": 40.4471934,
+        "longitude": -75.4670278,
+        "city": "Coopersburg",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 82
+      },
+      {
+        "id": "zcrm_38729000000292539",
+        "name": "Corkum Tree Farm",
+        "slug": "corkum-tree-farm",
+        "url": "/farms/corkum-tree-farm",
+        "latitude": 40.2093016,
+        "longitude": -75.433736,
+        "city": "Collegeville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 85
+      },
+      {
+        "id": "zcrm_38729000000292457",
+        "name": "Boswell's Tree Farm",
+        "slug": "boswell-s-tree-farm",
+        "url": "/farms/boswell-s-tree-farm",
+        "latitude": 40.182154,
+        "longitude": -75.406372,
+        "city": "Collegeville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 88
       }
     ],
     "farmCount": 12
@@ -12318,6 +12966,152 @@
     "farmCount": 9
   },
   {
+    "name": "Harrisburg",
+    "slug": "harrisburg",
+    "population": null,
+    "coordinates": {
+      "latitude": 40.273191,
+      "longitude": -76.886701
+    },
+    "province": "Pennsylvania",
+    "province_slug": "pa",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "harrisburg-pa-us",
+    "full_location": "Harrisburg, PA, United States",
+    "seo_title": "U-Pick Farms near Harrisburg, Pennsylvania",
+    "meta_description": "Find the best U-Pick farms near Harrisburg, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292448",
+        "name": "Blue Ridge Christmas Tree Farm",
+        "slug": "blue-ridge-christmas-tree-farm",
+        "url": "/farms/blue-ridge-christmas-tree-farm",
+        "latitude": 40.3912829,
+        "longitude": -76.5784427,
+        "city": "Annville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 29
+      },
+      {
+        "id": "zcrm_38729000000292464",
+        "name": "Browns Christmas Tree Farm",
+        "slug": "browns-christmas-tree-farm",
+        "url": "/farms/browns-christmas-tree-farm",
+        "latitude": 40.006944,
+        "longitude": -76.694543,
+        "city": "York",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 34
+      },
+      {
+        "id": "zcrm_38729000000292545",
+        "name": "Country Barn Farm Market",
+        "slug": "country-barn-farm-market",
+        "url": "/farms/country-barn-farm-market",
+        "latitude": 40.0314728,
+        "longitude": -76.4002621,
+        "city": "Lancaster",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Corn Mazes, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 49
+      },
+      {
+        "id": "zcrm_38729000000292469",
+        "name": "Buck Run Evergreen Farms",
+        "slug": "buck-run-evergreen-farms",
+        "url": "/farms/buck-run-evergreen-farms",
+        "latitude": 40.589211,
+        "longitude": -76.247012,
+        "city": "Schuylkill Haven",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 65
+      },
+      {
+        "id": "zcrm_38729000000305792",
+        "name": "Zepp's Tree Farm",
+        "slug": "zepp-s-tree-farm",
+        "url": "/farms/zepp-s-tree-farm",
+        "latitude": 39.496751,
+        "longitude": -77.000657,
+        "city": "Westminster",
+        "province": "Maryland",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 87
+      },
+      {
+        "id": "zcrm_38729000000292430",
+        "name": "Beck Tree Farms",
+        "slug": "beck-tree-farms",
+        "url": "/farms/beck-tree-farms",
+        "latitude": 40.514255,
+        "longitude": -75.871453,
+        "city": "Hamburg",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 90
+      },
+      {
+        "id": "zcrm_38729000000292524",
+        "name": "Clarks Christmas Tree Farm and Gift Shop",
+        "slug": "clarks-christmas-tree-farm-and-gift-shop",
+        "url": "/farms/clarks-christmas-tree-farm-and-gift-shop",
+        "latitude": 39.8354942,
+        "longitude": -75.9121587,
+        "city": "Cochranville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 96
+      },
+      {
+        "id": "zcrm_38729000000305776",
+        "name": "Wolfeâs PIne Valley Farms, LLC (Sykesville Md)",
+        "slug": "wolfe-s-pine-valley-farms-llc-sykesville-md",
+        "url": "/farms/wolfe-s-pine-valley-farms-llc-sykesville-md",
+        "latitude": 39.4040254,
+        "longitude": -77.0348582,
+        "city": "Sykesville",
+        "province": "Maryland",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 97
+      },
+      {
+        "id": "zcrm_38729000000305754",
+        "name": "Wiggins Christmas Tree Farm",
+        "slug": "wiggins-christmas-tree-farm",
+        "url": "/farms/wiggins-christmas-tree-farm",
+        "latitude": 39.8674783,
+        "longitude": -75.8644051,
+        "city": "Cochranville",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 98
+      }
+    ],
+    "farmCount": 9
+  },
+  {
     "name": "Jersey City",
     "slug": "jersey-city",
     "population": 257342,
@@ -13798,6 +14592,124 @@
     "farmCount": 7
   },
   {
+    "name": "Kingston",
+    "slug": "kingston",
+    "population": null,
+    "coordinates": {
+      "latitude": 41.927037,
+      "longitude": -73.997361
+    },
+    "province": "New York",
+    "province_slug": "ny",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "kingston-ny-us",
+    "full_location": "Kingston, NY, United States",
+    "seo_title": "U-Pick Farms near Kingston, New York",
+    "meta_description": "Find the best U-Pick farms near Kingston, New York. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292433",
+        "name": "Bell's Christmas Trees",
+        "slug": "bell-s-christmas-trees",
+        "url": "/farms/bell-s-christmas-trees",
+        "latitude": 41.826795,
+        "longitude": -74.2689709,
+        "city": "Accord",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 25
+      },
+      {
+        "id": "zcrm_38729000000292530",
+        "name": "Cold Spring Tree Farm",
+        "slug": "cold-spring-tree-farm",
+        "url": "/farms/cold-spring-tree-farm",
+        "latitude": 42.1751244,
+        "longitude": -73.8107872,
+        "city": "Hudson",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 32
+      },
+      {
+        "id": "zcrm_38729000000292389",
+        "name": "Airfield Farms",
+        "slug": "airfield-farms",
+        "url": "/farms/airfield-farms",
+        "latitude": 41.5606716,
+        "longitude": -74.0183463,
+        "city": "Newburgh",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 41
+      },
+      {
+        "id": "zcrm_38729000000305766",
+        "name": "Windswept Tree Farm",
+        "slug": "windswept-tree-farm",
+        "url": "/farms/windswept-tree-farm",
+        "latitude": 41.591061,
+        "longitude": -73.476272,
+        "city": "New Milford",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vineyards",
+        "featured": false,
+        "distance_km": 57
+      },
+      {
+        "id": "zcrm_38729000000292407",
+        "name": "Angevine Farm - Pumpkin Patch & Harvest Barn",
+        "slug": "angevine-farm-pumpkin-patch-harvest-barn",
+        "url": "/farms/angevine-farm-pumpkin-patch-harvest-barn",
+        "latitude": 41.72211,
+        "longitude": -73.32448,
+        "city": "Warren",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Vineyards",
+        "featured": false,
+        "distance_km": 60
+      },
+      {
+        "id": "zcrm_38729000000292482",
+        "name": "Canaan Conifers",
+        "slug": "canaan-conifers",
+        "url": "/farms/canaan-conifers",
+        "latitude": 42.3842882,
+        "longitude": -73.4217936,
+        "city": "Canaan",
+        "province": "NY",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 70
+      },
+      {
+        "id": "zcrm_38729000000292538",
+        "name": "Corian Tree Farm LLC",
+        "slug": "corian-tree-farm-llc",
+        "url": "/farms/corian-tree-farm-llc",
+        "latitude": 41.8439455,
+        "longitude": -73.0516696,
+        "city": "New Hartford",
+        "province": "Connecticut",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 79
+      }
+    ],
+    "farmCount": 7
+  },
+  {
     "name": "Repentigny",
     "slug": "repentigny",
     "population": 86100,
@@ -14268,6 +15180,318 @@
       }
     ],
     "farmCount": 7
+  },
+  {
+    "name": "Albany",
+    "slug": "albany",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.651809,
+      "longitude": -73.754471
+    },
+    "province": "New York",
+    "province_slug": "ny",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "albany-ny-us",
+    "full_location": "Albany, NY, United States",
+    "seo_title": "U-Pick Farms near Albany, New York",
+    "meta_description": "Find the best U-Pick farms near Albany, New York. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292482",
+        "name": "Canaan Conifers",
+        "slug": "canaan-conifers",
+        "url": "/farms/canaan-conifers",
+        "latitude": 42.3842882,
+        "longitude": -73.4217936,
+        "city": "Canaan",
+        "province": "NY",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 40
+      },
+      {
+        "id": "zcrm_38729000000292459",
+        "name": "Boulder Brook Farm",
+        "slug": "boulder-brook-farm",
+        "url": "/farms/boulder-brook-farm",
+        "latitude": 43.0202023,
+        "longitude": -73.7729078,
+        "city": "Ballston Spa",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 41
+      },
+      {
+        "id": "zcrm_38729000000292417",
+        "name": "Bailey Family Christmas Trees",
+        "slug": "bailey-family-christmas-trees",
+        "url": "/farms/bailey-family-christmas-trees",
+        "latitude": 42.9917172,
+        "longitude": -73.4708521,
+        "city": "Cambridge",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 44
+      },
+      {
+        "id": "zcrm_38729000000292449",
+        "name": "Bob's Trees",
+        "slug": "bob-s-trees",
+        "url": "/farms/bob-s-trees",
+        "latitude": 43.0054435,
+        "longitude": -74.08514,
+        "city": "Hagaman",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 48
+      },
+      {
+        "id": "zcrm_38729000000292530",
+        "name": "Cold Spring Tree Farm",
+        "slug": "cold-spring-tree-farm",
+        "url": "/farms/cold-spring-tree-farm",
+        "latitude": 42.1751244,
+        "longitude": -73.8107872,
+        "city": "Hudson",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 53
+      },
+      {
+        "id": "zcrm_38729000000292557",
+        "name": "Cranston's Christmas Tree Farm",
+        "slug": "cranston-s-christmas-tree-farm",
+        "url": "/farms/cranston-s-christmas-tree-farm",
+        "latitude": 42.5344255,
+        "longitude": -72.7914471,
+        "city": "Ashfield",
+        "province": "Massachusetts",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 80
+      }
+    ],
+    "farmCount": 6
+  },
+  {
+    "name": "Appleton",
+    "slug": "appleton",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.262271,
+      "longitude": -88.407105
+    },
+    "province": "Wisconsin",
+    "province_slug": "wi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "appleton-wi-us",
+    "full_location": "Appleton, WI, United States",
+    "seo_title": "U-Pick Farms near Appleton, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Appleton, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292419",
+        "name": "Balsam Creek Lane Tree Farm",
+        "slug": "balsam-creek-lane-tree-farm",
+        "url": "/farms/balsam-creek-lane-tree-farm",
+        "latitude": 44.544572,
+        "longitude": -88.785407,
+        "city": "Bear Creek",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      },
+      {
+        "id": "zcrm_38729000000292390",
+        "name": "Aissen Tree Farm",
+        "slug": "aissen-tree-farm",
+        "url": "/farms/aissen-tree-farm",
+        "latitude": 44.4421025,
+        "longitude": -87.7133856,
+        "city": "Luxemburg",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 59
+      },
+      {
+        "id": "zcrm_38729000000305758",
+        "name": "Wild Rose Choose & Cut",
+        "slug": "wild-rose-choose-cut",
+        "url": "/farms/wild-rose-choose-cut",
+        "latitude": 44.1769772,
+        "longitude": -89.2288252,
+        "city": "Wild Rose",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 66
+      },
+      {
+        "id": "zcrm_38729000000292426",
+        "name": "Bay View Tree Farm",
+        "slug": "bay-view-tree-farm",
+        "url": "/farms/bay-view-tree-farm",
+        "latitude": 44.6750322,
+        "longitude": -87.7202425,
+        "city": "Luxemburg",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 71
+      },
+      {
+        "id": "zcrm_38729000000292408",
+        "name": "ANR Tree Farm",
+        "slug": "anr-tree-farm",
+        "url": "/farms/anr-tree-farm",
+        "latitude": 44.1335087,
+        "longitude": -89.3016782,
+        "city": "Wautoma",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 73
+      },
+      {
+        "id": "zcrm_38729000000292406",
+        "name": "Andersonâs Christmas Tree Farm",
+        "slug": "anderson-s-christmas-tree-farm",
+        "url": "/farms/anderson-s-christmas-tree-farm",
+        "latitude": 43.574318,
+        "longitude": -87.908013,
+        "city": "Random Lake",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 86
+      }
+    ],
+    "farmCount": 6
+  },
+  {
+    "name": "Augusta",
+    "slug": "augusta",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.316496,
+      "longitude": -69.76811
+    },
+    "province": "Maine",
+    "province_slug": "me",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "augusta-me-us",
+    "full_location": "Augusta, ME, United States",
+    "seo_title": "U-Pick Farms near Augusta, Maine",
+    "meta_description": "Find the best U-Pick farms near Augusta, Maine. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292501",
+        "name": "Chestnut Hill Farm",
+        "slug": "chestnut-hill-farm",
+        "url": "/farms/chestnut-hill-farm",
+        "latitude": 44.591558,
+        "longitude": -69.6459491,
+        "city": "Fairfield",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 32
+      },
+      {
+        "id": "zcrm_38729000000292515",
+        "name": "Christmas Tree Bazaar",
+        "slug": "christmas-tree-bazaar",
+        "url": "/farms/christmas-tree-bazaar",
+        "latitude": 44.0686639,
+        "longitude": -69.4801437,
+        "city": "Nobleboro",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 36
+      },
+      {
+        "id": "zcrm_38729000000292420",
+        "name": "Balsam Hill Farm",
+        "slug": "balsam-hill-farm",
+        "url": "/farms/balsam-hill-farm",
+        "latitude": 44.2394989,
+        "longitude": -69.2454507,
+        "city": "Hope",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 42
+      },
+      {
+        "id": "zcrm_38729000000292497",
+        "name": "Celebration Tree Farm & Wellness Center",
+        "slug": "celebration-tree-farm-wellness-center",
+        "url": "/farms/celebration-tree-farm-wellness-center",
+        "latitude": 43.9709087,
+        "longitude": -70.1597143,
+        "city": "Durham",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 50
+      },
+      {
+        "id": "zcrm_38729000000292472",
+        "name": "Burgess Tree Farm",
+        "slug": "burgess-tree-farm",
+        "url": "/farms/burgess-tree-farm",
+        "latitude": 44.8328292,
+        "longitude": -69.2032803,
+        "city": "Newport",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 73
+      },
+      {
+        "id": "zcrm_38729000000292432",
+        "name": "Beech Ridge Farm",
+        "slug": "beech-ridge-farm",
+        "url": "/farms/beech-ridge-farm",
+        "latitude": 43.6152442,
+        "longitude": -70.4051371,
+        "city": "Scarborough",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 93
+      }
+    ],
+    "farmCount": 6
   },
   {
     "name": "Belleville",
@@ -15414,6 +16638,110 @@
     "farmCount": 6
   },
   {
+    "name": "Schenectady",
+    "slug": "schenectady",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.814351,
+      "longitude": -73.938742
+    },
+    "province": "New York",
+    "province_slug": "ny",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "schenectady-ny-us",
+    "full_location": "Schenectady, NY, United States",
+    "seo_title": "U-Pick Farms near Schenectady, New York",
+    "meta_description": "Find the best U-Pick farms near Schenectady, New York. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292449",
+        "name": "Bob's Trees",
+        "slug": "bob-s-trees",
+        "url": "/farms/bob-s-trees",
+        "latitude": 43.0054435,
+        "longitude": -74.08514,
+        "city": "Hagaman",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 24
+      },
+      {
+        "id": "zcrm_38729000000292459",
+        "name": "Boulder Brook Farm",
+        "slug": "boulder-brook-farm",
+        "url": "/farms/boulder-brook-farm",
+        "latitude": 43.0202023,
+        "longitude": -73.7729078,
+        "city": "Ballston Spa",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 27
+      },
+      {
+        "id": "zcrm_38729000000292417",
+        "name": "Bailey Family Christmas Trees",
+        "slug": "bailey-family-christmas-trees",
+        "url": "/farms/bailey-family-christmas-trees",
+        "latitude": 42.9917172,
+        "longitude": -73.4708521,
+        "city": "Cambridge",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      },
+      {
+        "id": "zcrm_38729000000292482",
+        "name": "Canaan Conifers",
+        "slug": "canaan-conifers",
+        "url": "/farms/canaan-conifers",
+        "latitude": 42.3842882,
+        "longitude": -73.4217936,
+        "city": "Canaan",
+        "province": "NY",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 64
+      },
+      {
+        "id": "zcrm_38729000000292530",
+        "name": "Cold Spring Tree Farm",
+        "slug": "cold-spring-tree-farm",
+        "url": "/farms/cold-spring-tree-farm",
+        "latitude": 42.1751244,
+        "longitude": -73.8107872,
+        "city": "Hudson",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 72
+      },
+      {
+        "id": "zcrm_38729000000292557",
+        "name": "Cranston's Christmas Tree Farm",
+        "slug": "cranston-s-christmas-tree-farm",
+        "url": "/farms/cranston-s-christmas-tree-farm",
+        "latitude": 42.5344255,
+        "longitude": -72.7914471,
+        "city": "Ashfield",
+        "province": "Massachusetts",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 99
+      }
+    ],
+    "farmCount": 6
+  },
+  {
     "name": "Aurora",
     "slug": "aurora",
     "population": 199963,
@@ -15499,6 +16827,186 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 94
+      }
+    ],
+    "farmCount": 5
+  },
+  {
+    "name": "Bangor",
+    "slug": "bangor",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.801613,
+      "longitude": -68.771226
+    },
+    "province": "Maine",
+    "province_slug": "me",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "bangor-me-us",
+    "full_location": "Bangor, ME, United States",
+    "seo_title": "U-Pick Farms near Bangor, Maine",
+    "meta_description": "Find the best U-Pick farms near Bangor, Maine. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292516",
+        "name": "Christmas Tree Ranch",
+        "slug": "christmas-tree-ranch",
+        "url": "/farms/christmas-tree-ranch",
+        "latitude": 44.8047548,
+        "longitude": -68.367698,
+        "city": "Amherst",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 32
+      },
+      {
+        "id": "zcrm_38729000000292472",
+        "name": "Burgess Tree Farm",
+        "slug": "burgess-tree-farm",
+        "url": "/farms/burgess-tree-farm",
+        "latitude": 44.8328292,
+        "longitude": -69.2032803,
+        "city": "Newport",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 34
+      },
+      {
+        "id": "zcrm_38729000000292420",
+        "name": "Balsam Hill Farm",
+        "slug": "balsam-hill-farm",
+        "url": "/farms/balsam-hill-farm",
+        "latitude": 44.2394989,
+        "longitude": -69.2454507,
+        "city": "Hope",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 73
+      },
+      {
+        "id": "zcrm_38729000000292501",
+        "name": "Chestnut Hill Farm",
+        "slug": "chestnut-hill-farm",
+        "url": "/farms/chestnut-hill-farm",
+        "latitude": 44.591558,
+        "longitude": -69.6459491,
+        "city": "Fairfield",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 73
+      },
+      {
+        "id": "zcrm_38729000000292515",
+        "name": "Christmas Tree Bazaar",
+        "slug": "christmas-tree-bazaar",
+        "url": "/farms/christmas-tree-bazaar",
+        "latitude": 44.0686639,
+        "longitude": -69.4801437,
+        "city": "Nobleboro",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 99
+      }
+    ],
+    "farmCount": 5
+  },
+  {
+    "name": "Boone",
+    "slug": "boone",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.218195,
+      "longitude": -81.683038
+    },
+    "province": "North Carolina",
+    "province_slug": "nc",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "boone-nc-us",
+    "full_location": "Boone, NC, United States",
+    "seo_title": "U-Pick Farms near Boone, North Carolina",
+    "meta_description": "Find the best U-Pick farms near Boone, North Carolina. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292523",
+        "name": "Circle C Tree Farms - Choose & Cut",
+        "slug": "circle-c-tree-farms-choose-cut",
+        "url": "/farms/circle-c-tree-farms-choose-cut",
+        "latitude": 36.2098572,
+        "longitude": -81.6254882,
+        "city": "Boone",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 5
+      },
+      {
+        "id": "zcrm_38729000000292526",
+        "name": "Clawson's Choose & Cut",
+        "slug": "clawson-s-choose-cut",
+        "url": "/farms/clawson-s-choose-cut",
+        "latitude": 36.2733324,
+        "longitude": -81.6512107,
+        "city": "Boone",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 7
+      },
+      {
+        "id": "zcrm_38729000000292541",
+        "name": "Cornett Deal Christmas Tree",
+        "slug": "cornett-deal-christmas-tree",
+        "url": "/farms/cornett-deal-christmas-tree",
+        "latitude": 36.328854,
+        "longitude": -81.847024,
+        "city": "Vilas",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 19
+      },
+      {
+        "id": "zcrm_38729000000292490",
+        "name": "Cartner Christmas Tree Farm",
+        "slug": "cartner-christmas-tree-farm",
+        "url": "/farms/cartner-christmas-tree-farm",
+        "latitude": 36.1201781,
+        "longitude": -81.9352591,
+        "city": "Newland",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 25
+      },
+      {
+        "id": "zcrm_38729000000292574",
+        "name": "David Pittman's Christmas Tree Farm",
+        "slug": "david-pittman-s-christmas-tree-farm",
+        "url": "/farms/david-pittman-s-christmas-tree-farm",
+        "latitude": 36.0497802,
+        "longitude": -82.0018349,
+        "city": "Newland",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 34
       }
     ],
     "farmCount": 5
@@ -15594,6 +17102,96 @@
     "farmCount": 5
   },
   {
+    "name": "Bristol",
+    "slug": "bristol",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.595106,
+      "longitude": -82.188744
+    },
+    "province": "Tennessee",
+    "province_slug": "tn",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "bristol-tn-us",
+    "full_location": "Bristol, TN, United States",
+    "seo_title": "U-Pick Farms near Bristol, Tennessee",
+    "meta_description": "Find the best U-Pick farms near Bristol, Tennessee. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292541",
+        "name": "Cornett Deal Christmas Tree",
+        "slug": "cornett-deal-christmas-tree",
+        "url": "/farms/cornett-deal-christmas-tree",
+        "latitude": 36.328854,
+        "longitude": -81.847024,
+        "city": "Vilas",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 43
+      },
+      {
+        "id": "zcrm_38729000000292490",
+        "name": "Cartner Christmas Tree Farm",
+        "slug": "cartner-christmas-tree-farm",
+        "url": "/farms/cartner-christmas-tree-farm",
+        "latitude": 36.1201781,
+        "longitude": -81.9352591,
+        "city": "Newland",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 57
+      },
+      {
+        "id": "zcrm_38729000000292526",
+        "name": "Clawson's Choose & Cut",
+        "slug": "clawson-s-choose-cut",
+        "url": "/farms/clawson-s-choose-cut",
+        "latitude": 36.2733324,
+        "longitude": -81.6512107,
+        "city": "Boone",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 60
+      },
+      {
+        "id": "zcrm_38729000000292574",
+        "name": "David Pittman's Christmas Tree Farm",
+        "slug": "david-pittman-s-christmas-tree-farm",
+        "url": "/farms/david-pittman-s-christmas-tree-farm",
+        "latitude": 36.0497802,
+        "longitude": -82.0018349,
+        "city": "Newland",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 63
+      },
+      {
+        "id": "zcrm_38729000000292523",
+        "name": "Circle C Tree Farms - Choose & Cut",
+        "slug": "circle-c-tree-farms-choose-cut",
+        "url": "/farms/circle-c-tree-farms-choose-cut",
+        "latitude": 36.2098572,
+        "longitude": -81.6254882,
+        "city": "Boone",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 66
+      }
+    ],
+    "farmCount": 5
+  },
+  {
     "name": "Chatham-Kent",
     "slug": "chatham-kent",
     "population": 103988,
@@ -15679,6 +17277,96 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 92
+      }
+    ],
+    "farmCount": 5
+  },
+  {
+    "name": "Flint",
+    "slug": "flint",
+    "population": null,
+    "coordinates": {
+      "latitude": 43.012527,
+      "longitude": -83.687456
+    },
+    "province": "Michigan",
+    "province_slug": "mi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "flint-mi-us",
+    "full_location": "Flint, MI, United States",
+    "seo_title": "U-Pick Farms near Flint, Michigan",
+    "meta_description": "Find the best U-Pick farms near Flint, Michigan. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000305749",
+        "name": "Whispering Pines Tree Farm",
+        "slug": "whispering-pines-tree-farm",
+        "url": "/farms/whispering-pines-tree-farm",
+        "latitude": 43.1181903,
+        "longitude": -83.8429769,
+        "city": "Flushing Township",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 17
+      },
+      {
+        "id": "zcrm_38729000000292463",
+        "name": "Broadview Christmas Tree",
+        "slug": "broadview-christmas-tree",
+        "url": "/farms/broadview-christmas-tree",
+        "latitude": 42.6750685,
+        "longitude": -83.6640603,
+        "city": "Highland",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 38
+      },
+      {
+        "id": "zcrm_38729000000292555",
+        "name": "Country Roads Farm, LLC",
+        "slug": "country-roads-farm-llc",
+        "url": "/farms/country-roads-farm-llc",
+        "latitude": 43.3513172,
+        "longitude": -83.3347452,
+        "city": "Mayville",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 47
+      },
+      {
+        "id": "zcrm_38729000000292547",
+        "name": "Country Christmas Tree Farm & Gifts",
+        "slug": "country-christmas-tree-farm-gifts",
+        "url": "/farms/country-christmas-tree-farm-gifts",
+        "latitude": 43.1357209,
+        "longitude": -82.7378228,
+        "city": "Avoca",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 78
+      },
+      {
+        "id": "zcrm_38729000000292583",
+        "name": "D'Lamater's Winter-fresh Christmas Tree Farm",
+        "slug": "d-lamater-s-winter-fresh-christmas-tree-farm",
+        "url": "/farms/d-lamater-s-winter-fresh-christmas-tree-farm",
+        "latitude": 42.470604,
+        "longitude": -84.384003,
+        "city": "Leslie",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 83
       }
     ],
     "farmCount": 5
@@ -16224,6 +17912,96 @@
     "farmCount": 5
   },
   {
+    "name": "Waterville",
+    "slug": "waterville",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.552011,
+      "longitude": -69.631712
+    },
+    "province": "Maine",
+    "province_slug": "me",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "waterville-me-us",
+    "full_location": "Waterville, ME, United States",
+    "seo_title": "U-Pick Farms near Waterville, Maine",
+    "meta_description": "Find the best U-Pick farms near Waterville, Maine. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292501",
+        "name": "Chestnut Hill Farm",
+        "slug": "chestnut-hill-farm",
+        "url": "/farms/chestnut-hill-farm",
+        "latitude": 44.591558,
+        "longitude": -69.6459491,
+        "city": "Fairfield",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 5
+      },
+      {
+        "id": "zcrm_38729000000292472",
+        "name": "Burgess Tree Farm",
+        "slug": "burgess-tree-farm",
+        "url": "/farms/burgess-tree-farm",
+        "latitude": 44.8328292,
+        "longitude": -69.2032803,
+        "city": "Newport",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 46
+      },
+      {
+        "id": "zcrm_38729000000292420",
+        "name": "Balsam Hill Farm",
+        "slug": "balsam-hill-farm",
+        "url": "/farms/balsam-hill-farm",
+        "latitude": 44.2394989,
+        "longitude": -69.2454507,
+        "city": "Hope",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 46
+      },
+      {
+        "id": "zcrm_38729000000292515",
+        "name": "Christmas Tree Bazaar",
+        "slug": "christmas-tree-bazaar",
+        "url": "/farms/christmas-tree-bazaar",
+        "latitude": 44.0686639,
+        "longitude": -69.4801437,
+        "city": "Nobleboro",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 55
+      },
+      {
+        "id": "zcrm_38729000000292497",
+        "name": "Celebration Tree Farm & Wellness Center",
+        "slug": "celebration-tree-farm-wellness-center",
+        "url": "/farms/celebration-tree-farm-wellness-center",
+        "latitude": 43.9709087,
+        "longitude": -70.1597143,
+        "city": "Durham",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 77
+      }
+    ],
+    "farmCount": 5
+  },
+  {
     "name": "Blainville",
     "slug": "blainville",
     "population": 59819,
@@ -16300,6 +18078,82 @@
     "farmCount": 4
   },
   {
+    "name": "Cleveland",
+    "slug": "cleveland",
+    "population": null,
+    "coordinates": {
+      "latitude": 35.159518,
+      "longitude": -84.876611
+    },
+    "province": "Tennessee",
+    "province_slug": "tn",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "cleveland-tn-us",
+    "full_location": "Cleveland, TN, United States",
+    "seo_title": "U-Pick Farms near Cleveland, Tennessee",
+    "meta_description": "Find the best U-Pick farms near Cleveland, Tennessee. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292480",
+        "name": "Campbell's Christmas Tree Farm",
+        "slug": "campbell-s-christmas-tree-farm",
+        "url": "/farms/campbell-s-christmas-tree-farm",
+        "latitude": 35.2021237,
+        "longitude": -85.0598199,
+        "city": "Harrison",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 17
+      },
+      {
+        "id": "zcrm_38729000000292508",
+        "name": "Christmas Carroll Tree Farm",
+        "slug": "christmas-carroll-tree-farm",
+        "url": "/farms/christmas-carroll-tree-farm",
+        "latitude": 34.741548,
+        "longitude": -85.182897,
+        "city": "LaFayette",
+        "province": "Georgia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 54
+      },
+      {
+        "id": "zcrm_38729000000292481",
+        "name": "Camp's Christmas Forest",
+        "slug": "camp-s-christmas-forest",
+        "url": "/farms/camp-s-christmas-forest",
+        "latitude": 35.5675403,
+        "longitude": -84.4456068,
+        "city": "Sweetwater",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 60
+      },
+      {
+        "id": "zcrm_38729000000292414",
+        "name": "Arwood Christmas Tree Farm",
+        "slug": "arwood-christmas-tree-farm",
+        "url": "/farms/arwood-christmas-tree-farm",
+        "latitude": 35.8839963,
+        "longitude": -84.3876533,
+        "city": "Kingston",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 92
+      }
+    ],
+    "farmCount": 4
+  },
+  {
     "name": "Concord",
     "slug": "concord",
     "population": 42419,
@@ -16371,6 +18225,82 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 75
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Dalton",
+    "slug": "dalton",
+    "population": null,
+    "coordinates": {
+      "latitude": 34.769802,
+      "longitude": -84.970223
+    },
+    "province": "Georgia",
+    "province_slug": "ga",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "dalton-ga-us",
+    "full_location": "Dalton, GA, United States",
+    "seo_title": "U-Pick Farms near Dalton, Georgia",
+    "meta_description": "Find the best U-Pick farms near Dalton, Georgia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292508",
+        "name": "Christmas Carroll Tree Farm",
+        "slug": "christmas-carroll-tree-farm",
+        "url": "/farms/christmas-carroll-tree-farm",
+        "latitude": 34.741548,
+        "longitude": -85.182897,
+        "city": "LaFayette",
+        "province": "Georgia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 20
+      },
+      {
+        "id": "zcrm_38729000000292480",
+        "name": "Campbell's Christmas Tree Farm",
+        "slug": "campbell-s-christmas-tree-farm",
+        "url": "/farms/campbell-s-christmas-tree-farm",
+        "latitude": 35.2021237,
+        "longitude": -85.0598199,
+        "city": "Harrison",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 49
+      },
+      {
+        "id": "zcrm_38729000000292422",
+        "name": "Barn Hill Tree Farm",
+        "slug": "barn-hill-tree-farm",
+        "url": "/farms/barn-hill-tree-farm",
+        "latitude": 34.5180726,
+        "longitude": -84.0265713,
+        "city": "Dahlonega",
+        "province": "Georgia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 91
+      },
+      {
+        "id": "zcrm_38729000000292458",
+        "name": "Bottoms Christmas Tree Farm",
+        "slug": "bottoms-christmas-tree-farm",
+        "url": "/farms/bottoms-christmas-tree-farm",
+        "latitude": 34.286445,
+        "longitude": -84.150588,
+        "city": "Cumming",
+        "province": "Georgia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Corn Mazes",
+        "featured": false,
+        "distance_km": 92
       }
     ],
     "farmCount": 4
@@ -16523,6 +18453,234 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 83
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Greenwood",
+    "slug": "greenwood",
+    "population": null,
+    "coordinates": {
+      "latitude": 34.1954,
+      "longitude": -82.161788
+    },
+    "province": "South Carolina",
+    "province_slug": "sc",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "greenwood-sc-us",
+    "full_location": "Greenwood, SC, United States",
+    "seo_title": "U-Pick Farms near Greenwood, South Carolina",
+    "meta_description": "Find the best U-Pick farms near Greenwood, South Carolina. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292572",
+        "name": "Davenport Christmas Tree Farm",
+        "slug": "davenport-christmas-tree-farm",
+        "url": "/farms/davenport-christmas-tree-farm",
+        "latitude": 34.249144,
+        "longitude": -82.180356,
+        "city": "Greenwood",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vegetable Farms",
+        "featured": false,
+        "distance_km": 6
+      },
+      {
+        "id": "zcrm_38729000000292494",
+        "name": "Cedar Post Tree Farm",
+        "slug": "cedar-post-tree-farm",
+        "url": "/farms/cedar-post-tree-farm",
+        "latitude": 34.3603512,
+        "longitude": -82.2777702,
+        "city": "Donalds",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 21
+      },
+      {
+        "id": "zcrm_38729000000292495",
+        "name": "Cedar Ridge Tree Farm",
+        "slug": "cedar-ridge-tree-farm",
+        "url": "/farms/cedar-ridge-tree-farm",
+        "latitude": 33.99514,
+        "longitude": -81.405328,
+        "city": "Gilbert",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 73
+      },
+      {
+        "id": "zcrm_38729000000292477",
+        "name": "Caldwell Tree Farm",
+        "slug": "caldwell-tree-farm",
+        "url": "/farms/caldwell-tree-farm",
+        "latitude": 34.418788,
+        "longitude": -81.117171,
+        "city": "Winnsboro",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 99
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Little Falls",
+    "slug": "little-falls",
+    "population": null,
+    "coordinates": {
+      "latitude": 45.980556,
+      "longitude": -94.369444
+    },
+    "province": "Minnesota",
+    "province_slug": "mn",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "little-falls-mn-us",
+    "full_location": "Little Falls, MN, United States",
+    "seo_title": "U-Pick Farms near Little Falls, Minnesota",
+    "meta_description": "Find the best U-Pick farms near Little Falls, Minnesota. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292540",
+        "name": "Cornerstone Pines",
+        "slug": "cornerstone-pines",
+        "url": "/farms/cornerstone-pines",
+        "latitude": 45.9064745,
+        "longitude": -94.7868962,
+        "city": "Grey Eagle",
+        "province": "Minnesota",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 33
+      },
+      {
+        "id": "zcrm_38729000000292441",
+        "name": "B&J Evergreen Christmas Trees - Clear Lake",
+        "slug": "b-j-evergreen-christmas-trees-clear-lake",
+        "url": "/farms/b-j-evergreen-christmas-trees-clear-lake",
+        "latitude": 45.501534,
+        "longitude": -93.892937,
+        "city": "Clear Lake",
+        "province": "Minnesota",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 65
+      },
+      {
+        "id": "zcrm_38729000000292443",
+        "name": "B&J Evergreen Christmas Trees - Princeton",
+        "slug": "b-j-evergreen-christmas-trees-princeton",
+        "url": "/farms/b-j-evergreen-christmas-trees-princeton",
+        "latitude": 45.5885786,
+        "longitude": -93.5084297,
+        "city": "Princeton",
+        "province": "Minnesota",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 80
+      },
+      {
+        "id": "zcrm_38729000000292404",
+        "name": "Amp Christmas Tree Farm",
+        "slug": "amp-christmas-tree-farm",
+        "url": "/farms/amp-christmas-tree-farm",
+        "latitude": 45.5359455,
+        "longitude": -93.376547,
+        "city": "Cambridge",
+        "province": "Minnesota",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 92
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Old Town",
+    "slug": "old-town",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.934829,
+      "longitude": -68.645714
+    },
+    "province": "Maine",
+    "province_slug": "me",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "old-town-me-us",
+    "full_location": "Old Town, ME, United States",
+    "seo_title": "U-Pick Farms near Old Town, Maine",
+    "meta_description": "Find the best U-Pick farms near Old Town, Maine. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292516",
+        "name": "Christmas Tree Ranch",
+        "slug": "christmas-tree-ranch",
+        "url": "/farms/christmas-tree-ranch",
+        "latitude": 44.8047548,
+        "longitude": -68.367698,
+        "city": "Amherst",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 26
+      },
+      {
+        "id": "zcrm_38729000000292472",
+        "name": "Burgess Tree Farm",
+        "slug": "burgess-tree-farm",
+        "url": "/farms/burgess-tree-farm",
+        "latitude": 44.8328292,
+        "longitude": -69.2032803,
+        "city": "Newport",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 45
+      },
+      {
+        "id": "zcrm_38729000000292501",
+        "name": "Chestnut Hill Farm",
+        "slug": "chestnut-hill-farm",
+        "url": "/farms/chestnut-hill-farm",
+        "latitude": 44.591558,
+        "longitude": -69.6459491,
+        "city": "Fairfield",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 88
+      },
+      {
+        "id": "zcrm_38729000000292420",
+        "name": "Balsam Hill Farm",
+        "slug": "balsam-hill-farm",
+        "url": "/farms/balsam-hill-farm",
+        "latitude": 44.2394989,
+        "longitude": -69.2454507,
+        "city": "Hope",
+        "province": "Maine",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 91
       }
     ],
     "farmCount": 4
@@ -16979,6 +19137,158 @@
         "categories": "Christmas Tree Farms, Pumpkin Patches",
         "featured": false,
         "distance_km": 86
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Sheridan",
+    "slug": "sheridan",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.395833,
+      "longitude": -89.198056
+    },
+    "province": "Wisconsin",
+    "province_slug": "wi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "sheridan-wi-us",
+    "full_location": "Sheridan, WI, United States",
+    "seo_title": "U-Pick Farms near Sheridan, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Sheridan, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000305758",
+        "name": "Wild Rose Choose & Cut",
+        "slug": "wild-rose-choose-cut",
+        "url": "/farms/wild-rose-choose-cut",
+        "latitude": 44.1769772,
+        "longitude": -89.2288252,
+        "city": "Wild Rose",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 24
+      },
+      {
+        "id": "zcrm_38729000000292408",
+        "name": "ANR Tree Farm",
+        "slug": "anr-tree-farm",
+        "url": "/farms/anr-tree-farm",
+        "latitude": 44.1335087,
+        "longitude": -89.3016782,
+        "city": "Wautoma",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 30
+      },
+      {
+        "id": "zcrm_38729000000292419",
+        "name": "Balsam Creek Lane Tree Farm",
+        "slug": "balsam-creek-lane-tree-farm",
+        "url": "/farms/balsam-creek-lane-tree-farm",
+        "latitude": 44.544572,
+        "longitude": -88.785407,
+        "city": "Bear Creek",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 37
+      },
+      {
+        "id": "zcrm_38729000000292552",
+        "name": "Country Mission Farm",
+        "slug": "country-mission-farm",
+        "url": "/farms/country-mission-farm",
+        "latitude": 44.6755741,
+        "longitude": -89.6085156,
+        "city": "Mosinee",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 45
+      }
+    ],
+    "farmCount": 4
+  },
+  {
+    "name": "Stevens Point",
+    "slug": "stevens-point",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.523579,
+      "longitude": -89.574563
+    },
+    "province": "Wisconsin",
+    "province_slug": "wi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "stevens-point-wi-us",
+    "full_location": "Stevens Point, WI, United States",
+    "seo_title": "U-Pick Farms near Stevens Point, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Stevens Point, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292552",
+        "name": "Country Mission Farm",
+        "slug": "country-mission-farm",
+        "url": "/farms/country-mission-farm",
+        "latitude": 44.6755741,
+        "longitude": -89.6085156,
+        "city": "Mosinee",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 17
+      },
+      {
+        "id": "zcrm_38729000000305758",
+        "name": "Wild Rose Choose & Cut",
+        "slug": "wild-rose-choose-cut",
+        "url": "/farms/wild-rose-choose-cut",
+        "latitude": 44.1769772,
+        "longitude": -89.2288252,
+        "city": "Wild Rose",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 47
+      },
+      {
+        "id": "zcrm_38729000000292408",
+        "name": "ANR Tree Farm",
+        "slug": "anr-tree-farm",
+        "url": "/farms/anr-tree-farm",
+        "latitude": 44.1335087,
+        "longitude": -89.3016782,
+        "city": "Wautoma",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 49
+      },
+      {
+        "id": "zcrm_38729000000292419",
+        "name": "Balsam Creek Lane Tree Farm",
+        "slug": "balsam-creek-lane-tree-farm",
+        "url": "/farms/balsam-creek-lane-tree-farm",
+        "latitude": 44.544572,
+        "longitude": -88.785407,
+        "city": "Bear Creek",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 63
       }
     ],
     "farmCount": 4
@@ -17522,6 +19832,192 @@
     "farmCount": 3
   },
   {
+    "name": "East Lansing",
+    "slug": "east-lansing",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.736979,
+      "longitude": -84.483865
+    },
+    "province": "Michigan",
+    "province_slug": "mi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "east-lansing-mi-us",
+    "full_location": "East Lansing, MI, United States",
+    "seo_title": "U-Pick Farms near East Lansing, Michigan",
+    "meta_description": "Find the best U-Pick farms near East Lansing, Michigan. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292583",
+        "name": "D'Lamater's Winter-fresh Christmas Tree Farm",
+        "slug": "d-lamater-s-winter-fresh-christmas-tree-farm",
+        "url": "/farms/d-lamater-s-winter-fresh-christmas-tree-farm",
+        "latitude": 42.470604,
+        "longitude": -84.384003,
+        "city": "Leslie",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 31
+      },
+      {
+        "id": "zcrm_38729000000305749",
+        "name": "Whispering Pines Tree Farm",
+        "slug": "whispering-pines-tree-farm",
+        "url": "/farms/whispering-pines-tree-farm",
+        "latitude": 43.1181903,
+        "longitude": -83.8429769,
+        "city": "Flushing Township",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 67
+      },
+      {
+        "id": "zcrm_38729000000292463",
+        "name": "Broadview Christmas Tree",
+        "slug": "broadview-christmas-tree",
+        "url": "/farms/broadview-christmas-tree",
+        "latitude": 42.6750685,
+        "longitude": -83.6640603,
+        "city": "Highland",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 67
+      }
+    ],
+    "farmCount": 3
+  },
+  {
+    "name": "Green Bay",
+    "slug": "green-bay",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.513319,
+      "longitude": -88.013296
+    },
+    "province": "Wisconsin",
+    "province_slug": "wi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "green-bay-wi-us",
+    "full_location": "Green Bay, WI, United States",
+    "seo_title": "U-Pick Farms near Green Bay, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Green Bay, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292390",
+        "name": "Aissen Tree Farm",
+        "slug": "aissen-tree-farm",
+        "url": "/farms/aissen-tree-farm",
+        "latitude": 44.4421025,
+        "longitude": -87.7133856,
+        "city": "Luxemburg",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 25
+      },
+      {
+        "id": "zcrm_38729000000292426",
+        "name": "Bay View Tree Farm",
+        "slug": "bay-view-tree-farm",
+        "url": "/farms/bay-view-tree-farm",
+        "latitude": 44.6750322,
+        "longitude": -87.7202425,
+        "city": "Luxemburg",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 29
+      },
+      {
+        "id": "zcrm_38729000000292419",
+        "name": "Balsam Creek Lane Tree Farm",
+        "slug": "balsam-creek-lane-tree-farm",
+        "url": "/farms/balsam-creek-lane-tree-farm",
+        "latitude": 44.544572,
+        "longitude": -88.785407,
+        "city": "Bear Creek",
+        "province": "Wisconsin",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 61
+      }
+    ],
+    "farmCount": 3
+  },
+  {
+    "name": "Lexington",
+    "slug": "lexington",
+    "population": null,
+    "coordinates": {
+      "latitude": 33.981537,
+      "longitude": -81.236211
+    },
+    "province": "South Carolina",
+    "province_slug": "sc",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "lexington-sc-us",
+    "full_location": "Lexington, SC, United States",
+    "seo_title": "U-Pick Farms near Lexington, South Carolina",
+    "meta_description": "Find the best U-Pick farms near Lexington, South Carolina. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292495",
+        "name": "Cedar Ridge Tree Farm",
+        "slug": "cedar-ridge-tree-farm",
+        "url": "/farms/cedar-ridge-tree-farm",
+        "latitude": 33.99514,
+        "longitude": -81.405328,
+        "city": "Gilbert",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 16
+      },
+      {
+        "id": "zcrm_38729000000292477",
+        "name": "Caldwell Tree Farm",
+        "slug": "caldwell-tree-farm",
+        "url": "/farms/caldwell-tree-farm",
+        "latitude": 34.418788,
+        "longitude": -81.117171,
+        "city": "Winnsboro",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 50
+      },
+      {
+        "id": "zcrm_38729000000292572",
+        "name": "Davenport Christmas Tree Farm",
+        "slug": "davenport-christmas-tree-farm",
+        "url": "/farms/davenport-christmas-tree-farm",
+        "latitude": 34.249144,
+        "longitude": -82.180356,
+        "city": "Greenwood",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vegetable Farms",
+        "featured": false,
+        "distance_km": 92
+      }
+    ],
+    "farmCount": 3
+  },
+  {
     "name": "Lincoln",
     "slug": "lincoln",
     "population": 268738,
@@ -17641,6 +20137,68 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 47
+      }
+    ],
+    "farmCount": 3
+  },
+  {
+    "name": "Oak Ridge",
+    "slug": "oak-ridge",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.010356,
+      "longitude": -84.269645
+    },
+    "province": "Tennessee",
+    "province_slug": "tn",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "oak-ridge-tn-us",
+    "full_location": "Oak Ridge, TN, United States",
+    "seo_title": "U-Pick Farms near Oak Ridge, Tennessee",
+    "meta_description": "Find the best U-Pick farms near Oak Ridge, Tennessee. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292414",
+        "name": "Arwood Christmas Tree Farm",
+        "slug": "arwood-christmas-tree-farm",
+        "url": "/farms/arwood-christmas-tree-farm",
+        "latitude": 35.8839963,
+        "longitude": -84.3876533,
+        "city": "Kingston",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 18
+      },
+      {
+        "id": "zcrm_38729000000292481",
+        "name": "Camp's Christmas Forest",
+        "slug": "camp-s-christmas-forest",
+        "url": "/farms/camp-s-christmas-forest",
+        "latitude": 35.5675403,
+        "longitude": -84.4456068,
+        "city": "Sweetwater",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 52
+      },
+      {
+        "id": "zcrm_38729000000292421",
+        "name": "Barding Farm",
+        "slug": "barding-farm",
+        "url": "/farms/barding-farm",
+        "latitude": 36.1009835,
+        "longitude": -83.4438594,
+        "city": "Jefferson City",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 75
       }
     ],
     "farmCount": 3
@@ -18018,6 +20576,68 @@
     "farmCount": 3
   },
   {
+    "name": "Waynesville",
+    "slug": "waynesville",
+    "population": null,
+    "coordinates": {
+      "latitude": 35.488715,
+      "longitude": -82.988748
+    },
+    "province": "North Carolina",
+    "province_slug": "nc",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "waynesville-nc-us",
+    "full_location": "Waynesville, NC, United States",
+    "seo_title": "U-Pick Farms near Waynesville, North Carolina",
+    "meta_description": "Find the best U-Pick farms near Waynesville, North Carolina. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292460",
+        "name": "Boyd Mountain Christmas Tree Farm",
+        "slug": "boyd-mountain-christmas-tree-farm",
+        "url": "/farms/boyd-mountain-christmas-tree-farm",
+        "latitude": 35.5516877,
+        "longitude": -83.0290832,
+        "city": "Waynesville",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 8
+      },
+      {
+        "id": "zcrm_38729000000292428",
+        "name": "Bear Valley Farm",
+        "slug": "bear-valley-farm",
+        "url": "/farms/bear-valley-farm",
+        "latitude": 35.178897,
+        "longitude": -83.127972,
+        "city": "Glenville",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 37
+      },
+      {
+        "id": "zcrm_38729000000292421",
+        "name": "Barding Farm",
+        "slug": "barding-farm",
+        "url": "/farms/barding-farm",
+        "latitude": 36.1009835,
+        "longitude": -83.4438594,
+        "city": "Jefferson City",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 79
+      }
+    ],
+    "farmCount": 3
+  },
+  {
     "name": "Aurora",
     "slug": "aurora",
     "population": 345803,
@@ -18061,6 +20681,54 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 53
+      }
+    ],
+    "farmCount": 2
+  },
+  {
+    "name": "Berkeley Springs",
+    "slug": "berkeley-springs",
+    "population": null,
+    "coordinates": {
+      "latitude": 39.62699,
+      "longitude": -78.227196
+    },
+    "province": "West Virginia",
+    "province_slug": "wv",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "berkeley-springs-wv-us",
+    "full_location": "Berkeley Springs, WV, United States",
+    "seo_title": "U-Pick Farms near Berkeley Springs, West Virginia",
+    "meta_description": "Find the best U-Pick farms near Berkeley Springs, West Virginia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292466",
+        "name": "Brush Creek Evergreens, Greenhouse, Gift & Garden Nook",
+        "slug": "brush-creek-evergreens-greenhouse-gift-garden-nook",
+        "url": "/farms/brush-creek-evergreens-greenhouse-gift-garden-nook",
+        "latitude": 39.9561767,
+        "longitude": -78.2633185,
+        "city": "Breezewood",
+        "province": "Pennsylvania",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vineyards",
+        "featured": false,
+        "distance_km": 37
+      },
+      {
+        "id": "zcrm_38729000000292473",
+        "name": "Buttonwood Farm Christmas Trees",
+        "slug": "buttonwood-farm-christmas-trees",
+        "url": "/farms/buttonwood-farm-christmas-trees",
+        "latitude": 39.0096211,
+        "longitude": -77.7950973,
+        "city": "Middleburg",
+        "province": "Virginia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Vineyards, Corn Mazes",
+        "featured": false,
+        "distance_km": 78
       }
     ],
     "farmCount": 2
@@ -18210,49 +20878,49 @@
     "farmCount": 2
   },
   {
-    "name": "Eau Claire",
-    "slug": "eau-claire",
+    "name": "Eugene",
+    "slug": "eugene",
     "population": null,
     "coordinates": {
-      "latitude": 44.8113,
-      "longitude": -91.498809
+      "latitude": 44.052121,
+      "longitude": -123.08967
     },
-    "province": "Wisconsin",
-    "province_slug": "wisconsin",
+    "province": "Oregon",
+    "province_slug": "or",
     "country": "United States",
     "country_slug": "us",
-    "location_slug": "eau-claire-wisconsin-us",
-    "full_location": "Eau Claire, Wisconsin, United States",
-    "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
-    "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "location_slug": "eugene-or-us",
+    "full_location": "Eugene, OR, United States",
+    "seo_title": "U-Pick Farms near Eugene, Oregon",
+    "meta_description": "Find the best U-Pick farms near Eugene, Oregon. Fresh apples, berries, pumpkins and Christmas trees.",
     "farms": [
       {
-        "id": "zcrm_38729000000292568",
-        "name": "Curvue Tree Farm + Gardens",
-        "slug": "curvue-tree-farm-gardens",
-        "url": "/farms/curvue-tree-farm-gardens",
-        "latitude": 44.8001352,
-        "longitude": -91.6002248,
-        "city": "Eau Claire",
-        "province": "Wisconsin",
+        "id": "zcrm_38729000000292488",
+        "name": "Carrollâs Country Christmas Trees",
+        "slug": "carroll-s-country-christmas-trees",
+        "url": "/farms/carroll-s-country-christmas-trees",
+        "latitude": 44.0368456,
+        "longitude": -123.3094154,
+        "city": "Veneta",
+        "province": "Oregon",
         "country": "United States of America",
         "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 8
+        "distance_km": 18
       },
       {
-        "id": "zcrm_38729000000292503",
-        "name": "Chippewa Valley Trees",
-        "slug": "chippewa-valley-trees",
-        "url": "/farms/chippewa-valley-trees",
-        "latitude": 44.850602,
-        "longitude": -91.2666389,
-        "city": "Cadott",
-        "province": "Wisconsin",
+        "id": "zcrm_38729000000292402",
+        "name": "Al's Hidden Valley Tree Farm",
+        "slug": "al-s-hidden-valley-tree-farm",
+        "url": "/farms/al-s-hidden-valley-tree-farm",
+        "latitude": 44.098038,
+        "longitude": -123.3574,
+        "city": "Elmira",
+        "province": "Oregon",
         "country": "United States of America",
-        "categories": "Christmas Tree Farms, Apple Orchards, Vineyards",
+        "categories": "Christmas Tree Farms",
         "featured": false,
-        "distance_km": 19
+        "distance_km": 22
       }
     ],
     "farmCount": 2
@@ -18498,6 +21166,102 @@
     "farmCount": 2
   },
   {
+    "name": "Marietta",
+    "slug": "marietta",
+    "population": null,
+    "coordinates": {
+      "latitude": 39.415352,
+      "longitude": -81.454844
+    },
+    "province": "Ohio",
+    "province_slug": "oh",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "marietta-oh-us",
+    "full_location": "Marietta, OH, United States",
+    "seo_title": "U-Pick Farms near Marietta, Ohio",
+    "meta_description": "Find the best U-Pick farms near Marietta, Ohio. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292492",
+        "name": "Caywood Christmas Tree Farms",
+        "slug": "caywood-christmas-tree-farms",
+        "url": "/farms/caywood-christmas-tree-farms",
+        "latitude": 39.4548034,
+        "longitude": -81.3901519,
+        "city": "Marietta",
+        "province": "Ohio",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 7
+      },
+      {
+        "id": "zcrm_38729000000292554",
+        "name": "Country Roads Christmas Trees",
+        "slug": "country-roads-christmas-trees",
+        "url": "/farms/country-roads-christmas-trees",
+        "latitude": 39.1617481,
+        "longitude": -81.5006554,
+        "city": "Mineral Wells",
+        "province": "West Virginia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 28
+      }
+    ],
+    "farmCount": 2
+  },
+  {
+    "name": "Morristown",
+    "slug": "morristown",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.213981,
+      "longitude": -83.294892
+    },
+    "province": "Tennessee",
+    "province_slug": "tn",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "morristown-tn-us",
+    "full_location": "Morristown, TN, United States",
+    "seo_title": "U-Pick Farms near Morristown, Tennessee",
+    "meta_description": "Find the best U-Pick farms near Morristown, Tennessee. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292421",
+        "name": "Barding Farm",
+        "slug": "barding-farm",
+        "url": "/farms/barding-farm",
+        "latitude": 36.1009835,
+        "longitude": -83.4438594,
+        "city": "Jefferson City",
+        "province": "Tennessee",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 18
+      },
+      {
+        "id": "zcrm_38729000000292460",
+        "name": "Boyd Mountain Christmas Tree Farm",
+        "slug": "boyd-mountain-christmas-tree-farm",
+        "url": "/farms/boyd-mountain-christmas-tree-farm",
+        "latitude": 35.5516877,
+        "longitude": -83.0290832,
+        "city": "Waynesville",
+        "province": "North Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 77
+      }
+    ],
+    "farmCount": 2
+  },
+  {
     "name": "Oklahoma City",
     "slug": "oklahoma-city",
     "population": 610613,
@@ -18541,6 +21305,54 @@
         "categories": "Christmas Tree Farms, Pumpkin Patches",
         "featured": false,
         "distance_km": 32
+      }
+    ],
+    "farmCount": 2
+  },
+  {
+    "name": "Peoria",
+    "slug": "peoria",
+    "population": null,
+    "coordinates": {
+      "latitude": 40.692693,
+      "longitude": -89.592778
+    },
+    "province": "Illinois",
+    "province_slug": "il",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "peoria-il-us",
+    "full_location": "Peoria, IL, United States",
+    "seo_title": "U-Pick Farms near Peoria, Illinois",
+    "meta_description": "Find the best U-Pick farms near Peoria, Illinois. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292522",
+        "name": "Cinnamon Tree Farm",
+        "slug": "cinnamon-tree-farm",
+        "url": "/farms/cinnamon-tree-farm",
+        "latitude": 40.8436861,
+        "longitude": -89.8665708,
+        "city": "Brimfield",
+        "province": "Illinois",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 29
+      },
+      {
+        "id": "zcrm_38729000000292455",
+        "name": "Bomke's Patch",
+        "slug": "bomke-s-patch",
+        "url": "/farms/bomke-s-patch",
+        "latitude": 39.8100446,
+        "longitude": -89.7924478,
+        "city": "Springfield",
+        "province": "Illinois",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 100
       }
     ],
     "farmCount": 2
@@ -18854,6 +21666,74 @@
     "farmCount": 1
   },
   {
+    "name": "Binghamton",
+    "slug": "binghamton",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.09712,
+      "longitude": -75.911655
+    },
+    "province": "New York",
+    "province_slug": "ny",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "binghamton-ny-us",
+    "full_location": "Binghamton, NY, United States",
+    "seo_title": "U-Pick Farms near Binghamton, New York",
+    "meta_description": "Find the best U-Pick farms near Binghamton, New York. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292532",
+        "name": "Coles Turnpike Tree Farm",
+        "slug": "coles-turnpike-tree-farm",
+        "url": "/farms/coles-turnpike-tree-farm",
+        "latitude": 42.350423,
+        "longitude": -75.923436,
+        "city": "Whitney Point",
+        "province": "New York",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Sugar Shacks",
+        "featured": false,
+        "distance_km": 28
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Blacksburg",
+    "slug": "blacksburg",
+    "population": null,
+    "coordinates": {
+      "latitude": 37.230067,
+      "longitude": -80.415075
+    },
+    "province": "Virginia",
+    "province_slug": "va",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "blacksburg-va-us",
+    "full_location": "Blacksburg, VA, United States",
+    "seo_title": "U-Pick Farms near Blacksburg, Virginia",
+    "meta_description": "Find the best U-Pick farms near Blacksburg, Virginia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292528",
+        "name": "Clover Hollow Christmas Tree Farm",
+        "slug": "clover-hollow-christmas-tree-farm",
+        "url": "/farms/clover-hollow-christmas-tree-farm",
+        "latitude": 37.3385669,
+        "longitude": -80.4668553,
+        "city": "Newport",
+        "province": "Virginia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 13
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Bridgewater",
     "slug": "bridgewater",
     "population": null,
@@ -19024,6 +21904,74 @@
     "farmCount": 1
   },
   {
+    "name": "Cordele",
+    "slug": "cordele",
+    "population": null,
+    "coordinates": {
+      "latitude": 31.963507,
+      "longitude": -83.782394
+    },
+    "province": "Georgia",
+    "province_slug": "ga",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "cordele-ga-us",
+    "full_location": "Cordele, GA, United States",
+    "seo_title": "U-Pick Farms near Cordele, Georgia",
+    "meta_description": "Find the best U-Pick farms near Cordele, Georgia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292423",
+        "name": "Barnard & Thompson CHRISTmas Tree Farm",
+        "slug": "barnard-thompson-christmas-tree-farm",
+        "url": "/farms/barnard-thompson-christmas-tree-farm",
+        "latitude": 32.0301376,
+        "longitude": -83.5668966,
+        "city": "Pitts",
+        "province": "Georgia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 22
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Eau Claire",
+    "slug": "eau-claire",
+    "population": null,
+    "coordinates": {
+      "latitude": 46.423669,
+      "longitude": -129.942709
+    },
+    "province": "Wisconsin",
+    "province_slug": "wi",
+    "country": "Canada",
+    "country_slug": "ca",
+    "location_slug": "eau-claire-wi-ca",
+    "full_location": "Eau Claire, WI, Canada",
+    "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
+    "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292467",
+        "name": "bryanstrees",
+        "slug": "bryanstrees",
+        "url": "/farms/bryanstrees",
+        "latitude": 46.423669,
+        "longitude": -129.9427086,
+        "city": "Eau Claire",
+        "province": "Wisconsin",
+        "country": "United States",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 0
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Edmonton",
     "slug": "edmonton",
     "population": 1010899,
@@ -19053,6 +22001,40 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 78
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Fairfield",
+    "slug": "fairfield",
+    "population": null,
+    "coordinates": {
+      "latitude": 38.378937,
+      "longitude": -88.359768
+    },
+    "province": "Illinois",
+    "province_slug": "il",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "fairfield-il-us",
+    "full_location": "Fairfield, IL, United States",
+    "seo_title": "U-Pick Farms near Fairfield, Illinois",
+    "meta_description": "Find the best U-Pick farms near Fairfield, Illinois. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292521",
+        "name": "Cider Barn Tree Farm, Wedding & Event Venue, Ice Skating",
+        "slug": "cider-barn-tree-farm-wedding-event-venue-ice-skating",
+        "url": "/farms/cider-barn-tree-farm-wedding-event-venue-ice-skating",
+        "latitude": 38.3286424,
+        "longitude": -88.3569139,
+        "city": "Fairfield",
+        "province": "Illinois",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 6
       }
     ],
     "farmCount": 1
@@ -19194,6 +22176,40 @@
     "farmCount": 1
   },
   {
+    "name": "Hilton Head Island",
+    "slug": "hilton-head-island",
+    "population": null,
+    "coordinates": {
+      "latitude": 32.216316,
+      "longitude": -80.752608
+    },
+    "province": "South Carolina",
+    "province_slug": "sc",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "hilton-head-island-sc-us",
+    "full_location": "Hilton Head Island, SC, United States",
+    "seo_title": "U-Pick Farms near Hilton Head Island, South Carolina",
+    "meta_description": "Find the best U-Pick farms near Hilton Head Island, South Carolina. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292385",
+        "name": "A&A Christmas Trees",
+        "slug": "a-a-christmas-trees",
+        "url": "/farms/a-a-christmas-trees",
+        "latitude": 32.3434426,
+        "longitude": -80.883027,
+        "city": "Okatie",
+        "province": "South Carolina",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 19
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Huntington",
     "slug": "huntington",
     "population": 49177,
@@ -19257,6 +22273,108 @@
         "categories": "Christmas Tree Farms, Pumpkin Patches",
         "featured": false,
         "distance_km": 75
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Huntsville",
+    "slug": "huntsville",
+    "population": null,
+    "coordinates": {
+      "latitude": 34.72955,
+      "longitude": -86.585315
+    },
+    "province": "Alabama",
+    "province_slug": "al",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "huntsville-al-us",
+    "full_location": "Huntsville, AL, United States",
+    "seo_title": "U-Pick Farms near Huntsville, Alabama",
+    "meta_description": "Find the best U-Pick farms near Huntsville, Alabama. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292507",
+        "name": "Christmas At The Corner",
+        "slug": "christmas-at-the-corner",
+        "url": "/farms/christmas-at-the-corner",
+        "latitude": 34.9167222,
+        "longitude": -86.5959206,
+        "city": "Hazel Green",
+        "province": "Alabama",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 21
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Iowa City",
+    "slug": "iowa-city",
+    "population": null,
+    "coordinates": {
+      "latitude": 41.657826,
+      "longitude": -91.534617
+    },
+    "province": "Iowa",
+    "province_slug": "ia",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "iowa-city-ia-us",
+    "full_location": "Iowa City, IA, United States",
+    "seo_title": "U-Pick Farms near Iowa City, Iowa",
+    "meta_description": "Find the best U-Pick farms near Iowa City, Iowa. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292533",
+        "name": "Colony Acres Family Farm",
+        "slug": "colony-acres-family-farm",
+        "url": "/farms/colony-acres-family-farm",
+        "latitude": 41.7304583,
+        "longitude": -91.5971087,
+        "city": "North Liberty",
+        "province": "Iowa",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Corn Mazes",
+        "featured": false,
+        "distance_km": 10
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Iowa Falls",
+    "slug": "iowa-falls",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.519887,
+      "longitude": -93.264574
+    },
+    "province": "Iowa",
+    "province_slug": "ia",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "iowa-falls-ia-us",
+    "full_location": "Iowa Falls, IA, United States",
+    "seo_title": "U-Pick Farms near Iowa Falls, Iowa",
+    "meta_description": "Find the best U-Pick farms near Iowa Falls, Iowa. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292487",
+        "name": "Carlson Tree Farm",
+        "slug": "carlson-tree-farm",
+        "url": "/farms/carlson-tree-farm",
+        "latitude": 42.714248,
+        "longitude": -93.346147,
+        "city": "Hampton",
+        "province": "Iowa",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 23
       }
     ],
     "farmCount": 1
@@ -19364,6 +22482,40 @@
     "farmCount": 1
   },
   {
+    "name": "LaGrange",
+    "slug": "lagrange",
+    "population": null,
+    "coordinates": {
+      "latitude": 33.036222,
+      "longitude": -85.032244
+    },
+    "province": "Georgia",
+    "province_slug": "ga",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "lagrange-ga-us",
+    "full_location": "LaGrange, GA, United States",
+    "seo_title": "U-Pick Farms near LaGrange, Georgia",
+    "meta_description": "Find the best U-Pick farms near LaGrange, Georgia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292531",
+        "name": "Cole's Christmas Tree Farm",
+        "slug": "cole-s-christmas-tree-farm",
+        "url": "/farms/cole-s-christmas-tree-farm",
+        "latitude": 33.340909,
+        "longitude": -85.356404,
+        "city": "Woodland",
+        "province": "Alabama",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 45
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Long Beach",
     "slug": "long-beach",
     "population": 469428,
@@ -19393,6 +22545,40 @@
         "categories": "Christmas Tree Farms, Pumpkin Patches",
         "featured": false,
         "distance_km": 94
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Manistee",
+    "slug": "manistee",
+    "population": null,
+    "coordinates": {
+      "latitude": 44.244447,
+      "longitude": -86.324253
+    },
+    "province": "Michigan",
+    "province_slug": "mi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "manistee-mi-us",
+    "full_location": "Manistee, MI, United States",
+    "seo_title": "U-Pick Farms near Manistee, Michigan",
+    "meta_description": "Find the best U-Pick farms near Manistee, Michigan. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292478",
+        "name": "Calvin Lutz Farms",
+        "slug": "calvin-lutz-farms",
+        "url": "/farms/calvin-lutz-farms",
+        "latitude": 44.3662986,
+        "longitude": -86.1021804,
+        "city": "Kaleva",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 22
       }
     ],
     "farmCount": 1
@@ -19534,6 +22720,40 @@
     "farmCount": 1
   },
   {
+    "name": "Norfolk",
+    "slug": "norfolk",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.032717,
+      "longitude": -97.416817
+    },
+    "province": "Nebraska",
+    "province_slug": "ne",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "norfolk-ne-us",
+    "full_location": "Norfolk, NE, United States",
+    "seo_title": "U-Pick Farms near Norfolk, Nebraska",
+    "meta_description": "Find the best U-Pick farms near Norfolk, Nebraska. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292391",
+        "name": "Aldag Acres Christmas Tree Farm",
+        "slug": "aldag-acres-christmas-tree-farm",
+        "url": "/farms/aldag-acres-christmas-tree-farm",
+        "latitude": 42.038015,
+        "longitude": -97.4704175,
+        "city": "Norfolk",
+        "province": "Nebraska",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 4
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "North Bay",
     "slug": "north-bay",
     "population": 52662,
@@ -19597,6 +22817,40 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 75
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Paragould",
+    "slug": "paragould",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.052562,
+      "longitude": -90.48868
+    },
+    "province": "Arkansas",
+    "province_slug": "ar",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "paragould-ar-us",
+    "full_location": "Paragould, AR, United States",
+    "seo_title": "U-Pick Farms near Paragould, Arkansas",
+    "meta_description": "Find the best U-Pick farms near Paragould, Arkansas. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292564",
+        "name": "Crow's Nest Farms",
+        "slug": "crow-s-nest-farms",
+        "url": "/farms/crow-s-nest-farms",
+        "latitude": 36.1005588,
+        "longitude": -90.5549261,
+        "city": "Paragould",
+        "province": "Arkansas",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 8
       }
     ],
     "farmCount": 1
@@ -19840,6 +23094,108 @@
     "farmCount": 1
   },
   {
+    "name": "Sioux Falls",
+    "slug": "sioux-falls",
+    "population": null,
+    "coordinates": {
+      "latitude": 43.546022,
+      "longitude": -96.731265
+    },
+    "province": "South Dakota",
+    "province_slug": "sd",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "sioux-falls-sd-us",
+    "full_location": "Sioux Falls, SD, United States",
+    "seo_title": "U-Pick Farms near Sioux Falls, South Dakota",
+    "meta_description": "Find the best U-Pick farms near Sioux Falls, South Dakota. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292544",
+        "name": "Country Apple Orchard & Christmas Tree Farm",
+        "slug": "country-apple-orchard-christmas-tree-farm",
+        "url": "/farms/country-apple-orchard-christmas-tree-farm",
+        "latitude": 43.439538,
+        "longitude": -96.729909,
+        "city": "Harrisburg",
+        "province": "South Dakota",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches, Apple Orchards, Corn Mazes",
+        "featured": false,
+        "distance_km": 12
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Springdale",
+    "slug": "springdale",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.174524,
+      "longitude": -94.139014
+    },
+    "province": "Arkansas",
+    "province_slug": "ar",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "springdale-ar-us",
+    "full_location": "Springdale, AR, United States",
+    "seo_title": "U-Pick Farms near Springdale, Arkansas",
+    "meta_description": "Find the best U-Pick farms near Springdale, Arkansas. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000305777",
+        "name": "Wonderland Christmas Tree Farm",
+        "slug": "wonderland-christmas-tree-farm",
+        "url": "/farms/wonderland-christmas-tree-farm",
+        "latitude": 36.4481814,
+        "longitude": -94.0736369,
+        "city": "Pea Ridge",
+        "province": "Arkansas",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 31
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Springfield",
+    "slug": "springfield",
+    "population": null,
+    "coordinates": {
+      "latitude": 39.800659,
+      "longitude": -89.644934
+    },
+    "province": "Illinois",
+    "province_slug": "il",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "springfield-il-us",
+    "full_location": "Springfield, IL, United States",
+    "seo_title": "U-Pick Farms near Springfield, Illinois",
+    "meta_description": "Find the best U-Pick farms near Springfield, Illinois. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292455",
+        "name": "Bomke's Patch",
+        "slug": "bomke-s-patch",
+        "url": "/farms/bomke-s-patch",
+        "latitude": 39.8100446,
+        "longitude": -89.7924478,
+        "city": "Springfield",
+        "province": "Illinois",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms, Pumpkin Patches",
+        "featured": false,
+        "distance_km": 13
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "St. Albert",
     "slug": "st-albert",
     "population": 68232,
@@ -19903,6 +23259,40 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 83
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Staunton",
+    "slug": "staunton",
+    "population": null,
+    "coordinates": {
+      "latitude": 38.149423,
+      "longitude": -79.073705
+    },
+    "province": "Virginia",
+    "province_slug": "va",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "staunton-va-us",
+    "full_location": "Staunton, VA, United States",
+    "seo_title": "U-Pick Farms near Staunton, Virginia",
+    "meta_description": "Find the best U-Pick farms near Staunton, Virginia. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292485",
+        "name": "Caritas Tree Farm",
+        "slug": "caritas-tree-farm",
+        "url": "/farms/caritas-tree-farm",
+        "latitude": 38.3211059,
+        "longitude": -79.1060189,
+        "city": "Mt Solon",
+        "province": "Virginia",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 19
       }
     ],
     "farmCount": 1
@@ -20044,6 +23434,40 @@
     "farmCount": 1
   },
   {
+    "name": "Walla Walla",
+    "slug": "walla-walla",
+    "population": null,
+    "coordinates": {
+      "latitude": 46.064581,
+      "longitude": -118.343021
+    },
+    "province": "Washington",
+    "province_slug": "wa",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "walla-walla-wa-us",
+    "full_location": "Walla Walla, WA, United States",
+    "seo_title": "U-Pick Farms near Walla Walla, Washington",
+    "meta_description": "Find the best U-Pick farms near Walla Walla, Washington. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292415",
+        "name": "Bachtold Christmas Trees",
+        "slug": "bachtold-christmas-trees",
+        "url": "/farms/bachtold-christmas-trees",
+        "latitude": 46.063564,
+        "longitude": -118.31427,
+        "city": "Walla Walla",
+        "province": "Washington",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 2
+      }
+    ],
+    "farmCount": 1
+  },
+  {
     "name": "Winnipeg",
     "slug": "winnipeg",
     "population": 749607,
@@ -20073,6 +23497,40 @@
         "categories": "Christmas Tree Farms",
         "featured": false,
         "distance_km": 62
+      }
+    ],
+    "farmCount": 1
+  },
+  {
+    "name": "Wyoming",
+    "slug": "wyoming",
+    "population": null,
+    "coordinates": {
+      "latitude": 42.91336,
+      "longitude": -85.705309
+    },
+    "province": "Michigan",
+    "province_slug": "mi",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "wyoming-mi-us",
+    "full_location": "Wyoming, MI, United States",
+    "seo_title": "U-Pick Farms near Wyoming, Michigan",
+    "meta_description": "Find the best U-Pick farms near Wyoming, Michigan. Fresh apples, berries, pumpkins and Christmas trees.",
+    "farms": [
+      {
+        "id": "zcrm_38729000000292456",
+        "name": "Bosch's Country View Nursery Christmas Tree Farm",
+        "slug": "bosch-s-country-view-nursery-christmas-tree-farm",
+        "url": "/farms/bosch-s-country-view-nursery-christmas-tree-farm",
+        "latitude": 42.9607953,
+        "longitude": -85.9863146,
+        "city": "Allendale",
+        "province": "Michigan",
+        "country": "United States of America",
+        "categories": "Christmas Tree Farms",
+        "featured": false,
+        "distance_km": 23
       }
     ],
     "farmCount": 1
