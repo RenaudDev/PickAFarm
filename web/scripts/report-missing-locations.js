@@ -287,7 +287,7 @@ function getBaseLocations(locsRaw) {
 
 (async function main() {
   const dataDir = path.join(__dirname, '..', 'data');
-  const RADIUS_KM = 65;
+  const RADIUS_KM = 100;
 
   const farmsPath = path.join(dataDir, 'farms.json');
   const locationsPath = path.join(dataDir, 'locations.json');
@@ -356,7 +356,17 @@ function getBaseLocations(locsRaw) {
   for (const farm of detailedMissing) {
     // Only consider truly uncovered farms (nearest > RADIUS)
     if (farm.nearest_distance_km == null || farm.nearest_distance_km <= RADIUS_KM) continue;
-    if (farm.country !== 'Canada' && farm.country !== 'United States' && farm.country !== 'USA' && farm.country !== 'US') continue; // US and Canada only
+    
+    console.log(`  Checking: ${farm.name} - Country: ${farm.country}`); // DEBUG
+    
+    if (farm.country !== 'Canada' && 
+      farm.country !== 'United States' && 
+      farm.country !== 'United States of America' &&  // ADD THIS
+      farm.country !== 'USA' && 
+      farm.country !== 'US') {
+    console.log(`    ❌ Skipped: Invalid country "${farm.country}"`);
+    continue;
+  }
     
     console.log(`Analyzing farm: ${farm.name} in ${farm.city}, ${farm.province}`);
     
@@ -491,10 +501,24 @@ function getBaseLocations(locsRaw) {
 // Helper function for province abbreviations
 function getProvinceAbbrev(province) {
   const abbrevMap = {
+    // Canadian provinces
     'Alberta': 'AB', 'British Columbia': 'BC', 'Manitoba': 'MB', 'New Brunswick': 'NB',
     'Newfoundland and Labrador': 'NL', 'Northwest Territories': 'NT', 'Nova Scotia': 'NS',
     'Nunavut': 'NU', 'Ontario': 'ON', 'Prince Edward Island': 'PE', 'Quebec': 'QC',
-    'Saskatchewan': 'SK', 'Yukon': 'YT'
+    'Saskatchewan': 'SK', 'Yukon': 'YT',
+    
+    // US states
+    'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA',
+    'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA',
+    'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA',
+    'Kansas': 'KS', 'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+    'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
+    'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV', 'New Hampshire': 'NH',
+    'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY', 'North Carolina': 'NC',
+    'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK', 'Oregon': 'OR', 'Pennsylvania': 'PA',
+    'Rhode Island': 'RI', 'South Carolina': 'SC', 'South Dakota': 'SD', 'Tennessee': 'TN',
+    'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA',
+    'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY', 'District of Columbia': 'DC'
   };
   return abbrevMap[province] || province || 'Unknown';
 }
@@ -518,6 +542,9 @@ function getProvinceAbbrev(province) {
   console.log(`- Covered by current locations: ${farms.length - missing.length}`);
   console.log(`- Missing coverage: ${missing.length}`);
   console.log(`- Suggested US/Canadian locations: ${formattedLocations.length}`);
+  console.log('\n📊 Missing farms breakdown:');
+console.log(`  Within ${RADIUS_KM}km of existing location: ${detailedMissing.filter(f => f.within_radius).length}`);
+console.log(`  Beyond ${RADIUS_KM}km (truly uncovered): ${detailedMissing.filter(f => !f.within_radius).length}`);
 
   if (formattedLocations.length > 0) {
     console.log('\n🏙️ NEW LOCATIONS TO ADD:');
@@ -537,7 +564,7 @@ function getProvinceAbbrev(province) {
     // Check for duplicates by location_slug
     const existingSlugs = new Set(existingLocations.map(loc => loc.location_slug));
     const newLocations = formattedLocations.filter(loc => !existingSlugs.has(loc.location_slug));
-    
+   
     if (newLocations.length > 0) {
       // Append new locations
       const updatedLocations = [...existingLocations, ...newLocations];
@@ -558,7 +585,7 @@ function getProvinceAbbrev(province) {
       }
     } else {
       console.log('ℹ️ No new locations to add (all suggestions already exist)');
-    }
+    } 
   } else {
     console.log('\nℹ️ No location suggestions generated');
   }
