@@ -36,6 +36,18 @@ export async function GET(request: NextRequest) {
     <lastmod>${currentDate}</lastmod>
   </sitemap>
 
+  <!-- Blog Posts Sitemap -->
+  <sitemap>
+    <loc>${baseUrl}/sitemap-blog.xml</loc>
+    <lastmod>${currentDate}</lastmod>
+  </sitemap>
+
+  <!-- Varieties Sitemap -->
+  <sitemap>
+    <loc>${baseUrl}/sitemap-varieties.xml</loc>
+    <lastmod>${currentDate}</lastmod>
+  </sitemap>
+
 </sitemapindex>`
 
   return new Response(sitemapIndex, {

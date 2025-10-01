@@ -163,27 +163,36 @@ export function generateFarmMetadata(farm: any): Metadata {
 
 // Location-based SEO metadata
 export function generateLocationMetadata(category: string, location: string, farmCount: number): Metadata {
-  const title = `${category} Near ${location}`
-  const description = `Find ${farmCount} ${category.toLowerCase()} near ${location}. Fresh produce, seasonal activities, and family fun at local pick-your-own farms.`
-  
+  // For generic all-farms pages, use cleaner copy and canonical path
+  const isAllFarmsNear = category.toLowerCase().trim() === 'all farms near'
+  const displayCategory = isAllFarmsNear ? 'All Farms' : category
+
+  const title = `${displayCategory} Near ${location}`
+  const description = `Find ${farmCount} ${displayCategory.toLowerCase()} near ${location}. Fresh produce, seasonal activities, and family fun at local pick-your-own farms.`
+
   const keywords = [
-    category.toLowerCase(),
+    displayCategory.toLowerCase(),
     location.toLowerCase(),
     "near me",
     "local farms",
-    `${category.toLowerCase()} near ${location.toLowerCase()}`,
+    `${displayCategory.toLowerCase()} near ${location.toLowerCase()}`,
     "family activities",
     "seasonal fun"
   ]
-  
+
   const locationSlug = location.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  const categorySlug = category.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  
+  const categorySlug = displayCategory.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+
+  // Canonical path
+  const urlPath = isAllFarmsNear
+    ? `/farms-near/${locationSlug}/`
+    : `/${categorySlug}/near/${locationSlug}/`
+
   return generateMetadata({
     title,
     description,
     keywords,
-    url: `${SITE_CONFIG.domain}/${categorySlug}/near/${locationSlug}/`
+    url: `${SITE_CONFIG.domain}${urlPath}`
   })
 }
 
