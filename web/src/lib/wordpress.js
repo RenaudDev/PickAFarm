@@ -84,3 +84,27 @@ export async function getVarietiesByTag(tagSlug) {
     return [];
   }
 }
+
+// Get review aggregates for a farm (count and average rating only)
+export async function getReviewAggregates(farmId) {
+  try {
+    const res = await fetch(
+      `https://admin.pickafarm.com/wp-json/reviews/v1/listing/${farmId}`,
+      { next: { revalidate: 3600 } }
+    );
+    
+    if (!res.ok) {
+      // No reviews or farm not found
+      return { count: 0, average_rating: null };
+    }
+    
+    const data = await res.json();
+    return {
+      count: data.count || 0,
+      average_rating: data.average_rating || null
+    };
+  } catch (error) {
+    console.error(`Error fetching review aggregates for ${farmId}:`, error);
+    return { count: 0, average_rating: null };
+  }
+}

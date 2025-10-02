@@ -1,8 +1,9 @@
 // Auto-generated search data - do not edit manually
-// Generated at: 2025-10-02T15:51:47.612Z
+// Generated at: 2025-10-02T21:30:41.060Z
 
 export const farmCategories = [
   "Apple Orchards",
+  "Berry Farms",
   "Christmas Tree Farms",
   "Corn Farms",
   "Corn Mazes",
@@ -13,14 +14,18 @@ export const farmCategories = [
   "Cut Your Own, Pre-Cut, Delivery, Wholesale",
   "Cut Your Own, Pre-Cut, Wholesale",
   "Cut Your Own, Pre-Cut, Wholesale, Delivery",
+  "Cut Your Own, Wholesale",
+  "Cut Your Own, Wholesale, Delivery",
   "Maple Syrup Farms",
   "Petting Zoo",
+  "Pre-Cut",
   "Pre-Cut, Cut Your Own",
   "Pumpkin Patches",
   "Sugar Shacks",
   "Vegetable Farms",
   "Vineyards",
   "You Choose We Cut, Cut Your Own",
+  "You Choose We Cut, Pre-Cut",
   "You Choose, We Cut"
 ] as const;
 

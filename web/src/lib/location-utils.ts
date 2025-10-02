@@ -5,6 +5,7 @@ export interface UserLocation {
   latitude: number
   longitude: number
   detectedAt: string
+  source?: 'ip' | 'browser' | 'saved' | 'default'
 }
 
 /**
@@ -27,7 +28,8 @@ export async function detectUserLocation(): Promise<UserLocation | null> {
       country: data.country_name || data.country || '',
       latitude: data.latitude || 0,
       longitude: data.longitude || 0,
-      detectedAt: new Date().toISOString()
+      detectedAt: new Date().toISOString(),
+      source: 'ip'
     }
   } catch (error) {
     console.error('Error detecting location:', error)
@@ -106,6 +108,91 @@ export async function getUserLocation(userId: string): Promise<UserLocation | nu
   }
   
   return detected
+}
+
+/**
+ * Get user's precise location from browser geolocation API
+ * Requires user permission
+ */
+export function getBrowserLocation(): Promise<UserLocation> {
+  return new Promise((resolve, reject) => {
+    if (!('geolocation' in navigator)) {
+      reject(new Error('Geolocation is not supported by your browser'))
+      return
+    }
+
+    // High accuracy options for GPS precision
+    const options = {
+      enableHighAccuracy: true,  // Use GPS on mobile devices
+      timeout: 10000,            // Wait up to 10 seconds
+      maximumAge: 0              // Don't use cached position, get fresh coords
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const location: UserLocation = {
+          city: 'Current Location',
+          region: '',
+          country: '',
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          detectedAt: new Date().toISOString(),
+          source: 'browser'
+        }
+        console.log('📍 High-accuracy location detected:', location)
+        console.log(`📍 Accuracy: ${position.coords.accuracy}m`)
+        resolve(location)
+      },
+      (error) => {
+        console.error('Browser geolocation error:', error)
+        
+        let errorMessage = 'Unable to get your location'
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = 'Location access denied. Please enable location permissions.'
+            break
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information unavailable.'
+            break
+          case error.TIMEOUT:
+            errorMessage = 'Location request timed out. Please try again.'
+            break
+        }
+        
+        reject(new Error(errorMessage))
+      },
+      options
+    )
+  })
+}
+
+/**
+ * Calculate distance between two coordinates using Haversine formula
+ * Returns distance in kilometers
+ */
+export function calculateDistance(
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number
+): number {
+  const R = 6371 // Earth's radius in km
+  const dLat = toRadians(lat2 - lat1)
+  const dLng = toRadians(lng2 - lng1)
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRadians(lat1)) *
+      Math.cos(toRadians(lat2)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2)
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  return R * c
+}
+
+function toRadians(degrees: number): number {
+  return degrees * (Math.PI / 180)
 }
 
 /**

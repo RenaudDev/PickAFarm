@@ -9,6 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Users } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
+import { FarmMapSection } from "@/components/farm-map-section"
+import { FAQSection } from "@/components/faq-section"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import { CategoryIcon } from "@/lib/category-icons"
@@ -34,20 +36,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <main className="flex-1">
-        <section className="relative bg-gradient-to-r from-primary/10 to-secondary/10 py-20 px-4">
-          <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
-              Discover Local U-Pick Farms
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-              Find fresh, local produce and family-friendly u-pick farm experiences near you. From apple orchards to pumpkin
-              patches, discover the best farms in your area.
-            </p>
-            <SearchBoxWrapper />
-          </div>
-        </section>
+      <FarmMapSection />
 
+      <main className="flex-1">
         <section className="py-16 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Popular Farm Experiences</h2>
@@ -90,6 +81,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <FAQSection />
       </main>
       <FarmFooter />
     </div>

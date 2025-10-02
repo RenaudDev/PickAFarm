@@ -85,26 +85,6 @@ export default async function FarmsNearCities({ params }: { params: Promise<{ ci
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <div className="bg-muted/20 border-b">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/" className="flex items-center gap-1.5 hover:text-primary transition-colors">
-                  <Home className="h-4 w-4" />
-                  <span className="hidden sm:inline">Home</span>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage className="font-medium">
-                  {locationData.name}, {locationData.province}
-                </BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </div>
       <Suspense fallback={<div>Loading farms near you...</div>}>
         <SearchResultsContent params={resolvedParams} />
       </Suspense>

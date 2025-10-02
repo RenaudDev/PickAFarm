@@ -114,6 +114,29 @@ async function fetchFarmsFromD1() {
   }
 }
 
+// Fetch review aggregates from WordPress
+async function fetchReviewsForFarm(farmId) {
+  try {
+    const response = await fetch(
+      `https://admin.pickafarm.com/wp-json/reviews/v1/listing/${farmId}`,
+      { headers: { 'User-Agent': 'PickAFarm-Build-Script' } }
+    );
+    
+    if (!response.ok) {
+      return { reviews: 0, rating: null };
+    }
+    
+    const data = await response.json();
+    return {
+      reviews: data.count || 0,
+      rating: data.average_rating || null
+    };
+  } catch (error) {
+    console.error(`Failed to fetch reviews for ${farmId}:`, error.message);
+    return { reviews: 0, rating: null };
+  }
+}
+
 async function generateFarmData() {
   console.log('🌾 Fetching farm data for build...');
   
@@ -147,8 +170,36 @@ async function generateFarmData() {
       throw new Error(`Expected farms array but got ${typeof farms}. Response: ${JSON.stringify(data).substring(0, 200)}...`);
     }
     
-    console.log(`✅ Fetched ${farms.length} farms from API`);
+    console.log(`✅ Fetched ${farms.length} farms`);
     console.log(`📋 Sample farm fields:`, farms[0] ? Object.keys(farms[0]).join(', ') : 'No farms available');
+    
+    // Fetch reviews from WordPress for each farm
+    console.log('⭐ Fetching review aggregates from WordPress...');
+    let reviewsFetched = 0;
+    let farmsWithReviews = 0;
+    
+    for (let i = 0; i < farms.length; i++) {
+      const farm = farms[i];
+      const reviewData = await fetchReviewsForFarm(farm.id);
+      farms[i] = { ...farm, ...reviewData };
+      
+      reviewsFetched++;
+      if (reviewData.reviews > 0) {
+        farmsWithReviews++;
+      }
+      
+      // Log progress every 50 farms
+      if ((i + 1) % 50 === 0) {
+        console.log(`  📊 Progress: ${i + 1}/${farms.length} farms processed`);
+      }
+      
+      // Small delay to avoid rate limiting
+      if (i < farms.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+    
+    console.log(`✅ Reviews fetched: ${farmsWithReviews} farms have reviews (${reviewsFetched} total farms checked)`);
     
     // Create data directory if it doesn't exist
     const dataDir = path.join(__dirname, '..', 'data');

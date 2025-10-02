@@ -35,7 +35,9 @@
     "thursday_hours": "By appointment",
     "friday_hours": "8:00AM to 5:00PM",
     "saturday_hours": "8:00AM to 5:00PM",
-    "sunday_hours": "1:00PM to 5:00PM"
+    "sunday_hours": "1:00PM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230845",
@@ -73,7 +75,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "10:00AM to 8:00PM",
     "saturday_hours": "9:00AM to 8:00PM",
-    "sunday_hours": "9:00AM to 6:00PM"
+    "sunday_hours": "9:00AM to 6:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230843",
@@ -111,7 +115,9 @@
     "thursday_hours": "8:30AM to 4:30PM",
     "friday_hours": "8:30AM to 4:30PM",
     "saturday_hours": "8:30AM to 4:30PM",
-    "sunday_hours": "8:30AM to 4:30PM"
+    "sunday_hours": "8:30AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230842",
@@ -149,7 +155,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 1,
+    "rating": 5
   },
   {
     "id": "zcrm_38729000000230841",
@@ -187,7 +195,9 @@
     "thursday_hours": "10:00AM to 4:00PM",
     "friday_hours": "Closed",
     "saturday_hours": "Closed",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230840",
@@ -225,7 +235,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230839",
@@ -263,7 +275,9 @@
     "thursday_hours": "By appointment",
     "friday_hours": "Noon untill Dark",
     "saturday_hours": "9:00AM to Dark",
-    "sunday_hours": "9:00AM to Dark"
+    "sunday_hours": "9:00AM to Dark",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230837",
@@ -301,7 +315,9 @@
     "thursday_hours": "10:00AM to 7:00PM",
     "friday_hours": "10:00AM to 7:00PM",
     "saturday_hours": "10:00AM to 7:00PM",
-    "sunday_hours": "10:00AM to 7:00PM"
+    "sunday_hours": "10:00AM to 7:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230836",
@@ -339,7 +355,9 @@
     "thursday_hours": "10:00AM to 4:30PM",
     "friday_hours": "10:00AM to 4:30PM",
     "saturday_hours": "9:00AM to 4:30PM",
-    "sunday_hours": "9:00AM to 4:30PM"
+    "sunday_hours": "9:00AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230835",
@@ -377,7 +395,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230834",
@@ -415,7 +435,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Close",
     "saturday_hours": "8:30AM to 5:00PM",
-    "sunday_hours": "8:30AM to 5:00PM"
+    "sunday_hours": "8:30AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230833",
@@ -453,7 +475,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9:00AM to 4:30PM",
     "saturday_hours": "9:00AM to 4:30PM",
-    "sunday_hours": "9:00AM to 3:00PM"
+    "sunday_hours": "9:00AM to 3:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230832",
@@ -491,7 +515,9 @@
     "thursday_hours": "12:00PM to 5:00PM",
     "friday_hours": "12:00PM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000230831",
@@ -529,7 +555,9 @@
     "thursday_hours": "10:00AM to 6:00PM",
     "friday_hours": "10:00AM to 6:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224619",
@@ -567,7 +595,9 @@
     "thursday_hours": "8:00AM to 4:00PM",
     "friday_hours": "8:00AM to 4:00PM",
     "saturday_hours": "Closed",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224618",
@@ -605,7 +635,9 @@
     "thursday_hours": "9:00AM to 3:30PM",
     "friday_hours": "9:00AM to 3:30PM",
     "saturday_hours": "9:00AM to 3:30PM",
-    "sunday_hours": "9:00AM to 3:30PM"
+    "sunday_hours": "9:00AM to 3:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224617",
@@ -633,7 +665,7 @@
     "verified": 0,
     "featured": 1,
     "active": 1,
-    "updated_at": "2025-09-21T11:41:42.444Z",
+    "updated_at": "2025-10-02T17:49:14.211Z",
     "payment_methods": "Cash, Debit Card",
     "opening_date": null,
     "closing_date": null,
@@ -643,7 +675,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224616",
@@ -681,7 +715,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224615",
@@ -719,7 +755,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": null
+    "sunday_hours": null,
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224614",
@@ -757,7 +795,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224613",
@@ -795,7 +835,9 @@
     "thursday_hours": "Unknown",
     "friday_hours": "Unknown",
     "saturday_hours": "Unknown",
-    "sunday_hours": "Unknown"
+    "sunday_hours": "Unknown",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224612",
@@ -833,7 +875,9 @@
     "thursday_hours": "9:00am-12:00pm",
     "friday_hours": "9:00am-12:00pm",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224611",
@@ -871,7 +915,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "10:00AM to 5:00PM",
     "saturday_hours": "10:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224610",
@@ -909,7 +955,9 @@
     "thursday_hours": "10:00AM to 6:00PM",
     "friday_hours": "10:00AM to 8:00PM",
     "saturday_hours": null,
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000224609",
@@ -947,7 +995,9 @@
     "thursday_hours": "1:00PM to 7:00PM",
     "friday_hours": "1:00PM to 7:00PM",
     "saturday_hours": "9:30AM to 5:00PM",
-    "sunday_hours": "9:30AM to 5:00PM"
+    "sunday_hours": "9:30AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000274098",
@@ -985,7 +1035,9 @@
     "thursday_hours": "9:00AM to 6:00PM",
     "friday_hours": "9:00AM to 8:00PM",
     "saturday_hours": "9:00AM to 8:00PM",
-    "sunday_hours": "9:00AM to 6:00PM"
+    "sunday_hours": "9:00AM to 6:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000274099",
@@ -1023,7 +1075,9 @@
     "thursday_hours": "9:00AM to 6:00PM",
     "friday_hours": "9:00AM to 6:00PM",
     "saturday_hours": "9:00AM to 6:00PM",
-    "sunday_hours": "9:00AM to 6:00PM"
+    "sunday_hours": "9:00AM to 6:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000274100",
@@ -1061,7 +1115,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000274101",
@@ -1099,7 +1155,9 @@
     "thursday_hours": "9:00AM to Dusk",
     "friday_hours": "9:00AM to Dusk",
     "saturday_hours": "9:00AM to Dusk",
-    "sunday_hours": "9:00AM to Dusk"
+    "sunday_hours": "9:00AM to Dusk",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000274102",
@@ -1137,7 +1195,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "10:00AM to 3:00PM",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000274103",
@@ -1175,7 +1235,9 @@
     "thursday_hours": "8:00AM to 5:00PM",
     "friday_hours": "8:00AM to 5:00PM",
     "saturday_hours": "8:00AM to 5:00PM",
-    "sunday_hours": "8:00AM to 5:00PM"
+    "sunday_hours": "8:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292155",
@@ -1213,7 +1275,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292154",
@@ -1251,7 +1315,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:30AM to 4:30PM",
-    "sunday_hours": "9:30AM to 4:30PM"
+    "sunday_hours": "9:30AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292153",
@@ -1289,7 +1355,9 @@
     "thursday_hours": "11:00AM to 4:00PM",
     "friday_hours": "11:00AM to 4:00PM",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292152",
@@ -1327,7 +1395,9 @@
     "thursday_hours": "Noon to 4:30PM",
     "friday_hours": "Noon to 4:30PM",
     "saturday_hours": "9:00AM to 4:30PM",
-    "sunday_hours": "9:00AM to 4:30PM"
+    "sunday_hours": "9:00AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292151",
@@ -1365,7 +1435,9 @@
     "thursday_hours": "Daytime: 9:00AM to 5:00PMEvenings: 5:00PM to 8:30PM",
     "friday_hours": "Daytime: 9:00AM to 5:00PMEvenings: 5:00PM to 8:30PM",
     "saturday_hours": "Daytime: 9:00AM to 5:00PMEvenings: 5:00PM to 8:30PM",
-    "sunday_hours": "Daytime: 9:00AM to 5:00PMEvenings: 5:00PM to 8:30PM"
+    "sunday_hours": "Daytime: 9:00AM to 5:00PMEvenings: 5:00PM to 8:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292150",
@@ -1403,7 +1475,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "Closed",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292149",
@@ -1441,7 +1515,9 @@
     "thursday_hours": "3:00PM to 8:00PM",
     "friday_hours": "3:00PM to 8:00PM",
     "saturday_hours": "10:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292148",
@@ -1479,7 +1555,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292147",
@@ -1517,7 +1595,9 @@
     "thursday_hours": "8:00AM to 5:00PM",
     "friday_hours": "8:00AM to 5:00PM",
     "saturday_hours": "8:00AM to 5:00PM",
-    "sunday_hours": "8:00AM to 5:00PM"
+    "sunday_hours": "8:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292146",
@@ -1555,7 +1635,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292145",
@@ -1593,7 +1675,9 @@
     "thursday_hours": "9:00AM to 4:30PM",
     "friday_hours": "9:00AM to 4:30PM",
     "saturday_hours": "9:00AM to 4:30PM",
-    "sunday_hours": "9:00AM to 4:30PM"
+    "sunday_hours": "9:00AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292144",
@@ -1631,7 +1715,9 @@
     "thursday_hours": "10:00AM to 4:30PM",
     "friday_hours": "10:00AM to 4:30PM",
     "saturday_hours": "10:00AM to 4:30PM",
-    "sunday_hours": "10:00AM to 4:30PM"
+    "sunday_hours": "10:00AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292143",
@@ -1669,7 +1755,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292142",
@@ -1707,7 +1795,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292141",
@@ -1745,7 +1835,9 @@
     "thursday_hours": "8:00AM to 5:00PM",
     "friday_hours": "8:00AM to 5:00PM",
     "saturday_hours": "8:00AM to 5:00PM",
-    "sunday_hours": "8:00AM to 5:00PM"
+    "sunday_hours": "8:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292138",
@@ -1783,7 +1875,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292156",
@@ -1821,7 +1915,9 @@
     "thursday_hours": "11:00AM to 5:00PM",
     "friday_hours": "11:00AM to 5:00PM",
     "saturday_hours": "11:00AM to 5:00PM",
-    "sunday_hours": "11:00AM to 5:00PM"
+    "sunday_hours": "11:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292137",
@@ -1859,7 +1955,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292136",
@@ -1897,7 +1995,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 3:00PM",
-    "sunday_hours": "9:00AM to 3:00PM"
+    "sunday_hours": "9:00AM to 3:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292135",
@@ -1935,7 +2035,9 @@
     "thursday_hours": "12:00PM to 7:00PM",
     "friday_hours": "12:00PM to 7:00PM",
     "saturday_hours": "10:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292134",
@@ -1973,7 +2075,9 @@
     "thursday_hours": "10:00AM to 4:30PM",
     "friday_hours": "10:00AM to 4:30PM",
     "saturday_hours": "10:00AM to 4:30PM",
-    "sunday_hours": "10:00AM to 4:30PM"
+    "sunday_hours": "10:00AM to 4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292133",
@@ -2011,7 +2115,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292132",
@@ -2049,7 +2155,9 @@
     "thursday_hours": "8:00AM to 5:30PM",
     "friday_hours": "8:00AM to 5:30PM",
     "saturday_hours": "8:00AM to 5:30PM",
-    "sunday_hours": "8:00AM to 5:30PM"
+    "sunday_hours": "8:00AM to 5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292131",
@@ -2087,7 +2195,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292130",
@@ -2125,7 +2235,9 @@
     "thursday_hours": "9:00AM to 4:00PM",
     "friday_hours": "9:00AM to 4:00PM",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292129",
@@ -2163,7 +2275,9 @@
     "thursday_hours": "9:30AM to 9:00PM",
     "friday_hours": "9:30AM to 9:00PM",
     "saturday_hours": "8:30AM to 5:00PM",
-    "sunday_hours": "8:30AM to 5:00PM"
+    "sunday_hours": "8:30AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292128",
@@ -2201,7 +2315,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "10:00AM to 4:00PM",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292127",
@@ -2239,7 +2355,9 @@
     "thursday_hours": "10:00AM to 4:00PM",
     "friday_hours": "10:00AM to 4:00PM",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292126",
@@ -2277,7 +2395,9 @@
     "thursday_hours": "9:00AM to 4:30PM",
     "friday_hours": "9:00AM to 4:30PM",
     "saturday_hours": "9:00AM to 3:00PM",
-    "sunday_hours": "9:00AM to 3:00PM"
+    "sunday_hours": "9:00AM to 3:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292125",
@@ -2315,7 +2435,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "Closed",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292124",
@@ -2353,7 +2475,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292123",
@@ -2391,7 +2515,9 @@
     "thursday_hours": "By appointment",
     "friday_hours": "By appointment",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292122",
@@ -2429,7 +2555,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "2:00PM to 5:00PM",
     "saturday_hours": "10:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292121",
@@ -2467,7 +2595,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292120",
@@ -2505,7 +2635,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292119",
@@ -2543,7 +2675,9 @@
     "thursday_hours": "9:00AM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 3:00PM",
-    "sunday_hours": "9:00AM to 3:00PM"
+    "sunday_hours": "9:00AM to 3:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292118",
@@ -2581,7 +2715,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10:00AM to 12:00PM; 1:00PM to 3:00PM",
-    "sunday_hours": "10:00AM to 12:00PM, 1:00PM to 3:00PM"
+    "sunday_hours": "10:00AM to 12:00PM, 1:00PM to 3:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292117",
@@ -2619,7 +2755,9 @@
     "thursday_hours": "10:00AM to 9:00PM",
     "friday_hours": "10:00AM to 9:00PM",
     "saturday_hours": "10:00AM to 9:00PM",
-    "sunday_hours": "10:00AM to 9:00PM"
+    "sunday_hours": "10:00AM to 9:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292116",
@@ -2657,7 +2795,9 @@
     "thursday_hours": "10:00AM to 4:00PM",
     "friday_hours": "10:00AM to 4:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292115",
@@ -2695,7 +2835,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:30AM to 4:00PM",
-    "sunday_hours": "9:30AM to 4:00PM"
+    "sunday_hours": "9:30AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292114",
@@ -2733,7 +2875,9 @@
     "thursday_hours": "9:00AM to 4:00PM",
     "friday_hours": "9:00AM to 4:00PM",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292113",
@@ -2771,7 +2915,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "10:00AM to 2:00PM",
     "saturday_hours": "10:00AM to 2:00PM",
-    "sunday_hours": "10:00AM to 2:00PM"
+    "sunday_hours": "10:00AM to 2:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292112",
@@ -2809,7 +2955,9 @@
     "thursday_hours": "10:00AM to 4:00PM",
     "friday_hours": "10:00AM to 4:00PM",
     "saturday_hours": "10:00AM to 4:00PM",
-    "sunday_hours": "10:00AM to 4:00PM"
+    "sunday_hours": "10:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292111",
@@ -2847,7 +2995,9 @@
     "thursday_hours": "10:00AM to 5:00PM",
     "friday_hours": "10:00AM to 5:00PM",
     "saturday_hours": "10:00AM to 5:00PM",
-    "sunday_hours": "10:00AM to 5:00PM"
+    "sunday_hours": "10:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292110",
@@ -2885,7 +3035,9 @@
     "thursday_hours": "4:00PM to 8:00PM",
     "friday_hours": "4:00PM to 8:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292109",
@@ -2923,7 +3075,9 @@
     "thursday_hours": "12:00PM to Dusk",
     "friday_hours": "12:00PM to Dusk",
     "saturday_hours": "9:00AM to Dusk",
-    "sunday_hours": "9:00AM to Dusk"
+    "sunday_hours": "9:00AM to Dusk",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292107",
@@ -2961,7 +3115,9 @@
     "thursday_hours": "12:00PM to 4:00PM",
     "friday_hours": "12:00PM to 4:00PM",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292106",
@@ -2999,7 +3155,9 @@
     "thursday_hours": "3:00PM to 5:00PM",
     "friday_hours": "3:00PM to 5:00PM",
     "saturday_hours": "8:00AM to 5:00PM",
-    "sunday_hours": "8:00AM to 5:00PM"
+    "sunday_hours": "8:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292105",
@@ -3037,7 +3195,9 @@
     "thursday_hours": "11:00AM to 4:30PM",
     "friday_hours": "11:00AM to 4:30PM",
     "saturday_hours": "11:00AM to 4:30PM",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292104",
@@ -3075,7 +3235,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292103",
@@ -3113,7 +3275,9 @@
     "thursday_hours": "12:00PM to 5:00PM",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292139",
@@ -3151,7 +3315,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9:00AM to 4:00PM",
-    "sunday_hours": "9:00AM to 4:00PM"
+    "sunday_hours": "9:00AM to 4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292140",
@@ -3189,7 +3355,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9:00AM to 5:00PM",
     "saturday_hours": "9:00AM to 5:00PM",
-    "sunday_hours": "9:00AM to 5:00PM"
+    "sunday_hours": "9:00AM to 5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305794",
@@ -3227,7 +3395,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "11AM-5PM"
+    "sunday_hours": "11AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305793",
@@ -3265,7 +3435,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "CLOSED",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305792",
@@ -3303,7 +3475,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305791",
@@ -3341,7 +3515,9 @@
     "thursday_hours": "8AM-4:30PM",
     "friday_hours": "8AM-4:30PM",
     "saturday_hours": "8AM-4:30PM",
-    "sunday_hours": "8AM-4:30PM"
+    "sunday_hours": "8AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305754",
@@ -3379,7 +3555,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305753",
@@ -3417,7 +3595,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "10AM-8PM",
-    "sunday_hours": "10AM-8PM"
+    "sunday_hours": "10AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305758",
@@ -3455,7 +3635,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305775",
@@ -3493,7 +3675,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305766",
@@ -3531,7 +3715,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "1:30 PM",
     "saturday_hours": "9:30AM-4:30PM",
-    "sunday_hours": "9:30AM-4:30PM"
+    "sunday_hours": "9:30AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305776",
@@ -3569,7 +3755,9 @@
     "thursday_hours": "11AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305777",
@@ -3607,7 +3795,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305783",
@@ -3645,7 +3835,9 @@
     "thursday_hours": "9AM-6PM",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "9AM-6PM"
+    "sunday_hours": "9AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305768",
@@ -3683,7 +3875,9 @@
     "thursday_hours": "11AM-4:30PM",
     "friday_hours": "11AM-4:30PM",
     "saturday_hours": "11AM-4:30PM",
-    "sunday_hours": "11AM-4:30PM"
+    "sunday_hours": "11AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305749",
@@ -3721,7 +3915,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305782",
@@ -3759,7 +3955,9 @@
     "thursday_hours": "10AM-4:30PM",
     "friday_hours": "10AM-4:30PM",
     "saturday_hours": "10AM-4:30PM",
-    "sunday_hours": "10AM-4:30PM"
+    "sunday_hours": "10AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305741",
@@ -3797,7 +3995,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305790",
@@ -3835,7 +4035,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292385",
@@ -3873,7 +4075,9 @@
     "thursday_hours": "10AM-5:30PM",
     "friday_hours": "10AM-5:30PM",
     "saturday_hours": "10AM-5:30PM",
-    "sunday_hours": "10AM-5:30PM"
+    "sunday_hours": "10AM-5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292386",
@@ -3911,7 +4115,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-6PM"
+    "sunday_hours": "10AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292387",
@@ -3949,7 +4155,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5:30PM",
     "saturday_hours": "8AM-5:30PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292388",
@@ -3987,7 +4195,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292389",
@@ -4025,7 +4235,9 @@
     "thursday_hours": "04:30 pm – 08:00 pm",
     "friday_hours": "04:30 pm – 08:00 pm",
     "saturday_hours": "11:00 am – 07:00 pm",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292390",
@@ -4063,7 +4275,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-7PM",
     "saturday_hours": "9AM-7PM",
-    "sunday_hours": "9AM-7PM"
+    "sunday_hours": "9AM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292402",
@@ -4101,7 +4315,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292391",
@@ -4139,7 +4355,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292392",
@@ -4177,7 +4395,9 @@
     "thursday_hours": "12-4PM",
     "friday_hours": "12-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292395",
@@ -4215,7 +4435,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "8:30AM-4:30PM",
-    "sunday_hours": "8:30AM-4:30PM"
+    "sunday_hours": "8:30AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292396",
@@ -4253,7 +4475,9 @@
     "thursday_hours": "1:00 PM - 7:00 PM",
     "friday_hours": "1:00 PM - 7:00 PM",
     "saturday_hours": "9:00 AM - 7:00 PM",
-    "sunday_hours": "9:00 AM - 7:00 PM"
+    "sunday_hours": "9:00 AM - 7:00 PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292397",
@@ -4291,7 +4515,9 @@
     "thursday_hours": "4 pm - 5:30 pm",
     "friday_hours": "4:30 PM",
     "saturday_hours": "10AM-5:30PM",
-    "sunday_hours": "10AM-5:30PM"
+    "sunday_hours": "10AM-5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292398",
@@ -4329,7 +4555,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292399",
@@ -4367,7 +4595,9 @@
     "thursday_hours": "9:30AM-6PM",
     "friday_hours": "9:30AM-6PM",
     "saturday_hours": "9:30AM-6PM",
-    "sunday_hours": "9:30AM-6PM"
+    "sunday_hours": "9:30AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292400",
@@ -4405,7 +4635,9 @@
     "thursday_hours": "9AM-4PM",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292401",
@@ -4443,7 +4675,9 @@
     "thursday_hours": "9AM-4PM",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292403",
@@ -4481,7 +4715,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9:00AM-4:30PM",
     "saturday_hours": "9:00AM-4:30PM",
-    "sunday_hours": "9:00AM-4:30PM"
+    "sunday_hours": "9:00AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292404",
@@ -4519,7 +4755,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292406",
@@ -4557,7 +4795,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292407",
@@ -4595,7 +4835,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292408",
@@ -4633,7 +4875,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "Closed",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292409",
@@ -4671,7 +4915,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292410",
@@ -4709,7 +4955,9 @@
     "thursday_hours": "11AM-4PM",
     "friday_hours": "11AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292411",
@@ -4747,7 +4995,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "1-5PM"
+    "sunday_hours": "1-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292412",
@@ -4785,7 +5035,9 @@
     "thursday_hours": "12PM-6PM",
     "friday_hours": "12PM-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292413",
@@ -4823,7 +5075,9 @@
     "thursday_hours": "9AM-7PM",
     "friday_hours": "9AM-7PM",
     "saturday_hours": "9AM-7PM",
-    "sunday_hours": "9AM-7PM"
+    "sunday_hours": "9AM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292414",
@@ -4861,7 +5115,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "12:00-5:00PM",
     "saturday_hours": "12:00-5:00PM",
-    "sunday_hours": "12:00-5:00PM"
+    "sunday_hours": "12:00-5:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292441",
@@ -4899,7 +5155,9 @@
     "thursday_hours": "9AM-8:30PM",
     "friday_hours": "9AM-9PM",
     "saturday_hours": "9AM-9PM",
-    "sunday_hours": "9AM-8:30PM"
+    "sunday_hours": "9AM-8:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292442",
@@ -4937,7 +5195,9 @@
     "thursday_hours": "11AM-8PM",
     "friday_hours": "9AM-9PM",
     "saturday_hours": "9AM-9PM",
-    "sunday_hours": "9AM-8PM"
+    "sunday_hours": "9AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292443",
@@ -4975,7 +5235,9 @@
     "thursday_hours": "9AM-4PM",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292444",
@@ -5013,7 +5275,9 @@
     "thursday_hours": "9AM-9PM",
     "friday_hours": "9AM-9PM",
     "saturday_hours": "9AM-9PM",
-    "sunday_hours": "9AM-9PM"
+    "sunday_hours": "9AM-9PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292445",
@@ -5051,7 +5315,9 @@
     "thursday_hours": "9:00AM-8:30PM",
     "friday_hours": "9:00AM-9:00PM",
     "saturday_hours": "9:00AM-9:00PM",
-    "sunday_hours": "9:00AM-8:30PM"
+    "sunday_hours": "9:00AM-8:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292415",
@@ -5089,7 +5355,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9:30AM-12:30PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292416",
@@ -5127,7 +5395,9 @@
     "thursday_hours": "10AM-4:30PM",
     "friday_hours": "8:30AM-4:30PM",
     "saturday_hours": "8:30AM-4:30PM",
-    "sunday_hours": "8:30AM-4:30PM"
+    "sunday_hours": "8:30AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292417",
@@ -5165,7 +5435,9 @@
     "thursday_hours": "10AM-4:30PM",
     "friday_hours": "10AM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292418",
@@ -5203,7 +5475,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292419",
@@ -5241,7 +5515,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-3PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292420",
@@ -5279,7 +5555,9 @@
     "thursday_hours": "UNKNOWN",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292421",
@@ -5317,7 +5595,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "By Appointment",
     "saturday_hours": "Closed",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292422",
@@ -5355,7 +5635,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292423",
@@ -5393,7 +5675,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "4PM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "2PM-6PM"
+    "sunday_hours": "2PM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292424",
@@ -5431,7 +5715,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292425",
@@ -5469,7 +5755,9 @@
     "thursday_hours": "8AM-6:30PM",
     "friday_hours": "8AM-6:30PM",
     "saturday_hours": "8AM-6PM",
-    "sunday_hours": "8AM-6PM"
+    "sunday_hours": "8AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292426",
@@ -5507,7 +5795,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292427",
@@ -5545,7 +5835,9 @@
     "thursday_hours": "By appointment",
     "friday_hours": "By appointment",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292428",
@@ -5583,7 +5875,9 @@
     "thursday_hours": "10AM-4PM",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292429",
@@ -5621,7 +5915,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292430",
@@ -5659,7 +5955,9 @@
     "thursday_hours": "11AM-5PM",
     "friday_hours": "11AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292431",
@@ -5697,7 +5995,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292432",
@@ -5735,7 +6035,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292433",
@@ -5773,7 +6075,9 @@
     "thursday_hours": "9:30AM-4:30PM",
     "friday_hours": "9:30AM-4:30PM",
     "saturday_hours": "8:30AM-4:30PM",
-    "sunday_hours": "8:30AM-4:30PM"
+    "sunday_hours": "8:30AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292434",
@@ -5811,7 +6115,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292435",
@@ -5849,7 +6155,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9:00 AM - 4:30 PM",
     "saturday_hours": "9:00 AM - 4:30 PM",
-    "sunday_hours": "10:00 AM - 4:30 PM"
+    "sunday_hours": "10:00 AM - 4:30 PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292436",
@@ -5887,7 +6195,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292437",
@@ -5925,7 +6235,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "11AM-5PM",
     "saturday_hours": "11AM-5PM",
-    "sunday_hours": "11AM-5PM"
+    "sunday_hours": "11AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292438",
@@ -5963,7 +6275,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "By Appointment",
     "saturday_hours": "By Appointment",
-    "sunday_hours": "By Appointment"
+    "sunday_hours": "By Appointment",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292439",
@@ -6001,7 +6315,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292440",
@@ -6039,7 +6355,9 @@
     "thursday_hours": "1PM-6PM",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292446",
@@ -6077,7 +6395,9 @@
     "thursday_hours": "5-7PM",
     "friday_hours": "5-7PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292447",
@@ -6115,7 +6435,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "9AM-6PM"
+    "sunday_hours": "9AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292448",
@@ -6153,7 +6475,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292449",
@@ -6191,7 +6515,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "8AM-12PM",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292450",
@@ -6229,7 +6555,9 @@
     "thursday_hours": "10AM-6PM",
     "friday_hours": "10AM-6PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292451",
@@ -6267,7 +6595,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292452",
@@ -6305,7 +6635,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "8AM-5PM",
-    "sunday_hours": "8AM-5PM"
+    "sunday_hours": "8AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292458",
@@ -6343,7 +6675,9 @@
     "thursday_hours": "3-6PM",
     "friday_hours": "3-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292459",
@@ -6381,7 +6715,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292460",
@@ -6419,7 +6755,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292461",
@@ -6457,7 +6795,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292462",
@@ -6495,7 +6835,9 @@
     "thursday_hours": "1PM-6PM",
     "friday_hours": "1PM-6PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292463",
@@ -6533,7 +6875,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292464",
@@ -6571,7 +6915,9 @@
     "thursday_hours": "11AM-7PM",
     "friday_hours": "11AM-7PM",
     "saturday_hours": "9AM-7PM",
-    "sunday_hours": "9AM-7PM"
+    "sunday_hours": "9AM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292465",
@@ -6609,7 +6955,9 @@
     "thursday_hours": "3:30 PM",
     "friday_hours": "3-8PM",
     "saturday_hours": "10AM-8PM",
-    "sunday_hours": "10AM-7:30PM"
+    "sunday_hours": "10AM-7:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292466",
@@ -6647,7 +6995,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "1-4PM"
+    "sunday_hours": "1-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292453",
@@ -6685,7 +7035,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "By Appointment",
     "saturday_hours": "By Appointment",
-    "sunday_hours": "By Appointment"
+    "sunday_hours": "By Appointment",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292469",
@@ -6723,7 +7075,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292470",
@@ -6761,7 +7115,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292471",
@@ -6799,7 +7155,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292472",
@@ -6837,7 +7195,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292473",
@@ -6875,7 +7235,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292474",
@@ -6913,7 +7275,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292477",
@@ -6951,7 +7315,9 @@
     "thursday_hours": "2:30PM-5:00PM",
     "friday_hours": "2:30PM-5:00PM",
     "saturday_hours": "9:00AM-5:00PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292481",
@@ -6989,7 +7355,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292480",
@@ -7027,7 +7395,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "2PM-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292476",
@@ -7065,7 +7435,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292478",
@@ -7103,7 +7475,9 @@
     "thursday_hours": "9AM-6PM",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "11AM-5PM"
+    "sunday_hours": "11AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292479",
@@ -7141,7 +7515,9 @@
     "thursday_hours": "12PM-4PM",
     "friday_hours": "12PM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292454",
@@ -7179,7 +7555,9 @@
     "thursday_hours": "10AM-4PM",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292455",
@@ -7217,7 +7595,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "6-9PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292456",
@@ -7255,7 +7635,9 @@
     "thursday_hours": "1PM-4PM",
     "friday_hours": "9AM-Dark",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292457",
@@ -7293,7 +7675,9 @@
     "thursday_hours": "9AM-8PM",
     "friday_hours": "9AM-8PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292467",
@@ -7331,7 +7715,9 @@
     "thursday_hours": "9AM-6PM",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "9AM-6PM"
+    "sunday_hours": "9AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292468",
@@ -7369,7 +7755,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "12PM-4PM",
-    "sunday_hours": "12PM-4PM"
+    "sunday_hours": "12PM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292482",
@@ -7407,7 +7795,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292483",
@@ -7445,7 +7835,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-2PM",
-    "sunday_hours": "10AM-2PM"
+    "sunday_hours": "10AM-2PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292484",
@@ -7483,7 +7875,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "8AM-5PM",
-    "sunday_hours": "8AM-5PM"
+    "sunday_hours": "8AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292485",
@@ -7521,7 +7915,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292486",
@@ -7559,7 +7955,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292487",
@@ -7597,7 +7995,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "Noon-5PM"
+    "sunday_hours": "Noon-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292488",
@@ -7635,7 +8035,9 @@
     "thursday_hours": "11AM-4PM",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292489",
@@ -7673,7 +8075,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292490",
@@ -7711,7 +8115,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292491",
@@ -7749,7 +8155,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "8:00AM-4:45PM",
     "saturday_hours": "8:00AM-4:45PM",
-    "sunday_hours": "8:00AM-4:45PM"
+    "sunday_hours": "8:00AM-4:45PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292492",
@@ -7787,7 +8195,9 @@
     "thursday_hours": "12-6PM",
     "friday_hours": "12-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-6PM"
+    "sunday_hours": "10AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292493",
@@ -7825,7 +8235,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292494",
@@ -7863,7 +8275,9 @@
     "thursday_hours": "3PM-dark",
     "friday_hours": "10AM-dark",
     "saturday_hours": "10AM-dark",
-    "sunday_hours": "1PM-dark"
+    "sunday_hours": "1PM-dark",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292495",
@@ -7901,7 +8315,9 @@
     "thursday_hours": "1PM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "1PM-5PM"
+    "sunday_hours": "1PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292496",
@@ -7939,7 +8355,9 @@
     "thursday_hours": "10AM-6PM",
     "friday_hours": "10AM-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-6PM"
+    "sunday_hours": "10AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292497",
@@ -7977,7 +8395,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292498",
@@ -8015,7 +8435,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5:30PM",
     "saturday_hours": "9AM-5:30PM",
-    "sunday_hours": "12:30 PM"
+    "sunday_hours": "12:30 PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292499",
@@ -8053,7 +8475,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "12:30PM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292500",
@@ -8091,7 +8515,9 @@
     "thursday_hours": "12-5PM",
     "friday_hours": "12-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292501",
@@ -8129,7 +8555,9 @@
     "thursday_hours": "8AM-7PM",
     "friday_hours": "8AM-7PM",
     "saturday_hours": "8AM-7PM",
-    "sunday_hours": "8AM-7PM"
+    "sunday_hours": "8AM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292503",
@@ -8167,7 +8595,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292504",
@@ -8205,7 +8635,9 @@
     "thursday_hours": "8AM-8PM",
     "friday_hours": "8AM-8PM",
     "saturday_hours": "8AM-8PM",
-    "sunday_hours": "8AM-8PM"
+    "sunday_hours": "8AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292505",
@@ -8243,7 +8675,9 @@
     "thursday_hours": "9AM-Dusk",
     "friday_hours": "9AM-Dusk",
     "saturday_hours": "9AM-Dusk",
-    "sunday_hours": "9AM-Dusk"
+    "sunday_hours": "9AM-Dusk",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292506",
@@ -8281,7 +8715,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292507",
@@ -8319,7 +8755,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292508",
@@ -8357,7 +8795,9 @@
     "thursday_hours": "10AM-6PM",
     "friday_hours": "10AM-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "1PM-6PM"
+    "sunday_hours": "1PM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292509",
@@ -8395,7 +8835,9 @@
     "thursday_hours": "10AM-4PM",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292511",
@@ -8433,7 +8875,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292512",
@@ -8471,7 +8915,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-3PM",
-    "sunday_hours": "9AM-3PM"
+    "sunday_hours": "9AM-3PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292513",
@@ -8509,7 +8955,9 @@
     "thursday_hours": "10AM-4:30PM",
     "friday_hours": "9:30AM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292514",
@@ -8547,7 +8995,9 @@
     "thursday_hours": "Call For Hours",
     "friday_hours": "Call For Hours",
     "saturday_hours": "Call For Hours",
-    "sunday_hours": "Call For Hours"
+    "sunday_hours": "Call For Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292515",
@@ -8585,7 +9035,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292516",
@@ -8623,7 +9075,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292517",
@@ -8661,7 +9115,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "Noon-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292518",
@@ -8699,7 +9155,9 @@
     "thursday_hours": "9AM-4PM",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292519",
@@ -8737,7 +9195,9 @@
     "thursday_hours": "12:000PM-4:30PM",
     "friday_hours": "12:000PM-4:30PM",
     "saturday_hours": "9:00AM-4:30PM",
-    "sunday_hours": "9:00AM-4:30PM"
+    "sunday_hours": "9:00AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292520",
@@ -8775,7 +9235,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292521",
@@ -8813,7 +9275,9 @@
     "thursday_hours": "1-5PM",
     "friday_hours": "1-9PM",
     "saturday_hours": "1-9PM",
-    "sunday_hours": "Closed"
+    "sunday_hours": "Closed",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292522",
@@ -8851,7 +9315,9 @@
     "thursday_hours": "9AM-6PM",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292523",
@@ -8889,7 +9355,9 @@
     "thursday_hours": "9:00AM-4:15PM",
     "friday_hours": "9:00AM-4:15PM",
     "saturday_hours": "9:00AM-4:15PM",
-    "sunday_hours": "9:00AM-4:15PM"
+    "sunday_hours": "9:00AM-4:15PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292525",
@@ -8927,7 +9395,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "12PM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292524",
@@ -8965,7 +9435,9 @@
     "thursday_hours": "1PM-5:30PM",
     "friday_hours": "1PM-5:30PM",
     "saturday_hours": "8AM-5:30PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292526",
@@ -9003,7 +9475,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292527",
@@ -9041,7 +9515,9 @@
     "thursday_hours": "8AM-8PM",
     "friday_hours": "8AM-8PM",
     "saturday_hours": "8AM-8PM",
-    "sunday_hours": "8AM-8PM"
+    "sunday_hours": "8AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292528",
@@ -9079,7 +9555,9 @@
     "thursday_hours": "By appointment only",
     "friday_hours": "By appointment only",
     "saturday_hours": "By appointment only",
-    "sunday_hours": "By appointment only"
+    "sunday_hours": "By appointment only",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292529",
@@ -9117,7 +9595,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292530",
@@ -9155,7 +9635,9 @@
     "thursday_hours": "Call For Hours",
     "friday_hours": "Call For Hours",
     "saturday_hours": "Call For Hours",
-    "sunday_hours": "Call For Hours"
+    "sunday_hours": "Call For Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292531",
@@ -9193,7 +9675,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "12-5PM",
     "saturday_hours": "8AM-5PM",
-    "sunday_hours": "12-5PM"
+    "sunday_hours": "12-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292532",
@@ -9231,7 +9715,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "12PM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292533",
@@ -9269,7 +9755,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292534",
@@ -9307,7 +9795,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292535",
@@ -9345,7 +9835,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292536",
@@ -9383,7 +9875,9 @@
     "thursday_hours": "7:30AM-4PM",
     "friday_hours": "7:30AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292537",
@@ -9421,7 +9915,9 @@
     "thursday_hours": "9AM-5:30PM",
     "friday_hours": "9AM-5:30PM",
     "saturday_hours": "9AM-5:30PM",
-    "sunday_hours": "9AM-5:30PM"
+    "sunday_hours": "9AM-5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292538",
@@ -9459,7 +9955,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292539",
@@ -9497,7 +9995,9 @@
     "thursday_hours": "10AM-8PM",
     "friday_hours": "8AM-8PM",
     "saturday_hours": "8AM-8PM",
-    "sunday_hours": "8AM-6PM"
+    "sunday_hours": "8AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292540",
@@ -9535,7 +10035,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "11AM-6PM"
+    "sunday_hours": "11AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292541",
@@ -9573,7 +10075,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292542",
@@ -9611,7 +10115,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292544",
@@ -9649,7 +10155,9 @@
     "thursday_hours": "10AM-6PM",
     "friday_hours": "10AM-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-6PM"
+    "sunday_hours": "10AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292545",
@@ -9687,7 +10195,9 @@
     "thursday_hours": "9:30AM-5:30PM",
     "friday_hours": "9:30AM-5:30PM",
     "saturday_hours": "9:30AM-5:30PM",
-    "sunday_hours": "10:30AM-5:30PM"
+    "sunday_hours": "10:30AM-5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292546",
@@ -9725,7 +10235,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292547",
@@ -9763,7 +10275,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292548",
@@ -9801,7 +10315,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292549",
@@ -9839,7 +10355,9 @@
     "thursday_hours": "3PM-6PM",
     "friday_hours": "3PM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "11AM-6PM"
+    "sunday_hours": "11AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292550",
@@ -9877,7 +10395,9 @@
     "thursday_hours": "3PM-5PM",
     "friday_hours": "3PM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "11AM-5PM"
+    "sunday_hours": "11AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292551",
@@ -9915,7 +10435,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "By Appointment",
     "saturday_hours": "By Appointment",
-    "sunday_hours": "By Appointment"
+    "sunday_hours": "By Appointment",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292552",
@@ -9953,7 +10475,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "By Appointment",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292553",
@@ -9991,7 +10515,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292554",
@@ -10029,7 +10555,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292555",
@@ -10067,7 +10595,9 @@
     "thursday_hours": "Call For Hours",
     "friday_hours": "Call For Hours",
     "saturday_hours": "Call For Hours",
-    "sunday_hours": "Call For Hours"
+    "sunday_hours": "Call For Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292556",
@@ -10105,7 +10635,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292557",
@@ -10143,7 +10675,9 @@
     "thursday_hours": "12PM-4:30PM",
     "friday_hours": "12PM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292558",
@@ -10181,7 +10715,9 @@
     "thursday_hours": "12PM-6PM",
     "friday_hours": "12PM-6PM",
     "saturday_hours": "10AM-7PM",
-    "sunday_hours": "12PM-7PM"
+    "sunday_hours": "12PM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292559",
@@ -10219,7 +10755,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "8AM-5PM",
-    "sunday_hours": "8AM-5PM"
+    "sunday_hours": "8AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292560",
@@ -10257,7 +10795,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "1-6PM"
+    "sunday_hours": "1-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292561",
@@ -10295,7 +10835,9 @@
     "thursday_hours": "1PM-5PM",
     "friday_hours": "1PM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292564",
@@ -10333,7 +10875,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "12PM-Close",
-    "sunday_hours": "3:30PM-4:30PM"
+    "sunday_hours": "3:30PM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292563",
@@ -10371,7 +10915,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10AM-4:30PM",
-    "sunday_hours": "12-4:30PM"
+    "sunday_hours": "12-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292565",
@@ -10409,7 +10955,9 @@
     "thursday_hours": "Call For Hours",
     "friday_hours": "Call For Hours",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "Call For Hours"
+    "sunday_hours": "Call For Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292566",
@@ -10447,7 +10995,9 @@
     "thursday_hours": "CLOSED on Thanksgiving",
     "friday_hours": "9:30AM-Dusk",
     "saturday_hours": "9:30AM-Dusk",
-    "sunday_hours": "9:30AM-Dusk"
+    "sunday_hours": "9:30AM-Dusk",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292567",
@@ -10485,7 +11035,9 @@
     "thursday_hours": "9AM-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292568",
@@ -10523,7 +11075,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-6PM",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "11AM-4PM"
+    "sunday_hours": "11AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292583",
@@ -10561,7 +11115,9 @@
     "thursday_hours": "12PM-5:30PM",
     "friday_hours": "10AM-5:30PM",
     "saturday_hours": "10AM-5:30PM",
-    "sunday_hours": "10AM-5:30PM"
+    "sunday_hours": "10AM-5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292582",
@@ -10599,7 +11155,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-2:30PM",
-    "sunday_hours": "9AM-2:30PM"
+    "sunday_hours": "9AM-2:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292569",
@@ -10637,7 +11195,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292570",
@@ -10675,7 +11235,9 @@
     "thursday_hours": "Call For Hours",
     "friday_hours": "Call For Hours",
     "saturday_hours": "Call For Hours",
-    "sunday_hours": "Call For Hours"
+    "sunday_hours": "Call For Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292571",
@@ -10713,7 +11275,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292572",
@@ -10751,7 +11315,9 @@
     "thursday_hours": "12:00 PM - 6:30 PM",
     "friday_hours": "12:00 PM - 6:30 PM",
     "saturday_hours": "9AM-6:30PM",
-    "sunday_hours": "1:00 PM - 6:30 PM"
+    "sunday_hours": "1:00 PM - 6:30 PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292573",
@@ -10789,7 +11355,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292574",
@@ -10827,7 +11395,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "1PM-5PM"
+    "sunday_hours": "1PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000305788",
@@ -10865,7 +11435,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292475",
@@ -10903,7 +11475,9 @@
     "thursday_hours": "Call For Hours",
     "friday_hours": "Call For Hours",
     "saturday_hours": "Call For Hours",
-    "sunday_hours": "Call For Hours"
+    "sunday_hours": "Call For Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292510",
@@ -10941,7 +11515,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "11AM-5PM"
+    "sunday_hours": "11AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292543",
@@ -10979,7 +11555,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-5:30PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292562",
@@ -11017,7 +11595,9 @@
     "thursday_hours": "12-5PM",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292575",
@@ -11055,7 +11635,9 @@
     "thursday_hours": "3PM-6PM",
     "friday_hours": "3PM-6PM",
     "saturday_hours": "8AM-8PM",
-    "sunday_hours": "9AM-8PM"
+    "sunday_hours": "9AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292576",
@@ -11093,7 +11675,9 @@
     "thursday_hours": "3-7PM",
     "friday_hours": "3-7PM",
     "saturday_hours": "10AM-7PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292577",
@@ -11131,7 +11715,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292578",
@@ -11169,7 +11755,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292579",
@@ -11207,7 +11795,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9:30AM-4:00PM",
     "saturday_hours": "9:30AM-4:00PM",
-    "sunday_hours": "10:00AM-4:00PM"
+    "sunday_hours": "10:00AM-4:00PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292580",
@@ -11245,7 +11835,9 @@
     "thursday_hours": "1PM-5PM",
     "friday_hours": "1PM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "1PM-5PM"
+    "sunday_hours": "1PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292581",
@@ -11283,7 +11875,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-6PM"
+    "sunday_hours": "10AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292584",
@@ -11321,7 +11915,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-4:30PM",
-    "sunday_hours": "10AM-4:30PM"
+    "sunday_hours": "10AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292585",
@@ -11359,7 +11955,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292586",
@@ -11397,7 +11995,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292587",
@@ -11435,7 +12035,9 @@
     "thursday_hours": "7AM-6PM",
     "friday_hours": "7AM-6PM",
     "saturday_hours": "7AM-5PM",
-    "sunday_hours": "7AM-5PM"
+    "sunday_hours": "7AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292588",
@@ -11473,7 +12075,9 @@
     "thursday_hours": "9AM-9PM",
     "friday_hours": "9AM-9PM",
     "saturday_hours": "9AM-9PM",
-    "sunday_hours": "9AM-9PM"
+    "sunday_hours": "9AM-9PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292589",
@@ -11511,7 +12115,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "1-5PM"
+    "sunday_hours": "1-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292590",
@@ -11549,7 +12155,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "Call for hours",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292591",
@@ -11587,7 +12195,9 @@
     "thursday_hours": "9AM-6PM",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "9AM-6PM"
+    "sunday_hours": "9AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292592",
@@ -11625,7 +12235,9 @@
     "thursday_hours": "1PM-7PM",
     "friday_hours": "1PM-7PM",
     "saturday_hours": "10AM-7PM",
-    "sunday_hours": "1PM-7PM"
+    "sunday_hours": "1PM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292593",
@@ -11663,7 +12275,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "8AM-12PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292594",
@@ -11701,7 +12315,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "10:30AM-4PM"
+    "sunday_hours": "10:30AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292595",
@@ -11739,7 +12355,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292596",
@@ -11777,7 +12395,9 @@
     "thursday_hours": "9AM-7PM",
     "friday_hours": "9AM-7PM",
     "saturday_hours": "8AM-7PM",
-    "sunday_hours": "8AM-7PM"
+    "sunday_hours": "8AM-7PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292598",
@@ -11815,7 +12435,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "10AM-3PM",
-    "sunday_hours": "1-5PM"
+    "sunday_hours": "1-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292599",
@@ -11853,7 +12475,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292600",
@@ -11891,7 +12515,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "1:00pm-4:00pm",
     "saturday_hours": "9:00am-2:00pm",
-    "sunday_hours": "10:00am-4:00pm"
+    "sunday_hours": "10:00am-4:00pm",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292601",
@@ -11929,7 +12555,9 @@
     "thursday_hours": "8AM-5PM",
     "friday_hours": "8AM-5PM",
     "saturday_hours": "8AM-5PM",
-    "sunday_hours": "8AM-5PM"
+    "sunday_hours": "8AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292602",
@@ -11967,7 +12595,9 @@
     "thursday_hours": "10AM-4:45PM",
     "friday_hours": "10AM-4:45PM",
     "saturday_hours": "10AM-4:45PM",
-    "sunday_hours": "10AM-4:45PM"
+    "sunday_hours": "10AM-4:45PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292603",
@@ -12005,7 +12635,9 @@
     "thursday_hours": "9AM-6PM",
     "friday_hours": "9AM-10PM",
     "saturday_hours": "9AM-10PM",
-    "sunday_hours": "9AM-6PM"
+    "sunday_hours": "9AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292604",
@@ -12043,7 +12675,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292605",
@@ -12081,7 +12715,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292606",
@@ -12119,7 +12755,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "CLOSED",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292607",
@@ -12157,7 +12795,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292608",
@@ -12195,7 +12835,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292609",
@@ -12233,7 +12875,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292610",
@@ -12271,7 +12915,9 @@
     "thursday_hours": "Noon-5PM",
     "friday_hours": "Noon-5PM",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "Noon-5PM"
+    "sunday_hours": "Noon-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292611",
@@ -12309,7 +12955,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-6PM",
-    "sunday_hours": "10AM-6PM"
+    "sunday_hours": "10AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292612",
@@ -12347,7 +12995,9 @@
     "thursday_hours": "3PM-5PM",
     "friday_hours": "3PM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292613",
@@ -12385,7 +13035,9 @@
     "thursday_hours": "12-4PM",
     "friday_hours": "12-4PM",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292614",
@@ -12423,7 +13075,9 @@
     "thursday_hours": "Call for hours",
     "friday_hours": "Call for hours",
     "saturday_hours": "10AM-12:30PM",
-    "sunday_hours": "Call for hours"
+    "sunday_hours": "Call for hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292615",
@@ -12461,7 +13115,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "10AM-4PM"
+    "sunday_hours": "10AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292616",
@@ -12499,7 +13155,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "Closed",
-    "sunday_hours": "12-4PM"
+    "sunday_hours": "12-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292617",
@@ -12537,7 +13195,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "10AM-5PM"
+    "sunday_hours": "10AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292618",
@@ -12575,7 +13235,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "9AM-6PM"
+    "sunday_hours": "9AM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292619",
@@ -12613,7 +13275,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292620",
@@ -12651,7 +13315,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292621",
@@ -12689,7 +13355,9 @@
     "thursday_hours": "Closed",
     "friday_hours": "Closed",
     "saturday_hours": "Closed",
-    "sunday_hours": "9AM-5PM"
+    "sunday_hours": "9AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292622",
@@ -12727,7 +13395,9 @@
     "thursday_hours": "12PM-6PM",
     "friday_hours": "12PM-8PM",
     "saturday_hours": "8AM-8PM",
-    "sunday_hours": "8AM-8PM"
+    "sunday_hours": "8AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292623",
@@ -12765,7 +13435,9 @@
     "thursday_hours": "1PM-6PM",
     "friday_hours": "1PM-6PM",
     "saturday_hours": "9AM-6PM",
-    "sunday_hours": "1PM-6PM"
+    "sunday_hours": "1PM-6PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292624",
@@ -12803,7 +13475,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "12PM-5PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292625",
@@ -12841,7 +13515,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": null,
     "saturday_hours": "9:30AM-4:30PM",
-    "sunday_hours": "9:30AM-4:30PM"
+    "sunday_hours": "9:30AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292626",
@@ -12879,7 +13555,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292627",
@@ -12917,7 +13595,9 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292628",
@@ -12955,7 +13635,9 @@
     "thursday_hours": "9AM-4:30PM",
     "friday_hours": "9AM-4:30PM",
     "saturday_hours": "9AM-4:30PM",
-    "sunday_hours": "9AM-4:30PM"
+    "sunday_hours": "9AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292629",
@@ -12993,7 +13675,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "10AM-5PM",
-    "sunday_hours": "12PM-5PM"
+    "sunday_hours": "12PM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292630",
@@ -13031,7 +13715,9 @@
     "thursday_hours": "9AM-4PM",
     "friday_hours": "9AM-4PM",
     "saturday_hours": "9AM-4PM",
-    "sunday_hours": "9AM-4PM"
+    "sunday_hours": "9AM-4PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292631",
@@ -13069,7 +13755,9 @@
     "thursday_hours": "10AM-4:30PM",
     "friday_hours": "10AM-4:30PM",
     "saturday_hours": "10AM-4:30PM",
-    "sunday_hours": "10AM-4:30PM"
+    "sunday_hours": "10AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292632",
@@ -13107,7 +13795,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "10AM-4PM",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292633",
@@ -13145,7 +13835,9 @@
     "thursday_hours": "3PM-5:30PM",
     "friday_hours": "10AM-5:30PM",
     "saturday_hours": "10AM-5:30PM",
-    "sunday_hours": "10AM-5:30PM"
+    "sunday_hours": "10AM-5:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000292634",
@@ -13183,7 +13875,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "CLOSED",
     "saturday_hours": "9:30AM-4:30PM",
-    "sunday_hours": "9:30AM-4:30PM"
+    "sunday_hours": "9:30AM-4:30PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000304142",
@@ -13221,7 +13915,9 @@
     "thursday_hours": "9AM-4:30PM",
     "friday_hours": "9AM-8PM",
     "saturday_hours": "9AM-8PM",
-    "sunday_hours": "9AM-8PM"
+    "sunday_hours": "9AM-8PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000304143",
@@ -13259,7 +13955,9 @@
     "thursday_hours": "By Appointment",
     "friday_hours": "By Appointment",
     "saturday_hours": "9AM-5PM",
-    "sunday_hours": "11AM-5PM"
+    "sunday_hours": "11AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000304144",
@@ -13297,7 +13995,9 @@
     "thursday_hours": "10AM-5PM",
     "friday_hours": "10AM-5PM",
     "saturday_hours": "8AM-5PM",
-    "sunday_hours": "8AM-5PM"
+    "sunday_hours": "8AM-5PM",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000304145",
@@ -13335,7 +14035,9 @@
     "thursday_hours": "CLOSED",
     "friday_hours": "9AM-1PM",
     "saturday_hours": "CLOSED",
-    "sunday_hours": "CLOSED"
+    "sunday_hours": "CLOSED",
+    "reviews": 0,
+    "rating": null
   },
   {
     "id": "zcrm_38729000000304146",
@@ -13373,6 +14075,8 @@
     "thursday_hours": "Call for Hours",
     "friday_hours": "Call for Hours",
     "saturday_hours": "Call for Hours",
-    "sunday_hours": "Call for Hours"
+    "sunday_hours": "Call for Hours",
+    "reviews": 0,
+    "rating": null
   }
 ]
