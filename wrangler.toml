@@ -8,6 +8,7 @@ GITHUB_OWNER = "RenaudDev"
 GITHUB_REPO  = "PickAFarm"
 GITHUB_EVENT = "rebuild-farms"
 ZOHO_DC = "ca"
+FROM_EMAIL = "PickAFarm Notifications <updates@notifications.pickafarm.com>"
 
 [[d1_databases]]
 binding = "DB"

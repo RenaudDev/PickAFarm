@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Bell, MapPin, Star, ArrowUpDown, Filter } from "lucide-react"
 import GoogleMaps from "@/components/google-maps"
 import type { FarmData } from "@/lib/schema"
+import { SaveFarmButton } from "@/components/save-farm-button"
 
 interface LocationData {
   name: string;
@@ -126,11 +127,6 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
           <p className="text-muted-foreground mb-4">
             {sortedFarms.length} farm{sortedFarms.length !== 1 ? "s" : ""} found nearby.
           </p>
-          
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Bell className="w-4 h-4 mr-2" />
-            Get Notified
-          </Button>
         </div>
       </div>
 
@@ -226,11 +222,17 @@ export default function SearchResultsContent({ params, initialFarms, locationDat
                     onClick={() => window.location.href = farm.url}
                   >
                     View Details
-                    
                   </Button>
-                  <Button size="sm" variant="secondary" className="px-3">
-                  <Bell className="h-3 w-3 mr-1" />
-                  </Button>
+                  <SaveFarmButton
+                    farmId={farm.id}
+                    farmName={farm.name}
+                    city={farm.city}
+                    state={farm.province}
+                    phone={(farm as any).phone}
+                    website={(farm as any).website}
+                    variant="icon"
+                    size="sm"
+                  />
                 </div>
               </CardContent>
             </Card>

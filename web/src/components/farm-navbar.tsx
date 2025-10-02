@@ -4,9 +4,11 @@ import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs"
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { isSignedIn } = useAuth()
 
   return (
     <nav className="bg-background border-b border-border sticky top-0 z-50">
@@ -38,9 +40,52 @@ function FarmNavbar() {
                 Contact
               </a>
             </div>
-            <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 py-2">
+            <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="text-foreground hover:text-accent font-medium transition-colors">
               List Your Farm
             </a>
+            {!isSignedIn ? (
+              <>
+                <SignInButton mode="modal">
+                  <Button 
+                    variant="outline" 
+                    className="font-medium border-border hover:bg-muted hover:text-foreground transition-colors"
+                  >
+                    Log In
+                  </Button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+                    Sign Up
+                  </Button>
+                </SignUpButton>
+              </>
+            ) : (
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "w-10 h-10 rounded-full",
+                    userButtonPopoverCard: "shadow-lg",
+                    userButtonPopoverActionButton: "hover:bg-muted"
+                  }
+                }}
+              >
+                <UserButton.MenuItems>
+                  <UserButton.Link
+                    label="Dashboard"
+                    labelIcon={<span>📊</span>}
+                    href="/dashboard"
+                  />
+                  <UserButton.Link
+                    label="Saved Farms"
+                    labelIcon={<span>❤️</span>}
+                    href="/saved-farms"
+                  />
+                  <UserButton.Action label="manageAccount" />
+                  <UserButton.Action label="signOut" />
+                </UserButton.MenuItems>
+              </UserButton>
+            )}
           </div>
         </div>
 
@@ -84,6 +129,46 @@ function FarmNavbar() {
                 <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="block px-4 py-2 text-primary hover:bg-muted rounded-md font-semibold">
                   List Your Farm
                 </a>
+                {!isSignedIn ? (
+                  <>
+                    <div className="px-4 py-2">
+                      <SignInButton mode="modal">
+                        <Button 
+                          variant="outline" 
+                          className="w-full font-medium border-border hover:bg-muted hover:text-foreground transition-colors"
+                        >
+                          Log In
+                        </Button>
+                      </SignInButton>
+                    </div>
+                    <div className="px-4 py-2">
+                      <SignUpButton mode="modal">
+                        <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+                          Sign Up
+                        </Button>
+                      </SignUpButton>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <a href="/dashboard" className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium">
+                      📊 Dashboard
+                    </a>
+                    <a href="/saved-farms" className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium">
+                      ❤️ Saved Farms
+                    </a>
+                    <div className="px-4 py-2 flex items-center justify-center">
+                      <UserButton 
+                        afterSignOutUrl="/"
+                        appearance={{
+                          elements: {
+                            avatarBox: "w-10 h-10 rounded-full"
+                          }
+                        }}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           )}

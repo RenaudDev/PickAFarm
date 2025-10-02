@@ -11,6 +11,7 @@ import GoogleMaps from "@/components/google-maps"
 import Link from "next/link"
 import farmsData from "../../../data/farms.json"
 import { getVarietySlug } from "@/lib/variety-mapper"
+import { SaveFarmButton } from "@/components/save-farm-button"
 
 
 // Import real location data
@@ -157,11 +158,6 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
           <p className="text-muted-foreground mb-4">
             {sortedFarms.length} farm{sortedFarms.length !== 1 ? "s" : ""} found within 100km
           </p>
-          
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Bell className="w-4 h-4 mr-2" />
-            Get Notified
-          </Button>
         </div>
       </div>
 
@@ -283,9 +279,16 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
                   >
                     View Details
                   </Button>
-                  <Button size="sm" variant="secondary" className="px-3">
-                    <Bell className="h-3 w-3 mr-1" />
-                  </Button>
+                  <SaveFarmButton
+                    farmId={farm.id}
+                    farmName={farm.name}
+                    city={farm.city}
+                    state={farm.province}
+                    phone={(farm as any).phone}
+                    website={(farm as any).website}
+                    variant="icon"
+                    size="sm"
+                  />
                 </div>
               </CardContent>
             </Card>
