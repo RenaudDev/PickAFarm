@@ -1,6 +1,3 @@
-# Ignore Next.js cache files
-web/.next/cache
-web/.next/trace
-
-# Ignore build cache
-web/.cache
+# Ignore Next.js cache files (relative to build output)
+.next/cache/**
+.next/trace
