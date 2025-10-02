@@ -12,6 +12,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.946239
 interface SavedFarm {
   farm_id: string
   farm_name: string
+  farm_slug: string
   farm_city: string
   farm_state: string
   farm_phone?: string
@@ -171,7 +172,7 @@ export default function SavedFarmsPage() {
                   </div>
 
                   <Button className="w-full mt-4" asChild>
-                    <a href={`/farms/${farm.farm_id}`}>View Details</a>
+                    <a href={`/farms/${farm.farm_slug}`}>View Details</a>
                   </Button>
                 </div>
               ))}

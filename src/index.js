@@ -1020,19 +1020,21 @@ async function handleUserSync(request, env, method) {
     const { email, firstName, lastName } = body;
     console.log("User data:", { email, firstName, lastName });
 
-    // Check if user already exists
+    // Check if user already exists by clerk_user_id OR email
     const existingUser = await env.DB.prepare(
-      "SELECT id FROM users WHERE clerk_user_id = ?"
-    ).bind(clerkUser.userId).first();
+      "SELECT id, clerk_user_id, email FROM users WHERE clerk_user_id = ? OR email = ?"
+    ).bind(clerkUser.userId, email).first();
 
     if (existingUser) {
       // Update existing user
       await env.DB.prepare(`
         UPDATE users 
-        SET email = ?, first_name = ?, last_name = ?, updated_at = datetime('now')
-        WHERE clerk_user_id = ?
-      `).bind(email, firstName, lastName, clerkUser.userId).run();
+        SET clerk_user_id = ?, email = ?, first_name = ?, last_name = ?, updated_at = datetime('now')
+        WHERE id = ?
+      `).bind(clerkUser.userId, email, firstName, lastName, existingUser.id).run();
 
+      console.log(`✅ User updated: ${existingUser.id}`);
+      
       return new Response(JSON.stringify({
         success: true,
         user_id: existingUser.id,
@@ -1041,20 +1043,47 @@ async function handleUserSync(request, env, method) {
         headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     } else {
-      // Create new user
+      // Create new user with UPSERT to handle race conditions
       const newUserId = generateUUID();
-      await env.DB.prepare(`
-        INSERT INTO users (id, clerk_user_id, email, first_name, last_name, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, datetime('now'), datetime('now'))
-      `).bind(newUserId, clerkUser.userId, email, firstName, lastName).run();
+      
+      try {
+        await env.DB.prepare(`
+          INSERT INTO users (id, clerk_user_id, email, first_name, last_name, created_at, updated_at)
+          VALUES (?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+          ON CONFLICT(email) DO UPDATE SET
+            clerk_user_id = excluded.clerk_user_id,
+            first_name = excluded.first_name,
+            last_name = excluded.last_name,
+            updated_at = datetime('now')
+        `).bind(newUserId, clerkUser.userId, email, firstName, lastName).run();
 
-      return new Response(JSON.stringify({
-        success: true,
-        user_id: newUserId,
-        action: "created"
-      }), {
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
+        console.log(`✅ User created: ${newUserId}`);
+
+        return new Response(JSON.stringify({
+          success: true,
+          user_id: newUserId,
+          action: "created"
+        }), {
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      } catch (insertError) {
+        // If still fails, try to get the existing user and return it
+        console.error("Insert failed, fetching existing user:", insertError.message);
+        const fallbackUser = await env.DB.prepare(
+          "SELECT id FROM users WHERE email = ?"
+        ).bind(email).first();
+        
+        if (fallbackUser) {
+          return new Response(JSON.stringify({
+            success: true,
+            user_id: fallbackUser.id,
+            action: "existing"
+          }), {
+            headers: { "Content-Type": "application/json", ...corsHeaders }
+          });
+        }
+        throw insertError;
+      }
     }
   } catch (error) {
     console.error("User sync error:", error);
