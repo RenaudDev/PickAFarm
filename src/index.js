@@ -290,70 +290,90 @@ const corsHeaders = {
 // Clerk JWT Verification
 // ============================
 
-// Base64 decode helper for Workers
+// Base64url decode helper for Workers
 function base64UrlDecode(str) {
   // Replace URL-safe characters with standard base64 characters
-  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+  
   // Add padding if needed
-  while (str.length % 4) {
-    str += '=';
+  const padding = base64.length % 4;
+  if (padding > 0) {
+    base64 += '='.repeat(4 - padding);
   }
-  // Decode using TextDecoder (Workers-compatible)
+  
   try {
-    const binString = atob(str);
-    return binString;
+    // Use atob for base64 decoding (available in Workers)
+    const decoded = atob(base64);
+    return decoded;
   } catch (e) {
-    // Fallback for Workers if atob fails
-    const bytes = Uint8Array.from(str, c => c.charCodeAt(0));
-    return new TextDecoder().decode(bytes);
+    throw new Error(`Base64 decode failed: ${e.message}`);
   }
 }
 
 async function verifyClerkToken(request, env) {
-  console.log("Verifying Clerk token...");
+  console.log("🔐 Verifying Clerk token...");
   
   const authHeader = request.headers.get("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    console.error("Missing or invalid Authorization header");
+    console.error("❌ Missing or invalid Authorization header");
     throw new Error("Missing or invalid Authorization header");
   }
 
   const token = authHeader.substring(7);
-  console.log("Token length:", token.length);
+  console.log(`📋 Token received, length: ${token.length}`);
   
-  // For now, we'll decode the JWT without full verification
-  // In production, you should verify the signature with Clerk's public key
   try {
+    // Split JWT into parts
     const parts = token.split('.');
-    console.log("JWT parts:", parts.length);
     
     if (parts.length !== 3) {
+      console.error(`❌ Invalid JWT format: ${parts.length} parts instead of 3`);
       throw new Error("Invalid JWT format");
     }
     
     // Decode the payload (second part of JWT)
-    console.log("Decoding payload...");
-    const payloadStr = base64UrlDecode(parts[1]);
-    console.log("Payload decoded, parsing JSON...");
-    const payload = JSON.parse(payloadStr);
-    console.log("Payload parsed:", { sub: payload.sub, exp: payload.exp });
+    console.log("🔓 Decoding JWT payload...");
+    let payloadStr;
+    try {
+      payloadStr = base64UrlDecode(parts[1]);
+    } catch (decodeError) {
+      console.error("❌ Base64 decode error:", decodeError.message);
+      throw new Error(`Failed to decode JWT payload: ${decodeError.message}`);
+    }
     
-    // Check expiration - temporarily disabled for testing
-    const now = Date.now() / 1000;
-    console.log("Checking expiration:", { exp: payload.exp, now, expired: payload.exp < now });
+    // Parse JSON payload
+    let payload;
+    try {
+      payload = JSON.parse(payloadStr);
+    } catch (parseError) {
+      console.error("❌ JSON parse error:", parseError.message);
+      throw new Error(`Failed to parse JWT payload: ${parseError.message}`);
+    }
     
-    // TODO: Re-enable expiration check after testing
-    // if (payload.exp && payload.exp < now) {
-    //   throw new Error("Token expired");
-    // }
+    console.log("✅ JWT decoded successfully:", { 
+      sub: payload.sub?.substring(0, 20) + '...', 
+      exp: payload.exp,
+      iss: payload.iss 
+    });
     
+    // Check expiration
+    if (payload.exp) {
+      const now = Math.floor(Date.now() / 1000);
+      if (payload.exp < now) {
+        console.error(`❌ Token expired: exp=${payload.exp}, now=${now}`);
+        throw new Error("Token expired");
+      }
+      console.log(`✅ Token valid, expires in ${payload.exp - now} seconds`);
+    }
+    
+    // Extract user info
     return {
       userId: payload.sub,
-      email: payload.email || payload.primary_email,
+      email: payload.email || payload.primary_email_address?.email_address,
       sessionId: payload.sid
     };
   } catch (error) {
-    console.error("JWT verification exception:", error.message, error.stack);
+    console.error("❌ JWT verification failed:", error.message);
     throw new Error(`JWT verification failed: ${error.message}`);
   }
 }
