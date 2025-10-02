@@ -1,6 +1,7 @@
 name = "pickafarm-api"
 main = "src/index.js"
 compatibility_date = "2024-09-17"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 ENVIRONMENT = "development"
