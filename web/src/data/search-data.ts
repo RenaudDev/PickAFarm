@@ -1,5 +1,5 @@
 // Auto-generated search data - do not edit manually
-// Generated at: 2025-10-02T14:16:30.089Z
+// Generated at: 2025-10-02T15:31:02.083Z
 
 export const farmCategories = [
   "Apple Orchards",

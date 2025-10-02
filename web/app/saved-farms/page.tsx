@@ -1,43 +1,80 @@
 "use client"
 
 import { ProtectedRoute } from "@/components/protected-route"
-import { useUser } from "@clerk/nextjs"
+import { useAuth, useUser } from "@clerk/nextjs"
 import { FarmNavbar } from "@/components/farm-navbar"
 import { useState, useEffect } from "react"
 import { Heart, MapPin, Phone, Globe, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
+
 interface SavedFarm {
-  id: string
-  name: string
-  city: string
-  state: string
-  phone?: string
-  website?: string
-  savedAt: string
+  farm_id: string
+  farm_name: string
+  farm_city: string
+  farm_state: string
+  farm_phone?: string
+  farm_website?: string
+  saved_at: string
 }
 
 export default function SavedFarmsPage() {
   const { user } = useUser()
+  const { getToken } = useAuth()
   const [savedFarms, setSavedFarms] = useState<SavedFarm[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Load saved farms from localStorage
-    if (user?.id) {
-      const saved = localStorage.getItem(`saved-farms-${user.id}`)
-      if (saved) {
-        setSavedFarms(JSON.parse(saved))
+    // Load saved farms from API
+    async function fetchSavedFarms() {
+      if (!user?.id) {
+        setIsLoading(false)
+        return
       }
-      setIsLoading(false)
-    }
-  }, [user?.id])
 
-  const removeFarm = (farmId: string) => {
-    const updated = savedFarms.filter(farm => farm.id !== farmId)
-    setSavedFarms(updated)
-    if (user?.id) {
-      localStorage.setItem(`saved-farms-${user.id}`, JSON.stringify(updated))
+      try {
+        const token = await getToken()
+        const response = await fetch(`${API_URL}/api/farms/saved`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          setSavedFarms(data.saved_farms || [])
+        }
+      } catch (error) {
+        console.error('Error fetching saved farms:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchSavedFarms()
+  }, [user?.id, getToken])
+
+  const removeFarm = async (farmId: string) => {
+    try {
+      const token = await getToken()
+      const response = await fetch(`${API_URL}/api/farms/unsave`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ farm_id: farmId }),
+      })
+
+      if (response.ok) {
+        setSavedFarms(savedFarms.filter(farm => farm.farm_id !== farmId))
+      } else {
+        alert('Failed to remove farm. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error removing farm:', error)
+      alert('Failed to remove farm. Please try again.')
     }
   }
 
@@ -80,17 +117,17 @@ export default function SavedFarmsPage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {savedFarms.map((farm) => (
                 <div 
-                  key={farm.id}
+                  key={farm.farm_id}
                   className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-xl font-semibold text-foreground">
-                      {farm.name}
+                      {farm.farm_name}
                     </h3>
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => removeFarm(farm.id)}
+                      onClick={() => removeFarm(farm.farm_id)}
                       className="text-red-500 hover:text-red-700 hover:bg-red-50"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -100,23 +137,23 @@ export default function SavedFarmsPage() {
                   <div className="space-y-3">
                     <div className="flex items-start text-sm text-muted-foreground">
                       <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
-                      <span>{farm.city}, {farm.state}</span>
+                      <span>{farm.farm_city}, {farm.farm_state}</span>
                     </div>
 
-                    {farm.phone && (
+                    {farm.farm_phone && (
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <a href={`tel:${farm.phone}`} className="hover:text-primary">
-                          {farm.phone}
+                        <a href={`tel:${farm.farm_phone}`} className="hover:text-primary">
+                          {farm.farm_phone}
                         </a>
                       </div>
                     )}
 
-                    {farm.website && (
+                    {farm.farm_website && (
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Globe className="w-4 h-4 mr-2 flex-shrink-0" />
                         <a 
-                          href={farm.website} 
+                          href={farm.farm_website} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="hover:text-primary truncate"
@@ -128,13 +165,13 @@ export default function SavedFarmsPage() {
 
                     <div className="pt-3 border-t border-border">
                       <p className="text-xs text-muted-foreground">
-                        Saved {new Date(farm.savedAt).toLocaleDateString()}
+                        Saved {new Date(farm.saved_at).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
 
                   <Button className="w-full mt-4" asChild>
-                    <a href={`/farms/${farm.id}`}>View Details</a>
+                    <a href={`/farms/${farm.farm_id}`}>View Details</a>
                   </Button>
                 </div>
               ))}
