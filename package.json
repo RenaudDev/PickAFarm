@@ -1,0 +1,8 @@
+{
+    "name": "pickafarm",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "build": "cd web && npm ci && npm run build"
+    }
+  }
