@@ -28,11 +28,17 @@ function deleteFolderRecursive(directoryPath) {
 
 console.log('🧹 Cleaning up cache files...');
 
-cacheDirectories.forEach(dir => {
-  if (fs.existsSync(dir)) {
-    deleteFolderRecursive(dir);
+cacheDirectories.forEach(target => {
+  if (fs.existsSync(target)) {
+    const stats = fs.lstatSync(target);
+    if (stats.isDirectory()) {
+      deleteFolderRecursive(target);
+    } else if (stats.isFile()) {
+      fs.unlinkSync(target);
+      console.log(`✅ Deleted file: ${target}`);
+    }
   } else {
-    console.log(`⚠️  Directory not found: ${dir}`);
+    console.log(`⚠️  Not found: ${target}`);
   }
 });
 
