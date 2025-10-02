@@ -6,9 +6,6 @@
     "dev": "next dev",
     "prebuild": "node scripts/generate-farm-data.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js",
     "build": "next build",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "npm run pages:build && wrangler pages dev",
-    "deploy": "npm run pages:build && wrangler pages deploy",
     "start": "next start",
     "lint": "next lint",
     "generate-data": "node scripts/generate-farm-data.js",
@@ -16,8 +13,7 @@
     "generate-categories": "node scripts/generate-categories.js",
     "generate-location-data": "node scripts/generate-location-data.js",
     "generate-manifest": "node scripts/generate-manifest.js",
-    "generate-sitemaps": "node scripts/generate-sitemaps.js",
-    "cf:build": "node scripts/generate-farm-data.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js && next build && npx @cloudflare/next-on-pages"
+    "generate-sitemaps": "node scripts/generate-sitemaps.js"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.14.5",
@@ -75,7 +71,6 @@
     "zod": "3.25.67"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.5",
     "@tailwindcss/postcss": "^4.1.9",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22",
@@ -84,7 +79,6 @@
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
-    "typescript": "^5",
-    "vercel": "^37.21.5"
+    "typescript": "^5"
   }
 }

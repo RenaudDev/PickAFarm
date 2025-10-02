@@ -15,5 +15,5 @@ binding = "DB"
 database_name = "pickafarm-db"
 database_id = "175c8757-6538-4bb7-ba4a-a7e4590e6478"
 
-[pages]
-pages_build_output_dir = "web/out"
+# Cloudflare Pages will detect Next.js automatically
+# No manual configuration needed for Next.js deployment
