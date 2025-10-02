@@ -1,3 +1,5 @@
-# Ignore Next.js cache files (relative to build output)
-.next/cache/**
-.next/trace
+# Ignore cache and build artifacts not needed for deployment
+web/.next/cache/**
+web/.next/trace
+web/node_modules/**
+.git/**
