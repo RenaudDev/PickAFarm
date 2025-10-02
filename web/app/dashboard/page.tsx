@@ -1,30 +1,54 @@
 "use client"
 
 import { ProtectedRoute } from "@/components/protected-route"
-import { useUser } from "@clerk/nextjs"
+import { useAuth, useUser } from "@clerk/nextjs"
 import { FarmNavbar } from "@/components/farm-navbar"
 import { useState, useEffect } from "react"
 import { getStoredLocation, formatLocation, type UserLocation } from "@/lib/location-utils"
 import { MapPin } from "lucide-react"
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
+
 export default function DashboardPage() {
   const { user } = useUser()
+  const { getToken } = useAuth()
   const [savedFarmsCount, setSavedFarmsCount] = useState(0)
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null)
+  const [isLoadingFarms, setIsLoadingFarms] = useState(true)
 
   useEffect(() => {
-    if (user?.id) {
-      const saved = localStorage.getItem(`saved-farms-${user.id}`)
-      if (saved) {
-        const farms = JSON.parse(saved)
-        setSavedFarmsCount(farms.length)
+    async function fetchDashboardData() {
+      if (!user?.id) {
+        setIsLoadingFarms(false)
+        return
       }
-      
+
       // Get user's location
       const location = getStoredLocation(user.id)
       setUserLocation(location)
+
+      // Fetch saved farms count from API
+      try {
+        const token = await getToken()
+        const response = await fetch(`${API_URL}/api/farms/saved`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          setSavedFarmsCount(data.count || 0)
+        }
+      } catch (error) {
+        console.error('Error fetching saved farms:', error)
+      } finally {
+        setIsLoadingFarms(false)
+      }
     }
-  }, [user?.id])
+
+    fetchDashboardData()
+  }, [user?.id, getToken])
 
   return (
     <ProtectedRoute>
@@ -61,12 +85,26 @@ export default function DashboardPage() {
 
             <div className="bg-card border border-border rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2">Saved Farms</h3>
-              <p className="text-sm text-muted-foreground">
-                {savedFarmsCount === 0 
-                  ? "You haven't saved any farms yet" 
-                  : `You have ${savedFarmsCount} saved farm${savedFarmsCount !== 1 ? 's' : ''}`
-                }
-              </p>
+              {isLoadingFarms ? (
+                <p className="text-sm text-muted-foreground">Loading...</p>
+              ) : (
+                <>
+                  <p className="text-sm text-muted-foreground">
+                    {savedFarmsCount === 0 
+                      ? "You haven't saved any farms yet" 
+                      : `You have ${savedFarmsCount} saved farm${savedFarmsCount !== 1 ? 's' : ''}`
+                    }
+                  </p>
+                  {savedFarmsCount > 0 && (
+                    <a 
+                      href="/saved-farms" 
+                      className="text-sm text-primary hover:underline mt-2 inline-block"
+                    >
+                      View saved farms →
+                    </a>
+                  )}
+                </>
+              )}
             </div>
 
             <div className="bg-card border border-border rounded-lg p-6">

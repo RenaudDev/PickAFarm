@@ -1263,13 +1263,15 @@ async function handleGetSavedFarms(request, env, method) {
   try {
     // Verify Clerk JWT
     const clerkUser = await verifyClerkToken(request, env);
+    console.log(`📋 Getting saved farms for Clerk user: ${clerkUser.userId}`);
     
     // Get D1 user ID
     const user = await env.DB.prepare(
-      "SELECT id FROM users WHERE clerk_user_id = ?"
+      "SELECT id, email FROM users WHERE clerk_user_id = ?"
     ).bind(clerkUser.userId).first();
 
     if (!user) {
+      console.error(`❌ User not found for clerk_user_id: ${clerkUser.userId}`);
       return new Response(JSON.stringify({
         saved_farms: [],
         count: 0,
@@ -1278,6 +1280,8 @@ async function handleGetSavedFarms(request, env, method) {
         headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     }
+
+    console.log(`✅ User found: ${user.id} (${user.email})`);
 
     // Get saved farms with full farm details
     const query = `
@@ -1312,6 +1316,7 @@ async function handleGetSavedFarms(request, env, method) {
     `;
 
     const result = await env.DB.prepare(query).bind(user.id).all();
+    console.log(`📊 Found ${result.results?.length || 0} saved farms for user ${user.id}`);
 
     return new Response(JSON.stringify({
       saved_farms: result.results || [],
@@ -1320,7 +1325,7 @@ async function handleGetSavedFarms(request, env, method) {
       headers: { "Content-Type": "application/json", ...corsHeaders }
     });
   } catch (error) {
-    console.error("Get saved farms error:", error);
+    console.error("❌ Get saved farms error:", error);
     return new Response(JSON.stringify({
       error: "Failed to get saved farms",
       message: error.message,
