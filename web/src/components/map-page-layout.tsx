@@ -89,7 +89,7 @@ interface Farm {
   state_province: string
   latitude: number
   longitude: number
-  categories: string
+  categories?: string
   distance?: number
   featured?: number | boolean
   verified?: number | boolean
