@@ -143,7 +143,7 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
         </div>
       </div>
       <Suspense fallback={<div>Loading search results...</div>}>
-        <SearchResultsContent params={resolvedParams} initialFarms={sortedFarms} locationData={compatibleLocationData} />
+        <SearchResultsContent params={resolvedParams} />
       </Suspense>
       <script
         type="application/ld+json"
