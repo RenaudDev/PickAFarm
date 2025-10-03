@@ -834,6 +834,19 @@ async function handleTokenDebug(request, env, method) {
 }
 
 // API Handler Functions (your existing functions)
+// Helper function to calculate distance using Haversine formula
+function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth's radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
 async function handleFarms(request, env, method) {
   if (method !== "GET") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
@@ -846,42 +859,67 @@ async function handleFarms(request, env, method) {
     const state = url.searchParams.get("state");
     const city = url.searchParams.get("city");
     const category = url.searchParams.get("category");
-    const limit = parseInt(url.searchParams.get("limit") || "50", 10);
+    const limit = parseInt(url.searchParams.get("limit") || "200", 10);
+    
+    // Location-based filtering
+    const lat = parseFloat(url.searchParams.get("lat"));
+    const lng = parseFloat(url.searchParams.get("lng"));
+    const radius = parseFloat(url.searchParams.get("radius") || "50"); // km
 
     let query = `
       SELECT 
-        f.zoho_record_id as id,
-        f.name, f.slug, f.street,
-        f.city as city_name, f.postal_code,
-        f.state as state_province, f.country,
-        f.latitude, f.longitude, f.phone, f.email,
-        f.website, f.facebook, f.instagram,
-        f.description, f.categories, f.type, f.amenities, f.varieties,
-        f.pet_friendly, f.price_range,
-        f.verified, f.featured, f.active, f.updated_at,
-        f.payment_methods, f.opening_date, f.closing_date,
-        f.monday_hours, f.tuesday_hours, f.wednesday_hours,
-        f.thursday_hours, f.friday_hours, f.saturday_hours, f.sunday_hours
-      FROM farms f
-      WHERE f.active = 1
+        zoho_record_id as id,
+        name, slug, street,
+        city as city_name, postal_code,
+        state as state_province, country,
+        latitude, longitude, phone, email,
+        website, facebook, instagram,
+        description, categories, type, amenities, varieties,
+        pet_friendly, price_range,
+        verified, featured, active, updated_at,
+        payment_methods, opening_date, closing_date,
+        monday_hours, tuesday_hours, wednesday_hours,
+        thursday_hours, friday_hours, saturday_hours, sunday_hours
+      FROM farms
+      WHERE active = 1 AND latitude IS NOT NULL AND longitude IS NOT NULL
     `;
 
     const params = [];
-    if (state) { query += " AND f.state = ?"; params.push(state); }
-    if (city) { query += " AND f.city = ?"; params.push(city); }
+    if (state) { query += " AND state = ?"; params.push(state); }
+    if (city) { query += " AND city = ?"; params.push(city); }
+    if (category) { query += " AND (categories LIKE ? OR type LIKE ?)"; params.push(`%${category}%`, `%${category}%`); }
 
-    query += " ORDER BY f.featured DESC, f.verified DESC, f.name ASC";
+    query += " ORDER BY featured DESC, verified DESC, name ASC";
     query += " LIMIT ?";
     params.push(limit);
 
     const stmt = env.DB.prepare(query);
     const result = await stmt.bind(...params).all();
 
+    let farms = result.results || [];
+
+    // If lat/lng provided, calculate distances and filter by radius
+    if (!isNaN(lat) && !isNaN(lng)) {
+      farms = farms
+        .map(farm => {
+          if (farm.latitude && farm.longitude) {
+            const distance = calculateHaversineDistance(
+              lat, lng,
+              parseFloat(farm.latitude), parseFloat(farm.longitude)
+            );
+            return { ...farm, distance: Math.round(distance * 10) / 10 }; // Round to 1 decimal
+          }
+          return null;
+        })
+        .filter(farm => farm !== null && farm.distance <= radius)
+        .sort((a, b) => a.distance - b.distance);
+    }
+
     return new Response(
       JSON.stringify({
-        farms: result.results || [],
-        count: result.results?.length || 0,
-        filters: { state, city, category, limit },
+        farms,
+        count: farms.length,
+        filters: { state, city, category, lat, lng, radius, limit },
       }),
       { headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
@@ -1097,6 +1135,74 @@ async function handleUserSync(request, env, method) {
   }
 }
 
+// POST /api/users/update-location - Update user's GPS location
+async function handleUpdateUserLocation(request, env, method) {
+  if (method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    // Verify Clerk JWT
+    const clerkUser = await verifyClerkToken(request, env);
+    
+    // Get D1 user ID
+    const user = await env.DB.prepare(
+      "SELECT id FROM users WHERE clerk_user_id = ?"
+    ).bind(clerkUser.userId).first();
+
+    if (!user) {
+      return new Response(JSON.stringify({
+        error: "User not found. Please sync user first."
+      }), {
+        status: 404,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    // Parse request body
+    const body = await request.json();
+    const { latitude, longitude, city, region } = body;
+
+    if (!latitude || !longitude) {
+      return new Response(JSON.stringify({ 
+        error: "latitude and longitude are required" 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    // Update user location
+    await env.DB.prepare(`
+      UPDATE users 
+      SET latitude = ?, longitude = ?, location_city = ?, location_region = ?, 
+          location_updated_at = datetime('now'), updated_at = datetime('now')
+      WHERE id = ?
+    `).bind(latitude, longitude, city || null, region || null, user.id).run();
+
+    console.log(`✅ User location updated: ${user.id} -> ${latitude}, ${longitude}`);
+
+    return new Response(JSON.stringify({
+      success: true,
+      message: "Location updated successfully",
+      location: { latitude, longitude, city, region }
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  } catch (error) {
+    console.error("Update location error:", error);
+    return new Response(JSON.stringify({
+      error: "Failed to update location",
+      message: error.message
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+}
+
 // ============================
 // Farm Save/Unsave Endpoints
 // ============================
@@ -1129,23 +1235,11 @@ async function handleSaveFarm(request, env, method) {
 
     // Parse request body
     const body = await request.json();
-    const { farm_id } = body;
+    const { farm_id, farm_name, farm_city, farm_state, farm_phone, farm_website } = body;
 
     if (!farm_id) {
       return new Response(JSON.stringify({ error: "farm_id is required" }), {
         status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    // Check if farm exists (farms table uses zoho_record_id as primary key)
-    const farm = await env.DB.prepare(
-      "SELECT zoho_record_id FROM farms WHERE zoho_record_id = ?"
-    ).bind(farm_id).first();
-
-    if (!farm) {
-      return new Response(JSON.stringify({ error: "Farm not found" }), {
-        status: 404,
         headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     }
@@ -1165,12 +1259,27 @@ async function handleSaveFarm(request, env, method) {
       });
     }
 
-    // Save the farm
+    // Save the farm with metadata
     const savedFarmId = generateUUID();
+    const farmSlug = farm_name ? farm_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : null;
+    
     await env.DB.prepare(`
-      INSERT INTO saved_farms (id, user_id, farm_id, saved_at)
-      VALUES (?, ?, ?, datetime('now'))
-    `).bind(savedFarmId, user.id, farm_id).run();
+      INSERT INTO saved_farms (
+        id, user_id, farm_id, farm_name, farm_slug, farm_city, farm_state, 
+        farm_phone, farm_website, saved_at
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+    `).bind(
+      savedFarmId, 
+      user.id, 
+      farm_id, 
+      farm_name || null, 
+      farmSlug, 
+      farm_city || null, 
+      farm_state || null, 
+      farm_phone || null, 
+      farm_website || null
+    ).run();
 
     return new Response(JSON.stringify({
       success: true,
@@ -1283,36 +1392,24 @@ async function handleGetSavedFarms(request, env, method) {
 
     console.log(`✅ User found: ${user.id} (${user.email})`);
 
-    // Get saved farms with full farm details
+    // Get saved farms (farm metadata is stored in saved_farms table)
     const query = `
       SELECT 
-        sf.id as saved_farm_id,
-        sf.saved_at,
-        sf.notify_on_hours_change,
-        sf.notify_on_opening_change,
-        sf.notify_on_status_change,
-        f.zoho_record_id as farm_id,
-        f.name as farm_name,
-        f.slug as farm_slug,
-        f.city as farm_city,
-        f.state as farm_state,
-        f.street as farm_street,
-        f.phone as farm_phone,
-        f.email as farm_email,
-        f.website as farm_website,
-        f.opening_date as farm_opening_date,
-        f.closing_date as farm_closing_date,
-        f.monday_hours as farm_monday_hours,
-        f.tuesday_hours as farm_tuesday_hours,
-        f.wednesday_hours as farm_wednesday_hours,
-        f.thursday_hours as farm_thursday_hours,
-        f.friday_hours as farm_friday_hours,
-        f.saturday_hours as farm_saturday_hours,
-        f.sunday_hours as farm_sunday_hours
-      FROM saved_farms sf
-      JOIN farms f ON sf.farm_id = f.zoho_record_id
-      WHERE sf.user_id = ?
-      ORDER BY sf.saved_at DESC
+        id as saved_farm_id,
+        saved_at,
+        notify_on_hours_change,
+        notify_on_opening_change,
+        notify_on_status_change,
+        farm_id,
+        farm_name,
+        farm_slug,
+        farm_city,
+        farm_state,
+        farm_phone,
+        farm_website
+      FROM saved_farms
+      WHERE user_id = ?
+      ORDER BY saved_at DESC
     `;
 
     const result = await env.DB.prepare(query).bind(user.id).all();
@@ -1676,6 +1773,10 @@ export default {
       return handleUserSync(request, env, method);
     }
     
+    if (url.pathname === "/api/users/update-location") {
+      return handleUpdateUserLocation(request, env, method);
+    }
+    
     // Farm save/unsave operations
     if (url.pathname === "/api/farms/save") {
       return handleSaveFarm(request, env, method);
@@ -1730,6 +1831,7 @@ export default {
           },
           authenticated: {
             user_sync: "POST /api/users/sync",
+            update_location: "POST /api/users/update-location",
             save_farm: "POST /api/farms/save",
             unsave_farm: "POST /api/farms/unsave",
             get_saved_farms: "GET /api/farms/saved"
