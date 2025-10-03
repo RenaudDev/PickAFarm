@@ -167,39 +167,21 @@ async function generateFarmData() {
     
     // Check if farms is actually an array
     if (!Array.isArray(farms)) {
-      throw new Error(`Expected farms array but got ${typeof farms}. Response: ${JSON.stringify(data).substring(0, 200)}...`);
     }
     
     console.log(`✅ Fetched ${farms.length} farms`);
     console.log(`📋 Sample farm fields:`, farms[0] ? Object.keys(farms[0]).join(', ') : 'No farms available');
     
-    // Fetch reviews from WordPress for each farm
-    console.log('⭐ Fetching review aggregates from WordPress...');
-    let reviewsFetched = 0;
-    let farmsWithReviews = 0;
+    // DISABLED: Review fetching moved to client-side for faster builds
+    // Reviews will be fetched dynamically when viewing farm pages
+    console.log('⏭️  Skipping WordPress review fetching (now done client-side for faster builds)');
     
-    for (let i = 0; i < farms.length; i++) {
-      const farm = farms[i];
-      const reviewData = await fetchReviewsForFarm(farm.id);
-      farms[i] = { ...farm, ...reviewData };
-      
-      reviewsFetched++;
-      if (reviewData.reviews > 0) {
-        farmsWithReviews++;
-      }
-      
-      // Log progress every 50 farms
-      if ((i + 1) % 50 === 0) {
-        console.log(`  📊 Progress: ${i + 1}/${farms.length} farms processed`);
-      }
-      
-      // Small delay to avoid rate limiting
-      if (i < farms.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-    }
-    
-    console.log(`✅ Reviews fetched: ${farmsWithReviews} farms have reviews (${reviewsFetched} total farms checked)`);
+    // Add placeholder review fields
+    farms = farms.map(farm => ({
+      ...farm,
+      reviews: 0,
+      rating: null
+    }));
     
     // Create data directory if it doesn't exist
     const dataDir = path.join(__dirname, '..', 'data');
