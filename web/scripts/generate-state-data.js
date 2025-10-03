@@ -8,6 +8,15 @@ console.log('='.repeat(60));
 const farmsDataPath = path.join(__dirname, '../data/farms.json');
 const farmsData = JSON.parse(fs.readFileSync(farmsDataPath, 'utf8'));
 
+// Read locations data to get city slugs (from locations.json which is the source)
+const locationsDataPath = path.join(__dirname, '../data/locations.json');
+const locationsRaw = JSON.parse(fs.readFileSync(locationsDataPath, 'utf8'));
+
+// Handle both array format and object with locationPages
+const locationsData = Array.isArray(locationsRaw)
+  ? locationsRaw
+  : (locationsRaw.locationPages || []);
+
 // Filter active farms only
 const activeFarms = farmsData.filter(farm => farm.active === 1 || farm.active === true);
 console.log(`📊 Total active farms: ${activeFarms.length}\n`);
@@ -210,11 +219,39 @@ function normalizeStateName(state) {
 // Detect country from state name
 function detectCountry(stateName) {
   const canadianProvinces = ['Ontario', 'Quebec', 'British Columbia', 'Alberta', 'Manitoba', 'Saskatchewan', 'Nova Scotia', 'New Brunswick', 'Newfoundland and Labrador', 'Prince Edward Island', 'Yukon', 'Northwest Territories', 'Nunavut'];
-  
+
   if (canadianProvinces.includes(stateName)) {
     return { name: 'Canada', code: 'CA', type: 'Province' };
   }
   return { name: 'United States', code: 'US', type: 'State' };
+}
+
+// Generate location slug from city name, state, and country
+function generateLocationSlug(cityName, stateName) {
+  const citySlug = cityName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const stateCode = STATE_CODE_MAP[stateName] || stateName.substring(0, 2).toLowerCase();
+  const countryInfo = detectCountry(stateName);
+  const countryCode = countryInfo.code.toLowerCase();
+
+  // Format: city-state-country (e.g., new-york-ny-us)
+  return `${citySlug}-${stateCode.toLowerCase()}-${countryCode}`;
+}
+
+// Calculate distance using Haversine formula (in kilometers)
+function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth's radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
 }
 
 // Group farms by state/province
@@ -272,25 +309,39 @@ Object.entries(farmsByState).forEach(([stateName, farms]) => {
   // Count featured farms
   const featuredCount = farms.filter(f => f.featured === 1 || f.featured === true).length;
   
-  // Extract unique cities
-  const citiesMap = new Map();
-  farms.forEach(farm => {
-    const cityKey = farm.city_name;
-    if (cityKey) {
-      if (!citiesMap.has(cityKey)) {
-        citiesMap.set(cityKey, {
-          name: farm.city_name,
-          slug: farm.location_slug || null,
-          farm_count: 0
-        });
-      }
-      citiesMap.get(cityKey).farm_count++;
+  // Get all location pages for this state
+  const stateLocations = locationsData.filter(loc => loc.province === stateName);
+
+  // Calculate farm count within 100km radius of each location
+  const cities = stateLocations.map(location => {
+    const cityLat = location.coordinates?.latitude;
+    const cityLng = location.coordinates?.longitude;
+
+    // Count farms within 100km of this location
+    let farmCount = 0;
+    if (cityLat && cityLng) {
+      farms.forEach(farm => {
+        if (farm.latitude && farm.longitude) {
+          const distance = calculateHaversineDistance(
+            cityLat, cityLng,
+            farm.latitude, farm.longitude
+          );
+          if (distance <= 100) { // 100km radius
+            farmCount++;
+          }
+        }
+      });
     }
-  });
-  
-  const cities = Array.from(citiesMap.values())
-    .sort((a, b) => b.farm_count - a.farm_count)
-    .slice(0, 20); // Top 20 cities
+
+    return {
+      name: location.name,
+      slug: location.location_slug,
+      farm_count: farmCount
+    };
+  })
+  .filter(city => city.farm_count > 0) // Only show cities with farms nearby
+  .sort((a, b) => b.farm_count - a.farm_count)
+  .slice(0, 20); // Top 20 cities
   
   // Extract unique categories
   const categoriesMap = new Map();

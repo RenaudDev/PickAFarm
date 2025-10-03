@@ -55,14 +55,20 @@ The web app uses a **static export strategy** to avoid runtime API calls:
    - `generate-farm-data.js` → `web/data/farms.json` and `web/data/farm-params.json`
    - `generate-search-data.js` → search index
    - `generate-categories.js` → category data
-   - `generate-location-data.js` → city/location data
-   - `generate-state-data.js` → state-level aggregations
+   - `generate-location-data.js` → `web/data/locations-with-farms.json` (reads from `locations.json`)
+   - `generate-state-data.js` → `web/data/states-with-farms.json` (reads from `locations.json` + `farms.json`)
    - `generate-manifest.js` → PWA manifest
    - `generate-sitemaps.js` → XML sitemaps
 3. Pages import JSON directly: `import farmsData from "../../../data/farms.json"`
 4. Next.js generates static HTML for all routes
 
 **Important**: Changes to farm data require rebuilding the site. The data is NOT fetched at runtime.
+
+**Data Dependencies:**
+- `generate-farm-data.js` must run FIRST (creates `farms.json`)
+- `generate-location-data.js` requires `farms.json` AND `locations.json` (source of truth for cities)
+- `generate-state-data.js` requires `farms.json` AND `locations.json`
+- Order matters! The `prebuild` script runs them in the correct sequence.
 
 ### Next.js 15 Async Params
 Next.js 15 requires async route params:
@@ -137,10 +143,21 @@ Zoho CRM → Webhook → Worker → D1 Database
 ## Key Conventions
 
 ### Route Structure
-- Farm detail pages: `/farms/[id]/` (dynamic route)
-- Category pages: `/[slug]/` (top-level catch-all)
-- State pages: Generated from state data
+- **Farm detail pages**: `/farms/[id]/` - Individual farm pages
+- **Category pages**: `/[slug]/` - Top-level catch-all (e.g., `/christmas-tree-farms/`)
+- **State pages**: `/[slug]/` - State overview pages (e.g., `/wisconsin/`, `/new-york/`)
+- **Category + Location pages**: `/[slug]/near/[location]/` - Filtered by category and location
+- **State + Category pages**: `/[state]/[category]/` - Farms in a state for a category
+- **Location pages**: `/farms-near/[location]/` - All farms near a location
 - All routes use trailing slashes (`trailingSlash: true` in next.config.js)
+
+**Route Disambiguation in `app/[slug]/page.tsx`:**
+The `[slug]` route handles both state pages AND category pages:
+1. First checks if slug matches a state in `states-with-farms.json`
+2. If state found, renders `StatePage` component
+3. Otherwise checks if slug matches a category in `category-content.json`
+4. If category found, renders `CategoryPage` component
+5. If neither, shows 404
 
 ### Import Paths
 - **Avoid** `@/data/*` for generated JSON files
@@ -202,3 +219,32 @@ Search data is pre-generated at build time:
 1. Edit `web/scripts/generate-search-data.js`
 2. Rebuild app to regenerate search index
 3. Search UI likely in components or app routes
+
+### Understanding State Page Cities
+State pages (e.g., `/wisconsin/`) show cities with clickable links to location pages:
+
+**How city data is generated** (`web/scripts/generate-state-data.js`):
+1. Reads all location pages from `locations.json` for that state
+2. Calculates farms within 100km radius of each location using Haversine distance
+3. Only shows cities with `farm_count > 0`
+4. Sorted by farm count descending, limited to top 20
+
+**Important**: Cities shown are from `locations.json` (major metro areas), NOT from farm addresses. Farms in small towns are counted toward the nearest major city within 100km radius.
+
+**Example**: A farm in "Ballston Spa, NY" counts toward "Albany, NY" if Albany is within 100km.
+
+### Location Slug Format
+Location slugs follow the pattern: `{city}-{state-code}-{country-code}`
+- Examples: `albany-ny-us`, `toronto-ontario-ca`, `madison-wi-us`
+- Generated in `locations.json` and used across the site
+- State codes use 2-letter abbreviations (NY, WI, CA, ON, etc.)
+- Country codes: `us` or `ca`
+
+### TypeScript Interface Patterns
+**Farm Interface Variations:**
+Different components expect different Farm shapes:
+- `map-page-layout.tsx` - expects `categories` as optional (for category-filtered pages)
+- `farm-schema.ts` - uses for JSON-LD structured data generation
+- Always check the interface definition in the component you're working with
+
+**Common mistake**: Passing data with required fields missing or wrong types between components.

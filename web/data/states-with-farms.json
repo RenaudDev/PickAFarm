@@ -16,104 +16,104 @@
     "farms_per_page": 48,
     "cities": [
       {
-        "name": "St Thomas",
-        "slug": null,
-        "farm_count": 2
+        "name": "Markham",
+        "slug": "markham-ontario-ca",
+        "farm_count": 24
       },
       {
-        "name": "Simcoe",
-        "slug": null,
-        "farm_count": 2
+        "name": "Richmond Hill",
+        "slug": "richmond-hill-ontario-ca",
+        "farm_count": 24
       },
       {
-        "name": "North Gower",
-        "slug": null,
-        "farm_count": 2
+        "name": "Vaughan",
+        "slug": "vaughan-ontario-ca",
+        "farm_count": 23
       },
       {
-        "name": "Greater Napanee",
-        "slug": null,
-        "farm_count": 1
+        "name": "Newmarket",
+        "slug": "newmarket-ontario-ca",
+        "farm_count": 22
       },
       {
-        "name": "Navan",
-        "slug": null,
-        "farm_count": 1
+        "name": "Aurora",
+        "slug": "aurora-ontario-ca",
+        "farm_count": 22
       },
       {
-        "name": "Casselman",
-        "slug": null,
-        "farm_count": 1
+        "name": "Mississauga",
+        "slug": "mississauga-ontario-ca",
+        "farm_count": 21
       },
       {
-        "name": "Jasper",
-        "slug": null,
-        "farm_count": 1
+        "name": "Caledon",
+        "slug": "caledon-ontario-ca",
+        "farm_count": 21
       },
       {
-        "name": "Niagara-on-the-Lake",
-        "slug": null,
-        "farm_count": 1
+        "name": "Toronto",
+        "slug": "toronto-ontario-ca",
+        "farm_count": 20
       },
       {
-        "name": "Essex",
-        "slug": null,
-        "farm_count": 1
+        "name": "Brampton",
+        "slug": "brampton-ontario-ca",
+        "farm_count": 20
       },
       {
-        "name": "Cobourg",
-        "slug": null,
-        "farm_count": 1
+        "name": "Oakville",
+        "slug": "oakville-ontario-ca",
+        "farm_count": 20
       },
       {
-        "name": "Millbrook",
-        "slug": null,
-        "farm_count": 1
+        "name": "Guelph",
+        "slug": "guelph-ontario-ca",
+        "farm_count": 20
       },
       {
-        "name": "Mount Albert",
-        "slug": null,
-        "farm_count": 1
+        "name": "Milton",
+        "slug": "milton-ontario-ca",
+        "farm_count": 20
       },
       {
-        "name": "Dorchester",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Sundridge",
-        "slug": null,
-        "farm_count": 1
+        "name": "Halton Hills",
+        "slug": "halton-hills-ontario-ca",
+        "farm_count": 20
       },
       {
         "name": "Cambridge",
-        "slug": null,
-        "farm_count": 1
+        "slug": "cambridge-ontario-ca",
+        "farm_count": 18
       },
       {
-        "name": "Pakenham",
-        "slug": null,
-        "farm_count": 1
+        "name": "Ajax",
+        "slug": "ajax-ontario-ca",
+        "farm_count": 18
       },
       {
-        "name": "Egbert",
-        "slug": null,
-        "farm_count": 1
+        "name": "Brantford",
+        "slug": "brantford-ontario-ca",
+        "farm_count": 18
       },
       {
-        "name": "Oro-Medonte",
-        "slug": null,
-        "farm_count": 1
+        "name": "Pickering",
+        "slug": "pickering-ontario-ca",
+        "farm_count": 18
       },
       {
-        "name": "Brockville",
-        "slug": null,
-        "farm_count": 1
+        "name": "Kitchener",
+        "slug": "kitchener-ontario-ca",
+        "farm_count": 17
       },
       {
-        "name": "Whitchurch-Stouffville",
-        "slug": null,
-        "farm_count": 1
+        "name": "Burlington",
+        "slug": "burlington-ontario-ca",
+        "farm_count": 17
+      },
+      {
+        "name": "Waterloo",
+        "slug": "waterloo-ontario-ca",
+        "farm_count": 17
       }
     ],
     "categories": [
@@ -292,7 +292,7 @@
         "verified": 0,
         "featured": 1,
         "active": 1,
-        "updated_at": "2025-10-03T12:46:09.694Z",
+        "updated_at": "2025-10-03T13:50:20.313Z",
         "payment_methods": "Cash",
         "opening_date": null,
         "closing_date": null,
@@ -2130,104 +2130,59 @@
     "farms_per_page": 33,
     "cities": [
       {
-        "name": "Ballston Spa",
-        "slug": null,
+        "name": "Rochester",
+        "slug": "rochester-new-york-us",
+        "farm_count": 12
+      },
+      {
+        "name": "Phoenix",
+        "slug": "phoenix-ny-ca",
+        "farm_count": 10
+      },
+      {
+        "name": "Albany",
+        "slug": "albany-ny-us",
+        "farm_count": 8
+      },
+      {
+        "name": "Central Square",
+        "slug": "central-square-ny-ca",
+        "farm_count": 8
+      },
+      {
+        "name": "Schenectady",
+        "slug": "schenectady-ny-us",
+        "farm_count": 7
+      },
+      {
+        "name": "Kingston",
+        "slug": "kingston-ny-us",
+        "farm_count": 7
+      },
+      {
+        "name": "Buffalo",
+        "slug": "buffalo-new-york-us",
+        "farm_count": 5
+      },
+      {
+        "name": "New York",
+        "slug": "new-york-new-york-us",
+        "farm_count": 4
+      },
+      {
+        "name": "Yonkers",
+        "slug": "yonkers-new-york-us",
+        "farm_count": 4
+      },
+      {
+        "name": "Lowville",
+        "slug": "lowville-ny-ca",
+        "farm_count": 4
+      },
+      {
+        "name": "Binghamton",
+        "slug": "binghamton-ny-us",
         "farm_count": 3
-      },
-      {
-        "name": "Cutchogue",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Penfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Newburgh",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Lockport",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cambridge",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Webster",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Prattsburgh",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Accord",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Eden",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Hagaman",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Canandaigua",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Sodus",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Canaan",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Miller Place",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Fulton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Hudson",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Whitney Point",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Holland",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Basom",
-        "slug": null,
-        "farm_count": 1
       }
     ],
     "categories": [
@@ -3629,104 +3584,29 @@
     "farms_per_page": 30,
     "cities": [
       {
-        "name": "Collegeville",
-        "slug": null,
-        "farm_count": 3
+        "name": "Lebanon",
+        "slug": "lebanon-pa-us",
+        "farm_count": 18
       },
       {
-        "name": "Cochranville",
-        "slug": null,
-        "farm_count": 2
+        "name": "Allentown",
+        "slug": "allentown-pa-us",
+        "farm_count": 17
       },
       {
-        "name": "Perkasie",
-        "slug": null,
-        "farm_count": 1
+        "name": "Harrisburg",
+        "slug": "harrisburg-pa-us",
+        "farm_count": 11
       },
       {
-        "name": "Aliquippa",
-        "slug": null,
-        "farm_count": 1
+        "name": "Philadelphia",
+        "slug": "philadelphia-pennsylvania-us",
+        "farm_count": 10
       },
       {
-        "name": "Cranesville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Hamburg",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Mt Bethel",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Industry",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Annville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Coopersburg",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "York",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Breezewood",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Schuylkill Haven",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Washington",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Lancaster",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Lehighton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Saylorsburg",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Spring Run",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Orangeville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Doylestown",
-        "slug": null,
-        "farm_count": 1
+        "name": "Pittsburgh",
+        "slug": "pittsburgh-pennsylvania-us",
+        "farm_count": 5
       }
     ],
     "categories": [
@@ -4997,98 +4877,43 @@
     "farms_per_page": 24,
     "cities": [
       {
-        "name": "Wild Rose",
-        "slug": null,
-        "farm_count": 4
+        "name": "Appleton",
+        "slug": "appleton-wi-us",
+        "farm_count": 11
       },
       {
-        "name": "Luxemburg",
-        "slug": null,
-        "farm_count": 2
+        "name": "Sheridan",
+        "slug": "sheridan-wi-us",
+        "farm_count": 10
       },
       {
-        "name": "Eau Claire",
-        "slug": null,
-        "farm_count": 2
+        "name": "Stevens Point",
+        "slug": "stevens-point-wi-us",
+        "farm_count": 10
       },
       {
-        "name": "Random Lake",
-        "slug": null,
-        "farm_count": 1
+        "name": "Madison",
+        "slug": "madison-wisconsin-us",
+        "farm_count": 7
       },
       {
-        "name": "Wautoma",
-        "slug": null,
-        "farm_count": 1
+        "name": "Green Bay",
+        "slug": "green-bay-wi-us",
+        "farm_count": 6
       },
       {
-        "name": "Bear Creek",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Waunakee",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cedarburg",
-        "slug": null,
-        "farm_count": 1
+        "name": "Milwaukee",
+        "slug": "milwaukee-wisconsin-us",
+        "farm_count": 5
       },
       {
         "name": "Cadott",
-        "slug": null,
-        "farm_count": 1
+        "slug": "cadott-wi-ca",
+        "farm_count": 3
       },
       {
-        "name": "Janesville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Fennimore",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Mosinee",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Walworth",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Marshall",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cross Plains",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Marshfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Rio",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "New London",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Shawano",
-        "slug": null,
+        "name": "Eau Claire",
+        "slug": "eau-claire-wi-ca",
         "farm_count": 1
       }
     ],
@@ -6118,83 +5943,98 @@
     "farms_per_page": 21,
     "cities": [
       {
-        "name": "Sebastopol",
-        "slug": null,
+        "name": "San Francisco",
+        "slug": "san-francisco-california-us",
+        "farm_count": 8
+      },
+      {
+        "name": "Oakland",
+        "slug": "oakland-california-us",
+        "farm_count": 8
+      },
+      {
+        "name": "Sacramento",
+        "slug": "sacramento-california-us",
+        "farm_count": 6
+      },
+      {
+        "name": "Fremont",
+        "slug": "fremont-california-us",
+        "farm_count": 6
+      },
+      {
+        "name": "San Jose",
+        "slug": "san-jose-california-us",
+        "farm_count": 5
+      },
+      {
+        "name": "Long Beach",
+        "slug": "long-beach-california-us",
         "farm_count": 4
       },
       {
-        "name": "Camino",
-        "slug": null,
-        "farm_count": 3
+        "name": "Anaheim",
+        "slug": "anaheim-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Menifee",
-        "slug": null,
-        "farm_count": 1
+        "name": "Santa Ana",
+        "slug": "santa-ana-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Grass Valley",
-        "slug": null,
-        "farm_count": 1
+        "name": "Riverside",
+        "slug": "riverside-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Martinez",
-        "slug": null,
-        "farm_count": 1
+        "name": "Irvine",
+        "slug": "irvine-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Castro Valley",
-        "slug": null,
-        "farm_count": 1
+        "name": "San Bernardino",
+        "slug": "san-bernardino-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Royal Oaks",
-        "slug": null,
-        "farm_count": 1
+        "name": "Fontana",
+        "slug": "fontana-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Santa Cruz",
-        "slug": null,
-        "farm_count": 1
+        "name": "Moreno Valley",
+        "slug": "moreno-valley-california-us",
+        "farm_count": 4
       },
       {
-        "name": "Nuevo",
-        "slug": null,
-        "farm_count": 1
+        "name": "Huntington Beach",
+        "slug": "huntington-beach-california-us",
+        "farm_count": 4
       },
       {
-        "name": "San Juan Bautista",
-        "slug": null,
-        "farm_count": 1
+        "name": "Los Angeles",
+        "slug": "los-angeles-california-us",
+        "farm_count": 2
       },
       {
-        "name": "San Juan Capistrano",
-        "slug": null,
-        "farm_count": 1
+        "name": "Stockton",
+        "slug": "stockton-california-us",
+        "farm_count": 2
+      },
+      {
+        "name": "Modesto",
+        "slug": "modesto-california-us",
+        "farm_count": 2
       },
       {
         "name": "Bakersfield",
-        "slug": null,
+        "slug": "bakersfield-california-us",
         "farm_count": 1
       },
       {
-        "name": "Mentone",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Novato",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Somis",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Pollock Pines",
-        "slug": null,
+        "name": "Oxnard",
+        "slug": "oxnard-california-us",
         "farm_count": 1
       }
     ],
@@ -7105,88 +6945,23 @@
     "farms_per_page": 20,
     "cities": [
       {
-        "name": "Bremerton",
-        "slug": null,
-        "farm_count": 2
+        "name": "Tacoma",
+        "slug": "tacoma-washington-us",
+        "farm_count": 13
       },
       {
-        "name": "North Bend",
-        "slug": null,
-        "farm_count": 2
+        "name": "Seattle",
+        "slug": "seattle-washington-us",
+        "farm_count": 12
       },
       {
-        "name": "Colbert",
-        "slug": null,
-        "farm_count": 2
-      },
-      {
-        "name": "Deming",
-        "slug": null,
-        "farm_count": 1
+        "name": "Spokane",
+        "slug": "spokane-washington-us",
+        "farm_count": 3
       },
       {
         "name": "Walla Walla",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Redmond",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Port Orchard",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Auburn",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Bothell",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Graham",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Hobart",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Washougal",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Chattaroy",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Tacoma",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Everson",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Edgewood",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Montesano",
-        "slug": null,
+        "slug": "walla-walla-wa-us",
         "farm_count": 1
       }
     ],
@@ -8048,93 +7823,28 @@
     "farms_per_page": 18,
     "cities": [
       {
-        "name": "Zumbro Falls",
-        "slug": null,
-        "farm_count": 1
+        "name": "St. Paul",
+        "slug": "st-paul-minnesota-us",
+        "farm_count": 14
       },
       {
-        "name": "Cambridge",
-        "slug": null,
-        "farm_count": 1
+        "name": "Minneapolis",
+        "slug": "minneapolis-minnesota-us",
+        "farm_count": 13
       },
       {
-        "name": "Clear Lake",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Eden Prairie",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Princeton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Richfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "St Louis Park",
-        "slug": null,
-        "farm_count": 1
+        "name": "Little Falls",
+        "slug": "little-falls-mn-us",
+        "farm_count": 8
       },
       {
         "name": "Rochester",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Grey Eagle",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Howard Lake",
-        "slug": null,
-        "farm_count": 1
+        "slug": "rochester-minnesota-us",
+        "farm_count": 5
       },
       {
         "name": "Duluth",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Kenyon",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Shafer",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Rice",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Zimmerman",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "St Paul",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Anoka",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cokato",
-        "slug": null,
+        "slug": "duluth-mn-ca",
         "farm_count": 1
       }
     ],
@@ -8910,88 +8620,33 @@
     "farms_per_page": 17,
     "cities": [
       {
-        "name": "Englewood",
-        "slug": null,
-        "farm_count": 1
+        "name": "Akron",
+        "slug": "akron-ohio-us",
+        "farm_count": 7
       },
       {
-        "name": "Wellston",
-        "slug": null,
-        "farm_count": 1
+        "name": "Cleveland",
+        "slug": "cleveland-ohio-us",
+        "farm_count": 6
       },
       {
-        "name": "Hamilton",
-        "slug": null,
-        "farm_count": 1
+        "name": "Cincinnati",
+        "slug": "cincinnati-ohio-us",
+        "farm_count": 5
       },
       {
-        "name": "Lebanon",
-        "slug": null,
-        "farm_count": 1
+        "name": "Columbus",
+        "slug": "columbus-ohio-us",
+        "farm_count": 3
       },
       {
-        "name": "East Sparta",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Jenera",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Yellow Springs",
-        "slug": null,
-        "farm_count": 1
+        "name": "Toledo",
+        "slug": "toledo-ohio-us",
+        "farm_count": 2
       },
       {
         "name": "Marietta",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Hamersville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Sunbury",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Willard",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Wadsworth",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Alliance",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Richmond",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Madison",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Delaware",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Canton",
-        "slug": null,
+        "slug": "marietta-oh-us",
         "farm_count": 1
       }
     ],
@@ -9718,58 +9373,103 @@
     "farms_per_page": 15,
     "cities": [
       {
-        "name": "Langley Twp",
-        "slug": null,
-        "farm_count": 4
+        "name": "Vancouver",
+        "slug": "vancouver-bc-ca",
+        "farm_count": 11
       },
       {
-        "name": "Nanaimo",
-        "slug": null,
-        "farm_count": 2
+        "name": "Surrey",
+        "slug": "surrey-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Burnaby",
+        "slug": "burnaby-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Richmond",
+        "slug": "richmond-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Coquitlam",
+        "slug": "coquitlam-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Langley",
+        "slug": "langley-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Delta",
+        "slug": "delta-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "New Westminster",
+        "slug": "new-westminster-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Port Coquitlam",
+        "slug": "port-coquitlam-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "North Vancouver",
+        "slug": "north-vancouver-bc-ca",
+        "farm_count": 11
       },
       {
         "name": "Maple Ridge",
-        "slug": null,
-        "farm_count": 1
+        "slug": "maple-ridge-bc-ca",
+        "farm_count": 10
       },
       {
-        "name": "Lindell Beach",
-        "slug": null,
-        "farm_count": 1
+        "name": "Abbotsford",
+        "slug": "abbotsford-bc-ca",
+        "farm_count": 9
       },
       {
-        "name": "Qualicum Beach",
-        "slug": null,
-        "farm_count": 1
+        "name": "Saanich",
+        "slug": "saanich-bc-ca",
+        "farm_count": 9
       },
       {
-        "name": "Aldergrove",
-        "slug": null,
+        "name": "Chilliwack",
+        "slug": "chilliwack-bc-ca",
+        "farm_count": 9
+      },
+      {
+        "name": "Nanaimo",
+        "slug": "nanaimo-bc-ca",
+        "farm_count": 8
+      },
+      {
+        "name": "Victoria",
+        "slug": "victoria-bc-ca",
+        "farm_count": 7
+      },
+      {
+        "name": "Kamloops",
+        "slug": "kamloops-bc-ca",
+        "farm_count": 2
+      },
+      {
+        "name": "Salmon Arm",
+        "slug": "salmon-arm-bc-ca",
+        "farm_count": 2
+      },
+      {
+        "name": "Kelowna",
+        "slug": "kelowna-bc-ca",
         "farm_count": 1
       },
       {
         "name": "Terrace",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Kamloops",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Surrey",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Langley",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Enderby",
-        "slug": null,
+        "slug": "terrace-bc-ca",
         "farm_count": 1
       }
     ],
@@ -10427,57 +10127,17 @@
     "cities": [
       {
         "name": "Boone",
-        "slug": null,
-        "farm_count": 4
-      },
-      {
-        "name": "Newland",
-        "slug": null,
-        "farm_count": 2
-      },
-      {
-        "name": "Glenville",
-        "slug": null,
-        "farm_count": 1
+        "slug": "boone-nc-us",
+        "farm_count": 12
       },
       {
         "name": "Waynesville",
-        "slug": null,
-        "farm_count": 1
+        "slug": "waynesville-nc-us",
+        "farm_count": 5
       },
       {
-        "name": "Vilas",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Burnsville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Elk Park",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Andrews",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Marshall",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "West Jefferson",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Denver",
-        "slug": null,
+        "name": "Charlotte",
+        "slug": "charlotte-north-carolina-us",
         "farm_count": 1
       }
     ],
@@ -11126,59 +10786,19 @@
     "farms_per_page": 13,
     "cities": [
       {
-        "name": "Hillsboro",
-        "slug": null,
-        "farm_count": 2
+        "name": "Portland",
+        "slug": "portland-oregon-us",
+        "farm_count": 9
       },
       {
-        "name": "Forest Grove",
-        "slug": null,
-        "farm_count": 2
-      },
-      {
-        "name": "Elmira",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Veneta",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Scappoose",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Happy Valley",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Corvallis",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Eagle Creek",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "McMinnville",
-        "slug": null,
-        "farm_count": 1
+        "name": "Eugene",
+        "slug": "eugene-or-us",
+        "farm_count": 3
       },
       {
         "name": "The Dalles",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Banks",
-        "slug": null,
-        "farm_count": 1
+        "slug": "the-dalles-or-ca",
+        "farm_count": 3
       }
     ],
     "categories": [
@@ -11740,64 +11360,9 @@
     "farms_per_page": 12,
     "cities": [
       {
-        "name": "Griswold",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "New Milford",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Brooklyn",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Warren",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Guilford",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Rockfall",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "New Hartford",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "South Windsor",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Shelton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Easton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Woodstock Valley",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Voluntown",
-        "slug": null,
-        "farm_count": 1
+        "name": "Bridgeport",
+        "slug": "bridgeport-connecticut-us",
+        "farm_count": 8
       }
     ],
     "categories": [
@@ -12330,64 +11895,14 @@
     "farms_per_page": 12,
     "cities": [
       {
-        "name": "Belvidere",
-        "slug": null,
-        "farm_count": 1
+        "name": "Newark",
+        "slug": "newark-new-jersey-us",
+        "farm_count": 10
       },
       {
-        "name": "Califon",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Augusta",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cream Ridge",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Branchville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Princeton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Freehold",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Mays Landing",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Flemington",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Wrightstown",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Washington",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Waretown",
-        "slug": null,
-        "farm_count": 1
+        "name": "Jersey City",
+        "slug": "jersey-city-new-jersey-us",
+        "farm_count": 10
       }
     ],
     "categories": [
@@ -12916,58 +12431,33 @@
     "farms_per_page": 12,
     "cities": [
       {
-        "name": "Harvard",
-        "slug": null,
+        "name": "Aurora",
+        "slug": "aurora-illinois-us",
+        "farm_count": 7
+      },
+      {
+        "name": "Chicago",
+        "slug": "chicago-illinois-us",
+        "farm_count": 4
+      },
+      {
+        "name": "Peoria",
+        "slug": "peoria-il-us",
         "farm_count": 2
       },
       {
-        "name": "Aurora",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "DeKalb",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
         "name": "Springfield",
-        "slug": null,
+        "slug": "springfield-il-us",
         "farm_count": 1
       },
       {
         "name": "Fairfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Brimfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Lee",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Millstadt",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Marseilles",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Woodstock",
-        "slug": null,
+        "slug": "fairfield-il-us",
         "farm_count": 1
       },
       {
         "name": "Rantoul",
-        "slug": null,
+        "slug": "rantoul-il-ca",
         "farm_count": 1
       }
     ],
@@ -13505,59 +12995,89 @@
     "farms_per_page": 11,
     "cities": [
       {
-        "name": "Cookshire-Eaton",
-        "slug": null,
-        "farm_count": 1
+        "name": "Saint-Hyacinthe",
+        "slug": "saint-hyacinthe-qc-ca",
+        "farm_count": 8
       },
       {
-        "name": "Sorel-Tracy",
-        "slug": null,
-        "farm_count": 1
+        "name": "Repentigny",
+        "slug": "repentigny-qc-ca",
+        "farm_count": 7
       },
       {
-        "name": "Saint-Isidore",
-        "slug": null,
-        "farm_count": 1
+        "name": "Granby",
+        "slug": "granby-qc-ca",
+        "farm_count": 7
       },
       {
-        "name": "Hatley",
-        "slug": null,
-        "farm_count": 1
+        "name": "Longueuil",
+        "slug": "longueuil-qc-ca",
+        "farm_count": 6
       },
       {
-        "name": "Fulford",
-        "slug": null,
-        "farm_count": 1
+        "name": "Saint-Jean-sur-Richelieu",
+        "slug": "saint-jean-sur-richelieu-qc-ca",
+        "farm_count": 6
       },
       {
-        "name": "Notre-Dame-de-l'Île-Perrot",
-        "slug": null,
-        "farm_count": 1
+        "name": "Brossard",
+        "slug": "brossard-qc-ca",
+        "farm_count": 6
       },
       {
-        "name": "L'Avenir",
-        "slug": null,
-        "farm_count": 1
+        "name": "Drummondville",
+        "slug": "drummondville-qc-ca",
+        "farm_count": 6
       },
       {
-        "name": "Saint-Raphaël",
-        "slug": null,
-        "farm_count": 1
+        "name": "Montreal",
+        "slug": "montreal-qc-ca",
+        "farm_count": 5
       },
       {
-        "name": "Henryville",
-        "slug": null,
-        "farm_count": 1
+        "name": "Laval",
+        "slug": "laval-qc-ca",
+        "farm_count": 5
       },
       {
-        "name": "Saint-Étienne-des-Grès",
-        "slug": null,
-        "farm_count": 1
+        "name": "Terrebonne",
+        "slug": "terrebonne-qc-ca",
+        "farm_count": 5
       },
       {
-        "name": "Lachute",
-        "slug": null,
-        "farm_count": 1
+        "name": "Sherbrooke",
+        "slug": "sherbrooke-qc-ca",
+        "farm_count": 4
+      },
+      {
+        "name": "Saint-Jérôme",
+        "slug": "saint-jerome-qc-ca",
+        "farm_count": 4
+      },
+      {
+        "name": "Mirabel",
+        "slug": "mirabel-qc-ca",
+        "farm_count": 4
+      },
+      {
+        "name": "Blainville",
+        "slug": "blainville-qc-ca",
+        "farm_count": 4
+      },
+      {
+        "name": "Trois-Rivières",
+        "slug": "trois-rivieres-qc-ca",
+        "farm_count": 3
+      },
+      {
+        "name": "Quebec City",
+        "slug": "quebec-city-qc-ca",
+        "farm_count": 2
+      },
+      {
+        "name": "Lévis",
+        "slug": "levis-qc-ca",
+        "farm_count": 2
       }
     ],
     "categories": [
@@ -13798,7 +13318,7 @@
         "verified": 0,
         "featured": 0,
         "active": 1,
-        "updated_at": "2025-09-26T01:03:50.185Z",
+        "updated_at": "2025-10-03T13:50:28.105Z",
         "payment_methods": "",
         "opening_date": null,
         "closing_date": null,
@@ -13808,7 +13328,7 @@
         "thursday_hours": "9:00AM to 5:00PM",
         "friday_hours": "9:00AM to 5:00PM",
         "saturday_hours": "9:00AM to 5:00PM",
-        "sunday_hours": "9:00AM to 5:00PM",
+        "sunday_hours": null,
         "reviews": 0,
         "rating": null,
         "distance_km": 0
@@ -14037,58 +13557,28 @@
     "farms_per_page": 11,
     "cities": [
       {
-        "name": "Flushing Township",
-        "slug": null,
-        "farm_count": 1
+        "name": "Flint",
+        "slug": "flint-mi-us",
+        "farm_count": 6
       },
       {
-        "name": "Highland",
-        "slug": null,
-        "farm_count": 1
+        "name": "Detroit",
+        "slug": "detroit-michigan-us",
+        "farm_count": 3
       },
       {
-        "name": "Kaleva",
-        "slug": null,
-        "farm_count": 1
+        "name": "Manistee",
+        "slug": "manistee-mi-us",
+        "farm_count": 3
       },
       {
-        "name": "Allendale",
-        "slug": null,
-        "farm_count": 1
+        "name": "East Lansing",
+        "slug": "east-lansing-mi-us",
+        "farm_count": 3
       },
       {
-        "name": "Avoca",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Mayville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Leslie",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Attica",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Reed City",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Manton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Reading",
-        "slug": null,
+        "name": "Wyoming",
+        "slug": "wyoming-mi-us",
         "farm_count": 1
       }
     ],
@@ -14573,49 +14063,14 @@
     "farms_per_page": 10,
     "cities": [
       {
-        "name": "Greensburg",
-        "slug": null,
-        "farm_count": 2
+        "name": "Indianapolis",
+        "slug": "indianapolis-indiana-us",
+        "farm_count": 5
       },
       {
-        "name": "Fremont",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cutler",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Thorntown",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Bristol",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Wanatah",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Danville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Wakarusa",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Evansville",
-        "slug": null,
-        "farm_count": 1
+        "name": "Fort Wayne",
+        "slug": "fort-wayne-indiana-us",
+        "farm_count": 3
       }
     ],
     "categories": [
@@ -15066,48 +14521,28 @@
     "farms_per_page": 9,
     "cities": [
       {
-        "name": "Kingston",
-        "slug": null,
-        "farm_count": 1
+        "name": "Oak Ridge",
+        "slug": "oak-ridge-tn-us",
+        "farm_count": 4
       },
       {
-        "name": "Jefferson City",
-        "slug": null,
-        "farm_count": 1
+        "name": "Nashville-Davidson",
+        "slug": "nashville-davidson-tennessee-us",
+        "farm_count": 3
       },
       {
-        "name": "Portland",
-        "slug": null,
-        "farm_count": 1
+        "name": "Cleveland",
+        "slug": "cleveland-tn-us",
+        "farm_count": 3
       },
       {
-        "name": "Sweetwater",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Harrison",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Murfreesboro",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Springfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Powell",
-        "slug": null,
-        "farm_count": 1
+        "name": "Morristown",
+        "slug": "morristown-tn-us",
+        "farm_count": 2
       },
       {
         "name": "Toone",
-        "slug": null,
+        "slug": "toone-tn-ca",
         "farm_count": 1
       }
     ],
@@ -15514,44 +14949,29 @@
     "farms_per_page": 8,
     "cities": [
       {
-        "name": "Hope",
-        "slug": null,
-        "farm_count": 1
+        "name": "Augusta",
+        "slug": "augusta-me-us",
+        "farm_count": 6
       },
       {
-        "name": "Scarborough",
-        "slug": null,
-        "farm_count": 1
+        "name": "Bangor",
+        "slug": "bangor-me-us",
+        "farm_count": 6
       },
       {
-        "name": "Newport",
-        "slug": null,
-        "farm_count": 1
+        "name": "Waterville",
+        "slug": "waterville-me-us",
+        "farm_count": 6
       },
       {
-        "name": "Durham",
-        "slug": null,
-        "farm_count": 1
+        "name": "Old Town",
+        "slug": "old-town-me-us",
+        "farm_count": 5
       },
       {
-        "name": "Fairfield",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Nobleboro",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Amherst",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Dover-Foxcroft",
-        "slug": null,
-        "farm_count": 1
+        "name": "Portland",
+        "slug": "portland-maine-us",
+        "farm_count": 3
       }
     ],
     "categories": [
@@ -15912,43 +15332,18 @@
     "farms_per_page": 8,
     "cities": [
       {
-        "name": "Middleburg",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Mt Solon",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Newport",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Rapidan",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Keezletown",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
         "name": "Staunton",
-        "slug": null,
-        "farm_count": 1
+        "slug": "staunton-va-us",
+        "farm_count": 5
       },
       {
-        "name": "Coleman Falls",
-        "slug": null,
-        "farm_count": 1
+        "name": "Blacksburg",
+        "slug": "blacksburg-va-us",
+        "farm_count": 2
       },
       {
-        "name": "Roanoke",
-        "slug": null,
+        "name": "Richmond",
+        "slug": "richmond-virginia-us",
         "farm_count": 1
       }
     ],
@@ -16318,44 +15713,14 @@
     "farms_per_page": 8,
     "cities": [
       {
-        "name": "Ashfield",
-        "slug": null,
-        "farm_count": 1
+        "name": "Boston",
+        "slug": "boston-massachusetts-us",
+        "farm_count": 7
       },
       {
-        "name": "Townsend",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Sutton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Haverhill",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Princeton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Sterling",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Billerica",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Shirley",
-        "slug": null,
-        "farm_count": 1
+        "name": "Chicopee",
+        "slug": "chicopee-ma-us",
+        "farm_count": 6
       }
     ],
     "categories": [
@@ -16716,39 +16081,14 @@
     "farms_per_page": 7,
     "cities": [
       {
-        "name": "Fremont",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Stratford",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Farmington",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Pembroke",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "New Durham",
-        "slug": null,
-        "farm_count": 1
+        "name": "Concord",
+        "slug": "concord-new-hampshire-us",
+        "farm_count": 5
       },
       {
         "name": "Bethlehem",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Plymouth",
-        "slug": null,
-        "farm_count": 1
+        "slug": "bethlehem-nh-ca",
+        "farm_count": 3
       }
     ],
     "categories": [
@@ -17064,38 +16404,23 @@
     "farms_per_page": 7,
     "cities": [
       {
-        "name": "Okatie",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Winnsboro",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Donalds",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Gilbert",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Harleyville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
         "name": "Greenwood",
-        "slug": null,
+        "slug": "greenwood-sc-us",
+        "farm_count": 5
+      },
+      {
+        "name": "Lexington",
+        "slug": "lexington-sc-us",
+        "farm_count": 3
+      },
+      {
+        "name": "Mount Pleasant",
+        "slug": "mount-pleasant-south-carolina-us",
         "farm_count": 1
       },
       {
-        "name": "Seneca",
-        "slug": null,
+        "name": "Hilton Head Island",
+        "slug": "hilton-head-island-sc-us",
         "farm_count": 1
       }
     ],
@@ -17420,38 +16745,23 @@
     "farms_per_page": 7,
     "cities": [
       {
-        "name": "Dahlonega",
-        "slug": null,
-        "farm_count": 1
+        "name": "Atlanta",
+        "slug": "atlanta-georgia-us",
+        "farm_count": 4
       },
       {
-        "name": "Pitts",
-        "slug": null,
-        "farm_count": 1
+        "name": "Dalton",
+        "slug": "dalton-ga-us",
+        "farm_count": 3
       },
       {
-        "name": "Covington",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Cumming",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "LaFayette",
-        "slug": null,
+        "name": "Cordele",
+        "slug": "cordele-ga-us",
         "farm_count": 1
       },
       {
         "name": "Jesup",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Bishop",
-        "slug": null,
+        "slug": "jesup-ga-ca",
         "farm_count": 1
       }
     ],
@@ -17772,34 +17082,9 @@
     "farms_per_page": 6,
     "cities": [
       {
-        "name": "Westminster",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Sykesville",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Chestertown",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Upperco",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Hagerstown",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Woodbine",
-        "slug": null,
-        "farm_count": 1
+        "name": "Baltimore",
+        "slug": "baltimore-maryland-us",
+        "farm_count": 6
       }
     ],
     "categories": [
@@ -18078,33 +17363,28 @@
     "farms_per_page": 6,
     "cities": [
       {
-        "name": "Cedar Park",
-        "slug": null,
+        "name": "Austin",
+        "slug": "austin-texas-us",
+        "farm_count": 2
+      },
+      {
+        "name": "San Antonio",
+        "slug": "san-antonio-texas-us",
         "farm_count": 1
       },
       {
-        "name": "Telephone",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Devine",
-        "slug": null,
+        "name": "Plano",
+        "slug": "plano-texas-us",
         "farm_count": 1
       },
       {
         "name": "Livingston",
-        "slug": null,
+        "slug": "livingston-tx-ca",
         "farm_count": 1
       },
       {
         "name": "Henderson",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Elgin",
-        "slug": null,
+        "slug": "henderson-tx-ca",
         "farm_count": 1
       }
     ],
@@ -18392,24 +17672,9 @@
     "farms_per_page": 5,
     "cities": [
       {
-        "name": "Springfield",
-        "slug": null,
+        "name": "Burlington",
+        "slug": "burlington-vermont-us",
         "farm_count": 2
-      },
-      {
-        "name": "Middlebury",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Richmond",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Dummerston",
-        "slug": null,
-        "farm_count": 1
       }
     ],
     "categories": [
@@ -18651,28 +17916,18 @@
     "farms_per_page": 5,
     "cities": [
       {
-        "name": "Trafford",
-        "slug": null,
-        "farm_count": 1
+        "name": "Birmingham",
+        "slug": "birmingham-alabama-us",
+        "farm_count": 2
       },
       {
-        "name": "Hazel Green",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Pell City",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Woodland",
-        "slug": null,
+        "name": "Huntsville",
+        "slug": "huntsville-al-us",
         "farm_count": 1
       },
       {
         "name": "Summerdale",
-        "slug": null,
+        "slug": "summerdale-al-ca",
         "farm_count": 1
       }
     ],
@@ -18907,28 +18162,23 @@
     "farms_per_page": 5,
     "cities": [
       {
-        "name": "Hampton",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "North Liberty",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
-        "name": "Council Bluffs",
-        "slug": null,
-        "farm_count": 1
-      },
-      {
         "name": "Denison",
-        "slug": null,
+        "slug": "denison-ia-ca",
+        "farm_count": 2
+      },
+      {
+        "name": "Iowa Falls",
+        "slug": "iowa-falls-ia-us",
+        "farm_count": 1
+      },
+      {
+        "name": "Iowa City",
+        "slug": "iowa-city-ia-us",
         "farm_count": 1
       },
       {
         "name": "Decorah",
-        "slug": null,
+        "slug": "decorah-ia-ca",
         "farm_count": 1
       }
     ],

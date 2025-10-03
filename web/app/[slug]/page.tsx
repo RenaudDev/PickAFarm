@@ -255,13 +255,12 @@ function StatePage({ stateData, slug }: { stateData: any; slug: string }) {
               <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
                 Explore u-pick farms in these cities across {stateData.state_name}
               </p>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {stateData.cities.map((city: any, index: number) => (
-                  <Link 
-                    key={index} 
-                    href={city.slug ? `/farms-near/${city.slug}` : `#`}
-                    className={city.slug ? '' : 'pointer-events-none'}
+                  <Link
+                    key={index}
+                    href={`/farms-near/${city.slug}`}
                   >
                     <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                       <CardContent className="pt-6 pb-4">
