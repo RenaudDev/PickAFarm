@@ -7,14 +7,17 @@ import { FarmFooter } from "@/components/farm-footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Users } from "lucide-react"
+import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
 import { FarmMapSection } from "@/components/farm-map-section"
 import { FAQSection } from "@/components/faq-section"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
+import statesData from "../data/states-with-farms.json"
 import { CategoryIcon } from "@/lib/category-icons"
 import { generateHomepageMetadata } from "@/lib/seo-metadata"
+import { getAllPosts } from '@/lib/wordpress'
+import Image from "next/image"
 
 // Function to get top categories from generated categories data
 function getTopCategories() {
@@ -25,13 +28,34 @@ function getTopCategories() {
     .slice(0, 4) // Top 4 categories
 }
 
+// Get US states sorted by farm count
+function getUSStates() {
+  return statesData
+    .filter(state => state.country_code === 'US')
+    .sort((a, b) => b.total_farms - a.total_farms)
+    .slice(0, 12) // Top 12 US states
+}
+
+// Get Canadian provinces sorted by farm count
+function getCanadianProvinces() {
+  return statesData
+    .filter(state => state.country_code === 'CA')
+    .sort((a, b) => b.total_farms - a.total_farms)
+}
+
 // Generate metadata for SEO
 export function generateMetadata(): Metadata {
   return generateHomepageMetadata()
 }
 
-export default function Home() {
+export default async function Home() {
   const topCategories = getTopCategories()
+  const usStates = getUSStates()
+  const canadianProvinces = getCanadianProvinces()
+  
+  // Fetch latest blog posts
+  const blogPosts = await getAllPosts()
+  const latestPosts = blogPosts.slice(0, 3) // Get 3 latest posts
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -39,30 +63,118 @@ export default function Home() {
       <FarmMapSection />
 
       <main className="flex-1">
-        <section className="py-16 px-4 bg-muted/30">
+        
+
+        {/* Browse by US States */}
+        <section className="py-16 px-4 bg-background">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Popular Farm Experiences</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {topCategories.map((category, index) => {
-                return (
-                  <Link key={index} href={`/${category.slug}`}>
-                    <Card className="text-center hover:shadow-md transition-shadow cursor-pointer group h-full">
-                      <CardContent className="pt-6">
-                        <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                          <CategoryIcon categoryName={category.name} className="h-8 w-8 text-primary" />
-                        </div>
-                        <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          {category.totalFarms} {category.totalFarms === 1 ? 'farm' : 'farms'}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                )
-              })}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4 text-foreground">Browse Farms by US State</h2>
+              <p className="text-muted-foreground">Discover u-pick farms across the United States</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {usStates.map((state) => (
+                <Link key={state.state_slug} href={`/${state.state_slug}`}>
+                  <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
+                    <CardContent className="pt-6 pb-4">
+                      <h3 className="font-semibold text-lg mb-2">{state.state_name}</h3>
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        <span>{state.total_farms} farms</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
+
+        {/* Browse by Canadian Provinces */}
+        <section className="py-16 px-4 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4 text-foreground">Browse Farms by Canadian Province</h2>
+              <p className="text-muted-foreground">Explore u-pick farms across Canada</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {canadianProvinces.map((province) => (
+                <Link key={province.state_slug} href={`/${province.state_slug}`}>
+                  <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
+                    <CardContent className="pt-6 pb-4">
+                      <h3 className="font-semibold text-lg mb-2">{province.state_name}</h3>
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        <span>{province.total_farms} farms</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Latest Blog Posts */}
+        {latestPosts.length > 0 && (
+          <section className="py-16 px-4 bg-background">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex justify-between items-center mb-12">
+                <div>
+                  <h2 className="text-3xl font-bold mb-2 text-foreground">Latest from Our Blog</h2>
+                  <p className="text-muted-foreground">Tips, guides, and stories from the farm</p>
+                </div>
+                <Link href="/blog" className="text-primary hover:underline flex items-center gap-2">
+                  View All Posts
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+              <div className="grid gap-8 md:grid-cols-3">
+                {latestPosts.map(post => {
+                  const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]
+                  
+                  return (
+                    <Link 
+                      key={post.id} 
+                      href={`/blog/${post.slug}`}
+                      className="group"
+                    >
+                      <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
+                        {featuredImage && (
+                          <div className="relative w-full h-48 overflow-hidden">
+                            <Image
+                              src={featuredImage.source_url}
+                              alt={featuredImage.alt_text || post.title.rendered}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        )}
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            {post.title.rendered}
+                          </h3>
+                          
+                          <div className="flex items-center text-sm text-muted-foreground mb-3">
+                            <Calendar className="w-4 h-4 mr-2" />
+                            <span>{new Date(post.date).toLocaleDateString()}</span>
+                          </div>
+                          
+                          <div 
+                            className="text-sm text-muted-foreground line-clamp-3"
+                            dangerouslySetInnerHTML={{ 
+                              __html: post.excerpt.rendered 
+                            }} 
+                          />
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="py-16 px-4 bg-primary">
           <div className="max-w-4xl mx-auto text-center">

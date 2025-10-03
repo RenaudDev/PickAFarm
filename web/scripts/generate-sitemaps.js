@@ -8,6 +8,7 @@ const currentDate = new Date().toISOString();
 const farmsData = require('../data/farms.json');
 const locationsData = require('../data/locations-with-farms.json');
 const categoriesData = require('../data/categories.json');
+const statesData = require('../data/states-with-farms.json');
 
 // Fetch varieties from WordPress API
 async function fetchVarietiesFromWordPress() {
@@ -48,6 +49,7 @@ function generateSitemapIndex() {
     'sitemap-main.xml',
     'sitemap-farms.xml',
     'sitemap-locations.xml',
+    'sitemap-states.xml',
     'sitemap-christmas-tree-farms.xml',
     'sitemap-varieties.xml',
     'sitemap-blog.xml'
@@ -137,6 +139,19 @@ function generateChristmasTreeFarmsSitemap() {
   return xml;
 }
 
+// Generate states sitemap
+function generateStatesSitemap() {
+  let xml = generateXmlHeader();
+  
+  statesData.forEach(state => {
+    const priority = state.total_farms >= 20 ? '0.9' : '0.8';
+    xml += generateUrlEntry(`${baseUrl}/${state.state_slug}/`, currentDate, 'weekly', priority);
+  });
+  
+  xml += generateXmlFooter();
+  return xml;
+}
+
 // Generate varieties sitemap
 function generateVarietiesSitemap(varieties) {
   let xml = generateXmlHeader();
@@ -208,6 +223,9 @@ async function generateAllSitemaps() {
   
   fs.writeFileSync(path.join(publicDir, 'sitemap-locations.xml'), generateLocationsSitemap());
   console.log('✅ Generated sitemap-locations.xml');
+  
+  fs.writeFileSync(path.join(publicDir, 'sitemap-states.xml'), generateStatesSitemap());
+  console.log('✅ Generated sitemap-states.xml');
   
   fs.writeFileSync(path.join(publicDir, 'sitemap-christmas-tree-farms.xml'), generateChristmasTreeFarmsSitemap());
   console.log('✅ Generated sitemap-christmas-tree-farms.xml');

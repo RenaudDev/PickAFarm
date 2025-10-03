@@ -15,30 +15,35 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { MapPin, Search, Wheat, Star, ChevronRight, Home } from "lucide-react"
+import { MapPin, Search, Wheat, Star, ChevronRight, Home, TreePine } from "lucide-react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import CategoryPageClient from "@/components/category-page-client"
 import { CategoryIcon } from "@/lib/category-icons"
 import { generateCategoryMetadata } from "@/lib/seo-metadata"
+import { getVarietiesByTag } from "@/lib/wordpress"
+import Image from "next/image"
 
 // Import categories data for static generation
 import categoriesData from "../../data/category-content.json"
 import locationsWithFarms from "../../data/locations-with-farms.json"
 import preGeneratedCategories from "../../data/categories.json"
+import statesData from "../../data/states-with-farms.json"
+import { StateMapSection } from "@/components/state-map-section"
+import { CategoryMapSection } from "@/components/category-map-section"
+import { getStateName } from "@/lib/state-utils"
 
-// Generate static params using slugs from category-content.json
+// Generate static params for BOTH categories AND state pages
 export async function generateStaticParams() {
   try {
+    // Get category slugs
     const validCategories = Object.values(categoriesData)
       .filter((category: any) => {
-        // Only include categories that have a valid slug
         return category && 
                typeof category === 'object' && 
                category.slug && 
                typeof category.slug === 'string' &&
                category.slug.length > 0 &&
-               // Exclude any system files or invalid slugs
                !category.slug.includes('.') &&
                !category.slug.startsWith('_') &&
                category.slug !== 'favicon'
@@ -47,11 +52,23 @@ export async function generateStaticParams() {
         slug: category.slug
       }))
 
-    console.log('Generated static params for categories:', validCategories.map(c => c.slug))
-    return validCategories
+    // Get state slugs
+    const stateParams = statesData.map(state => ({
+      slug: state.state_slug
+    }))
+
+    // Combine both
+    const allParams = [...validCategories, ...stateParams]
+    
+    console.log('Generated static params:', {
+      categories: validCategories.length,
+      states: stateParams.length,
+      total: allParams.length
+    })
+    
+    return allParams
   } catch (error) {
     console.error('Error generating static params:', error)
-    // Return empty array as fallback to prevent build failures
     return []
   }
 }
@@ -60,13 +77,42 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   
-  // Find the category from the category-content.json data by slug
+  // Check if this is a state page
+  const stateData = statesData.find(s => s.state_slug === slug)
+  if (stateData) {
+    const title = `U-Pick Farms in ${stateData.state_name} | ${stateData.total_farms} ${stateData.state_name} Pick-Your-Own Farms`
+    const description = `Discover ${stateData.total_farms} u-pick farms across ${stateData.state_name}. Find Christmas tree farms, pumpkin patches, apple orchards, berry farms, and more. Interactive map with reviews and directions.`
+    const topCategories = stateData.categories.slice(0, 3).map(c => c.name.toLowerCase()).join(', ')
+    const keywords = `${stateData.state_name.toLowerCase()} u-pick farms, pick your own ${stateData.state_name.toLowerCase()}, ${stateData.state_name.toLowerCase()} farms, u-pick ${stateData.state_code.toLowerCase()}, ${topCategories}`
+
+    return {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        title: `U-Pick Farms in ${stateData.state_name} | PickAFarm`,
+        description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`,
+        type: 'website',
+        url: `https://pickafarm.com/${slug}`
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `U-Pick Farms in ${stateData.state_name}`,
+        description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`
+      },
+      alternates: {
+        canonical: `https://pickafarm.com/${slug}`
+      }
+    }
+  }
+  
+  // Otherwise, treat as category page
   const category = Object.values(categoriesData).find((cat: any) => cat.slug === slug)
   
   if (!category) {
     return {
-      title: 'Category Not Found | Pick A Farm',
-      description: 'The requested category could not be found.'
+      title: 'Page Not Found | Pick A Farm',
+      description: 'The requested page could not be found.'
     }
   }
 
@@ -123,16 +169,216 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return generateCategoryMetadata(category.name, category, farmCount)
 }
 
-export default async function CategoryLandingPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   
-  // Find the category from the category-content.json data by slug
+  // Check if this is a state page
+  const stateData = statesData.find(s => s.state_slug === slug)
+  if (stateData) {
+    return <StatePage stateData={stateData} slug={slug} />
+  }
+  
+  // Otherwise, treat as category page
   const category = Object.values(categoriesData).find((cat: any) => cat.slug === slug)
   
-  // If no category is found for the slug, show a 404 page
+  // If no category or state is found for the slug, show a 404 page
   if (!category) {
     notFound()
   }
+  
+  return <CategoryPage category={category} slug={slug} />
+}
+
+// Generate Schema.org structured data for state pages
+function generateStateSchema(stateData: any, stateSlug: string) {
+  const baseUrl = 'https://pickafarm.com'
+  
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${baseUrl}/${stateSlug}`,
+        "url": `${baseUrl}/${stateSlug}`,
+        "name": `U-Pick Farms in ${stateData.state_name}`,
+        "description": `Discover ${stateData.total_farms} u-pick farms across ${stateData.state_name}`,
+        "inLanguage": stateData.country_code === 'CA' ? 'en-CA' : 'en-US',
+        "isPartOf": {
+          "@id": `${baseUrl}/#website`
+        },
+        "breadcrumb": {
+          "@id": `${baseUrl}/${stateSlug}#breadcrumb`
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${baseUrl}/${stateSlug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": baseUrl
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": stateData.state_name,
+            "item": `${baseUrl}/${stateSlug}`
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "numberOfItems": Math.min(stateData.total_farms, 50),
+        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "itemListElement": stateData.farms.slice(0, 50).map((farm: any, index: number) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "LocalBusiness",
+            "@id": `${baseUrl}/farms/${farm.slug}`,
+            "name": farm.name,
+            "url": `${baseUrl}/farms/${farm.slug}`,
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": farm.street || "",
+              "addressLocality": farm.city_name,
+              "addressRegion": farm.state_province,
+              "addressCountry": farm.country === 'Canada' ? 'CA' : 'US',
+              "postalCode": farm.postal_code || ""
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": farm.latitude,
+              "longitude": farm.longitude
+            },
+            ...(farm.reviews && farm.reviews > 0 && farm.rating && {
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": farm.rating,
+                "reviewCount": farm.reviews,
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            })
+          }
+        }))
+      }
+    ]
+  }
+}
+
+// State Page Component
+function StatePage({ stateData, slug }: { stateData: any; slug: string }) {
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <FarmNavbar />
+      
+      {/* State Map Section */}
+      <StateMapSection stateData={stateData} />
+
+      <main className="flex-1">
+        {/* Popular Cities Section */}
+        {stateData.cities.length > 0 && (
+          <section className="py-16 px-4 bg-muted/30">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-4 text-foreground">
+                Popular Cities in {stateData.state_name}
+              </h2>
+              <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+                Explore u-pick farms in these cities across {stateData.state_name}
+              </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {stateData.cities.map((city: any, index: number) => (
+                  <Link 
+                    key={index} 
+                    href={city.slug ? `/farms-near/${city.slug}` : `#`}
+                    className={city.slug ? '' : 'pointer-events-none'}
+                  >
+                    <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
+                      <CardContent className="pt-6 pb-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-lg mb-1">{city.name}</h3>
+                            <div className="flex items-center text-sm text-muted-foreground">
+                              <MapPin className="h-4 w-4 mr-1" />
+                              <span>{city.farm_count} {city.farm_count === 1 ? 'farm' : 'farms'}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Top Categories Section */}
+        {stateData.categories.length > 0 && (
+          <section className="py-16 px-4 bg-background">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-4 text-foreground">
+                Farm Types in {stateData.state_name}
+              </h2>
+              <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+                Popular u-pick experiences available across the {stateData.geographic_type.toLowerCase()}
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                {stateData.categories.map((category: any, index: number) => (
+                  <Badge 
+                    key={index} 
+                    variant="secondary" 
+                    className="text-sm px-4 py-2"
+                  >
+                    {category.name} ({category.count})
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* About Section */}
+        <section className="py-16 px-4 bg-muted/30">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6 text-foreground">
+              About U-Pick Farms in {stateData.state_name}
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              {stateData.state_name} is home to {stateData.total_farms} pick-your-own farms offering fresh, locally-grown produce and memorable agritourism experiences. From {stateData.categories[0]?.name.toLowerCase() || 'seasonal farms'} to {stateData.categories[1]?.name.toLowerCase() || 'family farms'}, discover the best u-pick destinations across the {stateData.geographic_type.toLowerCase()}.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Use the interactive map above to find farms near you, check ratings and reviews, get directions, and plan your visit. Save your favorite farms to your account to receive updates on seasonal availability and special events.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <FarmFooter />
+
+      {/* Schema.org Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateStateSchema(stateData, slug))
+        }}
+      />
+    </div>
+  )
+}
+
+// Category Page Component
+async function CategoryPage({ category, slug }: { category: any; slug: string }) {
+  // Fetch varieties for this category using the slug as the tag
+  const varieties = await getVarietiesByTag(slug).catch(err => {
+    console.error(`Error fetching varieties for ${slug}:`, err)
+    return []
+  })
 
   // Create dynamic category mapping based on category names from category-content.json
   // This maps each category name to variations that might appear in farm data
@@ -238,6 +484,40 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
       .slice(0, 3)
   }
 
+  // Calculate states/provinces with farms for this category
+  const statesWithCategoryFarms = statesData
+    .map((state: any) => {
+      // Count farms in this state that match the category
+      const categoryFarmCount = state.farms.filter((farm: any) => {
+        let farmCategories: string[] = []
+        try {
+          farmCategories = JSON.parse(farm.categories || '[]')
+          if (typeof farmCategories === 'string') {
+            farmCategories = [farmCategories]
+          }
+        } catch (error) {
+          farmCategories = farm.categories ? [farm.categories] : []
+        }
+        
+        return matchingCategories.some(catName => 
+          farmCategories.some((farmCat: string) => 
+            farmCat.toLowerCase().includes(catName.toLowerCase())
+          )
+        )
+      }).length
+      
+      return {
+        ...state,
+        categoryFarmCount
+      }
+    })
+    .filter((state: any) => state.categoryFarmCount > 0)
+    .sort((a: any, b: any) => b.categoryFarmCount - a.categoryFarmCount)
+
+  // Separate US states and Canadian provinces
+  const usStates = statesWithCategoryFarms.filter((state: any) => state.country === 'United States')
+  const canadianProvinces = statesWithCategoryFarms.filter((state: any) => state.country === 'Canada')
+
   // Add enriched data for the category
   const enrichedCategory = {
     ...category,
@@ -274,28 +554,129 @@ export default async function CategoryLandingPage({ params }: { params: Promise<
         </div>
       </div>
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <CategoryIcon categoryName={enrichedCategory.name} className="h-16 w-16 text-primary" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-            Find the Best {enrichedCategory.name} Near You
-          </h1>
-          <div className="flex justify-center mb-6">
-          <div className="text-sm px-4 py-2">
-  {enrichedCategory.totalFarms} Farm{enrichedCategory.totalFarms !== 1 ? 's' : ''} In Our Directory
-</div>
-          </div>
-          <p className="text-muted-foreground text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
-            {enrichedCategory.intro}
-          </p>
+      {/* NEW: Category Map Section - Shows map with category-filtered farms */}
+      <CategoryMapSection 
+        categoryName={enrichedCategory.name}
+        categorySlug={slug}
+      />
 
-          {/* Search Bar - Client Component */}
-          <CategoryPageClient category={enrichedCategory} slug={slug} />
-        </div>
-      </section>
+      {/* Browse by US State Section */}
+      {usStates.length > 0 && (
+        <section className="py-16 px-4 bg-background">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Browse {enrichedCategory.name} by US State
+            </h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Discover {enrichedCategory.name.toLowerCase()} across the United States
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {usStates.map((state: any) => (
+                <Link key={state.state_slug} href={`/${state.state_slug}/${slug}`}>
+                  <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
+                    <CardContent className="pt-6 pb-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-lg mb-1">{state.state_name}</h3>
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <MapPin className="h-4 w-4 mr-1" />
+                            <span>{state.categoryFarmCount} {state.categoryFarmCount === 1 ? 'farm' : 'farms'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Browse by Canadian Province Section */}
+      {canadianProvinces.length > 0 && (
+        <section className="py-16 px-4 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Browse {enrichedCategory.name} by Canadian Province
+            </h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Discover {enrichedCategory.name.toLowerCase()} across Canada
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {canadianProvinces.map((province: any) => (
+                <Link key={province.state_slug} href={`/${province.state_slug}/${slug}`}>
+                  <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
+                    <CardContent className="pt-6 pb-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-lg mb-1">{province.state_name}</h3>
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <MapPin className="h-4 w-4 mr-1" />
+                            <span>{province.categoryFarmCount} {province.categoryFarmCount === 1 ? 'farm' : 'farms'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Varieties Section - Only show if varieties exist */}
+      {varieties && varieties.length > 0 && (
+        <section className="py-16 px-4 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <TreePine className="h-8 w-8 text-green-600" />
+              <h2 className="text-3xl font-bold text-center">Tree Varieties</h2>
+            </div>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Explore different Christmas tree varieties to find the perfect tree for your home
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {varieties.map((variety: any) => {
+                const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0]
+                return (
+                  <Link key={variety.id} href={`/varieties/${variety.slug}`}>
+                    <Card className="hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden h-full group">
+                      {featuredImage && (
+                        <div className="relative w-full h-48 overflow-hidden">
+                          <Image
+                            src={featuredImage.source_url}
+                            alt={featuredImage.alt_text || variety.title.rendered}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-200"
+                          />
+                        </div>
+                      )}
+                      <CardContent className="p-6">
+                        <h3 className="text-xl font-semibold mb-2 group-hover:text-green-600 transition-colors">
+                          {variety.title.rendered}
+                        </h3>
+                        <div 
+                          className="text-muted-foreground text-sm line-clamp-3"
+                          dangerouslySetInnerHTML={{ 
+                            __html: variety.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim() 
+                          }}
+                        />
+                        <div className="mt-4">
+                          <Badge variant="outline" className="text-green-600 border-green-600">
+                            Learn More
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Top Cities Grid */}
       <section className="py-16 px-4">

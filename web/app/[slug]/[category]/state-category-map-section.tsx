@@ -1,0 +1,63 @@
+"use client"
+
+import { useMemo } from "react"
+import { MapPageLayout } from "@/components/map-page-layout"
+import type { UserLocation } from "@/lib/location-utils"
+
+interface StateCategoryMapSectionProps {
+  stateData: {
+    state_name: string
+    state_code: string
+    center_latitude: number
+    center_longitude: number
+    zoom_level: number
+  }
+  categoryData: {
+    name: string
+    slug: string
+  }
+  farms: any[]
+}
+
+export default function StateCategoryMapSection({ 
+  stateData, 
+  categoryData, 
+  farms 
+}: StateCategoryMapSectionProps) {
+  // Create center location from state data
+  const stateCenter: UserLocation = useMemo(() => ({
+    latitude: stateData.center_latitude,
+    longitude: stateData.center_longitude,
+    city: stateData.state_name,
+    region: stateData.state_code,
+    country: 'US',
+    detectedAt: new Date().toISOString(),
+    source: 'ip'
+  }), [stateData])
+
+  return (
+    <MapPageLayout
+      centerLocation={stateCenter}
+      isLoadingLocation={false}
+      locationError={null}
+      pageTitle={`${categoryData.name} in ${stateData.state_name}`}
+      showUserMarker={false}
+      showCityMarker={true}
+      showRadiusControl={false}
+      showRadiusCircle={false}
+      showDistances={false}
+      filterByRadius={false}
+      sortBy="featured"
+      initialZoom={stateData.zoom_level}
+      enableClustering={farms.length >= 50}
+      enableVirtualScrolling={farms.length >= 50}
+      preFilteredFarms={farms}
+      pagination={farms.length > 100 ? {
+        enabled: true,
+        totalPages: Math.ceil(farms.length / 50),
+        currentPage: 1,
+        farmsPerPage: 50
+      } : undefined}
+    />
+  )
+}

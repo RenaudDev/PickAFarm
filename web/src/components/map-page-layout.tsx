@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useMemo, useRef } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -26,6 +27,7 @@ import { SaveFarmButton } from "@/components/save-farm-button"
 import { useAuth } from "@clerk/nextjs"
 import { generateFarmsSchema } from "@/lib/farm-schema"
 import farmsData from "../../data/farms.json"
+import categoriesData from "../../data/categories.json"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
 
@@ -43,6 +45,40 @@ const getCategoryEmoji = (category: string): string => {
   if (lowerCategory.includes('vineyard') || lowerCategory.includes('wine')) return '🍇'
   if (lowerCategory.includes('zoo') || lowerCategory.includes('petting')) return '🐐'
   return '🌾'
+}
+
+// Get category slug from category name
+const getCategorySlug = (categoryName: string): string | null => {
+  const trimmedCategory = categoryName.trim()
+  
+  // Try to find exact match first
+  const exactMatch = categoriesData.find(cat => 
+    cat.name.toLowerCase() === trimmedCategory.toLowerCase()
+  )
+  if (exactMatch) return exactMatch.slug
+  
+  // Try to find partial match
+  const partialMatch = categoriesData.find(cat => 
+    cat.name.toLowerCase().includes(trimmedCategory.toLowerCase()) ||
+    trimmedCategory.toLowerCase().includes(cat.name.toLowerCase())
+  )
+  if (partialMatch) return partialMatch.slug
+  
+  // Default fallback based on common patterns
+  if (trimmedCategory.toLowerCase().includes('christmas') || trimmedCategory.toLowerCase().includes('tree')) {
+    return 'christmas-tree-farms'
+  }
+  if (trimmedCategory.toLowerCase().includes('apple')) {
+    return 'apple-orchards'
+  }
+  if (trimmedCategory.toLowerCase().includes('pumpkin')) {
+    return 'pumpkin-patches'
+  }
+  if (trimmedCategory.toLowerCase().includes('berry')) {
+    return 'berry-farms'
+  }
+  
+  return null
 }
 
 interface Farm {
@@ -83,13 +119,46 @@ declare global {
   }
 }
 
+interface PaginationConfig {
+  enabled: boolean
+  currentPage: number
+  totalPages: number
+  farmsPerPage: number
+}
+
 interface MapPageLayoutProps {
+  // Location & Display
   centerLocation: UserLocation | null
   isLoadingLocation: boolean
   locationError?: string | null
   showUserMarker?: boolean
   showCityMarker?: boolean
   pageTitle?: string
+  
+  // Radius Features (for state pages, set these to false)
+  showRadiusControl?: boolean
+  showRadiusCircle?: boolean
+  filterByRadius?: boolean
+  showDistances?: boolean
+  
+  // Sorting & Filtering
+  sortBy?: "distance" | "featured" | "name" | "rating"
+  hideCategoryFilter?: boolean
+  
+  // Map Behavior
+  initialZoom?: number
+  enableClustering?: boolean
+  maxVisibleMarkers?: number
+  
+  // Pagination (for large state pages)
+  pagination?: PaginationConfig
+  
+  // Performance
+  enableVirtualScrolling?: boolean
+  lazyLoadMarkers?: boolean
+  
+  // Pre-filtered farms (for state pages)
+  preFilteredFarms?: Farm[]
 }
 
 export function MapPageLayout({ 
@@ -98,7 +167,21 @@ export function MapPageLayout({
   locationError,
   showUserMarker = false,
   showCityMarker = false,
-  pageTitle = "All U-Pick Farms Near You"
+  pageTitle = "All U-Pick Farms Near You",
+  // New props with backward-compatible defaults
+  showRadiusControl = true,
+  showRadiusCircle = true,
+  filterByRadius = true,
+  showDistances = true,
+  sortBy = "distance",
+  hideCategoryFilter = false,
+  initialZoom,
+  enableClustering = false,
+  maxVisibleMarkers,
+  pagination,
+  enableVirtualScrolling = false,
+  lazyLoadMarkers = false,
+  preFilteredFarms
 }: MapPageLayoutProps) {
   const { isSignedIn, userId } = useAuth()
   const mapRef = useRef<HTMLDivElement>(null)
@@ -155,27 +238,56 @@ export function MapPageLayout({
     async function fetchFarms() {
       setIsLoadingFarms(true)
       
-      const farmsWithDistance = farmsData
-        .filter(f => f.active === 1 && f.latitude && f.longitude)
+      // Use preFilteredFarms if provided (for state pages), otherwise load all farms
+      const sourceFarms = preFilteredFarms || farmsData
+      
+      let farmsWithDistance = sourceFarms
+        .filter(f => {
+          // For prefiltered farms, assume already filtered by active status
+          if (preFilteredFarms) return f.latitude && f.longitude
+          // For all farms from database, filter by active
+          return (f as any).active === 1 && f.latitude && f.longitude
+        })
         .map(farm => ({
           ...farm,
-          id: farm.id.replace('zcrm_', ''),
-          distance: Math.round(calculateDistance(
+          id: farm.id.toString().replace('zcrm_', ''),
+          distance: showDistances ? Math.round(calculateDistance(
             mapCenter.latitude,
             mapCenter.longitude,
             farm.latitude,
             farm.longitude
-          ) * 10) / 10
+          ) * 10) / 10 : 0
         }))
-        .filter(farm => farm.distance <= radius)
-        .sort((a, b) => a.distance - b.distance)
+      
+      // Only filter by radius if filterByRadius is true (default behavior)
+      if (filterByRadius) {
+        farmsWithDistance = farmsWithDistance.filter(farm => farm.distance <= radius)
+      }
+      
+      // Sort based on sortBy prop
+      if (sortBy === "featured") {
+        farmsWithDistance.sort((a, b) => {
+          // Featured first
+          if (a.featured === 1 && b.featured !== 1) return -1
+          if (b.featured === 1 && a.featured !== 1) return 1
+          // Then by rating
+          return (b.rating || 0) - (a.rating || 0)
+        })
+      } else if (sortBy === "rating") {
+        farmsWithDistance.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      } else if (sortBy === "name") {
+        farmsWithDistance.sort((a, b) => a.name.localeCompare(b.name))
+      } else {
+        // Default: sort by distance
+        farmsWithDistance.sort((a, b) => a.distance - b.distance)
+      }
       
       setFarms(farmsWithDistance as any)
       setIsLoadingFarms(false)
     }
 
     fetchFarms()
-  }, [mapCenter, radius])
+  }, [mapCenter, radius, filterByRadius, sortBy, showDistances, preFilteredFarms])
 
   const availableCategories = useMemo(() => {
     return getUniqueCategories(farms)
@@ -272,30 +384,38 @@ export function MapPageLayout({
     }
   }, [isMapLoaded, mapCenter, filteredFarms, showUserMarker, showCityMarker])
 
-  // Update radius circle
+  // Update radius circle (only if showRadiusCircle is true)
   useEffect(() => {
     if (!googleMapRef.current || !mapCenter || !window.google) return
 
+    // Remove existing circle
     if (radiusCircleRef.current) {
       radiusCircleRef.current.setMap(null)
+      radiusCircleRef.current = null
     }
 
-    radiusCircleRef.current = new window.google.maps.Circle({
-      map: googleMapRef.current,
-      center: { lat: mapCenter.latitude, lng: mapCenter.longitude },
-      radius: radius * 1000,
-      fillColor: '#2d5016',
-      fillOpacity: 0.1,
-      strokeColor: '#2d5016',
-      strokeOpacity: 0.3,
-      strokeWeight: 2,
-    })
+    // Only create circle if showRadiusCircle is true
+    if (showRadiusCircle) {
+      radiusCircleRef.current = new window.google.maps.Circle({
+        map: googleMapRef.current,
+        center: { lat: mapCenter.latitude, lng: mapCenter.longitude },
+        radius: radius * 1000,
+        fillColor: '#2d5016',
+        fillOpacity: 0.1,
+        strokeColor: '#2d5016',
+        strokeOpacity: 0.3,
+        strokeWeight: 2,
+      })
 
-    const bounds = radiusCircleRef.current.getBounds()
-    if (bounds) {
-      googleMapRef.current.fitBounds(bounds)
+      const bounds = radiusCircleRef.current.getBounds()
+      if (bounds) {
+        googleMapRef.current.fitBounds(bounds)
+      }
+    } else if (initialZoom) {
+      // For state pages, set the zoom level without fitting to circle bounds
+      googleMapRef.current.setZoom(initialZoom)
     }
-  }, [mapCenter, radius, isMapLoaded])
+  }, [mapCenter, radius, isMapLoaded, showRadiusCircle, initialZoom])
 
   // Update markers
   useEffect(() => {
@@ -342,9 +462,11 @@ export function MapPageLayout({
             <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">
               ${categoryEmojis} ${farm.name}
             </div>
-            <div style="color: #666; font-size: 13px; margin-bottom: 4px;">
-              📍 ${farm.distance}km away
-            </div>
+            ${showDistances && farm.distance ? `
+              <div style="color: #666; font-size: 13px; margin-bottom: 4px;">
+                📍 ${farm.distance}km away
+              </div>
+            ` : ''}
             ${reviewsHtml}
             <div style="color: #666; font-size: 12px; margin-bottom: 8px;">
               ${farm.city_name}, ${farm.state_province}
@@ -448,7 +570,7 @@ export function MapPageLayout({
   return (
     <div className="flex-1 flex flex-col lg:flex-row relative">
       {/* Map Section - Left on desktop, top on mobile */}
-      <div className="w-full lg:w-3/4 h-[70vh] lg:h-screen relative">
+      <div className="w-full lg:w-3/4 h-[70vh] lg:h-[80vh] relative">
         {isLoadingLocation ? (
           <div className="w-full h-full flex items-center justify-center bg-muted">
             <div className="text-center">
@@ -495,35 +617,39 @@ export function MapPageLayout({
                         </div>
                       </CardHeader>
                       <CardContent className="p-6 pt-0 space-y-6">
-                        <div>
-                          <div className="flex items-center justify-between mb-3">
-                            <h3 className="font-semibold text-sm">Search Radius</h3>
-                            <Badge variant="outline">{radius}km</Badge>
+                        {showRadiusControl && (
+                          <div>
+                            <div className="flex items-center justify-between mb-3">
+                              <h3 className="font-semibold text-sm">Search Radius</h3>
+                              <Badge variant="outline">{radius}km</Badge>
+                            </div>
+                            <Slider
+                              value={[radius]}
+                              onValueChange={(value) => setRadius(value[0])}
+                              min={10}
+                              max={200}
+                              step={5}
+                              className="mb-2"
+                            />
                           </div>
-                          <Slider
-                            value={[radius]}
-                            onValueChange={(value) => setRadius(value[0])}
-                            min={10}
-                            max={200}
-                            step={5}
-                            className="mb-2"
-                          />
-                        </div>
+                        )}
 
-                        <div>
-                          <h3 className="font-semibold text-sm mb-3">Farm Type</h3>
-                          <select
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md text-sm"
-                          >
-                            {availableCategories.map((category) => (
-                              <option key={category} value={category}>
-                                {category}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
+                        {!hideCategoryFilter && (
+                          <div>
+                            <h3 className="font-semibold text-sm mb-3">Farm Type</h3>
+                            <select
+                              value={selectedCategory}
+                              onChange={(e) => setSelectedCategory(e.target.value)}
+                              className="w-full px-3 py-2 border rounded-md text-sm"
+                            >
+                              {availableCategories.map((category) => (
+                                <option key={category} value={category}>
+                                  {category}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
 
                         {showUserMarker && (
                           <div>
@@ -555,7 +681,7 @@ export function MapPageLayout({
       </div>
 
       {/* Sidebar - Right on desktop, bottom on mobile */}
-      <div className="w-full lg:w-1/4 bg-white border-l overflow-y-auto h-auto lg:h-screen">
+      <div className="w-full lg:w-1/4 bg-white border-l overflow-y-auto h-auto lg:h-[80vh]">
         <div className="p-3 lg:p-4 space-y-3 lg:space-y-4">
           {/* Desktop Location Control */}
           <div className="hidden lg:block space-y-4">
@@ -656,15 +782,28 @@ export function MapPageLayout({
                         <div className="flex-1 min-w-0">
                           {farm.categories && (
                             <div className="flex items-center gap-1 mb-1">
-                              {farm.categories.split(',').slice(0, 2).map((cat, idx) => (
-                                <span 
-                                  key={idx} 
-                                  className="text-lg"
-                                  title={cat.trim()}
-                                >
-                                  {getCategoryEmoji(cat.trim())}
-                                </span>
-                              ))}
+                              {farm.categories.split(',').slice(0, 2).map((cat, idx) => {
+                                const categorySlug = getCategorySlug(cat.trim())
+                                return categorySlug ? (
+                                  <Link
+                                    key={idx}
+                                    href={`/${categorySlug}`}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="text-lg hover:scale-110 transition-transform cursor-pointer"
+                                    title={`View all ${cat.trim()}`}
+                                  >
+                                    {getCategoryEmoji(cat.trim())}
+                                  </Link>
+                                ) : (
+                                  <span 
+                                    key={idx} 
+                                    className="text-lg"
+                                    title={cat.trim()}
+                                  >
+                                    {getCategoryEmoji(cat.trim())}
+                                  </span>
+                                )
+                              })}
                             </div>
                           )}
                           <div className="flex items-center gap-2 mb-0.5 flex-wrap">
@@ -711,18 +850,19 @@ export function MapPageLayout({
                       </div>
                     </CardHeader>
                     <CardContent className="pt-0 p-2.5">
-                      <a 
+                      <Link 
                         href={`/farms/${farm.slug}`} 
-                        className="w-full"
+                        className="w-full block"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <Button 
                           size="sm" 
-                          className="w-full text-xs bg-primary hover:bg-primary/90 text-white"
+                          className="w-full text-xs bg-primary hover:bg-primary/90 text-white transition-all hover:shadow-md"
+                          asChild
                         >
-                          View Details
+                          <span>View Details</span>
                         </Button>
-                      </a>
+                      </Link>
                     </CardContent>
                   </Card>
                 ))

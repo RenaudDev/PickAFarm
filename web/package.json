@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-farm-data.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js",
+    "prebuild": "node scripts/generate-farm-data.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-state-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js",
     "build": "next build",
     "pages:build": "npx @cloudflare/next-on-pages@1",
     "start": "next start",
