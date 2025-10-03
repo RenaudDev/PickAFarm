@@ -286,7 +286,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
             <FarmInteractiveElements 
               farmName={farm.name}
               locationLink={`https://maps.google.com/?q=${encodeURIComponent(`${farm.street}, ${farm.city_name}, ${farm.state_province}`)}`}
-              farmId={`zcrm_${farm.id}`}
+              farmId={farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`}
               farmCity={farm.city_name}
               farmState={farm.state_province}
               farmPhone={farm.phone}

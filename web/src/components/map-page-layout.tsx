@@ -839,7 +839,7 @@ export function MapPageLayout({
                         </div>
                         <div onClick={(e) => e.stopPropagation()}>
                           <SaveFarmButton
-                            farmId={farm.id}
+                            farmId={farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`}
                             farmName={farm.name}
                             city={farm.city_name}
                             state={farm.state_province}
