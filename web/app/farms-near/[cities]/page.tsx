@@ -21,6 +21,7 @@ import { Home } from "lucide-react"
 import locationsWithFarms from "../../../data/locations-with-farms.json"
 
 // Make this route dynamic (too generic for SEO - category+location pages are better)
+export const runtime = 'edge' // Required for Cloudflare Pages
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
 export const revalidate = 3600 // Cache for 1 hour
@@ -42,11 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ cities: s
   return generateLocationMetadata('All Farms Near', locationName, farmCount)
 }
 
-// Don't pre-generate any pages - render on-demand (dynamic)
-// Generic city pages are less valuable for SEO than category+location pages
-export async function generateStaticParams() {
-  return [] // All pages rendered dynamically
-}
+// Generic city pages are fully dynamic - no static generation
 
 export default async function FarmsNearCities({ params }: { params: Promise<{ cities: string }> }) {
   const resolvedParams = await params

@@ -34,15 +34,10 @@ import { CategoryMapSection } from "@/components/category-map-section"
 import { getStateName } from "@/lib/state-utils"
 
 // Make state overview pages dynamic (category pages are more specific)
+export const runtime = 'edge' // Required for Cloudflare Pages
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
 export const revalidate = 3600 // Cache for 1 hour
-
-// Don't pre-generate state overview pages - render on-demand (dynamic)
-// Category pages and category+location pages are more specific and valuable
-export async function generateStaticParams() {
-  return [] // All state overview pages rendered dynamically
-}
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

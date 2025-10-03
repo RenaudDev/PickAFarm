@@ -26,15 +26,9 @@ interface StateCategoryPageProps {
 
 // Disable static generation - render on-demand for Cloudflare Pages limits
 // This route will use dynamic rendering instead of pre-generating all combinations
+export const runtime = 'edge' // Required for Cloudflare Pages
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
-
-// Generate static params for TOP state+category combinations only (optional - can be empty)
-export async function generateStaticParams() {
-  // Return empty array to make all routes dynamic
-  // Or optionally pre-generate only top combinations
-  return []
-}
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: StateCategoryPageProps): Promise<Metadata> {

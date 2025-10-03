@@ -49,6 +49,7 @@ import { getReviews } from "@/lib/reviews"
 import farmsData from "../../../data/farms.json"
 
 // Make this route dynamic (users find farms via money pages)
+export const runtime = 'edge' // Required for Cloudflare Pages
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
 export const revalidate = 3600 // Cache for 1 hour
@@ -109,10 +110,7 @@ type FarmData = {
 
 // Add this after the imports, before generateStaticParams
 
-// Don't pre-generate farm detail pages - render on-demand (dynamic)
-export async function generateStaticParams() {
-  return [] // All farm pages rendered dynamically
-}
+// Farm detail pages are fully dynamic - no static generation
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
