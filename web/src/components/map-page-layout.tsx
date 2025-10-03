@@ -134,35 +134,35 @@ interface MapPageLayoutProps {
   showUserMarker?: boolean
   showCityMarker?: boolean
   pageTitle?: string
-  
+
   // Radius Features (for state pages, set these to false)
   showRadiusControl?: boolean
   showRadiusCircle?: boolean
   filterByRadius?: boolean
   showDistances?: boolean
-  
+
   // Sorting & Filtering
   sortBy?: "distance" | "featured" | "name" | "rating"
   hideCategoryFilter?: boolean
-  
+
   // Map Behavior
   initialZoom?: number
   enableClustering?: boolean
   maxVisibleMarkers?: number
-  
+
   // Pagination (for large state pages)
   pagination?: PaginationConfig
-  
+
   // Performance
   enableVirtualScrolling?: boolean
   lazyLoadMarkers?: boolean
-  
+
   // Pre-filtered farms (for state pages)
   preFilteredFarms?: Farm[]
 }
 
-export function MapPageLayout({ 
-  centerLocation, 
+export function MapPageLayout({
+  centerLocation,
   isLoadingLocation,
   locationError,
   showUserMarker = false,
@@ -444,8 +444,8 @@ export function MapPageLayout({
         },
       })
 
-      const categoryEmojis = farm.categories 
-        ? farm.categories.split(',').slice(0, 2).map(cat => getCategoryEmoji(cat.trim())).join(' ')
+      const categoryEmojis = farm.categories
+        ? farm.categories.split(',').slice(0, 4).map(cat => getCategoryEmoji(cat.trim())).join(' ')
         : '🌾'
       
       const reviewsHtml = farm.reviews && farm.reviews > 0
@@ -705,42 +705,46 @@ export function MapPageLayout({
               </div>
             )}
 
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-sm">Search Radius</h3>
-                <Badge variant="outline" className="text-xs">
-                  {radius}km
-                </Badge>
-              </div>
-              <Slider 
-                value={[radius]} 
-                onValueChange={(value) => setRadius(value[0])} 
-                min={10} 
-                max={200} 
-                step={5} 
-              />
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-sm mb-3">Farm Type</h3>
-              <div className="flex flex-wrap gap-2">
-                {availableCategories.map((category) => (
-                  <Badge
-                    key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    className={cn(
-                      "cursor-pointer text-xs transition-colors",
-                      selectedCategory === category 
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                        : "hover:bg-primary/10"
-                    )}
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
+            {showRadiusControl && (
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-sm">Search Radius</h3>
+                  <Badge variant="outline" className="text-xs">
+                    {radius}km
                   </Badge>
-                ))}
+                </div>
+                <Slider
+                  value={[radius]}
+                  onValueChange={(value) => setRadius(value[0])}
+                  min={10}
+                  max={200}
+                  step={5}
+                />
               </div>
-            </div>
+            )}
+
+            {!hideCategoryFilter && (
+              <div>
+                <h3 className="font-semibold text-sm mb-3">Farm Type</h3>
+                <div className="flex flex-wrap gap-2">
+                  {availableCategories.map((category) => (
+                    <Badge
+                      key={category}
+                      variant={selectedCategory === category ? "default" : "outline"}
+                      className={cn(
+                        "cursor-pointer text-xs transition-colors",
+                        selectedCategory === category
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                          : "hover:bg-primary/10"
+                      )}
+                      onClick={() => setSelectedCategory(category)}
+                    >
+                      {category}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Farm List */}
@@ -781,29 +785,16 @@ export function MapPageLayout({
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1 min-w-0">
                           {farm.categories && (
-                            <div className="flex items-center gap-1 mb-1">
-                              {farm.categories.split(',').slice(0, 2).map((cat, idx) => {
-                                const categorySlug = getCategorySlug(cat.trim())
-                                return categorySlug ? (
-                                  <Link
-                                    key={idx}
-                                    href={`/${categorySlug}`}
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="text-lg hover:scale-110 transition-transform cursor-pointer"
-                                    title={`View all ${cat.trim()}`}
-                                  >
-                                    {getCategoryEmoji(cat.trim())}
-                                  </Link>
-                                ) : (
-                                  <span 
-                                    key={idx} 
-                                    className="text-lg"
-                                    title={cat.trim()}
-                                  >
-                                    {getCategoryEmoji(cat.trim())}
-                                  </span>
-                                )
-                              })}
+                            <div className="flex items-center gap-1 mb-1 flex-wrap">
+                              {farm.categories.split(',').slice(0, 4).map((cat, idx) => (
+                                <span
+                                  key={idx}
+                                  className="text-lg"
+                                  title={cat.trim()}
+                                >
+                                  {getCategoryEmoji(cat.trim())}
+                                </span>
+                              ))}
                             </div>
                           )}
                           <div className="flex items-center gap-2 mb-0.5 flex-wrap">

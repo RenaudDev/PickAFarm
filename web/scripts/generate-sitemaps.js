@@ -50,6 +50,7 @@ function generateSitemapIndex() {
     'sitemap-farms.xml',
     'sitemap-locations.xml',
     'sitemap-states.xml',
+    'sitemap-state-categories.xml',
     'sitemap-christmas-tree-farms.xml',
     'sitemap-varieties.xml',
     'sitemap-blog.xml'
@@ -57,16 +58,16 @@ function generateSitemapIndex() {
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-  
+
   sitemaps.forEach(sitemap => {
     xml += `  <sitemap>\n`;
     xml += `    <loc>${baseUrl}/${sitemap}</loc>\n`;
     xml += `    <lastmod>${currentDate}</lastmod>\n`;
     xml += `  </sitemap>\n`;
   });
-  
+
   xml += `</sitemapindex>`;
-  
+
   return xml;
 }
 
@@ -142,12 +143,72 @@ function generateChristmasTreeFarmsSitemap() {
 // Generate states sitemap
 function generateStatesSitemap() {
   let xml = generateXmlHeader();
-  
+
   statesData.forEach(state => {
     const priority = state.total_farms >= 20 ? '0.9' : '0.8';
     xml += generateUrlEntry(`${baseUrl}/${state.state_slug}/`, currentDate, 'weekly', priority);
   });
-  
+
+  xml += generateXmlFooter();
+  return xml;
+}
+
+// Generate state+category pages sitemap (money pages)
+function generateStateCategoriesSitemap() {
+  let xml = generateXmlHeader();
+
+  // Helper to get category variations
+  const getCategoryVariations = (categoryName) => {
+    const variations = [categoryName];
+
+    if (categoryName.includes('Christmas Tree')) {
+      variations.push('Christmas Tree', 'Christmas Trees', 'Christmas Tree Farms');
+    }
+    if (categoryName.includes('Apple')) {
+      variations.push('Apple', 'Apple Orchard', 'Apple Picking', 'Apple Orchards');
+    }
+    if (categoryName.includes('Pumpkin')) {
+      variations.push('Pumpkin', 'Pumpkin Patch', 'Pumpkin Patches');
+    }
+    if (categoryName.includes('Berry')) {
+      variations.push('Berry', 'Berry Farm', 'Berry Picking', 'Berry Farms');
+    }
+
+    return variations;
+  };
+
+  // For each state
+  statesData.forEach(state => {
+    // For each category
+    categoriesData.forEach(category => {
+      const matchingCategories = getCategoryVariations(category.name);
+
+      // Check if state has farms in this category
+      const hasFarms = state.farms.some(farm => {
+        let farmCategories = [];
+        try {
+          farmCategories = JSON.parse(farm.categories || '[]');
+          if (typeof farmCategories === 'string') {
+            farmCategories = [farmCategories];
+          }
+        } catch (error) {
+          farmCategories = farm.categories ? [farm.categories] : [];
+        }
+
+        return matchingCategories.some(catName =>
+          farmCategories.some(farmCat =>
+            farmCat.toLowerCase().includes(catName.toLowerCase())
+          )
+        );
+      });
+
+      if (hasFarms) {
+        // High priority for money pages
+        xml += generateUrlEntry(`${baseUrl}/${state.state_slug}/${category.slug}/`, currentDate, 'weekly', '0.9');
+      }
+    });
+  });
+
   xml += generateXmlFooter();
   return xml;
 }
@@ -226,7 +287,10 @@ async function generateAllSitemaps() {
   
   fs.writeFileSync(path.join(publicDir, 'sitemap-states.xml'), generateStatesSitemap());
   console.log('✅ Generated sitemap-states.xml');
-  
+
+  fs.writeFileSync(path.join(publicDir, 'sitemap-state-categories.xml'), generateStateCategoriesSitemap());
+  console.log('✅ Generated sitemap-state-categories.xml');
+
   fs.writeFileSync(path.join(publicDir, 'sitemap-christmas-tree-farms.xml'), generateChristmasTreeFarmsSitemap());
   console.log('✅ Generated sitemap-christmas-tree-farms.xml');
   

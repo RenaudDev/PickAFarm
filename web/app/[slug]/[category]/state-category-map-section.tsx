@@ -47,6 +47,7 @@ export default function StateCategoryMapSection({
       showRadiusCircle={false}
       showDistances={false}
       filterByRadius={false}
+      hideCategoryFilter={true}
       sortBy="featured"
       initialZoom={stateData.zoom_level}
       enableClustering={farms.length >= 50}

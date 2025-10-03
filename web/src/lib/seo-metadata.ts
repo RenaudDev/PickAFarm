@@ -128,16 +128,14 @@ export function generateMetadata({
 
 // Farm-specific SEO metadata
 export function generateFarmMetadata(farm: any): Metadata {
-  // Create a simple title with just farm name
-  const title = `${farm.name} | Pick A Farm`
-  
-  // Get category name and create singular/plural versions
-  const categoryName = farm.categories || ""
-  const categorySingular = categoryName.replace(/s$/, '') // Remove trailing 's' for singular
-  const categoryPlural = categoryName.endsWith('s') ? categoryName : `${categoryName}s` // Add 's' for plural if not already there
-  
-  // Create a better description with categories
-  const description = `${farm.name} is a ${categoryPlural.toLowerCase()} in ${farm.city_name}, ${farm.state_province}. Visit us to learn more.`
+  // Extract primary category for SEO
+  const primaryCategory = farm.categories ? farm.categories.split(',')[0].trim() : 'U-Pick Farm'
+
+  // Create keyword-rich title with location
+  const title = `${farm.name} - ${primaryCategory} in ${farm.city_name}, ${farm.state_province}`
+
+  // Create compelling description with call-to-action
+  const description = `Visit ${farm.name}, a ${primaryCategory.toLowerCase()} in ${farm.city_name}, ${farm.state_province}. Get directions, hours, reviews, and plan your visit to this local pick-your-own farm.`
   
   const keywords = [
     farm.name.toLowerCase(),

@@ -63,6 +63,9 @@ import categoriesData from "../../../data/categories.json"
 // Import locations data for breadcrumb
 import locationsWithFarms from "../../../data/locations-with-farms.json"
 
+// Import states data for breadcrumb
+import statesData from "../../../data/states-with-farms.json"
+
 // Type definition for farm data
 type FarmData = {
   id: string
@@ -178,30 +181,71 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
   // Parse categories (already a string, but getCategoryInfo expects it)
   const categories = getCategoryInfo(farm.categories || "")
 
-  // Find the nearest city for breadcrumb
-  const findNearestCity = () => {
-    // Look for a location that contains this farm
-    const locationWithFarm = locationsWithFarms.find(location => 
-      location.farms?.some(locationFarm => locationFarm.id === farm.id)
+  // Find the state for breadcrumb
+  const getStateInfo = () => {
+    // Find state by matching state_province name
+    const state = statesData.find(s =>
+      s.state_name === farm.state_province ||
+      s.state_code === farm.state_province
     )
-    
-    if (locationWithFarm) {
+
+    if (state) {
       return {
-        name: locationWithFarm.name,
-        province: locationWithFarm.province,
-        slug: locationWithFarm.location_slug
+        name: state.state_name,
+        slug: state.state_slug
       }
     }
-    
-    // Fallback: use the farm's city_name if no location match found
+
+    // Fallback: create slug from state_province
     return {
-      name: farm.city_name,
-      province: farm.state_province,
-      slug: `${farm.city_name.toLowerCase().replace(/\s+/g, '-')}-${farm.state_province.toLowerCase().replace(/\s+/g, '-')}-ca` 
+      name: farm.state_province,
+      slug: farm.state_province.toLowerCase().replace(/\s+/g, '-')
     }
   }
-  
-  const nearestCity = findNearestCity()
+
+  const stateInfo = getStateInfo()
+
+  // Find nearest city for breadcrumb
+  const getNearestCity = () => {
+    // Calculate distance using Haversine formula
+    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+      const R = 6371 // Earth's radius in km
+      const dLat = (lat2 - lat1) * Math.PI / 180
+      const dLon = (lon2 - lon1) * Math.PI / 180
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+      return R * c
+    }
+
+    // Find closest location from locations-with-farms.json
+    let nearestLocation = null
+    let minDistance = Infinity
+
+    for (const location of locationsWithFarms) {
+      const distance = calculateDistance(
+        farm.latitude,
+        farm.longitude,
+        location.latitude,
+        location.longitude
+      )
+
+      if (distance < minDistance) {
+        minDistance = distance
+        nearestLocation = location
+      }
+    }
+
+    return nearestLocation || {
+      name: farm.city_name,
+      slug: `${farm.city_name.toLowerCase().replace(/\s+/g, '-')}-${farm.state_province.toLowerCase().replace(/\s+/g, '-')}-us`,
+      province: farm.state_province
+    }
+  }
+
+  const nearestCity = getNearestCity()
 
   return (
     <div className="min-h-screen bg-background">
@@ -218,8 +262,8 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href={`/farms-near/${nearestCity.slug}`} className="hover:text-primary transition-colors">
-                  {nearestCity.name}, {nearestCity.province}
+                <BreadcrumbLink href={`/${stateInfo.slug}`} className="hover:text-primary transition-colors">
+                  {stateInfo.name}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

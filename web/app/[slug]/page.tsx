@@ -292,17 +292,32 @@ function StatePage({ stateData, slug }: { stateData: any; slug: string }) {
               <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
                 Popular u-pick experiences available across the {stateData.geographic_type.toLowerCase()}
               </p>
-              
+
               <div className="flex flex-wrap justify-center gap-3">
-                {stateData.categories.map((category: any, index: number) => (
-                  <Badge 
-                    key={index} 
-                    variant="secondary" 
-                    className="text-sm px-4 py-2"
-                  >
-                    {category.name} ({category.count})
-                  </Badge>
-                ))}
+                {stateData.categories.map((category: any, index: number) => {
+                  // Look up the actual category slug from categoriesData
+                  const categoryData = Object.values(categoriesData).find(
+                    (cat: any) => cat.name === category.name
+                  )
+                  const categorySlug = categoryData?.slug || category.name
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '')
+
+                  return (
+                    <Link
+                      key={index}
+                      href={`/${slug}/${categorySlug}`}
+                    >
+                      <Badge
+                        variant="secondary"
+                        className="text-sm px-4 py-2 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer"
+                      >
+                        {category.name} ({category.count})
+                      </Badge>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </section>
