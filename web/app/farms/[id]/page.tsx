@@ -228,8 +228,8 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
       const distance = calculateDistance(
         farm.latitude,
         farm.longitude,
-        location.latitude,
-        location.longitude
+        location.coordinates.latitude,
+        location.coordinates.longitude
       )
 
       if (distance < minDistance) {
