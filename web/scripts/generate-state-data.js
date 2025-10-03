@@ -5,7 +5,7 @@ console.log('🗺️  PHASE 1: Generating State-Level Farm Data\n');
 console.log('='.repeat(60));
 
 // Read farms data
-const farmsDataPath = path.join(__dirname, '../web/data/farms.json');
+const farmsDataPath = path.join(__dirname, '../data/farms.json');
 const farmsData = JSON.parse(fs.readFileSync(farmsDataPath, 'utf8'));
 
 // Filter active farms only
@@ -353,7 +353,7 @@ Object.entries(farmsByState).forEach(([stateName, farms]) => {
 statesData.sort((a, b) => b.total_farms - a.total_farms);
 
 // Write to file
-const outputPath = path.join(__dirname, '../web/data/states-with-farms.json');
+const outputPath = path.join(__dirname, '../data/states-with-farms.json');
 fs.writeFileSync(outputPath, JSON.stringify(statesData, null, 2));
 
 // Summary
