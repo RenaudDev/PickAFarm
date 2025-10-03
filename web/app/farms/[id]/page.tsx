@@ -48,6 +48,11 @@ import { getReviews } from "@/lib/reviews"
 // Import farms data for static generation
 import farmsData from "../../../data/farms.json"
 
+// Make this route dynamic (users find farms via money pages)
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 3600 // Cache for 1 hour
+
 // Import category content for mapping
 import categoryContent from "../../../data/category-content.json"
 
@@ -99,17 +104,14 @@ type FarmData = {
   sunday_hours?: string
   hours_of_operation?: string
   seasonal_hours?: string
-  [key: string]: any // Allow for additional dynamic fields
 }
 
 
 // Add this after the imports, before generateStaticParams
 
-// Generate static params using slugs from farms.json
+// Don't pre-generate farm detail pages - render on-demand (dynamic)
 export async function generateStaticParams() {
-  return farmsData.map((farm: FarmData) => ({
-    id: farm.slug
-  }))
+  return [] // All farm pages rendered dynamically
 }
 
 // Generate metadata for SEO
@@ -310,6 +312,23 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
           <strong>Opening Date:</strong> {farm.opening_date} • <strong>Closing Date:</strong> {farm.closing_date}
           </p>
         </div>
+
+        {/* Unverified Farm Disclaimer */}
+        {farm.verified !== 1 && (
+          <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl mb-6 flex items-start gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-amber-900 font-semibold mb-1">Not Verified by Owner</p>
+              <p className="text-amber-800 text-sm leading-relaxed">
+                This farm's information has not been verified by the owner. We recommend calling ahead to confirm hours, availability, and pricing before visiting.
+              </p>
+            </div>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-10">
           {/* Main Content */}

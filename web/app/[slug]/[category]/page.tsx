@@ -24,28 +24,16 @@ interface StateCategoryPageProps {
   }>
 }
 
-// Generate static params for all state+category combinations
+// Disable static generation - render on-demand for Cloudflare Pages limits
+// This route will use dynamic rendering instead of pre-generating all combinations
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
+// Generate static params for TOP state+category combinations only (optional - can be empty)
 export async function generateStaticParams() {
-  const params: Array<{ slug: string; category: string }> = []
-  
-  // For each state
-  statesData.forEach(state => {
-    // For each category
-    Object.values(categoriesData).forEach((category: any) => {
-      // Check if this state has farms in this category
-      const farmCount = getStateCategoryCount(state, category)
-      
-      if (farmCount > 0) {
-        params.push({
-          slug: state.state_slug,  // State slug goes in 'slug' param
-          category: category.slug   // Category slug goes in 'category' param
-        })
-      }
-    })
-  })
-  
-  console.log(`Generated ${params.length} state+category combinations`)
-  return params
+  // Return empty array to make all routes dynamic
+  // Or optionally pre-generate only top combinations
+  return []
 }
 
 // Generate metadata for SEO

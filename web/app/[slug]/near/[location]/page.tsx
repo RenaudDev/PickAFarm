@@ -46,38 +46,37 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-// Generate static params for all category + location combinations
+// Generate static params for category + location combinations
+// Only generate for viable categories (>= 10 farms) with actual farms in location
 export async function generateStaticParams() {
   try {
-    // Get categories that have farms (from categories.json)
-    const categoriesWithFarms = categoriesData.filter(cat => cat.totalFarms > 0)
+    const MINIMUM_FARMS_FOR_CATEGORY = 10
+    const MINIMUM_FARMS_FOR_LOCATION = 1
     
-    // If no categories have farms, use the first category to prevent build failure
-    const categoriesToUse = categoriesWithFarms.length > 0 ? categoriesWithFarms : [categoriesData[0]]
+    // Get categories that have sufficient farms (from categories.json)
+    const viableCategories = categoriesData.filter(cat => cat.totalFarms >= MINIMUM_FARMS_FOR_CATEGORY)
     
-    // If locationsWithFarms is empty, provide fallback locations
-    const locationsToUse = locationsWithFarms.length > 0 ? locationsWithFarms : [
-      {
-        location_slug: 'london-ontario-canada'
-      },
-      {
-        location_slug: 'norfolk-county-ontario-canada'
-      }
-    ]
+    console.log(`📊 Viable categories: ${viableCategories.map(c => `${c.name} (${c.totalFarms})`).join(', ')}`)
     
-    // Generate all combinations using location_slug
+    // Generate combinations only where farms exist
     const params = []
     
-    for (const category of categoriesToUse) {
-      for (const location of locationsToUse) {
-        params.push({
-          slug: category.slug,
-          location: location.location_slug
-        })
+    for (const category of viableCategories) {
+      for (const location of locationsWithFarms) {
+        // Filter farms by category for this location
+        const farmsInLocation = filterFarmsByCategory(location.farms, category.slug)
+        
+        // Only generate if this category+location has farms
+        if (farmsInLocation.length >= MINIMUM_FARMS_FOR_LOCATION) {
+          params.push({
+            slug: category.slug,
+            location: location.location_slug
+          })
+        }
       }
     }
     
-    console.log(`📋 Generated ${params.length} static params for category/location combinations`)
+    console.log(`📋 Generated ${params.length} category+location pages (filtered by viability)`)
     return params
   } catch (error) {
     console.error('Error generating static params:', error)

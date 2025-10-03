@@ -20,6 +20,11 @@ import { Home } from "lucide-react"
 // Import data for static generation using correct relative paths
 import locationsWithFarms from "../../../data/locations-with-farms.json"
 
+// Make this route dynamic (too generic for SEO - category+location pages are better)
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 3600 // Cache for 1 hour
+
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ cities: string }> }): Promise<Metadata> {
   const { cities } = await params
@@ -37,30 +42,10 @@ export async function generateMetadata({ params }: { params: Promise<{ cities: s
   return generateLocationMetadata('All Farms Near', locationName, farmCount)
 }
 
-// Generate static params for all locations that have farms
+// Don't pre-generate any pages - render on-demand (dynamic)
+// Generic city pages are less valuable for SEO than category+location pages
 export async function generateStaticParams() {
-  try {
-    // Only include locations that have farms
-    const locationsToUse = locationsWithFarms.filter(location => 
-      location.farms && location.farms.length > 0
-    )
-    
-    // Generate params using location_slug mapped to cities parameter
-    const params = locationsToUse.map(location => ({
-      cities: location.location_slug
-    }))
-    
-    console.log(`📋 Generated ${params.length} static params for farms-near cities pages`)
-    return params
-  } catch (error) {
-    console.error('Error generating static params for farms-near:', error)
-    // Fallback: return at least one param to prevent build failure
-    return [
-      {
-        cities: 'ajax-on-ca'
-      }
-    ]
-  }
+  return [] // All pages rendered dynamically
 }
 
 export default async function FarmsNearCities({ params }: { params: Promise<{ cities: string }> }) {

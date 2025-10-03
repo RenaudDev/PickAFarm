@@ -33,44 +33,15 @@ import { StateMapSection } from "@/components/state-map-section"
 import { CategoryMapSection } from "@/components/category-map-section"
 import { getStateName } from "@/lib/state-utils"
 
-// Generate static params for BOTH categories AND state pages
+// Make state overview pages dynamic (category pages are more specific)
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 3600 // Cache for 1 hour
+
+// Don't pre-generate state overview pages - render on-demand (dynamic)
+// Category pages and category+location pages are more specific and valuable
 export async function generateStaticParams() {
-  try {
-    // Get category slugs
-    const validCategories = Object.values(categoriesData)
-      .filter((category: any) => {
-        return category && 
-               typeof category === 'object' && 
-               category.slug && 
-               typeof category.slug === 'string' &&
-               category.slug.length > 0 &&
-               !category.slug.includes('.') &&
-               !category.slug.startsWith('_') &&
-               category.slug !== 'favicon'
-      })
-      .map((category: any) => ({
-        slug: category.slug
-      }))
-
-    // Get state slugs
-    const stateParams = statesData.map(state => ({
-      slug: state.state_slug
-    }))
-
-    // Combine both
-    const allParams = [...validCategories, ...stateParams]
-    
-    console.log('Generated static params:', {
-      categories: validCategories.length,
-      states: stateParams.length,
-      total: allParams.length
-    })
-    
-    return allParams
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
+  return [] // All state overview pages rendered dynamically
 }
 
 // Generate metadata for SEO

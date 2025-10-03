@@ -36,10 +36,46 @@
   ],
   "shortcuts": [
     {
+      "name": "Find Apple Orchards",
+      "short_name": "Apple Orchards",
+      "description": "Find apple orchards near you",
+      "url": "/apple-orchards",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Find Berry Farms",
+      "short_name": "Berry Farms",
+      "description": "Find berry farms near you",
+      "url": "/berry-farms",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
       "name": "Find Christmas Tree Farms",
       "short_name": "Christmas Tree Farms",
       "description": "Find christmas tree farms near you",
       "url": "/christmas-tree-farms",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Find Corn Farms",
+      "short_name": "Corn Farms",
+      "description": "Find corn farms near you",
+      "url": "/corn-farms",
       "icons": [
         {
           "src": "/android-chrome-192x192.png",

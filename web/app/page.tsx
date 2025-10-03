@@ -20,10 +20,13 @@ import { getAllPosts } from '@/lib/wordpress'
 import Image from "next/image"
 
 // Function to get top categories from generated categories data
+// Only show categories with at least 10 farms (viable inventory)
 function getTopCategories() {
-  // Filter categories that have farms and sort by farm count
+  const MINIMUM_FARMS_FOR_CATEGORY = 10
+  
+  // Filter categories that have sufficient farms and sort by farm count
   return categoriesData
-    .filter(category => category.totalFarms > 0)
+    .filter(category => category.totalFarms >= MINIMUM_FARMS_FOR_CATEGORY)
     .sort((a, b) => b.totalFarms - a.totalFarms)
     .slice(0, 4) // Top 4 categories
 }
