@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-farm-data.js && node scripts/optimize-blog-images.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-state-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js",
+    "prebuild": "node scripts/generate-farm-data.js && node scripts/optimize-blog-images.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-state-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js && node scripts/generate-static-map.js",
     "build": "next build",
     "pages:build": "npx @cloudflare/next-on-pages@1",
     "start": "next start",
@@ -15,7 +15,8 @@
     "generate-categories": "node scripts/generate-categories.js",
     "generate-location-data": "node scripts/generate-location-data.js",
     "generate-manifest": "node scripts/generate-manifest.js",
-    "generate-sitemaps": "node scripts/generate-sitemaps.js"
+    "generate-sitemaps": "node scripts/generate-sitemaps.js",
+    "generate-static-map": "node scripts/generate-static-map.js"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.14.5",
