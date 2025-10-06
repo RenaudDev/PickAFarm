@@ -122,6 +122,7 @@ export function FarmListItem({ farm }: FarmListItemProps) {
         <Link
           href={`/farms/${farm.slug}/`}
           className="w-full block"
+          aria-label={`View details for ${farm.name} in ${farm.city_name}, ${farm.state_province}`}
         >
           <Button
             size="sm"

@@ -342,6 +342,7 @@ export function SubscribeButton({
         )}
         onClick={handleClick}
         disabled={isLoading}
+        aria-label={isSubscribed ? `Unsubscribe from ${farmName}` : `Subscribe to ${farmName} updates`}
       >
         <Bell
           className={cn(

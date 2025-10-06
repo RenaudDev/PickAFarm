@@ -300,6 +300,7 @@ export function NearbyFarmsList() {
                     href={`/farms/${farm.slug}/`}
                     className="w-full block"
                     onClick={(e) => e.stopPropagation()}
+                    aria-label={`View details for ${farm.name} in ${farm.city_name}, ${farm.state_province}`}
                   >
                     <Button
                       size="sm"

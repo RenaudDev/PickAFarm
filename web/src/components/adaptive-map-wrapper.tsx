@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, ReactNode } from 'react'
+import { useState, useEffect, ReactNode, createContext, useContext } from 'react'
 import { MobileStaticMap } from '@/components/mobile-static-map'
 import { getUserLocation, calculateDistance } from '@/lib/location-utils'
 import farmsData from '../../data/farms.json'
@@ -8,6 +8,13 @@ import farmsData from '../../data/farms.json'
 interface AdaptiveMapWrapperProps {
   children: ReactNode
   preFilteredFarms?: any[]
+}
+
+// Create context to share interactive map state
+const InteractiveMapContext = createContext({ showInteractiveMap: false })
+
+export function useInteractiveMap() {
+  return useContext(InteractiveMapContext)
 }
 
 export function AdaptiveMapWrapper({ children, preFilteredFarms }: AdaptiveMapWrapperProps) {
@@ -79,15 +86,21 @@ export function AdaptiveMapWrapper({ children, preFilteredFarms }: AdaptiveMapWr
 
   // On server or desktop, always show interactive map
   if (!isClient || !isMobile || showInteractiveMap) {
-    return <>{children}</>
+    return (
+      <InteractiveMapContext.Provider value={{ showInteractiveMap: showInteractiveMap && isMobile }}>
+        {children}
+      </InteractiveMapContext.Provider>
+    )
   }
 
   // On mobile client, show static map with modal until user clicks
   return (
-    <MobileStaticMap
-      onLoadInteractiveMap={() => setShowInteractiveMap(true)}
-      farmCount={nearbyFarmCount}
-      isCalculating={isCalculating}
-    />
+    <InteractiveMapContext.Provider value={{ showInteractiveMap: false }}>
+      <MobileStaticMap
+        onLoadInteractiveMap={() => setShowInteractiveMap(true)}
+        farmCount={nearbyFarmCount}
+        isCalculating={isCalculating}
+      />
+    </InteractiveMapContext.Provider>
   )
 }

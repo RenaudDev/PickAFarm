@@ -20,6 +20,7 @@ import { generateHomepageMetadata } from "@/lib/seo-metadata"
 import { getAllPosts } from '@/lib/wordpress'
 import Image from "next/image"
 import { NearbyFarmsList } from "@/components/nearby-farms-list"
+import { NearbyFarmsSection } from "@/components/nearby-farms-section"
 
 // Dynamic imports for below-the-fold components
 const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
@@ -86,17 +87,7 @@ export default async function Home() {
 
       <main className="flex-1">
         {/* Nearby Farms Listing - Matches sidebar on map pages */}
-        <section className="py-8 px-4 bg-background border-t">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold mb-2 text-foreground">Farms Near You</h2>
-              <p className="text-sm text-muted-foreground">Browse farms near your location or use the map above to explore</p>
-            </div>
-
-            {/* Client-side list with location detection and working subscribe buttons */}
-            <NearbyFarmsList />
-          </div>
-        </section>
+        <NearbyFarmsSection />
 
         {/* Browse by US States */}
         <section className="py-16 px-4 bg-background">

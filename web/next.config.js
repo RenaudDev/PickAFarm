@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
+  productionBrowserSourceMaps: true, // Enable source maps in production
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
