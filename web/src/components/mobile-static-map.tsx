@@ -14,18 +14,15 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
     <div className="relative w-full h-[70vh] lg:h-[80vh] overflow-hidden">
       {/* Static Map Background */}
       <div className="absolute inset-0">
-        <picture>
-          <source srcSet="/us-map-static.webp" type="image/webp" />
-          <img
-            src="/us-map-static.png"
-            alt="Map of the United States"
-            width={600}
-            height={375}
-            className="object-cover w-full h-full"
-            style={{ objectFit: 'cover' }}
-            loading="eager"
-          />
-        </picture>
+        <img
+          src="/us-map-static.png"
+          alt="Map of the United States"
+          width={600}
+          height={375}
+          className="object-cover w-full h-full"
+          style={{ objectFit: 'cover' }}
+          loading="eager"
+        />
         {/* Overlay to darken background slightly */}
         <div className="absolute inset-0 bg-black/10" />
       </div>
