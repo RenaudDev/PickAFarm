@@ -6,7 +6,8 @@
       "Bash(npm install:*)",
       "Bash(lighthouse:*)",
       "Bash(cat:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(npx lighthouse:*)"
     ],
     "deny": [],
     "ask": []
