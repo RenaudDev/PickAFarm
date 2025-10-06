@@ -1235,10 +1235,21 @@ async function handleSaveFarm(request, env, method) {
 
     // Parse request body
     const body = await request.json();
-    const { farm_id, farm_name, farm_city, farm_state, farm_phone, farm_website } = body;
+    const { farm_id, farm_name, farm_city, farm_state, farm_phone, farm_website, consent_given } = body;
 
     if (!farm_id) {
       return new Response(JSON.stringify({ error: "farm_id is required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    // Require consent for new subscriptions
+    if (!consent_given) {
+      return new Response(JSON.stringify({
+        error: "Consent required",
+        message: "You must agree to receive email notifications to subscribe to farm updates"
+      }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders }
       });
@@ -1252,38 +1263,57 @@ async function handleSaveFarm(request, env, method) {
     if (existing) {
       return new Response(JSON.stringify({
         success: true,
-        message: "Farm already saved",
+        message: "Already subscribed to this farm",
         saved_farm_id: existing.id
       }), {
         headers: { "Content-Type": "application/json", ...corsHeaders }
       });
     }
 
-    // Save the farm with metadata
+    // Get client IP for consent tracking
+    const clientIP = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || 'unknown';
+
+    // Save the farm with metadata and consent tracking
     const savedFarmId = generateUUID();
     const farmSlug = farm_name ? farm_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : null;
-    
+
     await env.DB.prepare(`
       INSERT INTO saved_farms (
-        id, user_id, farm_id, farm_name, farm_slug, farm_city, farm_state, 
-        farm_phone, farm_website, saved_at
+        id, user_id, farm_id, farm_name, farm_slug, farm_city, farm_state,
+        farm_phone, farm_website, saved_at, consent_given_at, consent_ip_address, consent_version
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'), ?, 'v1')
     `).bind(
-      savedFarmId, 
-      user.id, 
-      farm_id, 
-      farm_name || null, 
-      farmSlug, 
-      farm_city || null, 
-      farm_state || null, 
-      farm_phone || null, 
-      farm_website || null
+      savedFarmId,
+      user.id,
+      farm_id,
+      farm_name || null,
+      farmSlug,
+      farm_city || null,
+      farm_state || null,
+      farm_phone || null,
+      farm_website || null,
+      clientIP
     ).run();
+
+    // Invalidate cache for this farm's subscriber count
+    try {
+      const cache = caches.default;
+      const cacheUrl = new URL(`/api/farms/${farm_id}/subscriber-count`, request.url);
+      const deleted = await cache.delete(new Request(cacheUrl.toString()));
+      if (deleted) {
+        console.log(`✅ Cache invalidated for farm ${farm_id} after subscription`);
+      } else {
+        console.log(`ℹ️ No cache entry found for farm ${farm_id}`);
+      }
+    } catch (cacheError) {
+      console.error(`⚠️ Cache invalidation failed for farm ${farm_id}:`, cacheError);
+      // Non-critical - don't fail the request
+    }
 
     return new Response(JSON.stringify({
       success: true,
-      message: "Farm saved successfully",
+      message: "Subscribed to farm updates successfully",
       saved_farm_id: savedFarmId
     }), {
       headers: { "Content-Type": "application/json", ...corsHeaders }
@@ -1341,6 +1371,21 @@ async function handleUnsaveFarm(request, env, method) {
     const result = await env.DB.prepare(
       "DELETE FROM saved_farms WHERE user_id = ? AND farm_id = ?"
     ).bind(user.id, farm_id).run();
+
+    // Invalidate cache for this farm's subscriber count
+    try {
+      const cache = caches.default;
+      const cacheUrl = new URL(`/api/farms/${farm_id}/subscriber-count`, request.url);
+      const deleted = await cache.delete(new Request(cacheUrl.toString()));
+      if (deleted) {
+        console.log(`✅ Cache invalidated for farm ${farm_id} after unsubscription`);
+      } else {
+        console.log(`ℹ️ No cache entry found for farm ${farm_id}`);
+      }
+    } catch (cacheError) {
+      console.error(`⚠️ Cache invalidation failed for farm ${farm_id}:`, cacheError);
+      // Non-critical - don't fail the request
+    }
 
     return new Response(JSON.stringify({
       success: true,
@@ -1428,6 +1473,136 @@ async function handleGetSavedFarms(request, env, method) {
       message: error.message,
       saved_farms: [],
       count: 0
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+}
+
+// GET /api/user/preferences - Get user notification preferences
+async function handleGetUserPreferences(request, env, method) {
+  console.log('🔔 handleGetUserPreferences called, method:', method);
+
+  if (method !== "GET") {
+    console.log('🔔 Method not GET, returning 405');
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Temporary: Return success to test routing
+  console.log('🔔 TESTING: Returning test response');
+  return new Response(JSON.stringify({
+    message: "Endpoint is working!",
+    timestamp: new Date().toISOString()
+  }), {
+    headers: { "Content-Type": "application/json", ...corsHeaders }
+  });
+
+  try {
+    console.log('🔔 Verifying Clerk token...');
+    const clerkUser = await verifyClerkToken(request, env);
+    console.log('🔔 Clerk user verified:', clerkUser.userId);
+
+    const user = await env.DB.prepare(
+      "SELECT id FROM users WHERE clerk_user_id = ?"
+    ).bind(clerkUser.userId).first();
+
+    if (!user) {
+      return new Response(JSON.stringify({ error: "User not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    // Get or create user preferences
+    let prefs = await env.DB.prepare(
+      "SELECT * FROM user_preferences WHERE user_id = ?"
+    ).bind(user.id).first();
+
+    if (!prefs) {
+      // Create default preferences
+      await env.DB.prepare(`
+        INSERT INTO user_preferences (user_id, first_subscription_consent_shown, email_notifications_enabled)
+        VALUES (?, 0, 1)
+      `).bind(user.id).run();
+
+      prefs = {
+        user_id: user.id,
+        first_subscription_consent_shown: 0,
+        email_notifications_enabled: 1,
+        consent_version: 'v1'
+      };
+    }
+
+    return new Response(JSON.stringify({
+      preferences: prefs
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  } catch (error) {
+    console.error("Get preferences error:", error);
+    return new Response(JSON.stringify({
+      error: "Failed to get user preferences",
+      message: error.message
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+}
+
+// PUT /api/user/preferences - Update user notification preferences
+async function handleUpdateUserPreferences(request, env, method) {
+  if (method !== "PUT") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    const clerkUser = await verifyClerkToken(request, env);
+
+    const user = await env.DB.prepare(
+      "SELECT id FROM users WHERE clerk_user_id = ?"
+    ).bind(clerkUser.userId).first();
+
+    if (!user) {
+      return new Response(JSON.stringify({ error: "User not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    const body = await request.json();
+    const { first_subscription_consent_shown, email_notifications_enabled } = body;
+
+    // Update preferences
+    await env.DB.prepare(`
+      INSERT INTO user_preferences (user_id, first_subscription_consent_shown, email_notifications_enabled, updated_at)
+      VALUES (?, ?, ?, datetime('now'))
+      ON CONFLICT(user_id) DO UPDATE SET
+        first_subscription_consent_shown = COALESCE(excluded.first_subscription_consent_shown, first_subscription_consent_shown),
+        email_notifications_enabled = COALESCE(excluded.email_notifications_enabled, email_notifications_enabled),
+        updated_at = datetime('now')
+    `).bind(
+      user.id,
+      first_subscription_consent_shown !== undefined ? first_subscription_consent_shown : null,
+      email_notifications_enabled !== undefined ? email_notifications_enabled : null
+    ).run();
+
+    return new Response(JSON.stringify({
+      success: true,
+      message: "Preferences updated successfully"
+    }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  } catch (error) {
+    console.error("Update preferences error:", error);
+    return new Response(JSON.stringify({
+      error: "Failed to update preferences",
+      message: error.message
     }), {
       status: 500,
       headers: { "Content-Type": "application/json", ...corsHeaders }
@@ -1604,6 +1779,179 @@ async function handleGetSubscribers(request, env, method, farmId) {
   }
 }
 
+// GET /api/farms/:farm_id/subscriber-count - Get public subscriber count for a farm
+async function handleGetSubscriberCount(request, env, method, farmId) {
+  if (method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    // Check cache first (Cloudflare Edge Cache)
+    const cache = caches.default;
+    const cacheKey = new Request(request.url, request);
+    let cachedResponse = await cache.match(cacheKey);
+
+    if (cachedResponse) {
+      console.log(`✅ Cache HIT for farm ${farmId}`);
+      return cachedResponse;
+    }
+
+    console.log(`❌ Cache MISS for farm ${farmId} - querying database`);
+
+    // Cache miss - query database
+    const query = `
+      SELECT COUNT(*) as count
+      FROM saved_farms
+      WHERE farm_id = ?
+    `;
+
+    const result = await env.DB.prepare(query).bind(farmId).first();
+
+    // Create response with cache headers
+    const response = new Response(JSON.stringify({
+      farm_id: farmId,
+      subscriber_count: result?.count || 0,
+      cached_at: new Date().toISOString()
+    }), {
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=300, s-maxage=300", // 5 minutes
+        ...corsHeaders
+      }
+    });
+
+    // Store in cache
+    await cache.put(cacheKey, response.clone());
+    console.log(`💾 Cached subscriber count for farm ${farmId}`);
+
+    return response;
+  } catch (error) {
+    console.error("Get subscriber count error:", error);
+    return new Response(JSON.stringify({
+      error: "Failed to get subscriber count",
+      message: error.message,
+      farm_id: farmId,
+      subscriber_count: 0
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+}
+
+// GET /api/farms/stats - Get subscriber counts for multiple farms (bulk endpoint)
+async function handleFarmsStats(request, env, method) {
+  if (method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+
+  try {
+    // Check cache first
+    const cache = caches.default;
+    const cacheKey = new Request(request.url, request);
+    let cachedResponse = await cache.match(cacheKey);
+
+    if (cachedResponse) {
+      console.log('✅ Cache HIT for bulk stats');
+      return cachedResponse;
+    }
+
+    console.log('❌ Cache MISS for bulk stats - querying database');
+
+    const url = new URL(request.url);
+    const idsParam = url.searchParams.get("ids");
+
+    if (!idsParam) {
+      return new Response(JSON.stringify({
+        error: "Missing 'ids' parameter",
+        message: "Provide comma-separated farm IDs (e.g., ?ids=zcrm_123,zcrm_456)"
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    const farmIds = idsParam.split(",").map(id => id.trim()).filter(id => id);
+
+    if (farmIds.length === 0) {
+      return new Response(JSON.stringify({
+        error: "No valid farm IDs provided"
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    if (farmIds.length > 100) {
+      return new Response(JSON.stringify({
+        error: "Too many farm IDs",
+        message: "Maximum 100 farm IDs allowed per request"
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    // Build query with parameterized placeholders
+    const placeholders = farmIds.map(() => "?").join(",");
+    const query = `
+      SELECT
+        farm_id,
+        COUNT(*) as subscriber_count
+      FROM saved_farms
+      WHERE farm_id IN (${placeholders})
+      GROUP BY farm_id
+    `;
+
+    const result = await env.DB.prepare(query).bind(...farmIds).all();
+
+    // Create map of farm_id -> subscriber_count
+    const statsMap = {};
+    result.results.forEach(row => {
+      statsMap[row.farm_id] = row.subscriber_count;
+    });
+
+    // Ensure all requested farms have an entry (even if 0 subscribers)
+    const stats = farmIds.map(id => ({
+      farm_id: id,
+      subscriber_count: statsMap[id] || 0
+    }));
+
+    const response = new Response(JSON.stringify({
+      stats,
+      count: stats.length,
+      cached_at: new Date().toISOString()
+    }), {
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=300, s-maxage=300", // 5 minutes
+        ...corsHeaders
+      }
+    });
+
+    // Store in cache
+    await cache.put(cacheKey, response.clone());
+    console.log(`💾 Cached bulk stats for ${stats.length} farms`);
+
+    return response;
+
+  } catch (error) {
+    console.error("Bulk stats error:", error);
+    return new Response(JSON.stringify({
+      error: "Failed to fetch farm stats",
+      message: error.message,
+      stats: []
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+}
+
 // POST /api/notifications/send - Send notification emails (called by Zoho Flow)
 async function handleSendNotifications(request, env, method) {
   if (method !== "POST") {
@@ -1736,7 +2084,12 @@ export default {
     if (url.pathname === "/api/farms") {
       return handleFarms(request, env, method);
     }
-    
+
+    // Bulk stats endpoint (must come before dynamic routes)
+    if (url.pathname === "/api/farms/stats") {
+      return handleFarmsStats(request, env, method);
+    }
+
     if (url.pathname === "/api/cities") {
       return handleCities(request, env, method);
     }
@@ -1789,11 +2142,30 @@ export default {
     if (url.pathname === "/api/farms/saved") {
       return handleGetSavedFarms(request, env, method);
     }
-    
+
+    // User preferences
+    if (url.pathname === "/api/user/preferences") {
+      console.log('🔔 Worker: User preferences endpoint hit, method:', method);
+      if (method === "GET") {
+        console.log('🔔 Worker: Calling handleGetUserPreferences');
+        return handleGetUserPreferences(request, env, method);
+      } else if (method === "PUT") {
+        console.log('🔔 Worker: Calling handleUpdateUserPreferences');
+        return handleUpdateUserPreferences(request, env, method);
+      }
+      console.log('🔔 Worker: Method not GET or PUT, falling through');
+    }
+
     // Dynamic route for subscribers: /api/farms/:farm_id/subscribers
     const subscribersMatch = url.pathname.match(/^\/api\/farms\/([^\/]+)\/subscribers$/);
     if (subscribersMatch) {
       return handleGetSubscribers(request, env, method, subscribersMatch[1]);
+    }
+
+    // Public route for subscriber count: /api/farms/:farm_id/subscriber-count
+    const subscriberCountMatch = url.pathname.match(/^\/api\/farms\/([^\/]+)\/subscriber-count$/);
+    if (subscriberCountMatch) {
+      return handleGetSubscriberCount(request, env, method, subscriberCountMatch[1]);
     }
     
     // Notification endpoint
