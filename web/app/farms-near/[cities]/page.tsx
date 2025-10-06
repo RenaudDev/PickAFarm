@@ -1,15 +1,10 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
-import dynamicImport from "next/dynamic"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import { MapSkeletonStatic } from "@/components/map-skeleton-static"
+import SearchResultsContent from "./search-results-content"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
-
-// Lazy load search results with static skeleton (no JS required)
-const SearchResultsContent = dynamicImport(() => import("./search-results-content"), {
-  loading: () => <MapSkeletonStatic />
-})
 import { generateCityPageSchema } from "@/lib/schema"
 import { sortFarms } from "@/lib/farm-utils"
 import { generateLocationBreadcrumbSchema } from "@/lib/breadcrumb-schema"
@@ -112,7 +107,9 @@ export default async function FarmsNearCities({ params }: { params: Promise<{ ci
         </div>
       </div>
 
-      <SearchResultsContent params={resolvedParams} />
+      <Suspense fallback={<MapSkeletonStatic />}>
+        <SearchResultsContent params={resolvedParams} />
+      </Suspense>
 
       {/* City Page Schema */}
       <script

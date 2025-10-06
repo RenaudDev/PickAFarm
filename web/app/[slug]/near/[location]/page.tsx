@@ -1,16 +1,11 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import dynamic from "next/dynamic"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import { MapSkeletonStatic } from "@/components/map-skeleton-static"
+import SearchResultsContent from "./search-results-content"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
-
-// Lazy load search results with static skeleton (no JS required)
-const SearchResultsContent = dynamic(() => import("./search-results-content"), {
-  loading: () => <MapSkeletonStatic />
-})
 import { generateCollectionPageSchema } from "@/lib/schema"
 import { filterFarmsByCategory, sortFarms } from "@/lib/farm-utils"
 import { getTopVarietiesWithArticles } from "@/lib/variety-utils"
@@ -156,7 +151,9 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
           </Breadcrumb>
         </div>
       </div>
-      <SearchResultsContent params={resolvedParams} />
+      <Suspense fallback={<MapSkeletonStatic />}>
+        <SearchResultsContent params={resolvedParams} />
+      </Suspense>
 
       {/* Variety Articles Section */}
       {varietyArticles.length > 0 && categoryData && (
