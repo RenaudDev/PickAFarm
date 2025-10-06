@@ -46,16 +46,17 @@ declare global {
   }
 }
 
-export default function GoogleMaps({ 
-  locationData, 
+export default function GoogleMaps({
+  locationData,
   categoryFilter,
-  radius = 100, 
-  zoom = 10, 
-  className = "w-full h-96" 
+  radius = 100,
+  zoom = 10,
+  className = "w-full h-96"
 }: GoogleMapsProps) {
   const mapRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [map, setMap] = useState<any>(null)
+  const [isVisible, setIsVisible] = useState(false)
   const markersRef = useRef<any[]>([])
   const circleRef = useRef<any>(null)
 
@@ -121,8 +122,36 @@ export default function GoogleMaps({
     return { lat, lng }
   }, [locationData.coordinates.latitude, locationData.coordinates.longitude])
 
+  // Intersection Observer to detect when map is visible
+  useEffect(() => {
+    if (!mapRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      {
+        rootMargin: '200px', // Start loading 200px before visible
+        threshold: 0.01
+      }
+    )
+
+    observer.observe(mapRef.current)
+
+    return () => {
+      if (mapRef.current) {
+        observer.unobserve(mapRef.current)
+      }
+    }
+  }, [])
+
   // Improved Google Maps script loading with better race condition handling
   useEffect(() => {
+    // Only load when visible
+    if (!isVisible) return
+
     // Check if Google Maps is already loaded
     if (window.google && window.google.maps) {
       setIsLoaded(true)
@@ -163,7 +192,7 @@ export default function GoogleMaps({
     return () => {
       // Don't remove script on unmount as other components might need it
     }
-  }, []) // Empty dependency array - only run once
+  }, [isVisible]) // Load when visible
 
   const initializeMap = useCallback(() => {
     if (!mapRef.current || !window.google) return
