@@ -1,6 +1,7 @@
 "use client"
 
 import dynamic from 'next/dynamic';
+import { ServiceWorkerRegister } from './service-worker-register';
 
 // Lazy load non-critical background components to improve LCP
 // These components don't render anything visible and only run side effects
@@ -21,6 +22,7 @@ const ClerkRedirectHandler = dynamic(
 export function DeferredComponents() {
   return (
     <>
+      <ServiceWorkerRegister />
       <LocationDetector />
       <ClerkRedirectHandler />
     </>
