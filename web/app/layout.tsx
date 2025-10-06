@@ -37,7 +37,7 @@ export default function RootLayout({
           {/* Resource hints for performance */}
           <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />
-          <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+          <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="anonymous" />
           <link rel="dns-prefetch" href="https://ipapi.co" />
           <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
         </head>

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ProgressiveMapLayout } from "./progressive-map-layout"
+import { MapPageLayout } from "./map-page-layout"
+import { MapSkeleton } from "./map-skeleton"
 import { getUserLocation, type UserLocation } from "@/lib/location-utils"
 import { getFarmsForCategory } from "@/lib/category-utils"
 
@@ -41,8 +42,13 @@ export function CategoryMapSection({
     loadLocation()
   }, [])
 
+  // Show skeleton while loading location
+  if (isLoadingLocation) {
+    return <MapSkeleton />
+  }
+
   return (
-    <ProgressiveMapLayout
+    <MapPageLayout
       centerLocation={userLocation} // CENTER ON USER'S LOCATION
       isLoadingLocation={isLoadingLocation}
       locationError={locationError}
@@ -56,10 +62,7 @@ export function CategoryMapSection({
       sortBy="distance" // Sort by distance from user (closest first)
       hideCategoryFilter={true} // KEY: Hide category dropdown (already filtered)
       initialZoom={undefined} // Use default zoom based on user location
-      staticMapZoom={9}
       preFilteredFarms={categoryFarms as any} // Pass category-filtered farms
-      staticMapWidth={1200}
-      staticMapHeight={600}
     />
   )
 }
