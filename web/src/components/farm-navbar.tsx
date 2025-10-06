@@ -1,10 +1,16 @@
 "use client"
 
-import { useState } from "react"
+import { useState, lazy, Suspense } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs"
+import { useAuth } from "@clerk/nextjs"
+import dynamic from "next/dynamic"
+
+// Lazy load Clerk auth components (only load when needed)
+const SignInButton = dynamic(() => import("@clerk/nextjs").then(mod => ({ default: mod.SignInButton })), { ssr: false })
+const SignUpButton = dynamic(() => import("@clerk/nextjs").then(mod => ({ default: mod.SignUpButton })), { ssr: false })
+const UserButton = dynamic(() => import("@clerk/nextjs").then(mod => ({ default: mod.UserButton })), { ssr: false })
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

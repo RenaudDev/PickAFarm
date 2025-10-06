@@ -18,8 +18,9 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
         <Image
           src="/us-map-static.png"
           alt="Map of the United States"
-          fill
-          className="object-cover"
+          width={640}
+          height={400}
+          className="object-cover w-full h-full"
           priority
           unoptimized
         />

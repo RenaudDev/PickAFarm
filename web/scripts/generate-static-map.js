@@ -19,9 +19,11 @@ if (!apiKey) {
   process.exit(0);
 }
 
-const url = `https://maps.googleapis.com/maps/api/staticmap?center=39.8283,-98.5795&zoom=4&size=640x400&scale=2&maptype=roadmap&style=feature:poi|visibility:off&style=feature:transit|visibility:off&key=${apiKey}`;
+// Generate mobile-optimized map: 640x400 at scale 1 (not 2) to reduce file size
+// This matches mobile viewport better and reduces the 45KB waste Lighthouse found
+const url = `https://maps.googleapis.com/maps/api/staticmap?center=39.8283,-98.5795&zoom=4&size=640x400&scale=1&maptype=roadmap&style=feature:poi|visibility:off&style=feature:transit|visibility:off&key=${apiKey}`;
 
-console.log('Downloading static US map image...');
+console.log('Downloading mobile-optimized static US map image (640x400)...');
 
 https.get(url, (res) => {
   if (res.statusCode !== 200) {

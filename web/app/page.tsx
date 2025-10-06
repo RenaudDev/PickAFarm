@@ -156,18 +156,18 @@ export default async function Home() {
                               {/* AVIF for modern browsers */}
                               <source
                                 srcSet={`${imageData.avif['400']} 400w, ${imageData.avif['800']} 800w`}
-                                sizes="(max-width: 768px) 100vw, 33vw"
+                                sizes="(max-width: 640px) 400px, (max-width: 1024px) 400px, 400px"
                                 type="image/avif"
                               />
                               {/* WebP fallback */}
                               <source
                                 srcSet={`${imageData.webp['400']} 400w, ${imageData.webp['800']} 800w`}
-                                sizes="(max-width: 768px) 100vw, 33vw"
+                                sizes="(max-width: 640px) 400px, (max-width: 1024px) 400px, 400px"
                                 type="image/webp"
                               />
                               {/* Use fetchpriority for first image (LCP element) */}
                               <img
-                                src={imageData.webp['800']}
+                                src={imageData.webp['400']}
                                 alt={imageData.alt}
                                 width={imageData.width}
                                 height={imageData.height}
