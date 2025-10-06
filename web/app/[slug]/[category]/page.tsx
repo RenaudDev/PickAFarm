@@ -2,7 +2,7 @@ import React from "react"
 import { notFound } from 'next/navigation'
 import { Metadata } from "next"
 import Link from "next/link"
-import dynamic from "next/dynamic"
+import dynamicImport from "next/dynamic"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin } from "lucide-react"
 
@@ -12,7 +12,7 @@ import { MapSkeleton } from "@/components/map-skeleton"
 import { sortFarms } from "@/lib/farm-utils"
 
 // Lazy load map section - no ssr option in server component
-const StateCategoryMapSection = dynamic(() => import("./state-category-map-section"), {
+const StateCategoryMapSection = dynamicImport(() => import("./state-category-map-section"), {
   loading: () => <MapSkeleton />
 })
 

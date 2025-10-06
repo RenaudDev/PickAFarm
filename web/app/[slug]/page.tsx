@@ -2,7 +2,7 @@ import type React from "react"
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Metadata } from "next"
-import dynamic from "next/dynamic"
+import dynamicImport from "next/dynamic"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -34,10 +34,10 @@ import { MapSkeleton } from "@/components/map-skeleton"
 import { getStateName } from "@/lib/state-utils"
 
 // Lazy load map sections - no ssr option in server component
-const StateMapSection = dynamic(() => import("@/components/state-map-section").then(mod => ({ default: mod.StateMapSection })), {
+const StateMapSection = dynamicImport(() => import("@/components/state-map-section").then(mod => ({ default: mod.StateMapSection })), {
   loading: () => <MapSkeleton />
 })
-const CategoryMapSection = dynamic(() => import("@/components/category-map-section").then(mod => ({ default: mod.CategoryMapSection })), {
+const CategoryMapSection = dynamicImport(() => import("@/components/category-map-section").then(mod => ({ default: mod.CategoryMapSection })), {
   loading: () => <MapSkeleton />
 })
 
