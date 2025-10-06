@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs';
 import { LocationDetector } from '@/components/location-detector';
+import { ClerkRedirectHandler } from '@/components/clerk-redirect-handler';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <LocationDetector />
+          <ClerkRedirectHandler />
           {children}
         </body>
       </html>

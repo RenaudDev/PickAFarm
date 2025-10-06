@@ -4,7 +4,7 @@ import { ProtectedRoute } from "@/components/protected-route"
 import { useAuth, useUser } from "@clerk/nextjs"
 import { FarmNavbar } from "@/components/farm-navbar"
 import { useState, useEffect } from "react"
-import { Heart, MapPin, Phone, Globe, Trash2 } from "lucide-react"
+import { Bell, MapPin, Phone, Globe, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
@@ -88,11 +88,11 @@ export default function SavedFarmsPage() {
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-4xl font-bold text-foreground flex items-center gap-3">
-                <Heart className="w-10 h-10 text-red-500 fill-red-500" />
-                Saved Farms
+                <Bell className="w-10 h-10 text-primary" />
+                Your Subscriptions
               </h1>
               <p className="text-muted-foreground mt-2">
-                Your favorite farms in one place
+                Manage your farm subscriptions and notifications
               </p>
             </div>
           </div>
@@ -101,14 +101,14 @@ export default function SavedFarmsPage() {
           {isLoading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-              <p className="mt-4 text-muted-foreground">Loading your saved farms...</p>
+              <p className="mt-4 text-muted-foreground">Loading your subscriptions...</p>
             </div>
           ) : savedFarms.length === 0 ? (
             <div className="text-center py-16 bg-card border border-border rounded-lg">
-              <Heart className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No saved farms yet</h3>
+              <Bell className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">No subscriptions yet</h3>
               <p className="text-muted-foreground mb-6">
-                Start exploring and save your favorite farms to visit later
+                Start exploring and subscribe to farms to get notified about their updates
               </p>
               <Button asChild>
                 <a href="/">Browse Farms</a>

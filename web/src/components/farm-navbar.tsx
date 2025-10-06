@@ -77,8 +77,8 @@ function FarmNavbar() {
                     href="/dashboard"
                   />
                   <UserButton.Link
-                    label="Saved Farms"
-                    labelIcon={<span>❤️</span>}
+                    label="Subscriptions"
+                    labelIcon={<span>🔔</span>}
                     href="/saved-farms"
                   />
                   <UserButton.Action label="manageAccount" />
@@ -155,7 +155,7 @@ function FarmNavbar() {
                       📊 Dashboard
                     </a>
                     <a href="/saved-farms" className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium">
-                      ❤️ Saved Farms
+                      🔔 Subscriptions
                     </a>
                     <div className="px-4 py-2 flex items-center justify-center">
                       <UserButton 

@@ -84,23 +84,23 @@ export default function DashboardPage() {
             </div>
 
             <div className="bg-card border border-border rounded-lg p-6">
-              <h3 className="font-semibold text-lg mb-2">Saved Farms</h3>
+              <h3 className="font-semibold text-lg mb-2">Your Subscriptions</h3>
               {isLoadingFarms ? (
                 <p className="text-sm text-muted-foreground">Loading...</p>
               ) : (
                 <>
                   <p className="text-sm text-muted-foreground">
-                    {savedFarmsCount === 0 
-                      ? "You haven't saved any farms yet" 
-                      : `You have ${savedFarmsCount} saved farm${savedFarmsCount !== 1 ? 's' : ''}`
+                    {savedFarmsCount === 0
+                      ? "You haven't subscribed to any farms yet"
+                      : `You are subscribed to ${savedFarmsCount} farm${savedFarmsCount !== 1 ? 's' : ''}`
                     }
                   </p>
                   {savedFarmsCount > 0 && (
-                    <a 
-                      href="/saved-farms" 
+                    <a
+                      href="/saved-farms"
                       className="text-sm text-primary hover:underline mt-2 inline-block"
                     >
-                      View saved farms →
+                      View your subscriptions →
                     </a>
                   )}
                 </>

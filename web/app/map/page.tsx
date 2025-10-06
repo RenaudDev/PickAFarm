@@ -28,7 +28,7 @@ import {
   storeUserLocation,
   type UserLocation 
 } from "@/lib/location-utils"
-import { SaveFarmButton } from "@/components/save-farm-button"
+import { SubscribeButton } from "@/components/subscribe-button"
 import { useAuth } from "@clerk/nextjs"
 import { CategoryIconList } from "@/lib/category-icons"
 import farmsData from "../../data/farms.json"
@@ -914,11 +914,14 @@ export default function MapHomePage() {
                             </div>
                           </div>
                           <div onClick={(e) => e.stopPropagation()}>
-                            <SaveFarmButton
+                            <SubscribeButton
                               farmId={farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`}
                               farmName={farm.name}
+                              farmSlug={farm.slug}
                               city={farm.city_name}
                               state={farm.state_province}
+                              phone={farm.phone}
+                              website={farm.website}
                               variant="icon"
                               size="sm"
                             />

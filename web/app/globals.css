@@ -125,3 +125,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Bell wiggle animation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
+  20%, 40%, 60%, 80% { transform: rotate(10deg); }
+}
+
+@layer utilities {
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out 0.5s;
+    transform-origin: top center;
+  }
+}

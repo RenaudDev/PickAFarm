@@ -3,22 +3,24 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Bell, Share2, MapPin } from "lucide-react"
-import { SaveFarmButton } from "@/components/save-farm-button"
+import { SubscribeButton } from "@/components/subscribe-button"
 
 interface FarmInteractiveElementsProps {
   farmName?: string
   locationLink?: string
   farmId?: string
+  farmSlug?: string
   farmCity?: string
   farmState?: string
   farmPhone?: string
   farmWebsite?: string
 }
 
-export default function FarmInteractiveElements({ 
-  farmName = "this farm", 
+export default function FarmInteractiveElements({
+  farmName = "this farm",
   locationLink = "https://maps.google.com",
   farmId,
+  farmSlug,
   farmCity,
   farmState,
   farmPhone,
@@ -67,16 +69,17 @@ export default function FarmInteractiveElements({
         Directions
       </Button>
 
-      {farmId && farmCity && farmState && (
-        <SaveFarmButton
+      {farmId && farmSlug && farmCity && farmState && (
+        <SubscribeButton
           farmId={farmId}
           farmName={farmName}
+          farmSlug={farmSlug}
           city={farmCity}
           state={farmState}
           phone={farmPhone}
           website={farmWebsite}
-          variant="icon"
           size="lg"
+          className="px-6 font-semibold"
         />
       )}
     </div>

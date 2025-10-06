@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import ReviewForm from '@/components/review-form'
 import ReviewsList from '@/components/review-list'
+import { FarmStats } from '@/components/farm-stats'
 
 import {
   Breadcrumb,
@@ -301,7 +302,16 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
 
               <div>
                 <h1 className="text-4xl font-bold text-foreground mb-3 leading-tight">{farm.name}</h1>
-                
+
+                {/* Farm Stats: Subscribers and Reviews */}
+                <div className="mb-4">
+                  <FarmStats
+                    farmId={farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`}
+                    reviewCount={reviewsData?.count || 0}
+                    averageRating={reviewsData?.average_rating || 0}
+                  />
+                </div>
+
                 <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-primary" />
@@ -327,10 +337,11 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
               </div>
             </div>
 
-            <FarmInteractiveElements 
+            <FarmInteractiveElements
               farmName={farm.name}
               locationLink={`https://maps.google.com/?q=${encodeURIComponent(`${farm.street}, ${farm.city_name}, ${farm.state_province}`)}`}
               farmId={farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`}
+              farmSlug={farm.slug}
               farmCity={farm.city_name}
               farmState={farm.state_province}
               farmPhone={farm.phone}
@@ -477,8 +488,10 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
                 </CardContent>
               </Card>
 
-              <ReviewsList farmId={farm.id} />
-  <ReviewForm farmId={farm.id} farmName={farm.name} />
+              <div id="reviews-section">
+                <ReviewsList farmId={farm.id} />
+                <ReviewForm farmId={farm.id} farmName={farm.name} />
+              </div>
 
             </div>
 
