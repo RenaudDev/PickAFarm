@@ -64,8 +64,8 @@ export function NearbyFarmsList() {
       try {
         setIsLoading(true)
 
-        // Get user location
-        const location = await getUserLocation("")
+        // Get user location - use 'guest' as key for anonymous users to enable caching
+        const location = await getUserLocation("guest")
 
         if (!location || !location.latitude || !location.longitude) {
           // Fallback: show featured farms if location detection fails

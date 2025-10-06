@@ -71,6 +71,15 @@ export default function RootLayout({
           <link rel="dns-prefetch" href="https://ipapi.co" />
           <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
 
+          {/* Preload LCP image for homepage - first blog post image */}
+          <link
+            rel="preload"
+            as="image"
+            href="/blog-images/best-christmas-trees-800.avif"
+            type="image/avif"
+            fetchPriority="high"
+          />
+
           {/* Font will be loaded by Next.js automatically - removed preload to avoid unused preload warning */}
         </head>
         <body>
