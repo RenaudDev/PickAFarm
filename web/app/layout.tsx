@@ -43,6 +43,29 @@ export default function RootLayout({
           {/* Preload mobile static map (LCP element on mobile) */}
           <link rel="preload" as="image" href="/us-map-static.png" fetchPriority="high" />
 
+          {/* Defer non-critical CSS - will be injected by Next.js but we make it async */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  var loadDeferredStyles = function() {
+                    var addStylesNode = document.getElementById("deferred-styles");
+                    if (addStylesNode) {
+                      var replacement = document.createElement("div");
+                      replacement.innerHTML = addStylesNode.textContent;
+                      document.body.appendChild(replacement);
+                      addStylesNode.parentElement.removeChild(addStylesNode);
+                    }
+                  };
+                  var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+                  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+                  else window.addEventListener('load', loadDeferredStyles);
+                })();
+              `
+            }}
+          />
+
           {/* Critical resource hints for performance */}
           <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />

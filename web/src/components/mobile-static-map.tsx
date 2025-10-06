@@ -22,6 +22,7 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
           height={400}
           className="object-cover w-full h-full"
           priority
+          fetchPriority="high"
           unoptimized
         />
         {/* Overlay to darken background slightly */}

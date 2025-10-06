@@ -1,6 +1,7 @@
 import React, { Suspense } from "react"
 import Link from "next/link"
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 
 import { FarmNavbar } from "@/components/farm-navbar"
 import { FarmFooter } from "@/components/farm-footer"
@@ -10,9 +11,6 @@ import { Badge } from "@/components/ui/badge"
 import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
 import { MapSkeletonStatic } from "@/components/map-skeleton-static"
-import { FAQSection } from "@/components/faq-section"
-import { FarmMapSection } from "@/components/farm-map-section"
-import { AdaptiveMapWrapper } from "@/components/adaptive-map-wrapper"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import statesData from "../data/states-with-farms.json"
@@ -21,6 +19,19 @@ import { CategoryIcon } from "@/lib/category-icons"
 import { generateHomepageMetadata } from "@/lib/seo-metadata"
 import { getAllPosts } from '@/lib/wordpress'
 import Image from "next/image"
+
+// Dynamic imports for below-the-fold components
+const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
+  loading: () => <div className="h-96" />
+})
+
+const FarmMapSection = dynamic(() => import("@/components/farm-map-section").then(mod => ({ default: mod.FarmMapSection })), {
+  loading: () => <MapSkeletonStatic />
+})
+
+const AdaptiveMapWrapper = dynamic(() => import("@/components/adaptive-map-wrapper").then(mod => ({ default: mod.AdaptiveMapWrapper })), {
+  loading: () => <MapSkeletonStatic />
+})
 
 // Function to get top categories from generated categories data
 // Only show categories with at least 10 farms (viable inventory)
