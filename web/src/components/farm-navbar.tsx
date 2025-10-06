@@ -46,8 +46,8 @@ function FarmNavbar() {
             {!isSignedIn ? (
               <>
                 <SignInButton mode="modal">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="font-medium border-border hover:bg-muted hover:text-foreground transition-colors"
                   >
                     Log In
@@ -60,7 +60,7 @@ function FarmNavbar() {
                 </SignUpButton>
               </>
             ) : (
-              <UserButton 
+              <UserButton
                 afterSignOutUrl="/"
                 appearance={{
                   elements: {
@@ -133,8 +133,8 @@ function FarmNavbar() {
                   <>
                     <div className="px-4 py-2">
                       <SignInButton mode="modal">
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           className="w-full font-medium border-border hover:bg-muted hover:text-foreground transition-colors"
                         >
                           Log In
@@ -158,7 +158,7 @@ function FarmNavbar() {
                       🔔 Subscriptions
                     </a>
                     <div className="px-4 py-2 flex items-center justify-center">
-                      <UserButton 
+                      <UserButton
                         afterSignOutUrl="/"
                         appearance={{
                           elements: {

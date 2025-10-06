@@ -1,8 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs';
-import { LocationDetector } from '@/components/location-detector';
-import { ClerkRedirectHandler } from '@/components/clerk-redirect-handler';
+import { DeferredComponents } from '@/components/deferred-components';
 import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
 
@@ -43,8 +42,7 @@ export default function RootLayout({
           <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
         </head>
         <body>
-          <LocationDetector />
-          <ClerkRedirectHandler />
+          <DeferredComponents />
           {children}
         </body>
       </html>
