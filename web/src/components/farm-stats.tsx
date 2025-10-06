@@ -15,6 +15,8 @@ export function FarmStats({ farmId, reviewCount = 0, averageRating = 0 }: FarmSt
   const [subscriberCount, setSubscriberCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState(true)
 
+  console.log('🔔 FarmStats received props:', { farmId, reviewCount, averageRating })
+
   useEffect(() => {
     async function fetchSubscriberCount() {
       try {
@@ -49,6 +51,8 @@ export function FarmStats({ farmId, reviewCount = 0, averageRating = 0 }: FarmSt
     }
   }
 
+  console.log('🔔 Rendering with reviewCount:', reviewCount, 'showing reviews?', reviewCount > 0)
+
   return (
     <div className="flex flex-wrap items-center gap-4 text-sm">
       <div className="flex items-center gap-1.5">
@@ -60,7 +64,7 @@ export function FarmStats({ farmId, reviewCount = 0, averageRating = 0 }: FarmSt
         </span>
 
         {/* Review Stats - show if available */}
-        {reviewCount > 0 ? (
+        {reviewCount > 0 && (
           <>
             <span className="text-muted-foreground mx-1">•</span>
             <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
@@ -69,7 +73,7 @@ export function FarmStats({ farmId, reviewCount = 0, averageRating = 0 }: FarmSt
               ({reviewCount.toLocaleString()} {reviewCount === 1 ? 'review' : 'reviews'})
             </span>
           </>
-        ) : null}
+        )}
 
         {/* Write a review link - always show */}
         <span className="text-muted-foreground mx-1">•</span>

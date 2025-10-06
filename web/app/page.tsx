@@ -14,6 +14,7 @@ import { FAQSection } from "@/components/faq-section"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import statesData from "../data/states-with-farms.json"
+import blogImages from "../data/blog-images.json"
 import { CategoryIcon } from "@/lib/category-icons"
 import { generateHomepageMetadata } from "@/lib/seo-metadata"
 import { getAllPosts } from '@/lib/wordpress'
@@ -133,41 +134,59 @@ export default async function Home() {
                 </Link>
               </div>
               <div className="grid gap-8 md:grid-cols-3">
-                {latestPosts.map(post => {
-                  const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]
-                  
+                {latestPosts.map((post, index) => {
+                  const imageData = blogImages[post.id as keyof typeof blogImages]
+
                   return (
-                    <Link 
-                      key={post.id} 
+                    <Link
+                      key={post.id}
                       href={`/blog/${post.slug}`}
                       className="group"
                     >
                       <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
-                        {featuredImage && (
-                          <div className="relative w-full h-48 overflow-hidden">
-                            <Image
-                              src={featuredImage.source_url}
-                              alt={featuredImage.alt_text || post.title.rendered}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                        {imageData && (
+                          <div className="relative w-full h-48 overflow-hidden bg-muted">
+                            <picture>
+                              {/* AVIF for modern browsers */}
+                              <source
+                                srcSet={`${imageData.avif['400']} 400w, ${imageData.avif['800']} 800w`}
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                type="image/avif"
+                              />
+                              {/* WebP fallback */}
+                              <source
+                                srcSet={`${imageData.webp['400']} 400w, ${imageData.webp['800']} 800w`}
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                type="image/webp"
+                              />
+                              {/* Use fetchpriority for first image (LCP element) */}
+                              <img
+                                src={imageData.webp['800']}
+                                alt={imageData.alt}
+                                width={imageData.width}
+                                height={imageData.height}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                fetchpriority={index === 0 ? 'high' : 'auto'}
+                                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </picture>
                           </div>
                         )}
                         <CardContent className="p-6">
                           <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                             {post.title.rendered}
                           </h3>
-                          
+
                           <div className="flex items-center text-sm text-muted-foreground mb-3">
                             <Calendar className="w-4 h-4 mr-2" />
                             <span>{new Date(post.date).toLocaleDateString()}</span>
                           </div>
-                          
-                          <div 
+
+                          <div
                             className="text-sm text-muted-foreground line-clamp-3"
-                            dangerouslySetInnerHTML={{ 
-                              __html: post.excerpt.rendered 
-                            }} 
+                            dangerouslySetInnerHTML={{
+                              __html: post.excerpt.rendered
+                            }}
                           />
                         </CardContent>
                       </Card>

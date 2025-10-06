@@ -1,0 +1,16 @@
+{
+  "1": {
+    "slug": "best-christmas-trees",
+    "avif": {
+      "400": "/blog-images/best-christmas-trees-400.avif",
+      "800": "/blog-images/best-christmas-trees-800.avif"
+    },
+    "webp": {
+      "400": "/blog-images/best-christmas-trees-400.webp",
+      "800": "/blog-images/best-christmas-trees-800.webp"
+    },
+    "alt": "Decorated Christmas Tree in a living room",
+    "width": 800,
+    "height": 450
+  }
+}

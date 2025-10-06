@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs';
 import { LocationDetector } from '@/components/location-detector';
 import { ClerkRedirectHandler } from '@/components/clerk-redirect-handler';
+import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -32,7 +33,15 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className={GeistSans.className}>
+        <head>
+          {/* Resource hints for performance */}
+          <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />
+          <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+          <link rel="dns-prefetch" href="https://ipapi.co" />
+          <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
+        </head>
         <body>
           <LocationDetector />
           <ClerkRedirectHandler />

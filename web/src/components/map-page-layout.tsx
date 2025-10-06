@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
-import { 
-  MapPin, 
-  Star, 
-  Loader2, 
-  Navigation, 
-  Settings2, 
-  X, 
+import {
+  MapPin,
+  Star,
+  Bell,
+  Loader2,
+  Navigation,
+  Settings2,
+  X,
   AlertCircle,
   Search
 } from "lucide-react"
@@ -24,6 +25,7 @@ import {
   type UserLocation 
 } from "@/lib/location-utils"
 import { SubscribeButton } from "@/components/subscribe-button"
+import { SubscriberBadge } from "@/components/subscriber-badge"
 import { useAuth } from "@clerk/nextjs"
 import { generateFarmsSchema } from "@/lib/farm-schema"
 import farmsData from "../../data/farms.json"
@@ -193,6 +195,7 @@ export function MapPageLayout({
   
   const [farms, setFarms] = useState<Farm[]>([])
   const [savedFarmIds, setSavedFarmIds] = useState<Set<string>>(new Set())
+  const [farmStats, setFarmStats] = useState<Record<string, number>>({})
   const [radius, setRadius] = useState(100)
   const [selectedCategory, setSelectedCategory] = useState("All Types")
   const [isLoadingFarms, setIsLoadingFarms] = useState(false)
@@ -313,6 +316,45 @@ export function MapPageLayout({
     
     return sorted
   }, [farms, selectedCategory])
+
+  // Fetch subscriber counts for filtered farms
+  useEffect(() => {
+    async function fetchFarmStats() {
+      if (filteredFarms.length === 0) {
+        console.log('📊 No filtered farms to fetch stats for')
+        return
+      }
+
+      // Get first 100 farms
+      const farmsToFetch = filteredFarms.slice(0, 100)
+      const farmIds = farmsToFetch
+        .map(f => f.id.startsWith('zcrm_') ? f.id : `zcrm_${f.id}`)
+        .join(',')
+
+      console.log(`📊 Fetching stats for ${farmsToFetch.length} farms`)
+
+      try {
+        const response = await fetch(`${API_URL}/api/farms/stats?ids=${farmIds}`)
+        if (response.ok) {
+          const data = await response.json()
+          console.log('📊 Stats received:', data)
+          const statsMap: Record<string, number> = {}
+          data.stats.forEach((stat: any) => {
+            statsMap[stat.farm_id] = stat.subscriber_count
+          })
+          setFarmStats(statsMap)
+          console.log('📊 Stats map updated:', statsMap)
+        } else {
+          console.error('Failed to fetch stats, status:', response.status)
+        }
+      } catch (error) {
+        console.error('Failed to fetch farm stats:', error)
+        // Non-critical error - map will still work without stats
+      }
+    }
+
+    fetchFarmStats()
+  }, [filteredFarms])
 
   // Initialize map
   useEffect(() => {
@@ -820,16 +862,34 @@ export function MapPageLayout({
                             <MapPin className="h-3 w-3 mr-1" />
                             {farm.distance ? `${farm.distance % 1 === 0 ? Math.round(farm.distance) : farm.distance}km away` : `${farm.city_name}, ${farm.state_province}`}
                           </div>
-                          <div className="flex items-center gap-1 text-xs">
-                            {farm.reviews && farm.reviews > 0 ? (
-                              <>
-                                <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                                <span className="font-medium">{farm.rating || '5.0'}</span>
-                                <span className="text-muted-foreground">({farm.reviews} reviews)</span>
-                              </>
-                            ) : (
-                              <span className="text-muted-foreground italic">No reviews yet</span>
-                            )}
+
+                          {/* Stats: Subscriber count and Reviews */}
+                          <div className="space-y-1">
+                            {/* Subscriber count */}
+                            <div className="flex items-center gap-1 text-xs">
+                              <Bell className="h-3 w-3 text-primary" />
+                              <span className="font-medium text-foreground">
+                                {farmStats[farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`] || 0}
+                              </span>
+                              <span className="text-muted-foreground">
+                                {(farmStats[farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`] || 0) === 1 ? 'subscriber' : 'subscribers'}
+                              </span>
+                            </div>
+
+                            {/* Review rating */}
+                            <div className="flex items-center gap-1 text-xs">
+                              {farm.reviews && farm.reviews > 0 ? (
+                                <>
+                                  <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                                  <span className="font-medium text-foreground">{farm.rating?.toFixed(1) || '5.0'}</span>
+                                  <span className="text-muted-foreground">
+                                    ({farm.reviews} {farm.reviews === 1 ? 'review' : 'reviews'})
+                                  </span>
+                                </>
+                              ) : (
+                                <span className="text-muted-foreground italic">No reviews yet</span>
+                              )}
+                            </div>
                           </div>
                         </div>
                         <div onClick={(e) => e.stopPropagation()}>
