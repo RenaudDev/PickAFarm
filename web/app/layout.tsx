@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { DeferredComponents } from '@/components/deferred-components';
 import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
+import { criticalCSS } from './critical-css';
 
 export const metadata: Metadata = {
   title: "PickAFarm",
@@ -34,6 +35,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={GeistSans.className}>
         <head>
+          {/* Inline Critical CSS for instant first paint */}
+          <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+
+          {/* Preload mobile static map (LCP element on mobile) */}
+          <link rel="preload" as="image" href="/us-map-static.png" fetchPriority="high" />
+
           {/* Critical resource hints for performance */}
           <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />
