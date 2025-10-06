@@ -108,7 +108,7 @@ export function generateMetadata({
       // Additional SEO
       'theme-color': '#22c55e',
       'msapplication-TileColor': '#22c55e',
-      'apple-mobile-web-app-capable': 'yes',
+      'mobile-web-app-capable': 'yes',
       'apple-mobile-web-app-status-bar-style': 'default',
       'format-detection': 'telephone=no',
       
