@@ -1,37 +1,27 @@
-# Cloudflare Pages Early Hints and Cache Configuration
+# Cache static map image aggressively
+/us-map-static.png
+  Cache-Control: public, max-age=31536000, immutable
+  
+# Cache all images for 1 year
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+  
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+  
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
 
-# Global early hints for all pages
-/*
-  Link: <https://admin.pickafarm.com>; rel=preconnect
-  Link: <https://clerk.pickafarm.com>; rel=preconnect
-  Link: <https://pickafarm-api.94623956quebecinc.workers.dev>; rel=preconnect
-  Link: <https://maps.googleapis.com>; rel=preconnect; crossorigin=anonymous
-  Link: <https://ipapi.co>; rel=dns-prefetch
-  Link: </_next/static/media/028c0d39d2e8f589-s.p.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  X-XSS-Protection: 1; mode=block
-  Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: frame-ancestors 'self'
+# Cache fonts for 1 year
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
 
-# Cache headers for static assets
+# Cache JavaScript/CSS for 1 year (with hash in filename)
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
-
-# Cache headers for HTML pages
-/*.html
-  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
-
-# API responses (if proxied through Pages)
-/api/*
-  Cache-Control: public, max-age=300, s-maxage=300
-
-# Blog images - aggressive caching
-/blog-images/*
-  Cache-Control: public, max-age=31536000, immutable
-  Vary: Accept
-
-# Fonts - aggressive caching with CORS
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
