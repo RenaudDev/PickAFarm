@@ -134,6 +134,7 @@ interface MapPageLayoutProps {
   showUserMarker?: boolean
   showCityMarker?: boolean
   pageTitle?: string
+  showFarmCount?: boolean
 
   // Radius Features (for state pages, set these to false)
   showRadiusControl?: boolean
@@ -168,6 +169,7 @@ export function MapPageLayout({
   showUserMarker = false,
   showCityMarker = false,
   pageTitle = "All U-Pick Farms Near You",
+  showFarmCount = true,
   // New props with backward-compatible defaults
   showRadiusControl = true,
   showRadiusCircle = true,
@@ -752,9 +754,11 @@ export function MapPageLayout({
             <h1 className="font-semibold text-sm mb-3">
               {pageTitle}
             </h1>
-            <p className="text-xs text-muted-foreground mb-2">
-              {isLoadingFarms ? "Loading..." : `${filteredFarms.length} farm${filteredFarms.length !== 1 ? 's' : ''}`}
-            </p>
+            {showFarmCount && (
+              <p className="text-xs text-muted-foreground mb-2">
+                {isLoadingFarms ? "Loading..." : `${filteredFarms.length} farm${filteredFarms.length !== 1 ? 's' : ''}`}
+              </p>
+            )}
             {mapCenter && (
               <p className="text-xs text-muted-foreground mb-2">
                 📍 {mapCenter.city || 'Your location'} • {radius}km radius

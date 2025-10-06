@@ -163,9 +163,9 @@ export function generateFarmMetadata(farm: any): Metadata {
 export function generateLocationMetadata(category: string, location: string, farmCount: number): Metadata {
   // For generic all-farms pages, use cleaner copy and canonical path
   const isAllFarmsNear = category.toLowerCase().trim() === 'all farms near'
-  const displayCategory = isAllFarmsNear ? 'All Farms' : category
+  const displayCategory = isAllFarmsNear ? 'U-Pick Farms' : category
 
-  const title = `${displayCategory} Near ${location}`
+  const title = `${farmCount} ${displayCategory} Near ${location}`
   const description = `Find ${farmCount} ${displayCategory.toLowerCase()} near ${location}. Fresh produce, seasonal activities, and family fun at local pick-your-own farms.`
 
   const keywords = [

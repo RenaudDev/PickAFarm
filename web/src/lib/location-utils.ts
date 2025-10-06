@@ -111,10 +111,44 @@ export async function getUserLocation(userId: string): Promise<UserLocation | nu
 }
 
 /**
+ * Reverse geocode coordinates to get city name
+ * Uses OpenStreetMap Nominatim API (free, no API key needed)
+ */
+async function reverseGeocode(latitude: number, longitude: number): Promise<{ city: string; region: string; country: string }> {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`,
+      {
+        headers: {
+          'User-Agent': 'PickAFarm/1.0' // Required by Nominatim
+        }
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('Reverse geocoding failed')
+    }
+
+    const data = await response.json()
+    const address = data.address || {}
+
+    // Try different city fields in order of preference
+    const city = address.city || address.town || address.village || address.municipality || 'Unknown City'
+    const region = address.state || address.province || address.region || ''
+    const country = address.country || ''
+
+    return { city, region, country }
+  } catch (error) {
+    console.error('Reverse geocoding error:', error)
+    return { city: 'Current Location', region: '', country: '' }
+  }
+}
+
+/**
  * Get user's precise location from browser geolocation API
  * Requires user permission
  */
-export function getBrowserLocation(): Promise<UserLocation> {
+export async function getBrowserLocation(): Promise<UserLocation> {
   return new Promise((resolve, reject) => {
     if (!('geolocation' in navigator)) {
       reject(new Error('Geolocation is not supported by your browser'))
@@ -129,23 +163,32 @@ export function getBrowserLocation(): Promise<UserLocation> {
     }
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+
+        console.log('📍 GPS coordinates detected:', { latitude, longitude })
+        console.log(`📍 Accuracy: ${position.coords.accuracy}m`)
+
+        // Reverse geocode to get city name
+        const geocoded = await reverseGeocode(latitude, longitude)
+
         const location: UserLocation = {
-          city: 'Current Location',
-          region: '',
-          country: '',
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          city: geocoded.city,
+          region: geocoded.region,
+          country: geocoded.country,
+          latitude,
+          longitude,
           detectedAt: new Date().toISOString(),
           source: 'browser'
         }
-        console.log('📍 High-accuracy location detected:', location)
-        console.log(`📍 Accuracy: ${position.coords.accuracy}m`)
+
+        console.log('📍 Location with city name:', location)
         resolve(location)
       },
       (error) => {
         console.error('Browser geolocation error:', error)
-        
+
         let errorMessage = 'Unable to get your location'
         switch (error.code) {
           case error.PERMISSION_DENIED:
@@ -158,7 +201,7 @@ export function getBrowserLocation(): Promise<UserLocation> {
             errorMessage = 'Location request timed out. Please try again.'
             break
         }
-        
+
         reject(new Error(errorMessage))
       },
       options

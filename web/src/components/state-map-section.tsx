@@ -34,7 +34,8 @@ export function StateMapSection({ stateData }: StateMapSectionProps) {
       centerLocation={stateCenter}
       isLoadingLocation={false}
       locationError={null}
-      pageTitle={`U-Pick Farms in ${stateData.state_name}`}
+      pageTitle={`${stateData.total_farms} U-Pick Farms in ${stateData.state_name}`}
+      showFarmCount={false}
       showUserMarker={false}
       showCityMarker={true}
       showRadiusControl={false}

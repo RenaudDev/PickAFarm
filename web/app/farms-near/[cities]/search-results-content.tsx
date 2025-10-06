@@ -56,13 +56,29 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
     }
   }, [allFarms, locationData])
 
+  // Filter active farms to get the correct count and map fields
+  const activeFarms = useMemo(() => {
+    return allFarms
+      .filter(f => f.latitude && f.longitude)
+      .map(farm => ({
+        ...farm,
+        city_name: farm.city,
+        state_province: farm.province
+      }))
+  }, [allFarms])
+
   return (
     <MapPageLayout
       centerLocation={cityLocation}
       isLoadingLocation={false}
       showUserMarker={false}
       showCityMarker={true}
-      pageTitle={`All ${locationData.name} U-Pick Farms Near You`}
+      pageTitle={`${activeFarms.length} U-Pick Farms in ${locationData.full_location}`}
+      showFarmCount={false}
+      preFilteredFarms={activeFarms as any}
+      filterByRadius={false}
+      showRadiusControl={false}
+      showRadiusCircle={true}
     />
   )
 }

@@ -40,16 +40,18 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
   // Filter farms by category
   const filteredFarms = filterFarmsByCategory(locationData.farms || [], category)
 
+  // Filter to only farms with valid coordinates (matches MapPageLayout filtering)
+  const validFarms = useMemo(() => {
+    return filteredFarms.filter(f => f.latitude && f.longitude)
+  }, [filteredFarms])
+
   // Create city center location from farms coordinates
   const cityLocation = useMemo((): UserLocation | null => {
-    if (!filteredFarms || filteredFarms.length === 0) return null
-    
-    const validFarms = filteredFarms.filter(f => f.latitude && f.longitude)
-    if (validFarms.length === 0) return null
-    
+    if (!validFarms || validFarms.length === 0) return null
+
     const avgLat = validFarms.reduce((sum, f) => sum + f.latitude, 0) / validFarms.length
     const avgLng = validFarms.reduce((sum, f) => sum + f.longitude, 0) / validFarms.length
-    
+
     return {
       latitude: avgLat,
       longitude: avgLng,
@@ -59,19 +61,19 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
       detectedAt: new Date().toISOString(),
       source: 'ip'
     }
-  }, [filteredFarms, locationData])
+  }, [validFarms, locationData])
 
-  const pageTitle = categoryData 
-    ? `${categoryData.name} Near ${locationData.full_location}`
-    : `All ${locationData.name} U-Pick Farms Near You`
+  const pageTitle = categoryData
+    ? `${validFarms.length} ${categoryData.name} Near ${locationData.full_location}`
+    : `${validFarms.length} U-Pick Farms in ${locationData.full_location}`
 
 // Map farm fields to match MapPageLayout expected format with required fields
-const mappedFarms = filteredFarms.map(farm => ({
+const mappedFarms = validFarms.map(farm => ({
   ...farm,
   city_name: farm.city,
   state_province: farm.province,
-  latitude: farm.latitude ?? 0,  // Add default values for required fields
-  longitude: farm.longitude ?? 0
+  latitude: farm.latitude,
+  longitude: farm.longitude
 }))
 
   return (
@@ -81,7 +83,11 @@ const mappedFarms = filteredFarms.map(farm => ({
       showUserMarker={false}
       showCityMarker={true}
       pageTitle={pageTitle}
+      showFarmCount={false}
       preFilteredFarms={mappedFarms}
+      filterByRadius={false}
+      showRadiusControl={false}
+      showRadiusCircle={true}
     />
   )
 }

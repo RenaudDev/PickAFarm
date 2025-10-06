@@ -2,7 +2,7 @@
   {
     "slug": "christmas-tree-farms",
     "name": "Christmas Tree Farms",
-    "totalFarms": 435,
+    "totalFarms": 467,
     "description": "Find the perfect Christmas tree at local farms offering fresh-cut trees, family activities, and holiday traditions.",
     "intro": "Christmas tree farms offer a magical holiday experience where families can select and cut their own perfect tree. These farms typically operate seasonally from late November through December, providing fresh Fraser Firs, Noble Firs, and other premium varieties alongside festive activities like hot cocoa, hayrides, and holiday decorations.",
     "faqs": [
@@ -176,7 +176,7 @@
   {
     "slug": "vineyards",
     "name": "Vineyards",
-    "totalFarms": 15,
+    "totalFarms": 16,
     "description": "Explore local vineyards for wine tastings, scenic tours, and grape-growing experiences.",
     "intro": "Local vineyards offer scenic agricultural experiences where visitors can tour the grounds, learn about winemaking, and sample estate-grown wines. Many vineyards provide seasonal activities like grape picking, wine education classes, and beautiful settings for picnics and special events.",
     "faqs": [
@@ -512,6 +512,54 @@
     ]
   },
   {
+    "slug": "tulip-farms",
+    "name": "Tulip Farms",
+    "totalFarms": 2,
+    "description": "Experience breathtaking tulip fields and pick fresh tulips at local u-pick flower farms.",
+    "intro": "Tulip farms create spectacular spring displays with acres of colorful blooms, offering visitors the chance to walk through vibrant fields and pick their own fresh tulips. These farms provide perfect photo opportunities and celebrate the arrival of spring with festivals, markets, and family activities amid stunning floral landscapes.",
+    "faqs": [
+      {
+        "question": "When is tulip season?",
+        "answer": "Tulip season typically runs from mid-April through May, depending on weather and region. Peak bloom usually occurs in late April to early May. Check with individual farms for bloom status as timing varies yearly."
+      },
+      {
+        "question": "Can I pick my own tulips?",
+        "answer": "Most tulip farms offer u-pick options where you can select and cut your own tulips. Some provide pre-cut bouquets. Farms supply cutters and instructions. Pick tulips in bud or early bloom for longest vase life."
+      },
+      {
+        "question": "How long do cut tulips last?",
+        "answer": "Fresh-cut tulips typically last 5-7 days in a vase. Keep them in cool water away from direct sunlight and heat. Trim stems at an angle and change water every 2-3 days for maximum longevity."
+      },
+      {
+        "question": "Are tulip farms good for photos?",
+        "answer": "Yes! Tulip farms are incredibly photogenic with rows of colorful blooms. Most farms welcome photographers, but check policies on professional shoots. Visit on weekday mornings for fewer crowds and better lighting."
+      }
+    ],
+    "topCities": [],
+    "featuredFarms": [
+      {
+        "id": "zcrm_38729000000292581",
+        "name": "Devine Acres - San Antonio Pumpkin, Christmas & Easter Events",
+        "slug": "devine-acres-san-antonio-pumpkin-christmas-easter-events",
+        "url": "/farms/devine-acres-san-antonio-pumpkin-christmas-easter-events",
+        "blurb": "Devine Acres Farm, established in 2005 and located a short drive from San Antonio, offers seasonal family-friendly event...",
+        "city": "Devine",
+        "province": "Texas",
+        "featured": false
+      },
+      {
+        "id": "zcrm_38729000000304232",
+        "name": "Hemingway Hill",
+        "slug": "hemingway-hill",
+        "url": "/farms/hemingway-hill",
+        "blurb": "Hemingway Hill offers a serene Christmas tree farm experience just a short drive from Dallas, Forney, and Kaufman in Ter...",
+        "city": "Terrell",
+        "province": "Texas",
+        "featured": false
+      }
+    ]
+  },
+  {
     "slug": "petting-zoo",
     "name": "Petting Zoo",
     "totalFarms": 1,
@@ -584,44 +632,6 @@
         "city": "Langley Twp",
         "province": "British Columbia",
         "featured": true
-      }
-    ]
-  },
-  {
-    "slug": "tulip-farms",
-    "name": "Tulip Farms",
-    "totalFarms": 1,
-    "description": "Experience breathtaking tulip fields and pick fresh tulips at local u-pick flower farms.",
-    "intro": "Tulip farms create spectacular spring displays with acres of colorful blooms, offering visitors the chance to walk through vibrant fields and pick their own fresh tulips. These farms provide perfect photo opportunities and celebrate the arrival of spring with festivals, markets, and family activities amid stunning floral landscapes.",
-    "faqs": [
-      {
-        "question": "When is tulip season?",
-        "answer": "Tulip season typically runs from mid-April through May, depending on weather and region. Peak bloom usually occurs in late April to early May. Check with individual farms for bloom status as timing varies yearly."
-      },
-      {
-        "question": "Can I pick my own tulips?",
-        "answer": "Most tulip farms offer u-pick options where you can select and cut your own tulips. Some provide pre-cut bouquets. Farms supply cutters and instructions. Pick tulips in bud or early bloom for longest vase life."
-      },
-      {
-        "question": "How long do cut tulips last?",
-        "answer": "Fresh-cut tulips typically last 5-7 days in a vase. Keep them in cool water away from direct sunlight and heat. Trim stems at an angle and change water every 2-3 days for maximum longevity."
-      },
-      {
-        "question": "Are tulip farms good for photos?",
-        "answer": "Yes! Tulip farms are incredibly photogenic with rows of colorful blooms. Most farms welcome photographers, but check policies on professional shoots. Visit on weekday mornings for fewer crowds and better lighting."
-      }
-    ],
-    "topCities": [],
-    "featuredFarms": [
-      {
-        "id": "zcrm_38729000000292581",
-        "name": "Devine Acres - San Antonio Pumpkin, Christmas & Easter Events",
-        "slug": "devine-acres-san-antonio-pumpkin-christmas-easter-events",
-        "url": "/farms/devine-acres-san-antonio-pumpkin-christmas-easter-events",
-        "blurb": "Devine Acres Farm, established in 2005 and located a short drive from San Antonio, offers seasonal family-friendly event...",
-        "city": "Devine",
-        "province": "Texas",
-        "featured": false
       }
     ]
   }

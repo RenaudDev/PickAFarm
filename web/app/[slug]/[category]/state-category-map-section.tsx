@@ -40,7 +40,8 @@ export default function StateCategoryMapSection({
       centerLocation={stateCenter}
       isLoadingLocation={false}
       locationError={null}
-      pageTitle={`${categoryData.name} in ${stateData.state_name}`}
+      pageTitle={`${farms.length} ${categoryData.name} in ${stateData.state_name}`}
+      showFarmCount={false}
       showUserMarker={false}
       showCityMarker={true}
       showRadiusControl={false}

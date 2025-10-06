@@ -116,6 +116,7 @@ async function generateLocationData() {
           province: farm.state_province,
           country: farm.country,
           categories: farm.categories,
+          varieties: farm.varieties || null,
           featured: farm.featured === 1 || farm.featured === true,
           distance_km: Math.round(distanceKm)
         }));

@@ -20,6 +20,10 @@ import {
   getStateCategoryFarms,
   getStateCategoryCount
 } from "@/lib/category-state-utils"
+import { generateStateCategoryBreadcrumbSchema } from "@/lib/breadcrumb-schema"
+import { getTopVarietiesWithArticles } from "@/lib/variety-utils"
+import { getVarietiesBySlugs } from "@/lib/wordpress"
+import VarietyArticlesSection from "@/components/variety-articles-section"
 
 interface StateCategoryPageProps {
   params: Promise<{
@@ -51,9 +55,9 @@ export async function generateMetadata({ params }: StateCategoryPageProps): Prom
   
   const farms = getStateCategoryFarms(stateData, categoryData)
   const farmCount = farms.length
-  
-  const title = `${categoryData.name} in ${stateData.state_name} | ${farmCount} Farms`
-  const description = `Discover ${farmCount} ${categoryData.name.toLowerCase()} across ${stateData.state_name}. Find locations, hours, reviews, and directions to the best pick-your-own farms.`
+
+  const title = `${farmCount} ${categoryData.name} in ${stateData.state_name} | Pick Your Own`
+  const description = `Find the best ${categoryData.name.toLowerCase()} in ${stateData.state_name}. ${farmCount} farms with locations, hours, reviews, and directions. Plan your pick-your-own adventure today!`
   const keywords = `${stateData.state_name.toLowerCase()} ${categoryData.name.toLowerCase()}, ${categoryData.name.toLowerCase()} in ${stateData.state_name.toLowerCase()}, ${stateData.state_code.toLowerCase()} ${categoryData.name.toLowerCase()}, pick your own ${stateData.state_name.toLowerCase()}`
 
   return {
@@ -61,7 +65,7 @@ export async function generateMetadata({ params }: StateCategoryPageProps): Prom
     description,
     keywords,
     openGraph: {
-      title: `${categoryData.name} in ${stateData.state_name} | PickAFarm`,
+      title: `${farmCount} ${categoryData.name} in ${stateData.state_name} | PickAFarm`,
       description,
       type: 'website',
       url: `https://pickafarm.com/${slug}/${category}`
@@ -96,6 +100,11 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
 
   // Sort farms by featured status and rating
   const sortedFarms = sortFarms(farms)
+
+  // Get varieties from farms that have blog articles
+  const varietiesInfo = getTopVarietiesWithArticles(farms, 9)
+  const varietySlugs = varietiesInfo.map(v => v.slug)
+  const varietyArticles = varietySlugs.length > 0 ? await getVarietiesBySlugs(varietySlugs) : []
 
   // Get cities with farms in this state+category
   const getCategoryVariations = (categoryName: string): string[] => {
@@ -189,6 +198,15 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
         </section>
       )}
 
+      {/* Variety Articles Section */}
+      {varietyArticles.length > 0 && (
+        <VarietyArticlesSection
+          varieties={varietyArticles}
+          title={`Popular ${categoryData.name.replace(/ Farms?$/i, '')} Varieties in ${stateData.state_name}`}
+          description={`Learn about the different varieties available at ${categoryData.name.toLowerCase()} across ${stateData.state_name}.`}
+        />
+      )}
+
       {/* About Section */}
       <section className="py-16 px-4 bg-background">
         <div className="max-w-4xl mx-auto">
@@ -206,6 +224,7 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
         </div>
       </section>
 
+      {/* Collection Page Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -218,6 +237,20 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
           })
         }}
       />
+
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateStateCategoryBreadcrumbSchema(
+            stateData.state_name,
+            slug,
+            categoryData.name,
+            category
+          ))
+        }}
+      />
+
       <FarmFooter />
     </div>
   )

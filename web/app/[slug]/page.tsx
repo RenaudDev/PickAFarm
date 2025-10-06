@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Check if this is a state page
   const stateData = statesData.find(s => s.state_slug === slug)
   if (stateData) {
-    const title = `U-Pick Farms in ${stateData.state_name} | ${stateData.total_farms} ${stateData.state_name} Pick-Your-Own Farms`
+    const title = `${stateData.total_farms} U-Pick Farms in ${stateData.state_name}`
     const description = `Discover ${stateData.total_farms} u-pick farms across ${stateData.state_name}. Find Christmas tree farms, pumpkin patches, apple orchards, berry farms, and more. Interactive map with reviews and directions.`
     const topCategories = stateData.categories.slice(0, 3).map(c => c.name.toLowerCase()).join(', ')
     const keywords = `${stateData.state_name.toLowerCase()} u-pick farms, pick your own ${stateData.state_name.toLowerCase()}, ${stateData.state_name.toLowerCase()} farms, u-pick ${stateData.state_code.toLowerCase()}, ${topCategories}`
@@ -56,14 +56,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       keywords,
       openGraph: {
-        title: `U-Pick Farms in ${stateData.state_name} | PickAFarm`,
+        title: `${stateData.total_farms} U-Pick Farms in ${stateData.state_name}`,
         description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`,
         type: 'website',
         url: `https://pickafarm.com/${slug}`
       },
       twitter: {
         card: 'summary_large_image',
-        title: `U-Pick Farms in ${stateData.state_name}`,
+        title: `${stateData.total_farms} U-Pick Farms in ${stateData.state_name}`,
         description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`
       },
       alternates: {
@@ -240,7 +240,27 @@ function StatePage({ stateData, slug }: { stateData: any; slug: string }) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      
+
+      {/* Breadcrumbs */}
+      <div className="bg-muted/20 border-b">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                  <Home className="h-4 w-4" />
+                  <span className="hidden sm:inline">Home</span>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="font-medium">{stateData.state_name}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
+
       {/* State Map Section */}
       <StateMapSection stateData={stateData} />
 

@@ -7,6 +7,9 @@ import SearchResultsContent from "./search-results-content"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
 import { generateCollectionPageSchema } from "@/lib/schema"
 import { filterFarmsByCategory, sortFarms } from "@/lib/farm-utils"
+import { getTopVarietiesWithArticles } from "@/lib/variety-utils"
+import { getVarietiesBySlugs } from "@/lib/wordpress"
+import VarietyArticlesSection from "@/components/variety-articles-section"
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -106,6 +109,11 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
   const filteredFarms = filterFarmsByCategory(locationData.farms, resolvedParams.slug)
   const sortedFarms = sortFarms(filteredFarms)
 
+  // Get varieties from filtered farms that have blog articles
+  const varietiesInfo = getTopVarietiesWithArticles(filteredFarms, 9)
+  const varietySlugs = varietiesInfo.map(v => v.slug)
+  const varietyArticles = varietySlugs.length > 0 ? await getVarietiesBySlugs(varietySlugs) : []
+
   // Create compatible locationData for the component with all required properties
   const compatibleLocationData = {
     ...locationData,
@@ -145,6 +153,16 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
       <Suspense fallback={<div>Loading search results...</div>}>
         <SearchResultsContent params={resolvedParams} />
       </Suspense>
+
+      {/* Variety Articles Section */}
+      {varietyArticles.length > 0 && categoryData && (
+        <VarietyArticlesSection
+          varieties={varietyArticles}
+          title={`${categoryData.name.replace(/ Farms?$/i, '')} Varieties in ${locationData.name}, ${locationData.province}`}
+          description={`Discover the different varieties available at ${categoryData.name.toLowerCase()} near ${locationData.name}.`}
+        />
+      )}
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -54,33 +54,62 @@ export async function getVarietiesByTag(tagSlug) {
     const tagRes = await fetch(`${WP_API_URL}/tags?slug=${tagSlug}`, {
       next: { revalidate: 3600 }
     });
-    
+
     if (!tagRes.ok) {
       console.warn(`Tag "${tagSlug}" not found`);
       return [];
     }
-    
+
     const tags = await tagRes.json();
     if (tags.length === 0) {
       console.warn(`No tags found for slug "${tagSlug}"`);
       return [];
     }
-    
+
     const tagId = tags[0].id;
-    
+
     // Fetch varieties with this tag
     const res = await fetch(`${WP_API_URL}/varieties?tags=${tagId}&_embed&per_page=100`, {
       next: { revalidate: 3600 }
     });
-    
+
     if (!res.ok) {
       console.warn(`Failed to fetch varieties for tag ${tagSlug}`);
       return [];
     }
-    
+
     return res.json();
   } catch (error) {
     console.error(`Error fetching varieties by tag "${tagSlug}":`, error);
+    return [];
+  }
+}
+
+/**
+ * Get multiple varieties by their slugs
+ * @param {string[]} slugs - Array of variety slugs to fetch
+ * @returns {Promise<Array>} Array of variety objects
+ */
+export async function getVarietiesBySlugs(slugs) {
+  if (!slugs || slugs.length === 0) {
+    return [];
+  }
+
+  try {
+    // WordPress REST API supports fetching by slug array
+    const slugQuery = slugs.map(s => `slug[]=${encodeURIComponent(s)}`).join('&');
+    const res = await fetch(`${WP_API_URL}/varieties?${slugQuery}&_embed&per_page=100`, {
+      next: { revalidate: 3600 }
+    });
+
+    if (!res.ok) {
+      console.warn(`Failed to fetch varieties by slugs`);
+      return [];
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error(`Error fetching varieties by slugs:`, error);
     return [];
   }
 }
