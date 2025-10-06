@@ -40,9 +40,6 @@ export default function RootLayout({
           {/* Inline Critical CSS for instant first paint */}
           <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
 
-          {/* Preload mobile static map (LCP element on mobile) */}
-          <link rel="preload" as="image" href="/us-map-static.png" fetchPriority="high" />
-
           {/* Defer non-critical CSS - will be injected by Next.js but we make it async */}
           <script
             dangerouslySetInnerHTML={{
