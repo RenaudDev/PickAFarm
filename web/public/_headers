@@ -7,10 +7,12 @@
   Link: <https://pickafarm-api.94623956quebecinc.workers.dev>; rel=preconnect
   Link: <https://maps.googleapis.com>; rel=preconnect; crossorigin=anonymous
   Link: <https://ipapi.co>; rel=dns-prefetch
+  Link: </_next/static/media/028c0d39d2e8f589-s.p.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: frame-ancestors 'self'
 
 # Cache headers for static assets
 /_next/static/*

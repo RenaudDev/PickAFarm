@@ -34,12 +34,22 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={GeistSans.className}>
         <head>
-          {/* Resource hints for performance */}
+          {/* Critical resource hints for performance */}
           <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://pickafarm-api.94623956quebecinc.workers.dev" crossOrigin="anonymous" />
           <link rel="dns-prefetch" href="https://ipapi.co" />
           <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
+
+          {/* Preload critical font */}
+          <link
+            rel="preload"
+            href="/_next/static/media/028c0d39d2e8f589-s.p.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
         </head>
         <body>
           <DeferredComponents />
