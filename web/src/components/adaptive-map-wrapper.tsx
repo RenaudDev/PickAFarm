@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, ReactNode, createContext, useContext } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import { MobileStaticMap } from '@/components/mobile-static-map'
 import { getUserLocation, calculateDistance } from '@/lib/location-utils'
 import farmsData from '../../data/farms.json'
@@ -10,11 +10,27 @@ interface AdaptiveMapWrapperProps {
   preFilteredFarms?: any[]
 }
 
-// Create context to share interactive map state
-const InteractiveMapContext = createContext({ showInteractiveMap: false })
+// Global state for interactive map visibility (accessible across components)
+let globalShowInteractiveMap = false
+const listeners: Set<() => void> = new Set()
+
+function setGlobalShowInteractiveMap(value: boolean) {
+  globalShowInteractiveMap = value
+  listeners.forEach(listener => listener())
+}
 
 export function useInteractiveMap() {
-  return useContext(InteractiveMapContext)
+  const [showInteractiveMap, setShowInteractiveMap] = useState(globalShowInteractiveMap)
+
+  useEffect(() => {
+    const listener = () => setShowInteractiveMap(globalShowInteractiveMap)
+    listeners.add(listener)
+    return () => {
+      listeners.delete(listener)
+    }
+  }, [])
+
+  return { showInteractiveMap }
 }
 
 export function AdaptiveMapWrapper({ children, preFilteredFarms }: AdaptiveMapWrapperProps) {
@@ -84,23 +100,29 @@ export function AdaptiveMapWrapper({ children, preFilteredFarms }: AdaptiveMapWr
     calculateNearbyFarms()
   }, [isClient, isMobile, preFilteredFarms])
 
+  // Update global state when interactive map is shown
+  useEffect(() => {
+    if (showInteractiveMap && isMobile) {
+      setGlobalShowInteractiveMap(true)
+    }
+    return () => {
+      if (showInteractiveMap && isMobile) {
+        setGlobalShowInteractiveMap(false)
+      }
+    }
+  }, [showInteractiveMap, isMobile])
+
   // On server or desktop, always show interactive map
   if (!isClient || !isMobile || showInteractiveMap) {
-    return (
-      <InteractiveMapContext.Provider value={{ showInteractiveMap: showInteractiveMap && isMobile }}>
-        {children}
-      </InteractiveMapContext.Provider>
-    )
+    return <>{children}</>
   }
 
   // On mobile client, show static map with modal until user clicks
   return (
-    <InteractiveMapContext.Provider value={{ showInteractiveMap: false }}>
-      <MobileStaticMap
-        onLoadInteractiveMap={() => setShowInteractiveMap(true)}
-        farmCount={nearbyFarmCount}
-        isCalculating={isCalculating}
-      />
-    </InteractiveMapContext.Provider>
+    <MobileStaticMap
+      onLoadInteractiveMap={() => setShowInteractiveMap(true)}
+      farmCount={nearbyFarmCount}
+      isCalculating={isCalculating}
+    />
   )
 }
