@@ -1,0 +1,45 @@
+# Redirect malformed location URLs to correct format
+
+# Fix: {city}-{state}-ca → {city}-{state}-us (US cities with wrong country code)
+/farms-near/*-*-ca 301 /farms-near/:splat-us
+/*/near/*-*-ca/ 301 /:splat/near/:splat-us/
+/christmas-tree-farms/near/*-*-ca/ 301 /christmas-tree-farms/near/:splat-us/
+/apple-orchards/near/*-*-ca/ 301 /apple-orchards/near/:splat-us/
+/pumpkin-patches/near/*-*-ca/ 301 /pumpkin-patches/near/:splat-us/
+/berry-farms/near/*-*-ca/ 301 /berry-farms/near/:splat-us/
+/petting-zoo/near/*-*-ca/ 301 /petting-zoo/near/:splat-us/
+/corn-farms/near/*-*-ca/ 301 /corn-farms/near/:splat-us/
+/vineyards/near/*-*-ca/ 301 /vineyards/near/:splat-us/
+
+# Fix: {city}-{state}-united-states → {city}-{state}-us
+/farms-near/*-united-states/ 301 /farms-near/:splat-us/
+/*/near/*-united-states/ 301 /:splat/near/:splat-us/
+/christmas-tree-farms/near/*-united-states/ 301 /christmas-tree-farms/near/:splat-us/
+/apple-orchards/near/*-united-states/ 301 /apple-orchards/near/:splat-us/
+/pumpkin-patches/near/*-united-states/ 301 /pumpkin-patches/near/:splat-us/
+/berry-farms/near/*-united-states/ 301 /berry-farms/near/:splat-us/
+/petting-zoo/near/*-united-states/ 301 /petting-zoo/near/:splat-us/
+/corn-farms/near/*-united-states/ 301 /corn-farms/near/:splat-us/
+/vineyards/near/*-united-states/ 301 /vineyards/near/:splat-us/
+/all-farms-near/near/*-united-states/ 301 /farms-near/:splat-us/
+
+# Fix: {city}-{state}-canada → {city}-{state}-ca
+/farms-near/*-canada/ 301 /farms-near/:splat-ca/
+/*/near/*-canada/ 301 /:splat/near/:splat-ca/
+/christmas-tree-farms/near/*-canada/ 301 /christmas-tree-farms/near/:splat-ca/
+/apple-orchards/near/*-canada/ 301 /apple-orchards/near/:splat-ca/
+/pumpkin-patches/near/*-canada/ 301 /pumpkin-patches/near/:splat-ca/
+/berry-farms/near/*-canada/ 301 /berry-farms/near/:splat-ca/
+/petting-zoo/near/*-canada/ 301 /petting-zoo/near/:splat-ca/
+/corn-farms/near/*-canada/ 301 /corn-farms/near/:splat-ca/
+/vineyards/near/*-canada/ 301 /vineyards/near/:splat-ca/
+/all-farms-near/near/*-canada/ 301 /farms-near/:splat-ca/
+
+# Fix: /all-farms-near/near/ → /farms-near/
+/all-farms-near/near/:location 301 /farms-near/:location
+
+# Varieties page (should exist)
+/varieties 301 /
+
+# Invalid locations with wrong state codes or formatting
+/farms-near/presque-isle-maine-united-states/ 301 /farms-near/presque-isle-me-us/
