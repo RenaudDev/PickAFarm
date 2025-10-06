@@ -15,17 +15,8 @@ export function TrulyDeferredScripts() {
     const defer = (window.requestIdleCallback || window.setTimeout);
 
     defer(() => {
-      // Defer Service Worker registration
-      if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then((registration) => {
-            console.log('Service Worker registered:', registration);
-          })
-          .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-          });
-      }
+      // Service Worker disabled - Cloudflare Pages handles caching
+      // If you need SW in the future, ensure sw.js is properly deployed
 
       // Any other heavy third-party scripts can be added here
       // Example: Google Analytics, tracking pixels, etc.
