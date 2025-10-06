@@ -3,12 +3,12 @@ import { notFound } from "next/navigation"
 import dynamicImport from "next/dynamic"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
-import { MapSkeleton } from "@/components/map-skeleton"
+import { MapSkeletonStatic } from "@/components/map-skeleton-static"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
 
-// Lazy load search results with map - no ssr option in server component
+// Lazy load search results with static skeleton (no JS required)
 const SearchResultsContent = dynamicImport(() => import("./search-results-content"), {
-  loading: () => <MapSkeleton />
+  loading: () => <MapSkeletonStatic />
 })
 import { generateCityPageSchema } from "@/lib/schema"
 import { sortFarms } from "@/lib/farm-utils"

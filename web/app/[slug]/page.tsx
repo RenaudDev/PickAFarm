@@ -30,15 +30,15 @@ import categoriesData from "../../data/category-content.json"
 import locationsWithFarms from "../../data/locations-with-farms.json"
 import preGeneratedCategories from "../../data/categories.json"
 import statesData from "../../data/states-with-farms.json"
-import { MapSkeleton } from "@/components/map-skeleton"
+import { MapSkeletonStatic } from "@/components/map-skeleton-static"
 import { getStateName } from "@/lib/state-utils"
 
-// Lazy load map sections - no ssr option in server component
+// Lazy load map sections with static skeleton (no JS required)
 const StateMapSection = dynamicImport(() => import("@/components/state-map-section").then(mod => ({ default: mod.StateMapSection })), {
-  loading: () => <MapSkeleton />
+  loading: () => <MapSkeletonStatic />
 })
 const CategoryMapSection = dynamicImport(() => import("@/components/category-map-section").then(mod => ({ default: mod.CategoryMapSection })), {
-  loading: () => <MapSkeleton />
+  loading: () => <MapSkeletonStatic />
 })
 
 // Make state overview pages dynamic (category pages are more specific)

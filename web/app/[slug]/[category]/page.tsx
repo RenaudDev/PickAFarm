@@ -8,12 +8,12 @@ import { MapPin } from "lucide-react"
 
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
-import { MapSkeleton } from "@/components/map-skeleton"
+import { MapSkeletonStatic } from "@/components/map-skeleton-static"
 import { sortFarms } from "@/lib/farm-utils"
 
-// Lazy load map section - no ssr option in server component
+// Lazy load map section with static skeleton (no JS required)
 const StateCategoryMapSection = dynamicImport(() => import("./state-category-map-section"), {
-  loading: () => <MapSkeleton />
+  loading: () => <MapSkeletonStatic />
 })
 
 // Import data

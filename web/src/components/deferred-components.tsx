@@ -4,8 +4,9 @@ import dynamic from 'next/dynamic';
 
 // Lazy load ALL non-critical background components to improve LCP
 // These components don't render anything visible and only run side effects
-const ServiceWorkerRegister = dynamic(
-  () => import('./service-worker-register').then(mod => ({ default: mod.ServiceWorkerRegister })),
+
+const TrulyDeferredScripts = dynamic(
+  () => import('@/components/truly-deferred-scripts').then(mod => ({ default: mod.TrulyDeferredScripts })),
   { ssr: false }
 );
 
@@ -26,7 +27,7 @@ const ClerkRedirectHandler = dynamic(
 export function DeferredComponents() {
   return (
     <>
-      <ServiceWorkerRegister />
+      <TrulyDeferredScripts />
       <LocationDetector />
       <ClerkRedirectHandler />
     </>

@@ -10,12 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
-import { MapSkeleton } from "@/components/map-skeleton"
+import { MapSkeletonStatic } from "@/components/map-skeleton-static"
 import { FAQSection } from "@/components/faq-section"
 
-// Lazy load map with proper loading skeleton - no ssr option in server component
+// Lazy load map with static skeleton (no JS required for skeleton)
 const FarmMapSection = dynamic(() => import("@/components/farm-map-section").then(mod => ({ default: mod.FarmMapSection })), {
-  loading: () => <MapSkeleton />
+  loading: () => <MapSkeletonStatic />
 })
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
