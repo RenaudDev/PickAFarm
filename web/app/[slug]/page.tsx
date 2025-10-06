@@ -2,7 +2,7 @@ import type React from "react"
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Metadata } from "next"
-import { Suspense } from "react"
+import dynamic from "next/dynamic"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -30,10 +30,16 @@ import categoriesData from "../../data/category-content.json"
 import locationsWithFarms from "../../data/locations-with-farms.json"
 import preGeneratedCategories from "../../data/categories.json"
 import statesData from "../../data/states-with-farms.json"
-import { StateMapSection } from "@/components/state-map-section"
-import { CategoryMapSection } from "@/components/category-map-section"
 import { MapSkeleton } from "@/components/map-skeleton"
 import { getStateName } from "@/lib/state-utils"
+
+// Lazy load map sections - no ssr option in server component
+const StateMapSection = dynamic(() => import("@/components/state-map-section").then(mod => ({ default: mod.StateMapSection })), {
+  loading: () => <MapSkeleton />
+})
+const CategoryMapSection = dynamic(() => import("@/components/category-map-section").then(mod => ({ default: mod.CategoryMapSection })), {
+  loading: () => <MapSkeleton />
+})
 
 // Make state overview pages dynamic (category pages are more specific)
 export const runtime = 'edge' // Required for Cloudflare Pages
@@ -264,9 +270,7 @@ function StatePage({ stateData, slug }: { stateData: any; slug: string }) {
       </div>
 
       {/* State Map Section */}
-      <Suspense fallback={<MapSkeleton />}>
-        <StateMapSection stateData={stateData} />
-      </Suspense>
+      <StateMapSection stateData={stateData} />
 
       <main className="flex-1">
         {/* Popular Cities Section */}
@@ -559,12 +563,10 @@ async function CategoryPage({ category, slug }: { category: any; slug: string })
       </div>
 
       {/* NEW: Category Map Section - Shows map with category-filtered farms */}
-      <Suspense fallback={<MapSkeleton />}>
-        <CategoryMapSection
-          categoryName={enrichedCategory.name}
-          categorySlug={slug}
-        />
-      </Suspense>
+      <CategoryMapSection
+        categoryName={enrichedCategory.name}
+        categorySlug={slug}
+      />
 
       {/* Browse by US State Section */}
       {usStates.length > 0 && (

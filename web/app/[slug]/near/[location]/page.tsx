@@ -1,11 +1,16 @@
-import React, { Suspense } from "react"
+import React from "react"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
-import SearchResultsContent from "./search-results-content"
 import { MapSkeleton } from "@/components/map-skeleton"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
+
+// Lazy load search results with map - no ssr option in server component
+const SearchResultsContent = dynamic(() => import("./search-results-content"), {
+  loading: () => <MapSkeleton />
+})
 import { generateCollectionPageSchema } from "@/lib/schema"
 import { filterFarmsByCategory, sortFarms } from "@/lib/farm-utils"
 import { getTopVarietiesWithArticles } from "@/lib/variety-utils"
@@ -151,9 +156,7 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
           </Breadcrumb>
         </div>
       </div>
-      <Suspense fallback={<MapSkeleton />}>
-        <SearchResultsContent params={resolvedParams} />
-      </Suspense>
+      <SearchResultsContent params={resolvedParams} />
 
       {/* Variety Articles Section */}
       {varietyArticles.length > 0 && categoryData && (

@@ -1,15 +1,20 @@
-import React, { Suspense } from "react"
+import React from "react"
 import { notFound } from 'next/navigation'
 import { Metadata } from "next"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin } from "lucide-react"
 
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
-import StateCategoryMapSection from "./state-category-map-section"
 import { MapSkeleton } from "@/components/map-skeleton"
 import { sortFarms } from "@/lib/farm-utils"
+
+// Lazy load map section - no ssr option in server component
+const StateCategoryMapSection = dynamic(() => import("./state-category-map-section"), {
+  loading: () => <MapSkeleton />
+})
 
 // Import data
 import statesData from "../../../data/states-with-farms.json"
@@ -154,13 +159,11 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <Suspense fallback={<MapSkeleton />}>
-        <StateCategoryMapSection
-          stateData={stateData}
-          categoryData={categoryData}
-          farms={sortedFarms}
-        />
-      </Suspense>
+      <StateCategoryMapSection
+        stateData={stateData}
+        categoryData={categoryData}
+        farms={sortedFarms}
+      />
 
       {/* Cities with farms section */}
       {citiesWithFarms.length > 0 && (

@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 
 import { FarmNavbar } from "@/components/farm-navbar"
 import { FarmFooter } from "@/components/farm-footer"
@@ -9,10 +10,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
-import { FarmMapSection } from "@/components/farm-map-section"
 import { MapSkeleton } from "@/components/map-skeleton"
 import { FAQSection } from "@/components/faq-section"
-import { Suspense } from "react"
+
+// Lazy load map with proper loading skeleton - no ssr option in server component
+const FarmMapSection = dynamic(() => import("@/components/farm-map-section").then(mod => ({ default: mod.FarmMapSection })), {
+  loading: () => <MapSkeleton />
+})
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import statesData from "../data/states-with-farms.json"
@@ -66,9 +70,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <Suspense fallback={<MapSkeleton />}>
-        <FarmMapSection />
-      </Suspense>
+      <FarmMapSection />
 
       <main className="flex-1">
         

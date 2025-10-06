@@ -1,10 +1,15 @@
-import React, { Suspense } from "react"
+import React from "react"
 import { notFound } from "next/navigation"
+import dynamic from "next/dynamic"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
-import SearchResultsContent from "./search-results-content"
 import { MapSkeleton } from "@/components/map-skeleton"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
+
+// Lazy load search results with map - no ssr option in server component
+const SearchResultsContent = dynamic(() => import("./search-results-content"), {
+  loading: () => <MapSkeleton />
+})
 import { generateCityPageSchema } from "@/lib/schema"
 import { sortFarms } from "@/lib/farm-utils"
 import { generateLocationBreadcrumbSchema } from "@/lib/breadcrumb-schema"
@@ -107,9 +112,7 @@ export default async function FarmsNearCities({ params }: { params: Promise<{ ci
         </div>
       </div>
 
-      <Suspense fallback={<MapSkeleton />}>
-        <SearchResultsContent params={resolvedParams} />
-      </Suspense>
+      <SearchResultsContent params={resolvedParams} />
 
       {/* City Page Schema */}
       <script
