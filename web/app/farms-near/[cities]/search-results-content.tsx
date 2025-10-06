@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { MapPageLayout } from "@/components/map-page-layout"
+import { ProgressiveMapLayout } from "@/components/progressive-map-layout"
 import type { UserLocation } from "@/lib/location-utils"
 
 // Import real location data
@@ -68,7 +68,7 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
   }, [allFarms])
 
   return (
-    <MapPageLayout
+    <ProgressiveMapLayout
       centerLocation={cityLocation}
       isLoadingLocation={false}
       showUserMarker={false}
@@ -79,6 +79,9 @@ export default function SearchResultsContent({ params }: SearchResultsContentPro
       filterByRadius={false}
       showRadiusControl={false}
       showRadiusCircle={true}
+      staticMapZoom={11}
+      staticMapWidth={1200}
+      staticMapHeight={600}
     />
   )
 }

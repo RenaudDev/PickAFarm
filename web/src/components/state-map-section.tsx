@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPageLayout } from "./map-page-layout"
+import { ProgressiveMapLayout } from "./progressive-map-layout"
 import type { UserLocation } from "@/lib/location-utils"
 
 interface StateMapSectionProps {
@@ -30,7 +30,7 @@ export function StateMapSection({ stateData }: StateMapSectionProps) {
   }
 
   return (
-    <MapPageLayout
+    <ProgressiveMapLayout
       centerLocation={stateCenter}
       isLoadingLocation={false}
       locationError={null}
@@ -44,9 +44,12 @@ export function StateMapSection({ stateData }: StateMapSectionProps) {
       filterByRadius={false}
       sortBy="featured"
       initialZoom={stateData.zoom_level}
+      staticMapZoom={stateData.zoom_level}
       enableClustering={stateData.total_farms >= 50}
       enableVirtualScrolling={stateData.total_farms >= 50}
       preFilteredFarms={stateData.farms}
+      staticMapWidth={1200}
+      staticMapHeight={600}
       pagination={stateData.needs_pagination ? {
         enabled: true,
         currentPage: 1, // TODO: Add URL param support for pagination

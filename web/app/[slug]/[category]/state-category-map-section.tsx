@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { MapPageLayout } from "@/components/map-page-layout"
+import { ProgressiveMapLayout } from "@/components/progressive-map-layout"
 import type { UserLocation } from "@/lib/location-utils"
 
 interface StateCategoryMapSectionProps {
@@ -36,7 +36,7 @@ export default function StateCategoryMapSection({
   }), [stateData])
 
   return (
-    <MapPageLayout
+    <ProgressiveMapLayout
       centerLocation={stateCenter}
       isLoadingLocation={false}
       locationError={null}
@@ -51,9 +51,12 @@ export default function StateCategoryMapSection({
       hideCategoryFilter={true}
       sortBy="featured"
       initialZoom={stateData.zoom_level}
+      staticMapZoom={stateData.zoom_level}
       enableClustering={farms.length >= 50}
       enableVirtualScrolling={farms.length >= 50}
       preFilteredFarms={farms}
+      staticMapWidth={1200}
+      staticMapHeight={600}
       pagination={farms.length > 100 ? {
         enabled: true,
         totalPages: Math.ceil(farms.length / 50),

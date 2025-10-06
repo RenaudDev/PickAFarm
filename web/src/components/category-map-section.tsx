@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { MapPageLayout } from "./map-page-layout"
+import { ProgressiveMapLayout } from "./progressive-map-layout"
 import { getUserLocation, type UserLocation } from "@/lib/location-utils"
 import { getFarmsForCategory } from "@/lib/category-utils"
 
@@ -10,17 +10,17 @@ interface CategoryMapSectionProps {
   categorySlug: string
 }
 
-export function CategoryMapSection({ 
-  categoryName, 
-  categorySlug 
+export function CategoryMapSection({
+  categoryName,
+  categorySlug
 }: CategoryMapSectionProps) {
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null)
   const [isLoadingLocation, setIsLoadingLocation] = useState(true)
   const [locationError, setLocationError] = useState<string | null>(null)
-  
+
   // Get farms for this category (client-side filtering)
   const categoryFarms = getFarmsForCategory(categoryName)
-  
+
   // Detect user location on mount
   useEffect(() => {
     async function loadLocation() {
@@ -42,7 +42,7 @@ export function CategoryMapSection({
   }, [])
 
   return (
-    <MapPageLayout
+    <ProgressiveMapLayout
       centerLocation={userLocation} // CENTER ON USER'S LOCATION
       isLoadingLocation={isLoadingLocation}
       locationError={locationError}
@@ -56,7 +56,10 @@ export function CategoryMapSection({
       sortBy="distance" // Sort by distance from user (closest first)
       hideCategoryFilter={true} // KEY: Hide category dropdown (already filtered)
       initialZoom={undefined} // Use default zoom based on user location
+      staticMapZoom={9}
       preFilteredFarms={categoryFarms as any} // Pass category-filtered farms
+      staticMapWidth={1200}
+      staticMapHeight={600}
     />
   )
 }
