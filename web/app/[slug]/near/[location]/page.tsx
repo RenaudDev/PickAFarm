@@ -4,6 +4,7 @@ import { Metadata } from "next"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import SearchResultsContent from "./search-results-content"
+import { MapSkeleton } from "@/components/map-skeleton"
 import { generateLocationMetadata } from "@/lib/seo-metadata"
 import { generateCollectionPageSchema } from "@/lib/schema"
 import { filterFarmsByCategory, sortFarms } from "@/lib/farm-utils"
@@ -150,7 +151,7 @@ export default async function SearchResults({ params }: { params: Promise<{ slug
           </Breadcrumb>
         </div>
       </div>
-      <Suspense fallback={<div>Loading search results...</div>}>
+      <Suspense fallback={<MapSkeleton />}>
         <SearchResultsContent params={resolvedParams} />
       </Suspense>
 

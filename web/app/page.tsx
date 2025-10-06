@@ -10,7 +10,9 @@ import { Badge } from "@/components/ui/badge"
 import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
 import SearchBoxWrapper from "@/components/search-box-wrapper"
 import { FarmMapSection } from "@/components/farm-map-section"
+import { MapSkeleton } from "@/components/map-skeleton"
 import { FAQSection } from "@/components/faq-section"
+import { Suspense } from "react"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import statesData from "../data/states-with-farms.json"
@@ -56,7 +58,7 @@ export default async function Home() {
   const topCategories = getTopCategories()
   const usStates = getUSStates()
   const canadianProvinces = getCanadianProvinces()
-  
+
   // Fetch latest blog posts
   const blogPosts = await getAllPosts()
   const latestPosts = blogPosts.slice(0, 3) // Get 3 latest posts
@@ -64,7 +66,9 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <FarmMapSection />
+      <Suspense fallback={<MapSkeleton />}>
+        <FarmMapSection />
+      </Suspense>
 
       <main className="flex-1">
         

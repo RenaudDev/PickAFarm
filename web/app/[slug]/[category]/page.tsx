@@ -8,6 +8,7 @@ import { MapPin } from "lucide-react"
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import StateCategoryMapSection from "./state-category-map-section"
+import { MapSkeleton } from "@/components/map-skeleton"
 import { sortFarms } from "@/lib/farm-utils"
 
 // Import data
@@ -153,7 +154,7 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <Suspense fallback={<div>Loading {categoryData.name} in {stateData.state_name}...</div>}>
+      <Suspense fallback={<MapSkeleton />}>
         <StateCategoryMapSection
           stateData={stateData}
           categoryData={categoryData}
