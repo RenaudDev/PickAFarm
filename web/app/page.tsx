@@ -12,6 +12,7 @@ import SearchBoxWrapper from "@/components/search-box-wrapper"
 import { MapSkeletonStatic } from "@/components/map-skeleton-static"
 import { FAQSection } from "@/components/faq-section"
 import { FarmMapSection } from "@/components/farm-map-section"
+import { AdaptiveMapWrapper } from "@/components/adaptive-map-wrapper"
 import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import statesData from "../data/states-with-farms.json"
@@ -65,9 +66,11 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <FarmNavbar />
-      <Suspense fallback={<MapSkeletonStatic />}>
-        <FarmMapSection />
-      </Suspense>
+      <AdaptiveMapWrapper>
+        <Suspense fallback={<MapSkeletonStatic />}>
+          <FarmMapSection />
+        </Suspense>
+      </AdaptiveMapWrapper>
 
       <main className="flex-1">
         
