@@ -166,7 +166,7 @@ export default async function Home() {
                                 width={imageData.width}
                                 height={imageData.height}
                                 loading={index === 0 ? 'eager' : 'lazy'}
-                                fetchpriority={index === 0 ? 'high' : 'auto'}
+                                fetchPriority={index === 0 ? 'high' : 'auto'}
                                 className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                               />
                             </picture>
