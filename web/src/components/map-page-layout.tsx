@@ -637,7 +637,7 @@ export function MapPageLayout({
 
             {/* Mobile Controls */}
             <div className="lg:hidden">
-              <div className="absolute bottom-4 right-4 z-[70]">
+              <div className="absolute bottom-4 left-4 z-40">
                 <Button
                   size="lg"
                   className="h-14 w-14 rounded-full shadow-xl"
@@ -649,8 +649,8 @@ export function MapPageLayout({
 
               {showControls && (
                 <>
-                  <div className="absolute inset-0 bg-black/20 z-[55]" onClick={() => setShowControls(false)} />
-                  <div className="absolute inset-x-0 bottom-0 z-[60] animate-in slide-in-from-bottom-5">
+                  <div className="absolute inset-0 bg-black/20 z-30" onClick={() => setShowControls(false)} />
+                  <div className="absolute inset-x-0 bottom-0 z-40 animate-in slide-in-from-bottom-5">
                     <Card className="rounded-t-2xl rounded-b-none shadow-2xl border-t-2">
                       <CardHeader className="pb-3 pt-4 px-6">
                         <div className="flex items-center justify-between">

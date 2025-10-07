@@ -70,7 +70,7 @@ export function PreAuthSubscriptionModal({
             <DialogTitle className="text-xl">Create an Account to Subscribe</DialogTitle>
           </div>
           <DialogDescription className="text-base pt-2">
-            To receive updates from <strong>{farmName}</strong>, you need a free Pick A Farm account.
+            To receive updates from <strong>PickAFarm</strong>, you need a free PickAFarm account.
           </DialogDescription>
         </DialogHeader>
 
