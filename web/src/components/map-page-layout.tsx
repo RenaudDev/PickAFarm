@@ -28,26 +28,11 @@ import { SubscribeButton } from "@/components/subscribe-button"
 import { SubscriberBadge } from "@/components/subscriber-badge"
 import { useAuth } from "@clerk/nextjs"
 import { generateFarmsSchema } from "@/lib/farm-schema"
+import { getCategoryEmoji } from "@/lib/category-utils"
 import farmsData from "../../data/farms.json"
 import categoriesData from "../../data/categories.json"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
-
-// Emoji mapping for farm categories
-const getCategoryEmoji = (category: string): string => {
-  const lowerCategory = category.toLowerCase()
-  if (lowerCategory.includes('christmas') || lowerCategory.includes('tree')) return '🎄'
-  if (lowerCategory.includes('apple')) return '🍎'
-  if (lowerCategory.includes('berry')) return '🫐'
-  if (lowerCategory.includes('pumpkin')) return '🎃'
-  if (lowerCategory.includes('corn')) return '🌽'
-  if (lowerCategory.includes('maple') || lowerCategory.includes('sugar')) return '🍁'
-  if (lowerCategory.includes('vegetable') || lowerCategory.includes('veggie')) return '🥕'
-  if (lowerCategory.includes('flower')) return '🌻'
-  if (lowerCategory.includes('vineyard') || lowerCategory.includes('wine')) return '🍇'
-  if (lowerCategory.includes('zoo') || lowerCategory.includes('petting')) return '🐐'
-  return '🌾'
-}
 
 // Get category slug from category name
 const getCategorySlug = (categoryName: string): string | null => {
@@ -321,7 +306,6 @@ export function MapPageLayout({
   useEffect(() => {
     async function fetchFarmStats() {
       if (filteredFarms.length === 0) {
-        console.log('📊 No filtered farms to fetch stats for')
         return
       }
 
@@ -331,19 +315,15 @@ export function MapPageLayout({
         .map(f => f.id.startsWith('zcrm_') ? f.id : `zcrm_${f.id}`)
         .join(',')
 
-      console.log(`📊 Fetching stats for ${farmsToFetch.length} farms`)
-
       try {
         const response = await fetch(`${API_URL}/api/farms/stats?ids=${farmIds}`)
         if (response.ok) {
           const data = await response.json()
-          console.log('📊 Stats received:', data)
           const statsMap: Record<string, number> = {}
           data.stats.forEach((stat: any) => {
             statsMap[stat.farm_id] = stat.subscriber_count
           })
           setFarmStats(statsMap)
-          console.log('📊 Stats map updated:', statsMap)
         } else {
           console.error('Failed to fetch stats, status:', response.status)
         }
@@ -699,7 +679,6 @@ export function MapPageLayout({
                           <div>
                             <Button
                               size="sm"
-                              variant="secondary"
                               onClick={getPreciseLocation}
                               className="w-full"
                             >
@@ -733,7 +712,6 @@ export function MapPageLayout({
               <div>
                 <Button
                   size="sm"
-                  variant="secondary"
                   onClick={getPreciseLocation}
                   className="w-full"
                 >

@@ -4,22 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { MapPin, Star, Bell, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-
-// Emoji mapping for farm categories
-const getCategoryEmoji = (category: string): string => {
-  const lowerCategory = category.toLowerCase()
-  if (lowerCategory.includes('christmas') || lowerCategory.includes('tree')) return '🎄'
-  if (lowerCategory.includes('apple')) return '🍎'
-  if (lowerCategory.includes('berry')) return '🫐'
-  if (lowerCategory.includes('pumpkin')) return '🎃'
-  if (lowerCategory.includes('corn')) return '🌽'
-  if (lowerCategory.includes('maple') || lowerCategory.includes('sugar')) return '🍁'
-  if (lowerCategory.includes('vegetable') || lowerCategory.includes('veggie')) return '🥕'
-  if (lowerCategory.includes('flower')) return '🌻'
-  if (lowerCategory.includes('vineyard') || lowerCategory.includes('wine')) return '🍇'
-  if (lowerCategory.includes('zoo') || lowerCategory.includes('petting')) return '🐐'
-  return '🌾'
-}
+import { getCategoryEmoji } from "@/lib/category-utils"
 
 interface FarmListItemProps {
   farm: {

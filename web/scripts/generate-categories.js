@@ -44,8 +44,9 @@ async function generateCategories() {
     
     farms.forEach(farm => {
       const farmCategories = new Set();
-      
-      // Extract from categories field
+
+      // Extract from categories field ONLY (not type field)
+      // Note: farm.type contains operational types (U-Pick, Pre-Cut, etc.), not categories
       if (farm.categories) {
         try {
           const categories = JSON.parse(farm.categories);
@@ -54,11 +55,6 @@ async function generateCategories() {
           // Fallback to comma-separated parsing
           farm.categories.split(',').forEach(cat => farmCategories.add(cat.trim()));
         }
-      }
-      
-      // Extract from type field
-      if (farm.type) {
-        farmCategories.add(farm.type.trim());
       }
       
       // Match farm categories to curated categories
@@ -118,13 +114,7 @@ async function generateCategories() {
               province: farm.state_province,
               featured: farm.featured === 1 || farm.featured === true
             });
-            
-            // Debug logging
-            console.log(`   🔗 Matched "${farmCategory}" → "${curatedContent[matchingCuratedKey].name}"`);
           }
-        } else {
-          // Debug: log unmatched categories
-          console.log(`   ⚠️  No match found for farm category: "${farmCategory}"`);
         }
       });
     });

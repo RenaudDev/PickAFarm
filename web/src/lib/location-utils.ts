@@ -167,8 +167,10 @@ export async function getBrowserLocation(): Promise<UserLocation> {
         const latitude = position.coords.latitude
         const longitude = position.coords.longitude
 
-        console.log('📍 GPS coordinates detected:', { latitude, longitude })
-        console.log(`📍 Accuracy: ${position.coords.accuracy}m`)
+        if (process.env.NODE_ENV === 'development') {
+          console.log('📍 GPS coordinates detected:', { latitude, longitude })
+          console.log(`📍 Accuracy: ${position.coords.accuracy}m`)
+        }
 
         // Reverse geocode to get city name
         const geocoded = await reverseGeocode(latitude, longitude)
@@ -183,7 +185,9 @@ export async function getBrowserLocation(): Promise<UserLocation> {
           source: 'browser'
         }
 
-        console.log('📍 Location with city name:', location)
+        if (process.env.NODE_ENV === 'development') {
+          console.log('📍 Location with city name:', location)
+        }
         resolve(location)
       },
       (error) => {

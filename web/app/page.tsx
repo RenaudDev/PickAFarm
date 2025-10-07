@@ -5,21 +5,14 @@ import dynamic from "next/dynamic"
 
 import { FarmNavbar } from "@/components/farm-navbar"
 import { FarmFooter } from "@/components/farm-footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
-import SearchBoxWrapper from "@/components/search-box-wrapper"
 import { MapSkeletonStatic } from "@/components/map-skeleton-static"
-import farmsData from "../data/farms.json"
 import categoriesData from "../data/categories.json"
 import statesData from "../data/states-with-farms.json"
 import blogImages from "../data/blog-images.json"
-import { CategoryIcon } from "@/lib/category-icons"
 import { generateHomepageMetadata } from "@/lib/seo-metadata"
 import { getAllPosts } from '@/lib/wordpress'
-import Image from "next/image"
-import { NearbyFarmsList } from "@/components/nearby-farms-list"
 import { NearbyFarmsSection } from "@/components/nearby-farms-section"
 
 // Dynamic imports for below-the-fold components

@@ -115,17 +115,46 @@ async function fetchFarmsFromD1() {
 }
 
 // Fetch review aggregates from WordPress
+async function fetchAllReviews() {
+  try {
+    const response = await fetch(
+      'https://admin.pickafarm.com/wp-json/reviews/v1/all-listings',
+      { headers: { 'User-Agent': 'PickAFarm-Build-Script' } }
+    );
+
+    if (!response.ok) {
+      console.warn('⚠️  Bulk reviews endpoint not available, falling back to individual calls');
+      return null;
+    }
+
+    const data = await response.json();
+    // Convert array to map for O(1) lookups: { farmId: { reviews, rating } }
+    const reviewsMap = {};
+    data.forEach(item => {
+      reviewsMap[item.listing_id] = {
+        reviews: item.count || 0,
+        rating: item.average_rating || null
+      };
+    });
+
+    return reviewsMap;
+  } catch (error) {
+    console.warn('⚠️  Failed to fetch bulk reviews:', error.message);
+    return null;
+  }
+}
+
 async function fetchReviewsForFarm(farmId) {
   try {
     const response = await fetch(
       `https://admin.pickafarm.com/wp-json/reviews/v1/listing/${farmId}`,
       { headers: { 'User-Agent': 'PickAFarm-Build-Script' } }
     );
-    
+
     if (!response.ok) {
       return { reviews: 0, rating: null };
     }
-    
+
     const data = await response.json();
     return {
       reviews: data.count || 0,
@@ -172,23 +201,47 @@ async function generateFarmData() {
     console.log(`✅ Fetched ${farms.length} farms`);
     console.log(`📋 Sample farm fields:`, farms[0] ? Object.keys(farms[0]).join(', ') : 'No farms available');
 
-    // Fetch review data from WordPress for each farm
+    // Fetch review data from WordPress
     console.log('📊 Fetching review data from WordPress...');
+
+    // Try bulk endpoint first
+    let reviewsMap = await fetchAllReviews();
+
     const farmsWithReviews = [];
 
-    for (let i = 0; i < farms.length; i++) {
-      const farm = farms[i];
-      const reviewData = await fetchReviewsForFarm(farm.id);
+    if (reviewsMap) {
+      // Use bulk data (fast path - single API call)
+      console.log('✅ Using bulk reviews data');
+      for (const farm of farms) {
+        const reviewData = reviewsMap[farm.id] || { reviews: 0, rating: null };
+        farmsWithReviews.push({
+          ...farm,
+          reviews: reviewData.reviews,
+          rating: reviewData.rating
+        });
+      }
+    } else {
+      // Fallback to parallel fetches with batching (faster than sequential)
+      console.log('⚠️  Bulk endpoint not available, using parallel fetches...');
+      const BATCH_SIZE = 20; // Fetch 20 farms at a time
 
-      farmsWithReviews.push({
-        ...farm,
-        reviews: reviewData.reviews,
-        rating: reviewData.rating
-      });
+      for (let i = 0; i < farms.length; i += BATCH_SIZE) {
+        const batch = farms.slice(i, i + BATCH_SIZE);
+        const batchResults = await Promise.all(
+          batch.map(async farm => {
+            const reviewData = await fetchReviewsForFarm(farm.id);
+            return {
+              ...farm,
+              reviews: reviewData.reviews,
+              rating: reviewData.rating
+            };
+          })
+        );
 
-      // Log progress every 50 farms
-      if ((i + 1) % 50 === 0) {
-        console.log(`  Processed ${i + 1}/${farms.length} farms...`);
+        farmsWithReviews.push(...batchResults);
+
+        // Log progress
+        console.log(`  Processed ${Math.min(i + BATCH_SIZE, farms.length)}/${farms.length} farms...`);
       }
     }
 

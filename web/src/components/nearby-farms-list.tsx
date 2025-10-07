@@ -7,27 +7,12 @@ import { MapPin, Star, Bell, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { getUserLocation, calculateDistance } from "@/lib/location-utils"
+import { getCategoryEmoji } from "@/lib/category-utils"
 import { SubscribeButton } from "@/components/subscribe-button"
 import Link from "next/link"
 import farmsData from "../../data/farms.json"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
-
-// Emoji mapping for farm categories (matching map-page-layout.tsx)
-const getCategoryEmoji = (category: string): string => {
-  const lowerCategory = category.toLowerCase()
-  if (lowerCategory.includes('christmas') || lowerCategory.includes('tree')) return '🎄'
-  if (lowerCategory.includes('apple')) return '🍎'
-  if (lowerCategory.includes('berry')) return '🫐'
-  if (lowerCategory.includes('pumpkin')) return '🎃'
-  if (lowerCategory.includes('corn')) return '🌽'
-  if (lowerCategory.includes('maple') || lowerCategory.includes('sugar')) return '🍁'
-  if (lowerCategory.includes('vegetable') || lowerCategory.includes('veggie')) return '🥕'
-  if (lowerCategory.includes('flower')) return '🌻'
-  if (lowerCategory.includes('vineyard') || lowerCategory.includes('wine')) return '🍇'
-  if (lowerCategory.includes('zoo') || lowerCategory.includes('petting')) return '🐐'
-  return '🌾'
-}
 
 interface Farm {
   id: string

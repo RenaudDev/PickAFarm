@@ -182,15 +182,39 @@ export function getCategoryFarmCount(categoryName: string): number {
  */
 export function farmMatchesCategory(farm: any, categoryName: string): boolean {
   if (!farm.categories) return false
-  
+
   const variations = getCategoryVariations(categoryName)
   const farmCategories = farm.categories
     .split(',')
     .map((c: string) => c.trim().toLowerCase())
-  
-  return variations.some(variation => 
-    farmCategories.some((farmCat: string) => 
+
+  return variations.some(variation =>
+    farmCategories.some((farmCat: string) =>
       farmCat.includes(variation.toLowerCase())
     )
   )
+}
+
+/**
+ * Get emoji icon for a farm category
+ * Used across the app to display consistent category icons
+ *
+ * @param category - Category name (e.g., "Christmas Trees", "Apple Orchards")
+ * @returns Emoji string representing the category
+ */
+export function getCategoryEmoji(category: string): string {
+  const lowerCategory = category.toLowerCase()
+
+  if (lowerCategory.includes('christmas') || lowerCategory.includes('tree')) return '🎄'
+  if (lowerCategory.includes('apple')) return '🍎'
+  if (lowerCategory.includes('berry')) return '🫐'
+  if (lowerCategory.includes('pumpkin')) return '🎃'
+  if (lowerCategory.includes('corn')) return '🌽'
+  if (lowerCategory.includes('maple') || lowerCategory.includes('sugar')) return '🍁'
+  if (lowerCategory.includes('vegetable') || lowerCategory.includes('veggie')) return '🥕'
+  if (lowerCategory.includes('flower')) return '🌻'
+  if (lowerCategory.includes('vineyard') || lowerCategory.includes('wine')) return '🍇'
+  if (lowerCategory.includes('zoo') || lowerCategory.includes('petting')) return '🐐'
+
+  return '🌾' // Default farm emoji
 }
