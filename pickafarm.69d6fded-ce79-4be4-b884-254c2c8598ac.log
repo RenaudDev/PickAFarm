@@ -1,0 +1,1501 @@
+2025-10-07T11:26:24.413677Z	Cloning repository...
+2025-10-07T11:26:25.674907Z	From https://github.com/RenaudDev/PickAFarm
+2025-10-07T11:26:25.675396Z	 * branch            ae13468e1455a8e0113efb8fead4f51d0e9e9ecf -> FETCH_HEAD
+2025-10-07T11:26:25.675512Z	
+2025-10-07T11:26:25.949369Z	HEAD is now at ae13468 update mobile map
+2025-10-07T11:26:25.949871Z	
+2025-10-07T11:26:26.028633Z	
+2025-10-07T11:26:26.029315Z	Using v2 root directory strategy
+2025-10-07T11:26:26.053959Z	Success: Finished cloning repository files
+2025-10-07T11:26:26.992563Z	Restoring from dependencies cache
+2025-10-07T11:26:27.009067Z	Restoring from build output cache
+2025-10-07T11:26:30.292134Z	Success: Build output restored from build cache.
+2025-10-07T11:26:31.763962Z	Success: Dependencies restored from build cache.
+2025-10-07T11:26:32.797786Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-10-07T11:26:32.798595Z	
+2025-10-07T11:26:32.799997Z	Found wrangler.toml file. Reading build configuration...
+2025-10-07T11:26:33.914369Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-10-07T11:26:36.002956Z	Detected the following tools from environment: nodejs@22.17.0, npm@10.9.2
+2025-10-07T11:26:36.020818Z	Installing nodejs 22.17.0
+2025-10-07T11:26:36.80399Z	Trying to update node-build... ok
+2025-10-07T11:26:36.900586Z	To follow progress, use 'tail -f /tmp/node-build.20251007112636.641.log' or pass --verbose
+2025-10-07T11:26:37.002818Z	Downloading node-v22.17.0-linux-x64.tar.gz...
+2025-10-07T11:26:37.210352Z	-> https://nodejs.org/dist/v22.17.0/node-v22.17.0-linux-x64.tar.gz
+2025-10-07T11:26:39.130518Z	Installing node-v22.17.0-linux-x64...
+2025-10-07T11:26:39.555078Z	Installed node-v22.17.0-linux-x64 to /opt/buildhome/.asdf/installs/nodejs/22.17.0
+2025-10-07T11:26:39.555331Z	
+2025-10-07T11:26:40.590702Z	Installing project dependencies: npm clean-install --progress=false
+2025-10-07T11:26:51.046169Z	
+2025-10-07T11:26:51.046411Z	added 312 packages, and audited 313 packages in 10s
+2025-10-07T11:26:51.046554Z	
+2025-10-07T11:26:51.046699Z	48 packages are looking for funding
+2025-10-07T11:26:51.046852Z	  run `npm fund` for details
+2025-10-07T11:26:51.103444Z	
+2025-10-07T11:26:51.103743Z	1 critical severity vulnerability
+2025-10-07T11:26:51.103872Z	
+2025-10-07T11:26:51.103936Z	To address all issues, run:
+2025-10-07T11:26:51.104119Z	  npm audit fix --force
+2025-10-07T11:26:51.104314Z	
+2025-10-07T11:26:51.10446Z	Run `npm audit` for details.
+2025-10-07T11:26:51.136841Z	Executing user command: npx @cloudflare/next-on-pages@1
+2025-10-07T11:26:52.269508Z	⚡️ @cloudflare/next-on-pages CLI v.1.13.16
+2025-10-07T11:26:52.437802Z	⚡️ Detected Package Manager: npm (10.9.2)
+2025-10-07T11:26:52.438084Z	⚡️ Preparing project...
+2025-10-07T11:26:52.441389Z	⚡️ Project is ready
+2025-10-07T11:26:52.441613Z	⚡️ Building project...
+2025-10-07T11:26:53.268118Z	▲  npm warn exec The following package was not found and will be installed: vercel@48.2.3
+2025-10-07T11:26:54.960897Z	▲  Vercel CLI 48.2.3
+2025-10-07T11:26:54.965241Z	▲  > NOTE: The Vercel CLI now collects telemetry regarding usage of the CLI.
+2025-10-07T11:26:54.965452Z	▲  > This information is used to shape the CLI roadmap and prioritize features.
+2025-10-07T11:26:54.965836Z	▲  > You can learn more, including how to opt-out if you'd not like to participate in this program, by visiting the following URL:
+2025-10-07T11:26:54.966106Z	▲  > https://vercel.com/docs/cli/about-telemetry
+2025-10-07T11:26:55.069754Z	▲  WARN! Build not running on Vercel. System environment variables will not be available.
+2025-10-07T11:26:55.407255Z	▲  Installing dependencies...
+2025-10-07T11:26:56.140722Z	▲  up to date in 609ms
+2025-10-07T11:26:56.141139Z	▲  48 packages are looking for funding
+2025-10-07T11:26:56.14137Z	▲  run `npm fund` for details
+2025-10-07T11:26:56.152485Z	▲  Detected Next.js version: 15.1.6
+2025-10-07T11:26:56.158301Z	▲  Running "npm run build"
+2025-10-07T11:26:56.344584Z	▲  > my-v0-project@0.1.0 prebuild
+2025-10-07T11:26:56.345148Z	▲  > node scripts/extract-critical-css.js && node scripts/generate-farm-data.js && node scripts/optimize-blog-images.js && node scripts/generate-search-data.js && node scripts/generate-categories.js && node scripts/generate-location-data.js && node scripts/generate-state-data.js && node scripts/generate-manifest.js && node scripts/generate-sitemaps.js && node scripts/generate-static-map.js
+2025-10-07T11:26:56.384961Z	▲  ✓ Critical CSS extracted to app/critical.css
+2025-10-07T11:26:56.385284Z	▲  ✓ Created app/critical-css.ts for edge runtime
+2025-10-07T11:26:56.385379Z	▲  Size: 5475 bytes
+2025-10-07T11:26:56.421254Z	▲  🌾 Fetching farm data for build...
+2025-10-07T11:26:56.421496Z	▲  🔍 Querying D1 database using REST API...
+2025-10-07T11:26:57.35879Z	▲  ✅ Fetched 467 farms from D1 database
+2025-10-07T11:26:57.359422Z	▲  ✅ Fetched 467 farms
+2025-10-07T11:26:57.359665Z	▲  📋 Sample farm fields: id, name, slug, street, city_name, state_province, country, postal_code, latitude, longitude, phone, email, website, facebook, instagram, description, categories, type, amenities, varieties, pet_friendly, price_range, verified, featured, active, updated_at, payment_methods, opening_date, closing_date, monday_hours, tuesday_hours, wednesday_hours, thursday_hours, friday_hours, saturday_hours, sunday_hours
+2025-10-07T11:26:57.359937Z	▲  📊 Fetching review data from WordPress...
+2025-10-07T11:27:00.964783Z	▲  Processed 50/467 farms...
+2025-10-07T11:27:04.393595Z	▲  Processed 100/467 farms...
+2025-10-07T11:27:07.824659Z	▲  Processed 150/467 farms...
+2025-10-07T11:27:11.256932Z	▲  Processed 200/467 farms...
+2025-10-07T11:27:14.684851Z	▲  Processed 250/467 farms...
+2025-10-07T11:27:18.107282Z	▲  Processed 300/467 farms...
+2025-10-07T11:27:21.53382Z	▲  Processed 350/467 farms...
+2025-10-07T11:27:24.958915Z	▲  Processed 400/467 farms...
+2025-10-07T11:27:28.386302Z	▲  Processed 450/467 farms...
+2025-10-07T11:27:29.545162Z	▲  ✅ Fetched review data for 467 farms
+2025-10-07T11:27:29.55465Z	▲  💾 Saved farm data to /opt/buildhome/repo/web/data/farms.json
+2025-10-07T11:27:29.555104Z	▲  📋 Generated static params for 467 farms
+2025-10-07T11:27:29.555292Z	▲  🎉 Farm data generation complete!
+2025-10-07T11:27:29.644267Z	▲  🖼️  Optimizing blog images...
+2025-10-07T11:27:30.027244Z	▲  📚 Fetched 1 blog posts
+2025-10-07T11:27:30.027545Z	▲  📁 Created directory: /opt/buildhome/repo/web/public/blog-images
+2025-10-07T11:27:30.027694Z	▲  ⬇️  Downloading image for: best-christmas-trees
+2025-10-07T11:27:30.304023Z	▲  🔄 Processing: best-christmas-trees
+2025-10-07T11:27:31.135424Z	▲  ✅ Optimized: best-christmas-trees
+2025-10-07T11:27:31.135868Z	▲  🎉 Blog image optimization complete!
+2025-10-07T11:27:31.136355Z	▲  ✅ Optimized: 1
+2025-10-07T11:27:31.136465Z	▲  ⚠️  Skipped: 0
+2025-10-07T11:27:31.136651Z	▲  📄 Manifest: data/blog-images.json
+2025-10-07T11:27:31.182474Z	▲  🔍 Generating search data for dropdowns...
+2025-10-07T11:27:31.182789Z	▲  📊 Fetching farm data...
+2025-10-07T11:27:31.545952Z	▲  🏙️ Fetching cities data...
+2025-10-07T11:27:31.664624Z	▲  ✅ Found 25 categories and 0 locations
+2025-10-07T11:27:31.665143Z	▲  💾 Saved search data to /opt/buildhome/repo/web/data/search-data.json
+2025-10-07T11:27:31.665357Z	▲  📝 Generated TypeScript constants at /opt/buildhome/repo/web/src/data/search-data.ts
+2025-10-07T11:27:31.665493Z	▲  🎉 Search data generation complete!
+2025-10-07T11:27:31.665617Z	▲  Categories: Apple Orchards, Berry Farms, Christmas Tree Farms, Corn Farms, Corn Mazes...
+2025-10-07T11:27:31.665749Z	▲  Locations:
+2025-10-07T11:27:31.703669Z	▲  📂 Generating categories from curated content...
+2025-10-07T11:27:31.703988Z	▲  📝 Loaded 12 curated categories
+2025-10-07T11:27:31.718221Z	▲  🌾 Loaded 467 farms for dynamic data
+2025-10-07T11:27:31.71873Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.719044Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.71919Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.719306Z	▲  ⚠️  No match found for farm category: "Pre-Cut"
+2025-10-07T11:27:31.719386Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.719446Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.720261Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.720373Z	▲  🔗 Matched "Maple Syrup Farms" → "Maple Syrup Farms"
+2025-10-07T11:27:31.720439Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.720497Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.720558Z	▲  ⚠️  No match found for farm category: "You Choose, We Cut"
+2025-10-07T11:27:31.720614Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.720726Z	▲  ⚠️  No match found for farm category: "Pre-Cut"
+2025-10-07T11:27:31.720795Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.720852Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.720912Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.720978Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.721034Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.721101Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.721161Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.721221Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.721277Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.721338Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.721395Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.721453Z	▲  ⚠️  No match found for farm category: "You Choose, We Cut"
+2025-10-07T11:27:31.721516Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.722921Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.723034Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.723107Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.723167Z	▲  🔗 Matched "Petting Zoo" → "Petting Zoo"
+2025-10-07T11:27:31.723224Z	▲  🔗 Matched "Corn Farms" → "Corn Farms"
+2025-10-07T11:27:31.723287Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.723348Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.723403Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.723465Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.723521Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.723576Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.723658Z	▲  ⚠️  No match found for farm category: "You Choose We Cut, Cut Your Own"
+2025-10-07T11:27:31.723734Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.723793Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.724136Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.724214Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.724272Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.724342Z	▲  ⚠️  No match found for farm category: "You Choose We Cut, Cut Your Own"
+2025-10-07T11:27:31.724401Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.724459Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.724521Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.724577Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.724662Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.724743Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.724801Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.724857Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.724919Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.724974Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.725029Z	▲  ⚠️  No match found for farm category: "You Choose We Cut, Pre-Cut"
+2025-10-07T11:27:31.725089Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.725162Z	▲  🔗 Matched "Maple Syrup Farms" → "Maple Syrup Farms"
+2025-10-07T11:27:31.725387Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.725463Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.725522Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.725578Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.725659Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.725731Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.725788Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.725852Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.72591Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.725966Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.726024Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.726079Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.726139Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.726206Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.72626Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Delivery"
+2025-10-07T11:27:31.72632Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.726378Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.726441Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.726497Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.726556Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.726611Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.726703Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.726768Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.72683Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.726889Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.726952Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.727007Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.727063Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.727127Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.72719Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.727246Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.727311Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.727367Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.727423Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.727481Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.727538Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.727593Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.727687Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Potted, Delivery"
+2025-10-07T11:27:31.727752Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.727817Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.727877Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.727935Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.727989Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.728048Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.728101Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.728155Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.728212Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.728268Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.728322Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.728388Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.728445Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.728499Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.728556Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.72861Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Potted"
+2025-10-07T11:27:31.7287Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.728807Z	▲  ⚠️  No match found for farm category: "You Choose We Cut, Cut Your Own"
+2025-10-07T11:27:31.728914Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.729023Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.729137Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.729247Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.72936Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.72948Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.7296Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.729765Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.729888Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.730008Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.730124Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.730249Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.730382Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.730501Z	▲  ⚠️  No match found for farm category: "You Choose We Cut, Cut Your Own"
+2025-10-07T11:27:31.730632Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.730787Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.730905Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.731026Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.73113Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.731224Z	▲  🔗 Matched "Pumpkin Farm Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.731318Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.731419Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.73152Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.731673Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.731796Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.731915Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.732041Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.732164Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.73228Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.732401Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.732515Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Potted"
+2025-10-07T11:27:31.732659Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.732787Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.732911Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.733026Z	▲  ⚠️  No match found for farm category: "You Choose We Cut, Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.733193Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.733309Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.733425Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.733573Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.733737Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.733868Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.733994Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.734126Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.734247Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.734379Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.734504Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.734617Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.734779Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.734909Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.735043Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.735183Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.73531Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.735441Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.735594Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.735743Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.735855Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.735969Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.736073Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.736168Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.736274Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.736373Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.736489Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.736619Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.736768Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.736892Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.73701Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.737188Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.737325Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.737452Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.737586Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.737739Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.737879Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.738015Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.738145Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.73828Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.738412Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.738547Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.738707Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.738843Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.738962Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.739081Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.739211Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.739367Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.739501Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.739622Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.739786Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.739929Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.740051Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.740183Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.740314Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.740433Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.740564Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.740717Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.740859Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.740991Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.741129Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.741261Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.741389Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.74152Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.741691Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.741823Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.74197Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.742109Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.742238Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Delivery"
+2025-10-07T11:27:31.742369Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.742491Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.742631Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.742784Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.742914Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.74305Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.743169Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.743294Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.743421Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.743549Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.743706Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.743836Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.743955Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.744096Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.744228Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.744358Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.744487Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.744603Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.744763Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.744878Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.744992Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.745113Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.745232Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.745344Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.745451Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.74555Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.745678Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.745947Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.746071Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.746154Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.746251Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.746353Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.746463Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.746579Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.746742Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.746858Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.746971Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.747088Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.747201Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.747316Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.747427Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.747526Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.747637Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.747924Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.748039Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.748151Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.748251Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.748354Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.748459Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.748567Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.748698Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.748804Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.748903Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.749012Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.749516Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.749704Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.749834Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.749973Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.750094Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery, Wholesale"
+2025-10-07T11:27:31.750213Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.750331Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery, Wholesale"
+2025-10-07T11:27:31.750449Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.750569Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery, Wholesale"
+2025-10-07T11:27:31.750712Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.750832Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.75096Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751083Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.751202Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751311Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751465Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751581Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751714Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751836Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.751968Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.752076Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.752202Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.752316Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.752428Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.752541Z	▲  🔗 Matched "Berry Farms" → "Berry Farms"
+2025-10-07T11:27:31.752669Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.752786Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.752915Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.753033Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.753148Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.753261Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.753384Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.753496Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.753613Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.753754Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.753882Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.754005Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.754128Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.754249Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.754373Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.754512Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.754633Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.754774Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.754899Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.755024Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.75514Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.75526Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.75538Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.755476Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.755571Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.755682Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.7558Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.755914Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.756013Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.756097Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.756156Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.756212Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.756281Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.75634Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.756511Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.756804Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.757023Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.757256Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.757593Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.757765Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.758017Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.758142Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.758254Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.758346Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.758421Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.758523Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.758713Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.758809Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.75888Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.758947Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.759094Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.759202Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.759316Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.759423Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.759531Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.759621Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.759739Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.759834Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.759941Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.76003Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.760113Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.760184Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.760308Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.7604Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.760499Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.760602Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale, Delivery"
+2025-10-07T11:27:31.760723Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.760818Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.760916Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.761012Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.761114Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.761231Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.761349Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.761451Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.761597Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.761719Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76184Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.761975Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.762078Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.762195Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.762307Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.762405Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.762498Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Delivery"
+2025-10-07T11:27:31.762601Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76273Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.762837Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.762952Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.763062Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.763164Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.763281Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.763387Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.76348Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.763578Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.76369Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.763799Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.763905Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.764006Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.76411Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.764208Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.764316Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.764415Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76451Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.764609Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76474Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.76487Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.764991Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.765102Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.765216Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.765317Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.765409Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.765512Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.765619Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.765788Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.765891Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.765986Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.766095Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.766196Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.766301Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.766403Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.766502Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.766615Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.766735Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.766829Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.766947Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.767142Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.767257Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.767378Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.767552Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.767624Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.767733Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.767803Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.767864Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.767922Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.767979Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.768046Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.768122Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.768188Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.768247Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.768304Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76836Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.76842Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.768571Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.76869Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.768768Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.768827Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.768885Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.768951Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale, Delivery"
+2025-10-07T11:27:31.76901Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.769066Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.769125Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.769193Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76926Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.769319Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.769377Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.769451Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.76951Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.769565Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.76962Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.76971Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.769772Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.769836Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.769904Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.769961Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.770015Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.770071Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.770126Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.77018Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.77024Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.770294Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.77036Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.770431Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.770487Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.770541Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.770599Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.770677Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.77074Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.770798Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.770853Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.77091Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.770968Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.771027Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771081Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.771149Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.771212Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771268Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.771331Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771395Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.771452Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771511Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.771576Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771631Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.771733Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771794Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.77185Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.771911Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.771975Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772032Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.772095Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772151Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.772223Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772282Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.772351Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772406Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.772465Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.77252Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Delivery"
+2025-10-07T11:27:31.772587Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772671Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.772733Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772787Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.772847Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.772902Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.772963Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.773027Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.773092Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.773151Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.773216Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.773328Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.773439Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.773562Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.773636Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.773756Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.773877Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.773987Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.774108Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.774232Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.774361Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.774497Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.774651Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.774779Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.774905Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.775017Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.775127Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.775231Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.775356Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.775457Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.77556Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.775713Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.775823Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.775935Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.776038Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.77612Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.776281Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.776413Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.776543Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.776702Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.776837Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.776961Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.777083Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.777215Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.777352Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.777509Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.777617Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.77773Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.777805Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.777891Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.77799Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.778079Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.778179Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.778267Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.778391Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.778517Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.778746Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.778882Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.779024Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.779134Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.779236Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.77934Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.779502Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.779614Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.779803Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.779893Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.780009Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.780122Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.780252Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.780379Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.780574Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.780684Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.780828Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.78091Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.781018Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.781154Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.781379Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.781459Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.781534Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.781671Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.781786Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.781905Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.782028Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.782192Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.782305Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.782422Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.782526Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.782656Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.782768Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.782881Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.782998Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.78311Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.783193Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.783355Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.783461Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.783564Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.783728Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.783893Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.784022Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.784159Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.784292Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.784437Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.784532Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.784658Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.784779Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.784913Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.785057Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.785182Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.785289Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.78539Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.785489Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.785556Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.785623Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.785726Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.785822Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.785908Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.785968Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.786056Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.786164Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.786268Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.786385Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.786505Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.786659Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.786769Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale, Delivery"
+2025-10-07T11:27:31.786885Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.786994Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.78709Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.787204Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.787378Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.787558Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.787656Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.787835Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.78793Z	▲  🔗 Matched "tulip farms" → "Tulip Farms"
+2025-10-07T11:27:31.78805Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.788144Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.788246Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.788358Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.788454Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.788553Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.788656Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.788757Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.788861Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.788959Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.789049Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.789151Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.789243Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.789333Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.78943Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.78953Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.789627Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.789739Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.789826Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.789955Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.790066Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.790216Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.790362Z	▲  🔗 Matched "Sugar Shacks" → "Sugar Shacks"
+2025-10-07T11:27:31.790489Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.790614Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.790727Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.790842Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.79095Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.791046Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.791162Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.791267Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.791366Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.79146Z	▲  🔗 Matched "Berry Farms" → "Berry Farms"
+2025-10-07T11:27:31.791559Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.791676Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.791784Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.791881Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.791995Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.792122Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.792215Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.792312Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.792421Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.792514Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.792606Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.792729Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.792848Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.792974Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.793089Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.793202Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.793312Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.793421Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.793526Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.793617Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.793742Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.793846Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.793943Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.79404Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.794144Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.794233Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.794328Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.794425Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.794511Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.79462Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.794753Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.794869Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.79498Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.795074Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.795173Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.795276Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.795377Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.795477Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.79558Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.795723Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.795834Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.795954Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.796064Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.796168Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.796288Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.796397Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.796517Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.796624Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.796735Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.79682Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.796937Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.797036Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.79713Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.79724Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.797341Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.797438Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.797539Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.797638Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.797758Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.797856Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.797981Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.798119Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.798227Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.798333Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.798438Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.798528Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.798621Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.79876Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.798862Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.798976Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.79909Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.799185Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.799288Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.799385Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.799496Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.799613Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.800078Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.800203Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.800306Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.801219Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.80135Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.801452Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.801541Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.801666Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.80177Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.801907Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.802003Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.802169Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.802316Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.802435Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.80253Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.802681Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.802786Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.802887Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.802989Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.803077Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.80317Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.803293Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.803392Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.803475Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own, Delivery"
+2025-10-07T11:27:31.803567Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.803691Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.803786Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.803899Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.803996Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.804084Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.804173Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.80426Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.804346Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.804465Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.804549Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.804658Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.804772Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.804868Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.805255Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.805423Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.805521Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.805615Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.805746Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.805843Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.805977Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.806175Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.806386Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.806561Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.80676Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.806943Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.807126Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.807257Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.807377Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.807539Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.80769Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.808873Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.809024Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.809218Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.809352Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.809462Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.809553Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.809669Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.809782Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.809872Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.810005Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.810092Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.810188Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.81028Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.810371Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.810526Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.810829Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.810957Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.812263Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.812395Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.812493Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.812587Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.812733Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.812846Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.812946Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.813037Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.813115Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.813198Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.813347Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.813717Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.81382Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.814112Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.814257Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.814363Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.814485Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.814577Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.814689Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.814999Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.815323Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.815458Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.815786Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.815903Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.815993Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.816079Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.816163Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.816245Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.81636Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.81645Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.816537Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.816628Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.816743Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.816831Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.816959Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.817064Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.817203Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.817572Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.817724Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.817798Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.817856Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.817925Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.817985Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.818044Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.818148Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.818245Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.818353Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.818471Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.818689Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.818908Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.819104Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.819193Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.819355Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.819477Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.819574Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.819682Z	▲  🔗 Matched "Vegetable Farms" → "Vegetable Farms"
+2025-10-07T11:27:31.819769Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.81987Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.819965Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.820054Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.82014Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.820231Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.820322Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.820414Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.820506Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.820606Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.820717Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.820822Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.820934Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.82103Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.82112Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.821211Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.821306Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.821399Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.82149Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.821596Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.821702Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.8218Z	▲  🔗 Matched "Pumpkin Patches" → "Pumpkin Patches"
+2025-10-07T11:27:31.821903Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.821995Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.822083Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.822162Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.822243Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.822321Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.822405Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.822486Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.822566Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.822658Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.822748Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.822829Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.822924Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.823015Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Delivery"
+2025-10-07T11:27:31.823109Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.823198Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.823293Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.823383Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.823472Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.82356Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.823672Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.823781Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.82387Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.823995Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.824088Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.824185Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.824272Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.824354Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.824447Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.824544Z	▲  🔗 Matched "Corn Mazes" → "Corn Mazes"
+2025-10-07T11:27:31.824657Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.82475Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.824847Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.824962Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.825054Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.825143Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.82524Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Wholesale"
+2025-10-07T11:27:31.825326Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.825404Z	▲  🔗 Matched "Apple Orchards" → "Apple Orchards"
+2025-10-07T11:27:31.825495Z	▲  🔗 Matched "Berry Farms" → "Berry Farms"
+2025-10-07T11:27:31.82558Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.825682Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.82577Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.825858Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.825949Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.826031Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.826114Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.826195Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.826276Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.826362Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.826455Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.826551Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.82666Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.82675Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.826848Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.826951Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.827065Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Delivery"
+2025-10-07T11:27:31.827167Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.827276Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.827382Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.827481Z	▲  🔗 Matched "tulip farms" → "Tulip Farms"
+2025-10-07T11:27:31.827597Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.827716Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.827826Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.82793Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.828113Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.828229Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.828359Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.828464Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.828558Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.828726Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.828837Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.828975Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.829072Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.829183Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.829311Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.829421Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.829533Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.829652Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.829773Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.829877Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.829989Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.830113Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.830222Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.830324Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.830425Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.830519Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.830625Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.830744Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.830846Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.830962Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.831034Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.831118Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.831216Z	▲  🔗 Matched "Vineyards" → "Vineyards"
+2025-10-07T11:27:31.831327Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.831433Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.831532Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale"
+2025-10-07T11:27:31.831638Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.831753Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.831858Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.831964Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.832085Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.832214Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.832336Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.832454Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.832592Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.832722Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.832896Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.833024Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.833171Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.833303Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.833382Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.833514Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.833599Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.833737Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.833882Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.834009Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.834172Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.8343Z	▲  ⚠️  No match found for farm category: "Cut Your Own"
+2025-10-07T11:27:31.83443Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.83453Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut, Wholesale, Delivery"
+2025-10-07T11:27:31.834725Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.834853Z	▲  ⚠️  No match found for farm category: "Pre-Cut, Cut Your Own"
+2025-10-07T11:27:31.83496Z	▲  🔗 Matched "Christmas Tree Farms" → "Christmas Tree Farms"
+2025-10-07T11:27:31.835123Z	▲  ⚠️  No match found for farm category: "Cut Your Own, Pre-Cut"
+2025-10-07T11:27:31.835237Z	▲  ✅ Christmas Tree Farms: 467 farms
+2025-10-07T11:27:31.835349Z	▲  ✅ Apple Orchards: 7 farms
+2025-10-07T11:27:31.835513Z	▲  ✅ Berry Farms: 3 farms
+2025-10-07T11:27:31.835592Z	▲  ✅ Pumpkin Patches: 36 farms
+2025-10-07T11:27:31.835723Z	▲  ✅ Corn Mazes: 23 farms
+2025-10-07T11:27:31.835844Z	▲  ✅ Maple Syrup Farms: 2 farms
+2025-10-07T11:27:31.835964Z	▲  ✅ Vegetable Farms: 9 farms
+2025-10-07T11:27:31.836067Z	▲  ✅ Petting Zoo: 1 farms
+2025-10-07T11:27:31.836201Z	▲  ✅ Vineyards: 16 farms
+2025-10-07T11:27:31.836328Z	▲  ✅ Corn Farms: 1 farms
+2025-10-07T11:27:31.836502Z	▲  ✅ Sugar Shacks: 8 farms
+2025-10-07T11:27:31.836588Z	▲  ✅ Tulip Farms: 2 farms
+2025-10-07T11:27:31.836735Z	▲  📊 Generated 12 categories (12 with farms)
+2025-10-07T11:27:31.83681Z	▲  💾 Saved categories to /opt/buildhome/repo/web/data/categories.json
+2025-10-07T11:27:31.836947Z	▲  📋 Generated static params for 12 categories with farms
+2025-10-07T11:27:31.837057Z	▲  
+2025-10-07T11:27:31.837248Z	▲  📝 Category Summary:
+2025-10-07T11:27:31.837386Z	▲  christmas-tree-farms: 467 farms
+2025-10-07T11:27:31.837526Z	▲  pumpkin-patches: 36 farms
+2025-10-07T11:27:31.837716Z	▲  corn-mazes: 23 farms
+2025-10-07T11:27:31.83779Z	▲  vineyards: 16 farms
+2025-10-07T11:27:31.83795Z	▲  vegetable-farms: 9 farms
+2025-10-07T11:27:31.838125Z	▲  sugar-shacks: 8 farms
+2025-10-07T11:27:31.838267Z	▲  apple-orchards: 7 farms
+2025-10-07T11:27:31.838341Z	▲  berry-farms: 3 farms
+2025-10-07T11:27:31.838478Z	▲  maple-syrup-farms: 2 farms
+2025-10-07T11:27:31.838638Z	▲  tulip-farms: 2 farms
+2025-10-07T11:27:31.838798Z	▲  petting-zoo: 1 farms
+2025-10-07T11:27:31.838974Z	▲  corn-farms: 1 farms
+2025-10-07T11:27:31.839123Z	▲  
+2025-10-07T11:27:31.839268Z	▲  🎉 Category generation complete!
+2025-10-07T11:27:31.839414Z	▲  📊 Only manually curated categories are included. Add new categories to category-content.json to create new pages.
+2025-10-07T11:27:31.841282Z	▲  🗺️  Building filtered location data (50km radius)...
+2025-10-07T11:27:31.843175Z	▲  📍 Loaded 316 locations from locations.json (locationPages)
+2025-10-07T11:27:31.855236Z	▲  🌾 Loaded 467 farms
+2025-10-07T11:27:31.898267Z	▲  💾 Saved filtered locations with nearby farms to /opt/buildhome/repo/web/data/locations-with-farms.json
+2025-10-07T11:27:31.898531Z	▲  📋 Generated static params for 252 filtered location pages
+2025-10-07T11:27:31.898728Z	▲  📝 Location Filtering Summary:
+2025-10-07T11:27:31.898856Z	▲  Total base locations: 316
+2025-10-07T11:27:31.898984Z	▲  Locations with farms (<= 100km): 252
+2025-10-07T11:27:31.899113Z	▲  • Allentown, PA, United States → 31 farms
+2025-10-07T11:27:31.899242Z	▲  • Markham, ON, Canada → 26 farms
+2025-10-07T11:27:31.899376Z	▲  • Richmond Hill, ON, Canada → 26 farms
+2025-10-07T11:27:31.899496Z	▲  • Vaughan, ON, Canada → 25 farms
+2025-10-07T11:27:31.899606Z	▲  • Chicopee, MA, United States → 24 farms
+2025-10-07T11:27:31.899746Z	▲  🎉 Location data build complete!
+2025-10-07T11:27:31.937564Z	▲  🗺️  PHASE 1: Generating State-Level Farm Data
+2025-10-07T11:27:31.93781Z	▲  ============================================================
+2025-10-07T11:27:31.950825Z	▲  📊 Total active farms: 467
+2025-10-07T11:27:31.951322Z	▲  🌎 Found 47 states/provinces
+2025-10-07T11:27:31.954191Z	▲  ✅ Ontario (ontario): 48 farms, 20 cities
+2025-10-07T11:27:31.954742Z	▲  ✅ British Columbia (british-columbia): 15 farms, 20 cities
+2025-10-07T11:27:31.95485Z	▲  ⏭️  Skipping New Brunswick (only 4 farms)
+2025-10-07T11:27:31.955181Z	▲  ✅ Quebec (quebec): 11 farms, 17 cities
+2025-10-07T11:27:31.955296Z	▲  ⏭️  Skipping Manitoba (only 1 farms)
+2025-10-07T11:27:31.955679Z	▲  ⏭️  Skipping Alberta (only 1 farms)
+2025-10-07T11:27:31.956008Z	▲  ⏭️  Skipping Prince Edward Island (only 1 farms)
+2025-10-07T11:27:31.956115Z	▲  ⏭️  Skipping Nova Scotia (only 3 farms)
+2025-10-07T11:27:31.956249Z	▲  ✅ Minnesota (minnesota): 19 farms, 5 cities
+2025-10-07T11:27:31.956757Z	▲  ✅ New York (new-york): 34 farms, 11 cities
+2025-10-07T11:27:31.956969Z	▲  ✅ Maryland (maryland): 9 farms, 1 cities
+2025-10-07T11:27:31.957151Z	▲  ✅ Connecticut (connecticut): 14 farms, 1 cities
+2025-10-07T11:27:31.957775Z	▲  ✅ Pennsylvania (pennsylvania): 33 farms, 5 cities
+2025-10-07T11:27:31.959174Z	▲  ✅ California (california): 23 farms, 20 cities
+2025-10-07T11:27:31.959367Z	▲  ✅ Wisconsin (wisconsin): 24 farms, 8 cities
+2025-10-07T11:27:31.95951Z	▲  ⏭️  Skipping Arkansas (only 2 farms)
+2025-10-07T11:27:31.959671Z	▲  ✅ New Hampshire (new-hampshire): 7 farms, 2 cities
+2025-10-07T11:27:31.959818Z	▲  ✅ Michigan (michigan): 12 farms, 5 cities
+2025-10-07T11:27:31.959955Z	▲  ✅ New Jersey (new-jersey): 14 farms, 2 cities
+2025-10-07T11:27:31.96008Z	▲  ✅ Vermont (vermont): 5 farms, 1 cities
+2025-10-07T11:27:31.960213Z	▲  ⏭️  Skipping Colorado (only 3 farms)
+2025-10-07T11:27:31.960332Z	▲  ✅ South Carolina (south-carolina): 7 farms, 4 cities
+2025-10-07T11:27:31.960469Z	▲  ✅ Illinois (illinois): 12 farms, 6 cities
+2025-10-07T11:27:31.960596Z	▲  ✅ Ohio (ohio): 19 farms, 6 cities
+2025-10-07T11:27:31.960755Z	▲  ✅ Oregon (oregon): 15 farms, 3 cities
+2025-10-07T11:27:31.9609Z	▲  ⏭️  Skipping Nebraska (only 3 farms)
+2025-10-07T11:27:31.961023Z	▲  ⏭️  Skipping Oklahoma (only 2 farms)
+2025-10-07T11:27:31.961132Z	▲  ✅ Washington (washington): 20 farms, 4 cities
+2025-10-07T11:27:31.961389Z	▲  ✅ Tennessee (tennessee): 10 farms, 5 cities
+2025-10-07T11:27:31.961657Z	▲  ✅ Maine (maine): 9 farms, 5 cities
+2025-10-07T11:27:31.961909Z	▲  ✅ Georgia (georgia): 7 farms, 4 cities
+2025-10-07T11:27:31.962006Z	▲  ✅ North Carolina (north-carolina): 16 farms, 6 cities
+2025-10-07T11:27:31.962215Z	▲  ✅ Alabama (alabama): 5 farms, 3 cities
+2025-10-07T11:27:31.962309Z	▲  ⏭️  Skipping Kansas (only 2 farms)
+2025-10-07T11:27:31.962439Z	▲  ⏭️  Skipping Florida (only 3 farms)
+2025-10-07T11:27:31.962574Z	▲  ✅ Indiana (indiana): 12 farms, 2 cities
+2025-10-07T11:27:31.962683Z	▲  ✅ Texas (texas): 8 farms, 10 cities
+2025-10-07T11:27:31.96278Z	▲  ✅ Virginia (virginia): 8 farms, 3 cities
+2025-10-07T11:27:31.962902Z	▲  ⏭️  Skipping Missouri (only 3 farms)
+2025-10-07T11:27:31.96299Z	▲  ✅ Iowa (iowa): 6 farms, 5 cities
+2025-10-07T11:27:31.963099Z	▲  ⏭️  Skipping Rhode Island (only 1 farms)
+2025-10-07T11:27:31.963203Z	▲  ⏭️  Skipping South Dakota (only 1 farms)
+2025-10-07T11:27:31.963308Z	▲  ⏭️  Skipping West Virginia (only 1 farms)
+2025-10-07T11:27:31.963538Z	▲  ✅ Massachusetts (massachusetts): 10 farms, 2 cities
+2025-10-07T11:27:31.963804Z	▲  ⚠️  No slug mapping for state: "AL" - skipping
+2025-10-07T11:27:31.963919Z	▲  ⚠️  No slug mapping for state: "MN" - skipping
+2025-10-07T11:27:31.964017Z	▲  ⏭️  Skipping Hawaii (only 2 farms)
+2025-10-07T11:27:31.971374Z	▲  ============================================================
+2025-10-07T11:27:31.971536Z	▲  ✨ State Data Generation Complete!
+2025-10-07T11:27:31.971821Z	▲  ============================================================
+2025-10-07T11:27:31.971936Z	▲  
+2025-10-07T11:27:31.97205Z	▲  📁 Output: /opt/buildhome/repo/web/data/states-with-farms.json
+2025-10-07T11:27:31.972278Z	▲  📊 States generated: 29
+2025-10-07T11:27:31.972523Z	▲  📊 Total farms included: 432
+2025-10-07T11:27:31.972821Z	▲  ⏭️  States skipped: 18 (below threshold or no slug)
+2025-10-07T11:27:31.972923Z	▲  
+2025-10-07T11:27:31.973056Z	▲  🇨🇦 Canada: 3 provinces, 74 farms
+2025-10-07T11:27:31.973169Z	▲  🇺🇸 United States: 26 states, 358 farms
+2025-10-07T11:27:31.973327Z	▲  
+2025-10-07T11:27:31.973423Z	▲  ✅ Ready for Phase 2: State page route creation!
+2025-10-07T11:27:32.016489Z	▲  ✅ Generated site.webmanifest with dynamic shortcuts:
+2025-10-07T11:27:32.016842Z	▲  - Find Apple Orchards (/apple-orchards)
+2025-10-07T11:27:32.017022Z	▲  - Find Berry Farms (/berry-farms)
+2025-10-07T11:27:32.017199Z	▲  - Find Christmas Tree Farms (/christmas-tree-farms)
+2025-10-07T11:27:32.0173Z	▲  - Find Corn Farms (/corn-farms)
+2025-10-07T11:27:32.08639Z	▲  🗺️  Generating sitemaps...
+2025-10-07T11:27:32.086738Z	▲  📡 Fetching varieties from WordPress...
+2025-10-07T11:27:32.564081Z	▲  ✅ Fetched 16 varieties
+2025-10-07T11:27:32.564435Z	▲  ✅ Generated sitemap.xml (index)
+2025-10-07T11:27:32.564845Z	▲  ✅ Generated sitemap-main.xml
+2025-10-07T11:27:32.565515Z	▲  ✅ Generated sitemap-farms.xml
+2025-10-07T11:27:32.566083Z	▲  ✅ Generated sitemap-locations.xml
+2025-10-07T11:27:32.566389Z	▲  ✅ Generated sitemap-states.xml
+2025-10-07T11:27:32.594677Z	▲  ✅ Generated sitemap-state-categories.xml
+2025-10-07T11:27:32.595222Z	▲  ✅ Generated sitemap-christmas-tree-farms.xml
+2025-10-07T11:27:32.595396Z	▲  ✅ Generated sitemap-varieties.xml
+2025-10-07T11:27:32.595547Z	▲  ✅ Generated sitemap-blog.xml
+2025-10-07T11:27:32.595964Z	▲  ✅ Generated robots.txt
+2025-10-07T11:27:32.596064Z	▲  ✨ All sitemaps generated successfully!
+2025-10-07T11:27:32.646682Z	▲  ✓ Static map image already exists at public/us-map-static.png
+2025-10-07T11:27:32.652721Z	▲  > my-v0-project@0.1.0 build
+2025-10-07T11:27:32.652923Z	▲  > next build && node scripts/copy-public-files.js
+2025-10-07T11:27:33.41291Z	▲  ▲ Next.js 15.1.6
+2025-10-07T11:27:33.413221Z	▲  - Experiments (use with caution):
+2025-10-07T11:27:33.413344Z	▲    · optimizeCss
+2025-10-07T11:27:33.413455Z	▲  
+2025-10-07T11:27:33.477389Z	▲  Creating an optimized production build ...
+2025-10-07T11:27:39.958656Z	▲  <w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (175kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+2025-10-07T11:27:43.038982Z	▲  ✓ Compiled successfully
+2025-10-07T11:27:43.045201Z	▲  Linting and checking validity of types ...
+2025-10-07T11:27:52.430372Z	▲  Collecting page data ...
+2025-10-07T11:27:53.870844Z	▲  ⚠ Using edge runtime on a page currently disables static generation for that page
+2025-10-07T11:27:57.067489Z	▲  Generating static pages (0/870) ...
+2025-10-07T11:28:07.587048Z	▲  Generating static pages (217/870)
+2025-10-07T11:28:14.754483Z	▲  Generating static pages (434/870)
+2025-10-07T11:28:20.306469Z	▲  Generating static pages (652/870)
+2025-10-07T11:28:28.440219Z	▲  ✓ Generating static pages (870/870)
+2025-10-07T11:28:28.518719Z	▲  Finalizing page optimization ...
+2025-10-07T11:28:28.519004Z	▲  Collecting build traces ...
+2025-10-07T11:28:28.528531Z	▲  
+2025-10-07T11:28:28.542574Z	▲  Route (app)                                           Size     First Load JS
+2025-10-07T11:28:28.542864Z	▲  ┌ ○ /                                                 5.15 kB         413 kB
+2025-10-07T11:28:28.542955Z	▲  ├ ○ /_not-found                                       150 B           115 kB
+2025-10-07T11:28:28.543373Z	▲  ├ ƒ /[slug]                                           2.28 kB         410 kB
+2025-10-07T11:28:28.543663Z	▲  ├ ƒ /[slug]/[category]                                731 B           408 kB
+2025-10-07T11:28:28.54384Z	▲  ├ ● /[slug]/near/[location]                           2.48 kB         486 kB
+2025-10-07T11:28:28.543952Z	▲  ├   ├ /christmas-tree-farms/near/allentown-pa-us
+2025-10-07T11:28:28.544061Z	▲  ├   ├ /christmas-tree-farms/near/markham-on-ca
+2025-10-07T11:28:28.54416Z	▲  ├   ├ /christmas-tree-farms/near/richmond-hill-on-ca
+2025-10-07T11:28:28.544259Z	▲  ├   └ [+838 more paths]
+2025-10-07T11:28:28.544343Z	▲  ├ ○ /about                                            1.91 kB         172 kB
+2025-10-07T11:28:28.544426Z	▲  ├ ○ /blog                                             1.9 kB          172 kB
+2025-10-07T11:28:28.544519Z	▲  ├ ● /blog/[posts]                                     2.03 kB         172 kB
+2025-10-07T11:28:28.544605Z	▲  ├   └ /blog/best-christmas-trees
+2025-10-07T11:28:28.544722Z	▲  ├ ○ /contact                                          1.91 kB         172 kB
+2025-10-07T11:28:28.544821Z	▲  ├ ○ /cookies                                          1.91 kB         172 kB
+2025-10-07T11:28:28.544916Z	▲  ├ ○ /dashboard                                        4.01 kB         174 kB
+2025-10-07T11:28:28.545022Z	▲  ├ ƒ /farms-near/[cities]                              856 B           484 kB
+2025-10-07T11:28:28.545124Z	▲  ├ ƒ /farms/[id]                                       3.25 kB         178 kB
+2025-10-07T11:28:28.545213Z	▲  ├ ○ /privacy                                          1.91 kB         172 kB
+2025-10-07T11:28:28.545307Z	▲  ├ ○ /profile                                          3.18 kB         173 kB
+2025-10-07T11:28:28.545401Z	▲  ├ ○ /saved-farms                                      3.65 kB         173 kB
+2025-10-07T11:28:28.545491Z	▲  └ ● /varieties/[variety]                              2.03 kB         172 kB
+2025-10-07T11:28:28.54558Z	▲    ├ /varieties/monterrey-pines-christmas-trees
+2025-10-07T11:28:28.545687Z	▲    ├ /varieties/cook-blue-fir-christmas-trees
+2025-10-07T11:28:28.545779Z	▲    ├ /varieties/concolor-fir-christmas-trees
+2025-10-07T11:28:28.54587Z	▲    └ [+13 more paths]
+2025-10-07T11:28:28.545967Z	▲  + First Load JS shared by all                         115 kB
+2025-10-07T11:28:28.546059Z	▲  ├ chunks/framework-51d04a064e381ac0.js              113 kB
+2025-10-07T11:28:28.546159Z	▲  └ other shared chunks (total)                       2.62 kB
+2025-10-07T11:28:28.546273Z	▲  
+2025-10-07T11:28:28.546374Z	▲  
+2025-10-07T11:28:28.54646Z	▲  ƒ Middleware                                          78.5 kB
+2025-10-07T11:28:28.546572Z	▲  ○  (Static)   prerendered as static content
+2025-10-07T11:28:28.546691Z	▲  ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+2025-10-07T11:28:28.546787Z	▲  ƒ  (Dynamic)  server-rendered on demand
+2025-10-07T11:28:28.708362Z	▲  Copying additional public files to out directory...
+2025-10-07T11:28:28.709047Z	▲  ⚠ Skipped sw.js (not found in public/)
+2025-10-07T11:28:28.709332Z	▲  ⚠ Skipped us-map-static.webp (not found in public/)
+2025-10-07T11:28:28.709466Z	▲  ✓ Copied us-map-static.png
+2025-10-07T11:28:28.709575Z	▲  ✓ Copied _headers
+2025-10-07T11:28:28.709693Z	▲  Done copying public files.
+2025-10-07T11:28:29.444347Z	▲  Traced Next.js server files in: 295.685ms
+2025-10-07T11:28:29.590467Z	▲  Created all serverless functions in: 145.889ms
+2025-10-07T11:28:30.370044Z	▲  Collected static files (public/, static/, .next/static): 7.378ms
+2025-10-07T11:28:31.319772Z	▲  Build Completed in .vercel/output [2m]
+2025-10-07T11:28:31.468384Z	⚡️ Completed `npx vercel build`.
+2025-10-07T11:28:32.973413Z	⚡️ Invalid prerender config for /[slug]/near/[location]
+2025-10-07T11:28:32.973778Z	⚡️ Invalid prerender config for /[slug]/near/[location].rsc
+2025-10-07T11:28:32.976246Z	⚡️ Invalid prerender config for /blog/[posts]
+2025-10-07T11:28:32.976577Z	⚡️ Invalid prerender config for /blog/[posts].rsc
+2025-10-07T11:28:33.760839Z	⚡️ Invalid prerender config for /varieties/[variety]
+2025-10-07T11:28:33.761192Z	⚡️ Invalid prerender config for /varieties/[variety].rsc
+2025-10-07T11:28:39.535041Z	
+2025-10-07T11:28:39.535278Z	⚡️ Build Summary (@cloudflare/next-on-pages v1.13.16)
+2025-10-07T11:28:39.535424Z	⚡️ 
+2025-10-07T11:28:39.535538Z	⚡️ Middleware Functions (1)
+2025-10-07T11:28:39.535668Z	⚡️   - middleware
+2025-10-07T11:28:39.535781Z	⚡️ 
+2025-10-07T11:28:39.535863Z	⚡️ Edge Function Routes (4)
+2025-10-07T11:28:39.535973Z	⚡️   ┌ /[slug]
+2025-10-07T11:28:39.536071Z	⚡️   ├ /[slug]/[category]
+2025-10-07T11:28:39.536183Z	⚡️   ├ /farms-near/[cities]
+2025-10-07T11:28:39.536291Z	⚡️   └ /farms/[id]
+2025-10-07T11:28:39.536375Z	⚡️ 
+2025-10-07T11:28:39.536566Z	⚡️ Prerendered Routes (1734)
+2025-10-07T11:28:39.536656Z	⚡️   ┌ /
+2025-10-07T11:28:39.537021Z	⚡️   ├ /about
+2025-10-07T11:28:39.537113Z	⚡️   ├ /about.rsc
+2025-10-07T11:28:39.537227Z	⚡️   ├ /blog
+2025-10-07T11:28:39.537364Z	⚡️   ├ /blog.rsc
+2025-10-07T11:28:39.537514Z	⚡️   ├ /blog/best-christmas-trees
+2025-10-07T11:28:39.537676Z	⚡️   ├ /blog/best-christmas-trees.rsc
+2025-10-07T11:28:39.537764Z	⚡️   ├ /christmas-tree-farms/near/abbotsford-bc-ca
+2025-10-07T11:28:39.537865Z	⚡️   ├ /christmas-tree-farms/near/abbotsford-bc-ca.rsc
+2025-10-07T11:28:39.537995Z	⚡️   ├ /christmas-tree-farms/near/ajax-on-ca
+2025-10-07T11:28:39.538142Z	⚡️   ├ /christmas-tree-farms/near/ajax-on-ca.rsc
+2025-10-07T11:28:39.538288Z	⚡️   ├ /christmas-tree-farms/near/akron-ohio-us
+2025-10-07T11:28:39.53842Z	⚡️   ├ /christmas-tree-farms/near/akron-ohio-us.rsc
+2025-10-07T11:28:39.538535Z	⚡️   ├ /christmas-tree-farms/near/albany-ny-us
+2025-10-07T11:28:39.538735Z	⚡️   ├ /christmas-tree-farms/near/albany-ny-us.rsc
+2025-10-07T11:28:39.538871Z	⚡️   ├ /christmas-tree-farms/near/allentown-pa-us
+2025-10-07T11:28:39.539013Z	⚡️   ├ /christmas-tree-farms/near/allentown-pa-us.rsc
+2025-10-07T11:28:39.539279Z	⚡️   ├ /christmas-tree-farms/near/anaheim-california-us
+2025-10-07T11:28:39.539375Z	⚡️   ├ /christmas-tree-farms/near/anaheim-california-us.rsc
+2025-10-07T11:28:39.539616Z	⚡️   └ ... 1715 more
+2025-10-07T11:28:39.539904Z	⚡️ 
+2025-10-07T11:28:39.540116Z	⚡️ Other Static Assets (115)
+2025-10-07T11:28:39.540281Z	⚡️   ┌ /_app.rsc.json
+2025-10-07T11:28:39.540406Z	⚡️   ├ /_document.rsc.json
+2025-10-07T11:28:39.540535Z	⚡️   ├ /_error.rsc.json
+2025-10-07T11:28:39.54069Z	⚡️   ├ /_redirects
+2025-10-07T11:28:39.540844Z	⚡️   └ ... 111 more
+2025-10-07T11:28:39.540937Z	
+2025-10-07T11:28:40.650902Z	⚡️ Build log saved to '.vercel/output/static/_worker.js/nop-build-log.json'
+2025-10-07T11:28:40.651149Z	⚡️ Generated '.vercel/output/static/_worker.js/index.js'.
+2025-10-07T11:28:40.651339Z	⚡️ Build completed in 9.18s
+2025-10-07T11:28:40.726974Z	Finished
+2025-10-07T11:28:41.636142Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-10-07T11:28:41.636862Z	
+2025-10-07T11:28:41.63757Z	Found wrangler.toml file. Reading build configuration...
+2025-10-07T11:28:42.751877Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-10-07T11:28:42.752587Z	Found _worker.js in output directory. Uploading.
+2025-10-07T11:28:42.759184Z	 ⛅️ wrangler 3.101.0
+2025-10-07T11:28:42.759474Z	-------------------
+2025-10-07T11:28:43.62186Z	Attaching additional modules:
+2025-10-07T11:28:43.633564Z	┌─────────────────────────────────────────────────────────────────────┬──────┬─────────────┐
+2025-10-07T11:28:43.633939Z	│ Name                                                                │ Type │ Size        │
+2025-10-07T11:28:43.634137Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.634302Z	│ __next-on-pages-dist__/cache/adaptor.js                             │ esm  │ 2.29 KiB    │
+2025-10-07T11:28:43.634532Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.634661Z	│ __next-on-pages-dist__/cache/cache-api.js                           │ esm  │ 0.43 KiB    │
+2025-10-07T11:28:43.634769Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.634913Z	│ __next-on-pages-dist__/cache/kv.js                                  │ esm  │ 0.35 KiB    │
+2025-10-07T11:28:43.635053Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635127Z	│ __next-on-pages-dist__/functions/[slug]/[category].func.js          │ esm  │ 54.84 KiB   │
+2025-10-07T11:28:43.635187Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635286Z	│ __next-on-pages-dist__/functions/[slug].func.js                     │ esm  │ 77.51 KiB   │
+2025-10-07T11:28:43.635352Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635435Z	│ __next-on-pages-dist__/functions/farms/[id].func.js                 │ esm  │ 1103.30 KiB │
+2025-10-07T11:28:43.635496Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635567Z	│ __next-on-pages-dist__/functions/farms-near/[cities].func.js        │ esm  │ 871.13 KiB  │
+2025-10-07T11:28:43.635623Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635703Z	│ __next-on-pages-dist__/functions/middleware.func.js                 │ esm  │ 259.68 KiB  │
+2025-10-07T11:28:43.635761Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635816Z	│ __next-on-pages-dist__/manifest/88a389dd6c068190adb2efc795e4063c.js │ esm  │ 13.74 KiB   │
+2025-10-07T11:28:43.63587Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.635932Z	│ __next-on-pages-dist__/webpack/17bff645647ab0e97141d7ef82eec746.js  │ esm  │ 1.39 KiB    │
+2025-10-07T11:28:43.635988Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.636054Z	│ __next-on-pages-dist__/webpack/6298.js                              │ esm  │ 0.93 KiB    │
+2025-10-07T11:28:43.636139Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.636309Z	│ __next-on-pages-dist__/webpack/6cddf0e23cc537804913ad042e9949d6.js  │ esm  │ 1059.03 KiB │
+2025-10-07T11:28:43.636472Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.636673Z	│ __next-on-pages-dist__/webpack/87dfb213ed445b3becee119f63d116be.js  │ esm  │ 31.70 KiB   │
+2025-10-07T11:28:43.636799Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.636915Z	│ __next-on-pages-dist__/webpack/a1ebac73dd120b34f2327e4724c4e13a.js  │ esm  │ 1.27 KiB    │
+2025-10-07T11:28:43.637005Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.637187Z	│ __next-on-pages-dist__/webpack/a95350641ae599ea1560bb35f39a37d0.js  │ esm  │ 3051.15 KiB │
+2025-10-07T11:28:43.637267Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.637413Z	│ __next-on-pages-dist__/webpack/adf749cdb72d7f64df19f431e025bc48.js  │ esm  │ 0.70 KiB    │
+2025-10-07T11:28:43.637527Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.6377Z	│ __next-on-pages-dist__/webpack/d311784130c4c018c1a2b528fdb9102c.js  │ esm  │ 19.59 KiB   │
+2025-10-07T11:28:43.637813Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.638205Z	│ __next-on-pages-dist__/webpack/dd4a5bbc595978422a209b2e37f2c577.js  │ esm  │ 5.16 KiB    │
+2025-10-07T11:28:43.638439Z	├─────────────────────────────────────────────────────────────────────┼──────┼─────────────┤
+2025-10-07T11:28:43.638676Z	│ Total (18 modules)                                                  │      │ 6554.21 KiB │
+2025-10-07T11:28:43.639725Z	└─────────────────────────────────────────────────────────────────────┴──────┴─────────────┘
+2025-10-07T11:28:43.7627Z	✨ Compiled Worker successfully
+2025-10-07T11:28:44.916787Z	Found _routes.json in output directory. Uploading.
+2025-10-07T11:28:44.926514Z	Validating asset output directory
+2025-10-07T11:28:48.738575Z	Deploying your site to Cloudflare's global network...
+2025-10-07T11:28:56.058857Z	Parsed 0 valid redirect rules.
+2025-10-07T11:28:56.059255Z	Found invalid redirect lines:
+2025-10-07T11:28:56.059347Z	  - #4: /farms-near/*-*-ca 301 /farms-near/:splat-us
+2025-10-07T11:28:56.059409Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.059482Z	  - #5: /*/near/*-*-ca/ 301 /:splat/near/:splat-us/
+2025-10-07T11:28:56.059543Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.059604Z	  - #6: /christmas-tree-farms/near/*-*-ca/ 301 /christmas-tree-farms/near/:splat-us/
+2025-10-07T11:28:56.059686Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.059781Z	  - #7: /apple-orchards/near/*-*-ca/ 301 /apple-orchards/near/:splat-us/
+2025-10-07T11:28:56.059848Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.059914Z	  - #8: /pumpkin-patches/near/*-*-ca/ 301 /pumpkin-patches/near/:splat-us/
+2025-10-07T11:28:56.059976Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060037Z	  - #9: /berry-farms/near/*-*-ca/ 301 /berry-farms/near/:splat-us/
+2025-10-07T11:28:56.060098Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060167Z	  - #10: /petting-zoo/near/*-*-ca/ 301 /petting-zoo/near/:splat-us/
+2025-10-07T11:28:56.060227Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060284Z	  - #11: /corn-farms/near/*-*-ca/ 301 /corn-farms/near/:splat-us/
+2025-10-07T11:28:56.060388Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060463Z	  - #12: /vineyards/near/*-*-ca/ 301 /vineyards/near/:splat-us/
+2025-10-07T11:28:56.06052Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060583Z	  - #15: /farms-near/*-united-states/ 301 /farms-near/:splat-us/
+2025-10-07T11:28:56.060651Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060722Z	  - #16: /*/near/*-united-states/ 301 /:splat/near/:splat-us/
+2025-10-07T11:28:56.060779Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060837Z	  - #17: /christmas-tree-farms/near/*-united-states/ 301 /christmas-tree-farms/near/:splat-us/
+2025-10-07T11:28:56.060895Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.060955Z	  - #18: /apple-orchards/near/*-united-states/ 301 /apple-orchards/near/:splat-us/
+2025-10-07T11:28:56.061015Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061078Z	  - #19: /pumpkin-patches/near/*-united-states/ 301 /pumpkin-patches/near/:splat-us/
+2025-10-07T11:28:56.061137Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061195Z	  - #20: /berry-farms/near/*-united-states/ 301 /berry-farms/near/:splat-us/
+2025-10-07T11:28:56.061256Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061313Z	  - #21: /petting-zoo/near/*-united-states/ 301 /petting-zoo/near/:splat-us/
+2025-10-07T11:28:56.061372Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061428Z	  - #22: /corn-farms/near/*-united-states/ 301 /corn-farms/near/:splat-us/
+2025-10-07T11:28:56.061484Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061556Z	  - #23: /vineyards/near/*-united-states/ 301 /vineyards/near/:splat-us/
+2025-10-07T11:28:56.061665Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061735Z	  - #24: /all-farms-near/near/*-united-states/ 301 /farms-near/:splat-us/
+2025-10-07T11:28:56.061794Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061861Z	  - #27: /farms-near/*-canada/ 301 /farms-near/:splat-ca/
+2025-10-07T11:28:56.061922Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.061979Z	  - #28: /*/near/*-canada/ 301 /:splat/near/:splat-ca/
+2025-10-07T11:28:56.062037Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.062093Z	  - #29: /christmas-tree-farms/near/*-canada/ 301 /christmas-tree-farms/near/:splat-ca/
+2025-10-07T11:28:56.062149Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.062209Z	  - #30: /apple-orchards/near/*-canada/ 301 /apple-orchards/near/:splat-ca/
+2025-10-07T11:28:56.062266Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.062372Z	  - #31: /pumpkin-patches/near/*-canada/ 301 /pumpkin-patches/near/:splat-ca/
+2025-10-07T11:28:56.06253Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.062621Z	  - #32: /berry-farms/near/*-canada/ 301 /berry-farms/near/:splat-ca/
+2025-10-07T11:28:56.062725Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.06279Z	  - #33: /petting-zoo/near/*-canada/ 301 /petting-zoo/near/:splat-ca/
+2025-10-07T11:28:56.062861Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.062934Z	  - #34: /corn-farms/near/*-canada/ 301 /corn-farms/near/:splat-ca/
+2025-10-07T11:28:56.062992Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.063048Z	  - #35: /vineyards/near/*-canada/ 301 /vineyards/near/:splat-ca/
+2025-10-07T11:28:56.063105Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.063168Z	  - #36: /all-farms-near/near/*-canada/ 301 /farms-near/:splat-ca/
+2025-10-07T11:28:56.063225Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.063288Z	  - #39: /all-farms-near/near/:location 301 /farms-near/:location
+2025-10-07T11:28:56.063346Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.063404Z	  - #42: /varieties 301 /
+2025-10-07T11:28:56.063465Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.063533Z	  - #45: /farms-near/presque-isle-maine-united-states/ 301 /farms-near/presque-isle-me-us/
+2025-10-07T11:28:56.063608Z	    URLs should either be relative (e.g. begin with a forward-slash), or use HTTPS (e.g. begin with "https://").
+2025-10-07T11:28:56.063703Z	Parsed 9 valid header rules.
+2025-10-07T11:28:58.139087Z	Uploading... (99/1849)
+2025-10-07T11:29:05.308096Z	Uploading... (683/1849)
+2025-10-07T11:29:06.443192Z	Uploading... (1266/1849)
+2025-10-07T11:29:06.829444Z	Uploading... (1849/1849)
+2025-10-07T11:29:06.829775Z	✨ Success! Uploaded 1750 files (99 already uploaded) (9.19 sec)
+2025-10-07T11:29:06.830021Z	
+2025-10-07T11:29:07.921841Z	✨ Upload complete!
+2025-10-07T11:29:10.430782Z	Uploading to build output cache
+2025-10-07T11:29:12.350845Z	Success: Build output uploaded to build cache.
+2025-10-07T11:29:13.982073Z	Success: Assets published!
+2025-10-07T11:29:17.70892Z	Success: Your site was deployed!

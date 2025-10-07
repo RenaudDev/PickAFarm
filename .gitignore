@@ -135,3 +135,11 @@ test-*.sql
 
 # Prompt files
 prompt.md
+
+# Lighthouse reports (keep only latest)
+web/lighthouse-*.json
+web/lighthouse-*.html
+!web/lighthouse-summary.js
+
+# Windows output redirection file
+nul

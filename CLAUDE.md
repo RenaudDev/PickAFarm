@@ -248,3 +248,145 @@ Different components expect different Farm shapes:
 - Always check the interface definition in the component you're working with
 
 **Common mistake**: Passing data with required fields missing or wrong types between components.
+
+## Performance Optimization
+
+### Mobile Performance Strategy
+The site is optimized for mobile with specific attention to Core Web Vitals on slow 3G connections:
+
+**Key Metrics (as of last Lighthouse audit):**
+- Desktop: 83/100 Performance, LCP 2.57s
+- Mobile: 64/100 Performance, LCP 7.59s simulated (1.42s observed)
+- The mobile score is conservative for slow 3G connections; real users on 4G/5G see much better performance
+
+### LCP Optimization
+**Current LCP element**: First blog post image on homepage (`/blog-images/best-christmas-trees-800.avif`)
+
+**Optimizations implemented:**
+1. **Preload LCP image** in `app/layout.tsx`:
+   ```tsx
+   <link rel="preload" as="image" href="/blog-images/best-christmas-trees-800.avif"
+         type="image/avif" fetchPriority="high" />
+   ```
+
+2. **Image optimization**:
+   - AVIF format with WebP fallback in `<picture>` tags
+   - Responsive srcset with 400px and 800px sizes
+   - `fetchPriority="high"` on first image, `loading="lazy"` on others
+   - Explicit width/height attributes to prevent CLS
+
+3. **Blog images data structure** (`web/data/blog-images.json`):
+   ```json
+   {
+     "1": {
+       "slug": "best-christmas-trees",
+       "avif": { "400": "...", "800": "..." },
+       "webp": { "400": "...", "800": "..." },
+       "alt": "...",
+       "width": 800,
+       "height": 450
+     }
+   }
+   ```
+
+### Location Detection & Caching
+**Problem**: Duplicate ipapi.co API calls (1000ms+ each) from multiple components
+**Solution**: Shared localStorage caching strategy
+
+**Implementation** (`web/src/lib/location-utils.ts`):
+- `getUserLocation(userId)` checks localStorage first before making API calls
+- Location data cached for 30 days (`isLocationStale()` function)
+- Anonymous users use `"guest"` as userId for shared cache
+- Both `NearbyFarmsList` and `LocationDetector` use same cache key
+
+**Components that detect location:**
+- `NearbyFarmsList` - calls `getUserLocation("guest")` on homepage
+- `LocationDetector` - calls `getUserLocation(user.id)` for authenticated users
+- Both share cached data when user is anonymous, avoiding duplicate API calls
+
+### JavaScript Bundle Optimization
+**Current bottleneck**: Clerk.js loading on all pages
+
+**Unused JavaScript** (730ms potential savings on mobile):
+- Clerk UI components: 71% unused (71KB)
+- Next.js framework: 38% unused (41KB)
+- Application code: Various chunks with partial usage
+
+**Note**: Clerk is essential for authentication and cannot be removed. Consider:
+- Dynamic imports for Clerk on protected routes only (future optimization)
+- Code splitting to reduce initial bundle size
+
+### Render-Blocking Resources
+- Single CSS bundle at 194ms on slow 3G: `_next/static/css/*.css`
+- Critical CSS inlined in `app/layout.tsx` for instant first paint
+- Resource hints for third-party domains (preconnect, dns-prefetch)
+
+### Dynamic Imports for Below-Fold Content
+**Pattern used** (`app/page.tsx`):
+```typescript
+const FAQSection = dynamic(() => import("@/components/faq-section"), {
+  loading: () => <div className="h-96" />
+})
+const FarmMapSection = dynamic(() => import("@/components/farm-map-section"), {
+  loading: () => <MapSkeletonStatic />
+})
+```
+
+Components that are dynamically imported:
+- `FAQSection` - Below the fold
+- `FarmMapSection` - Interactive map (heavy Google Maps API)
+- `AdaptiveMapWrapper` - Map container logic
+- `LocationDetector` - Background location detection (in `DeferredComponents`)
+
+### Z-Index Hierarchy
+**Stacking order** (from lowest to highest):
+- `z-30` - Mobile map filter backdrop
+- `z-40` - Mobile map filter button & panel
+- `z-50` - Navbar (sticky), Dialog/Modal overlays and content
+- Higher z-indexes should not be used to prevent conflicts
+
+**Key components:**
+- `farm-navbar.tsx`: `z-50` (sticky navbar)
+- `ui/dialog.tsx`: `z-50` (modal overlay and content)
+- `map-page-layout.tsx`: Mobile filter uses `z-30` (backdrop), `z-40` (button/panel)
+
+**Mobile map filter positioning**: `bottom-4 left-4` (not right, to avoid conflicts with other UI)
+
+### Third-Party Services
+**Impact on mobile performance:**
+- ipapi.co: ~1000ms per call (cached after first load)
+- Clerk: ~150ms per chunk, multiple chunks loaded
+- Google Analytics: ~200ms (deferred)
+- Cloudflare Insights: ~150ms (deferred)
+
+**Optimization strategy:**
+- Preconnect to Clerk and API domains in `app/layout.tsx`
+- DNS prefetch for analytics domains
+- Location API cached locally to avoid repeated calls
+
+### Testing Performance
+**Run Lighthouse audits:**
+```bash
+# Desktop
+npx lighthouse https://pickafarm.com --preset=desktop --output=json --output-path=./web/lighthouse-desktop-latest.json
+
+# Mobile (default settings)
+npx lighthouse https://pickafarm.com --output=json --output-path=./web/lighthouse-mobile-latest.json
+```
+
+**View summary:**
+```bash
+cd web && node lighthouse-summary.js
+```
+
+**Key files:**
+- `web/lighthouse-desktop-latest.json` - Desktop audit results
+- `web/lighthouse-mobile-latest.json` - Mobile audit results
+- `web/lighthouse-summary.js` - Script to extract and display key metrics
+
+### Future Optimization Opportunities
+1. **Defer Clerk loading**: Only load on protected routes or after user interaction
+2. **Image CDN**: Consider using an image CDN for automatic format/size optimization
+3. **Service Worker**: Implement for offline support and faster repeat visits
+4. **Font optimization**: Currently using Geist font, could optimize loading strategy
+5. **Reduce unused CSS**: Consider purging unused Tailwind classes more aggressively
