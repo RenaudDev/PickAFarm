@@ -350,7 +350,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
           </div>
           <div className="w-full h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border">
             <Image
-              src="/images/farms/christmas-tree.webp"
+              src="/images/farms/background.webp"
               alt={`${farm.name} - Christmas Tree Farm`}
               width={800}
               height={500}
