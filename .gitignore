@@ -84,8 +84,9 @@ dist
 # Gatsby files
 .cache/
 public
-# But allow static map image for mobile optimization
+# But allow static assets
 !web/public/us-map-static.png
+!web/public/images/
 
 # Storybook build outputs
 .out
