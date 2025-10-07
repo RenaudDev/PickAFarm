@@ -20,6 +20,11 @@ interface FarmData {
   categories?: string;
   featured?: number;      // Number to match SearchResultsContent
   distance_km?: number;
+  // Farm custom branding images
+  logo_url?: string;
+  background_url?: string;
+  logo_updated_at?: string;
+  background_updated_at?: string;
 }
 
 // Type for raw farm data from API (with boolean featured)
@@ -40,6 +45,11 @@ interface ApiFarmData {
   postal_code?: string;
   phone?: string;
   image_url?: string;
+  // Farm custom branding images
+  logo_url?: string;
+  background_url?: string;
+  logo_updated_at?: string;
+  background_updated_at?: string;
 }
 
 interface CategoryData {

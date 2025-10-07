@@ -37,6 +37,7 @@ import {
 import FarmNavbar from "@/components/farm-navbar"
 import FarmFooter from "@/components/farm-footer"
 import FarmInteractiveElements from "@/components/farm-interactive-elements"
+import FarmProfileHeader from "@/components/farm-profile-header"
 import { CategoryIcon } from "@/lib/category-icons"
 import Link from "next/link"
 import Image from "next/image"
@@ -47,7 +48,7 @@ import { Metadata } from "next"
 import { getReviews } from "@/lib/reviews"
 
 // Import farms data for static generation
-import farmsData from "../../../data/farms.json"
+import farmsDataRaw from "../../../data/farms.json"
 
 // Make this route dynamic (users find farms via money pages)
 export const runtime = 'edge' // Required for Cloudflare Pages
@@ -76,12 +77,18 @@ type FarmData = {
   city_name: string
   state_province: string
   country: string
+  postal_code?: string
   latitude: number
   longitude: number
   phone: string
   email: string
   website?: string
   facebook?: string
+  // Farm custom branding
+  logo_url?: string
+  background_url?: string
+  logo_updated_at?: string
+  background_updated_at?: string
   instagram?: string
   description: string
   categories: string
@@ -111,6 +118,8 @@ type FarmData = {
   seasonal_hours?: string
 }
 
+// Cast farms data to FarmData type
+const farmsData = farmsDataRaw as FarmData[]
 
 // Add this after the imports, before generateStaticParams
 
@@ -348,17 +357,14 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
               farmWebsite={farm.website}
             />
           </div>
-          <div className="w-full h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border">
-            <Image
-              src="/images/farms/background.webp"
-              alt={`${farm.name} - Christmas Tree Farm`}
-              width={800}
-              height={500}
-              className="w-full h-full object-cover"
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-            />
-          </div>
+
+          {/* Farm Profile Header with Logo and Background */}
+          <FarmProfileHeader
+            farmName={farm.name}
+            logoUrl={farm.logo_url}
+            backgroundUrl={farm.background_url}
+            className="mb-6"
+          />
         </div>
         <div className="bg-primary border border-primary/50 p-4 rounded-xl mb-6">
           <p className="text-white font-medium">
