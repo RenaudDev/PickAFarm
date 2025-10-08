@@ -2,7 +2,7 @@
   {
     "slug": "christmas-tree-farms",
     "name": "Christmas Tree Farms",
-    "totalFarms": 467,
+    "totalFarms": 578,
     "description": "Find the perfect Christmas tree at local farms offering fresh-cut trees, family activities, and holiday traditions.",
     "intro": "Christmas tree farms offer a magical holiday experience where families can select and cut their own perfect tree. These farms typically operate seasonally from late November through December, providing fresh Fraser Firs, Noble Firs, and other premium varieties alongside festive activities like hot cocoa, hayrides, and holiday decorations.",
     "faqs": [
@@ -60,7 +60,7 @@
   {
     "slug": "pumpkin-patches",
     "name": "Pumpkin Patches",
-    "totalFarms": 36,
+    "totalFarms": 46,
     "description": "Visit local pumpkin patches for fall fun, perfect pumpkins, and family-friendly activities like corn mazes and hayrides.",
     "intro": "Pumpkin patches are the quintessential fall destination where families can select the perfect pumpkin for carving or decorating. Many patches offer additional activities like corn mazes, hayrides, petting zoos, and photo opportunities, making them ideal for creating lasting autumn memories.",
     "faqs": [
@@ -118,7 +118,7 @@
   {
     "slug": "corn-mazes",
     "name": "Corn Mazes",
-    "totalFarms": 23,
+    "totalFarms": 29,
     "description": "Get lost in the fun at local corn mazes offering fall adventures, challenging paths, and family entertainment.",
     "intro": "Corn mazes offer an exciting autumn adventure where visitors navigate through towering corn stalks to find their way out. These agricultural attractions combine fun and challenge, often featuring multiple difficulty levels, themed designs, and nighttime flashlight mazes for added excitement.",
     "faqs": [
@@ -176,7 +176,7 @@
   {
     "slug": "vineyards",
     "name": "Vineyards",
-    "totalFarms": 16,
+    "totalFarms": 20,
     "description": "Explore local vineyards for wine tastings, scenic tours, and grape-growing experiences.",
     "intro": "Local vineyards offer scenic agricultural experiences where visitors can tour the grounds, learn about winemaking, and sample estate-grown wines. Many vineyards provide seasonal activities like grape picking, wine education classes, and beautiful settings for picnics and special events.",
     "faqs": [
@@ -234,7 +234,7 @@
   {
     "slug": "vegetable-farms",
     "name": "Vegetable Farms",
-    "totalFarms": 9,
+    "totalFarms": 12,
     "description": "Visit local u-pick vegetable farms for fresh, seasonal produce and farm-to-table experiences.",
     "intro": "U-pick vegetable farms offer fresh, seasonal produce straight from the field to your table. These farms provide hands-on experiences where visitors can harvest tomatoes, peppers, cucumbers, beans, and more while learning about sustainable agriculture and enjoying the satisfaction of gathering their own food.",
     "faqs": [
@@ -292,7 +292,7 @@
   {
     "slug": "sugar-shacks",
     "name": "Sugar Shacks",
-    "totalFarms": 8,
+    "totalFarms": 11,
     "description": "Visit authentic sugar shacks to experience traditional maple syrup production and maple tastings.",
     "intro": "Sugar shacks are the heart of maple syrup production, where sap from maple trees is transformed into delicious syrup through traditional boiling methods. Visiting a sugar shack during spring sugaring season offers an authentic glimpse into this sweet tradition, complete with tours, tastings, and often hearty maple-themed meals.",
     "faqs": [
@@ -350,7 +350,7 @@
   {
     "slug": "apple-orchards",
     "name": "Apple Orchards",
-    "totalFarms": 7,
+    "totalFarms": 10,
     "description": "Discover local apple orchards offering pick-your-own apples, farm-fresh cider, and family-friendly fall activities.",
     "intro": "Apple orchards provide a classic fall experience where families can pick fresh apples straight from the tree. Most orchards offer multiple apple varieties including Honeycrisp, Gala, and McIntosh, along with additional activities like apple cider tastings, hayrides, and farm markets featuring homemade pies and preserves.",
     "faqs": [
@@ -408,7 +408,7 @@
   {
     "slug": "berry-farms",
     "name": "Berry Farms",
-    "totalFarms": 3,
+    "totalFarms": 5,
     "description": "Find local berry farms offering fresh strawberries, blueberries, raspberries, and more for pick-your-own experiences.",
     "intro": "Berry farms offer delightful pick-your-own experiences throughout the growing season, from strawberries in early summer to raspberries and blueberries in mid-summer. These farms provide a fun, family-friendly activity where you can harvest fresh, sweet berries while enjoying the outdoors and learning about sustainable farming practices.",
     "faqs": [
