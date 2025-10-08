@@ -45,6 +45,37 @@ async function zohoAccessToken(env) {
   return data.access_token;
 }
 
+// Fetch attachments for a Zoho record
+async function zohoFetchAttachments(env, accessToken, accountId) {
+  const dc = env.ZOHO_DC || 'com';
+  const apiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${encodeURIComponent(accountId)}/Attachments`;
+
+  console.log(`📎 Fetching attachments for account ${accountId}`);
+
+  const response = await fetch(apiUrl, {
+    method: "GET",
+    headers: {
+      "Authorization": `Zoho-oauthtoken ${accessToken}`,
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.warn(`Attachments API warning: ${response.status} - ${errorText}`);
+    return []; // Return empty if no attachments
+  }
+
+  const data = await response.json();
+
+  if (data.data && Array.isArray(data.data)) {
+    console.log(`📎 Found ${data.data.length} attachments`);
+    return data.data;
+  }
+
+  return [];
+}
+
 async function zohoFetchAccount(env, accessToken, accountId) {
   if (!accessToken) {
     throw new Error("Access token is required");
@@ -56,7 +87,7 @@ async function zohoFetchAccount(env, accessToken, accountId) {
 
   // Use the correct Zoho data center
   const dc = env.ZOHO_DC || 'com'; // You have 'ca' set
-  
+
   // Updated to use all the fields from your production handler
   const fields = [
     "Account_Name","Website","Phone","Email",
@@ -65,9 +96,10 @@ async function zohoFetchAccount(env, accessToken, accountId) {
     "Type_of_Farm","Amenities","Varieties","Payment_Methods","Services_Type",
     "Pet_Friendly","Year_Established","Open_Date","Close_Day",
     "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
-    "latitude","longitude","Price_Range","Slug","Featured","Verified"
+    "latitude","longitude","Price_Range","Slug","Featured","Verified",
+    "Logo1","Cover"  // Farm branding images (File Upload fields)
   ];
-  
+
   const apiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${encodeURIComponent(accountId)}?fields=${fields.join(",")}`;
 
   const response = await fetch(apiUrl, {
@@ -95,7 +127,20 @@ async function zohoFetchAccount(env, accessToken, accountId) {
 
   // Return the first record from the data array
   if (data.data && Array.isArray(data.data) && data.data.length > 0) {
-    return data.data[0];
+    const record = data.data[0];
+
+    // Debug: Log ALL fields to see what Zoho returns
+    console.log(`🔍 Full record for ${record.Account_Name}:`);
+    console.log(JSON.stringify(record, null, 2));
+
+    // Debug: Log image fields structure specifically
+    if (record.Logo !== undefined || record.Cover_Image !== undefined) {
+      console.log(`📸 Image fields for ${record.Account_Name}:`);
+      console.log(`  Logo type: ${typeof record.Logo}, value: ${JSON.stringify(record.Logo)}`);
+      console.log(`  Cover_Image type: ${typeof record.Cover_Image}, value: ${JSON.stringify(record.Cover_Image)}`);
+    }
+
+    return record;
   }
 
   throw new Error("No account data found in response");
@@ -164,16 +209,17 @@ async function upsertFarm(env, rec) {
 
   const sql = `
 INSERT INTO farms (
-  zoho_record_id, name, slug, website, phone, email, description, 
+  zoho_record_id, name, slug, website, phone, email, description,
   street, city, postal_code, state, country, latitude, longitude,
   facebook, instagram, categories, type, amenities, varieties,
   pet_friendly, price_range, zoho_last_sync, updated_at,
   payment_methods, opening_date, closing_date,
   monday_hours, tuesday_hours, wednesday_hours,
   thursday_hours, friday_hours, saturday_hours, sunday_hours,
-  featured, verified
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-ON CONFLICT(zoho_record_id) DO UPDATE SET 
+  featured, verified,
+  logo_url, background_url, logo_updated_at, background_updated_at
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+ON CONFLICT(zoho_record_id) DO UPDATE SET
   name=excluded.name, slug=excluded.slug, website=excluded.website,
   phone=excluded.phone, email=excluded.email, description=excluded.description,
   street=excluded.street, city=excluded.city, postal_code=excluded.postal_code,
@@ -185,7 +231,9 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
   payment_methods=excluded.payment_methods, opening_date=excluded.opening_date, closing_date=excluded.closing_date,
   monday_hours=excluded.monday_hours, tuesday_hours=excluded.tuesday_hours, wednesday_hours=excluded.wednesday_hours,
   thursday_hours=excluded.thursday_hours, friday_hours=excluded.friday_hours, saturday_hours=excluded.saturday_hours, sunday_hours=excluded.sunday_hours,
-  featured=excluded.featured, verified=excluded.verified;
+  featured=excluded.featured, verified=excluded.verified,
+  logo_url=excluded.logo_url, background_url=excluded.background_url,
+  logo_updated_at=excluded.logo_updated_at, background_updated_at=excluded.background_updated_at;
 `;
 
   // Handle coordinates - try Zoho first, then geocode if missing
@@ -206,19 +254,26 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     }
   }
 
+  // Image fields from Zoho (will be processed by webhook handler)
+  const logoUrl = rec.logo_url || null;  // These will be set by image processor
+  const backgroundUrl = rec.background_url || null;
+  const logoUpdatedAt = rec.logo_updated_at || null;
+  const backgroundUpdatedAt = rec.background_updated_at || null;
+
   const result = await env.DB.prepare(sql).bind(
     d1Id, name, slug,
     rec.Website, rec.Phone, rec.Email, rec.Description,
     rec.Billing_Street, rec.Billing_City, rec.Billing_Code,
     rec.Billing_State, rec.Billing_Country, lat, lng,
-    rec.Facebook, rec.Instagram, 
+    rec.Facebook, rec.Instagram,
     categories, type, amenities, varieties,
-    petFriendly, rec.Price_Range, 
+    petFriendly, rec.Price_Range,
     new Date().toISOString(), new Date().toISOString(),
     paymentMethods, openingDate, closingDate,
     mondayHours, tuesdayHours, wednesdayHours,
     thursdayHours, fridayHours, saturdayHours, sundayHours,
-    featured, verified
+    featured, verified,
+    logoUrl, backgroundUrl, logoUpdatedAt, backgroundUpdatedAt
   ).run();
 }
 
@@ -459,6 +514,9 @@ async function handleZohoDelete(request, env, method) {
     });
   }
 
+  // Check if rebuild is requested via query parameter
+  const shouldRebuild = url.searchParams.get("rebuild") === "true";
+
   // Normalize: D1 PK uses zcrm_<id>
   const rawId = String(zohoId);
   const d1Id = rawId.startsWith("zcrm_") ? rawId : `zcrm_${rawId}`;
@@ -466,22 +524,24 @@ async function handleZohoDelete(request, env, method) {
   try {
     // Delete from D1
     const deleteResult = await deleteFarm(env, d1Id);
-    
-    // Trigger Cloudflare Pages rebuild
-    if (env.CLOUDFLARE_DEPLOY_HOOK) {
+
+    // Trigger Cloudflare Pages rebuild (only if ?rebuild=true)
+    let rebuildStatus = "disabled";
+    if (shouldRebuild && env.CLOUDFLARE_DEPLOY_HOOK) {
       await fetch(env.CLOUDFLARE_DEPLOY_HOOK, { method: 'POST' });
+      rebuildStatus = "triggered";
     }
 
-    return new Response(JSON.stringify({ 
-      ok: true, 
+    return new Response(JSON.stringify({
+      ok: true,
       action: "delete",
       record_id: zohoId,
       d1_id: d1Id,
       module: payload.module || "Accounts",
       deleted_at: payload.deleted_at || new Date().toISOString(),
-      database: "deleted", 
+      database: "deleted",
       rowsAffected: deleteResult.changes || 0,
-      rebuild: env.CLOUDFLARE_DEPLOY_HOOK ? "triggered" : "not-configured"
+      rebuild: rebuildStatus
     }), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
@@ -553,6 +613,9 @@ async function handleZohoWebhook(request, env, method) {
     });
   }
 
+  // Check if rebuild is requested via query parameter
+  const shouldRebuild = url.searchParams.get("rebuild") === "true";
+
   // Normalize: API wants numeric; D1 PK uses zcrm_<id>
   const rawId = String(zohoId);
   const apiId = rawId.replace(/^zcrm_/, "");
@@ -574,8 +637,131 @@ async function handleZohoWebhook(request, env, method) {
     const record = await zohoFetchAccount(env, accessToken, apiId);
     record.id = d1Id; // ensure D1 uses zcrm_...
 
+    // Step 2.5: Fetch attachments (Logo and Cover_Image)
+    const attachments = await zohoFetchAttachments(env, accessToken, apiId);
+
+    // Try to find logo and cover image in attachments
+    // Attachments have: { File_Name, Size, $file_id, $link_url }
+    if (attachments.length > 0) {
+      console.log(`📎 Processing ${attachments.length} attachments`);
+
+      for (const att of attachments) {
+        const fileName = (att.File_Name || '').toLowerCase();
+        console.log(`  - ${att.File_Name} (${att.Size})`);
+
+        // Match logo
+        if (fileName.includes('logo') && !record.Logo) {
+          record.Logo = att.$link_url;
+          console.log(`✅ Matched Logo: ${att.File_Name}`);
+        }
+
+        // Match cover/background
+        if ((fileName.includes('cover') || fileName.includes('background')) && !record.Cover_Image) {
+          record.Cover_Image = att.$link_url;
+          console.log(`✅ Matched Cover_Image: ${att.File_Name}`);
+        }
+      }
+    }
+
     // Step 3: Upsert to D1
     await upsertFarm(env, record);
+
+    // Step 3.5: Process images if Logo1 or Cover changed
+    // Import image processing functions
+    const { processImage } = await import('./lib/image-processor.js');
+    const { sendImageErrorEmail } = await import('./lib/email-notifications.js');
+
+    // Helper to extract file_Id and construct Zoho API download URL
+    const extractFileDownloadUrl = (fileField, dc, recordId) => {
+      if (!fileField) return null;
+
+      // File Upload fields return array of file objects with file_Id
+      if (Array.isArray(fileField) && fileField.length > 0) {
+        const fileId = fileField[0]?.file_Id;
+        const attachmentId = fileField[0]?.attachment_Id;
+
+        if (fileId && attachmentId) {
+          // Use Zoho Attachments API to download
+          // https://www.zoho.com/crm/developer/docs/api/v3/get-attachments.html
+          return `https://www.zohoapis.${dc}/crm/v3/Accounts/${recordId}/Attachments/${attachmentId}`;
+        }
+      }
+
+      // Legacy: direct URL string
+      if (typeof fileField === 'string') {
+        return fileField;
+      }
+
+      return null;
+    };
+
+    const dc = env.ZOHO_DC || 'com';
+    const logoUrl = extractFileDownloadUrl(record.Logo1, dc, apiId);
+    const coverUrl = extractFileDownloadUrl(record.Cover, dc, apiId);
+
+    console.log(`🔍 Image URL check - Logo1: ${logoUrl ? 'Found' : 'None'}, Cover: ${coverUrl ? 'Found' : 'None'}`);
+
+    if (logoUrl || coverUrl) {
+      console.log(`📸 Processing images for ${record.Account_Name || d1Id}`);
+
+      // Process logo
+      if (logoUrl) {
+        try {
+          console.log(`⬇️ Processing logo from URL: ${logoUrl}`);
+
+          const result = await processImage({
+            imageUrl: logoUrl,
+            farmId: d1Id,
+            imageType: 'logo',
+            bucket: env.ASSETS_BUCKET,
+            cdnDomain: env.CDN_DOMAIN,
+            accessToken: accessToken  // For Zoho authenticated URLs
+          });
+
+          // Update database with new logo URL
+          await env.DB.prepare(
+            'UPDATE farms SET logo_url = ?, logo_updated_at = ? WHERE zoho_record_id = ?'
+          ).bind(result.url, new Date().toISOString(), d1Id).run();
+
+          console.log(`✅ Logo processed: ${result.url}`);
+        } catch (error) {
+          console.error(`❌ Logo processing failed:`, error);
+          // Send error notification asynchronously (don't block webhook)
+          sendImageErrorEmail(env, d1Id, record.Account_Name, 'logo', error).catch(err =>
+            console.error('Failed to send error email:', err)
+          );
+        }
+      }
+
+      // Process cover image
+      if (coverUrl) {
+        try {
+          console.log(`⬇️ Processing cover image from URL: ${coverUrl}`);
+
+          const result = await processImage({
+            imageUrl: coverUrl,
+            farmId: d1Id,
+            imageType: 'background',
+            bucket: env.ASSETS_BUCKET,
+            cdnDomain: env.CDN_DOMAIN,
+            accessToken: accessToken  // For Zoho authenticated URLs
+          });
+
+          // Update database with new background URL
+          await env.DB.prepare(
+            'UPDATE farms SET background_url = ?, background_updated_at = ? WHERE zoho_record_id = ?'
+          ).bind(result.url, new Date().toISOString(), d1Id).run();
+
+          console.log(`✅ Background processed: ${result.url}`);
+        } catch (error) {
+          console.error(`❌ Background processing failed:`, error);
+          // Send error notification asynchronously (don't block webhook)
+          sendImageErrorEmail(env, d1Id, record.Account_Name, 'background', error).catch(err =>
+            console.error('Failed to send error email:', err)
+          );
+        }
+      }
+    }
 
     // Step 4: Check if opening_date changed and send notifications
     const newOpeningDate = record.Open_Date || null;
@@ -675,17 +861,19 @@ async function handleZohoWebhook(request, env, method) {
       }
     }
 
-    // Step 5: Trigger Cloudflare Pages rebuild
-    if (env.CLOUDFLARE_DEPLOY_HOOK) {
+    // Step 5: Trigger Cloudflare Pages rebuild (only if ?rebuild=true)
+    let rebuildStatus = "disabled";
+    if (shouldRebuild && env.CLOUDFLARE_DEPLOY_HOOK) {
       await fetch(env.CLOUDFLARE_DEPLOY_HOOK, { method: 'POST' });
+      rebuildStatus = "triggered";
     }
 
-    return new Response(JSON.stringify({ 
-      ok: true, 
+    return new Response(JSON.stringify({
+      ok: true,
       id: d1Id,
       source: "zoho",
-      database: "updated", 
-      rebuild: env.CLOUDFLARE_DEPLOY_HOOK ? "triggered" : "not-configured",
+      database: "updated",
+      rebuild: rebuildStatus,
       notifications_sent: notificationSent
     }), {
       headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -867,7 +1055,7 @@ async function handleFarms(request, env, method) {
     const radius = parseFloat(url.searchParams.get("radius") || "50"); // km
 
     let query = `
-      SELECT 
+      SELECT
         zoho_record_id as id,
         name, slug, street,
         city as city_name, postal_code,
@@ -879,7 +1067,8 @@ async function handleFarms(request, env, method) {
         verified, featured, active, updated_at,
         payment_methods, opening_date, closing_date,
         monday_hours, tuesday_hours, wednesday_hours,
-        thursday_hours, friday_hours, saturday_hours, sunday_hours
+        thursday_hours, friday_hours, saturday_hours, sunday_hours,
+        logo_url, background_url, logo_updated_at, background_updated_at
       FROM farms
       WHERE active = 1 AND latitude IS NOT NULL AND longitude IS NOT NULL
     `;
@@ -2188,6 +2377,46 @@ export default {
 
     if (url.pathname === "/api/token-debug") {
       return handleTokenDebug(request, env, method);
+    }
+
+    // Test endpoint to fetch a specific Zoho record
+    if (url.pathname === "/api/test-zoho-fetch") {
+      if (method !== "GET") {
+        return new Response(JSON.stringify({ error: "Method not allowed" }), {
+          status: 405, headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+
+      try {
+        const url = new URL(request.url);
+        const recordId = url.searchParams.get("id") || "38729000000292133"; // Default to Quinn Farm
+
+        const accessToken = await zohoAccessToken(env);
+        const record = await zohoFetchAccount(env, accessToken, recordId);
+        const attachments = await zohoFetchAttachments(env, accessToken, recordId);
+
+        return new Response(JSON.stringify({
+          success: true,
+          record_id: recordId,
+          full_record: record,
+          logo1_field: record.Logo1,
+          cover_field: record.Cover,
+          logo1_type: typeof record.Logo1,
+          cover_type: typeof record.Cover,
+          attachments: attachments,
+          attachments_count: attachments.length
+        }, null, 2), {
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      } catch (error) {
+        return new Response(JSON.stringify({
+          error: "Test fetch failed",
+          message: error.message
+        }, null, 2), {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
     }
 
     // Root endpoint

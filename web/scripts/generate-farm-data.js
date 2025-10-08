@@ -30,9 +30,9 @@ async function fetchFarmsFromD1() {
     console.log('🔍 Querying D1 database using REST API...');
     
     const query = `
-      SELECT 
+      SELECT
         zoho_record_id as id,
-        name, 
+        name,
         slug,
         street,
         city as city_name,
@@ -66,8 +66,12 @@ async function fetchFarmsFromD1() {
         thursday_hours,
         friday_hours,
         saturday_hours,
-        sunday_hours
-      FROM farms 
+        sunday_hours,
+        logo_url,
+        background_url,
+        logo_updated_at,
+        background_updated_at
+      FROM farms
       WHERE active = 1
     `;
 

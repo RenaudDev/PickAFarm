@@ -10,11 +10,16 @@ GITHUB_REPO  = "PickAFarm"
 GITHUB_EVENT = "rebuild-farms"
 ZOHO_DC = "ca"
 FROM_EMAIL = "PickAFarm Notifications <updates@notifications.pickafarm.com>"
+CDN_DOMAIN = "https://cdn.pickafarm.com" # Custom domain for R2 bucket (fallback: https://pub-326783be0962429fb08c8a70c6b02503.r2.dev)
 
 [[d1_databases]]
 binding = "DB"
 database_name = "pickafarm-db"
 database_id = "175c8757-6538-4bb7-ba4a-a7e4590e6478"
+
+[[r2_buckets]]
+binding = "ASSETS_BUCKET"
+bucket_name = "pickafarm-assets"
 
 # Cloudflare Pages will detect Next.js automatically
 # No manual configuration needed for Next.js deployment
