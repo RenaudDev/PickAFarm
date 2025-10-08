@@ -25,6 +25,8 @@ import { generateStateCategoryBreadcrumbSchema } from "@/lib/breadcrumb-schema"
 import { getTopVarietiesWithArticles } from "@/lib/variety-utils"
 import { getVarietiesBySlugs } from "@/lib/wordpress"
 import VarietyArticlesSection from "@/components/variety-articles-section"
+import { generateItemListSchema } from "@/lib/item-list-schema"
+import { StructuredData } from "@/components/seo/structured-data"
 
 interface StateCategoryPageProps {
   params: Promise<{
@@ -60,6 +62,7 @@ export async function generateMetadata({ params }: StateCategoryPageProps): Prom
   const title = `${farmCount} ${categoryData.name} in ${stateData.state_name} | Pick Your Own`
   const description = `Find the best ${categoryData.name.toLowerCase()} in ${stateData.state_name}. ${farmCount} farms with locations, hours, reviews, and directions. Plan your pick-your-own adventure today!`
   const keywords = `${stateData.state_name.toLowerCase()} ${categoryData.name.toLowerCase()}, ${categoryData.name.toLowerCase()} in ${stateData.state_name.toLowerCase()}, ${stateData.state_code.toLowerCase()} ${categoryData.name.toLowerCase()}, pick your own ${stateData.state_name.toLowerCase()}`
+  const ogImage = 'https://pickafarm.com/images/og-pickafarm.webp'
 
   return {
     title,
@@ -69,12 +72,21 @@ export async function generateMetadata({ params }: StateCategoryPageProps): Prom
       title: `${farmCount} ${categoryData.name} in ${stateData.state_name} | PickAFarm`,
       description,
       type: 'website',
-      url: `https://pickafarm.com/${slug}/${category}`
+      url: `https://pickafarm.com/${slug}/${category}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${categoryData.name} in ${stateData.state_name}`
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',
       title,
-      description
+      description,
+      images: [ogImage]
     },
     alternates: {
       canonical: `https://pickafarm.com/${slug}/${category}`
@@ -237,6 +249,15 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
             "url": `https://pickafarm.com/${slug}/${category}`
           })
         }}
+      />
+
+      {/* ItemList Schema - List of businesses */}
+      <StructuredData
+        data={generateItemListSchema(
+          sortedFarms,
+          `https://pickafarm.com/${slug}/${category}/`,
+          `${categoryData.name} in ${stateData.state_name}`
+        )}
       />
 
       {/* Breadcrumb Schema */}
