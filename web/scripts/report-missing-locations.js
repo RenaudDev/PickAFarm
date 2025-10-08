@@ -428,8 +428,9 @@ function getBaseLocations(locsRaw) {
         await new Promise(resolve => setTimeout(resolve, 100));
       } catch (error) {
         console.error(`Error getting location details for ${center.name}:`, error.message);
-        // Fallback: use the nearest farm's country
-        center.country = center.farms[0]?.country || 'Canada';
+        // Fallback: use the nearest farm's country (prefer farm data over default)
+        const farmCountry = center.farms[0]?.country;
+        center.country = farmCountry || 'United States'; // Most new farms are US-based
         center.province = center.farms[0]?.province || 'Unknown';
       }
     }
@@ -438,10 +439,18 @@ function getBaseLocations(locsRaw) {
   // Convert to legacy format for compatibility
   const clusters = new Map();
   for (const [key, center] of populationCenters.entries()) {
+    // Use farm's actual country data
+    const farmCountry = center.farms[0]?.country;
+    const normalizedCountry = farmCountry === 'United States' || farmCountry === 'USA' || farmCountry === 'US'
+      ? 'United States'
+      : farmCountry === 'Canada'
+      ? 'Canada'
+      : 'United States'; // Default to US for new locations
+
     clusters.set(key, {
       city: center.name,
-      province: center.province || 'Unknown',
-      country: center.country || 'Canada',
+      province: center.province || center.farms[0]?.province || 'Unknown',
+      country: center.country || normalizedCountry,
       count: center.farms.length,
       farms: center.farms.map(f => ({ id: f.id, name: f.name, lat: f.latitude, lon: f.longitude })),
       latSum: center.latitude * center.farms.length,
