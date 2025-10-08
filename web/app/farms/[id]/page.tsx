@@ -381,7 +381,7 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
               </svg>
             </div>
             <div className="flex-1">
-              <p className="text-amber-900 font-semibold mb-1">Not Verified by Owner</p>
+              <p className="text-amber-900 font-semibold mb-1">Not Verified by Owner Recently</p>
               <p className="text-amber-800 text-sm leading-relaxed">
                 This farm's information has not been verified by the owner. We recommend calling ahead to confirm hours, availability, and pricing before visiting.
               </p>

@@ -14,6 +14,9 @@ import blogImages from "../data/blog-images.json"
 import { generateHomepageMetadata } from "@/lib/seo-metadata"
 import { getAllPosts } from '@/lib/wordpress'
 import { NearbyFarmsSection } from "@/components/nearby-farms-section"
+import { generateHomepageSchemas } from "@/lib/organization-schema"
+import { generateHomepageFAQSchema } from "@/lib/faq-schema"
+import { StructuredData, MultipleStructuredData } from "@/components/seo/structured-data"
 
 // Dynamic imports for below-the-fold components
 const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
@@ -69,8 +72,15 @@ export default async function Home() {
   const blogPosts = await getAllPosts()
   const latestPosts = blogPosts.slice(0, 3) // Get 3 latest posts
 
+  // Generate structured data for SEO
+  const homepageSchemas = generateHomepageSchemas()
+  const faqSchema = generateHomepageFAQSchema()
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {/* Structured Data for SEO */}
+      <MultipleStructuredData schemas={[...homepageSchemas, faqSchema]} />
+
       <FarmNavbar />
       <AdaptiveMapWrapper>
         <Suspense fallback={<MapSkeletonStatic />}>

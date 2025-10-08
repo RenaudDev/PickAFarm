@@ -65,10 +65,10 @@ export function FarmFooter() {
               </div>
             </div>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Follow us on Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="https://www.instagram.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/pickafarm" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Follow us on Instagram">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
