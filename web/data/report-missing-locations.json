@@ -1,28 +1,11 @@
 [
   {
-    "name": "Cadott",
-    "slug": "cadott",
-    "population": null,
-    "coordinates": {
-      "latitude": 44.850602,
-      "longitude": -91.266639
-    },
-    "province": "Wisconsin",
-    "province_slug": "wi",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "cadott-wi-ca",
-    "full_location": "Cadott, WI, Canada",
-    "seo_title": "U-Pick Farms near Cadott, Wisconsin",
-    "meta_description": "Find the best U-Pick farms near Cadott, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
     "name": "Eau Claire",
     "slug": "eau-claire",
     "population": null,
     "coordinates": {
-      "latitude": 44.800135,
-      "longitude": -91.600225
+      "latitude": 46.423669,
+      "longitude": -129.942709
     },
     "province": "Wisconsin",
     "province_slug": "wi",
@@ -34,275 +17,156 @@
     "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Jesup",
-    "slug": "jesup",
+    "name": "Hamlet",
+    "slug": "hamlet",
     "population": null,
     "coordinates": {
-      "latitude": 31.589399,
-      "longitude": -81.952131
+      "latitude": 41.38419,
+      "longitude": -86.560498
     },
-    "province": "Georgia",
-    "province_slug": "ga",
+    "province": "Indiana",
+    "province_slug": "in",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "jesup-ga-ca",
-    "full_location": "Jesup, GA, Canada",
-    "seo_title": "U-Pick Farms near Jesup, Georgia",
-    "meta_description": "Find the best U-Pick farms near Jesup, Georgia. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "hamlet-in-ca",
+    "full_location": "Hamlet, IN, Canada",
+    "seo_title": "U-Pick Farms near Hamlet, Indiana",
+    "meta_description": "Find the best U-Pick farms near Hamlet, Indiana. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "St John",
-    "slug": "st-john",
+    "name": "Cottondale",
+    "slug": "cottondale",
     "population": null,
     "coordinates": {
-      "latitude": 38.001323,
-      "longitude": -98.746624
+      "latitude": 30.77859,
+      "longitude": -85.374233
     },
-    "province": "Kansas",
-    "province_slug": "ks",
+    "province": "Florida",
+    "province_slug": "fl",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "st-john-ks-ca",
-    "full_location": "St John, KS, Canada",
-    "seo_title": "U-Pick Farms near St John, Kansas",
-    "meta_description": "Find the best U-Pick farms near St John, Kansas. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "cottondale-fl-ca",
+    "full_location": "Cottondale, FL, Canada",
+    "seo_title": "U-Pick Farms near Cottondale, Florida",
+    "meta_description": "Find the best U-Pick farms near Cottondale, Florida. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Livingston",
-    "slug": "livingston",
+    "name": "Nipomo",
+    "slug": "nipomo",
     "population": null,
     "coordinates": {
-      "latitude": 30.766351,
-      "longitude": -94.888257
+      "latitude": 35.03033,
+      "longitude": -120.474569
     },
-    "province": "Texas",
-    "province_slug": "tx",
+    "province": "California",
+    "province_slug": "ca",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "livingston-tx-ca",
-    "full_location": "Livingston, TX, Canada",
-    "seo_title": "U-Pick Farms near Livingston, Texas",
-    "meta_description": "Find the best U-Pick farms near Livingston, Texas. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "nipomo-ca-ca",
+    "full_location": "Nipomo, CA, Canada",
+    "seo_title": "U-Pick Farms near Nipomo, California",
+    "meta_description": "Find the best U-Pick farms near Nipomo, California. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Duluth",
-    "slug": "duluth",
+    "name": "Crawfordville",
+    "slug": "crawfordville",
     "population": null,
     "coordinates": {
-      "latitude": 46.801893,
-      "longitude": -92.083929
+      "latitude": 30.223721,
+      "longitude": -84.342108
     },
-    "province": "Minnesota",
-    "province_slug": "mn",
+    "province": "Florida",
+    "province_slug": "fl",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "duluth-mn-ca",
-    "full_location": "Duluth, MN, Canada",
-    "seo_title": "U-Pick Farms near Duluth, Minnesota",
-    "meta_description": "Find the best U-Pick farms near Duluth, Minnesota. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "crawfordville-fl-ca",
+    "full_location": "Crawfordville, FL, Canada",
+    "seo_title": "U-Pick Farms near Crawfordville, Florida",
+    "meta_description": "Find the best U-Pick farms near Crawfordville, Florida. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Henderson",
-    "slug": "henderson",
+    "name": "Pittsfield",
+    "slug": "pittsfield",
     "population": null,
     "coordinates": {
-      "latitude": 32.180023,
-      "longitude": -94.852372
+      "latitude": 41.829592,
+      "longitude": -79.376011
     },
-    "province": "Texas",
-    "province_slug": "tx",
+    "province": "Pennsylvania",
+    "province_slug": "pa",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "henderson-tx-ca",
-    "full_location": "Henderson, TX, Canada",
-    "seo_title": "U-Pick Farms near Henderson, Texas",
-    "meta_description": "Find the best U-Pick farms near Henderson, Texas. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "pittsfield-pa-ca",
+    "full_location": "Pittsfield, PA, Canada",
+    "seo_title": "U-Pick Farms near Pittsfield, Pennsylvania",
+    "meta_description": "Find the best U-Pick farms near Pittsfield, Pennsylvania. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Denison",
-    "slug": "denison",
+    "name": "Anthony",
+    "slug": "anthony",
     "population": null,
     "coordinates": {
-      "latitude": 42.008961,
-      "longitude": -95.299768
+      "latitude": 29.297311,
+      "longitude": -82.098522
     },
-    "province": "Iowa",
-    "province_slug": "ia",
+    "province": "Florida",
+    "province_slug": "fl",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "denison-ia-ca",
-    "full_location": "Denison, IA, Canada",
-    "seo_title": "U-Pick Farms near Denison, Iowa",
-    "meta_description": "Find the best U-Pick farms near Denison, Iowa. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "anthony-fl-ca",
+    "full_location": "Anthony, FL, Canada",
+    "seo_title": "U-Pick Farms near Anthony, Florida",
+    "meta_description": "Find the best U-Pick farms near Anthony, Florida. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Decorah",
-    "slug": "decorah",
+    "name": "Chunky",
+    "slug": "chunky",
     "population": null,
     "coordinates": {
-      "latitude": 43.314648,
-      "longitude": -91.76208
+      "latitude": 32.357415,
+      "longitude": -88.945587
     },
-    "province": "Iowa",
-    "province_slug": "ia",
+    "province": "Mississippi",
+    "province_slug": "ms",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "decorah-ia-ca",
-    "full_location": "Decorah, IA, Canada",
-    "seo_title": "U-Pick Farms near Decorah, Iowa",
-    "meta_description": "Find the best U-Pick farms near Decorah, Iowa. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "chunky-ms-ca",
+    "full_location": "Chunky, MS, Canada",
+    "seo_title": "U-Pick Farms near Chunky, Mississippi",
+    "meta_description": "Find the best U-Pick farms near Chunky, Mississippi. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Lowville",
-    "slug": "lowville",
+    "name": "West Terre Haute",
+    "slug": "west-terre-haute",
     "population": null,
     "coordinates": {
-      "latitude": 43.706814,
-      "longitude": -75.454592
+      "latitude": 39.587859,
+      "longitude": -87.441439
     },
-    "province": "New York",
-    "province_slug": "ny",
+    "province": "Indiana",
+    "province_slug": "in",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "lowville-ny-ca",
-    "full_location": "Lowville, NY, Canada",
-    "seo_title": "U-Pick Farms near Lowville, New York",
-    "meta_description": "Find the best U-Pick farms near Lowville, New York. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "west-terre-haute-in-ca",
+    "full_location": "West Terre Haute, IN, Canada",
+    "seo_title": "U-Pick Farms near West Terre Haute, Indiana",
+    "meta_description": "Find the best U-Pick farms near West Terre Haute, Indiana. Fresh apples, berries, pumpkins and Christmas trees."
   },
   {
-    "name": "Toone",
-    "slug": "toone",
+    "name": "Jacksonville",
+    "slug": "jacksonville",
     "population": null,
     "coordinates": {
-      "latitude": 35.319738,
-      "longitude": -88.938778
+      "latitude": 34.750347,
+      "longitude": -77.504068
     },
-    "province": "Tennessee",
-    "province_slug": "tn",
+    "province": "North Carolina",
+    "province_slug": "nc",
     "country": "Canada",
     "country_slug": "ca",
-    "location_slug": "toone-tn-ca",
-    "full_location": "Toone, TN, Canada",
-    "seo_title": "U-Pick Farms near Toone, Tennessee",
-    "meta_description": "Find the best U-Pick farms near Toone, Tennessee. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "Summerdale",
-    "slug": "summerdale",
-    "population": null,
-    "coordinates": {
-      "latitude": 30.485379,
-      "longitude": -87.786168
-    },
-    "province": "Alabama",
-    "province_slug": "al",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "summerdale-al-ca",
-    "full_location": "Summerdale, AL, Canada",
-    "seo_title": "U-Pick Farms near Summerdale, Alabama",
-    "meta_description": "Find the best U-Pick farms near Summerdale, Alabama. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "Bethlehem",
-    "slug": "bethlehem",
-    "population": null,
-    "coordinates": {
-      "latitude": 44.28065,
-      "longitude": -71.735401
-    },
-    "province": "New Hampshire",
-    "province_slug": "nh",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "bethlehem-nh-ca",
-    "full_location": "Bethlehem, NH, Canada",
-    "seo_title": "U-Pick Farms near Bethlehem, New Hampshire",
-    "meta_description": "Find the best U-Pick farms near Bethlehem, New Hampshire. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "Phoenix",
-    "slug": "phoenix",
-    "population": null,
-    "coordinates": {
-      "latitude": 43.317899,
-      "longitude": -76.306909
-    },
-    "province": "New York",
-    "province_slug": "ny",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "phoenix-ny-ca",
-    "full_location": "Phoenix, NY, Canada",
-    "seo_title": "U-Pick Farms near Phoenix, New York",
-    "meta_description": "Find the best U-Pick farms near Phoenix, New York. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "Central Square",
-    "slug": "central-square",
-    "population": null,
-    "coordinates": {
-      "latitude": 43.303409,
-      "longitude": -76.19984
-    },
-    "province": "New York",
-    "province_slug": "ny",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "central-square-ny-ca",
-    "full_location": "Central Square, NY, Canada",
-    "seo_title": "U-Pick Farms near Central Square, New York",
-    "meta_description": "Find the best U-Pick farms near Central Square, New York. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "The Dalles",
-    "slug": "the-dalles",
-    "population": null,
-    "coordinates": {
-      "latitude": 45.598306,
-      "longitude": -121.26925
-    },
-    "province": "Oregon",
-    "province_slug": "or",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "the-dalles-or-ca",
-    "full_location": "The Dalles, OR, Canada",
-    "seo_title": "U-Pick Farms near The Dalles, Oregon",
-    "meta_description": "Find the best U-Pick farms near The Dalles, Oregon. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "NÄ«nole",
-    "slug": "n-nole",
-    "population": null,
-    "coordinates": {
-      "latitude": 19.926513,
-      "longitude": -155.166493
-    },
-    "province": "Hawaii",
-    "province_slug": "hi",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "n-nole-hi-ca",
-    "full_location": "NÄ«nole, HI, Canada",
-    "seo_title": "U-Pick Farms near NÄ«nole, Hawaii",
-    "meta_description": "Find the best U-Pick farms near NÄ«nole, Hawaii. Fresh apples, berries, pumpkins and Christmas trees."
-  },
-  {
-    "name": "Rantoul",
-    "slug": "rantoul",
-    "population": null,
-    "coordinates": {
-      "latitude": 40.297961,
-      "longitude": -88.202652
-    },
-    "province": "Illinois",
-    "province_slug": "il",
-    "country": "Canada",
-    "country_slug": "ca",
-    "location_slug": "rantoul-il-ca",
-    "full_location": "Rantoul, IL, Canada",
-    "seo_title": "U-Pick Farms near Rantoul, Illinois",
-    "meta_description": "Find the best U-Pick farms near Rantoul, Illinois. Fresh apples, berries, pumpkins and Christmas trees."
+    "location_slug": "jacksonville-nc-ca",
+    "full_location": "Jacksonville, NC, Canada",
+    "seo_title": "U-Pick Farms near Jacksonville, North Carolina",
+    "meta_description": "Find the best U-Pick farms near Jacksonville, North Carolina. Fresh apples, berries, pumpkins and Christmas trees."
   }
 ]

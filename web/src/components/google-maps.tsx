@@ -173,9 +173,9 @@ export default function GoogleMaps({
       return
     }
 
-    // Load Google Maps script
+    // Load Google Maps script with marker library for AdvancedMarkerElement
     const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE'}`
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE'}&loading=async&libraries=marker`
     script.async = true
     script.defer = true
     

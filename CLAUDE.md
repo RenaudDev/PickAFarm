@@ -125,6 +125,54 @@ Farm data originates from Zoho CRM:
 4. Rebuild is triggered via GitHub Actions workflow
 5. Web app rebuilds with fresh data
 
+### Farm Custom Branding (Logo & Background Images)
+Farms can have custom logos and background images managed through Zoho CRM:
+
+**Architecture:**
+- **Storage**: Cloudflare R2 bucket (`pickafarm-assets`)
+- **CDN**: `https://cdn.pickafarm.com` (public read access)
+- **Zoho Fields**: `Logo` and `Cover_Image` (file upload fields in Zoho CRM)
+- **Database**: `logo_url`, `background_url`, `logo_updated_at`, `background_updated_at` columns in `farms` table
+
+**Image Processing Pipeline:**
+1. Farm owner uploads image to Zoho CRM (Logo or Cover_Image field)
+2. Zoho webhook triggers Worker endpoint with file metadata
+3. Worker downloads image from Zoho API: `/crm/v3/Accounts/{recordId}/actions/download_fields_attachment?fields_attachment_id={fileId}`
+4. Worker validates image size (warns if >200KB, recommends pre-optimization with Squoosh.app)
+5. Worker uploads original format (JPEG/PNG/WebP) to R2 at `/farms/{farmId}/{logo|background}.{ext}`
+6. Worker generates CDN URL with cache-busting timestamp: `?v={timestamp}`
+7. Worker updates D1 database with CDN URLs and timestamps
+8. On error, Worker sends notification email via Resend (non-blocking)
+
+**Key Implementation Files:**
+- `src/lib/image-processor.js` - Image download, validation, and R2 upload functions
+- `src/lib/email-notifications.js` - Error notification emails
+- `src/index.js` (lines 676-850) - Zoho webhook handler with image processing
+- `web/components/farm-profile-header.tsx` - Facebook-style profile header display
+- `web/lib/fallback-image.ts` - SVG fallback logo generation for farms without custom images
+
+**Frontend Display:**
+- Profile header component with background image and logo overlay (bottom-left)
+- Responsive design: 150×150px logo (desktop), 120×120px (mobile)
+- Fallback: SVG generated logo with farm's first letter in hashed color circle
+- Default background: `/images/farms/background.webp`
+
+**R2 Bucket Structure:**
+```
+pickafarm-assets/
+└── farms/
+    └── {farmId}/
+        ├── logo.{ext}        # Farm logo (JPEG/PNG/WebP)
+        └── background.{ext}  # Cover/background image
+```
+
+**Important Notes:**
+- Images stored in original format (no server-side optimization for MVP)
+- Future enhancement: Cloudflare Images integration ($5/mo for automatic WebP conversion)
+- API SELECT queries MUST include: `logo_url, background_url, logo_updated_at, background_updated_at`
+- Build script (`web/scripts/generate-farm-data.js`) MUST include these fields in D1 query
+- Zoho API uses v3 endpoint for file downloads (NOT v8)
+
 ### Data Flow
 ```
 Zoho CRM → Webhook → Worker → D1 Database
