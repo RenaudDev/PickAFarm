@@ -17,102 +17,102 @@
     "cities": [
       {
         "name": "Markham",
-        "slug": "markham-ontario-ca",
+        "slug": "markham-on-ca",
         "farm_count": 24
       },
       {
         "name": "Richmond Hill",
-        "slug": "richmond-hill-ontario-ca",
+        "slug": "richmond-hill-on-ca",
         "farm_count": 24
       },
       {
         "name": "Vaughan",
-        "slug": "vaughan-ontario-ca",
+        "slug": "vaughan-on-ca",
         "farm_count": 23
       },
       {
-        "name": "Newmarket",
-        "slug": "newmarket-ontario-ca",
+        "name": "Aurora",
+        "slug": "aurora-on-ca",
         "farm_count": 22
       },
       {
-        "name": "Aurora",
-        "slug": "aurora-ontario-ca",
+        "name": "Newmarket",
+        "slug": "newmarket-on-ca",
         "farm_count": 22
       },
       {
         "name": "Mississauga",
-        "slug": "mississauga-ontario-ca",
+        "slug": "mississauga-on-ca",
         "farm_count": 21
       },
       {
         "name": "Caledon",
-        "slug": "caledon-ontario-ca",
+        "slug": "caledon-on-ca",
         "farm_count": 21
       },
       {
-        "name": "Toronto",
-        "slug": "toronto-ontario-ca",
-        "farm_count": 20
-      },
-      {
-        "name": "Brampton",
-        "slug": "brampton-ontario-ca",
+        "name": "Milton",
+        "slug": "milton-on-ca",
         "farm_count": 20
       },
       {
         "name": "Oakville",
-        "slug": "oakville-ontario-ca",
+        "slug": "oakville-on-ca",
         "farm_count": 20
       },
       {
-        "name": "Guelph",
-        "slug": "guelph-ontario-ca",
+        "name": "Toronto",
+        "slug": "toronto-on-ca",
         "farm_count": 20
       },
       {
-        "name": "Milton",
-        "slug": "milton-ontario-ca",
+        "name": "Brampton",
+        "slug": "brampton-on-ca",
         "farm_count": 20
       },
       {
         "name": "Halton Hills",
-        "slug": "halton-hills-ontario-ca",
+        "slug": "halton-hills-on-ca",
         "farm_count": 20
       },
       {
-        "name": "Cambridge",
-        "slug": "cambridge-ontario-ca",
-        "farm_count": 18
+        "name": "Guelph",
+        "slug": "guelph-on-ca",
+        "farm_count": 20
       },
       {
         "name": "Ajax",
-        "slug": "ajax-ontario-ca",
-        "farm_count": 18
-      },
-      {
-        "name": "Brantford",
-        "slug": "brantford-ontario-ca",
+        "slug": "ajax-on-ca",
         "farm_count": 18
       },
       {
         "name": "Pickering",
-        "slug": "pickering-ontario-ca",
+        "slug": "pickering-on-ca",
         "farm_count": 18
       },
       {
-        "name": "Kitchener",
-        "slug": "kitchener-ontario-ca",
-        "farm_count": 17
+        "name": "Brantford",
+        "slug": "brantford-on-ca",
+        "farm_count": 18
+      },
+      {
+        "name": "Cambridge",
+        "slug": "cambridge-on-ca",
+        "farm_count": 18
       },
       {
         "name": "Burlington",
-        "slug": "burlington-ontario-ca",
+        "slug": "burlington-on-ca",
         "farm_count": 17
       },
       {
-        "name": "Waterloo",
-        "slug": "waterloo-ontario-ca",
+        "name": "Norfolk County",
+        "slug": "norfolk-county-on-ca",
+        "farm_count": 17
+      },
+      {
+        "name": "Kitchener",
+        "slug": "kitchener-on-ca",
         "farm_count": 17
       }
     ],
@@ -4355,13 +4355,13 @@
         "farm_count": 9
       },
       {
-        "name": "Buffalo",
-        "slug": "buffalo-new-york-us",
+        "name": "Yonkers",
+        "slug": "yonkers-new-york-us",
         "farm_count": 6
       },
       {
-        "name": "Yonkers",
-        "slug": "yonkers-new-york-us",
+        "name": "Buffalo",
+        "slug": "buffalo-new-york-us",
         "farm_count": 6
       },
       {
@@ -6320,8 +6320,8 @@
     "farms_per_page": 31,
     "cities": [
       {
-        "name": "San Francisco",
-        "slug": "san-francisco-california-us",
+        "name": "Oakland",
+        "slug": "oakland-california-us",
         "farm_count": 11
       },
       {
@@ -6330,8 +6330,8 @@
         "farm_count": 11
       },
       {
-        "name": "Oakland",
-        "slug": "oakland-california-us",
+        "name": "San Francisco",
+        "slug": "san-francisco-california-us",
         "farm_count": 11
       },
       {
@@ -6345,33 +6345,8 @@
         "farm_count": 6
       },
       {
-        "name": "Long Beach",
-        "slug": "long-beach-california-us",
-        "farm_count": 4
-      },
-      {
         "name": "Anaheim",
         "slug": "anaheim-california-us",
-        "farm_count": 4
-      },
-      {
-        "name": "Santa Ana",
-        "slug": "santa-ana-california-us",
-        "farm_count": 4
-      },
-      {
-        "name": "Riverside",
-        "slug": "riverside-california-us",
-        "farm_count": 4
-      },
-      {
-        "name": "Irvine",
-        "slug": "irvine-california-us",
-        "farm_count": 4
-      },
-      {
-        "name": "San Bernardino",
-        "slug": "san-bernardino-california-us",
         "farm_count": 4
       },
       {
@@ -6380,13 +6355,38 @@
         "farm_count": 4
       },
       {
+        "name": "Huntington Beach",
+        "slug": "huntington-beach-california-us",
+        "farm_count": 4
+      },
+      {
+        "name": "Irvine",
+        "slug": "irvine-california-us",
+        "farm_count": 4
+      },
+      {
+        "name": "Long Beach",
+        "slug": "long-beach-california-us",
+        "farm_count": 4
+      },
+      {
         "name": "Moreno Valley",
         "slug": "moreno-valley-california-us",
         "farm_count": 4
       },
       {
-        "name": "Huntington Beach",
-        "slug": "huntington-beach-california-us",
+        "name": "Riverside",
+        "slug": "riverside-california-us",
+        "farm_count": 4
+      },
+      {
+        "name": "San Bernardino",
+        "slug": "san-bernardino-california-us",
+        "farm_count": 4
+      },
+      {
+        "name": "Santa Ana",
+        "slug": "santa-ana-california-us",
         "farm_count": 4
       },
       {
@@ -6395,19 +6395,14 @@
         "farm_count": 2
       },
       {
-        "name": "Stockton",
-        "slug": "stockton-california-us",
-        "farm_count": 2
-      },
-      {
         "name": "Modesto",
         "slug": "modesto-california-us",
         "farm_count": 2
       },
       {
-        "name": "San Diego",
-        "slug": "san-diego-california-us",
-        "farm_count": 1
+        "name": "Stockton",
+        "slug": "stockton-california-us",
+        "farm_count": 2
       },
       {
         "name": "Bakersfield",
@@ -6417,6 +6412,11 @@
       {
         "name": "Chula Vista",
         "slug": "chula-vista-california-us",
+        "farm_count": 1
+      },
+      {
+        "name": "Nipomo",
+        "slug": "nipomo-ca-us",
         "farm_count": 1
       }
     ],
@@ -7897,7 +7897,7 @@
       },
       {
         "name": "Eau Claire",
-        "slug": "eau-claire-wi-us",
+        "slug": "eau-claire-wi-ca",
         "farm_count": 2
       }
     ],
@@ -12599,13 +12599,13 @@
         "farm_count": 1
       },
       {
-        "name": "Greensboro",
-        "slug": "greensboro-north-carolina-us",
+        "name": "Durham",
+        "slug": "durham-north-carolina-us",
         "farm_count": 1
       },
       {
-        "name": "Durham",
-        "slug": "durham-north-carolina-us",
+        "name": "Greensboro",
+        "slug": "greensboro-north-carolina-us",
         "farm_count": 1
       },
       {
@@ -14599,13 +14599,13 @@
         "farm_count": 14
       },
       {
-        "name": "Eugene",
-        "slug": "eugene-or-us",
+        "name": "The Dalles",
+        "slug": "the-dalles-or-us",
         "farm_count": 5
       },
       {
-        "name": "The Dalles",
-        "slug": "the-dalles-or-us",
+        "name": "Eugene",
+        "slug": "eugene-or-us",
         "farm_count": 5
       }
     ],
@@ -17986,23 +17986,8 @@
     "farms_per_page": 15,
     "cities": [
       {
-        "name": "Vancouver",
-        "slug": "vancouver-bc-ca",
-        "farm_count": 11
-      },
-      {
-        "name": "Surrey",
-        "slug": "surrey-bc-ca",
-        "farm_count": 11
-      },
-      {
         "name": "Burnaby",
         "slug": "burnaby-bc-ca",
-        "farm_count": 11
-      },
-      {
-        "name": "Richmond",
-        "slug": "richmond-bc-ca",
         "farm_count": 11
       },
       {
@@ -18011,13 +17996,13 @@
         "farm_count": 11
       },
       {
-        "name": "Langley",
-        "slug": "langley-bc-ca",
+        "name": "Delta",
+        "slug": "delta-bc-ca",
         "farm_count": 11
       },
       {
-        "name": "Delta",
-        "slug": "delta-bc-ca",
+        "name": "Langley",
+        "slug": "langley-bc-ca",
         "farm_count": 11
       },
       {
@@ -18026,13 +18011,28 @@
         "farm_count": 11
       },
       {
+        "name": "North Vancouver",
+        "slug": "north-vancouver-bc-ca",
+        "farm_count": 11
+      },
+      {
         "name": "Port Coquitlam",
         "slug": "port-coquitlam-bc-ca",
         "farm_count": 11
       },
       {
-        "name": "North Vancouver",
-        "slug": "north-vancouver-bc-ca",
+        "name": "Richmond",
+        "slug": "richmond-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Surrey",
+        "slug": "surrey-bc-ca",
+        "farm_count": 11
+      },
+      {
+        "name": "Vancouver",
+        "slug": "vancouver-bc-ca",
         "farm_count": 11
       },
       {
@@ -18041,13 +18041,13 @@
         "farm_count": 10
       },
       {
-        "name": "Abbotsford",
-        "slug": "abbotsford-bc-ca",
+        "name": "Saanich",
+        "slug": "saanich-bc-ca",
         "farm_count": 9
       },
       {
-        "name": "Saanich",
-        "slug": "saanich-bc-ca",
+        "name": "Abbotsford",
+        "slug": "abbotsford-bc-ca",
         "farm_count": 9
       },
       {
@@ -19484,11 +19484,6 @@
         "farm_count": 2
       },
       {
-        "name": "Springfield",
-        "slug": "springfield-il-us",
-        "farm_count": 1
-      },
-      {
         "name": "Fairfield",
         "slug": "fairfield-il-us",
         "farm_count": 1
@@ -19496,6 +19491,11 @@
       {
         "name": "Rantoul",
         "slug": "rantoul-il-us",
+        "farm_count": 1
+      },
+      {
+        "name": "Springfield",
+        "slug": "springfield-il-us",
         "farm_count": 1
       }
     ],
@@ -20126,13 +20126,13 @@
     "farms_per_page": 12,
     "cities": [
       {
-        "name": "Nashville-Davidson",
-        "slug": "nashville-davidson-tennessee-us",
+        "name": "Oak Ridge",
+        "slug": "oak-ridge-tn-us",
         "farm_count": 5
       },
       {
-        "name": "Oak Ridge",
-        "slug": "oak-ridge-tn-us",
+        "name": "Nashville-Davidson",
+        "slug": "nashville-davidson-tennessee-us",
         "farm_count": 5
       },
       {
@@ -20730,24 +20730,14 @@
         "farm_count": 8
       },
       {
-        "name": "Repentigny",
-        "slug": "repentigny-qc-ca",
-        "farm_count": 7
-      },
-      {
         "name": "Granby",
         "slug": "granby-qc-ca",
         "farm_count": 7
       },
       {
-        "name": "Longueuil",
-        "slug": "longueuil-qc-ca",
-        "farm_count": 6
-      },
-      {
-        "name": "Saint-Jean-sur-Richelieu",
-        "slug": "saint-jean-sur-richelieu-qc-ca",
-        "farm_count": 6
+        "name": "Repentigny",
+        "slug": "repentigny-qc-ca",
+        "farm_count": 7
       },
       {
         "name": "Brossard",
@@ -20760,13 +20750,23 @@
         "farm_count": 6
       },
       {
-        "name": "Montreal",
-        "slug": "montreal-qc-ca",
-        "farm_count": 5
+        "name": "Longueuil",
+        "slug": "longueuil-qc-ca",
+        "farm_count": 6
+      },
+      {
+        "name": "Saint-Jean-sur-Richelieu",
+        "slug": "saint-jean-sur-richelieu-qc-ca",
+        "farm_count": 6
       },
       {
         "name": "Laval",
         "slug": "laval-qc-ca",
+        "farm_count": 5
+      },
+      {
+        "name": "Montreal",
+        "slug": "montreal-qc-ca",
         "farm_count": 5
       },
       {
@@ -20775,18 +20775,18 @@
         "farm_count": 5
       },
       {
+        "name": "Mirabel",
+        "slug": "mirabel-qc-ca",
+        "farm_count": 4
+      },
+      {
         "name": "Sherbrooke",
         "slug": "sherbrooke-qc-ca",
         "farm_count": 4
       },
       {
         "name": "Saint-Jérôme",
-        "slug": "saint-jerome-qc-ca",
-        "farm_count": 4
-      },
-      {
-        "name": "Mirabel",
-        "slug": "mirabel-qc-ca",
+        "slug": "saint-jrme-qc-ca",
         "farm_count": 4
       },
       {
@@ -20796,17 +20796,17 @@
       },
       {
         "name": "Trois-Rivières",
-        "slug": "trois-rivieres-qc-ca",
+        "slug": "trois-rivires-qc-ca",
         "farm_count": 3
+      },
+      {
+        "name": "Lévis",
+        "slug": "lvis-qc-ca",
+        "farm_count": 2
       },
       {
         "name": "Quebec City",
         "slug": "quebec-city-qc-ca",
-        "farm_count": 2
-      },
-      {
-        "name": "Lévis",
-        "slug": "levis-qc-ca",
         "farm_count": 2
       }
     ],
@@ -21901,13 +21901,13 @@
         "farm_count": 3
       },
       {
-        "name": "Austin",
-        "slug": "austin-texas-us",
+        "name": "Arlington",
+        "slug": "arlington-texas-us",
         "farm_count": 2
       },
       {
-        "name": "Arlington",
-        "slug": "arlington-texas-us",
+        "name": "Austin",
+        "slug": "austin-texas-us",
         "farm_count": 2
       },
       {
@@ -21921,13 +21921,13 @@
         "farm_count": 1
       },
       {
-        "name": "San Antonio",
-        "slug": "san-antonio-texas-us",
+        "name": "Livingston",
+        "slug": "livingston-tx-us",
         "farm_count": 1
       },
       {
-        "name": "Livingston",
-        "slug": "livingston-tx-us",
+        "name": "San Antonio",
+        "slug": "san-antonio-texas-us",
         "farm_count": 1
       }
     ],
@@ -22971,13 +22971,13 @@
         "farm_count": 4
       },
       {
-        "name": "Mount Pleasant",
-        "slug": "mount-pleasant-south-carolina-us",
+        "name": "Hilton Head Island",
+        "slug": "hilton-head-island-sc-us",
         "farm_count": 1
       },
       {
-        "name": "Hilton Head Island",
-        "slug": "hilton-head-island-sc-us",
+        "name": "Mount Pleasant",
+        "slug": "mount-pleasant-south-carolina-us",
         "farm_count": 1
       }
     ],
@@ -23470,13 +23470,13 @@
         "farm_count": 5
       },
       {
-        "name": "Richmond",
-        "slug": "richmond-virginia-us",
+        "name": "Blacksburg",
+        "slug": "blacksburg-va-us",
         "farm_count": 2
       },
       {
-        "name": "Blacksburg",
-        "slug": "blacksburg-va-us",
+        "name": "Richmond",
+        "slug": "richmond-virginia-us",
         "farm_count": 2
       }
     ],
@@ -24333,13 +24333,13 @@
         "farm_count": 3
       },
       {
-        "name": "Cordele",
-        "slug": "cordele-ga-us",
+        "name": "LaGrange",
+        "slug": "lagrange-ga-us",
         "farm_count": 1
       },
       {
-        "name": "LaGrange",
-        "slug": "lagrange-ga-us",
+        "name": "Cordele",
+        "slug": "cordele-ga-us",
         "farm_count": 1
       },
       {
@@ -24752,8 +24752,8 @@
         "farm_count": 2
       },
       {
-        "name": "Iowa Falls",
-        "slug": "iowa-falls-ia-us",
+        "name": "Decorah",
+        "slug": "decorah-ia-us",
         "farm_count": 1
       },
       {
@@ -24762,8 +24762,8 @@
         "farm_count": 1
       },
       {
-        "name": "Decorah",
-        "slug": "decorah-ia-us",
+        "name": "Iowa Falls",
+        "slug": "iowa-falls-ia-us",
         "farm_count": 1
       }
     ],
@@ -25781,18 +25781,18 @@
     "farms_per_page": 5,
     "cities": [
       {
-        "name": "Tampa",
-        "slug": "tampa-florida-us",
-        "farm_count": 2
-      },
-      {
         "name": "St. Petersburg",
         "slug": "st-petersburg-florida-us",
         "farm_count": 2
       },
       {
-        "name": "Orlando",
-        "slug": "orlando-florida-us",
+        "name": "Tampa",
+        "slug": "tampa-florida-us",
+        "farm_count": 2
+      },
+      {
+        "name": "Anthony",
+        "slug": "anthony-fl-us",
         "farm_count": 1
       },
       {
@@ -25806,8 +25806,8 @@
         "farm_count": 1
       },
       {
-        "name": "Anthony",
-        "slug": "anthony-fl-us",
+        "name": "Orlando",
+        "slug": "orlando-florida-us",
         "farm_count": 1
       }
     ],

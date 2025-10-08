@@ -46,6 +46,8 @@ import { generateFarmMetadata } from "@/lib/seo-metadata"
 import { getVarietySlug } from "@/lib/variety-mapper"
 import { Metadata } from "next"
 import { getReviews } from "@/lib/reviews"
+import { generateFarmDetailSchema } from "@/lib/farm-schema"
+import { StructuredData } from "@/components/seo/structured-data"
 
 // Import farms data for static generation
 import farmsDataRaw from "../../../data/farms.json"
@@ -257,8 +259,12 @@ export default async function FarmListingPage({ params }: { params: Promise<{ id
 
   const nearestCity = getNearestCity()
 
+  // Generate farm schema for SEO
+  const farmSchema = generateFarmDetailSchema(farm)
+
   return (
     <div className="min-h-screen bg-background">
+      <StructuredData data={farmSchema} />
       <FarmNavbar />
       <div className="bg-muted/20 border-b">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3">

@@ -8,14 +8,9 @@ console.log('='.repeat(60));
 const farmsDataPath = path.join(__dirname, '../data/farms.json');
 const farmsData = JSON.parse(fs.readFileSync(farmsDataPath, 'utf8'));
 
-// Read locations data to get city slugs (from locations.json which is the source)
-const locationsDataPath = path.join(__dirname, '../data/locations.json');
-const locationsRaw = JSON.parse(fs.readFileSync(locationsDataPath, 'utf8'));
-
-// Handle both array format and object with locationPages
-const locationsData = Array.isArray(locationsRaw)
-  ? locationsRaw
-  : (locationsRaw.locationPages || []);
+// Read locations data to get city slugs (from locations-with-farms.json which has correct slugs)
+const locationsDataPath = path.join(__dirname, '../data/locations-with-farms.json');
+const locationsData = JSON.parse(fs.readFileSync(locationsDataPath, 'utf8'));
 
 // Filter active farms only
 const activeFarms = farmsData.filter(farm => farm.active === 1 || farm.active === true);

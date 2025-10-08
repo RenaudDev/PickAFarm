@@ -20,17 +20,31 @@ const { variety: varietySlug } = await params;
 const variety = await getVarietyBySlug(varietySlug);
 
 if (!variety) {
-  return {};
+  return {
+    title: 'Variety Not Found | PickAFarm',
+    description: 'The requested variety could not be found.'
+  };
 }
 
 const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
-const description = variety.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim();
+const description = variety.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim() ||
+  `Learn about ${variety.title.rendered} varieties. Find farms offering ${variety.title.rendered} for pick-your-own experiences.`;
+
+const keywords = [
+  variety.title.rendered.toLowerCase(),
+  `${variety.title.rendered.toLowerCase()} varieties`,
+  `${variety.title.rendered.toLowerCase()} picking`,
+  `u-pick ${variety.title.rendered.toLowerCase()}`,
+  'farm varieties',
+  'pick your own'
+];
 
 return generateSEOMetadata({
-  title: variety.title.rendered,
+  title: `${variety.title.rendered} Varieties - Pick Your Own Guide`,
   description: description,
-  image: featuredImage?.source_url,
-  url: `https://pickafarm.com/varieties/${variety.slug}`,
+  keywords: keywords,
+  image: featuredImage?.source_url || 'https://pickafarm.com/images/og-pickafarm.webp',
+  url: `https://pickafarm.com/varieties/${variety.slug}/`,
   type: 'article',
 });
 }

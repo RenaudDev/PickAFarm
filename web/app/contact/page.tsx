@@ -2,6 +2,22 @@ import StaticPageLayout from "@/components/static-page-layout"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { Metadata } from "next"
+import { generateMetadata as createMetadata } from "@/lib/seo-metadata"
+
+export async function generateMetadata(): Promise<Metadata> {
+  return createMetadata({
+    title: "Contact Us - PickAFarm",
+    description: "Get in touch with the PickAFarm team. Questions about farm listings, partnerships, or need help? We're here to assist you.",
+    keywords: [
+      "contact pickafarm",
+      "farm directory contact",
+      "list your farm",
+      "farm partnership"
+    ],
+    url: "https://pickafarm.com/contact/"
+  })
+}
 
 export default function ContactPage() {
   return (

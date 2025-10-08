@@ -53,6 +53,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const topCategories = stateData.categories.slice(0, 3).map(c => c.name.toLowerCase()).join(', ')
     const keywords = `${stateData.state_name.toLowerCase()} u-pick farms, pick your own ${stateData.state_name.toLowerCase()}, ${stateData.state_name.toLowerCase()} farms, u-pick ${stateData.state_code.toLowerCase()}, ${topCategories}`
 
+    const ogImage = 'https://pickafarm.com/images/og-pickafarm.webp'
+
     return {
       title,
       description,
@@ -61,12 +63,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title: `${stateData.total_farms} U-Pick Farms in ${stateData.state_name}`,
         description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`,
         type: 'website',
-        url: `https://pickafarm.com/${slug}`
+        url: `https://pickafarm.com/${slug}`,
+        images: [
+          {
+            url: ogImage,
+            width: 1200,
+            height: 630,
+            alt: `U-Pick Farms in ${stateData.state_name}`
+          }
+        ]
       },
       twitter: {
         card: 'summary_large_image',
         title: `${stateData.total_farms} U-Pick Farms in ${stateData.state_name}`,
-        description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`
+        description: `${stateData.total_farms} pick-your-own farms across ${stateData.state_name}`,
+        images: [ogImage]
       },
       alternates: {
         canonical: `https://pickafarm.com/${slug}`

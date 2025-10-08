@@ -17,7 +17,7 @@ export function generateOrganizationSchema() {
     "url": BASE_URL,
     "logo": {
       "@type": "ImageObject",
-      "url": `${BASE_URL}/logo.png`,
+      "url": `${BASE_URL}/android-chrome-512x512.png`,
       "width": 512,
       "height": 512
     },

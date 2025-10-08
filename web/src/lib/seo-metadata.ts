@@ -136,7 +136,7 @@ export function generateFarmMetadata(farm: any): Metadata {
 
   // Create compelling description with call-to-action
   const description = `Visit ${farm.name}, a ${primaryCategory.toLowerCase()} in ${farm.city_name}, ${farm.state_province}. Get directions, hours, reviews, and plan your visit to this local pick-your-own farm.`
-  
+
   const keywords = [
     farm.name.toLowerCase(),
     farm.categories?.toLowerCase().replace(/\s+/g, ' '),
@@ -148,11 +148,15 @@ export function generateFarmMetadata(farm: any): Metadata {
     ...(farm.varieties ? farm.varieties.split(',').map((v: string) => v.trim().toLowerCase()) : []),
     ...(farm.amenities ? farm.amenities.split(',').map((a: string) => a.trim().toLowerCase()) : [])
   ].filter(Boolean)
-  
+
+  // Use farm's background image if available, otherwise logo, otherwise default
+  const farmImage = farm.background_url || farm.logo_url || SITE_CONFIG.defaultImage
+
   return generateMetadata({
     title,
     description,
     keywords,
+    image: farmImage,
     url: `${SITE_CONFIG.domain}/farms/${farm.slug}/`,
     type: "article",
     isBusiness: true

@@ -1,4 +1,15 @@
 import StaticPageLayout from "@/components/static-page-layout"
+import { Metadata } from "next"
+import { generateMetadata as createMetadata } from "@/lib/seo-metadata"
+
+export async function generateMetadata(): Promise<Metadata> {
+  return createMetadata({
+    title: "Privacy Policy - PickAFarm",
+    description: "Read PickAFarm's privacy policy to understand how we collect, use, and protect your personal information.",
+    keywords: ["privacy policy", "data protection", "user privacy"],
+    url: "https://pickafarm.com/privacy/"
+  })
+}
 
 export default function PrivacyPolicyPage() {
   return (

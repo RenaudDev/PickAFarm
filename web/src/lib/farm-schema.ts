@@ -14,6 +14,7 @@ interface Farm {
   categories?: string
   reviews?: number
   rating?: number
+  subscriber_count?: number
   street?: string
   postal_code?: string
   // Additional fields for enhanced schema
@@ -31,7 +32,12 @@ interface Farm {
   background_url?: string
   payment_methods?: string
   amenities?: string
+  varieties?: string
   price_range?: string
+  opening_date?: string
+  closing_date?: string
+  pet_friendly?: number
+  verified?: number
 }
 
 export function generateFarmsSchema(farms: Farm[], organizationName = "PickAFarm") {
@@ -40,7 +46,7 @@ export function generateFarmsSchema(farms: Farm[], organizationName = "PickAFarm
     "@type": "Organization",
     "name": organizationName,
     "url": "https://pickafarm.com",
-    "logo": "https://pickafarm.com/logo.png",
+    "logo": "https://pickafarm.com/android-chrome-512x512.png",
     "description": "Find the best pick-your-own farms, Christmas tree farms, pumpkin patches, and agritourism experiences across Canada.",
     "sameAs": [
       "https://www.facebook.com/PickAFarmCanada",
@@ -225,7 +231,7 @@ export function generateFarmDetailSchema(farm: Farm) {
   if (farm.website) schema.url = farm.website
   if (farm.description) schema.description = farm.description
 
-  // Add logo/image
+  // Add logo/image - use logo as primary image for business listings
   if (farm.logo_url) {
     schema.image = farm.logo_url
     schema.logo = farm.logo_url
@@ -239,6 +245,15 @@ export function generateFarmDetailSchema(farm: Farm) {
       "reviewCount": farm.reviews,
       "bestRating": "5",
       "worstRating": "1"
+    }
+  }
+
+  // Add subscriber count as interaction statistic
+  if (farm.subscriber_count !== undefined && farm.subscriber_count > 0) {
+    schema.interactionStatistic = {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/FollowAction",
+      "userInteractionCount": farm.subscriber_count
     }
   }
 
@@ -276,6 +291,56 @@ export function generateFarmDetailSchema(farm: Farm) {
       "@type": "LocationFeatureSpecification",
       "name": amenity.trim()
     }))
+  }
+
+  // Add varieties as makesOffer
+  if (farm.varieties) {
+    schema.makesOffer = farm.varieties.split(',').map((variety: string) => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Product",
+        "name": variety.trim()
+      }
+    }))
+  }
+
+  // Add additional properties
+  const additionalProperties = []
+
+  if (farm.pet_friendly === 1) {
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      "name": "Pet Friendly",
+      "value": "Yes"
+    })
+  }
+
+  if (farm.verified === 1) {
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      "name": "Verified",
+      "value": "Owner Verified"
+    })
+  }
+
+  if (farm.opening_date) {
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      "name": "Opening Date",
+      "value": farm.opening_date
+    })
+  }
+
+  if (farm.closing_date) {
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      "name": "Closing Date",
+      "value": farm.closing_date
+    })
+  }
+
+  if (additionalProperties.length > 0) {
+    schema.additionalProperty = additionalProperties
   }
 
   return schema

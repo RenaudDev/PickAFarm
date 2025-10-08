@@ -4,6 +4,24 @@ import { FarmFooter } from "@/components/farm-footer"
 import { Calendar } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { Metadata } from "next"
+import { generateMetadata as createMetadata } from "@/lib/seo-metadata"
+
+export async function generateMetadata(): Promise<Metadata> {
+  return createMetadata({
+    title: "Farm Tips & Guides Blog",
+    description: "Discover farm tips, seasonal guides, and the best pick-your-own experiences. Learn about u-pick farms, Christmas tree selection, and family farm activities.",
+    keywords: [
+      "farm blog",
+      "pick your own tips",
+      "christmas tree guides",
+      "farm activities",
+      "seasonal farming",
+      "u-pick guides"
+    ],
+    url: "https://pickafarm.com/blog/"
+  })
+}
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
