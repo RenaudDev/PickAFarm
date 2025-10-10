@@ -7,6 +7,13 @@ const nextConfig = {
   // Fix malformed location URLs from data generation bug
   async redirects() {
     return [
+      // Pattern 0: Legacy route - all-farms-near/near/* → farms-near/*
+      // Old route structure that no longer exists
+      {
+        source: '/all-farms-near/near/:location/',
+        destination: '/farms-near/:location/',
+        permanent: true,
+      },
       // Pattern 1: US states incorrectly tagged as Canada
       // All 50 US states + DC that were marked as "canada"
       {
@@ -107,6 +114,14 @@ const nextConfig = {
       {
         source: '/:category/near/:city-:province(on|qc|bc|ab|mb|sk|ns|nb|nl|pe|nt|yt|nu)-canada/',
         destination: '/:category/near/:city-:province-ca/',
+        permanent: true,
+      },
+
+      // Pattern 5: Special case - Saint-Jérôme with malformed slug
+      // "saint-j-r-me" was created by incorrectly stripping special chars
+      {
+        source: '/:category/near/saint-j-r-me-qc-canada/',
+        destination: '/:category/near/saint-jerome-qc-ca/',
         permanent: true,
       },
     ];
