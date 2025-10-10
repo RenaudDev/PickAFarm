@@ -117,11 +117,27 @@ const nextConfig = {
         permanent: true,
       },
 
-      // Pattern 5: Special case - Saint-Jérôme with malformed slug
-      // "saint-j-r-me" was created by incorrectly stripping special chars
+      // Pattern 5: Special cases - Cities with malformed slugs from special character stripping
+      // Saint-Jérôme: "saint-j-r-me" → "saint-jerome"
+      {
+        source: '/all-farms-near/near/saint-j-r-me-qc-canada/',
+        destination: '/farms-near/saint-jerome-qc-ca/',
+        permanent: true,
+      },
       {
         source: '/:category/near/saint-j-r-me-qc-canada/',
         destination: '/:category/near/saint-jerome-qc-ca/',
+        permanent: true,
+      },
+      // Trois-Rivières: "trois-rivi-res" → "trois-rivieres"
+      {
+        source: '/all-farms-near/near/trois-rivi-res-qc-canada/',
+        destination: '/farms-near/trois-rivieres-qc-ca/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/trois-rivi-res-qc-canada/',
+        destination: '/:category/near/trois-rivieres-qc-ca/',
         permanent: true,
       },
     ];
