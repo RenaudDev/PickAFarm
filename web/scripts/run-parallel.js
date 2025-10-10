@@ -12,13 +12,13 @@ const parallelScripts = [
   'generate-search-data.js',
   'generate-categories.js',
   'generate-location-data.js',
-  'generate-state-data.js',
   'generate-manifest.js',
   'generate-static-map.js'
 ];
 
 // Scripts that depend on the parallel scripts being complete
 const dependentScripts = [
+  'generate-state-data.js', // Requires locations-with-farms.json from generate-location-data.js
   'generate-sitemaps.js' // Requires states-with-farms.json to be complete
 ];
 
