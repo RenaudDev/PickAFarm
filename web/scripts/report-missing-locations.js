@@ -479,10 +479,49 @@ function getBaseLocations(locsRaw) {
     .map(c => {
       const citySlug = c.city ? c.city.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : 'unknown';
       
-      // Normalize country name
-      const isUS = c.country === 'United States' || c.country === 'USA' || c.country === 'US';
-      const country = isUS ? 'United States' : 'Canada';
-      const countrySlug = isUS ? 'us' : 'ca';
+      // Normalize country name with SAFE fallback based on province inference
+      const isUS = c.country === 'United States' ||
+                   c.country === 'USA' ||
+                   c.country === 'US' ||
+                   c.country === 'United States of America';
+
+      const isCanada = c.country === 'Canada' || c.country === 'CA';
+
+      let country;
+      let countrySlug;
+
+      if (isUS) {
+        country = 'United States';
+        countrySlug = 'us';
+      } else if (isCanada) {
+        country = 'Canada';
+        countrySlug = 'ca';
+      } else {
+        // ⚠️ FALLBACK: Use province to infer country when country is null/undefined
+        const usStates = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA',
+                          'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
+                          'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
+                          'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC',
+                          'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
+
+        const canadianProvinces = ['AB','BC','MB','NB','NL','NT','NS','NU',
+                                   'ON','PE','QC','SK','YT'];
+
+        const provinceAbbrev = getProvinceAbbrev(c.province);
+
+        if (usStates.includes(provinceAbbrev)) {
+          country = 'United States';
+          countrySlug = 'us';
+          console.warn(`⚠️ Inferred country=US for ${c.city}, ${c.province} (original country: ${c.country})`);
+        } else if (canadianProvinces.includes(provinceAbbrev)) {
+          country = 'Canada';
+          countrySlug = 'ca';
+          console.warn(`⚠️ Inferred country=Canada for ${c.city}, ${c.province} (original country: ${c.country})`);
+        } else {
+          console.error(`❌ ERROR: Cannot determine country for ${c.city}, ${c.province}, country=${c.country}`);
+          return null; // Skip this location - better to skip than corrupt
+        }
+      }
       
       // Get proper province/state abbreviation
       const provinceAbbrev = getProvinceAbbrev(c.province);
@@ -505,7 +544,8 @@ function getBaseLocations(locsRaw) {
         seo_title: `U-Pick Farms near ${c.city || 'Unknown City'}, ${c.province || 'Unknown Province'}`,
         meta_description: `Find the best U-Pick farms near ${c.city || 'Unknown City'}, ${c.province || 'Unknown Province'}. Fresh apples, berries, pumpkins and Christmas trees.`
       };
-    });
+    })
+    .filter(loc => loc !== null); // Remove any locations that couldn't be determined
 
 // Helper function for province abbreviations
 function getProvinceAbbrev(province) {

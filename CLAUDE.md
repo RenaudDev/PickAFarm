@@ -10,6 +10,26 @@ PickAFarm is a farm directory web application with notification features. The ar
 - **Data Source**: Zoho CRM integration for farm data
 - **Monorepo**: npm workspaces with root package managing web workspace
 
+**📚 For detailed architecture, see** [.agent/Docs/DOC_Application_Architecture.md](.agent/Docs/DOC_Application_Architecture.md)
+
+---
+
+## Quick Start
+
+```bash
+# Frontend development
+cd web && npm run dev              # Start Next.js dev server (localhost:3000)
+
+# Backend development
+wrangler dev                       # Start Worker locally (localhost:8787)
+
+# Full production build
+cd web && npm run prebuild         # Generate data from APIs
+cd web && npm run build            # Build static site
+```
+
+---
+
 ## Development Commands
 
 ### Web (Next.js)
@@ -45,20 +65,15 @@ npm install              # Install all dependencies
 npm run build            # Build web app (delegates to web/package.json)
 ```
 
+---
+
 ## Architecture
 
 ### Static Data Generation (Build Time)
 The web app uses a **static export strategy** to avoid runtime API calls:
 
 1. **prebuild** scripts run before `next build`
-2. Scripts in `web/scripts/` fetch data from the API:
-   - `generate-farm-data.js` → `web/data/farms.json` and `web/data/farm-params.json`
-   - `generate-search-data.js` → search index
-   - `generate-categories.js` → category data
-   - `generate-location-data.js` → `web/data/locations-with-farms.json` (reads from `locations.json`)
-   - `generate-state-data.js` → `web/data/states-with-farms.json` (reads from `locations.json` + `farms.json`)
-   - `generate-manifest.js` → PWA manifest
-   - `generate-sitemaps.js` → XML sitemaps
+2. Scripts in `web/scripts/` fetch data from the API
 3. Pages import JSON directly: `import farmsData from "../../../data/farms.json"`
 4. Next.js generates static HTML for all routes
 
@@ -66,21 +81,10 @@ The web app uses a **static export strategy** to avoid runtime API calls:
 
 **Data Dependencies:**
 - `generate-farm-data.js` must run FIRST (creates `farms.json`)
-- `generate-location-data.js` requires `farms.json` AND `locations.json` (source of truth for cities)
+- `generate-location-data.js` requires `farms.json` AND `locations.json`
 - `generate-state-data.js` requires `farms.json` AND `locations.json`
-- Order matters! The `prebuild` script runs them in the correct sequence.
-
-### Next.js 15 Async Params
-Next.js 15 requires async route params:
-```typescript
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  // ...
-}
-```
 
 ### API Routes (Cloudflare Worker)
-The API (`src/index.js`) is a single Cloudflare Worker with multiple endpoints:
 
 **Public Endpoints:**
 - `GET /api/farms` - List farms (with filters: state, city, category, lat/lng/radius)
@@ -94,118 +98,55 @@ The API (`src/index.js`) is a single Cloudflare Worker with multiple endpoints:
 - `GET /api/saved-farms` - Get user's saved farms
 - `PUT /api/saved-farms/:id` - Update notification preferences
 
+**📚 See** [.agent/Docs/DOC_Cloudflare-Worker-Api.md](.agent/Docs/DOC_Cloudflare-Worker-Api.md) for complete API documentation.
+
 ### Authentication
-Uses **Clerk** for authentication:
+
+Uses **Clerk** for authentication. **See** [.agent/Docs/DOC_Authentication-User-Management.md](.agent/Docs/DOC_Authentication-User-Management.md) for complete details.
+
 - Middleware: `web/middleware.ts` - protects routes
 - Public routes: farms, categories, locations, etc.
 - Protected routes: `/dashboard`, `/profile`, `/saved-farms`, `/map` (when saving)
-- API validates Clerk session tokens for authenticated endpoints
 
 ### Database (D1)
-Schema defined in `schema.sql`:
+
+Schema defined in `schema.sql` with 20+ tables including:
 - `farms` - Main farm data (synced from Zoho CRM)
 - `saved_farms` - User's saved farms with notification preferences
 - `cities` - Location data for URL structure
 - `farm_categories` - Category taxonomy
-- `operational_types` - Farm operational types (U-Pick, Pre-Cut, etc.)
 
-Farm data fields include:
-- Basic info: name, slug, description, categories, type
-- Contact: phone, email, website, facebook, instagram
-- Location: street, city, state, country, latitude, longitude
-- Hours: monday_hours through sunday_hours
-- Features: amenities, varieties, pet_friendly, payment_methods
-- Metadata: verified, featured, active
+**📚 See** [.agent/Docs/DOC_Database-Schema-Migrations.md](.agent/Docs/DOC_Database-Schema-Migrations.md)
 
-### Zoho CRM Integration
-Farm data originates from Zoho CRM:
-1. Worker webhook endpoint receives updates: `POST /api/webhook/zoho/:token`
-2. Worker fetches full record from Zoho API using OAuth
-3. Data is upserted to D1 `farms` table
-4. Rebuild is triggered via GitHub Actions workflow
-5. Web app rebuilds with fresh data
+### Farm Custom Branding
 
-### Farm Custom Branding (Logo & Background Images)
-Farms can have custom logos and background images managed through Zoho CRM:
+Farms can have custom logos and background images. **See** [.agent/Docs/DOC_Farm-Custom-Branding.md](.agent/Docs/DOC_Farm-Custom-Branding.md) for complete pipeline details.
 
-**Architecture:**
-- **Storage**: Cloudflare R2 bucket (`pickafarm-assets`)
-- **CDN**: `https://cdn.pickafarm.com` (public read access)
-- **Zoho Fields**: `Logo` and `Cover_Image` (file upload fields in Zoho CRM)
-- **Database**: `logo_url`, `background_url`, `logo_updated_at`, `background_updated_at` columns in `farms` table
+**Quick reference:**
+- Storage: Cloudflare R2 bucket (`pickafarm-assets`)
+- CDN: `https://cdn.pickafarm.com`
+- Database fields: `logo_url`, `background_url`, `logo_updated_at`, `background_updated_at`
 
-**Image Processing Pipeline:**
-1. Farm owner uploads image to Zoho CRM (Logo or Cover_Image field)
-2. Zoho webhook triggers Worker endpoint with file metadata
-3. Worker downloads image from Zoho API: `/crm/v3/Accounts/{recordId}/actions/download_fields_attachment?fields_attachment_id={fileId}`
-4. Worker validates image size (warns if >200KB, recommends pre-optimization with Squoosh.app)
-5. Worker uploads original format (JPEG/PNG/WebP) to R2 at `/farms/{farmId}/{logo|background}.{ext}`
-6. Worker generates CDN URL with cache-busting timestamp: `?v={timestamp}`
-7. Worker updates D1 database with CDN URLs and timestamps
-8. On error, Worker sends notification email via Resend (non-blocking)
-
-**Key Implementation Files:**
-- `src/lib/image-processor.js` - Image download, validation, and R2 upload functions
-- `src/lib/email-notifications.js` - Error notification emails
-- `src/index.js` (lines 676-850) - Zoho webhook handler with image processing
-- `web/components/farm-profile-header.tsx` - Facebook-style profile header display
-- `web/lib/fallback-image.ts` - SVG fallback logo generation for farms without custom images
-
-**Frontend Display:**
-- Profile header component with background image and logo overlay (bottom-left)
-- Responsive design: 150×150px logo (desktop), 120×120px (mobile)
-- Fallback: SVG generated logo with farm's first letter in hashed color circle
-- Default background: `/images/farms/background.webp`
-
-**R2 Bucket Structure:**
-```
-pickafarm-assets/
-└── farms/
-    └── {farmId}/
-        ├── logo.{ext}        # Farm logo (JPEG/PNG/WebP)
-        └── background.{ext}  # Cover/background image
-```
-
-**Important Notes:**
-- Images stored in original format (no server-side optimization for MVP)
-- Future enhancement: Cloudflare Images integration ($5/mo for automatic WebP conversion)
-- API SELECT queries MUST include: `logo_url, background_url, logo_updated_at, background_updated_at`
-- Build script (`web/scripts/generate-farm-data.js`) MUST include these fields in D1 query
-- Zoho API uses v3 endpoint for file downloads (NOT v8)
-
-### Data Flow
-```
-Zoho CRM → Webhook → Worker → D1 Database
-                               ↓
-                         Worker API (GET /api/farms)
-                               ↓
-                    Build Scripts (prebuild)
-                               ↓
-                    web/data/*.json files
-                               ↓
-                       Next.js Pages (import)
-                               ↓
-                      Static HTML (export)
-```
+---
 
 ## Key Conventions
 
 ### Route Structure
-- **Farm detail pages**: `/farms/[id]/` - Individual farm pages
-- **Category pages**: `/[slug]/` - Top-level catch-all (e.g., `/christmas-tree-farms/`)
-- **State pages**: `/[slug]/` - State overview pages (e.g., `/wisconsin/`, `/new-york/`)
-- **Category + Location pages**: `/[slug]/near/[location]/` - Filtered by category and location
-- **State + Category pages**: `/[state]/[category]/` - Farms in a state for a category
-- **Location pages**: `/farms-near/[location]/` - All farms near a location
+- **Farm detail pages**: `/farms/[id]/`
+- **Category pages**: `/[slug]/` (e.g., `/christmas-tree-farms/`)
+- **State pages**: `/[slug]/` (e.g., `/wisconsin/`)
+- **Category + Location**: `/[slug]/near/[location]/`
+- **State + Category**: `/[state]/[category]/`
+- **Location pages**: `/farms-near/[location]/`
 - All routes use trailing slashes (`trailingSlash: true` in next.config.js)
 
-**Route Disambiguation in `app/[slug]/page.tsx`:**
-The `[slug]` route handles both state pages AND category pages:
-1. First checks if slug matches a state in `states-with-farms.json`
-2. If state found, renders `StatePage` component
-3. Otherwise checks if slug matches a category in `category-content.json`
-4. If category found, renders `CategoryPage` component
-5. If neither, shows 404
+### Next.js 15 Async Params
+```typescript
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  // ...
+}
+```
 
 ### Import Paths
 - **Avoid** `@/data/*` for generated JSON files
@@ -223,20 +164,7 @@ The `[slug]` route handles both state pages AND category pages:
 - UI components from shadcn/ui (Radix UI primitives)
 - Images unoptimized (`next.config.js` sets `unoptimized: true`)
 
-### Environment Variables
-Web app (`web/.env.local`):
-- `NEXT_PUBLIC_API_URL` - API endpoint
-- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-- `CLERK_SECRET_KEY`
-- `CLOUDFLARE_D1_TOKEN` - For build scripts
-- `CLOUDFLARE_D1_URL` - For build scripts
-
-Worker (`wrangler.toml` + secrets):
-- `ZOHO_REFRESH_TOKEN`, `ZOHO_CLIENT_ID`, `ZOHO_CLIENT_SECRET`
-- `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`
-- `RESEND_API_KEY` - For email notifications
-- `GITHUB_TOKEN` - For triggering rebuilds
-- D1 binding: `env.DB`
+---
 
 ## Common Tasks
 
@@ -249,6 +177,8 @@ Worker (`wrangler.toml` + secrets):
 6. Update TypeScript types in `web/lib/schema.ts`
 7. Update UI components to display new field
 
+**📚 See** [.agent/SOP/implement-prd-tasks.md](.agent/SOP/implement-prd-tasks.md) for complete workflow.
+
 ### Testing Build Process
 1. Ensure API is accessible
 2. Run `cd web && npm run prebuild` to generate data files
@@ -256,185 +186,97 @@ Worker (`wrangler.toml` + secrets):
 4. Run `npm run build` to test static export
 5. Run `npm run start` to preview production build
 
-### Debugging Zoho Webhook
-1. Check webhook token matches: `farms.zoho_webhook_token` in D1
-2. Verify Zoho credentials in Worker secrets
-3. Check Worker logs: `wrangler tail`
-4. Test endpoint: `POST /api/webhook/zoho/:token` with Zoho payload
-
-### Modifying Search
-Search data is pre-generated at build time:
-1. Edit `web/scripts/generate-search-data.js`
-2. Rebuild app to regenerate search index
-3. Search UI likely in components or app routes
-
 ### Understanding State Page Cities
-State pages (e.g., `/wisconsin/`) show cities with clickable links to location pages:
 
-**How city data is generated** (`web/scripts/generate-state-data.js`):
-1. Reads all location pages from `locations.json` for that state
-2. Calculates farms within 100km radius of each location using Haversine distance
-3. Only shows cities with `farm_count > 0`
-4. Sorted by farm count descending, limited to top 20
+State pages (e.g., `/wisconsin/`) show cities with clickable links. Cities are from `locations.json` (major metro areas), NOT from farm addresses. Farms in small towns count toward the nearest major city within 100km radius.
 
-**Important**: Cities shown are from `locations.json` (major metro areas), NOT from farm addresses. Farms in small towns are counted toward the nearest major city within 100km radius.
-
-**Example**: A farm in "Ballston Spa, NY" counts toward "Albany, NY" if Albany is within 100km.
+**Example**: A farm in "Ballston Spa, NY" counts toward "Albany, NY" if within 100km.
 
 ### Location Slug Format
 Location slugs follow the pattern: `{city}-{state-code}-{country-code}`
 - Examples: `albany-ny-us`, `toronto-ontario-ca`, `madison-wi-us`
-- Generated in `locations.json` and used across the site
-- State codes use 2-letter abbreviations (NY, WI, CA, ON, etc.)
-- Country codes: `us` or `ca`
 
-### TypeScript Interface Patterns
-**Farm Interface Variations:**
-Different components expect different Farm shapes:
-- `map-page-layout.tsx` - expects `categories` as optional (for category-filtered pages)
-- `farm-schema.ts` - uses for JSON-LD structured data generation
-- Always check the interface definition in the component you're working with
-
-**Common mistake**: Passing data with required fields missing or wrong types between components.
+---
 
 ## Performance Optimization
 
-### Mobile Performance Strategy
-The site is optimized for mobile with specific attention to Core Web Vitals on slow 3G connections:
+**See** [.agent/Docs/DOC_Performance-Optimization.md](.agent/Docs/DOC_Performance-Optimization.md) for comprehensive performance strategy.
 
-**Key Metrics (as of last Lighthouse audit):**
+**Key metrics:**
 - Desktop: 83/100 Performance, LCP 2.57s
-- Mobile: 64/100 Performance, LCP 7.59s simulated (1.42s observed)
-- The mobile score is conservative for slow 3G connections; real users on 4G/5G see much better performance
+- Mobile: 64/100 Performance, LCP 7.59s (simulated 3G)
 
-### LCP Optimization
-**Current LCP element**: First blog post image on homepage (`/blog-images/best-christmas-trees-800.avif`)
+**Quick wins implemented:**
+- Preload LCP image in `app/layout.tsx`
+- Dynamic imports for below-fold content
+- Location detection caching (30 days localStorage)
+- AVIF/WebP image formats with responsive srcset
+- **Lazy Google Maps loading**: Mobile users see SVG map preview, Google Maps API only loads on user click
+- **IntersectionObserver**: Below-fold maps load only when scrolled into view
 
-**Optimizations implemented:**
-1. **Preload LCP image** in `app/layout.tsx`:
-   ```tsx
-   <link rel="preload" as="image" href="/blog-images/best-christmas-trees-800.avif"
-         type="image/avif" fetchPriority="high" />
-   ```
+**📚 See** [docs/DOC_Map-Experience-Mobile-Optimization.md](docs/DOC_Map-Experience-Mobile-Optimization.md) for complete map optimization strategy.
 
-2. **Image optimization**:
-   - AVIF format with WebP fallback in `<picture>` tags
-   - Responsive srcset with 400px and 800px sizes
-   - `fetchPriority="high"` on first image, `loading="lazy"` on others
-   - Explicit width/height attributes to prevent CLS
+---
 
-3. **Blog images data structure** (`web/data/blog-images.json`):
-   ```json
-   {
-     "1": {
-       "slug": "best-christmas-trees",
-       "avif": { "400": "...", "800": "..." },
-       "webp": { "400": "...", "800": "..." },
-       "alt": "...",
-       "width": 800,
-       "height": 450
-     }
-   }
-   ```
+## Environment Variables
 
-### Location Detection & Caching
-**Problem**: Duplicate ipapi.co API calls (1000ms+ each) from multiple components
-**Solution**: Shared localStorage caching strategy
-
-**Implementation** (`web/src/lib/location-utils.ts`):
-- `getUserLocation(userId)` checks localStorage first before making API calls
-- Location data cached for 30 days (`isLocationStale()` function)
-- Anonymous users use `"guest"` as userId for shared cache
-- Both `NearbyFarmsList` and `LocationDetector` use same cache key
-
-**Components that detect location:**
-- `NearbyFarmsList` - calls `getUserLocation("guest")` on homepage
-- `LocationDetector` - calls `getUserLocation(user.id)` for authenticated users
-- Both share cached data when user is anonymous, avoiding duplicate API calls
-
-### JavaScript Bundle Optimization
-**Current bottleneck**: Clerk.js loading on all pages
-
-**Unused JavaScript** (730ms potential savings on mobile):
-- Clerk UI components: 71% unused (71KB)
-- Next.js framework: 38% unused (41KB)
-- Application code: Various chunks with partial usage
-
-**Note**: Clerk is essential for authentication and cannot be removed. Consider:
-- Dynamic imports for Clerk on protected routes only (future optimization)
-- Code splitting to reduce initial bundle size
-
-### Render-Blocking Resources
-- Single CSS bundle at 194ms on slow 3G: `_next/static/css/*.css`
-- Critical CSS inlined in `app/layout.tsx` for instant first paint
-- Resource hints for third-party domains (preconnect, dns-prefetch)
-
-### Dynamic Imports for Below-Fold Content
-**Pattern used** (`app/page.tsx`):
-```typescript
-const FAQSection = dynamic(() => import("@/components/faq-section"), {
-  loading: () => <div className="h-96" />
-})
-const FarmMapSection = dynamic(() => import("@/components/farm-map-section"), {
-  loading: () => <MapSkeletonStatic />
-})
-```
-
-Components that are dynamically imported:
-- `FAQSection` - Below the fold
-- `FarmMapSection` - Interactive map (heavy Google Maps API)
-- `AdaptiveMapWrapper` - Map container logic
-- `LocationDetector` - Background location detection (in `DeferredComponents`)
-
-### Z-Index Hierarchy
-**Stacking order** (from lowest to highest):
-- `z-30` - Mobile map filter backdrop
-- `z-40` - Mobile map filter button & panel
-- `z-50` - Navbar (sticky), Dialog/Modal overlays and content
-- Higher z-indexes should not be used to prevent conflicts
-
-**Key components:**
-- `farm-navbar.tsx`: `z-50` (sticky navbar)
-- `ui/dialog.tsx`: `z-50` (modal overlay and content)
-- `map-page-layout.tsx`: Mobile filter uses `z-30` (backdrop), `z-40` (button/panel)
-
-**Mobile map filter positioning**: `bottom-4 left-4` (not right, to avoid conflicts with other UI)
-
-### Third-Party Services
-**Impact on mobile performance:**
-- ipapi.co: ~1000ms per call (cached after first load)
-- Clerk: ~150ms per chunk, multiple chunks loaded
-- Google Analytics: ~200ms (deferred)
-- Cloudflare Insights: ~150ms (deferred)
-
-**Optimization strategy:**
-- Preconnect to Clerk and API domains in `app/layout.tsx`
-- DNS prefetch for analytics domains
-- Location API cached locally to avoid repeated calls
-
-### Testing Performance
-**Run Lighthouse audits:**
+**Web app** (`web/.env.local`):
 ```bash
-# Desktop
-npx lighthouse https://pickafarm.com --preset=desktop --output=json --output-path=./web/lighthouse-desktop-latest.json
-
-# Mobile (default settings)
-npx lighthouse https://pickafarm.com --output=json --output-path=./web/lighthouse-mobile-latest.json
+NEXT_PUBLIC_API_URL=...
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+CLERK_SECRET_KEY=...
+CLOUDFLARE_D1_TOKEN=...              # For build scripts
+CLOUDFLARE_D1_URL=...                # For build scripts
 ```
 
-**View summary:**
+**Worker** (Cloudflare Secrets):
 ```bash
-cd web && node lighthouse-summary.js
+wrangler secret put ZOHO_REFRESH_TOKEN
+wrangler secret put ZOHO_CLIENT_ID
+wrangler secret put ZOHO_CLIENT_SECRET
+wrangler secret put CLERK_SECRET_KEY
+wrangler secret put RESEND_API_KEY
+wrangler secret put GITHUB_TOKEN
 ```
 
-**Key files:**
-- `web/lighthouse-desktop-latest.json` - Desktop audit results
-- `web/lighthouse-mobile-latest.json` - Mobile audit results
-- `web/lighthouse-summary.js` - Script to extract and display key metrics
+---
 
-### Future Optimization Opportunities
-1. **Defer Clerk loading**: Only load on protected routes or after user interaction
-2. **Image CDN**: Consider using an image CDN for automatic format/size optimization
-3. **Service Worker**: Implement for offline support and faster repeat visits
-4. **Font optimization**: Currently using Geist font, could optimize loading strategy
-5. **Reduce unused CSS**: Consider purging unused Tailwind classes more aggressively
+## Documentation Index
+
+All comprehensive documentation is stored in `.agent/Docs/` to keep this file lean.
+
+### Architecture & Setup
+- [DOC_Application_Architecture.md](.agent/Docs/DOC_Application_Architecture.md) - Complete system architecture
+- [DOC_Build-Scripts-Data-Generation.md](.agent/Docs/DOC_Build-Scripts-Data-Generation.md) - Build process details
+
+### Backend & API
+- [DOC_Cloudflare-Worker-Api.md](.agent/Docs/DOC_Cloudflare-Worker-Api.md) - Worker API implementation
+- [DOC_Database-Schema-Migrations.md](.agent/Docs/DOC_Database-Schema-Migrations.md) - Database schema and migrations
+- [DOC_Zoho-CRM-Integration.md](.agent/Docs/DOC_Zoho-CRM-Integration.md) - Zoho CRM integration
+- [DOC_Farm-Custom-Branding.md](.agent/Docs/DOC_Farm-Custom-Branding.md) - Farm logo & background images
+
+### Frontend & UI
+- [DOC_Frontend-Components-UI.md](.agent/Docs/DOC_Frontend-Components-UI.md) - React component patterns
+- [DOC_Google-Maps-Integration.md](.agent/Docs/DOC_Google-Maps-Integration.md) - Google Maps implementation
+- [DOC_Authentication-User-Management.md](.agent/Docs/DOC_Authentication-User-Management.md) - Clerk authentication
+- [DOC_Performance-Optimization.md](.agent/Docs/DOC_Performance-Optimization.md) - Performance strategy
+- [DOC_Map-Experience-Mobile-Optimization.md](docs/DOC_Map-Experience-Mobile-Optimization.md) - Map UX & mobile optimization (lazy Google Maps loading)
+
+### Processes
+- [.agent/SOP/implement-prd-tasks.md](.agent/SOP/implement-prd-tasks.md) - How to implement PRD tasks
+- [.agent/SOP/generate-task-list.md](.agent/SOP/generate-task-list.md) - Task list management
+- [.agent/SOP/create-prd.md](.agent/SOP/create-prd.md) - Creating PRDs
+
+### Reference
+- [.agent/Reference/](.agent/Reference/) - Cloudflare documentation and external references
+- [.agent/Tasks/](.agent/Tasks/) - PRDs and task lists
+
+---
+
+## See Also
+
+- `.agent/README.md` - Navigation guide for all .agent/ documentation
+- `docs/README.md` - **NEW: Agent-focused documentation index** (API, Database, Zoho, Maps, Environment)
+- `schema.sql` - Complete database schema
+- `wrangler.toml` - Worker configuration
+- `web/next.config.js` - Next.js configuration

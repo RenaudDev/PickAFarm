@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/extract-critical-css.js && node scripts/generate-farm-data.js && node scripts/optimize-blog-images.js && node scripts/run-parallel.js",
+    "prebuild": "node scripts/extract-critical-css.js && node scripts/generate-farm-data.js && node scripts/optimize-blog-images.js && node scripts/run-parallel.js && node scripts/validate-location-data.js",
     "build": "next build && node scripts/copy-public-files.js",
     "pages:build": "npx @cloudflare/next-on-pages@1",
     "start": "next start",
     "lint": "next lint",
+    "validate-locations": "node scripts/validate-location-data.js",
     "generate-data": "node scripts/generate-farm-data.js",
     "optimize-blog-images": "node scripts/optimize-blog-images.js",
     "generate-search-data": "node scripts/generate-search-data.js",
