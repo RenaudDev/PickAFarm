@@ -414,6 +414,14 @@ const nextConfig = {
         destination: '/:category/near/:city-:state-us/',
         permanent: true,
       },
+
+      // Pattern 8: Blog post URL fixes
+      // Fix singular/plural blog post URLs
+      {
+        source: '/blog/best-christmas-tree/',
+        destination: '/blog/best-christmas-trees/',
+        permanent: true,
+      },
     ];
   },
 
