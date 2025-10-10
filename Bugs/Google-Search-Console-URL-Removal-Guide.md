@@ -26,6 +26,27 @@ After deploying the 404 error fixes (redirects + data cleanup), we need to clean
 3. ✅ New sitemap generated with correct URLs
 4. ✅ Wait 24-48 hours after deployment (let redirects work)
 
+### Verify Redirects (Optional)
+
+After deployment, you can test all redirects locally using the test script:
+
+```bash
+# Test all 609 URLs from Table.csv against production
+node web/scripts/test-404-redirects.js --url https://pickafarm.com
+
+# Quick test with first 50 URLs only
+node web/scripts/test-404-redirects.js --url https://pickafarm.com --sample 50
+
+# Verbose mode (shows each redirect chain)
+node web/scripts/test-404-redirects.js --url https://pickafarm.com --verbose
+```
+
+The script will:
+- Test each URL from Bugs/Table.csv
+- Follow redirect chains (308/301 redirects)
+- Verify final destination returns 200 OK
+- Report any 404 errors or failures
+
 ---
 
 ## Step 1: Submit Updated Sitemap

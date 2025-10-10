@@ -140,6 +140,280 @@ const nextConfig = {
         destination: '/:category/near/trois-rivieres-qc-ca/',
         permanent: true,
       },
+
+      // Pattern 6: Full US state names → 2-letter codes
+      // Handles URLs like "chicago-illinois-us" → "chicago-il-us"
+      {
+        source: '/:category/near/:city-alabama-:country(us|united-states)/',
+        destination: '/:category/near/:city-al-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-alaska-:country(us|united-states)/',
+        destination: '/:category/near/:city-ak-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-arizona-:country(us|united-states)/',
+        destination: '/:category/near/:city-az-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-arkansas-:country(us|united-states)/',
+        destination: '/:category/near/:city-ar-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-california-:country(us|united-states)/',
+        destination: '/:category/near/:city-ca-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-colorado-:country(us|united-states)/',
+        destination: '/:category/near/:city-co-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-connecticut-:country(us|united-states)/',
+        destination: '/:category/near/:city-ct-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-delaware-:country(us|united-states)/',
+        destination: '/:category/near/:city-de-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-florida-:country(us|united-states)/',
+        destination: '/:category/near/:city-fl-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-georgia-:country(us|united-states)/',
+        destination: '/:category/near/:city-ga-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-hawaii-:country(us|united-states)/',
+        destination: '/:category/near/:city-hi-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-idaho-:country(us|united-states)/',
+        destination: '/:category/near/:city-id-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-illinois-:country(us|united-states)/',
+        destination: '/:category/near/:city-il-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-indiana-:country(us|united-states)/',
+        destination: '/:category/near/:city-in-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-iowa-:country(us|united-states)/',
+        destination: '/:category/near/:city-ia-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-kansas-:country(us|united-states)/',
+        destination: '/:category/near/:city-ks-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-kentucky-:country(us|united-states)/',
+        destination: '/:category/near/:city-ky-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-louisiana-:country(us|united-states)/',
+        destination: '/:category/near/:city-la-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-maine-:country(us|united-states)/',
+        destination: '/:category/near/:city-me-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-maryland-:country(us|united-states)/',
+        destination: '/:category/near/:city-md-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-massachusetts-:country(us|united-states)/',
+        destination: '/:category/near/:city-ma-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-michigan-:country(us|united-states)/',
+        destination: '/:category/near/:city-mi-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-minnesota-:country(us|united-states)/',
+        destination: '/:category/near/:city-mn-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-mississippi-:country(us|united-states)/',
+        destination: '/:category/near/:city-ms-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-missouri-:country(us|united-states)/',
+        destination: '/:category/near/:city-mo-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-montana-:country(us|united-states)/',
+        destination: '/:category/near/:city-mt-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-nebraska-:country(us|united-states)/',
+        destination: '/:category/near/:city-ne-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-nevada-:country(us|united-states)/',
+        destination: '/:category/near/:city-nv-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-new-hampshire-:country(us|united-states)/',
+        destination: '/:category/near/:city-nh-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-new-jersey-:country(us|united-states)/',
+        destination: '/:category/near/:city-nj-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-new-mexico-:country(us|united-states)/',
+        destination: '/:category/near/:city-nm-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-new-york-:country(us|united-states)/',
+        destination: '/:category/near/:city-ny-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-north-carolina-:country(us|united-states)/',
+        destination: '/:category/near/:city-nc-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-north-dakota-:country(us|united-states)/',
+        destination: '/:category/near/:city-nd-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-ohio-:country(us|united-states)/',
+        destination: '/:category/near/:city-oh-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-oklahoma-:country(us|united-states)/',
+        destination: '/:category/near/:city-ok-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-oregon-:country(us|united-states)/',
+        destination: '/:category/near/:city-or-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-pennsylvania-:country(us|united-states)/',
+        destination: '/:category/near/:city-pa-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-rhode-island-:country(us|united-states)/',
+        destination: '/:category/near/:city-ri-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-south-carolina-:country(us|united-states)/',
+        destination: '/:category/near/:city-sc-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-south-dakota-:country(us|united-states)/',
+        destination: '/:category/near/:city-sd-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-tennessee-:country(us|united-states)/',
+        destination: '/:category/near/:city-tn-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-texas-:country(us|united-states)/',
+        destination: '/:category/near/:city-tx-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-utah-:country(us|united-states)/',
+        destination: '/:category/near/:city-ut-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-vermont-:country(us|united-states)/',
+        destination: '/:category/near/:city-vt-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-virginia-:country(us|united-states)/',
+        destination: '/:category/near/:city-va-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-washington-:country(us|united-states)/',
+        destination: '/:category/near/:city-wa-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-west-virginia-:country(us|united-states)/',
+        destination: '/:category/near/:city-wv-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-wisconsin-:country(us|united-states)/',
+        destination: '/:category/near/:city-wi-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-wyoming-:country(us|united-states)/',
+        destination: '/:category/near/:city-wy-us/',
+        permanent: true,
+      },
+      {
+        source: '/:category/near/:city-puerto-rico-:country(us|united-states)/',
+        destination: '/:category/near/:city-pr-us/',
+        permanent: true,
+      },
+
+      // Pattern 7: US states with -ca suffix (wrong country abbreviation)
+      // Handles URLs like "cadott-wi-ca" → "cadott-wi-us"
+      // This is different from Pattern 1 which catches -canada (full word)
+      // With trailing slash
+      {
+        source: '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-ca/',
+        destination: '/:category/near/:city-:state-us/',
+        permanent: true,
+      },
+      // Without trailing slash
+      {
+        source: '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-ca',
+        destination: '/:category/near/:city-:state-us/',
+        permanent: true,
+      },
     ];
   },
 
