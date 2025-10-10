@@ -101,6 +101,14 @@ const nextConfig = {
         destination: '/:category/near/:city-nu-ca/',
         permanent: true,
       },
+
+      // Pattern 4: Canadian province codes with "canada" suffix → "ca"
+      // This catches URLs like "montreal-qc-canada" → "montreal-qc-ca"
+      {
+        source: '/:category/near/:city-:province(on|qc|bc|ab|mb|sk|ns|nb|nl|pe|nt|yt|nu)-canada/',
+        destination: '/:category/near/:city-:province-ca/',
+        permanent: true,
+      },
     ];
   },
 
