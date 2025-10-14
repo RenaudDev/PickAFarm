@@ -2803,6 +2803,83 @@ export default {
       }
     }
 
+    // REBUILD TRIGGER ENDPOINT
+    // Triggers GitHub Actions workflow to rebuild the static site
+    if (url.pathname === "/api/trigger-rebuild") {
+      if (method !== "POST") {
+        return new Response(JSON.stringify({ error: "Method not allowed" }), {
+          status: 405,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+
+      const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_EVENT } = env;
+
+      if (!GITHUB_TOKEN) {
+        return new Response(JSON.stringify({
+          error: "GitHub token not configured"
+        }), {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+
+      try {
+        const owner = GITHUB_OWNER || 'RenaudDev';
+        const repo = GITHUB_REPO || 'PickAFarm';
+        const eventType = GITHUB_EVENT || 'rebuild-farms';
+
+        console.log(`🔄 Triggering rebuild: ${owner}/${repo} (${eventType})`);
+
+        const response = await fetch(
+          `https://api.github.com/repos/${owner}/${repo}/dispatches`,
+          {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${GITHUB_TOKEN}`,
+              'Accept': 'application/vnd.github+json',
+              'Content-Type': 'application/json',
+              'User-Agent': 'PickAFarm-Worker'
+            },
+            body: JSON.stringify({
+              event_type: eventType,
+              client_payload: {
+                reason: 'Manual trigger via API',
+                triggered_at: new Date().toISOString(),
+              },
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`GitHub API error: ${response.status} - ${errorText}`);
+          throw new Error(`GitHub API error: ${response.status}`);
+        }
+
+        console.log(`✅ Rebuild workflow triggered successfully`);
+
+        return new Response(JSON.stringify({
+          success: true,
+          message: 'Rebuild workflow triggered',
+          repository: `${owner}/${repo}`,
+          event_type: eventType,
+          triggered_at: new Date().toISOString()
+        }), {
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      } catch (error) {
+        console.error('Failed to trigger rebuild:', error);
+        return new Response(JSON.stringify({
+          error: 'Failed to trigger rebuild workflow',
+          message: error.message
+        }), {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+    }
+
     // API DOCUMENTATION ROOT
     // Provides discoverable endpoint list for developers
     if (url.pathname === "/") {
@@ -2826,7 +2903,8 @@ export default {
             zoho_webhook: "/api/zoho-webhook",
             zoho_delete: "/api/zoho-delete",
             get_subscribers: "GET /api/farms/:farm_id/subscribers",
-            send_notifications: "POST /api/notifications/send"
+            send_notifications: "POST /api/notifications/send",
+            trigger_rebuild: "POST /api/trigger-rebuild"
           },
           debug: {
             zoho_debug: "/api/zoho-debug",
@@ -2843,16 +2921,17 @@ export default {
       error: "Not found", 
       available_endpoints: [
         "/api/farms",
-        "/api/cities", 
+        "/api/cities",
         "/api/search",
         "/api/users/sync",
         "/api/farms/save",
         "/api/farms/unsave",
         "/api/farms/saved",
         "/api/farms/:farm_id/subscribers",
-        "/api/zoho-webhook", 
+        "/api/zoho-webhook",
         "/api/zoho-delete",
-        "/api/zoho-debug", 
+        "/api/trigger-rebuild",
+        "/api/zoho-debug",
         "/api/token-debug"
       ] 
     }), {
