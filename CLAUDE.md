@@ -290,13 +290,30 @@ Key tables:
 
 ---
 
-## CI/CD & Preview Deployments
+## CI/CD & Automated Rebuilds
 
 ### GitHub Actions Workflows
 - **`.github/workflows/ci.yml`** - CI pipeline (lint, test, build verification)
 - **`.github/workflows/preview-comment.yml`** - Posts preview URLs to PR comments
 - **`.github/workflows/cleanup-preview.yml`** - Cleanup notifications when PR closes
-- **`.github/workflows/rebuild-farms.yml`** - Scheduled rebuild workflow
+- **`.github/workflows/scheduled-rebuild.yml`** - Scheduled rebuild every 2 hours (cron)
+- **`.github/workflows/rebuild-farms.yml`** - Manual/API-triggered rebuild workflow
+
+### Automated Rebuild System
+The site rebuilds automatically every 2 hours to keep farm data fresh:
+
+**Rebuild triggers**:
+1. **Scheduled**: Every 2 hours via cron (`0 */2 * * *`)
+2. **API**: `POST /api/trigger-rebuild` (for Zoho webhooks or manual triggers)
+3. **Manual**: GitHub Actions UI → "Run workflow" button
+
+**Rebuild process**:
+1. Fetch latest data from D1 database (`npm run prebuild`)
+2. Build static Next.js site (`npm run build`)
+3. Deploy to Cloudflare Pages production
+4. Send Zoho Cliq notification on failure
+
+**Documentation**: See [docs/REBUILD_WORKFLOW.md](docs/REBUILD_WORKFLOW.md) for complete guide
 
 ### Preview Deployment Flow
 1. Developer creates PR → GitHub Actions CI runs

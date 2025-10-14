@@ -1,12 +1,14 @@
-# .github/workflows/rebuild-farms.yml
-# Triggered by Zoho webhook via repository_dispatch or manual API call
+# .github/workflows/scheduled-rebuild.yml
+# Automated rebuild every 2 hours to keep farm data fresh
 
-name: Rebuild Farm Directory
+name: Scheduled Rebuild
 
 on:
-  repository_dispatch:
-    types: [rebuild-farms]
-  # Also allow manual triggers for testing
+  # Run every 2 hours at :00 minutes (UTC)
+  schedule:
+    - cron: '0 */2 * * *'
+
+  # Allow manual triggers for testing and emergency rebuilds
   workflow_dispatch:
     inputs:
       reason:
@@ -35,9 +37,8 @@ jobs:
     - name: Log trigger source
       run: |
         echo "Triggered by: ${{ github.event_name }}"
-        echo "Reason: ${{ github.event.client_payload.reason || inputs.reason || 'Webhook trigger' }}"
+        echo "Reason: ${{ inputs.reason || 'Scheduled (every 2 hours)' }}"
         echo "Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-        echo "Farm updated: ${{ github.event.client_payload.zoho_record_id || 'N/A' }}"
 
     - name: Run prebuild scripts
       run: cd web && npm run prebuild
@@ -63,10 +64,9 @@ jobs:
     - name: Notify success
       if: success()
       run: |
-        echo "✅ Farm directory rebuild completed successfully"
+        echo "✅ Scheduled rebuild completed successfully"
         echo "Build time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
         echo "Triggered by: ${{ github.event_name }}"
-        echo "Farm updated: ${{ github.event.client_payload.zoho_record_id || 'N/A' }}"
 
     - name: Notify failure to Zoho Cliq
       if: failure()
@@ -74,9 +74,9 @@ jobs:
         curl -X POST "${{ secrets.CLIQ_WEBHOOK_URL }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "text": "🚨 *Farm Directory Rebuild FAILED*",
+            "text": "🚨 *Scheduled Rebuild FAILED*",
             "card": {
-              "title": "Farm Directory Rebuild Failed",
+              "title": "Scheduled Rebuild Failed",
               "theme": "modern-inline",
               "thumbnail": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
               "icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
@@ -91,8 +91,7 @@ jobs:
                     ["Workflow", "${{ github.workflow }}"],
                     ["Repository", "${{ github.repository }}"],
                     ["Trigger", "${{ github.event_name }}"],
-                    ["Time", "${{ github.event.repository.updated_at }}"],
-                    ["Farm ID", "${{ github.event.client_payload.zoho_record_id || 'N/A' }}"]
+                    ["Time", "${{ github.event.repository.updated_at }}"]
                   ]
                 }
               }
