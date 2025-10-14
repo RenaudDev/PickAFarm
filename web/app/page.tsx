@@ -110,7 +110,8 @@ export default async function Home() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 text-foreground">Browse Farms by US State</h2>
               <p className="text-muted-foreground">
-                Discover u-pick farms across the United States (Testing Preview Deployment - Story 1.3)
+                Discover u-pick farms across the United States (Testing Preview Deployment - Story
+                1.3)
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
