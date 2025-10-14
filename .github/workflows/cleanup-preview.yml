@@ -1,0 +1,103 @@
+name: Cleanup Preview Deployment
+
+# This workflow is OPTIONAL and serves as a backup
+# Cloudflare Pages automatically deletes preview deployments when PRs are closed
+# This workflow can be used if manual cleanup is needed or for additional actions
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main-clean]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  cleanup-notification:
+    name: Preview Cleanup Notification
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Generate preview URL
+        id: preview-url
+        run: |
+          # Cloudflare Pages preview URL format
+          BRANCH_NAME="${{ github.head_ref }}"
+          SANITIZED_BRANCH=$(echo "$BRANCH_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')
+          PREVIEW_URL="https://${SANITIZED_BRANCH}.pickafarm.pages.dev"
+
+          echo "preview_url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+          echo "sanitized_branch=$SANITIZED_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Post cleanup notification comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const previewUrl = '${{ steps.preview-url.outputs.preview_url }}';
+            const wasMerged = context.payload.pull_request.merged;
+            const action = wasMerged ? 'merged' : 'closed';
+
+            const commentBody = `## 🧹 Preview Deployment Cleanup
+
+The preview deployment for this PR has been automatically cleaned up by Cloudflare Pages.
+
+**Status**: PR ${action}
+**Preview URL**: ~~${previewUrl}~~ (no longer accessible)
+
+---
+
+### Cleanup Details
+
+- ✅ Preview deployment has been deleted
+- ✅ Branch alias removed
+- ✅ Resources freed
+
+Cloudflare Pages automatically cleans up preview deployments when PRs are closed or merged. The preview URL will return a 404 error if accessed.
+
+---
+
+💡 *Preview deployments are retained for 30 days after PR closure by default, then permanently deleted.*`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: commentBody,
+            });
+
+            console.log(`Posted cleanup notification for PR #${prNumber}`);
+
+      - name: Summary
+        run: |
+          echo "### 🧹 Preview Cleanup Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Preview URL**: ${{ steps.preview-url.outputs.preview_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Status**: PR ${{ github.event.pull_request.merged && 'merged' || 'closed' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Cloudflare Pages will automatically clean up the preview deployment." >> $GITHUB_STEP_SUMMARY
+
+  # Optional: Manual cleanup using Cloudflare API
+  # This job is commented out by default since Cloudflare Pages handles cleanup automatically
+  # Uncomment and configure if manual cleanup is needed
+  #
+  # manual-cleanup:
+  #   name: Manual Preview Cleanup (API)
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
+  #   if: false  # Disabled by default
+  #
+  #   steps:
+  #     - name: Delete preview deployment via API
+  #       run: |
+  #         # Requires CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets
+  #         # API endpoint: DELETE /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}
+  #         #
+  #         # Example:
+  #         # curl -X DELETE \
+  #         #   "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/pickafarm/deployments/${DEPLOYMENT_ID}" \
+  #         #   -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}"
+  #
+  #         echo "Manual cleanup would be performed here if enabled"

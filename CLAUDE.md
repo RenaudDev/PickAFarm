@@ -241,6 +241,16 @@ When adding features or making changes to this codebase:
 4. Run `npm run build` to test static export
 5. Run `npm run start` to preview production build
 
+### Testing Preview Deployments
+1. Create test branch: `test/preview-deployment`
+2. Make code changes and push to GitHub
+3. Create pull request against `main-clean`
+4. Wait for Cloudflare Pages to build preview (5-10 minutes)
+5. Check PR comment for preview URL
+6. Access preview URL and verify changes
+7. Push additional commits to test auto-update
+8. Close/merge PR to verify cleanup
+
 ---
 
 ## Environment Variables
@@ -277,6 +287,33 @@ Key tables:
 - `farm_categories` - Category taxonomy
 
 **See complete schema**: [DOC_Database-Schema-Migrations.md](.agent/Docs/DOC_Database-Schema-Migrations.md)
+
+---
+
+## CI/CD & Preview Deployments
+
+### GitHub Actions Workflows
+- **`.github/workflows/ci.yml`** - CI pipeline (lint, test, build verification)
+- **`.github/workflows/preview-comment.yml`** - Posts preview URLs to PR comments
+- **`.github/workflows/cleanup-preview.yml`** - Cleanup notifications when PR closes
+- **`.github/workflows/rebuild-farms.yml`** - Scheduled rebuild workflow
+
+### Preview Deployment Flow
+1. Developer creates PR → GitHub Actions CI runs
+2. CI passes → Cloudflare Pages builds preview automatically
+3. Preview comment workflow posts URL to PR
+4. Preview URL: `https://<branch-name>.pickafarm.pages.dev`
+5. New commits → Preview auto-updates
+6. PR closed/merged → Preview deleted automatically (30-day retention)
+
+### Preview Environment Characteristics
+- **Data**: Uses production D1 database (read-only)
+- **Webhooks**: Disabled (no production side effects)
+- **Emails**: Disabled (no Resend API key)
+- **Rebuilds**: Cannot trigger (no GitHub token)
+- **URL Format**: `<branch-name>.pickafarm.pages.dev` or `<hash>.pickafarm.pages.dev`
+
+**Configuration Guide**: `docs/CLOUDFLARE_PAGES_PREVIEW_SETUP.md`
 
 ---
 
