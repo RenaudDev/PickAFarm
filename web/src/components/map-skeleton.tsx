@@ -9,7 +9,7 @@ export function MapSkeleton() {
             linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
             linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
+          backgroundSize: '40px 40px',
         }}
       />
 
@@ -33,5 +33,5 @@ export function MapSkeleton() {
         <div className="w-10 h-10 bg-background/80 rounded shadow" />
       </div>
     </div>
-  )
+  );
 }

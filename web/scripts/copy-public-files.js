@@ -6,19 +6,14 @@ const path = require('path');
  * This is a workaround for Next.js not copying all public files to the out directory
  */
 
-const filesToCopy = [
-  'sw.js',
-  'us-map-static.webp',
-  'us-map-static.png',
-  '_headers'
-];
+const filesToCopy = ['sw.js', 'us-map-static.webp', 'us-map-static.png', '_headers'];
 
 const publicDir = path.join(__dirname, '..', 'public');
 const outDir = path.join(__dirname, '..', 'out');
 
 console.log('Copying additional public files to out directory...');
 
-filesToCopy.forEach(file => {
+filesToCopy.forEach((file) => {
   const src = path.join(publicDir, file);
   const dest = path.join(outDir, file);
 

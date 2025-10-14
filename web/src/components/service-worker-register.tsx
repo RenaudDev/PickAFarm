@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 export function ServiceWorkerRegister() {
   useEffect(() => {
@@ -9,14 +9,14 @@ export function ServiceWorkerRegister() {
         navigator.serviceWorker
           .register('/sw.js')
           .then((registration) => {
-            console.log('Service Worker registered:', registration)
+            console.log('Service Worker registered:', registration);
           })
           .catch((error) => {
-            console.error('Service Worker registration failed:', error)
-          })
-      })
+            console.error('Service Worker registration failed:', error);
+          });
+      });
     }
-  }, [])
+  }, []);
 
-  return null
+  return null;
 }

@@ -13,25 +13,25 @@ const parallelScripts = [
   'generate-categories.js',
   'generate-location-data.js',
   'generate-manifest.js',
-  'generate-static-map.js'
+  'generate-static-map.js',
 ];
 
 // Scripts that depend on the parallel scripts being complete
 const dependentScripts = [
   'generate-state-data.js', // Requires locations-with-farms.json from generate-location-data.js
-  'generate-sitemaps.js' // Requires states-with-farms.json to be complete
+  'generate-sitemaps.js', // Requires states-with-farms.json to be complete
 ];
 
 console.log(`🚀 Running ${parallelScripts.length} scripts in parallel...`);
 
-const processes = parallelScripts.map(script => {
+const processes = parallelScripts.map((script) => {
   return new Promise((resolve, reject) => {
     const scriptPath = path.join(__dirname, script);
     // On Windows, use quoted path to handle spaces
     const proc = spawn(process.platform === 'win32' ? 'node.exe' : 'node', [scriptPath], {
       stdio: 'inherit',
-      shell: false,  // Disable shell to avoid path parsing issues
-      windowsHide: true
+      shell: false, // Disable shell to avoid path parsing issues
+      windowsHide: true,
     });
 
     proc.on('close', (code) => {
@@ -55,7 +55,7 @@ function runScript(script) {
     const proc = spawn(process.platform === 'win32' ? 'node.exe' : 'node', [scriptPath], {
       stdio: 'inherit',
       shell: false,
-      windowsHide: true
+      windowsHide: true,
     });
 
     proc.on('close', (code) => {

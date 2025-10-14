@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import dynamic from "next/dynamic"
+import dynamic from 'next/dynamic';
 
 // Dynamically import the SearchBox client component with SSR enabled
-const SearchBox = dynamic(() => import("@/components/search-box"), {
+const SearchBox = dynamic(() => import('@/components/search-box'), {
   ssr: true,
   loading: () => (
     <div className="space-y-0">
@@ -29,9 +29,9 @@ const SearchBox = dynamic(() => import("@/components/search-box"), {
         </div>
       </div>
     </div>
-  )
-})
+  ),
+});
 
 export default function SearchBoxWrapper() {
-  return <SearchBox />
+  return <SearchBox />;
 }

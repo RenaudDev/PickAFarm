@@ -1,5 +1,5 @@
-import React from "react"
-import { Apple, Grape, TreePine, Wheat, Cherry, Carrot, Flower2, LucideIcon } from "lucide-react"
+import React from 'react';
+import { Apple, Grape, TreePine, Wheat, Cherry, Carrot, Flower2, LucideIcon } from 'lucide-react';
 
 // Centralized icon mapping for categories
 const iconMap: { [key: string]: LucideIcon } = {
@@ -16,7 +16,7 @@ const iconMap: { [key: string]: LucideIcon } = {
   'Cut Your Own': TreePine,
   'Vegetable Farm': Carrot,
   'Flower Farm': Flower2,
-}
+};
 
 /**
  * Get the appropriate icon component for a category name
@@ -26,23 +26,23 @@ const iconMap: { [key: string]: LucideIcon } = {
 export const getCategoryIcon = (categoryName: string): LucideIcon => {
   // Try exact match first
   if (iconMap[categoryName]) {
-    return iconMap[categoryName]
+    return iconMap[categoryName];
   }
-  
+
   // Try partial matches for flexibility
-  const lowerCaseName = categoryName.toLowerCase()
-  
-  if (lowerCaseName.includes('apple')) return Apple
-  if (lowerCaseName.includes('berry')) return Grape
-  if (lowerCaseName.includes('christmas') || lowerCaseName.includes('tree')) return TreePine
-  if (lowerCaseName.includes('pumpkin') || lowerCaseName.includes('corn')) return Wheat
-  if (lowerCaseName.includes('vegetable') || lowerCaseName.includes('veggie')) return Carrot
-  if (lowerCaseName.includes('flower')) return Flower2
-  if (lowerCaseName.includes('pick') || lowerCaseName.includes('cherry')) return Cherry
-  
+  const lowerCaseName = categoryName.toLowerCase();
+
+  if (lowerCaseName.includes('apple')) return Apple;
+  if (lowerCaseName.includes('berry')) return Grape;
+  if (lowerCaseName.includes('christmas') || lowerCaseName.includes('tree')) return TreePine;
+  if (lowerCaseName.includes('pumpkin') || lowerCaseName.includes('corn')) return Wheat;
+  if (lowerCaseName.includes('vegetable') || lowerCaseName.includes('veggie')) return Carrot;
+  if (lowerCaseName.includes('flower')) return Flower2;
+  if (lowerCaseName.includes('pick') || lowerCaseName.includes('cherry')) return Cherry;
+
   // Default fallback
-  return Wheat
-}
+  return Wheat;
+};
 
 /**
  * Get category icon as JSX element with optional styling
@@ -50,16 +50,13 @@ export const getCategoryIcon = (categoryName: string): LucideIcon => {
  * @param className - Optional CSS classes to apply
  * @returns JSX element with the icon
  */
-export const CategoryIcon: React.FC<{ 
-  categoryName: string
-  className?: string 
-}> = ({ 
-  categoryName, 
-  className = "h-5 w-5" 
-}) => {
-  const IconComponent = getCategoryIcon(categoryName)
-  return <IconComponent className={className} />
-}
+export const CategoryIcon: React.FC<{
+  categoryName: string;
+  className?: string;
+}> = ({ categoryName, className = 'h-5 w-5' }) => {
+  const IconComponent = getCategoryIcon(categoryName);
+  return <IconComponent className={className} />;
+};
 
 /**
  * Display multiple category icons in a horizontal list
@@ -69,39 +66,33 @@ export const CategoryIcon: React.FC<{
  * @returns JSX element with horizontal list of category icons
  */
 export const CategoryIconList: React.FC<{
-  categories: string[] | string
-  className?: string
-  maxIcons?: number
-}> = ({
-  categories,
-  className = "h-4 w-4",
-  maxIcons = 3
-}) => {
+  categories: string[] | string;
+  className?: string;
+  maxIcons?: number;
+}> = ({ categories, className = 'h-4 w-4', maxIcons = 3 }) => {
   // Parse categories - handle both array and comma-separated string
-  let categoryArray: string[] = []
-  
+  let categoryArray: string[] = [];
+
   if (typeof categories === 'string') {
     // Handle comma-separated string or JSON string
     try {
-      const parsed = JSON.parse(categories)
-      categoryArray = Array.isArray(parsed) ? parsed : [categories]
+      const parsed = JSON.parse(categories);
+      categoryArray = Array.isArray(parsed) ? parsed : [categories];
     } catch {
       // If not JSON, split by comma
-      categoryArray = categories.split(',').map(cat => cat.trim())
+      categoryArray = categories.split(',').map((cat) => cat.trim());
     }
   } else {
-    categoryArray = categories
+    categoryArray = categories;
   }
 
   // Limit to maxIcons and filter out empty strings
-  const displayCategories = categoryArray
-    .filter(cat => cat && cat.trim())
-    .slice(0, maxIcons)
+  const displayCategories = categoryArray.filter((cat) => cat && cat.trim()).slice(0, maxIcons);
 
   return (
     <div className="flex items-center gap-1">
       {displayCategories.map((category, index) => {
-        const IconComponent = getCategoryIcon(category.trim())
+        const IconComponent = getCategoryIcon(category.trim());
         return (
           <div
             key={index}
@@ -110,13 +101,11 @@ export const CategoryIconList: React.FC<{
           >
             <IconComponent className={className} />
           </div>
-        )
+        );
       })}
       {categoryArray.length > maxIcons && (
-        <div className="text-xs text-muted-foreground ml-1">
-          +{categoryArray.length - maxIcons}
-        </div>
+        <div className="text-xs text-muted-foreground ml-1">+{categoryArray.length - maxIcons}</div>
       )}
     </div>
-  )
-}
+  );
+};

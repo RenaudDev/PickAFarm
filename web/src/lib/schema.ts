@@ -1,4 +1,10 @@
-import { WithContext, Organization, BreadcrumbList, CollectionPage, LocalBusiness } from 'schema-dts';
+import {
+  WithContext,
+  Organization,
+  BreadcrumbList,
+  CollectionPage,
+  LocalBusiness,
+} from 'schema-dts';
 
 const BASE_URL = 'https://pickafarm.com';
 
@@ -7,7 +13,7 @@ interface FarmData {
   id: string;
   name: string;
   slug: string;
-  url: string;            // Required to match SearchResultsContent
+  url: string; // Required to match SearchResultsContent
   street?: string;
   city: string;
   province: string;
@@ -18,7 +24,7 @@ interface FarmData {
   phone?: string;
   image_url?: string;
   categories?: string;
-  featured?: number;      // Number to match SearchResultsContent
+  featured?: number; // Number to match SearchResultsContent
   distance_km?: number;
   // Farm custom branding images
   logo_url?: string;
@@ -39,7 +45,7 @@ interface ApiFarmData {
   province: string;
   country?: string;
   categories?: string;
-  featured?: boolean;     // Boolean from API
+  featured?: boolean; // Boolean from API
   distance_km?: number;
   street?: string;
   postal_code?: string;
@@ -61,7 +67,7 @@ interface LocationData {
   name: string;
   province: string;
   location_slug: string;
-  farms?: ApiFarmData[];  // Use API farm type
+  farms?: ApiFarmData[]; // Use API farm type
   full_location?: string;
 }
 
@@ -74,10 +80,7 @@ export function generateOrganizationSchema(): Organization {
     name: 'PickAFarm',
     url: BASE_URL,
     logo: `${BASE_URL}/android-chrome-512x512.png`,
-    sameAs: [
-      'https://www.facebook.com/pickafarm/',
-      'https://www.instagram.com/pickafarm',
-    ],
+    sameAs: ['https://www.facebook.com/pickafarm/', 'https://www.instagram.com/pickafarm'],
   };
 }
 
@@ -85,7 +88,9 @@ export function generateOrganizationSchema(): Organization {
  * Generates a BreadcrumbList schema.
  * @param items - An array of breadcrumb items with name and optional item URL.
  */
-export function generateBreadcrumbSchema(items: { name: string; item?: string }[]): WithContext<BreadcrumbList> {
+export function generateBreadcrumbSchema(
+  items: { name: string; item?: string }[]
+): WithContext<BreadcrumbList> {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -130,7 +135,7 @@ export function generateCollectionPageSchema(
 
   // Filter out farms with invalid data
   const validFarms = farms.filter(validateFarmData);
-  
+
   const organization = generateOrganizationSchema();
   const url = `${BASE_URL}/${categoryData.slug}/near/${locationData.location_slug}`;
 
@@ -167,13 +172,14 @@ export function generateCollectionPageSchema(
               addressCountry: 'CA',
             },
           }),
-          ...(farm.latitude && farm.longitude && {
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: farm.latitude,
-              longitude: farm.longitude,
-            },
-          }),
+          ...(farm.latitude &&
+            farm.longitude && {
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: farm.latitude,
+                longitude: farm.longitude,
+              },
+            }),
           ...(farm.phone && { telephone: farm.phone }),
           image: farm.image_url || `${BASE_URL}/android-chrome-512x512.png`,
         } as LocalBusiness,
@@ -197,7 +203,7 @@ export function generateCityPageSchema(
 
   // Filter out farms with invalid data
   const validFarms = farms.filter(validateFarmData);
-  
+
   const organization = generateOrganizationSchema();
   const url = `${BASE_URL}/farms-near/${locationData.location_slug}`;
 
@@ -233,13 +239,14 @@ export function generateCityPageSchema(
               addressCountry: 'CA',
             },
           }),
-          ...(farm.latitude && farm.longitude && {
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: farm.latitude,
-              longitude: farm.longitude,
-            },
-          }),
+          ...(farm.latitude &&
+            farm.longitude && {
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: farm.latitude,
+                longitude: farm.longitude,
+              },
+            }),
           ...(farm.phone && { telephone: farm.phone }),
           image: farm.image_url || `${BASE_URL}/android-chrome-512x512.png`,
         } as LocalBusiness,

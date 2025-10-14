@@ -17,7 +17,8 @@ const nextConfig = {
       // Pattern 1: US states incorrectly tagged as Canada
       // All 50 US states + DC that were marked as "canada"
       {
-        source: '/:category/near/:city-:state(al|ak|az|ar|ca|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-canada/',
+        source:
+          '/:category/near/:city-:state(al|ak|az|ar|ca|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-canada/',
         destination: '/:category/near/:city-:state-us/',
         permanent: true,
       },
@@ -404,13 +405,15 @@ const nextConfig = {
       // This is different from Pattern 1 which catches -canada (full word)
       // With trailing slash
       {
-        source: '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-ca/',
+        source:
+          '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-ca/',
         destination: '/:category/near/:city-:state-us/',
         permanent: true,
       },
       // Without trailing slash
       {
-        source: '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-ca',
+        source:
+          '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc)-ca',
         destination: '/:category/near/:city-:state-us/',
         permanent: true,
       },
@@ -434,12 +437,12 @@ const nextConfig = {
   },
   // Optimize bundle size in production
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
   // Optimize JavaScript loading
   experimental: {
     optimizePackageImports: ['@clerk/nextjs', 'lucide-react'],
-    optimizeCss: true // Enable CSS optimization
+    optimizeCss: true, // Enable CSS optimization
   },
   // Webpack optimizations for bundle splitting
   webpack: (config, { isServer }) => {
@@ -479,6 +482,6 @@ const nextConfig = {
     }
     return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -9,7 +9,9 @@ async function main() {
   console.log('🔑 Fetching Zoho credentials from deployed Worker...\n');
 
   try {
-    const response = await fetch('https://pickafarm-api.94623956quebecinc.workers.dev/api/token-debug');
+    const response = await fetch(
+      'https://pickafarm-api.94623956quebecinc.workers.dev/api/token-debug'
+    );
 
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status}`);
@@ -43,7 +45,6 @@ async function main() {
     console.log('      ZOHO_REFRESH_TOKEN=your_value_here');
     console.log('      ZOHO_DC=ca');
     console.log('');
-
   } catch (error) {
     console.error('❌ Error:', error.message);
     process.exit(1);

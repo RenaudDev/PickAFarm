@@ -25,24 +25,26 @@ const url = `https://maps.googleapis.com/maps/api/staticmap?center=39.8283,-98.5
 
 console.log('Downloading mobile-optimized static US map image (640x400)...');
 
-https.get(url, (res) => {
-  if (res.statusCode !== 200) {
-    console.error('Error: Failed to download map. Status:', res.statusCode);
+https
+  .get(url, (res) => {
+    if (res.statusCode !== 200) {
+      console.error('Error: Failed to download map. Status:', res.statusCode);
+      process.exit(1);
+    }
+
+    const dest = fs.createWriteStream(outputPath);
+    res.pipe(dest);
+
+    dest.on('finish', () => {
+      console.log('✓ Static map image saved to public/us-map-static.png');
+    });
+
+    dest.on('error', (err) => {
+      console.error('Error saving file:', err.message);
+      process.exit(1);
+    });
+  })
+  .on('error', (err) => {
+    console.error('Error downloading map:', err.message);
     process.exit(1);
-  }
-
-  const dest = fs.createWriteStream(outputPath);
-  res.pipe(dest);
-
-  dest.on('finish', () => {
-    console.log('✓ Static map image saved to public/us-map-static.png');
   });
-
-  dest.on('error', (err) => {
-    console.error('Error saving file:', err.message);
-    process.exit(1);
-  });
-}).on('error', (err) => {
-  console.error('Error downloading map:', err.message);
-  process.exit(1);
-});

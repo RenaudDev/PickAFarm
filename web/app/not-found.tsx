@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Wheat } from 'lucide-react'
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Wheat } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -18,13 +18,10 @@ export default function NotFound() {
         </div>
         <div className="space-y-3">
           <Button asChild className="w-full">
-            <Link href="/">
-              Return Home
-            </Link>
+            <Link href="/">Return Home</Link>
           </Button>
-          
         </div>
       </div>
     </div>
-  )
+  );
 }

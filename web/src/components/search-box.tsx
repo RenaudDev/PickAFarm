@@ -1,138 +1,145 @@
-"use client"
+'use client';
 
-import React, { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, MapPin, ChevronRight, AlertCircle } from "lucide-react"
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Search, MapPin, ChevronRight, AlertCircle } from 'lucide-react';
 
 // Import the full locations and categories data
-import locationsWithFarms from "../../data/locations-with-farms.json"
-import categoriesData from "../../data/categories.json"
+import locationsWithFarms from '../../data/locations-with-farms.json';
+import categoriesData from '../../data/categories.json';
 
 export default function SearchBox() {
-  const [categoryQuery, setCategoryQuery] = useState("")
-  const [locationQuery, setLocationQuery] = useState("")
-  const [showCategorySuggestions, setShowCategorySuggestions] = useState(false)
-  const [showLocationSuggestions, setShowLocationSuggestions] = useState(false)
-  const [searchError, setSearchError] = useState("")
-  const router = useRouter()
+  const [categoryQuery, setCategoryQuery] = useState('');
+  const [locationQuery, setLocationQuery] = useState('');
+  const [showCategorySuggestions, setShowCategorySuggestions] = useState(false);
+  const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
+  const [searchError, setSearchError] = useState('');
+  const router = useRouter();
 
   // Create category options from categories data
   const categoryOptions = categoriesData
-    .filter(category => category.totalFarms > 0)
-    .map(category => ({
+    .filter((category) => category.totalFarms > 0)
+    .map((category) => ({
       name: category.name,
       slug: category.slug,
-      farmCount: category.totalFarms
-    }))
+      farmCount: category.totalFarms,
+    }));
 
   // Create location options from locations with farms
   const locationOptions = locationsWithFarms
-    .filter(location => location.farmCount > 0)
-    .map(location => ({
+    .filter((location) => location.farmCount > 0)
+    .map((location) => ({
       displayName: location.full_location,
       searchName: `${location.name}, ${location.province}`,
       slug: location.location_slug,
-      farmCount: location.farmCount
-    }))
+      farmCount: location.farmCount,
+    }));
 
   const filteredCategories = categoryOptions
     .filter((category) => category.name.toLowerCase().includes(categoryQuery.toLowerCase()))
-    .slice(0, 5)
+    .slice(0, 5);
 
   const filteredLocations = locationOptions
-    .filter((location) => 
-      location.displayName.toLowerCase().includes(locationQuery.toLowerCase()) ||
-      location.searchName.toLowerCase().includes(locationQuery.toLowerCase()) ||
-      location.slug.toLowerCase().includes(locationQuery.toLowerCase())
+    .filter(
+      (location) =>
+        location.displayName.toLowerCase().includes(locationQuery.toLowerCase()) ||
+        location.searchName.toLowerCase().includes(locationQuery.toLowerCase()) ||
+        location.slug.toLowerCase().includes(locationQuery.toLowerCase())
     )
-    .slice(0, 8)
+    .slice(0, 8);
 
   const handleSearch = () => {
-    setSearchError("")
+    setSearchError('');
 
     // If both category and location are provided, redirect to specific location page
     if (categoryQuery.trim() && locationQuery.trim()) {
       // Find matching category
-      const matchingCategory = categoryOptions.find(category => 
-        category.name.toLowerCase() === categoryQuery.toLowerCase() ||
-        category.slug.toLowerCase() === categoryQuery.toLowerCase()
-      )
+      const matchingCategory = categoryOptions.find(
+        (category) =>
+          category.name.toLowerCase() === categoryQuery.toLowerCase() ||
+          category.slug.toLowerCase() === categoryQuery.toLowerCase()
+      );
 
       // Find matching location
-      const exactLocationMatch = locationOptions.find(location => 
-        location.displayName.toLowerCase() === locationQuery.toLowerCase() ||
-        location.searchName.toLowerCase() === locationQuery.toLowerCase()
-      )
+      const exactLocationMatch = locationOptions.find(
+        (location) =>
+          location.displayName.toLowerCase() === locationQuery.toLowerCase() ||
+          location.searchName.toLowerCase() === locationQuery.toLowerCase()
+      );
 
-      const partialLocationMatch = locationOptions.find(location =>
-        location.displayName.toLowerCase().includes(locationQuery.toLowerCase()) ||
-        location.searchName.toLowerCase().includes(locationQuery.toLowerCase())
-      )
+      const partialLocationMatch = locationOptions.find(
+        (location) =>
+          location.displayName.toLowerCase().includes(locationQuery.toLowerCase()) ||
+          location.searchName.toLowerCase().includes(locationQuery.toLowerCase())
+      );
 
-      const locationMatch = exactLocationMatch || partialLocationMatch
+      const locationMatch = exactLocationMatch || partialLocationMatch;
 
       if (matchingCategory && locationMatch) {
-        router.push(`/${matchingCategory.slug}/near/${locationMatch.slug}`)
-        return
+        router.push(`/${matchingCategory.slug}/near/${locationMatch.slug}`);
+        return;
       }
     }
 
     // If only category is provided, redirect to category page
     if (categoryQuery.trim() && !locationQuery.trim()) {
-      const matchingCategory = categoryOptions.find(category => 
-        category.name.toLowerCase() === categoryQuery.toLowerCase() ||
-        category.slug.toLowerCase() === categoryQuery.toLowerCase()
-      )
+      const matchingCategory = categoryOptions.find(
+        (category) =>
+          category.name.toLowerCase() === categoryQuery.toLowerCase() ||
+          category.slug.toLowerCase() === categoryQuery.toLowerCase()
+      );
 
       if (matchingCategory) {
-        router.push(`/${matchingCategory.slug}`)
-        return
+        router.push(`/${matchingCategory.slug}`);
+        return;
       }
     }
 
     // If only location is provided, show error (need category for specific pages)
     if (!categoryQuery.trim() && locationQuery.trim()) {
-      setSearchError("Please select a farm type (e.g., Apple Orchards) to search for farms near that location.")
-      return
+      setSearchError(
+        'Please select a farm type (e.g., Apple Orchards) to search for farms near that location.'
+      );
+      return;
     }
 
     // If neither is provided or no matches found
     if (!categoryQuery.trim() && !locationQuery.trim()) {
-      setSearchError("Please enter what you're looking for and a location.")
+      setSearchError("Please enter what you're looking for and a location.");
     } else {
-      setSearchError("Sorry, we couldn't find matching farms. Please try different search terms.")
+      setSearchError("Sorry, we couldn't find matching farms. Please try different search terms.");
     }
-  }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch()
+    if (e.key === 'Enter') {
+      handleSearch();
     }
-  }
+  };
 
-  const handleCategorySelect = (category: typeof categoryOptions[0]) => {
-    setCategoryQuery(category.name)
-    setShowCategorySuggestions(false)
-    setSearchError("")
-  }
+  const handleCategorySelect = (category: (typeof categoryOptions)[0]) => {
+    setCategoryQuery(category.name);
+    setShowCategorySuggestions(false);
+    setSearchError('');
+  };
 
-  const handleLocationSelect = (location: typeof locationOptions[0]) => {
-    setLocationQuery(location.searchName)
-    setShowLocationSuggestions(false)
-    setSearchError("")
-  }
+  const handleLocationSelect = (location: (typeof locationOptions)[0]) => {
+    setLocationQuery(location.searchName);
+    setShowLocationSuggestions(false);
+    setSearchError('');
+  };
 
   const handleCategoryInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCategoryQuery(e.target.value)
-    setSearchError("")
-  }
+    setCategoryQuery(e.target.value);
+    setSearchError('');
+  };
 
   const handleLocationInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocationQuery(e.target.value)
-    setSearchError("")
-  }
+    setLocationQuery(e.target.value);
+    setSearchError('');
+  };
 
   return (
     <>
@@ -250,7 +257,7 @@ export default function SearchBox() {
               )}
             </div>
           </div>
-          
+
           <div className="flex-1 relative">
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground z-10" />
@@ -289,7 +296,7 @@ export default function SearchBox() {
               )}
             </div>
           </div>
-          
+
           <div className="flex-shrink-0">
             <Button
               size="lg"
@@ -308,5 +315,5 @@ export default function SearchBox() {
         )}
       </div>
     </>
-  )
+  );
 }

@@ -3,13 +3,13 @@
 ## Method 1: Using ProtectedRoute Component (Recommended)
 
 ```tsx
-"use client"
+'use client';
 
-import { ProtectedRoute } from "@/components/protected-route"
-import { useUser } from "@clerk/nextjs"
+import { ProtectedRoute } from '@/components/protected-route';
+import { useUser } from '@clerk/nextjs';
 
 export default function MyProtectedPage() {
-  const { user } = useUser()
+  const { user } = useUser();
 
   return (
     <ProtectedRoute>
@@ -18,49 +18,49 @@ export default function MyProtectedPage() {
         <p>This content is only visible to authenticated users</p>
       </div>
     </ProtectedRoute>
-  )
+  );
 }
 ```
 
 ## Method 2: Using useRequireAuth Hook
 
 ```tsx
-"use client"
+'use client';
 
-import { useRequireAuth } from "@/hooks/use-require-auth"
-import { useUser } from "@clerk/nextjs"
+import { useRequireAuth } from '@/hooks/use-require-auth';
+import { useUser } from '@clerk/nextjs';
 
 export default function MyProtectedPage() {
-  const { isLoaded, isSignedIn } = useRequireAuth()
-  const { user } = useUser()
+  const { isLoaded, isSignedIn } = useRequireAuth();
+  const { user } = useUser();
 
   if (!isLoaded) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!isSignedIn) {
-    return null // Will redirect
+    return null; // Will redirect
   }
 
   return (
     <div>
       <h1>Welcome {user?.firstName}!</h1>
     </div>
-  )
+  );
 }
 ```
 
 ## Method 3: Conditional Rendering (For Sections)
 
 ```tsx
-"use client"
+'use client';
 
-import { useAuth, useUser } from "@clerk/nextjs"
-import { SignInButton } from "@clerk/nextjs"
+import { useAuth, useUser } from '@clerk/nextjs';
+import { SignInButton } from '@clerk/nextjs';
 
 export default function MyPage() {
-  const { isSignedIn } = useAuth()
-  const { user } = useUser()
+  const { isSignedIn } = useAuth();
+  const { user } = useUser();
 
   return (
     <div>
@@ -81,40 +81,36 @@ export default function MyPage() {
         </div>
       )}
     </div>
-  )
+  );
 }
 ```
 
 ## Method 4: Protecting Actions/Buttons
 
 ```tsx
-"use client"
+'use client';
 
-import { useAuth } from "@clerk/nextjs"
-import { SignInButton } from "@clerk/nextjs"
-import { Button } from "@/components/ui/button"
+import { useAuth } from '@clerk/nextjs';
+import { SignInButton } from '@clerk/nextjs';
+import { Button } from '@/components/ui/button';
 
 export function SaveFarmButton({ farmId }: { farmId: string }) {
-  const { isSignedIn } = useAuth()
+  const { isSignedIn } = useAuth();
 
   const handleSave = () => {
     // This will only run if user is signed in
-    console.log("Saving farm:", farmId)
-  }
+    console.log('Saving farm:', farmId);
+  };
 
   if (!isSignedIn) {
     return (
       <SignInButton mode="modal">
         <Button>Sign in to Save</Button>
       </SignInButton>
-    )
+    );
   }
 
-  return (
-    <Button onClick={handleSave}>
-      Save Farm
-    </Button>
-  )
+  return <Button onClick={handleSave}>Save Farm</Button>;
 }
 ```
 

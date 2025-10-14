@@ -4,7 +4,7 @@
  */
 
 interface StructuredDataProps {
-  data: Record<string, any>
+  data: Record<string, any>;
 }
 
 export function StructuredData({ data }: StructuredDataProps) {
@@ -12,10 +12,10 @@ export function StructuredData({ data }: StructuredDataProps) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data)
+        __html: JSON.stringify(data),
       }}
     />
-  )
+  );
 }
 
 /**
@@ -23,7 +23,7 @@ export function StructuredData({ data }: StructuredDataProps) {
  * Renders multiple JSON-LD schemas at once
  */
 interface MultipleStructuredDataProps {
-  schemas: Array<Record<string, any>>
+  schemas: Array<Record<string, any>>;
 }
 
 export function MultipleStructuredData({ schemas }: MultipleStructuredDataProps) {
@@ -33,5 +33,5 @@ export function MultipleStructuredData({ schemas }: MultipleStructuredDataProps)
         <StructuredData key={index} data={schema} />
       ))}
     </>
-  )
+  );
 }

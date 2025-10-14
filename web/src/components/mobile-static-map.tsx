@@ -1,19 +1,28 @@
-"use client"
+'use client';
 
-import { Button } from '@/components/ui/button'
-import { MapPin, Loader2 } from 'lucide-react'
+import { Button } from '@/components/ui/button';
+import { MapPin, Loader2 } from 'lucide-react';
 
 interface MobileStaticMapProps {
-  onLoadInteractiveMap: () => void
-  farmCount?: number
-  isCalculating?: boolean
+  onLoadInteractiveMap: () => void;
+  farmCount?: number;
+  isCalculating?: boolean;
 }
 
-export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalculating = false }: MobileStaticMapProps) {
+export function MobileStaticMap({
+  onLoadInteractiveMap,
+  farmCount = 0,
+  isCalculating = false,
+}: MobileStaticMapProps) {
   return (
     <div className="relative w-full h-[70vh] lg:h-[80vh] overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-stone-50">
       {/* SVG map with roads, regions, and pins */}
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice">
+      <svg
+        className="absolute inset-0 w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1000 800"
+        preserveAspectRatio="xMidYMid slice"
+      >
         <defs>
           <filter id="softBlur">
             <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" />
@@ -26,12 +35,24 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
 
         {/* Map regions/land areas */}
         <g opacity="0.4" filter="url(#softBlur)">
-          <path d="M 50 100 L 200 80 L 350 120 L 450 90 L 600 110 L 750 95 L 900 120 L 950 250 L 900 380 L 850 500 L 750 620 L 600 680 L 450 700 L 300 690 L 150 650 L 80 520 L 50 380 Z"
-                fill="rgba(34, 197, 94, 0.15)" stroke="rgba(34, 197, 94, 0.2)" strokeWidth="1" />
-          <path d="M 100 200 Q 250 180, 400 210 T 700 200 Q 800 250, 750 350 T 500 420 Q 300 450, 150 380 Z"
-                fill="rgba(132, 204, 22, 0.12)" stroke="rgba(132, 204, 22, 0.15)" strokeWidth="1" />
-          <path d="M 400 400 L 550 380 L 700 420 L 800 500 L 750 600 L 600 650 L 450 640 L 350 580 Z"
-                fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.15)" strokeWidth="1" />
+          <path
+            d="M 50 100 L 200 80 L 350 120 L 450 90 L 600 110 L 750 95 L 900 120 L 950 250 L 900 380 L 850 500 L 750 620 L 600 680 L 450 700 L 300 690 L 150 650 L 80 520 L 50 380 Z"
+            fill="rgba(34, 197, 94, 0.15)"
+            stroke="rgba(34, 197, 94, 0.2)"
+            strokeWidth="1"
+          />
+          <path
+            d="M 100 200 Q 250 180, 400 210 T 700 200 Q 800 250, 750 350 T 500 420 Q 300 450, 150 380 Z"
+            fill="rgba(132, 204, 22, 0.12)"
+            stroke="rgba(132, 204, 22, 0.15)"
+            strokeWidth="1"
+          />
+          <path
+            d="M 400 400 L 550 380 L 700 420 L 800 500 L 750 600 L 600 650 L 450 640 L 350 580 Z"
+            fill="rgba(16, 185, 129, 0.1)"
+            stroke="rgba(16, 185, 129, 0.15)"
+            strokeWidth="1"
+          />
         </g>
 
         {/* Road network */}
@@ -52,19 +73,44 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
         {/* Location pins/markers */}
         <g opacity="0.5">
           <circle cx="250" cy="200" r="8" fill="rgb(34, 197, 94)" />
-          <path d="M 250 192 Q 250 180, 250 180 L 250 200" stroke="rgb(34, 197, 94)" strokeWidth="2" fill="none" />
+          <path
+            d="M 250 192 Q 250 180, 250 180 L 250 200"
+            stroke="rgb(34, 197, 94)"
+            strokeWidth="2"
+            fill="none"
+          />
 
           <circle cx="500" cy="350" r="8" fill="rgb(16, 185, 129)" />
-          <path d="M 500 342 Q 500 330, 500 330 L 500 350" stroke="rgb(16, 185, 129)" strokeWidth="2" fill="none" />
+          <path
+            d="M 500 342 Q 500 330, 500 330 L 500 350"
+            stroke="rgb(16, 185, 129)"
+            strokeWidth="2"
+            fill="none"
+          />
 
           <circle cx="650" cy="250" r="8" fill="rgb(132, 204, 22)" />
-          <path d="M 650 242 Q 650 230, 650 230 L 650 250" stroke="rgb(132, 204, 22)" strokeWidth="2" fill="none" />
+          <path
+            d="M 650 242 Q 650 230, 650 230 L 650 250"
+            stroke="rgb(132, 204, 22)"
+            strokeWidth="2"
+            fill="none"
+          />
 
           <circle cx="400" cy="500" r="8" fill="rgb(34, 197, 94)" />
-          <path d="M 400 492 Q 400 480, 400 480 L 400 500" stroke="rgb(34, 197, 94)" strokeWidth="2" fill="none" />
+          <path
+            d="M 400 492 Q 400 480, 400 480 L 400 500"
+            stroke="rgb(34, 197, 94)"
+            strokeWidth="2"
+            fill="none"
+          />
 
           <circle cx="750" cy="400" r="8" fill="rgb(16, 185, 129)" />
-          <path d="M 750 392 Q 750 380, 750 380 L 750 400" stroke="rgb(16, 185, 129)" strokeWidth="2" fill="none" />
+          <path
+            d="M 750 392 Q 750 380, 750 380 L 750 400"
+            stroke="rgb(16, 185, 129)"
+            strokeWidth="2"
+            fill="none"
+          />
         </g>
 
         {/* Small dots for cities/towns */}
@@ -95,11 +141,9 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
 
             {/* Title */}
             <h2 className="text-2xl font-bold text-foreground">
-              {isCalculating ? (
-                'Finding Farms Near You...'
-              ) : (
-                `${farmCount} ${farmCount === 1 ? 'Farm' : 'Farms'} Near You`
-              )}
+              {isCalculating
+                ? 'Finding Farms Near You...'
+                : `${farmCount} ${farmCount === 1 ? 'Farm' : 'Farms'} Near You`}
             </h2>
 
             {/* Description */}
@@ -120,5 +164,5 @@ export function MobileStaticMap({ onLoadInteractiveMap, farmCount = 0, isCalcula
         </div>
       </div>
     </div>
-  )
+  );
 }

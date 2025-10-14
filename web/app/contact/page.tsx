@@ -1,22 +1,18 @@
-import StaticPageLayout from "@/components/static-page-layout"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
-import { Metadata } from "next"
-import { generateMetadata as createMetadata } from "@/lib/seo-metadata"
+import StaticPageLayout from '@/components/static-page-layout';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Metadata } from 'next';
+import { generateMetadata as createMetadata } from '@/lib/seo-metadata';
 
 export async function generateMetadata(): Promise<Metadata> {
   return createMetadata({
-    title: "Contact Us - PickAFarm",
-    description: "Get in touch with the PickAFarm team. Questions about farm listings, partnerships, or need help? We're here to assist you.",
-    keywords: [
-      "contact pickafarm",
-      "farm directory contact",
-      "list your farm",
-      "farm partnership"
-    ],
-    url: "https://pickafarm.com/contact/"
-  })
+    title: 'Contact Us - PickAFarm',
+    description:
+      "Get in touch with the PickAFarm team. Questions about farm listings, partnerships, or need help? We're here to assist you.",
+    keywords: ['contact pickafarm', 'farm directory contact', 'list your farm', 'farm partnership'],
+    url: 'https://pickafarm.com/contact/',
+  });
 }
 
 export default function ContactPage() {
@@ -35,7 +31,10 @@ export default function ContactPage() {
             <form className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="firstName"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     First Name *
                   </label>
                   <input
@@ -47,7 +46,10 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="lastName"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Last Name *
                   </label>
                   <input
@@ -143,8 +145,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            
-
             <div className="flex items-start gap-4">
               <div className="bg-primary/10 p-3 rounded-full">
                 <Clock className="h-6 w-6 text-primary" />
@@ -169,12 +169,10 @@ export default function ContactPage() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              Want to list your farm on PickAFarm? We'd love to help you connect with visitors looking for authentic
-              farm experiences.
+              Want to list your farm on PickAFarm? We'd love to help you connect with visitors
+              looking for authentic farm experiences.
             </p>
-            <Button className="w-full">
-              List Your Farm
-            </Button>
+            <Button className="w-full">List Your Farm</Button>
           </CardContent>
         </Card>
       </div>
@@ -183,9 +181,12 @@ export default function ContactPage() {
         <h2 className="text-2xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <h3 className="font-semibold text-foreground mb-2">How do I add my farm to the directory?</h3>
+            <h3 className="font-semibold text-foreground mb-2">
+              How do I add my farm to the directory?
+            </h3>
             <p className="text-muted-foreground text-sm">
-              Contact us using the form above or email us directly. We'll guide you through the listing process.
+              Contact us using the form above or email us directly. We'll guide you through the
+              listing process.
             </p>
           </div>
           <div>
@@ -195,9 +196,12 @@ export default function ContactPage() {
             </p>
           </div>
           <div>
-            <h3 className="font-semibold text-foreground mb-2">How can I update my farm information?</h3>
+            <h3 className="font-semibold text-foreground mb-2">
+              How can I update my farm information?
+            </h3>
             <p className="text-muted-foreground text-sm">
-              Send us an email with your updates, or contact us to discuss dashboard access for self-service updates.
+              Send us an email with your updates, or contact us to discuss dashboard access for
+              self-service updates.
             </p>
           </div>
           <div>
@@ -209,5 +213,5 @@ export default function ContactPage() {
         </div>
       </div>
     </StaticPageLayout>
-  )
+  );
 }

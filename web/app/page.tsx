@@ -1,80 +1,92 @@
-import React, { Suspense } from "react"
-import Link from "next/link"
-import { Metadata } from "next"
-import dynamic from "next/dynamic"
+import React, { Suspense } from 'react';
+import Link from 'next/link';
+import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
-import { FarmNavbar } from "@/components/farm-navbar"
-import { FarmFooter } from "@/components/farm-footer"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Users, Calendar, ArrowRight } from "lucide-react"
-import { MapSkeletonStatic } from "@/components/map-skeleton-static"
-import categoriesData from "../data/categories.json"
-import statesData from "../data/states-with-farms.json"
-import blogImages from "../data/blog-images.json"
-import { generateHomepageMetadata } from "@/lib/seo-metadata"
-import { getAllPosts } from '@/lib/wordpress'
-import { NearbyFarmsSection } from "@/components/nearby-farms-section"
-import { generateHomepageSchemas } from "@/lib/organization-schema"
-import { generateHomepageFAQSchema } from "@/lib/faq-schema"
-import { StructuredData, MultipleStructuredData } from "@/components/seo/structured-data"
+import { FarmNavbar } from '@/components/farm-navbar';
+import { FarmFooter } from '@/components/farm-footer';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MapPin, Users, Calendar, ArrowRight } from 'lucide-react';
+import { MapSkeletonStatic } from '@/components/map-skeleton-static';
+import categoriesData from '../data/categories.json';
+import statesData from '../data/states-with-farms.json';
+import blogImages from '../data/blog-images.json';
+import { generateHomepageMetadata } from '@/lib/seo-metadata';
+import { getAllPosts } from '@/lib/wordpress';
+import { NearbyFarmsSection } from '@/components/nearby-farms-section';
+import { generateHomepageSchemas } from '@/lib/organization-schema';
+import { generateHomepageFAQSchema } from '@/lib/faq-schema';
+import { StructuredData, MultipleStructuredData } from '@/components/seo/structured-data';
 
 // Dynamic imports for below-the-fold components
-const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
-  loading: () => <div className="h-96" />
-})
+const FAQSection = dynamic(
+  () => import('@/components/faq-section').then((mod) => ({ default: mod.FAQSection })),
+  {
+    loading: () => <div className="h-96" />,
+  }
+);
 
-const FarmMapSection = dynamic(() => import("@/components/farm-map-section").then(mod => ({ default: mod.FarmMapSection })), {
-  loading: () => <MapSkeletonStatic />
-})
+const FarmMapSection = dynamic(
+  () => import('@/components/farm-map-section').then((mod) => ({ default: mod.FarmMapSection })),
+  {
+    loading: () => <MapSkeletonStatic />,
+  }
+);
 
-const AdaptiveMapWrapper = dynamic(() => import("@/components/adaptive-map-wrapper").then(mod => ({ default: mod.AdaptiveMapWrapper })), {
-  loading: () => <MapSkeletonStatic />
-})
+const AdaptiveMapWrapper = dynamic(
+  () =>
+    import('@/components/adaptive-map-wrapper').then((mod) => ({
+      default: mod.AdaptiveMapWrapper,
+    })),
+  {
+    loading: () => <MapSkeletonStatic />,
+  }
+);
 
 // Function to get top categories from generated categories data
 // Only show categories with at least 10 farms (viable inventory)
 function getTopCategories() {
-  const MINIMUM_FARMS_FOR_CATEGORY = 10
-  
+  const MINIMUM_FARMS_FOR_CATEGORY = 10;
+
   // Filter categories that have sufficient farms and sort by farm count
   return categoriesData
-    .filter(category => category.totalFarms >= MINIMUM_FARMS_FOR_CATEGORY)
+    .filter((category) => category.totalFarms >= MINIMUM_FARMS_FOR_CATEGORY)
     .sort((a, b) => b.totalFarms - a.totalFarms)
-    .slice(0, 4) // Top 4 categories
+    .slice(0, 4); // Top 4 categories
 }
 
 // Get US states sorted by farm count
 function getUSStates() {
   return statesData
-    .filter(state => state.country_code === 'US')
+    .filter((state) => state.country_code === 'US')
     .sort((a, b) => b.total_farms - a.total_farms)
-    .slice(0, 12) // Top 12 US states
+    .slice(0, 12); // Top 12 US states
 }
 
 // Get Canadian provinces sorted by farm count
 function getCanadianProvinces() {
   return statesData
-    .filter(state => state.country_code === 'CA')
-    .sort((a, b) => b.total_farms - a.total_farms)
+    .filter((state) => state.country_code === 'CA')
+    .sort((a, b) => b.total_farms - a.total_farms);
 }
 
 // Generate metadata for SEO
 export function generateMetadata(): Metadata {
-  return generateHomepageMetadata()
+  return generateHomepageMetadata();
 }
 
 export default async function Home() {
-  const topCategories = getTopCategories()
-  const usStates = getUSStates()
-  const canadianProvinces = getCanadianProvinces()
+  const topCategories = getTopCategories();
+  const usStates = getUSStates();
+  const canadianProvinces = getCanadianProvinces();
 
   // Fetch latest blog posts
-  const blogPosts = await getAllPosts()
-  const latestPosts = blogPosts.slice(0, 3) // Get 3 latest posts
+  const blogPosts = await getAllPosts();
+  const latestPosts = blogPosts.slice(0, 3); // Get 3 latest posts
 
   // Generate structured data for SEO
-  const homepageSchemas = generateHomepageSchemas()
-  const faqSchema = generateHomepageFAQSchema()
+  const homepageSchemas = generateHomepageSchemas();
+  const faqSchema = generateHomepageFAQSchema();
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -97,7 +109,9 @@ export default async function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 text-foreground">Browse Farms by US State</h2>
-              <p className="text-muted-foreground">Discover u-pick farms across the United States</p>
+              <p className="text-muted-foreground">
+                Discover u-pick farms across the United States
+              </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {usStates.map((state) => (
@@ -121,7 +135,9 @@ export default async function Home() {
         <section className="py-16 px-4 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-foreground">Browse Farms by Canadian Province</h2>
+              <h2 className="text-3xl font-bold mb-4 text-foreground">
+                Browse Farms by Canadian Province
+              </h2>
               <p className="text-muted-foreground">Explore u-pick farms across Canada</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -158,14 +174,10 @@ export default async function Home() {
               </div>
               <div className="grid gap-8 md:grid-cols-3">
                 {latestPosts.map((post, index) => {
-                  const imageData = blogImages[post.id as keyof typeof blogImages]
+                  const imageData = blogImages[post.id as keyof typeof blogImages];
 
                   return (
-                    <Link
-                      key={post.id}
-                      href={`/blog/${post.slug}`}
-                      className="group"
-                    >
+                    <Link key={post.id} href={`/blog/${post.slug}`} className="group">
                       <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
                         {imageData && (
                           <div className="relative w-full h-48 overflow-hidden bg-muted">
@@ -208,13 +220,13 @@ export default async function Home() {
                           <div
                             className="text-sm text-muted-foreground line-clamp-3"
                             dangerouslySetInnerHTML={{
-                              __html: post.excerpt.rendered
+                              __html: post.excerpt.rendered,
                             }}
                           />
                         </CardContent>
                       </Card>
                     </Link>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -225,16 +237,20 @@ export default async function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <Users className="h-16 w-16 mx-auto mb-6 text-primary-foreground opacity-90" />
             <h2 className="text-3xl font-bold mb-4 text-balance text-primary-foreground">
-            Get More Families to Your Farm
+              Get More Families to Your Farm
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto text-pretty text-primary-foreground">
-            Join thousands of pick-your-own farms across Canada reaching customers actively searching for agritourism experiences. List your farm and connect with families ready to pick, explore, and spend.
+              Join thousands of pick-your-own farms across Canada reaching customers actively
+              searching for agritourism experiences. List your farm and connect with families ready
+              to pick, explore, and spend.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3" className="bg-secondary hover:bg-secondary/90 text-primary-foreground font-semibold px-4 py-2">
+              <a
+                href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3"
+                className="bg-secondary hover:bg-secondary/90 text-primary-foreground font-semibold px-4 py-2"
+              >
                 List Your Farm
               </a>
-              
             </div>
           </div>
         </section>
@@ -243,5 +259,5 @@ export default async function Home() {
       </main>
       <FarmFooter />
     </div>
-  )
+  );
 }

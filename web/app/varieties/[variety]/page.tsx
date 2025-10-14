@@ -1,79 +1,79 @@
 import { getVarietyBySlug, getVarietyPaths } from '@/lib/wordpress';
 import { notFound } from 'next/navigation';
-import { FarmNavbar } from "@/components/farm-navbar"
-import { FarmFooter } from "@/components/farm-footer"
-import { Separator } from "@/components/ui/separator"
-import { Calendar } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+import { FarmNavbar } from '@/components/farm-navbar';
+import { FarmFooter } from '@/components/farm-footer';
+import { Separator } from '@/components/ui/separator';
+import { Calendar } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo-metadata';
 import { Metadata } from 'next';
 
 interface VarietyPageProps {
   params: Promise<{
-    variety: string
-  }>
+    variety: string;
+  }>;
 }
 
 export async function generateMetadata({ params }: VarietyPageProps): Promise<Metadata> {
-const { variety: varietySlug } = await params;
-const variety = await getVarietyBySlug(varietySlug);
+  const { variety: varietySlug } = await params;
+  const variety = await getVarietyBySlug(varietySlug);
 
-if (!variety) {
-  return {
-    title: 'Variety Not Found | PickAFarm',
-    description: 'The requested variety could not be found.'
-  };
-}
+  if (!variety) {
+    return {
+      title: 'Variety Not Found | PickAFarm',
+      description: 'The requested variety could not be found.',
+    };
+  }
 
-const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
-const description = variety.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim() ||
-  `Learn about ${variety.title.rendered} varieties. Find farms offering ${variety.title.rendered} for pick-your-own experiences.`;
+  const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
+  const description =
+    variety.excerpt.rendered.replace(/<[^>]*>?/gm, '').trim() ||
+    `Learn about ${variety.title.rendered} varieties. Find farms offering ${variety.title.rendered} for pick-your-own experiences.`;
 
-const keywords = [
-  variety.title.rendered.toLowerCase(),
-  `${variety.title.rendered.toLowerCase()} varieties`,
-  `${variety.title.rendered.toLowerCase()} picking`,
-  `u-pick ${variety.title.rendered.toLowerCase()}`,
-  'farm varieties',
-  'pick your own'
-];
+  const keywords = [
+    variety.title.rendered.toLowerCase(),
+    `${variety.title.rendered.toLowerCase()} varieties`,
+    `${variety.title.rendered.toLowerCase()} picking`,
+    `u-pick ${variety.title.rendered.toLowerCase()}`,
+    'farm varieties',
+    'pick your own',
+  ];
 
-return generateSEOMetadata({
-  title: `${variety.title.rendered} Varieties - Pick Your Own Guide`,
-  description: description,
-  keywords: keywords,
-  image: featuredImage?.source_url || 'https://pickafarm.com/images/og-pickafarm.webp',
-  url: `https://pickafarm.com/varieties/${variety.slug}/`,
-  type: 'article',
-});
+  return generateSEOMetadata({
+    title: `${variety.title.rendered} Varieties - Pick Your Own Guide`,
+    description: description,
+    keywords: keywords,
+    image: featuredImage?.source_url || 'https://pickafarm.com/images/og-pickafarm.webp',
+    url: `https://pickafarm.com/varieties/${variety.slug}/`,
+    type: 'article',
+  });
 }
 
 export async function generateStaticParams() {
-const paths = await getVarietyPaths();
-return paths;
+  const paths = await getVarietyPaths();
+  return paths;
 }
 
 export default async function VarietyPage({ params }: VarietyPageProps) {
   const { variety: varietySlug } = await params;
   const variety = await getVarietyBySlug(varietySlug);
 
-if (!variety) notFound();
+  if (!variety) notFound();
 
-const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
+  const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
 
-return (
+  return (
     <div className="bg-background">
       {/* Minimal Navigation */}
       {/* Navigation */}
-<FarmNavbar />
+      <FarmNavbar />
 
       {/* Article Content */}
       <article className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           {/* Article Header */}
           <header className="mb-12">
-
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance leading-tight">
               {variety.title.rendered}
             </h1>
@@ -106,7 +106,7 @@ return (
 
           {/* Article Body */}
           <div className="prose prose-lg max-w-none">
-            <div 
+            <div
               className="text-foreground leading-relaxed space-y-6"
               dangerouslySetInnerHTML={{ __html: variety.content.rendered }}
             />
@@ -115,13 +115,11 @@ return (
           {/* Article Footer */}
           <footer className="mt-16">
             <Separator className="mb-8" />
-            
-            
           </footer>
         </div>
       </article>
       {/* Footer */}
-<FarmFooter />
+      <FarmFooter />
     </div>
   );
 }

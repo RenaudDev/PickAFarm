@@ -7,7 +7,7 @@ const path = require('path');
 const envPath = path.join(__dirname, '..', '.env.local');
 if (fs.existsSync(envPath)) {
   const envContent = fs.readFileSync(envPath, 'utf8');
-  envContent.split('\n').forEach(line => {
+  envContent.split('\n').forEach((line) => {
     const [key, ...valueParts] = line.split('=');
     if (key && valueParts.length > 0) {
       process.env[key.trim()] = valueParts.join('=').trim();
@@ -28,7 +28,7 @@ async function fetchFarmsFromD1() {
 
   try {
     console.log('🔍 Querying D1 database using REST API...');
-    
+
     const query = `
       SELECT
         f.zoho_record_id as id,
@@ -81,12 +81,12 @@ async function fetchFarmsFromD1() {
     const response = await fetch(CLOUDFLARE_D1_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${CLOUDFLARE_D1_TOKEN}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${CLOUDFLARE_D1_TOKEN}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        sql: query
-      })
+        sql: query,
+      }),
     });
 
     if (!response.ok) {
@@ -94,7 +94,7 @@ async function fetchFarmsFromD1() {
     }
 
     const data = await response.json();
-    
+
     // Handle different response structures
     let farms = null;
     if (data.success && data.result) {
@@ -109,11 +109,11 @@ async function fetchFarmsFromD1() {
         console.error('Unexpected D1 response structure:', data);
         throw new Error('Invalid D1 response format');
       }
-      
+
       console.log(`✅ Fetched ${farms.length} farms from D1 database`);
       return farms;
     }
-    
+
     throw new Error('Invalid D1 response format');
   } catch (error) {
     console.error('Failed to fetch farms from D1:', error.message);
@@ -124,10 +124,9 @@ async function fetchFarmsFromD1() {
 // Fetch review aggregates from WordPress
 async function fetchAllReviews() {
   try {
-    const response = await fetch(
-      'https://admin.pickafarm.com/wp-json/reviews/v1/all-listings',
-      { headers: { 'User-Agent': 'PickAFarm-Build-Script' } }
-    );
+    const response = await fetch('https://admin.pickafarm.com/wp-json/reviews/v1/all-listings', {
+      headers: { 'User-Agent': 'PickAFarm-Build-Script' },
+    });
 
     if (!response.ok) {
       console.warn('⚠️  Bulk reviews endpoint not available, falling back to individual calls');
@@ -137,10 +136,10 @@ async function fetchAllReviews() {
     const data = await response.json();
     // Convert array to map for O(1) lookups: { farmId: { reviews, rating } }
     const reviewsMap = {};
-    data.forEach(item => {
+    data.forEach((item) => {
       reviewsMap[item.listing_id] = {
         reviews: item.count || 0,
-        rating: item.average_rating || null
+        rating: item.average_rating || null,
       };
     });
 
@@ -165,7 +164,7 @@ async function fetchReviewsForFarm(farmId) {
     const data = await response.json();
     return {
       reviews: data.count || 0,
-      rating: data.average_rating || null
+      rating: data.average_rating || null,
     };
   } catch (error) {
     console.error(`Failed to fetch reviews for ${farmId}:`, error.message);
@@ -175,38 +174,43 @@ async function fetchReviewsForFarm(farmId) {
 
 async function generateFarmData() {
   console.log('🌾 Fetching farm data for build...');
-  
+
   try {
     // Try to fetch from D1 first, fallback to API
     let farms = await fetchFarmsFromD1();
-    
+
     if (!farms) {
       console.log('📡 Falling back to API...');
       // Fetch farm data from API with all fields
-      const response = await fetch('https://pickafarm-api.94623956quebecinc.workers.dev/api/farms?include_all_fields=true');
-      
+      const response = await fetch(
+        'https://pickafarm-api.94623956quebecinc.workers.dev/api/farms?include_all_fields=true'
+      );
+
       if (!response.ok) {
         throw new Error(`API request failed: ${response.status} ${response.statusText}`);
       }
-      
+
       const data = await response.json();
-      console.log('📊 API Response:', { 
-        type: typeof data, 
+      console.log('📊 API Response:', {
+        type: typeof data,
         hasFarmsProperty: 'farms' in data,
         farmsLength: data.farms?.length,
-        sampleFields: data.farms?.[0] ? Object.keys(data.farms[0]) : 'no farms'
+        sampleFields: data.farms?.[0] ? Object.keys(data.farms[0]) : 'no farms',
       });
-      
+
       // Extract farms array from response object
       farms = data.farms;
     }
-    
+
     // Check if farms is actually an array
     if (!Array.isArray(farms)) {
     }
-    
+
     console.log(`✅ Fetched ${farms.length} farms`);
-    console.log(`📋 Sample farm fields:`, farms[0] ? Object.keys(farms[0]).join(', ') : 'No farms available');
+    console.log(
+      `📋 Sample farm fields:`,
+      farms[0] ? Object.keys(farms[0]).join(', ') : 'No farms available'
+    );
 
     // Fetch review data from WordPress
     console.log('📊 Fetching review data from WordPress...');
@@ -224,7 +228,7 @@ async function generateFarmData() {
         farmsWithReviews.push({
           ...farm,
           reviews: reviewData.reviews,
-          rating: reviewData.rating
+          rating: reviewData.rating,
         });
       }
     } else {
@@ -235,12 +239,12 @@ async function generateFarmData() {
       for (let i = 0; i < farms.length; i += BATCH_SIZE) {
         const batch = farms.slice(i, i + BATCH_SIZE);
         const batchResults = await Promise.all(
-          batch.map(async farm => {
+          batch.map(async (farm) => {
             const reviewData = await fetchReviewsForFarm(farm.id);
             return {
               ...farm,
               reviews: reviewData.reviews,
-              rating: reviewData.rating
+              rating: reviewData.rating,
             };
           })
         );
@@ -248,53 +252,55 @@ async function generateFarmData() {
         farmsWithReviews.push(...batchResults);
 
         // Log progress
-        console.log(`  Processed ${Math.min(i + BATCH_SIZE, farms.length)}/${farms.length} farms...`);
+        console.log(
+          `  Processed ${Math.min(i + BATCH_SIZE, farms.length)}/${farms.length} farms...`
+        );
       }
     }
 
     farms = farmsWithReviews;
     console.log(`✅ Fetched review data for ${farms.length} farms`);
-    
+
     // Create data directory if it doesn't exist
     const dataDir = path.join(__dirname, '..', 'data');
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
-    
+
     // Write farms data to JSON file
     const farmsFilePath = path.join(dataDir, 'farms.json');
     fs.writeFileSync(farmsFilePath, JSON.stringify(farms, null, 2));
     console.log(`💾 Saved farm data to ${farmsFilePath}`);
-    
+
     // Generate farm IDs for static params using slugs
-    const farmIds = farms.map(farm => ({ id: farm.slug || farm.id.toString() }));
+    const farmIds = farms.map((farm) => ({ id: farm.slug || farm.id.toString() }));
     const paramsFilePath = path.join(dataDir, 'farm-params.json');
     fs.writeFileSync(paramsFilePath, JSON.stringify(farmIds, null, 2));
     console.log(`📋 Generated static params for ${farmIds.length} farms`);
-    
+
     console.log('🎉 Farm data generation complete!');
-    
   } catch (error) {
     console.error('❌ Error generating farm data:', error.message);
-    
+
     // Create fallback data so build doesn't fail
     const fallbackData = [
       { id: 1, name: 'Sample Farm 1' },
       { id: 2, name: 'Sample Farm 2' },
       { id: 3, name: 'Sample Farm 3' },
-      { id: 4, name: 'Sample Farm 4' }
+      { id: 4, name: 'Sample Farm 4' },
     ];
-    
+
     const dataDir = path.join(__dirname, '..', 'data');
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
-    
+
     fs.writeFileSync(path.join(dataDir, 'farms.json'), JSON.stringify(fallbackData, null, 2));
-    fs.writeFileSync(path.join(dataDir, 'farm-params.json'), JSON.stringify([
-      { id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }
-    ], null, 2));
-    
+    fs.writeFileSync(
+      path.join(dataDir, 'farm-params.json'),
+      JSON.stringify([{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }], null, 2)
+    );
+
     console.log('🔄 Created fallback data to prevent build failure');
   }
 }

@@ -3,25 +3,43 @@
     "location": "allentown-pa-us"
   },
   {
-    "location": "chicopee-ma-us"
-  },
-  {
     "location": "philadelphia-pa-us"
   },
   {
-    "location": "new-york-ny-us"
+    "location": "chicopee-ma-us"
   },
   {
     "location": "lebanon-pa-us"
   },
   {
+    "location": "new-york-ny-us"
+  },
+  {
     "location": "newark-nj-us"
+  },
+  {
+    "location": "yonkers-ny-us"
   },
   {
     "location": "jersey-city-nj-us"
   },
   {
-    "location": "yonkers-ny-us"
+    "location": "harrisburg-pa-us"
+  },
+  {
+    "location": "seattle-wa-us"
+  },
+  {
+    "location": "tacoma-wa-us"
+  },
+  {
+    "location": "bridgeport-ct-us"
+  },
+  {
+    "location": "baltimore-md-us"
+  },
+  {
+    "location": "kingston-ny-us"
   },
   {
     "location": "markham-on-ca"
@@ -30,49 +48,34 @@
     "location": "richmond-hill-on-ca"
   },
   {
-    "location": "vaughan-on-ca"
-  },
-  {
-    "location": "bridgeport-ct-us"
-  },
-  {
-    "location": "harrisburg-pa-us"
-  },
-  {
-    "location": "kingston-ny-us"
-  },
-  {
     "location": "minneapolis-mn-us"
-  },
-  {
-    "location": "mississauga-on-ca"
-  },
-  {
-    "location": "seattle-wa-us"
   },
   {
     "location": "st-paul-mn-us"
   },
   {
-    "location": "tacoma-wa-us"
-  },
-  {
-    "location": "aurora-on-ca"
-  },
-  {
-    "location": "baltimore-md-us"
+    "location": "vaughan-on-ca"
   },
   {
     "location": "boston-ma-us"
   },
   {
-    "location": "milton-on-ca"
-  },
-  {
-    "location": "newmarket-on-ca"
+    "location": "mississauga-on-ca"
   },
   {
     "location": "niagara-on-the-lake-on-ca"
+  },
+  {
+    "location": "portland-or-us"
+  },
+  {
+    "location": "warwick-pr-us"
+  },
+  {
+    "location": "concord-nh-us"
+  },
+  {
+    "location": "milton-on-ca"
   },
   {
     "location": "oakville-on-ca"
@@ -81,79 +84,91 @@
     "location": "toronto-on-ca"
   },
   {
+    "location": "aurora-on-ca"
+  },
+  {
+    "location": "newmarket-on-ca"
+  },
+  {
+    "location": "ajax-on-ca"
+  },
+  {
     "location": "brampton-on-ca"
   },
   {
     "location": "caledon-on-ca"
   },
   {
-    "location": "concord-nh-us"
-  },
-  {
     "location": "halton-hills-on-ca"
-  },
-  {
-    "location": "ajax-on-ca"
-  },
-  {
-    "location": "guelph-on-ca"
   },
   {
     "location": "pickering-on-ca"
   },
   {
-    "location": "warwick-pr-us"
+    "location": "burlington-on-ca"
   },
   {
-    "location": "burlington-on-ca"
+    "location": "guelph-on-ca"
   },
   {
     "location": "oshawa-on-ca"
   },
   {
+    "location": "albany-ny-us"
+  },
+  {
     "location": "boone-nc-us"
-  },
-  {
-    "location": "brantford-on-ca"
-  },
-  {
-    "location": "cambridge-on-ca"
-  },
-  {
-    "location": "norfolk-county-on-ca"
-  },
-  {
-    "location": "portland-or-us"
-  },
-  {
-    "location": "whitby-on-ca"
-  },
-  {
-    "location": "bristol-tn-us"
-  },
-  {
-    "location": "hamilton-on-ca"
-  },
-  {
-    "location": "kitchener-on-ca"
   },
   {
     "location": "st-catharines-on-ca"
   },
   {
-    "location": "waterloo-on-ca"
+    "location": "washington-dc-us"
   },
   {
-    "location": "albany-ny-us"
+    "location": "whitby-on-ca"
   },
   {
-    "location": "niagara-falls-on-ca"
+    "location": "brantford-on-ca"
+  },
+  {
+    "location": "bristol-tn-us"
+  },
+  {
+    "location": "cambridge-on-ca"
+  },
+  {
+    "location": "hamilton-on-ca"
+  },
+  {
+    "location": "norfolk-county-on-ca"
   },
   {
     "location": "phoenix-ny-us"
   },
   {
+    "location": "kitchener-on-ca"
+  },
+  {
+    "location": "niagara-falls-on-ca"
+  },
+  {
+    "location": "waterloo-on-ca"
+  },
+  {
+    "location": "welland-on-ca"
+  },
+  {
+    "location": "oakland-ca-us"
+  },
+  {
     "location": "rochester-ny-us"
+  },
+  {
+    "location": "sacramento-ca-us"
+  },
+  {
+    "location": "san-francisco-ca-us"
   },
   {
     "location": "sheridan-wi-us"
@@ -162,25 +177,31 @@
     "location": "stevens-point-wi-us"
   },
   {
-    "location": "welland-on-ca"
-  },
-  {
-    "location": "barrie-on-ca"
+    "location": "central-square-ny-us"
   },
   {
     "location": "clarington-on-ca"
-  },
-  {
-    "location": "london-on-ca"
-  },
-  {
-    "location": "washington-dc-us"
   },
   {
     "location": "akron-oh-us"
   },
   {
     "location": "appleton-wi-us"
+  },
+  {
+    "location": "barrie-on-ca"
+  },
+  {
+    "location": "indianapolis-in-us"
+  },
+  {
+    "location": "london-on-ca"
+  },
+  {
+    "location": "madison-wi-us"
+  },
+  {
+    "location": "schenectady-ny-us"
   },
   {
     "location": "burnaby-bc-ca"
@@ -192,10 +213,16 @@
     "location": "delta-bc-ca"
   },
   {
+    "location": "fremont-ca-us"
+  },
+  {
     "location": "kawartha-lakes-on-ca"
   },
   {
     "location": "langley-bc-ca"
+  },
+  {
+    "location": "little-falls-mn-us"
   },
   {
     "location": "new-westminster-bc-ca"
@@ -219,37 +246,40 @@
     "location": "vancouver-bc-ca"
   },
   {
-    "location": "central-square-ny-us"
+    "location": "berkeley-springs-wv-us"
   },
   {
-    "location": "indianapolis-in-us"
-  },
-  {
-    "location": "little-falls-mn-us"
-  },
-  {
-    "location": "maple-ridge-bc-ca"
-  },
-  {
-    "location": "schenectady-ny-us"
-  },
-  {
-    "location": "abbotsford-bc-ca"
-  },
-  {
-    "location": "chilliwack-bc-ca"
+    "location": "east-lansing-mi-us"
   },
   {
     "location": "flint-mi-us"
   },
   {
-    "location": "oakland-ca-us"
+    "location": "maple-ridge-bc-ca"
   },
   {
-    "location": "sacramento-ca-us"
+    "location": "milwaukee-wi-us"
   },
   {
-    "location": "san-francisco-ca-us"
+    "location": "pittsburgh-pa-us"
+  },
+  {
+    "location": "abbotsford-bc-ca"
+  },
+  {
+    "location": "aurora-il-us"
+  },
+  {
+    "location": "chilliwack-bc-ca"
+  },
+  {
+    "location": "cincinnati-oh-us"
+  },
+  {
+    "location": "cleveland-oh-us"
+  },
+  {
+    "location": "lowville-ny-us"
   },
   {
     "location": "victoria-bc-ca"
@@ -258,7 +288,7 @@
     "location": "waynesville-nc-us"
   },
   {
-    "location": "cleveland-oh-us"
+    "location": "buffalo-ny-us"
   },
   {
     "location": "detroit-mi-us"
@@ -273,28 +303,16 @@
     "location": "peterborough-on-ca"
   },
   {
-    "location": "pittsburgh-pa-us"
-  },
-  {
     "location": "windsor-on-ca"
   },
   {
     "location": "augusta-me-us"
   },
   {
-    "location": "aurora-il-us"
-  },
-  {
     "location": "bethlehem-nh-us"
   },
   {
-    "location": "cincinnati-oh-us"
-  },
-  {
-    "location": "east-lansing-mi-us"
-  },
-  {
-    "location": "fremont-ca-us"
+    "location": "chicago-il-us"
   },
   {
     "location": "gatineau-qc-ca"
@@ -303,37 +321,37 @@
     "location": "greenwood-sc-us"
   },
   {
-    "location": "madison-wi-us"
+    "location": "hamlet-in-us"
   },
   {
     "location": "ottawa-on-ca"
   },
   {
+    "location": "portland-me-us"
+  },
+  {
+    "location": "san-jose-ca-us"
+  },
+  {
     "location": "waterville-me-us"
   },
   {
-    "location": "berkeley-springs-wv-us"
+    "location": "wyoming-mi-us"
   },
   {
-    "location": "buffalo-ny-us"
+    "location": "atlanta-ga-us"
+  },
+  {
+    "location": "binghamton-ny-us"
   },
   {
     "location": "burlington-vt-us"
   },
   {
-    "location": "chicago-il-us"
-  },
-  {
-    "location": "lowville-ny-us"
-  },
-  {
-    "location": "milwaukee-wi-us"
+    "location": "green-bay-wi-us"
   },
   {
     "location": "nanaimo-bc-ca"
-  },
-  {
-    "location": "portland-me-us"
   },
   {
     "location": "saint-hyacinthe-qc-ca"
@@ -345,16 +363,19 @@
     "location": "sherbrooke-qc-ca"
   },
   {
-    "location": "bangor-me-us"
+    "location": "the-dalles-or-us"
   },
   {
-    "location": "binghamton-ny-us"
+    "location": "toledo-oh-us"
+  },
+  {
+    "location": "bangor-me-us"
   },
   {
     "location": "brossard-qc-ca"
   },
   {
-    "location": "green-bay-wi-us"
+    "location": "lincoln-ne-us"
   },
   {
     "location": "repentigny-qc-ca"
@@ -366,13 +387,7 @@
     "location": "staunton-va-us"
   },
   {
-    "location": "the-dalles-or-us"
-  },
-  {
-    "location": "toledo-oh-us"
-  },
-  {
-    "location": "atlanta-ga-us"
+    "location": "anaheim-ca-us"
   },
   {
     "location": "belleville-on-ca"
@@ -384,19 +399,40 @@
     "location": "eugene-or-us"
   },
   {
-    "location": "hamlet-in-us"
+    "location": "fontana-ca-us"
+  },
+  {
+    "location": "fort-wayne-in-us"
+  },
+  {
+    "location": "huntington-beach-ca-us"
+  },
+  {
+    "location": "irvine-ca-us"
   },
   {
     "location": "kingston-on-ca"
   },
   {
+    "location": "long-beach-ca-us"
+  },
+  {
     "location": "longueuil-qc-ca"
+  },
+  {
+    "location": "manistee-mi-us"
   },
   {
     "location": "mirabel-qc-ca"
   },
   {
+    "location": "moreno-valley-ca-us"
+  },
+  {
     "location": "morristown-tn-us"
+  },
+  {
+    "location": "nashville-davidson-tn-us"
   },
   {
     "location": "oak-ridge-tn-us"
@@ -405,19 +441,25 @@
     "location": "old-town-me-us"
   },
   {
+    "location": "omaha-ne-us"
+  },
+  {
+    "location": "pittsfield-pa-us"
+  },
+  {
+    "location": "riverside-ca-us"
+  },
+  {
     "location": "rochester-mn-us"
   },
   {
-    "location": "san-jose-ca-us"
+    "location": "san-bernardino-ca-us"
+  },
+  {
+    "location": "santa-ana-ca-us"
   },
   {
     "location": "west-terre-haute-in-us"
-  },
-  {
-    "location": "wyoming-mi-us"
-  },
-  {
-    "location": "anaheim-ca-us"
   },
   {
     "location": "birmingham-al-us"
@@ -429,64 +471,13 @@
     "location": "cleveland-tn-us"
   },
   {
-    "location": "dalton-ga-us"
-  },
-  {
-    "location": "fontana-ca-us"
-  },
-  {
-    "location": "huntington-beach-ca-us"
-  },
-  {
-    "location": "irvine-ca-us"
-  },
-  {
-    "location": "laval-qc-ca"
-  },
-  {
-    "location": "lincoln-ne-us"
-  },
-  {
-    "location": "long-beach-ca-us"
-  },
-  {
-    "location": "manistee-mi-us"
-  },
-  {
-    "location": "montreal-qc-ca"
-  },
-  {
-    "location": "moreno-valley-ca-us"
-  },
-  {
-    "location": "nashville-davidson-tn-us"
-  },
-  {
-    "location": "riverside-ca-us"
-  },
-  {
-    "location": "saint-jrme-qc-ca"
-  },
-  {
-    "location": "san-bernardino-ca-us"
-  },
-  {
-    "location": "santa-ana-ca-us"
-  },
-  {
-    "location": "terrebonne-qc-ca"
-  },
-  {
-    "location": "blainville-qc-ca"
-  },
-  {
     "location": "columbus-oh-us"
   },
   {
-    "location": "decorah-ia-us"
+    "location": "dalton-ga-us"
   },
   {
-    "location": "fort-wayne-in-us"
+    "location": "decorah-ia-us"
   },
   {
     "location": "henderson-tx-us"
@@ -495,19 +486,49 @@
     "location": "kansas-city-mo-us"
   },
   {
+    "location": "lagrange-ga-us"
+  },
+  {
+    "location": "laval-qc-ca"
+  },
+  {
+    "location": "montreal-qc-ca"
+  },
+  {
+    "location": "saint-jrme-qc-ca"
+  },
+  {
+    "location": "terrebonne-qc-ca"
+  },
+  {
+    "location": "blacksburg-va-us"
+  },
+  {
+    "location": "blainville-qc-ca"
+  },
+  {
+    "location": "cadott-wi-us"
+  },
+  {
+    "location": "des-moines-ia-us"
+  },
+  {
+    "location": "eau-claire-wi-us"
+  },
+  {
     "location": "leamington-on-ca"
   },
   {
     "location": "lexington-sc-us"
   },
   {
-    "location": "omaha-ne-us"
-  },
-  {
-    "location": "pittsfield-pa-us"
+    "location": "los-angeles-ca-us"
   },
   {
     "location": "plano-tx-us"
+  },
+  {
+    "location": "richmond-va-us"
   },
   {
     "location": "spokane-wa-us"
@@ -519,10 +540,16 @@
     "location": "st-louis-mo-us"
   },
   {
+    "location": "stockton-ca-us"
+  },
+  {
+    "location": "anthony-fl-us"
+  },
+  {
     "location": "aurora-co-us"
   },
   {
-    "location": "cadott-wi-us"
+    "location": "austin-tx-us"
   },
   {
     "location": "charlotte-nc-us"
@@ -537,9 +564,6 @@
     "location": "denver-co-us"
   },
   {
-    "location": "des-moines-ia-us"
-  },
-  {
     "location": "fairfield-il-us"
   },
   {
@@ -552,40 +576,46 @@
     "location": "irving-tx-us"
   },
   {
-    "location": "lagrange-ga-us"
+    "location": "oklahoma-city-ok-us"
   },
   {
-    "location": "los-angeles-ca-us"
+    "location": "orlando-fl-us"
   },
   {
-    "location": "richmond-va-us"
+    "location": "san-antonio-tx-us"
   },
   {
     "location": "trois-rivires-qc-ca"
   },
   {
-    "location": "anthony-fl-us"
+    "location": "wichita-ks-us"
+  },
+  {
+    "location": "winston-salem-nc-us"
   },
   {
     "location": "arlington-tx-us"
   },
   {
-    "location": "austin-tx-us"
-  },
-  {
-    "location": "blacksburg-va-us"
-  },
-  {
     "location": "chula-vista-ca-us"
+  },
+  {
+    "location": "cordele-ga-us"
   },
   {
     "location": "duluth-mn-us"
   },
   {
-    "location": "eau-claire-wi-us"
+    "location": "durham-nc-us"
   },
   {
     "location": "fredericton-nb-ca"
+  },
+  {
+    "location": "greensboro-nc-us"
+  },
+  {
+    "location": "hilton-head-island-sc-us"
   },
   {
     "location": "huntington-wv-us"
@@ -615,10 +645,13 @@
     "location": "modesto-ca-us"
   },
   {
-    "location": "oklahoma-city-ok-us"
+    "location": "montgomery-al-us"
   },
   {
-    "location": "orlando-fl-us"
+    "location": "mount-pleasant-sc-us"
+  },
+  {
+    "location": "nipomo-ca-us"
   },
   {
     "location": "peoria-il-us"
@@ -627,10 +660,10 @@
     "location": "quebec-city-qc-ca"
   },
   {
-    "location": "salmon-arm-bc-ca"
+    "location": "reno-nv-us"
   },
   {
-    "location": "san-antonio-tx-us"
+    "location": "salmon-arm-bc-ca"
   },
   {
     "location": "san-diego-ca-us"
@@ -639,19 +672,13 @@
     "location": "shreveport-la-us"
   },
   {
+    "location": "sioux-falls-sd-us"
+  },
+  {
     "location": "st-petersburg-fl-us"
   },
   {
-    "location": "stockton-ca-us"
-  },
-  {
     "location": "tampa-fl-us"
-  },
-  {
-    "location": "wichita-ks-us"
-  },
-  {
-    "location": "winston-salem-nc-us"
   },
   {
     "location": "bakersfield-ca-us"
@@ -678,16 +705,10 @@
     "location": "columbus-ga-us"
   },
   {
-    "location": "cordele-ga-us"
-  },
-  {
     "location": "cottondale-fl-us"
   },
   {
     "location": "crawfordville-fl-us"
-  },
-  {
-    "location": "durham-nc-us"
   },
   {
     "location": "edmonton-ab-ca"
@@ -696,13 +717,7 @@
     "location": "falun-ab-ca"
   },
   {
-    "location": "greensboro-nc-us"
-  },
-  {
     "location": "halifax-ns-ca"
-  },
-  {
-    "location": "hilton-head-island-sc-us"
   },
   {
     "location": "honolulu-hi-us"
@@ -726,16 +741,7 @@
     "location": "moncton-nb-ca"
   },
   {
-    "location": "montgomery-al-us"
-  },
-  {
-    "location": "mount-pleasant-sc-us"
-  },
-  {
     "location": "nnole-hi-us"
-  },
-  {
-    "location": "nipomo-ca-us"
   },
   {
     "location": "norfolk-ne-us"
@@ -753,22 +759,19 @@
     "location": "presque-isle-me-us"
   },
   {
+    "location": "raleigh-nc-us"
+  },
+  {
     "location": "rantoul-il-us"
   },
   {
     "location": "red-deer-ab-ca"
   },
   {
-    "location": "reno-nv-us"
-  },
-  {
     "location": "saint-john-nb-ca"
   },
   {
     "location": "salt-lake-city-ut-us"
-  },
-  {
-    "location": "sioux-falls-sd-us"
   },
   {
     "location": "springfield-il-us"

@@ -15,20 +15,22 @@ function generateSlug(text) {
 
 // Haversine distance in kilometers between two lat/lng points
 function haversineDistance(lat1, lon1, lat2, lon2) {
-  function toRad(x) { return (x * Math.PI) / 180; }
+  function toRad(x) {
+    return (x * Math.PI) / 180;
+  }
   const R = 6371; // km
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
 async function generateLocationData() {
   console.log('🗺️  Building filtered location data (50km radius)...');
-  
+
   try {
     const dataDir = path.join(__dirname, '..', 'data');
 
@@ -46,17 +48,25 @@ async function generateLocationData() {
         console.log(`📍 Loaded ${baseLocations.length} locations from locations.json`);
       } else if (raw && Array.isArray(raw.locationPages)) {
         baseLocations = raw.locationPages;
-        console.log(`📍 Loaded ${baseLocations.length} locations from locations.json (locationPages)`);
+        console.log(
+          `📍 Loaded ${baseLocations.length} locations from locations.json (locationPages)`
+        );
       } else if (raw && raw.metadata && raw.locationPages) {
         baseLocations = raw.locationPages;
-        console.log(`📍 Loaded ${baseLocations.length} locations from locations.json (metadata + locationPages)`);
+        console.log(
+          `📍 Loaded ${baseLocations.length} locations from locations.json (metadata + locationPages)`
+        );
       } else {
-        throw new Error('Unsupported locations.json format. Expect an array or an object with locationPages array.');
+        throw new Error(
+          'Unsupported locations.json format. Expect an array or an object with locationPages array.'
+        );
       }
     } else if (fs.existsSync(citiesPath)) {
       // Backwards compatibility: transform cities.json -> locations
       const citiesData = JSON.parse(fs.readFileSync(citiesPath, 'utf8'));
-      console.log(`📍 Loaded ${citiesData.metadata.totalCities} cities from ${citiesData.metadata.totalProvinces} provinces`);
+      console.log(
+        `📍 Loaded ${citiesData.metadata.totalCities} cities from ${citiesData.metadata.totalProvinces} provinces`
+      );
       for (const [, provinceData] of Object.entries(citiesData.provinces)) {
         for (const city of provinceData.cities) {
           const countrySlug = 'ca'; // Default for Canada, could be made configurable
@@ -69,7 +79,7 @@ async function generateLocationData() {
             location_slug: `${city.slug}-${provinceData.slug}-${countrySlug}`,
             full_location: `${city.name}, ${provinceData.name}, Canada`,
             seo_title: `Pick Your Own Farms near ${city.name}, ${provinceData.name}`,
-            meta_description: `Find the best pick-your-own farms near ${city.name}, ${provinceData.name}. Fresh apples, berries, pumpkins and Christmas trees.`
+            meta_description: `Find the best pick-your-own farms near ${city.name}, ${provinceData.name}. Fresh apples, berries, pumpkins and Christmas trees.`,
           });
         }
       }
@@ -89,7 +99,7 @@ async function generateLocationData() {
     const RADIUS_KM = 100; // configurable
 
     // For each location, collect farms within 75km
-    const locationsWithFarms = baseLocations.map(loc => {
+    const locationsWithFarms = baseLocations.map((loc) => {
       const cityLat = loc.coordinates?.latitude ?? loc.latitude;
       const cityLon = loc.coordinates?.longitude ?? loc.longitude;
 
@@ -98,8 +108,13 @@ async function generateLocationData() {
       }
 
       const nearby = farms
-        .filter(f => typeof f.latitude === 'number' && typeof f.longitude === 'number' && (f.active === 1 || f.active === true))
-        .map(f => {
+        .filter(
+          (f) =>
+            typeof f.latitude === 'number' &&
+            typeof f.longitude === 'number' &&
+            (f.active === 1 || f.active === true)
+        )
+        .map((f) => {
           const distanceKm = haversineDistance(cityLat, cityLon, f.latitude, f.longitude);
           return { farm: f, distanceKm };
         })
@@ -118,7 +133,7 @@ async function generateLocationData() {
           categories: farm.categories,
           varieties: farm.varieties || null,
           featured: farm.featured === 1 || farm.featured === true,
-          distance_km: Math.round(distanceKm)
+          distance_km: Math.round(distanceKm),
         }));
 
       return {
@@ -126,15 +141,17 @@ async function generateLocationData() {
         // Regenerate location_slug using updated province_slug
         location_slug: `${generateSlug(loc.name)}-${loc.province_slug}-${loc.country_slug}`,
         farms: nearby,
-        farmCount: nearby.length
+        farmCount: nearby.length,
       };
     });
 
     // Filter out cities with no nearby farms
-    const filtered = locationsWithFarms.filter(l => (l.farmCount || 0) > 0);
+    const filtered = locationsWithFarms.filter((l) => (l.farmCount || 0) > 0);
 
     // Sort by number of farms desc, then name
-    filtered.sort((a, b) => (b.farmCount - a.farmCount) || (a.name || '').localeCompare(b.name || ''));
+    filtered.sort(
+      (a, b) => b.farmCount - a.farmCount || (a.name || '').localeCompare(b.name || '')
+    );
 
     // Write outputs
     const filteredLocationsPath = path.join(dataDir, 'locations-with-farms.json');
@@ -142,7 +159,10 @@ async function generateLocationData() {
     console.log(`💾 Saved filtered locations with nearby farms to ${filteredLocationsPath}`);
 
     // Params for Next.js generateStaticParams (city/near pages)
-    const params = filtered.map(l => ({ location: l.location_slug || generateSlug(`${l.name}-${l.province}-${l.country_slug || 'ca'}`) }));
+    const params = filtered.map((l) => ({
+      location:
+        l.location_slug || generateSlug(`${l.name}-${l.province}-${l.country_slug || 'ca'}`),
+    }));
     const paramsPath = path.join(dataDir, 'location-params-filtered.json');
     fs.writeFileSync(paramsPath, JSON.stringify(params, null, 2));
     console.log(`📋 Generated static params for ${params.length} filtered location pages`);
@@ -153,12 +173,13 @@ async function generateLocationData() {
     console.log(`   Locations with farms (<= ${RADIUS_KM}km): ${filtered.length}`);
 
     // Show examples
-    filtered.slice(0, 5).forEach(l => {
-      console.log(`   • ${l.full_location || `${l.name}, ${l.province}, ${l.country}`} → ${l.farmCount} farms`);
+    filtered.slice(0, 5).forEach((l) => {
+      console.log(
+        `   • ${l.full_location || `${l.name}, ${l.province}, ${l.country}`} → ${l.farmCount} farms`
+      );
     });
 
     console.log('\n🎉 Location data build complete!');
-
   } catch (error) {
     console.error('❌ Error generating location data:', error.message);
     process.exit(1);

@@ -1,37 +1,37 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { TreePine } from "lucide-react"
+import Link from 'next/link';
+import Image from 'next/image';
+import { Card, CardContent } from '@/components/ui/card';
+import { TreePine } from 'lucide-react';
 
 interface VarietyArticle {
-  slug: string
+  slug: string;
   title: {
-    rendered: string
-  }
+    rendered: string;
+  };
   excerpt: {
-    rendered: string
-  }
+    rendered: string;
+  };
   _embedded?: {
     'wp:featuredmedia'?: Array<{
-      source_url: string
-      alt_text: string
-    }>
-  }
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
 }
 
 interface VarietyArticlesSectionProps {
-  varieties: VarietyArticle[]
-  title: string
-  description?: string
+  varieties: VarietyArticle[];
+  title: string;
+  description?: string;
 }
 
 export default function VarietyArticlesSection({
   varieties,
   title,
-  description
+  description,
 }: VarietyArticlesSectionProps) {
   if (!varieties || varieties.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -42,27 +42,20 @@ export default function VarietyArticlesSection({
             <TreePine className="h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">{title}</h2>
           </div>
-          {description && (
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {description}
-            </p>
-          )}
+          {description && <p className="text-muted-foreground max-w-2xl mx-auto">{description}</p>}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {varieties.map((variety) => {
-            const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0]
-            const excerpt = variety.excerpt.rendered
-              .replace(/<[^>]*>?/gm, '')
-              .trim()
-              .substring(0, 150) + '...'
+            const featuredImage = variety._embedded?.['wp:featuredmedia']?.[0];
+            const excerpt =
+              variety.excerpt.rendered
+                .replace(/<[^>]*>?/gm, '')
+                .trim()
+                .substring(0, 150) + '...';
 
             return (
-              <Link
-                key={variety.slug}
-                href={`/varieties/${variety.slug}`}
-                className="group"
-              >
+              <Link key={variety.slug} href={`/varieties/${variety.slug}`} className="group">
                 <Card className="h-full hover:shadow-lg transition-all duration-300 overflow-hidden border-2 hover:border-primary">
                   {featuredImage && (
                     <div className="relative h-48 w-full overflow-hidden">
@@ -79,9 +72,7 @@ export default function VarietyArticlesSection({
                     <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
                       {variety.title.rendered}
                     </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {excerpt}
-                    </p>
+                    <p className="text-sm text-muted-foreground line-clamp-3">{excerpt}</p>
                     <div className="mt-4">
                       <span className="text-sm font-medium text-primary group-hover:underline">
                         Learn More →
@@ -90,10 +81,10 @@ export default function VarietyArticlesSection({
                   </CardContent>
                 </Card>
               </Link>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

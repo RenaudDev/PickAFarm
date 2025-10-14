@@ -43,7 +43,7 @@ async function testUrl(url, maxRedirects = 5) {
     finalStatus: null,
     finalUrl: null,
     error: null,
-    success: false
+    success: false,
   };
 
   let currentUrl = url;
@@ -56,7 +56,7 @@ async function testUrl(url, maxRedirects = 5) {
       results.redirectChain.push({
         url: currentUrl,
         status: response.statusCode,
-        location: response.headers.location
+        location: response.headers.location,
       });
 
       // Check if this is a redirect
@@ -77,7 +77,6 @@ async function testUrl(url, maxRedirects = 5) {
       results.finalUrl = currentUrl;
       results.success = response.statusCode === 200;
       break;
-
     } catch (error) {
       results.error = error.message;
       results.finalStatus = 'ERROR';
@@ -100,8 +99,8 @@ function makeRequest(url) {
     const options = {
       method: 'GET',
       headers: {
-        'User-Agent': 'PickAFarm-Redirect-Tester/1.0'
-      }
+        'User-Agent': 'PickAFarm-Redirect-Tester/1.0',
+      },
     };
 
     const req = client.get(url, options, (res) => {
@@ -109,7 +108,7 @@ function makeRequest(url) {
       res.resume();
       resolve({
         statusCode: res.statusCode,
-        headers: res.headers
+        headers: res.headers,
       });
     });
 
@@ -127,19 +126,21 @@ function parseCSV(csvPath) {
   const lines = content.split('\n').slice(1); // Skip header
 
   const urls = lines
-    .map(line => line.split(',')[0])
-    .filter(url => url && url.startsWith('http'))
-    .map(url => url.trim());
+    .map((line) => line.split(',')[0])
+    .filter((url) => url && url.startsWith('http'))
+    .map((url) => url.trim());
 
   return urls;
 }
 
 // Format redirect chain for display
 function formatRedirectChain(chain) {
-  return chain.map((step, index) => {
-    const arrow = index < chain.length - 1 ? ' →' : ' ✓';
-    return `  ${step.status} ${step.url}${arrow}`;
-  }).join('\n');
+  return chain
+    .map((step, index) => {
+      const arrow = index < chain.length - 1 ? ' →' : ' ✓';
+      return `  ${step.status} ${step.url}${arrow}`;
+    })
+    .join('\n');
 }
 
 // Main test function
@@ -168,7 +169,7 @@ async function runTests() {
   }
 
   // Convert pickafarm.com URLs to test server
-  const testUrls = urls.map(url => url.replace('https://pickafarm.com', BASE_URL));
+  const testUrls = urls.map((url) => url.replace('https://pickafarm.com', BASE_URL));
 
   // Test each URL
   const results = {
@@ -177,7 +178,7 @@ async function runTests() {
     redirects: 0,
     notFound: 0,
     errors: 0,
-    details: []
+    details: [],
   };
 
   console.log('🚀 Starting tests...\n');
@@ -222,7 +223,9 @@ async function runTests() {
   console.log('='.repeat(80));
   console.log('');
   console.log(`Total URLs tested:     ${results.total}`);
-  console.log(`✅ Successful:          ${results.success} (${Math.round(results.success / results.total * 100)}%)`);
+  console.log(
+    `✅ Successful:          ${results.success} (${Math.round((results.success / results.total) * 100)}%)`
+  );
   console.log(`🔀 With redirects:      ${results.redirects}`);
   console.log(`❌ 404 Not Found:       ${results.notFound}`);
   console.log(`⚠️  Errors:              ${results.errors}`);
@@ -258,7 +261,7 @@ async function runTests() {
 }
 
 // Run tests
-runTests().catch(error => {
+runTests().catch((error) => {
   console.error('Fatal error:', error);
   process.exit(1);
 });

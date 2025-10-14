@@ -1,14 +1,15 @@
-import StaticPageLayout from "@/components/static-page-layout"
-import { Metadata } from "next"
-import { generateMetadata as createMetadata } from "@/lib/seo-metadata"
+import StaticPageLayout from '@/components/static-page-layout';
+import { Metadata } from 'next';
+import { generateMetadata as createMetadata } from '@/lib/seo-metadata';
 
 export async function generateMetadata(): Promise<Metadata> {
   return createMetadata({
-    title: "Privacy Policy - PickAFarm",
-    description: "Read PickAFarm's privacy policy to understand how we collect, use, and protect your personal information.",
-    keywords: ["privacy policy", "data protection", "user privacy"],
-    url: "https://pickafarm.com/privacy/"
-  })
+    title: 'Privacy Policy - PickAFarm',
+    description:
+      "Read PickAFarm's privacy policy to understand how we collect, use, and protect your personal information.",
+    keywords: ['privacy policy', 'data protection', 'user privacy'],
+    url: 'https://pickafarm.com/privacy/',
+  });
 }
 
 export default function PrivacyPolicyPage() {
@@ -50,24 +51,25 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-primary">Information Sharing</h2>
           <p className="text-muted-foreground">
-            We do not sell, trade, or otherwise transfer your personal information to third parties without your
-            consent, except as described in this policy. We may share information with trusted partners who assist us in
-            operating our website and serving our users.
+            We do not sell, trade, or otherwise transfer your personal information to third parties
+            without your consent, except as described in this policy. We may share information with
+            trusted partners who assist us in operating our website and serving our users.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-primary">Data Security</h2>
           <p className="text-muted-foreground">
-            We implement appropriate security measures to protect your personal information against unauthorized access,
-            alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.
+            We implement appropriate security measures to protect your personal information against
+            unauthorized access, alteration, disclosure, or destruction. However, no method of
+            transmission over the internet is 100% secure.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-primary">Contact Us</h2>
           <p className="text-muted-foreground">
-            If you have questions about this Privacy Policy, please contact us at{" "}
+            If you have questions about this Privacy Policy, please contact us at{' '}
             <a href="mailto:privacy@pickafarm.ca" className="text-primary hover:underline">
               hello@pickafarm.ca
             </a>
@@ -75,5 +77,5 @@ export default function PrivacyPolicyPage() {
         </section>
       </div>
     </StaticPageLayout>
-  )
+  );
 }

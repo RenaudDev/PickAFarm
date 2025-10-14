@@ -1,68 +1,65 @@
-import React, { Suspense } from "react"
-import { notFound } from 'next/navigation'
-import { Metadata } from "next"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
-import { MapPin } from "lucide-react"
+import React, { Suspense } from 'react';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { Card, CardContent } from '@/components/ui/card';
+import { MapPin } from 'lucide-react';
 
-import FarmNavbar from "@/components/farm-navbar"
-import FarmFooter from "@/components/farm-footer"
-import { MapSkeletonStatic } from "@/components/map-skeleton-static"
-import StateCategoryMapSection from "./state-category-map-section"
-import { sortFarms } from "@/lib/farm-utils"
+import FarmNavbar from '@/components/farm-navbar';
+import FarmFooter from '@/components/farm-footer';
+import { MapSkeletonStatic } from '@/components/map-skeleton-static';
+import StateCategoryMapSection from './state-category-map-section';
+import { sortFarms } from '@/lib/farm-utils';
 
 // Import data
-import statesData from "../../../data/states-with-farms.json"
-import categoriesData from "../../../data/category-content.json"
-import locationsData from "../../../data/locations-with-farms.json"
+import statesData from '../../../data/states-with-farms.json';
+import categoriesData from '../../../data/category-content.json';
+import locationsData from '../../../data/locations-with-farms.json';
 
 // Import utilities
-import {
-  getStateCategoryFarms,
-  getStateCategoryCount
-} from "@/lib/category-state-utils"
-import { generateStateCategoryBreadcrumbSchema } from "@/lib/breadcrumb-schema"
-import { getTopVarietiesWithArticles } from "@/lib/variety-utils"
-import { getVarietiesBySlugs } from "@/lib/wordpress"
-import VarietyArticlesSection from "@/components/variety-articles-section"
-import { generateItemListSchema } from "@/lib/item-list-schema"
-import { StructuredData } from "@/components/seo/structured-data"
+import { getStateCategoryFarms, getStateCategoryCount } from '@/lib/category-state-utils';
+import { generateStateCategoryBreadcrumbSchema } from '@/lib/breadcrumb-schema';
+import { getTopVarietiesWithArticles } from '@/lib/variety-utils';
+import { getVarietiesBySlugs } from '@/lib/wordpress';
+import VarietyArticlesSection from '@/components/variety-articles-section';
+import { generateItemListSchema } from '@/lib/item-list-schema';
+import { StructuredData } from '@/components/seo/structured-data';
 
 interface StateCategoryPageProps {
   params: Promise<{
-    slug: string  // This is the state slug
-    category: string
-  }>
+    slug: string; // This is the state slug
+    category: string;
+  }>;
 }
 
 // Disable static generation - render on-demand for Cloudflare Pages limits
 // This route will use dynamic rendering instead of pre-generating all combinations
-export const runtime = 'edge' // Required for Cloudflare Pages
-export const dynamic = 'force-dynamic'
-export const dynamicParams = true
+export const runtime = 'edge'; // Required for Cloudflare Pages
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: StateCategoryPageProps): Promise<Metadata> {
-  const { slug, category } = await params
-  
+  const { slug, category } = await params;
+
   // slug is the state, category is the category
-  const stateData = statesData.find(s => s.state_slug === slug)
-  const categoryData = Object.values(categoriesData).find((c: any) => c.slug === category)
-  
+  const stateData = statesData.find((s) => s.state_slug === slug);
+  const categoryData = Object.values(categoriesData).find((c: any) => c.slug === category);
+
   if (!stateData || !categoryData) {
     return {
       title: 'Page Not Found | Pick A Farm',
-      description: 'The requested page could not be found.'
-    }
+      description: 'The requested page could not be found.',
+    };
   }
-  
-  const farms = getStateCategoryFarms(stateData, categoryData)
-  const farmCount = farms.length
 
-  const title = `${farmCount} ${categoryData.name} in ${stateData.state_name} | Pick Your Own`
-  const description = `Find the best ${categoryData.name.toLowerCase()} in ${stateData.state_name}. ${farmCount} farms with locations, hours, reviews, and directions. Plan your pick-your-own adventure today!`
-  const keywords = `${stateData.state_name.toLowerCase()} ${categoryData.name.toLowerCase()}, ${categoryData.name.toLowerCase()} in ${stateData.state_name.toLowerCase()}, ${stateData.state_code.toLowerCase()} ${categoryData.name.toLowerCase()}, pick your own ${stateData.state_name.toLowerCase()}`
-  const ogImage = 'https://pickafarm.com/images/og-pickafarm.webp'
+  const farms = getStateCategoryFarms(stateData, categoryData);
+  const farmCount = farms.length;
+
+  const title = `${farmCount} ${categoryData.name} in ${stateData.state_name} | Pick Your Own`;
+  const description = `Find the best ${categoryData.name.toLowerCase()} in ${stateData.state_name}. ${farmCount} farms with locations, hours, reviews, and directions. Plan your pick-your-own adventure today!`;
+  const keywords = `${stateData.state_name.toLowerCase()} ${categoryData.name.toLowerCase()}, ${categoryData.name.toLowerCase()} in ${stateData.state_name.toLowerCase()}, ${stateData.state_code.toLowerCase()} ${categoryData.name.toLowerCase()}, pick your own ${stateData.state_name.toLowerCase()}`;
+  const ogImage = 'https://pickafarm.com/images/og-pickafarm.webp';
 
   return {
     title,
@@ -78,90 +75,90 @@ export async function generateMetadata({ params }: StateCategoryPageProps): Prom
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${categoryData.name} in ${stateData.state_name}`
-        }
-      ]
+          alt: `${categoryData.name} in ${stateData.state_name}`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [ogImage]
+      images: [ogImage],
     },
     alternates: {
-      canonical: `https://pickafarm.com/${slug}/${category}`
-    }
-  }
+      canonical: `https://pickafarm.com/${slug}/${category}`,
+    },
+  };
 }
 
 export default async function StateCategoryPage({ params }: StateCategoryPageProps) {
-  const { slug, category } = await params
+  const { slug, category } = await params;
 
   // slug is the state, category is the category
-  const stateData = statesData.find(s => s.state_slug === slug)
-  const categoryData = Object.values(categoriesData).find((c: any) => c.slug === category)
+  const stateData = statesData.find((s) => s.state_slug === slug);
+  const categoryData = Object.values(categoriesData).find((c: any) => c.slug === category);
 
   if (!stateData || !categoryData) {
-    notFound()
+    notFound();
   }
 
-  const farms = getStateCategoryFarms(stateData, categoryData)
+  const farms = getStateCategoryFarms(stateData, categoryData);
 
   if (farms.length === 0) {
-    notFound()
+    notFound();
   }
 
   // Sort farms by featured status and rating
-  const sortedFarms = sortFarms(farms)
+  const sortedFarms = sortFarms(farms);
 
   // Get varieties from farms that have blog articles
-  const varietiesInfo = getTopVarietiesWithArticles(farms, 9)
-  const varietySlugs = varietiesInfo.map(v => v.slug)
-  const varietyArticles = varietySlugs.length > 0 ? await getVarietiesBySlugs(varietySlugs) : []
+  const varietiesInfo = getTopVarietiesWithArticles(farms, 9);
+  const varietySlugs = varietiesInfo.map((v) => v.slug);
+  const varietyArticles = varietySlugs.length > 0 ? await getVarietiesBySlugs(varietySlugs) : [];
 
   // Get cities with farms in this state+category
   const getCategoryVariations = (categoryName: string): string[] => {
-    const variations = [categoryName]
+    const variations = [categoryName];
     if (categoryName.includes('Christmas Tree')) {
-      variations.push('Christmas Tree', 'Christmas Trees', 'Christmas Tree Farms')
+      variations.push('Christmas Tree', 'Christmas Trees', 'Christmas Tree Farms');
     }
     if (categoryName.includes('Apple')) {
-      variations.push('Apple', 'Apple Orchard', 'Apple Picking', 'Apple Orchards')
+      variations.push('Apple', 'Apple Orchard', 'Apple Picking', 'Apple Orchards');
     }
     if (categoryName.includes('Pumpkin')) {
-      variations.push('Pumpkin', 'Pumpkin Patch', 'Pumpkin Patches')
+      variations.push('Pumpkin', 'Pumpkin Patch', 'Pumpkin Patches');
     }
     if (categoryName.includes('Berry')) {
-      variations.push('Berry', 'Berry Farm', 'Berry Picking', 'Berry Farms')
+      variations.push('Berry', 'Berry Farm', 'Berry Picking', 'Berry Farms');
     }
-    return variations
-  }
+    return variations;
+  };
 
-  const matchingCategories = getCategoryVariations(categoryData.name)
+  const matchingCategories = getCategoryVariations(categoryData.name);
 
   // Filter locations in this state that have farms in this category
   const citiesWithFarms = locationsData
     .filter((location: any) => location.province === stateData.state_name)
     .map((location: any) => {
-      const categoryFarmCount = location.farms?.filter((farm: any) => {
-        const farmCategories = typeof farm.categories === 'string'
-          ? farm.categories.split(',').map((c: string) => c.trim())
-          : []
-        return matchingCategories.some(catName =>
-          farmCategories.some(farmCat =>
-            farmCat.toLowerCase().includes(catName.toLowerCase())
-          )
-        )
-      }).length || 0
+      const categoryFarmCount =
+        location.farms?.filter((farm: any) => {
+          const farmCategories =
+            typeof farm.categories === 'string'
+              ? farm.categories.split(',').map((c: string) => c.trim())
+              : [];
+          return matchingCategories.some((catName) =>
+            farmCategories.some((farmCat) => farmCat.toLowerCase().includes(catName.toLowerCase()))
+          );
+        }).length || 0;
 
       return {
         name: location.name,
         slug: location.location_slug,
-        farmCount: categoryFarmCount
-      }
+        farmCount: categoryFarmCount,
+      };
     })
     .filter((city: any) => city.farmCount > 0)
-    .sort((a: any, b: any) => b.farmCount - a.farmCount)
+    .sort((a: any, b: any) => b.farmCount - a.farmCount);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -182,15 +179,13 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
               Popular Cities for {categoryData.name} in {stateData.state_name}
             </h2>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Explore {categoryData.name.toLowerCase()} in these cities across {stateData.state_name}
+              Explore {categoryData.name.toLowerCase()} in these cities across{' '}
+              {stateData.state_name}
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {citiesWithFarms.map((city: any, index: number) => (
-                <Link
-                  key={index}
-                  href={`/${category}/near/${city.slug}`}
-                >
+                <Link key={index} href={`/${category}/near/${city.slug}`}>
                   <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                     <CardContent className="pt-6 pb-4">
                       <div className="flex items-start justify-between">
@@ -198,7 +193,9 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
                           <h3 className="font-semibold text-lg mb-1">{city.name}</h3>
                           <div className="flex items-center text-sm text-muted-foreground">
                             <MapPin className="h-4 w-4 mr-1" />
-                            <span>{city.farmCount} {city.farmCount === 1 ? 'farm' : 'farms'}</span>
+                            <span>
+                              {city.farmCount} {city.farmCount === 1 ? 'farm' : 'farms'}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -228,10 +225,15 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
           </h2>
           <div className="space-y-4">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              {stateData.state_name} offers {farms.length} {categoryData.name.toLowerCase()} where families can enjoy authentic pick-your-own experiences. Whether you're looking for a weekend activity or planning a special outing, these farms provide fresh, locally-grown produce and memorable agritourism adventures.
+              {stateData.state_name} offers {farms.length} {categoryData.name.toLowerCase()} where
+              families can enjoy authentic pick-your-own experiences. Whether you're looking for a
+              weekend activity or planning a special outing, these farms provide fresh,
+              locally-grown produce and memorable agritourism adventures.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Use the interactive map above to find {categoryData.name.toLowerCase()} near you, check ratings and reviews, get directions, and plan your visit. Save your favorite farms to receive updates on seasonal availability and special events.
+              Use the interactive map above to find {categoryData.name.toLowerCase()} near you,
+              check ratings and reviews, get directions, and plan your visit. Save your favorite
+              farms to receive updates on seasonal availability and special events.
             </p>
           </div>
         </div>
@@ -242,12 +244,12 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "name": `${categoryData.name} in ${stateData.state_name}`,
-            "description": `Discover ${farms.length} ${categoryData.name.toLowerCase()} across ${stateData.state_name}`,
-            "url": `https://pickafarm.com/${slug}/${category}`
-          })
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${categoryData.name} in ${stateData.state_name}`,
+            description: `Discover ${farms.length} ${categoryData.name.toLowerCase()} across ${stateData.state_name}`,
+            url: `https://pickafarm.com/${slug}/${category}`,
+          }),
         }}
       />
 
@@ -264,16 +266,18 @@ export default async function StateCategoryPage({ params }: StateCategoryPagePro
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateStateCategoryBreadcrumbSchema(
-            stateData.state_name,
-            slug,
-            categoryData.name,
-            category
-          ))
+          __html: JSON.stringify(
+            generateStateCategoryBreadcrumbSchema(
+              stateData.state_name,
+              slug,
+              categoryData.name,
+              category
+            )
+          ),
         }}
       />
 
       <FarmFooter />
     </div>
-  )
+  );
 }

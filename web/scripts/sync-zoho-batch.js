@@ -17,7 +17,7 @@ const { execSync } = require('child_process');
 const envPath = path.join(__dirname, '..', '.env.local');
 if (fs.existsSync(envPath)) {
   const envContent = fs.readFileSync(envPath, 'utf8');
-  envContent.split('\n').forEach(line => {
+  envContent.split('\n').forEach((line) => {
     const [key, ...valueParts] = line.split('=');
     if (key && valueParts.length > 0) {
       process.env[key.trim()] = valueParts.join('=').trim();
@@ -30,18 +30,14 @@ if (fs.existsSync(envPath)) {
  * @throws {Error} If any required environment variables are missing
  */
 function validateEnvironment() {
-  const requiredVars = [
-    'ZOHO_CLIENT_ID',
-    'ZOHO_CLIENT_SECRET',
-    'ZOHO_REFRESH_TOKEN'
-  ];
+  const requiredVars = ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'];
 
-  const missing = requiredVars.filter(varName => !process.env[varName]);
+  const missing = requiredVars.filter((varName) => !process.env[varName]);
 
   if (missing.length > 0) {
     throw new Error(
       `Missing required environment variables: ${missing.join(', ')}\n` +
-      `Please ensure these are set in web/.env.local`
+        `Please ensure these are set in web/.env.local`
     );
   }
 }
@@ -58,23 +54,24 @@ async function zohoAccessToken() {
 
   // Use the correct Zoho data center
   const dc = process.env.ZOHO_DC || 'com';
-  const tokenUrl = dc === 'ca'
-    ? 'https://accounts.zohocloud.ca/oauth/v2/token'
-    : `https://accounts.zoho.${dc}/oauth/v2/token`;
+  const tokenUrl =
+    dc === 'ca'
+      ? 'https://accounts.zohocloud.ca/oauth/v2/token'
+      : `https://accounts.zoho.${dc}/oauth/v2/token`;
 
   const body = new URLSearchParams({
     refresh_token: refreshToken,
     client_id: clientId,
     client_secret: clientSecret,
-    grant_type: "refresh_token"
+    grant_type: 'refresh_token',
   });
 
   const response = await fetch(tokenUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: body.toString()
+    body: body.toString(),
   });
 
   if (!response.ok) {
@@ -110,11 +107,11 @@ async function fetchLiveFarms(accessToken) {
     const apiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/search?criteria=(Tag:equals:LIVE)&page=${page}&per_page=${perPage}`;
 
     const response = await fetch(apiUrl, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Authorization": `Zoho-oauthtoken ${accessToken}`,
-        "Content-Type": "application/json"
-      }
+        Authorization: `Zoho-oauthtoken ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
@@ -126,7 +123,9 @@ async function fetchLiveFarms(accessToken) {
 
     if (data.data && Array.isArray(data.data)) {
       allFarms = allFarms.concat(data.data);
-      console.log(`   Page ${page}: Found ${data.data.length} farms (total so far: ${allFarms.length})`);
+      console.log(
+        `   Page ${page}: Found ${data.data.length} farms (total so far: ${allFarms.length})`
+      );
     }
 
     // Check if there are more pages
@@ -153,7 +152,7 @@ async function fetchLiveFarms(accessToken) {
  */
 function toCSV(v) {
   if (v == null) return null;
-  if (Array.isArray(v)) return v.join(", ");
+  if (Array.isArray(v)) return v.join(', ');
   if (typeof v === 'object') return JSON.stringify(v);
   return String(v);
 }
@@ -164,10 +163,10 @@ function toCSV(v) {
  * @returns {string} Slugified name
  */
 function slugify(name) {
-  return String(name || "")
+  return String(name || '')
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
     .slice(0, 120);
 }
 
@@ -179,9 +178,9 @@ function slugify(name) {
  */
 async function upsertFarmToD1(rec) {
   // Ensure ID has zcrm_ prefix
-  const rawId = rec.id || rec.zoho_record_id || "";
+  const rawId = rec.id || rec.zoho_record_id || '';
   const d1Id = rawId.startsWith('zcrm_') ? rawId : `zcrm_${rawId}`;
-  const name = rec.Account_Name || "";
+  const name = rec.Account_Name || '';
   const slug = slugify(name);
 
   // Validate required fields
@@ -196,8 +195,11 @@ async function upsertFarmToD1(rec) {
   const varieties = toCSV(rec.Varieties);
 
   // Convert payment methods to string if it's an array or object
-  const paymentMethods = rec.Payment_Methods ?
-    (Array.isArray(rec.Payment_Methods) ? rec.Payment_Methods.join(', ') : String(rec.Payment_Methods)) : null;
+  const paymentMethods = rec.Payment_Methods
+    ? Array.isArray(rec.Payment_Methods)
+      ? rec.Payment_Methods.join(', ')
+      : String(rec.Payment_Methods)
+    : null;
 
   // Convert dates to strings if they exist
   const openingDate = rec.Open_Date ? String(rec.Open_Date) : null;
@@ -213,15 +215,15 @@ async function upsertFarmToD1(rec) {
   const sundayHours = rec.Sunday ? String(rec.Sunday) : null;
 
   // Convert Pet_Friendly: "TRUE" = 1, "FALSE" = 0, null/undefined = null (3 states)
-  const petFriendly = rec.Pet_Friendly === "TRUE" ? 1 : (rec.Pet_Friendly === "FALSE" ? 0 : null);
+  const petFriendly = rec.Pet_Friendly === 'TRUE' ? 1 : rec.Pet_Friendly === 'FALSE' ? 0 : null;
 
   // Convert Featured and Verified: checkboxes (true = 1, false = 0)
   const featured = rec.Featured === true ? 1 : 0;
   const verified = rec.Verified === true ? 1 : 0;
 
   // Handle coordinates
-  let lat = rec.latitude !== "" && rec.latitude != null ? Number(rec.latitude) : null;
-  let lng = rec.longitude !== "" && rec.longitude != null ? Number(rec.longitude) : null;
+  let lat = rec.latitude !== '' && rec.latitude != null ? Number(rec.latitude) : null;
+  let lng = rec.longitude !== '' && rec.longitude != null ? Number(rec.longitude) : null;
 
   // Image fields (preserved from existing data if present)
   const logoUrl = rec.logo_url || null;
@@ -236,7 +238,7 @@ async function upsertFarmToD1(rec) {
     const checkOutput = execSync(checkCmd, {
       encoding: 'utf-8',
       cwd: path.join(__dirname, '..', '..'),
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
     });
 
     const checkResult = JSON.parse(checkOutput);
@@ -288,22 +290,52 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
 
   // Build VALUES clause with proper escaping
   const values = [
-    escapeSql(d1Id), escapeSql(name), escapeSql(finalSlug),
-    escapeSql(rec.Website), escapeSql(rec.Phone), escapeSql(rec.Email), escapeSql(rec.Description),
-    escapeSql(rec.Billing_Street), escapeSql(rec.Billing_City), escapeSql(rec.Billing_Code),
-    escapeSql(rec.Billing_State), escapeSql(rec.Billing_Country), lat || 'NULL', lng || 'NULL',
-    escapeSql(rec.Facebook), escapeSql(rec.Instagram),
-    escapeSql(categories), escapeSql(type), escapeSql(amenities), escapeSql(varieties),
-    petFriendly === null ? 'NULL' : petFriendly, escapeSql(rec.Price_Range),
-    escapeSql(new Date().toISOString()), escapeSql(new Date().toISOString()),
-    escapeSql(paymentMethods), escapeSql(openingDate), escapeSql(closingDate),
-    escapeSql(mondayHours), escapeSql(tuesdayHours), escapeSql(wednesdayHours),
-    escapeSql(thursdayHours), escapeSql(fridayHours), escapeSql(saturdayHours), escapeSql(sundayHours),
-    featured, verified,
-    escapeSql(logoUrl), escapeSql(backgroundUrl), escapeSql(logoUpdatedAt), escapeSql(backgroundUpdatedAt)
+    escapeSql(d1Id),
+    escapeSql(name),
+    escapeSql(finalSlug),
+    escapeSql(rec.Website),
+    escapeSql(rec.Phone),
+    escapeSql(rec.Email),
+    escapeSql(rec.Description),
+    escapeSql(rec.Billing_Street),
+    escapeSql(rec.Billing_City),
+    escapeSql(rec.Billing_Code),
+    escapeSql(rec.Billing_State),
+    escapeSql(rec.Billing_Country),
+    lat || 'NULL',
+    lng || 'NULL',
+    escapeSql(rec.Facebook),
+    escapeSql(rec.Instagram),
+    escapeSql(categories),
+    escapeSql(type),
+    escapeSql(amenities),
+    escapeSql(varieties),
+    petFriendly === null ? 'NULL' : petFriendly,
+    escapeSql(rec.Price_Range),
+    escapeSql(new Date().toISOString()),
+    escapeSql(new Date().toISOString()),
+    escapeSql(paymentMethods),
+    escapeSql(openingDate),
+    escapeSql(closingDate),
+    escapeSql(mondayHours),
+    escapeSql(tuesdayHours),
+    escapeSql(wednesdayHours),
+    escapeSql(thursdayHours),
+    escapeSql(fridayHours),
+    escapeSql(saturdayHours),
+    escapeSql(sundayHours),
+    featured,
+    verified,
+    escapeSql(logoUrl),
+    escapeSql(backgroundUrl),
+    escapeSql(logoUpdatedAt),
+    escapeSql(backgroundUpdatedAt),
   ].join(',');
 
-  const finalSql = sql.replace('(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', `(${values})`);
+  const finalSql = sql.replace(
+    '(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    `(${values})`
+  );
 
   // Execute via wrangler d1 execute using a temp file to avoid command-line escaping issues
   const tempSqlFile = path.join(__dirname, '.temp-sync.sql');
@@ -318,7 +350,7 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
       output = execSync(execCmd, {
         encoding: 'utf-8',
         cwd: path.join(__dirname, '..', '..'),
-        stdio: ['pipe', 'pipe', 'pipe']
+        stdio: ['pipe', 'pipe', 'pipe'],
       });
     } catch (execError) {
       // If execSync throws, it might still have output - try to extract JSON
@@ -331,9 +363,11 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     // Extract JSON from wrangler output (skip progress lines)
     // Progress lines start with special characters like ├ │ └
     const lines = output.split('\n');
-    const jsonLines = lines.filter(line => {
+    const jsonLines = lines.filter((line) => {
       const trimmed = line.trim();
-      return trimmed && !trimmed.startsWith('├') && !trimmed.startsWith('│') && !trimmed.startsWith('└');
+      return (
+        trimmed && !trimmed.startsWith('├') && !trimmed.startsWith('│') && !trimmed.startsWith('└')
+      );
     });
     const jsonOutput = jsonLines.join('\n');
 
@@ -352,7 +386,9 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
     const debugFile = path.join(__dirname, '.failed-sync.sql');
     try {
       fs.writeFileSync(debugFile, finalSql, 'utf-8');
-      throw new Error(`D1 execution failed: ${error.message}. SQL saved to ${debugFile} for inspection.`);
+      throw new Error(
+        `D1 execution failed: ${error.message}. SQL saved to ${debugFile} for inspection.`
+      );
     } catch (saveError) {
       throw new Error(`D1 execution failed: ${error.message}`);
     }
@@ -374,7 +410,7 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
  * @returns {Promise<void>}
  */
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function main() {
@@ -386,7 +422,7 @@ async function main() {
 
   // Check for test mode (--test or --test=N flag)
   const args = process.argv.slice(2);
-  const testArg = args.find(arg => arg.startsWith('--test'));
+  const testArg = args.find((arg) => arg.startsWith('--test'));
   let testMode = false;
   let testLimit = 5; // Default to 5 farms in test mode
 
@@ -432,7 +468,13 @@ async function main() {
   const totalBatches = Math.ceil(farms.length / BATCH_SIZE);
   const estimatedMinutes = Math.ceil((farms.length * DELAY_MS) / 60000);
 
-  console.log('⏱️  Estimated time: ~' + estimatedMinutes + ' minute' + (estimatedMinutes > 1 ? 's' : '') + ' (respecting rate limits)');
+  console.log(
+    '⏱️  Estimated time: ~' +
+      estimatedMinutes +
+      ' minute' +
+      (estimatedMinutes > 1 ? 's' : '') +
+      ' (respecting rate limits)'
+  );
   console.log('');
 
   // Sync statistics
@@ -457,7 +499,6 @@ async function main() {
 
         // Rate limiting delay
         await sleep(DELAY_MS);
-
       } catch (error) {
         // Fail-fast: stop on first error
         console.log('');
@@ -466,7 +507,9 @@ async function main() {
         console.error('━'.repeat(50));
         console.error(`Farm: ${farmName} (${farm.id})`);
         console.error(`Error: ${error.message}`);
-        console.error(`Progress: ${processedCount}/${farms.length} records completed before failure`);
+        console.error(
+          `Progress: ${processedCount}/${farms.length} records completed before failure`
+        );
         console.error('━'.repeat(50));
         process.exit(1);
       }
@@ -498,7 +541,7 @@ async function main() {
 }
 
 // Run the main function
-main().catch(error => {
+main().catch((error) => {
   console.error('❌ Fatal error:', error.message);
   process.exit(1);
 });

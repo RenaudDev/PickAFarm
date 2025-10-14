@@ -11,7 +11,7 @@ const categoriesData = require('../web/data/categories.json');
 // Category variations function (matches category-utils.ts)
 function getCategoryVariations(categoryName) {
   const variations = [categoryName];
-  
+
   if (categoryName.includes('Christmas Tree')) {
     variations.push('Christmas Tree', 'Christmas Trees', 'Christmas Tree Farms');
   }
@@ -63,27 +63,23 @@ function getCategoryVariations(categoryName) {
   if (categoryName.includes('Hayride')) {
     variations.push('Hayride', 'Hay Ride', 'Hayrides');
   }
-  
+
   return variations;
 }
 
 // Filter farms by category
 function getFarmsForCategory(categoryName) {
   const variations = getCategoryVariations(categoryName);
-  
+
   return farmsData
-    .filter(farm => farm.active === 1)
-    .filter(farm => {
+    .filter((farm) => farm.active === 1)
+    .filter((farm) => {
       if (!farm.categories) return false;
-      
-      const farmCategories = farm.categories
-        .split(',')
-        .map(c => c.trim().toLowerCase());
-      
-      return variations.some(variation => 
-        farmCategories.some(farmCat => 
-          farmCat.includes(variation.toLowerCase())
-        )
+
+      const farmCategories = farm.categories.split(',').map((c) => c.trim().toLowerCase());
+
+      return variations.some((variation) =>
+        farmCategories.some((farmCat) => farmCat.includes(variation.toLowerCase()))
       );
     });
 }
@@ -96,17 +92,17 @@ let totalPassed = 0;
 let totalFailed = 0;
 const issues = [];
 
-categoriesData.forEach(category => {
+categoriesData.forEach((category) => {
   totalTested++;
-  
+
   const filteredFarms = getFarmsForCategory(category.name);
   const expectedCount = category.totalFarms;
   const actualCount = filteredFarms.length;
-  
+
   const match = actualCount === expectedCount;
   const status = match ? '✅' : '⚠️';
   const difference = actualCount - expectedCount;
-  
+
   if (match) {
     totalPassed++;
   } else {
@@ -115,13 +111,15 @@ categoriesData.forEach(category => {
       category: category.name,
       expected: expectedCount,
       actual: actualCount,
-      difference: difference
+      difference: difference,
     });
   }
-  
+
   console.log(`${status} ${category.name}`);
-  console.log(`   Expected: ${expectedCount} | Actual: ${actualCount}${difference !== 0 ? ` (${difference > 0 ? '+' : ''}${difference})` : ''}`);
-  
+  console.log(
+    `   Expected: ${expectedCount} | Actual: ${actualCount}${difference !== 0 ? ` (${difference > 0 ? '+' : ''}${difference})` : ''}`
+  );
+
   if (filteredFarms.length > 0) {
     console.log(`   Sample: ${filteredFarms[0].name}`);
   }
@@ -138,13 +136,13 @@ console.log(`⚠️  Failed: ${totalFailed}`);
 
 if (issues.length > 0) {
   console.log('\n⚠️  Categories with mismatches:');
-  issues.forEach(issue => {
+  issues.forEach((issue) => {
     console.log(`\n  ${issue.category}:`);
     console.log(`    Expected: ${issue.expected}`);
     console.log(`    Actual: ${issue.actual}`);
     console.log(`    Difference: ${issue.difference > 0 ? '+' : ''}${issue.difference}`);
   });
-  
+
   console.log('\n💡 Note: Small differences are normal if farm data has been updated.');
   console.log('   Large differences may indicate missing category variations.');
 }
@@ -154,20 +152,15 @@ console.log('\n\n' + '='.repeat(60));
 console.log('🎄 HIGH PRIORITY CATEGORIES');
 console.log('='.repeat(60));
 
-const highPriority = [
-  'Christmas Tree Farms',
-  'Apple Orchards',
-  'Pumpkin Patches',
-  'Berry Farms'
-];
+const highPriority = ['Christmas Tree Farms', 'Apple Orchards', 'Pumpkin Patches', 'Berry Farms'];
 
-highPriority.forEach(categoryName => {
+highPriority.forEach((categoryName) => {
   const farms = getFarmsForCategory(categoryName);
   console.log(`\n${categoryName}: ${farms.length} farms`);
-  
+
   if (farms.length > 0) {
     console.log('  Sample farms:');
-    farms.slice(0, 3).forEach(farm => {
+    farms.slice(0, 3).forEach((farm) => {
       console.log(`    - ${farm.name} (${farm.city_name}, ${farm.state_province})`);
       console.log(`      Categories: ${farm.categories}`);
     });
@@ -184,7 +177,7 @@ const testFarms = getFarmsForCategory(testCategory);
 const farmIds = new Set();
 let duplicates = 0;
 
-testFarms.forEach(farm => {
+testFarms.forEach((farm) => {
   if (farmIds.has(farm.id)) {
     duplicates++;
     console.log(`⚠️  Duplicate farm ID: ${farm.id} (${farm.name})`);

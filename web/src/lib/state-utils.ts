@@ -1,86 +1,86 @@
 /**
  * State/Province Utilities
- * 
+ *
  * Helper functions for converting between state names, slugs, and codes.
  * Used for breadcrumbs, navigation, and URL generation.
  */
 
 export interface StateInfo {
-  name: string
-  slug: string
-  code: string
-  country: 'Canada' | 'United States'
-  countryCode: 'CA' | 'US'
-  geographicType: 'Province' | 'State'
+  name: string;
+  slug: string;
+  code: string;
+  country: 'Canada' | 'United States';
+  countryCode: 'CA' | 'US';
+  geographicType: 'Province' | 'State';
 }
 
 // Complete mapping of state/province names to URL slugs
 const STATE_SLUG_MAP: Record<string, string> = {
   // Canada
-  'Ontario': 'ontario-farms',
-  'Quebec': 'quebec-farms',
+  Ontario: 'ontario-farms',
+  Quebec: 'quebec-farms',
   'British Columbia': 'british-columbia-farms',
-  'Alberta': 'alberta-farms',
-  'Manitoba': 'manitoba-farms',
-  'Saskatchewan': 'saskatchewan-farms',
+  Alberta: 'alberta-farms',
+  Manitoba: 'manitoba-farms',
+  Saskatchewan: 'saskatchewan-farms',
   'Nova Scotia': 'nova-scotia-farms',
   'New Brunswick': 'new-brunswick-farms',
   'Newfoundland and Labrador': 'newfoundland-and-labrador-farms',
   'Prince Edward Island': 'prince-edward-island-farms',
-  'Yukon': 'yukon-farms',
+  Yukon: 'yukon-farms',
   'Northwest Territories': 'northwest-territories-farms',
-  'Nunavut': 'nunavut-farms',
+  Nunavut: 'nunavut-farms',
   // United States
-  'Alabama': 'alabama-farms',
-  'Alaska': 'alaska-farms',
-  'Arizona': 'arizona-farms',
-  'Arkansas': 'arkansas-farms',
-  'California': 'california-farms',
-  'Colorado': 'colorado-farms',
-  'Connecticut': 'connecticut-farms',
-  'Delaware': 'delaware-farms',
-  'Florida': 'florida-farms',
-  'Georgia': 'georgia-farms',
-  'Hawaii': 'hawaii-farms',
-  'Idaho': 'idaho-farms',
-  'Illinois': 'illinois-farms',
-  'Indiana': 'indiana-farms',
-  'Iowa': 'iowa-farms',
-  'Kansas': 'kansas-farms',
-  'Kentucky': 'kentucky-farms',
-  'Louisiana': 'louisiana-farms',
-  'Maine': 'maine-farms',
-  'Maryland': 'maryland-farms',
-  'Massachusetts': 'massachusetts-farms',
-  'Michigan': 'michigan-farms',
-  'Minnesota': 'minnesota-farms',
-  'Mississippi': 'mississippi-farms',
-  'Missouri': 'missouri-farms',
-  'Montana': 'montana-farms',
-  'Nebraska': 'nebraska-farms',
-  'Nevada': 'nevada-farms',
+  Alabama: 'alabama-farms',
+  Alaska: 'alaska-farms',
+  Arizona: 'arizona-farms',
+  Arkansas: 'arkansas-farms',
+  California: 'california-farms',
+  Colorado: 'colorado-farms',
+  Connecticut: 'connecticut-farms',
+  Delaware: 'delaware-farms',
+  Florida: 'florida-farms',
+  Georgia: 'georgia-farms',
+  Hawaii: 'hawaii-farms',
+  Idaho: 'idaho-farms',
+  Illinois: 'illinois-farms',
+  Indiana: 'indiana-farms',
+  Iowa: 'iowa-farms',
+  Kansas: 'kansas-farms',
+  Kentucky: 'kentucky-farms',
+  Louisiana: 'louisiana-farms',
+  Maine: 'maine-farms',
+  Maryland: 'maryland-farms',
+  Massachusetts: 'massachusetts-farms',
+  Michigan: 'michigan-farms',
+  Minnesota: 'minnesota-farms',
+  Mississippi: 'mississippi-farms',
+  Missouri: 'missouri-farms',
+  Montana: 'montana-farms',
+  Nebraska: 'nebraska-farms',
+  Nevada: 'nevada-farms',
   'New Hampshire': 'new-hampshire-farms',
   'New Jersey': 'new-jersey-farms',
   'New Mexico': 'new-mexico-farms',
   'New York': 'new-york-farms',
   'North Carolina': 'north-carolina-farms',
   'North Dakota': 'north-dakota-farms',
-  'Ohio': 'ohio-farms',
-  'Oklahoma': 'oklahoma-farms',
-  'Oregon': 'oregon-farms',
-  'Pennsylvania': 'pennsylvania-farms',
+  Ohio: 'ohio-farms',
+  Oklahoma: 'oklahoma-farms',
+  Oregon: 'oregon-farms',
+  Pennsylvania: 'pennsylvania-farms',
   'Rhode Island': 'rhode-island-farms',
   'South Carolina': 'south-carolina-farms',
   'South Dakota': 'south-dakota-farms',
-  'Tennessee': 'tennessee-farms',
-  'Texas': 'texas-farms',
-  'Utah': 'utah-farms',
-  'Vermont': 'vermont-farms',
-  'Virginia': 'virginia-farms',
-  'Washington': 'washington-farms',
+  Tennessee: 'tennessee-farms',
+  Texas: 'texas-farms',
+  Utah: 'utah-farms',
+  Vermont: 'vermont-farms',
+  Virginia: 'virginia-farms',
+  Washington: 'washington-farms',
   'West Virginia': 'west-virginia-farms',
-  'Wisconsin': 'wisconsin-farms',
-  'Wyoming': 'wyoming-farms'
+  Wisconsin: 'wisconsin-farms',
+  Wyoming: 'wyoming-farms',
 };
 
 // Reverse mapping: slug to name
@@ -91,77 +91,87 @@ const SLUG_TO_NAME: Record<string, string> = Object.fromEntries(
 // State/Province codes
 const STATE_CODES: Record<string, string> = {
   // Canada
-  'Ontario': 'ON',
-  'Quebec': 'QC',
+  Ontario: 'ON',
+  Quebec: 'QC',
   'British Columbia': 'BC',
-  'Alberta': 'AB',
-  'Manitoba': 'MB',
-  'Saskatchewan': 'SK',
+  Alberta: 'AB',
+  Manitoba: 'MB',
+  Saskatchewan: 'SK',
   'Nova Scotia': 'NS',
   'New Brunswick': 'NB',
   'Newfoundland and Labrador': 'NL',
   'Prince Edward Island': 'PE',
-  'Yukon': 'YT',
+  Yukon: 'YT',
   'Northwest Territories': 'NT',
-  'Nunavut': 'NU',
+  Nunavut: 'NU',
   // United States
-  'Alabama': 'AL',
-  'Alaska': 'AK',
-  'Arizona': 'AZ',
-  'Arkansas': 'AR',
-  'California': 'CA',
-  'Colorado': 'CO',
-  'Connecticut': 'CT',
-  'Delaware': 'DE',
-  'Florida': 'FL',
-  'Georgia': 'GA',
-  'Hawaii': 'HI',
-  'Idaho': 'ID',
-  'Illinois': 'IL',
-  'Indiana': 'IN',
-  'Iowa': 'IA',
-  'Kansas': 'KS',
-  'Kentucky': 'KY',
-  'Louisiana': 'LA',
-  'Maine': 'ME',
-  'Maryland': 'MD',
-  'Massachusetts': 'MA',
-  'Michigan': 'MI',
-  'Minnesota': 'MN',
-  'Mississippi': 'MS',
-  'Missouri': 'MO',
-  'Montana': 'MT',
-  'Nebraska': 'NE',
-  'Nevada': 'NV',
+  Alabama: 'AL',
+  Alaska: 'AK',
+  Arizona: 'AZ',
+  Arkansas: 'AR',
+  California: 'CA',
+  Colorado: 'CO',
+  Connecticut: 'CT',
+  Delaware: 'DE',
+  Florida: 'FL',
+  Georgia: 'GA',
+  Hawaii: 'HI',
+  Idaho: 'ID',
+  Illinois: 'IL',
+  Indiana: 'IN',
+  Iowa: 'IA',
+  Kansas: 'KS',
+  Kentucky: 'KY',
+  Louisiana: 'LA',
+  Maine: 'ME',
+  Maryland: 'MD',
+  Massachusetts: 'MA',
+  Michigan: 'MI',
+  Minnesota: 'MN',
+  Mississippi: 'MS',
+  Missouri: 'MO',
+  Montana: 'MT',
+  Nebraska: 'NE',
+  Nevada: 'NV',
   'New Hampshire': 'NH',
   'New Jersey': 'NJ',
   'New Mexico': 'NM',
   'New York': 'NY',
   'North Carolina': 'NC',
   'North Dakota': 'ND',
-  'Ohio': 'OH',
-  'Oklahoma': 'OK',
-  'Oregon': 'OR',
-  'Pennsylvania': 'PA',
+  Ohio: 'OH',
+  Oklahoma: 'OK',
+  Oregon: 'OR',
+  Pennsylvania: 'PA',
   'Rhode Island': 'RI',
   'South Carolina': 'SC',
   'South Dakota': 'SD',
-  'Tennessee': 'TN',
-  'Texas': 'TX',
-  'Utah': 'UT',
-  'Vermont': 'VT',
-  'Virginia': 'VA',
-  'Washington': 'WA',
+  Tennessee: 'TN',
+  Texas: 'TX',
+  Utah: 'UT',
+  Vermont: 'VT',
+  Virginia: 'VA',
+  Washington: 'WA',
   'West Virginia': 'WV',
-  'Wisconsin': 'WI',
-  'Wyoming': 'WY'
+  Wisconsin: 'WI',
+  Wyoming: 'WY',
 };
 
 // Canadian provinces
 const CANADIAN_PROVINCES = new Set([
-  'Ontario', 'Quebec', 'British Columbia', 'Alberta', 'Manitoba', 'Saskatchewan',
-  'Nova Scotia', 'New Brunswick', 'Newfoundland and Labrador', 'Prince Edward Island',
-  'Yukon', 'Northwest Territories', 'Nunavut'
+  'Ontario',
+  'Quebec',
+  'British Columbia',
+  'Alberta',
+  'Manitoba',
+  'Saskatchewan',
+  'Nova Scotia',
+  'New Brunswick',
+  'Newfoundland and Labrador',
+  'Prince Edward Island',
+  'Yukon',
+  'Northwest Territories',
+  'Nunavut',
 ]);
 
 /**
@@ -169,24 +179,24 @@ const CANADIAN_PROVINCES = new Set([
  */
 export function normalizeStateName(state: string): string | null {
   if (!state) return null;
-  
+
   const normalized = state.trim();
-  
+
   // Common variations
   const variations: Record<string, string> = {
-    'ON': 'Ontario',
-    'On': 'Ontario',
-    'ontario': 'Ontario',
-    'QC': 'Quebec',
-    'Qc': 'Quebec',
-    'quebec': 'Quebec',
-    'BC': 'British Columbia',
-    'Bc': 'British Columbia',
+    ON: 'Ontario',
+    On: 'Ontario',
+    ontario: 'Ontario',
+    QC: 'Quebec',
+    Qc: 'Quebec',
+    quebec: 'Quebec',
+    BC: 'British Columbia',
+    Bc: 'British Columbia',
     'british columbia': 'British Columbia',
-    'NY': 'New York',
-    'new york': 'New York'
+    NY: 'New York',
+    'new york': 'New York',
   };
-  
+
   return variations[normalized] || normalized;
 }
 
@@ -198,7 +208,7 @@ export function normalizeStateName(state: string): string | null {
 export function getStateSlug(stateName: string): string | null {
   const normalized = normalizeStateName(stateName);
   if (!normalized) return null;
-  
+
   return STATE_SLUG_MAP[normalized] || null;
 }
 
@@ -219,7 +229,7 @@ export function getStateName(slug: string): string | null {
 export function getStateCode(stateName: string): string | null {
   const normalized = normalizeStateName(stateName);
   if (!normalized) return null;
-  
+
   return STATE_CODES[normalized] || null;
 }
 
@@ -229,7 +239,7 @@ export function getStateCode(stateName: string): string | null {
 export function isCanadianProvince(stateName: string): boolean {
   const normalized = normalizeStateName(stateName);
   if (!normalized) return false;
-  
+
   return CANADIAN_PROVINCES.has(normalized);
 }
 
@@ -238,10 +248,10 @@ export function isCanadianProvince(stateName: string): boolean {
  */
 export function getGeographicType(stateName: string): 'Province' | 'State' | null {
   if (isCanadianProvince(stateName)) return 'Province';
-  
+
   const normalized = normalizeStateName(stateName);
   if (normalized && STATE_SLUG_MAP[normalized]) return 'State';
-  
+
   return null;
 }
 
@@ -251,21 +261,21 @@ export function getGeographicType(stateName: string): 'Province' | 'State' | nul
 export function getStateInfo(stateName: string): StateInfo | null {
   const normalized = normalizeStateName(stateName);
   if (!normalized) return null;
-  
+
   const slug = STATE_SLUG_MAP[normalized];
   const code = STATE_CODES[normalized];
-  
+
   if (!slug || !code) return null;
-  
+
   const isCanadian = CANADIAN_PROVINCES.has(normalized);
-  
+
   return {
     name: normalized,
     slug: slug,
     code: code,
     country: isCanadian ? 'Canada' : 'United States',
     countryCode: isCanadian ? 'CA' : 'US',
-    geographicType: isCanadian ? 'Province' : 'State'
+    geographicType: isCanadian ? 'Province' : 'State',
   };
 }
 
@@ -287,5 +297,5 @@ export function getCanadianProvinces(): string[] {
  * Get US states only
  */
 export function getUSStates(): string[] {
-  return getAllStates().filter(state => !CANADIAN_PROVINCES.has(state));
+  return getAllStates().filter((state) => !CANADIAN_PROVINCES.has(state));
 }

@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function VarietyLoading() {
   return (
@@ -35,13 +35,13 @@ export default function VarietyLoading() {
             <Skeleton className="h-6 w-24 mb-4" />
             <Skeleton className="h-12 w-full mb-4" />
             <Skeleton className="h-6 w-3/4 mb-8" />
-            
+
             {/* Meta Info Skeleton */}
             <div className="flex items-center space-x-4 mb-8">
               <Skeleton className="h-4 w-4" />
               <Skeleton className="h-4 w-24" />
             </div>
-            
+
             <Skeleton className="h-px w-full" />
           </header>
 
@@ -57,14 +57,14 @@ export default function VarietyLoading() {
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-5/6" />
-            
+
             <div className="space-y-2 mt-8">
               <Skeleton className="h-6 w-1/2" />
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-2/3" />
             </div>
-            
+
             <div className="space-y-2 mt-8">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-full" />

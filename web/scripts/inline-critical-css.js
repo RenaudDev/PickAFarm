@@ -53,7 +53,7 @@ async function inlineCriticalCSS() {
   console.log(`✓ Successfully inlined critical CSS in ${processedCount} files`);
 }
 
-inlineCriticalCSS().catch(err => {
+inlineCriticalCSS().catch((err) => {
   console.error('❌ Critical CSS inlining failed:', err);
   process.exit(1);
 });

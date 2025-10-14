@@ -1,33 +1,33 @@
-import Link from "next/link"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { MapPin, Star, Bell, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { getCategoryEmoji } from "@/lib/category-utils"
+import Link from 'next/link';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { MapPin, Star, Bell, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { getCategoryEmoji } from '@/lib/category-utils';
 
 interface FarmListItemProps {
   farm: {
-    id: string
-    name: string
-    slug: string
-    city_name: string
-    state_province: string
-    categories?: string
-    featured?: number
-    verified?: number
-    reviews?: number
-    rating?: number
-    subscriber_count?: number
-  }
+    id: string;
+    name: string;
+    slug: string;
+    city_name: string;
+    state_province: string;
+    categories?: string;
+    featured?: number;
+    verified?: number;
+    reviews?: number;
+    rating?: number;
+    subscriber_count?: number;
+  };
 }
 
 export function FarmListItem({ farm }: FarmListItemProps) {
   return (
     <Card
       className={cn(
-        "cursor-pointer transition-all hover:shadow-md",
-        farm.featured === 1 && "border-2 border-yellow-400 bg-yellow-50/30"
+        'cursor-pointer transition-all hover:shadow-md',
+        farm.featured === 1 && 'border-2 border-yellow-400 bg-yellow-50/30'
       )}
     >
       <CardHeader className="pb-1 p-2.5">
@@ -35,15 +35,14 @@ export function FarmListItem({ farm }: FarmListItemProps) {
           <div className="flex-1 min-w-0">
             {farm.categories && (
               <div className="flex items-center gap-1 mb-1 flex-wrap">
-                {farm.categories.split(',').slice(0, 4).map((cat, idx) => (
-                  <span
-                    key={idx}
-                    className="text-lg"
-                    title={cat.trim()}
-                  >
-                    {getCategoryEmoji(cat.trim())}
-                  </span>
-                ))}
+                {farm.categories
+                  .split(',')
+                  .slice(0, 4)
+                  .map((cat, idx) => (
+                    <span key={idx} className="text-lg" title={cat.trim()}>
+                      {getCategoryEmoji(cat.trim())}
+                    </span>
+                  ))}
               </div>
             )}
             <div className="flex items-center gap-2 mb-0.5 flex-wrap">
@@ -51,10 +50,15 @@ export function FarmListItem({ farm }: FarmListItemProps) {
               {(farm.verified === 1 || farm.featured === 1) && (
                 <div className="flex gap-1">
                   {farm.verified === 1 && (
-                    <span className="text-xs" title="Verified">✓</span>
+                    <span className="text-xs" title="Verified">
+                      ✓
+                    </span>
                   )}
                   {farm.featured === 1 && (
-                    <Badge variant="outline" className="text-xs px-1.5 py-0 text-yellow-600 border-yellow-600">
+                    <Badge
+                      variant="outline"
+                      className="text-xs px-1.5 py-0 text-yellow-600 border-yellow-600"
+                    >
                       Featured
                     </Badge>
                   )}
@@ -71,9 +75,7 @@ export function FarmListItem({ farm }: FarmListItemProps) {
               {/* Subscriber count */}
               <div className="flex items-center gap-1 text-xs">
                 <Bell className="h-3 w-3 text-primary" />
-                <span className="font-medium text-foreground">
-                  {farm.subscriber_count || 0}
-                </span>
+                <span className="font-medium text-foreground">{farm.subscriber_count || 0}</span>
                 <span className="text-muted-foreground">
                   {(farm.subscriber_count || 0) === 1 ? 'subscriber' : 'subscribers'}
                 </span>
@@ -84,7 +86,9 @@ export function FarmListItem({ farm }: FarmListItemProps) {
                 {farm.reviews && farm.reviews > 0 ? (
                   <>
                     <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                    <span className="font-medium text-foreground">{farm.rating?.toFixed(1) || '5.0'}</span>
+                    <span className="font-medium text-foreground">
+                      {farm.rating?.toFixed(1) || '5.0'}
+                    </span>
                     <span className="text-muted-foreground">
                       ({farm.reviews} {farm.reviews === 1 ? 'review' : 'reviews'})
                     </span>
@@ -118,5 +122,5 @@ export function FarmListItem({ farm }: FarmListItemProps) {
         </Link>
       </CardContent>
     </Card>
-  )
+  );
 }

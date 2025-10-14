@@ -1,17 +1,17 @@
 import { getPostBySlug, getPostPaths } from '@/lib/wordpress';
 import { notFound } from 'next/navigation';
-import { FarmNavbar } from "@/components/farm-navbar"
-import { FarmFooter } from "@/components/farm-footer"
-import { Separator } from "@/components/ui/separator"
-import { Calendar } from "lucide-react"
-import Image from "next/image"
+import { FarmNavbar } from '@/components/farm-navbar';
+import { FarmFooter } from '@/components/farm-footer';
+import { Separator } from '@/components/ui/separator';
+import { Calendar } from 'lucide-react';
+import Image from 'next/image';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo-metadata';
 import { Metadata } from 'next';
 
 interface BlogPostProps {
   params: Promise<{
-    posts: string
-  }>
+    posts: string;
+  }>;
 }
 
 export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
@@ -40,9 +40,9 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostProps) {
-  const { posts: slug } = await params;  // Changed this line
+  const { posts: slug } = await params; // Changed this line
   const post = await getPostBySlug(slug);
-  
+
   if (!post) notFound();
 
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
@@ -83,7 +83,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           )}
 
           <div className="prose prose-lg max-w-none">
-            <div 
+            <div
               className="text-foreground leading-relaxed space-y-6"
               dangerouslySetInnerHTML={{ __html: post.content.rendered }}
             />

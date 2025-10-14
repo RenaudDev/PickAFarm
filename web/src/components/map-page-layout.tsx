@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import { useState, useEffect, useMemo, useRef } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Slider } from "@/components/ui/slider"
+import { useState, useEffect, useMemo, useRef } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Slider } from '@/components/ui/slider';
 import {
   MapPin,
   Star,
@@ -15,138 +15,146 @@ import {
   Settings2,
   X,
   AlertCircle,
-  Search
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import { 
-  getBrowserLocation, 
+  Search,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import {
+  getBrowserLocation,
   calculateDistance,
   storeUserLocation,
-  type UserLocation 
-} from "@/lib/location-utils"
-import { SubscribeButton } from "@/components/subscribe-button"
-import { SubscriberBadge } from "@/components/subscriber-badge"
-import { useAuth } from "@clerk/nextjs"
-import { generateFarmsSchema } from "@/lib/farm-schema"
-import { getCategoryEmoji } from "@/lib/category-utils"
-import farmsData from "../../data/farms.json"
-import categoriesData from "../../data/categories.json"
+  type UserLocation,
+} from '@/lib/location-utils';
+import { SubscribeButton } from '@/components/subscribe-button';
+import { SubscriberBadge } from '@/components/subscriber-badge';
+import { useAuth } from '@clerk/nextjs';
+import { generateFarmsSchema } from '@/lib/farm-schema';
+import { getCategoryEmoji } from '@/lib/category-utils';
+import farmsData from '../../data/farms.json';
+import categoriesData from '../../data/categories.json';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
 
 // Get category slug from category name
 const getCategorySlug = (categoryName: string): string | null => {
-  const trimmedCategory = categoryName.trim()
-  
+  const trimmedCategory = categoryName.trim();
+
   // Try to find exact match first
-  const exactMatch = categoriesData.find(cat => 
-    cat.name.toLowerCase() === trimmedCategory.toLowerCase()
-  )
-  if (exactMatch) return exactMatch.slug
-  
+  const exactMatch = categoriesData.find(
+    (cat) => cat.name.toLowerCase() === trimmedCategory.toLowerCase()
+  );
+  if (exactMatch) return exactMatch.slug;
+
   // Try to find partial match
-  const partialMatch = categoriesData.find(cat => 
-    cat.name.toLowerCase().includes(trimmedCategory.toLowerCase()) ||
-    trimmedCategory.toLowerCase().includes(cat.name.toLowerCase())
-  )
-  if (partialMatch) return partialMatch.slug
-  
+  const partialMatch = categoriesData.find(
+    (cat) =>
+      cat.name.toLowerCase().includes(trimmedCategory.toLowerCase()) ||
+      trimmedCategory.toLowerCase().includes(cat.name.toLowerCase())
+  );
+  if (partialMatch) return partialMatch.slug;
+
   // Default fallback based on common patterns
-  if (trimmedCategory.toLowerCase().includes('christmas') || trimmedCategory.toLowerCase().includes('tree')) {
-    return 'christmas-tree-farms'
+  if (
+    trimmedCategory.toLowerCase().includes('christmas') ||
+    trimmedCategory.toLowerCase().includes('tree')
+  ) {
+    return 'christmas-tree-farms';
   }
   if (trimmedCategory.toLowerCase().includes('apple')) {
-    return 'apple-orchards'
+    return 'apple-orchards';
   }
   if (trimmedCategory.toLowerCase().includes('pumpkin')) {
-    return 'pumpkin-patches'
+    return 'pumpkin-patches';
   }
   if (trimmedCategory.toLowerCase().includes('berry')) {
-    return 'berry-farms'
+    return 'berry-farms';
   }
-  
-  return null
-}
+
+  return null;
+};
 
 interface Farm {
-  id: string
-  name: string
-  slug: string
-  city_name: string
-  state_province: string
-  latitude: number
-  longitude: number
-  categories?: string
-  distance?: number
-  featured?: number | boolean
-  verified?: number | boolean
-  phone?: string
-  website?: string
-  reviews?: number
-  rating?: number
+  id: string;
+  name: string;
+  slug: string;
+  city_name: string;
+  state_province: string;
+  latitude: number;
+  longitude: number;
+  categories?: string;
+  distance?: number;
+  featured?: number | boolean;
+  verified?: number | boolean;
+  phone?: string;
+  website?: string;
+  reviews?: number;
+  rating?: number;
 }
 
 const getUniqueCategories = (farms: Farm[]): string[] => {
-  const categoriesSet = new Set<string>()
-  farms.forEach(farm => {
+  const categoriesSet = new Set<string>();
+  farms.forEach((farm) => {
     if (farm.categories) {
-      const cats = farm.categories.split(',').map(c => c.trim()).filter(c => c)
-      cats.forEach(cat => {
-        if (cat) categoriesSet.add(cat)
-      })
+      const cats = farm.categories
+        .split(',')
+        .map((c) => c.trim())
+        .filter((c) => c);
+      cats.forEach((cat) => {
+        if (cat) categoriesSet.add(cat);
+      });
     }
-  })
-  const sorted = Array.from(categoriesSet).sort()
-  return ["All Types", ...sorted]
-}
+  });
+  const sorted = Array.from(categoriesSet).sort();
+  return ['All Types', ...sorted];
+};
 
 declare global {
   interface Window {
-    google: any
+    google: any;
   }
 }
 
 interface PaginationConfig {
-  enabled: boolean
-  currentPage: number
-  totalPages: number
-  farmsPerPage: number
+  enabled: boolean;
+  currentPage: number;
+  totalPages: number;
+  farmsPerPage: number;
 }
 
 interface MapPageLayoutProps {
   // Location & Display
-  centerLocation: UserLocation | null
-  isLoadingLocation: boolean
-  locationError?: string | null
-  showUserMarker?: boolean
-  showCityMarker?: boolean
-  pageTitle?: string
-  showFarmCount?: boolean
+  centerLocation: UserLocation | null;
+  isLoadingLocation: boolean;
+  locationError?: string | null;
+  showUserMarker?: boolean;
+  showCityMarker?: boolean;
+  pageTitle?: string;
+  showFarmCount?: boolean;
 
   // Radius Features (for state pages, set these to false)
-  showRadiusControl?: boolean
-  showRadiusCircle?: boolean
-  filterByRadius?: boolean
-  showDistances?: boolean
+  showRadiusControl?: boolean;
+  showRadiusCircle?: boolean;
+  filterByRadius?: boolean;
+  showDistances?: boolean;
 
   // Sorting & Filtering
-  sortBy?: "distance" | "featured" | "name" | "rating"
-  hideCategoryFilter?: boolean
+  sortBy?: 'distance' | 'featured' | 'name' | 'rating';
+  hideCategoryFilter?: boolean;
 
   // Map Behavior
-  initialZoom?: number
-  enableClustering?: boolean
-  maxVisibleMarkers?: number
+  initialZoom?: number;
+  enableClustering?: boolean;
+  maxVisibleMarkers?: number;
 
   // Pagination (for large state pages)
-  pagination?: PaginationConfig
+  pagination?: PaginationConfig;
 
   // Performance
-  enableVirtualScrolling?: boolean
-  lazyLoadMarkers?: boolean
+  enableVirtualScrolling?: boolean;
+  lazyLoadMarkers?: boolean;
 
   // Pre-filtered farms (for state pages)
-  preFilteredFarms?: Farm[]
+  preFilteredFarms?: Farm[];
 }
 
 export function MapPageLayout({
@@ -155,14 +163,14 @@ export function MapPageLayout({
   locationError,
   showUserMarker = false,
   showCityMarker = false,
-  pageTitle = "All U-Pick Farms Near You",
+  pageTitle = 'All U-Pick Farms Near You',
   showFarmCount = true,
   // New props with backward-compatible defaults
   showRadiusControl = true,
   showRadiusCircle = true,
   filterByRadius = true,
   showDistances = true,
-  sortBy = "distance",
+  sortBy = 'distance',
   hideCategoryFilter = false,
   initialZoom,
   enableClustering = false,
@@ -170,189 +178,193 @@ export function MapPageLayout({
   pagination,
   enableVirtualScrolling = false,
   lazyLoadMarkers = false,
-  preFilteredFarms
+  preFilteredFarms,
 }: MapPageLayoutProps) {
-  const { isSignedIn, userId } = useAuth()
-  const mapRef = useRef<HTMLDivElement>(null)
-  const googleMapRef = useRef<any>(null)
-  const markersRef = useRef<Map<string, any>>(new Map())
-  const radiusCircleRef = useRef<any>(null)
-  
-  const [farms, setFarms] = useState<Farm[]>([])
-  const [savedFarmIds, setSavedFarmIds] = useState<Set<string>>(new Set())
-  const [farmStats, setFarmStats] = useState<Record<string, number>>({})
-  const [radius, setRadius] = useState(100)
-  const [selectedCategory, setSelectedCategory] = useState("All Types")
-  const [isLoadingFarms, setIsLoadingFarms] = useState(false)
-  const [isMapLoaded, setIsMapLoaded] = useState(false)
-  const [showControls, setShowControls] = useState(false)
-  const [selectedFarm, setSelectedFarm] = useState<string | null>(null)
-  const [showSearchThisArea, setShowSearchThisArea] = useState(false)
-  const [mapCenter, setMapCenter] = useState<UserLocation | null>(centerLocation)
+  const { isSignedIn, userId } = useAuth();
+  const mapRef = useRef<HTMLDivElement>(null);
+  const googleMapRef = useRef<any>(null);
+  const markersRef = useRef<Map<string, any>>(new Map());
+  const radiusCircleRef = useRef<any>(null);
+
+  const [farms, setFarms] = useState<Farm[]>([]);
+  const [savedFarmIds, setSavedFarmIds] = useState<Set<string>>(new Set());
+  const [farmStats, setFarmStats] = useState<Record<string, number>>({});
+  const [radius, setRadius] = useState(100);
+  const [selectedCategory, setSelectedCategory] = useState('All Types');
+  const [isLoadingFarms, setIsLoadingFarms] = useState(false);
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [showControls, setShowControls] = useState(false);
+  const [selectedFarm, setSelectedFarm] = useState<string | null>(null);
+  const [showSearchThisArea, setShowSearchThisArea] = useState(false);
+  const [mapCenter, setMapCenter] = useState<UserLocation | null>(centerLocation);
 
   // Update map center when prop changes
   useEffect(() => {
-    setMapCenter(centerLocation)
-  }, [centerLocation])
+    setMapCenter(centerLocation);
+  }, [centerLocation]);
 
   // Load Google Maps script
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') return;
 
     if (window.google && window.google.maps) {
-      setIsMapLoaded(true)
-      return
+      setIsMapLoaded(true);
+      return;
     }
 
-    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]')
+    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
     if (existingScript) {
-      existingScript.addEventListener('load', () => setIsMapLoaded(true))
-      return
+      existingScript.addEventListener('load', () => setIsMapLoaded(true));
+      return;
     }
 
-    const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
-    script.async = true
-    script.defer = true
-    script.onload = () => setIsMapLoaded(true)
-    script.onerror = () => console.error('Failed to load Google Maps')
-    document.head.appendChild(script)
-  }, [])
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => setIsMapLoaded(true);
+    script.onerror = () => console.error('Failed to load Google Maps');
+    document.head.appendChild(script);
+  }, []);
 
   // Fetch farms when location or radius changes
   useEffect(() => {
     if (!mapCenter || !mapCenter.latitude || !mapCenter.longitude) {
-      return
+      return;
     }
 
     async function fetchFarms() {
-      setIsLoadingFarms(true)
-      
+      setIsLoadingFarms(true);
+
       // Use preFilteredFarms if provided (for state pages), otherwise load all farms
-      const sourceFarms = preFilteredFarms || farmsData
-      
+      const sourceFarms = preFilteredFarms || farmsData;
+
       let farmsWithDistance = sourceFarms
-        .filter(f => {
+        .filter((f) => {
           // For prefiltered farms, assume already filtered by active status
-          if (preFilteredFarms) return f.latitude && f.longitude
+          if (preFilteredFarms) return f.latitude && f.longitude;
           // For all farms from database, filter by active
-          return (f as any).active === 1 && f.latitude && f.longitude
+          return (f as any).active === 1 && f.latitude && f.longitude;
         })
-        .map(farm => ({
+        .map((farm) => ({
           ...farm,
           id: farm.id.toString().replace('zcrm_', ''),
-          distance: showDistances ? Math.round(calculateDistance(
-            mapCenter.latitude,
-            mapCenter.longitude,
-            farm.latitude,
-            farm.longitude
-          ) * 10) / 10 : 0
-        }))
-      
+          distance: showDistances
+            ? Math.round(
+                calculateDistance(
+                  mapCenter.latitude,
+                  mapCenter.longitude,
+                  farm.latitude,
+                  farm.longitude
+                ) * 10
+              ) / 10
+            : 0,
+        }));
+
       // Only filter by radius if filterByRadius is true (default behavior)
       if (filterByRadius) {
-        farmsWithDistance = farmsWithDistance.filter(farm => farm.distance <= radius)
+        farmsWithDistance = farmsWithDistance.filter((farm) => farm.distance <= radius);
       }
-      
+
       // Sort based on sortBy prop
-      if (sortBy === "featured") {
+      if (sortBy === 'featured') {
         farmsWithDistance.sort((a, b) => {
           // Featured first
-          if (a.featured === 1 && b.featured !== 1) return -1
-          if (b.featured === 1 && a.featured !== 1) return 1
+          if (a.featured === 1 && b.featured !== 1) return -1;
+          if (b.featured === 1 && a.featured !== 1) return 1;
           // Then by rating
-          return (b.rating || 0) - (a.rating || 0)
-        })
-      } else if (sortBy === "rating") {
-        farmsWithDistance.sort((a, b) => (b.rating || 0) - (a.rating || 0))
-      } else if (sortBy === "name") {
-        farmsWithDistance.sort((a, b) => a.name.localeCompare(b.name))
+          return (b.rating || 0) - (a.rating || 0);
+        });
+      } else if (sortBy === 'rating') {
+        farmsWithDistance.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      } else if (sortBy === 'name') {
+        farmsWithDistance.sort((a, b) => a.name.localeCompare(b.name));
       } else {
         // Default: sort by distance
-        farmsWithDistance.sort((a, b) => a.distance - b.distance)
+        farmsWithDistance.sort((a, b) => a.distance - b.distance);
       }
-      
-      setFarms(farmsWithDistance as any)
-      setIsLoadingFarms(false)
+
+      setFarms(farmsWithDistance as any);
+      setIsLoadingFarms(false);
     }
 
-    fetchFarms()
-  }, [mapCenter, radius, filterByRadius, sortBy, showDistances, preFilteredFarms])
+    fetchFarms();
+  }, [mapCenter, radius, filterByRadius, sortBy, showDistances, preFilteredFarms]);
 
   const availableCategories = useMemo(() => {
-    return getUniqueCategories(farms)
-  }, [farms])
+    return getUniqueCategories(farms);
+  }, [farms]);
 
   const filteredFarms = useMemo(() => {
-    let filtered = farms
-    
-    if (selectedCategory !== "All Types") {
-      filtered = farms.filter(farm => {
-        const categories = farm.categories?.toLowerCase() || ''
-        return categories.toLowerCase().includes(selectedCategory.toLowerCase())
-      })
+    let filtered = farms;
+
+    if (selectedCategory !== 'All Types') {
+      filtered = farms.filter((farm) => {
+        const categories = farm.categories?.toLowerCase() || '';
+        return categories.toLowerCase().includes(selectedCategory.toLowerCase());
+      });
     }
-    
+
     const sorted = filtered.sort((a, b) => {
-      if (a.featured === 1 && b.featured !== 1) return -1
-      if (b.featured === 1 && a.featured !== 1) return 1
-      return (a.distance || 0) - (b.distance || 0)
-    })
-    
-    return sorted
-  }, [farms, selectedCategory])
+      if (a.featured === 1 && b.featured !== 1) return -1;
+      if (b.featured === 1 && a.featured !== 1) return 1;
+      return (a.distance || 0) - (b.distance || 0);
+    });
+
+    return sorted;
+  }, [farms, selectedCategory]);
 
   // Fetch subscriber counts for filtered farms
   useEffect(() => {
     async function fetchFarmStats() {
       if (filteredFarms.length === 0) {
-        return
+        return;
       }
 
       // Get first 100 farms
-      const farmsToFetch = filteredFarms.slice(0, 100)
+      const farmsToFetch = filteredFarms.slice(0, 100);
       const farmIds = farmsToFetch
-        .map(f => f.id.startsWith('zcrm_') ? f.id : `zcrm_${f.id}`)
-        .join(',')
+        .map((f) => (f.id.startsWith('zcrm_') ? f.id : `zcrm_${f.id}`))
+        .join(',');
 
       try {
-        const response = await fetch(`${API_URL}/api/farms/stats?ids=${farmIds}`)
+        const response = await fetch(`${API_URL}/api/farms/stats?ids=${farmIds}`);
         if (response.ok) {
-          const data = await response.json()
-          const statsMap: Record<string, number> = {}
+          const data = await response.json();
+          const statsMap: Record<string, number> = {};
           data.stats.forEach((stat: any) => {
-            statsMap[stat.farm_id] = stat.subscriber_count
-          })
-          setFarmStats(statsMap)
+            statsMap[stat.farm_id] = stat.subscriber_count;
+          });
+          setFarmStats(statsMap);
         } else {
-          console.error('Failed to fetch stats, status:', response.status)
+          console.error('Failed to fetch stats, status:', response.status);
         }
       } catch (error) {
-        console.error('Failed to fetch farm stats:', error)
+        console.error('Failed to fetch farm stats:', error);
         // Non-critical error - map will still work without stats
       }
     }
 
-    fetchFarmStats()
-  }, [filteredFarms])
+    fetchFarmStats();
+  }, [filteredFarms]);
 
   // Initialize map
   useEffect(() => {
-    if (!isMapLoaded || !mapRef.current || googleMapRef.current) return
+    if (!isMapLoaded || !mapRef.current || googleMapRef.current) return;
 
-    let centerLat = 45.4215
-    let centerLng = -75.6972
-    
+    let centerLat = 45.4215;
+    let centerLng = -75.6972;
+
     if (mapCenter) {
-      centerLat = mapCenter.latitude
-      centerLng = mapCenter.longitude
+      centerLat = mapCenter.latitude;
+      centerLng = mapCenter.longitude;
     } else if (filteredFarms.length > 0 && filteredFarms[0].latitude) {
-      centerLat = filteredFarms[0].latitude
-      centerLng = filteredFarms[0].longitude
+      centerLat = filteredFarms[0].latitude;
+      centerLng = filteredFarms[0].longitude;
     }
 
     // Zoom level: city pages get more zoom
-    const zoomLevel = showCityMarker ? 11 : (mapCenter ? 9 : 5)
+    const zoomLevel = showCityMarker ? 11 : mapCenter ? 9 : 5;
 
     googleMapRef.current = new window.google.maps.Map(mapRef.current, {
       center: { lat: centerLat, lng: centerLng },
@@ -364,14 +376,14 @@ export function MapPageLayout({
       zoomControl: true,
       scrollwheel: true,
       gestureHandling: 'greedy',
-    })
+    });
 
     googleMapRef.current.addListener('dragend', () => {
-      const center = googleMapRef.current.getCenter()
+      const center = googleMapRef.current.getCenter();
       if (center) {
-        setShowSearchThisArea(true)
+        setShowSearchThisArea(true);
       }
-    })
+    });
 
     // Add user location marker (blue)
     if (mapCenter && showUserMarker) {
@@ -387,7 +399,7 @@ export function MapPageLayout({
           strokeWeight: 3,
           scale: 10,
         },
-      })
+      });
     }
 
     // Add city center marker (green)
@@ -404,18 +416,18 @@ export function MapPageLayout({
           strokeWeight: 3,
           scale: 12,
         },
-      })
+      });
     }
-  }, [isMapLoaded, mapCenter, filteredFarms, showUserMarker, showCityMarker])
+  }, [isMapLoaded, mapCenter, filteredFarms, showUserMarker, showCityMarker]);
 
   // Update radius circle (only if showRadiusCircle is true)
   useEffect(() => {
-    if (!googleMapRef.current || !mapCenter || !window.google) return
+    if (!googleMapRef.current || !mapCenter || !window.google) return;
 
     // Remove existing circle
     if (radiusCircleRef.current) {
-      radiusCircleRef.current.setMap(null)
-      radiusCircleRef.current = null
+      radiusCircleRef.current.setMap(null);
+      radiusCircleRef.current = null;
     }
 
     // Only create circle if showRadiusCircle is true
@@ -429,30 +441,30 @@ export function MapPageLayout({
         strokeColor: '#2d5016',
         strokeOpacity: 0.3,
         strokeWeight: 2,
-      })
+      });
 
-      const bounds = radiusCircleRef.current.getBounds()
+      const bounds = radiusCircleRef.current.getBounds();
       if (bounds) {
-        googleMapRef.current.fitBounds(bounds)
+        googleMapRef.current.fitBounds(bounds);
       }
     } else if (initialZoom) {
       // For state pages, set the zoom level without fitting to circle bounds
-      googleMapRef.current.setZoom(initialZoom)
+      googleMapRef.current.setZoom(initialZoom);
     }
-  }, [mapCenter, radius, isMapLoaded, showRadiusCircle, initialZoom])
+  }, [mapCenter, radius, isMapLoaded, showRadiusCircle, initialZoom]);
 
   // Update markers
   useEffect(() => {
-    if (!googleMapRef.current || !window.google || !isMapLoaded) return
+    if (!googleMapRef.current || !window.google || !isMapLoaded) return;
 
-    markersRef.current.forEach(marker => marker.setMap(null))
-    markersRef.current.clear()
+    markersRef.current.forEach((marker) => marker.setMap(null));
+    markersRef.current.clear();
 
     filteredFarms.forEach((farm) => {
-      if (!farm.latitude || !farm.longitude) return
+      if (!farm.latitude || !farm.longitude) return;
 
-      const isFeatured = farm.featured === 1
-      const pinColor = isFeatured ? '#eab308' : '#2d5016'
+      const isFeatured = farm.featured === 1;
+      const pinColor = isFeatured ? '#eab308' : '#2d5016';
 
       const marker = new window.google.maps.Marker({
         position: { lat: parseFloat(farm.latitude as any), lng: parseFloat(farm.longitude as any) },
@@ -466,31 +478,40 @@ export function MapPageLayout({
           strokeWeight: 2,
           scale: 8,
         },
-      })
+      });
 
       const categoryEmojis = farm.categories
-        ? farm.categories.split(',').slice(0, 4).map(cat => getCategoryEmoji(cat.trim())).join(' ')
-        : '🌾'
-      
-      const reviewsHtml = farm.reviews && farm.reviews > 0
-        ? `<div style="color: #666; font-size: 12px; margin-bottom: 8px;">
+        ? farm.categories
+            .split(',')
+            .slice(0, 4)
+            .map((cat) => getCategoryEmoji(cat.trim()))
+            .join(' ')
+        : '🌾';
+
+      const reviewsHtml =
+        farm.reviews && farm.reviews > 0
+          ? `<div style="color: #666; font-size: 12px; margin-bottom: 8px;">
              ⭐ ${farm.rating || '5.0'} (${farm.reviews} reviews)
            </div>`
-        : `<div style="color: #999; font-size: 12px; margin-bottom: 8px; font-style: italic;">
+          : `<div style="color: #999; font-size: 12px; margin-bottom: 8px; font-style: italic;">
              No reviews yet
-           </div>`
-      
+           </div>`;
+
       const infoWindow = new window.google.maps.InfoWindow({
         content: `
           <div style="padding: 8px; min-width: 200px;">
             <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">
               ${categoryEmojis} ${farm.name}
             </div>
-            ${showDistances && farm.distance ? `
+            ${
+              showDistances && farm.distance
+                ? `
               <div style="color: #666; font-size: 13px; margin-bottom: 4px;">
                 📍 ${farm.distance}km away
               </div>
-            ` : ''}
+            `
+                : ''
+            }
             ${reviewsHtml}
             <div style="color: #666; font-size: 12px; margin-bottom: 8px;">
               ${farm.city_name}, ${farm.state_province}
@@ -502,94 +523,94 @@ export function MapPageLayout({
               View Details
             </a>
           </div>
-        `
-      })
+        `,
+      });
 
       marker.addListener('click', () => {
-        window.google.maps.event.trigger(googleMapRef.current, 'closeAllInfoWindows')
-        infoWindow.open(googleMapRef.current, marker)
-        setSelectedFarm(farm.id)
-        const element = document.getElementById(`farm-${farm.id}`)
-        element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-      })
-      
-      marker.set('infoWindow', infoWindow)
-      window.google.maps.event.addListener(googleMapRef.current, 'closeAllInfoWindows', () => {
-        infoWindow.close()
-      })
+        window.google.maps.event.trigger(googleMapRef.current, 'closeAllInfoWindows');
+        infoWindow.open(googleMapRef.current, marker);
+        setSelectedFarm(farm.id);
+        const element = document.getElementById(`farm-${farm.id}`);
+        element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
 
-      markersRef.current.set(farm.id, marker)
-    })
-  }, [filteredFarms, savedFarmIds, isMapLoaded])
+      marker.set('infoWindow', infoWindow);
+      window.google.maps.event.addListener(googleMapRef.current, 'closeAllInfoWindows', () => {
+        infoWindow.close();
+      });
+
+      markersRef.current.set(farm.id, marker);
+    });
+  }, [filteredFarms, savedFarmIds, isMapLoaded]);
 
   // Pan to selected farm
   useEffect(() => {
-    if (!selectedFarm || !googleMapRef.current) return
+    if (!selectedFarm || !googleMapRef.current) return;
 
-    const farm = farms.find(f => f.id === selectedFarm)
-    if (!farm) return
+    const farm = farms.find((f) => f.id === selectedFarm);
+    if (!farm) return;
 
-    googleMapRef.current.panTo({ lat: farm.latitude, lng: farm.longitude })
-    googleMapRef.current.setZoom(13)
-  }, [selectedFarm, farms])
+    googleMapRef.current.panTo({ lat: farm.latitude, lng: farm.longitude });
+    googleMapRef.current.setZoom(13);
+  }, [selectedFarm, farms]);
 
   const getPreciseLocation = async () => {
-    setShowControls(false)
-    
+    setShowControls(false);
+
     try {
-      const location = await getBrowserLocation()
-      setMapCenter(location)
-      storeUserLocation(userId || "", location)
-      
+      const location = await getBrowserLocation();
+      setMapCenter(location);
+      storeUserLocation(userId || '', location);
+
       if (googleMapRef.current && location.latitude && location.longitude) {
-        const exactPosition = { lat: location.latitude, lng: location.longitude }
-        googleMapRef.current.setCenter(exactPosition)
-        googleMapRef.current.setZoom(12)
+        const exactPosition = { lat: location.latitude, lng: location.longitude };
+        googleMapRef.current.setCenter(exactPosition);
+        googleMapRef.current.setZoom(12);
       }
 
       // Save to database if signed in
       if (isSignedIn && userId) {
         try {
-          const token = await (window as any).Clerk?.session?.getToken()
+          const token = await (window as any).Clerk?.session?.getToken();
           if (token) {
             await fetch(`${API_URL}/api/users/update-location`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
               },
               body: JSON.stringify({
                 latitude: location.latitude,
                 longitude: location.longitude,
                 city: location.city,
-                region: location.region
-              })
-            })
+                region: location.region,
+              }),
+            });
           }
         } catch (dbError) {
-          console.error('Error saving location:', dbError)
+          console.error('Error saving location:', dbError);
         }
       }
     } catch (error: any) {
-      console.error('Precise location error:', error)
+      console.error('Precise location error:', error);
     }
-  }
+  };
 
   const searchThisArea = () => {
-    if (!googleMapRef.current) return
-    
-    const center = googleMapRef.current.getCenter()
+    if (!googleMapRef.current) return;
+
+    const center = googleMapRef.current.getCenter();
     if (center) {
       const newLocation: UserLocation = {
         ...mapCenter!,
         latitude: center.lat(),
         longitude: center.lng(),
         city: 'Map Center',
-      }
-      setMapCenter(newLocation)
-      setShowSearchThisArea(false)
+      };
+      setMapCenter(newLocation);
+      setShowSearchThisArea(false);
     }
-  }
+  };
 
   return (
     <div className="flex-1 flex flex-col lg:flex-row relative">
@@ -605,7 +626,7 @@ export function MapPageLayout({
         ) : (
           <>
             <div ref={mapRef} className="w-full h-full" />
-            
+
             {showSearchThisArea && (
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
                 <Button onClick={searchThisArea} className="shadow-lg">
@@ -629,7 +650,10 @@ export function MapPageLayout({
 
               {showControls && (
                 <>
-                  <div className="absolute inset-0 bg-black/20 z-30" onClick={() => setShowControls(false)} />
+                  <div
+                    className="absolute inset-0 bg-black/20 z-30"
+                    onClick={() => setShowControls(false)}
+                  />
                   <div className="absolute inset-x-0 bottom-0 z-40 animate-in slide-in-from-bottom-5">
                     <Card className="rounded-t-2xl rounded-b-none shadow-2xl border-t-2">
                       <CardHeader className="pb-3 pt-4 px-6">
@@ -677,11 +701,7 @@ export function MapPageLayout({
 
                         {showUserMarker && (
                           <div>
-                            <Button
-                              size="sm"
-                              onClick={getPreciseLocation}
-                              className="w-full"
-                            >
+                            <Button size="sm" onClick={getPreciseLocation} className="w-full">
                               <Navigation className="h-4 w-4 mr-2" />
                               Use My Exact Location
                             </Button>
@@ -710,11 +730,7 @@ export function MapPageLayout({
           <div className="hidden lg:block space-y-4">
             {showUserMarker && (
               <div>
-                <Button
-                  size="sm"
-                  onClick={getPreciseLocation}
-                  className="w-full"
-                >
+                <Button size="sm" onClick={getPreciseLocation} className="w-full">
                   <Navigation className="h-4 w-4 mr-2" />
                   Use My Exact Location
                 </Button>
@@ -752,12 +768,12 @@ export function MapPageLayout({
                   {availableCategories.map((category) => (
                     <Badge
                       key={category}
-                      variant={selectedCategory === category ? "default" : "outline"}
+                      variant={selectedCategory === category ? 'default' : 'outline'}
                       className={cn(
-                        "cursor-pointer text-xs transition-colors",
+                        'cursor-pointer text-xs transition-colors',
                         selectedCategory === category
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                          : "hover:bg-primary/10"
+                          ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                          : 'hover:bg-primary/10'
                       )}
                       onClick={() => setSelectedCategory(category)}
                     >
@@ -771,12 +787,12 @@ export function MapPageLayout({
 
           {/* Farm List */}
           <div>
-            <h1 className="font-semibold text-sm mb-3">
-              {pageTitle}
-            </h1>
+            <h1 className="font-semibold text-sm mb-3">{pageTitle}</h1>
             {showFarmCount && (
               <p className="text-xs text-muted-foreground mb-2">
-                {isLoadingFarms ? "Loading..." : `${filteredFarms.length} farm${filteredFarms.length !== 1 ? 's' : ''}`}
+                {isLoadingFarms
+                  ? 'Loading...'
+                  : `${filteredFarms.length} farm${filteredFarms.length !== 1 ? 's' : ''}`}
               </p>
             )}
             {mapCenter && (
@@ -799,9 +815,9 @@ export function MapPageLayout({
                     key={farm.id}
                     id={`farm-${farm.id}`}
                     className={cn(
-                      "cursor-pointer transition-all hover:shadow-md",
-                      selectedFarm === farm.id && "ring-2 ring-primary",
-                      farm.featured === 1 && "border-2 border-yellow-400 bg-yellow-50/30"
+                      'cursor-pointer transition-all hover:shadow-md',
+                      selectedFarm === farm.id && 'ring-2 ring-primary',
+                      farm.featured === 1 && 'border-2 border-yellow-400 bg-yellow-50/30'
                     )}
                     onClick={() => setSelectedFarm(farm.id)}
                   >
@@ -810,15 +826,14 @@ export function MapPageLayout({
                         <div className="flex-1 min-w-0">
                           {farm.categories && (
                             <div className="flex items-center gap-1 mb-1 flex-wrap">
-                              {farm.categories.split(',').slice(0, 4).map((cat, idx) => (
-                                <span
-                                  key={idx}
-                                  className="text-lg"
-                                  title={cat.trim()}
-                                >
-                                  {getCategoryEmoji(cat.trim())}
-                                </span>
-                              ))}
+                              {farm.categories
+                                .split(',')
+                                .slice(0, 4)
+                                .map((cat, idx) => (
+                                  <span key={idx} className="text-lg" title={cat.trim()}>
+                                    {getCategoryEmoji(cat.trim())}
+                                  </span>
+                                ))}
                             </div>
                           )}
                           <div className="flex items-center gap-2 mb-0.5 flex-wrap">
@@ -826,10 +841,15 @@ export function MapPageLayout({
                             {(farm.verified === 1 || farm.featured === 1) && (
                               <div className="flex gap-1">
                                 {farm.verified === 1 && (
-                                  <span className="text-xs" title="Verified">✓</span>
+                                  <span className="text-xs" title="Verified">
+                                    ✓
+                                  </span>
                                 )}
                                 {farm.featured === 1 && (
-                                  <Badge variant="outline" className="text-xs px-1.5 py-0 text-yellow-600 border-yellow-600">
+                                  <Badge
+                                    variant="outline"
+                                    className="text-xs px-1.5 py-0 text-yellow-600 border-yellow-600"
+                                  >
                                     Featured
                                   </Badge>
                                 )}
@@ -838,7 +858,9 @@ export function MapPageLayout({
                           </div>
                           <div className="flex items-center text-xs text-muted-foreground mb-1">
                             <MapPin className="h-3 w-3 mr-1" />
-                            {farm.distance ? `${farm.distance % 1 === 0 ? Math.round(farm.distance) : farm.distance}km away` : `${farm.city_name}, ${farm.state_province}`}
+                            {farm.distance
+                              ? `${farm.distance % 1 === 0 ? Math.round(farm.distance) : farm.distance}km away`
+                              : `${farm.city_name}, ${farm.state_province}`}
                           </div>
 
                           {/* Stats: Subscriber count and Reviews */}
@@ -847,10 +869,16 @@ export function MapPageLayout({
                             <div className="flex items-center gap-1 text-xs">
                               <Bell className="h-3 w-3 text-primary" />
                               <span className="font-medium text-foreground">
-                                {farmStats[farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`] || 0}
+                                {farmStats[
+                                  farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`
+                                ] || 0}
                               </span>
                               <span className="text-muted-foreground">
-                                {(farmStats[farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`] || 0) === 1 ? 'subscriber' : 'subscribers'}
+                                {(farmStats[
+                                  farm.id.startsWith('zcrm_') ? farm.id : `zcrm_${farm.id}`
+                                ] || 0) === 1
+                                  ? 'subscriber'
+                                  : 'subscribers'}
                               </span>
                             </div>
 
@@ -859,7 +887,9 @@ export function MapPageLayout({
                               {farm.reviews && farm.reviews > 0 ? (
                                 <>
                                   <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                                  <span className="font-medium text-foreground">{farm.rating?.toFixed(1) || '5.0'}</span>
+                                  <span className="font-medium text-foreground">
+                                    {farm.rating?.toFixed(1) || '5.0'}
+                                  </span>
                                   <span className="text-muted-foreground">
                                     ({farm.reviews} {farm.reviews === 1 ? 'review' : 'reviews'})
                                   </span>
@@ -886,13 +916,13 @@ export function MapPageLayout({
                       </div>
                     </CardHeader>
                     <CardContent className="pt-0 p-2.5">
-                      <Link 
-                        href={`/farms/${farm.slug}`} 
+                      <Link
+                        href={`/farms/${farm.slug}`}
                         className="w-full block"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           className="w-full text-xs bg-primary hover:bg-primary/90 text-white transition-all hover:shadow-md"
                           asChild
                         >
@@ -912,9 +942,9 @@ export function MapPageLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateFarmsSchema(filteredFarms as any))
+          __html: JSON.stringify(generateFarmsSchema(filteredFarms as any)),
         }}
       />
     </div>
-  )
+  );
 }

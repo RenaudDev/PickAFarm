@@ -1,83 +1,84 @@
-"use client"
+'use client';
 
-import { ProtectedRoute } from "@/components/protected-route"
-import { useAuth, useUser } from "@clerk/nextjs"
-import { FarmNavbar } from "@/components/farm-navbar"
-import { useState, useEffect } from "react"
-import { Bell, MapPin, Phone, Globe, Trash2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ProtectedRoute } from '@/components/protected-route';
+import { useAuth, useUser } from '@clerk/nextjs';
+import { FarmNavbar } from '@/components/farm-navbar';
+import { useState, useEffect } from 'react';
+import { Bell, MapPin, Phone, Globe, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://pickafarm-api.94623956quebecinc.workers.dev"
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
 
 interface SavedFarm {
-  farm_id: string
-  farm_name: string
-  farm_slug: string
-  farm_city: string
-  farm_state: string
-  farm_phone?: string
-  farm_website?: string
-  saved_at: string
+  farm_id: string;
+  farm_name: string;
+  farm_slug: string;
+  farm_city: string;
+  farm_state: string;
+  farm_phone?: string;
+  farm_website?: string;
+  saved_at: string;
 }
 
 export default function SavedFarmsPage() {
-  const { user } = useUser()
-  const { getToken } = useAuth()
-  const [savedFarms, setSavedFarms] = useState<SavedFarm[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { user } = useUser();
+  const { getToken } = useAuth();
+  const [savedFarms, setSavedFarms] = useState<SavedFarm[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Load saved farms from API
     async function fetchSavedFarms() {
       if (!user?.id) {
-        setIsLoading(false)
-        return
+        setIsLoading(false);
+        return;
       }
 
       try {
-        const token = await getToken()
+        const token = await getToken();
         const response = await fetch(`${API_URL}/api/farms/saved`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
-        })
+        });
 
         if (response.ok) {
-          const data = await response.json()
-          setSavedFarms(data.saved_farms || [])
+          const data = await response.json();
+          setSavedFarms(data.saved_farms || []);
         }
       } catch (error) {
-        console.error('Error fetching saved farms:', error)
+        console.error('Error fetching saved farms:', error);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
 
-    fetchSavedFarms()
-  }, [user?.id, getToken])
+    fetchSavedFarms();
+  }, [user?.id, getToken]);
 
   const removeFarm = async (farmId: string) => {
     try {
-      const token = await getToken()
+      const token = await getToken();
       const response = await fetch(`${API_URL}/api/farms/unsave`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ farm_id: farmId }),
-      })
+      });
 
       if (response.ok) {
-        setSavedFarms(savedFarms.filter(farm => farm.farm_id !== farmId))
+        setSavedFarms(savedFarms.filter((farm) => farm.farm_id !== farmId));
       } else {
-        alert('Failed to remove farm. Please try again.')
+        alert('Failed to remove farm. Please try again.');
       }
     } catch (error) {
-      console.error('Error removing farm:', error)
-      alert('Failed to remove farm. Please try again.')
+      console.error('Error removing farm:', error);
+      alert('Failed to remove farm. Please try again.');
     }
-  }
+  };
 
   return (
     <ProtectedRoute>
@@ -117,14 +118,12 @@ export default function SavedFarmsPage() {
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {savedFarms.map((farm) => (
-                <div 
+                <div
                   key={farm.farm_id}
                   className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-foreground">
-                      {farm.farm_name}
-                    </h3>
+                    <h3 className="text-xl font-semibold text-foreground">{farm.farm_name}</h3>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -138,7 +137,9 @@ export default function SavedFarmsPage() {
                   <div className="space-y-3">
                     <div className="flex items-start text-sm text-muted-foreground">
                       <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
-                      <span>{farm.farm_city}, {farm.farm_state}</span>
+                      <span>
+                        {farm.farm_city}, {farm.farm_state}
+                      </span>
                     </div>
 
                     {farm.farm_phone && (
@@ -153,9 +154,9 @@ export default function SavedFarmsPage() {
                     {farm.farm_website && (
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Globe className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <a 
-                          href={farm.farm_website} 
-                          target="_blank" 
+                        <a
+                          href={farm.farm_website}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="hover:text-primary truncate"
                         >
@@ -187,5 +188,5 @@ export default function SavedFarmsPage() {
         </div>
       </div>
     </ProtectedRoute>
-  )
+  );
 }

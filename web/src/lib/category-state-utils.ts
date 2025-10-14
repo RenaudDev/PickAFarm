@@ -8,34 +8,39 @@
  * Returns array of possible category names that should match
  */
 export function getCategoryVariations(categoryName: string): string[] {
-  const variations = [categoryName]
-  
+  const variations = [categoryName];
+
   if (categoryName.includes('Christmas Tree')) {
-    variations.push('Christmas Tree', 'Christmas Trees', 'Christmas Tree Farms', 'Christmas Tree Farm')
+    variations.push(
+      'Christmas Tree',
+      'Christmas Trees',
+      'Christmas Tree Farms',
+      'Christmas Tree Farm'
+    );
   }
   if (categoryName.includes('Apple')) {
-    variations.push('Apple', 'Apple Orchard', 'Apple Picking', 'Apple Orchards', 'Apples')
+    variations.push('Apple', 'Apple Orchard', 'Apple Picking', 'Apple Orchards', 'Apples');
   }
   if (categoryName.includes('Pumpkin')) {
-    variations.push('Pumpkin', 'Pumpkin Patch', 'Pumpkin Patches', 'Pumpkins')
+    variations.push('Pumpkin', 'Pumpkin Patch', 'Pumpkin Patches', 'Pumpkins');
   }
   if (categoryName.includes('Berry')) {
-    variations.push('Berry', 'Berry Farm', 'Berry Picking', 'Berry Farms', 'Berries')
+    variations.push('Berry', 'Berry Farm', 'Berry Picking', 'Berry Farms', 'Berries');
   }
   if (categoryName.includes('Corn Maze')) {
-    variations.push('Corn Maze', 'Corn Mazes', 'Maze')
+    variations.push('Corn Maze', 'Corn Mazes', 'Maze');
   }
   if (categoryName.includes('Sunflower')) {
-    variations.push('Sunflower', 'Sunflowers', 'Sunflower Field')
+    variations.push('Sunflower', 'Sunflowers', 'Sunflower Field');
   }
   if (categoryName.includes('Lavender')) {
-    variations.push('Lavender', 'Lavender Farm', 'Lavender Farms')
+    variations.push('Lavender', 'Lavender Farm', 'Lavender Farms');
   }
   if (categoryName.includes('Vegetable')) {
-    variations.push('Vegetable', 'Vegetables', 'Veggie', 'Veggies')
+    variations.push('Vegetable', 'Vegetables', 'Veggie', 'Veggies');
   }
-  
-  return variations
+
+  return variations;
 }
 
 /**
@@ -43,46 +48,47 @@ export function getCategoryVariations(categoryName: string): string[] {
  * Handles JSON strings, arrays, and comma-separated strings
  */
 export function parseFarmCategories(categoriesField: any): string[] {
-  if (!categoriesField) return []
-  
+  if (!categoriesField) return [];
+
   // Already an array
   if (Array.isArray(categoriesField)) {
-    return categoriesField
+    return categoriesField;
   }
-  
+
   // Try parsing as JSON
   if (typeof categoriesField === 'string') {
     try {
-      const parsed = JSON.parse(categoriesField)
+      const parsed = JSON.parse(categoriesField);
       if (Array.isArray(parsed)) {
-        return parsed
+        return parsed;
       }
       // Single string after parsing
-      return [parsed]
+      return [parsed];
     } catch (error) {
       // Not JSON, treat as comma-separated or single value
       if (categoriesField.includes(',')) {
-        return categoriesField.split(',').map(c => c.trim()).filter(Boolean)
+        return categoriesField
+          .split(',')
+          .map((c) => c.trim())
+          .filter(Boolean);
       }
-      return [categoriesField]
+      return [categoriesField];
     }
   }
-  
-  return []
+
+  return [];
 }
 
 /**
  * Check if a farm matches the given category
  */
 export function farmMatchesCategory(farm: any, categoryName: string): boolean {
-  const categoryVariations = getCategoryVariations(categoryName)
-  const farmCategories = parseFarmCategories(farm.categories)
-  
-  return categoryVariations.some(catName => 
-    farmCategories.some((farmCat: string) => 
-      farmCat.toLowerCase().includes(catName.toLowerCase())
-    )
-  )
+  const categoryVariations = getCategoryVariations(categoryName);
+  const farmCategories = parseFarmCategories(farm.categories);
+
+  return categoryVariations.some((catName) =>
+    farmCategories.some((farmCat: string) => farmCat.toLowerCase().includes(catName.toLowerCase()))
+  );
 }
 
 /**
@@ -90,19 +96,17 @@ export function farmMatchesCategory(farm: any, categoryName: string): boolean {
  */
 export function getStateCategoryFarms(stateData: any, categoryData: any) {
   if (!stateData?.farms || !categoryData?.name) {
-    return []
+    return [];
   }
-  
-  return stateData.farms.filter((farm: any) => 
-    farmMatchesCategory(farm, categoryData.name)
-  )
+
+  return stateData.farms.filter((farm: any) => farmMatchesCategory(farm, categoryData.name));
 }
 
 /**
  * Count farms in a state that match a specific category
  */
 export function getStateCategoryCount(stateData: any, categoryData: any): number {
-  return getStateCategoryFarms(stateData, categoryData).length
+  return getStateCategoryFarms(stateData, categoryData).length;
 }
 
 /**
@@ -110,16 +114,16 @@ export function getStateCategoryCount(stateData: any, categoryData: any): number
  * Returns array of states with their farm counts for this category
  */
 export function getStatesWithCategoryFarms(
-  statesData: any[], 
+  statesData: any[],
   categoryData: any
 ): Array<{ state: any; farmCount: number }> {
   return statesData
-    .map(state => ({
+    .map((state) => ({
       state,
-      farmCount: getStateCategoryCount(state, categoryData)
+      farmCount: getStateCategoryCount(state, categoryData),
     }))
-    .filter(item => item.farmCount > 0)
-    .sort((a, b) => b.farmCount - a.farmCount)
+    .filter((item) => item.farmCount > 0)
+    .sort((a, b) => b.farmCount - a.farmCount);
 }
 
 /**
@@ -133,8 +137,8 @@ export function getCategoriesInState(
   return Object.values(categoriesData)
     .map((category: any) => ({
       category,
-      farmCount: getStateCategoryCount(stateData, category)
+      farmCount: getStateCategoryCount(stateData, category),
     }))
-    .filter(item => item.farmCount > 0)
-    .sort((a, b) => b.farmCount - a.farmCount)
+    .filter((item) => item.farmCount > 0)
+    .sort((a, b) => b.farmCount - a.farmCount);
 }

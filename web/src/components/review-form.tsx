@@ -1,36 +1,36 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Star } from 'lucide-react'
-import { submitReview } from '@/lib/reviews'
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Star } from 'lucide-react';
+import { submitReview } from '@/lib/reviews';
 
 interface ReviewFormProps {
-  farmId: string
-  farmName: string
+  farmId: string;
+  farmName: string;
 }
 
 export default function ReviewForm({ farmId, farmName }: ReviewFormProps) {
-  const [rating, setRating] = useState(0)
-  const [hoveredRating, setHoveredRating] = useState(0)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [comment, setComment] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [rating, setRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [comment, setComment] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (rating === 0) {
-      setMessage('Please select a rating')
-      return
+      setMessage('Please select a rating');
+      return;
     }
 
-    setLoading(true)
-    setMessage('')
+    setLoading(true);
+    setMessage('');
 
     try {
       const result = await submitReview({
@@ -39,26 +39,26 @@ export default function ReviewForm({ farmId, farmName }: ReviewFormProps) {
         rating,
         comment,
         name,
-        email
-      })
+        email,
+      });
 
       if (result.success) {
-        setSuccess(true)
-        setMessage('Thank you! Your review has been submitted and will appear after moderation.')
+        setSuccess(true);
+        setMessage('Thank you! Your review has been submitted and will appear after moderation.');
         // Reset form
-        setRating(0)
-        setName('')
-        setEmail('')
-        setComment('')
+        setRating(0);
+        setName('');
+        setEmail('');
+        setComment('');
       } else {
-        setMessage('Failed to submit review. Please try again.')
+        setMessage('Failed to submit review. Please try again.');
       }
     } catch (error) {
-      setMessage('Error submitting review. Please try again.')
+      setMessage('Error submitting review. Please try again.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Card className="shadow-sm border-0 bg-white">
@@ -143,22 +143,16 @@ export default function ReviewForm({ farmId, farmName }: ReviewFormProps) {
           </div>
 
           {/* Submit Button */}
-          <Button 
-            type="submit" 
-            disabled={loading || success}
-            className="w-full"
-          >
+          <Button type="submit" disabled={loading || success} className="w-full">
             {loading ? 'Submitting...' : success ? 'Review Submitted!' : 'Submit Review'}
           </Button>
 
           {/* Message */}
           {message && (
-            <p className={`text-sm ${success ? 'text-green-600' : 'text-red-600'}`}>
-              {message}
-            </p>
+            <p className={`text-sm ${success ? 'text-green-600' : 'text-red-600'}`}>{message}</p>
           )}
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }

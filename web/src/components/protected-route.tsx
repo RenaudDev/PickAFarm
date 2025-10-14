@@ -1,24 +1,24 @@
-"use client"
+'use client';
 
-import { useAuth } from "@clerk/nextjs"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useAuth } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface ProtectedRouteProps {
-  children: React.ReactNode
-  fallback?: React.ReactNode
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
 }
 
 export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
-  const { isLoaded, isSignedIn } = useAuth()
-  const router = useRouter()
+  const { isLoaded, isSignedIn } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
       // Redirect to home or show sign-in modal
-      router.push("/")
+      router.push('/');
     }
-  }, [isLoaded, isSignedIn, router])
+  }, [isLoaded, isSignedIn, router]);
 
   // Show loading state while checking auth
   if (!isLoaded) {
@@ -29,14 +29,14 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
           <p className="mt-4 text-muted-foreground">Loading...</p>
         </div>
       </div>
-    )
+    );
   }
 
   // Show fallback or nothing while redirecting
   if (!isSignedIn) {
-    return fallback || null
+    return fallback || null;
   }
 
   // User is authenticated, show the protected content
-  return <>{children}</>
+  return <>{children}</>;
 }

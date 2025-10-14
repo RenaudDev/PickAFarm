@@ -12,7 +12,7 @@ export function MapSkeletonStatic() {
             linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
             linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
+          backgroundSize: '40px 40px',
         }}
       />
 

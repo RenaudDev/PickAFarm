@@ -1,35 +1,38 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Star } from 'lucide-react'
-import { getReviews, ReviewsData } from '@/lib/reviews'
+import { useEffect, useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Star } from 'lucide-react';
+import { getReviews, ReviewsData } from '@/lib/reviews';
 
 interface ReviewsListProps {
-  farmId: string
+  farmId: string;
 }
 
 export default function ReviewsList({ farmId }: ReviewsListProps) {
-  const [reviewsData, setReviewsData] = useState<ReviewsData | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [reviewsData, setReviewsData] = useState<ReviewsData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchReviews() {
-      console.log('🔍 Fetching reviews for farmId:', farmId)
-      console.log('🔗 API URL:', `https://admin.pickafarm.com/wp-json/reviews/v1/listing/${farmId}`)
+      console.log('🔍 Fetching reviews for farmId:', farmId);
+      console.log(
+        '🔗 API URL:',
+        `https://admin.pickafarm.com/wp-json/reviews/v1/listing/${farmId}`
+      );
       try {
-        const data = await getReviews(farmId)
-        console.log('✅ Reviews data received:', data)
-        setReviewsData(data)
+        const data = await getReviews(farmId);
+        console.log('✅ Reviews data received:', data);
+        setReviewsData(data);
       } catch (error) {
-        console.error('❌ Error fetching reviews:', error)
+        console.error('❌ Error fetching reviews:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
 
-    fetchReviews()
-  }, [farmId])
+    fetchReviews();
+  }, [farmId]);
 
   if (loading) {
     return (
@@ -44,7 +47,7 @@ export default function ReviewsList({ farmId }: ReviewsListProps) {
           <p className="text-muted-foreground">Loading reviews...</p>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -114,5 +117,5 @@ export default function ReviewsList({ farmId }: ReviewsListProps) {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

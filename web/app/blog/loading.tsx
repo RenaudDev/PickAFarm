@@ -1,11 +1,11 @@
-import { Skeleton } from "@/components/ui/skeleton"
-import { FarmNavbar } from "@/components/farm-navbar"
-import { FarmFooter } from "@/components/farm-footer"
+import { Skeleton } from '@/components/ui/skeleton';
+import { FarmNavbar } from '@/components/farm-navbar';
+import { FarmFooter } from '@/components/farm-footer';
 
 export default function BlogLoading() {
   return (
     <div className="bg-background">
-        <div className="max-w-6xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-4 py-16">
         <Skeleton className="h-10 w-32 mb-12" />
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -22,6 +22,6 @@ export default function BlogLoading() {
           ))}
         </div>
       </div>
-      </div>
+    </div>
   );
 }

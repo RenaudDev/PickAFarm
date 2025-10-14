@@ -3,11 +3,11 @@
  * Generates Schema.org BreadcrumbList structured data for SEO
  */
 
-const BASE_URL = 'https://pickafarm.com'
+const BASE_URL = 'https://pickafarm.com';
 
 export interface BreadcrumbItem {
-  name: string
-  url: string
+  name: string;
+  url: string;
 }
 
 /**
@@ -17,15 +17,15 @@ export interface BreadcrumbItem {
  */
 export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": `${BASE_URL}${item.url}`
-    }))
-  }
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${BASE_URL}${item.url}`,
+    })),
+  };
 }
 
 /**
@@ -34,9 +34,9 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
  */
 export function generateStateBreadcrumbSchema(stateName: string, stateSlug: string) {
   return generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: stateName, url: `/${stateSlug}` }
-  ])
+    { name: 'Home', url: '/' },
+    { name: stateName, url: `/${stateSlug}` },
+  ]);
 }
 
 /**
@@ -50,10 +50,10 @@ export function generateLocationBreadcrumbSchema(
   locationSlug: string
 ) {
   return generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
+    { name: 'Home', url: '/' },
     { name: stateName, url: `/${stateSlug}` },
-    { name: cityName, url: `/farms-near/${locationSlug}` }
-  ])
+    { name: cityName, url: `/farms-near/${locationSlug}` },
+  ]);
 }
 
 /**
@@ -67,10 +67,10 @@ export function generateFarmBreadcrumbSchema(
   farmSlug: string
 ) {
   return generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
+    { name: 'Home', url: '/' },
     { name: stateName, url: `/${stateSlug}` },
-    { name: farmName, url: `/farms/${farmSlug}` }
-  ])
+    { name: farmName, url: `/farms/${farmSlug}` },
+  ]);
 }
 
 /**
@@ -79,9 +79,9 @@ export function generateFarmBreadcrumbSchema(
  */
 export function generateCategoryBreadcrumbSchema(categoryName: string, categorySlug: string) {
   return generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: categoryName, url: `/${categorySlug}` }
-  ])
+    { name: 'Home', url: '/' },
+    { name: categoryName, url: `/${categorySlug}` },
+  ]);
 }
 
 /**
@@ -95,10 +95,10 @@ export function generateStateCategoryBreadcrumbSchema(
   categorySlug: string
 ) {
   return generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
+    { name: 'Home', url: '/' },
     { name: stateName, url: `/${stateSlug}` },
-    { name: categoryName, url: `/${stateSlug}/${categorySlug}` }
-  ])
+    { name: categoryName, url: `/${stateSlug}/${categorySlug}` },
+  ]);
 }
 
 /**
@@ -114,9 +114,9 @@ export function generateCategoryLocationBreadcrumbSchema(
   categorySlug: string
 ) {
   return generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
+    { name: 'Home', url: '/' },
     { name: stateName, url: `/${stateSlug}` },
     { name: cityName, url: `/farms-near/${locationSlug}` },
-    { name: categoryName, url: `/${categorySlug}/near/${locationSlug}` }
-  ])
+    { name: categoryName, url: `/${categorySlug}/near/${locationSlug}` },
+  ]);
 }

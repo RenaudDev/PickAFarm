@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useEffect } from 'react';
 
@@ -12,12 +12,11 @@ export function TrulyDeferredScripts() {
     if (typeof window === 'undefined') return;
 
     // Use requestIdleCallback or setTimeout fallback
-    const defer = (window.requestIdleCallback || window.setTimeout);
+    const defer = window.requestIdleCallback || window.setTimeout;
 
     defer(() => {
       // Service Worker disabled - Cloudflare Pages handles caching
       // If you need SW in the future, ensure sw.js is properly deployed
-
       // Any other heavy third-party scripts can be added here
       // Example: Google Analytics, tracking pixels, etc.
     });

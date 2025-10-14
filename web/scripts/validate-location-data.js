@@ -18,24 +18,91 @@ const path = require('path');
 
 // US state abbreviations
 const US_STATES = [
-  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
-  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
-  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
-  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
-  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC'
+  'AL',
+  'AK',
+  'AZ',
+  'AR',
+  'CA',
+  'CO',
+  'CT',
+  'DE',
+  'FL',
+  'GA',
+  'HI',
+  'ID',
+  'IL',
+  'IN',
+  'IA',
+  'KS',
+  'KY',
+  'LA',
+  'ME',
+  'MD',
+  'MA',
+  'MI',
+  'MN',
+  'MS',
+  'MO',
+  'MT',
+  'NE',
+  'NV',
+  'NH',
+  'NJ',
+  'NM',
+  'NY',
+  'NC',
+  'ND',
+  'OH',
+  'OK',
+  'OR',
+  'PA',
+  'RI',
+  'SC',
+  'SD',
+  'TN',
+  'TX',
+  'UT',
+  'VT',
+  'VA',
+  'WA',
+  'WV',
+  'WI',
+  'WY',
+  'DC',
 ];
 
 // Canadian province abbreviations
 const CANADIAN_PROVINCES = [
-  'AB', 'BC', 'MB', 'NB', 'NL', 'NT', 'NS', 'NU',
-  'ON', 'PE', 'QC', 'SK', 'YT'
+  'AB',
+  'BC',
+  'MB',
+  'NB',
+  'NL',
+  'NT',
+  'NS',
+  'NU',
+  'ON',
+  'PE',
+  'QC',
+  'SK',
+  'YT',
 ];
 
 // Full province/state names that shouldn't appear in slugs
 const FULL_PROVINCE_NAMES = [
-  'ontario', 'quebec', 'british-columbia', 'alberta', 'manitoba', 'saskatchewan',
-  'nova-scotia', 'new-brunswick', 'prince-edward-island', 'newfoundland-and-labrador',
-  'yukon', 'northwest-territories', 'nunavut'
+  'ontario',
+  'quebec',
+  'british-columbia',
+  'alberta',
+  'manitoba',
+  'saskatchewan',
+  'nova-scotia',
+  'new-brunswick',
+  'prince-edward-island',
+  'newfoundland-and-labrador',
+  'yukon',
+  'northwest-territories',
+  'nunavut',
 ];
 
 // Full country names that shouldn't appear in slugs
@@ -44,14 +111,18 @@ const FULL_COUNTRY_NAMES = ['united-states', 'canada'];
 function getBaseLocations(locsRaw) {
   if (Array.isArray(locsRaw)) return locsRaw;
   if (locsRaw && Array.isArray(locsRaw.locationPages)) return locsRaw.locationPages;
-  if (locsRaw && locsRaw.metadata && Array.isArray(locsRaw.locationPages)) return locsRaw.locationPages;
-  throw new Error('Unsupported locations.json format. Expect an array or an object with locationPages array.');
+  if (locsRaw && locsRaw.metadata && Array.isArray(locsRaw.locationPages))
+    return locsRaw.locationPages;
+  throw new Error(
+    'Unsupported locations.json format. Expect an array or an object with locationPages array.'
+  );
 }
 
 function validateLocation(location, index) {
   const errors = [];
 
-  const locationSlug = location.location_slug || `${location.slug}-${location.province_slug}-${location.country_slug}`;
+  const locationSlug =
+    location.location_slug || `${location.slug}-${location.province_slug}-${location.country_slug}`;
   const provinceSlug = (location.province_slug || '').toUpperCase();
   const countrySlug = (location.country_slug || '').toLowerCase();
 
@@ -62,7 +133,7 @@ function validateLocation(location, index) {
       location_slug: locationSlug,
       error_type: 'US_STATE_AS_CANADA',
       message: `US state "${provinceSlug}" incorrectly marked as Canada`,
-      fix: `Change country_slug from 'ca' to 'us'`
+      fix: `Change country_slug from 'ca' to 'us'`,
     });
   }
 
@@ -73,7 +144,7 @@ function validateLocation(location, index) {
       location_slug: locationSlug,
       error_type: 'CANADIAN_PROVINCE_AS_US',
       message: `Canadian province "${provinceSlug}" incorrectly marked as US`,
-      fix: `Change country_slug from 'us' to 'ca'`
+      fix: `Change country_slug from 'us' to 'ca'`,
     });
   }
 
@@ -85,7 +156,7 @@ function validateLocation(location, index) {
       location_slug: locationSlug,
       error_type: 'INVALID_SLUG_FORMAT',
       message: `Invalid slug format (expected: city-state-country with 2-letter codes)`,
-      fix: `Update slug to match pattern: {city}-{state}-{country}`
+      fix: `Update slug to match pattern: {city}-{state}-{country}`,
     });
   }
 
@@ -102,8 +173,8 @@ function validateLocation(location, index) {
 
     // Check if all parts of province name appear consecutively after city
     if (parts.length >= provincePartStart + provinceNameParts.length) {
-      foundInProvincePosition = provinceNameParts.every((part, idx) =>
-        parts[provincePartStart + idx] === part
+      foundInProvincePosition = provinceNameParts.every(
+        (part, idx) => parts[provincePartStart + idx] === part
       );
     }
 
@@ -113,7 +184,7 @@ function validateLocation(location, index) {
         location_slug: locationSlug,
         error_type: 'OLD_FORMAT_PROVINCE',
         message: `Old format slug contains full province name "${provinceName}"`,
-        fix: `Use 2-letter province code instead of full name`
+        fix: `Use 2-letter province code instead of full name`,
       });
     }
   }
@@ -126,7 +197,7 @@ function validateLocation(location, index) {
         location_slug: locationSlug,
         error_type: 'OLD_FORMAT_COUNTRY',
         message: `Old format slug contains full country name "${countryName}"`,
-        fix: `Use 2-letter country code (us/ca) instead of full name`
+        fix: `Use 2-letter country code (us/ca) instead of full name`,
       });
     }
   }
@@ -195,7 +266,9 @@ function main() {
 
     // Print errors grouped by type
     for (const [errorType, errors] of Object.entries(errorsByType)) {
-      console.error(`\n━━━ ${errorType} (${errors.length} error${errors.length > 1 ? 's' : ''}) ━━━\n`);
+      console.error(
+        `\n━━━ ${errorType} (${errors.length} error${errors.length > 1 ? 's' : ''}) ━━━\n`
+      );
 
       for (const error of errors) {
         console.error(`Location #${error.index + 1}: ${error.location_slug}`);

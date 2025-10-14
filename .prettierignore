@@ -1,0 +1,28 @@
+# Build output
+.next/
+out/
+node_modules/
+dist/
+build/
+web/.next/
+web/out/
+
+# Generated files
+web/data/
+data/
+*.min.js
+*.min.css
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# Coverage reports
+coverage/

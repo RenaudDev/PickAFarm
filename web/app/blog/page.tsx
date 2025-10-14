@@ -1,26 +1,27 @@
 import { getAllPosts } from '@/lib/wordpress';
-import { FarmNavbar } from "@/components/farm-navbar"
-import { FarmFooter } from "@/components/farm-footer"
-import { Calendar } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import { Metadata } from "next"
-import { generateMetadata as createMetadata } from "@/lib/seo-metadata"
+import { FarmNavbar } from '@/components/farm-navbar';
+import { FarmFooter } from '@/components/farm-footer';
+import { Calendar } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Metadata } from 'next';
+import { generateMetadata as createMetadata } from '@/lib/seo-metadata';
 
 export async function generateMetadata(): Promise<Metadata> {
   return createMetadata({
-    title: "Farm Tips & Guides Blog",
-    description: "Discover farm tips, seasonal guides, and the best pick-your-own experiences. Learn about u-pick farms, Christmas tree selection, and family farm activities.",
+    title: 'Farm Tips & Guides Blog',
+    description:
+      'Discover farm tips, seasonal guides, and the best pick-your-own experiences. Learn about u-pick farms, Christmas tree selection, and family farm activities.',
     keywords: [
-      "farm blog",
-      "pick your own tips",
-      "christmas tree guides",
-      "farm activities",
-      "seasonal farming",
-      "u-pick guides"
+      'farm blog',
+      'pick your own tips',
+      'christmas tree guides',
+      'farm activities',
+      'seasonal farming',
+      'u-pick guides',
     ],
-    url: "https://pickafarm.com/blog/"
-  })
+    url: 'https://pickafarm.com/blog/',
+  });
 }
 
 export default async function BlogPage() {
@@ -34,12 +35,12 @@ export default async function BlogPage() {
         <h1 className="text-4xl font-bold mb-12">Blog</h1>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map(post => {
+          {posts.map((post) => {
             const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
-            
+
             return (
-              <Link 
-                key={post.id} 
+              <Link
+                key={post.id}
                 href={`/blog/${post.slug}`}
                 className="border rounded-lg overflow-hidden hover:shadow-lg transition"
               >
@@ -53,22 +54,20 @@ export default async function BlogPage() {
                     />
                   </div>
                 )}
-                
+
                 <div className="p-6">
-                  <h2 className="text-2xl font-semibold mb-2">
-                    {post.title.rendered}
-                  </h2>
-                  
+                  <h2 className="text-2xl font-semibold mb-2">{post.title.rendered}</h2>
+
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-4">
                     <Calendar className="w-4 h-4" />
                     <span>{new Date(post.date).toLocaleDateString()}</span>
                   </div>
-                  
-                  <div 
+
+                  <div
                     className="text-gray-600 line-clamp-3"
-                    dangerouslySetInnerHTML={{ 
-                      __html: post.excerpt.rendered 
-                    }} 
+                    dangerouslySetInnerHTML={{
+                      __html: post.excerpt.rendered,
+                    }}
                   />
                 </div>
               </Link>

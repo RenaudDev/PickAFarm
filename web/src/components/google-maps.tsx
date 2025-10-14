@@ -1,48 +1,48 @@
-"use client"
+'use client';
 
-import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 
 interface Farm {
-  id: string
-  name: string
-  slug: string
-  url: string
-  latitude: number
-  longitude: number
-  city: string
-  province: string
-  country: string
-  categories: string
-  featured?: boolean
-  distance_km: number
+  id: string;
+  name: string;
+  slug: string;
+  url: string;
+  latitude: number;
+  longitude: number;
+  city: string;
+  province: string;
+  country: string;
+  categories: string;
+  featured?: boolean;
+  distance_km: number;
 }
 
 interface LocationData {
-  name: string
-  slug: string
+  name: string;
+  slug: string;
   coordinates: {
-    latitude: number
-    longitude: number
-  }
-  province: string
-  country: string
-  location_slug: string
-  full_location: string
-  farms: Farm[]
-  farmCount: number
+    latitude: number;
+    longitude: number;
+  };
+  province: string;
+  country: string;
+  location_slug: string;
+  full_location: string;
+  farms: Farm[];
+  farmCount: number;
 }
 
 interface GoogleMapsProps {
-  locationData: LocationData
-  categoryFilter?: string
-  radius?: number // radius in km
-  zoom?: number
-  className?: string
+  locationData: LocationData;
+  categoryFilter?: string;
+  radius?: number; // radius in km
+  zoom?: number;
+  className?: string;
 }
 
 declare global {
   interface Window {
-    google: any
+    google: any;
   }
 }
 
@@ -51,151 +51,157 @@ export default function GoogleMaps({
   categoryFilter,
   radius = 100,
   zoom = 10,
-  className = "w-full h-96"
+  className = 'w-full h-96',
 }: GoogleMapsProps) {
-  const mapRef = useRef<HTMLDivElement>(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [map, setMap] = useState<any>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const markersRef = useRef<any[]>([])
-  const circleRef = useRef<any>(null)
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [map, setMap] = useState<any>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const markersRef = useRef<any[]>([]);
+  const circleRef = useRef<any>(null);
 
   // Memoize filtered farms to prevent unnecessary recalculations
   const filteredFarms = useMemo(() => {
     if (!categoryFilter) {
       // Filter out farms with invalid coordinates
-      return locationData.farms.filter(farm => 
-        farm.latitude != null && 
-        farm.longitude != null && 
-        !isNaN(farm.latitude) && 
-        !isNaN(farm.longitude)
-      )
+      return locationData.farms.filter(
+        (farm) =>
+          farm.latitude != null &&
+          farm.longitude != null &&
+          !isNaN(farm.latitude) &&
+          !isNaN(farm.longitude)
+      );
     }
 
-    return locationData.farms.filter(farm => {
+    return locationData.farms.filter((farm) => {
       // First check if coordinates are valid
-      if (farm.latitude == null || farm.longitude == null || isNaN(farm.latitude) || isNaN(farm.longitude)) {
-        return false
+      if (
+        farm.latitude == null ||
+        farm.longitude == null ||
+        isNaN(farm.latitude) ||
+        isNaN(farm.longitude)
+      ) {
+        return false;
       }
 
       // Handle both JSON array and plain string formats for categories
-      let farmCategories: string[] = []
+      let farmCategories: string[] = [];
       try {
         // Try to parse as JSON first
-        farmCategories = JSON.parse(farm.categories || '[]')
+        farmCategories = JSON.parse(farm.categories || '[]');
         // If it's a string, wrap it in an array
         if (typeof farmCategories === 'string') {
-          farmCategories = [farmCategories]
+          farmCategories = [farmCategories];
         }
       } catch (error) {
         // If JSON parsing fails, treat as plain string
-        farmCategories = farm.categories ? [farm.categories] : []
+        farmCategories = farm.categories ? [farm.categories] : [];
       }
-      
+
       const categoryMap: Record<string, string[]> = {
         'apple-orchards': ['Apple Orchard', 'Apple Picking'],
         'pumpkin-patches': ['Pumpkin Patch'],
         'berry-farms': ['Berry Farm', 'Berry Picking'],
-        'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree', 'Christmas Tree Farms']
-      }
-      const matchingCategories = categoryMap[categoryFilter] || []
-      return matchingCategories.some(catName => 
-        farmCategories.some((farmCat: string) => 
+        'christmas-tree-farms': ['Christmas Trees', 'Christmas Tree', 'Christmas Tree Farms'],
+      };
+      const matchingCategories = categoryMap[categoryFilter] || [];
+      return matchingCategories.some((catName) =>
+        farmCategories.some((farmCat: string) =>
           farmCat.toLowerCase().includes(catName.toLowerCase())
         )
-      )
-    })
-  }, [locationData.farms, categoryFilter])
+      );
+    });
+  }, [locationData.farms, categoryFilter]);
 
   // Memoize center coordinates with validation
   const center = useMemo(() => {
-    const lat = locationData.coordinates.latitude
-    const lng = locationData.coordinates.longitude
-    
+    const lat = locationData.coordinates.latitude;
+    const lng = locationData.coordinates.longitude;
+
     // Validate center coordinates
     if (lat == null || lng == null || isNaN(lat) || isNaN(lng)) {
-      console.error('Invalid center coordinates:', { lat, lng })
+      console.error('Invalid center coordinates:', { lat, lng });
       // Fallback to Toronto coordinates
-      return { lat: 43.7315, lng: -79.2845 }
+      return { lat: 43.7315, lng: -79.2845 };
     }
-    
-    return { lat, lng }
-  }, [locationData.coordinates.latitude, locationData.coordinates.longitude])
+
+    return { lat, lng };
+  }, [locationData.coordinates.latitude, locationData.coordinates.longitude]);
 
   // Intersection Observer to detect when map is visible
   useEffect(() => {
-    if (!mapRef.current) return
+    if (!mapRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       {
         rootMargin: '200px', // Start loading 200px before visible
-        threshold: 0.01
+        threshold: 0.01,
       }
-    )
+    );
 
-    observer.observe(mapRef.current)
+    observer.observe(mapRef.current);
 
     return () => {
       if (mapRef.current) {
-        observer.unobserve(mapRef.current)
+        observer.unobserve(mapRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   // Improved Google Maps script loading with better race condition handling
   useEffect(() => {
     // Only load when visible
-    if (!isVisible) return
+    if (!isVisible) return;
 
     // Check if Google Maps is already loaded
     if (window.google && window.google.maps) {
-      setIsLoaded(true)
-      return
+      setIsLoaded(true);
+      return;
     }
 
     // Check if script is already being loaded
-    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]')
+    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
     if (existingScript) {
       // Script is already loading, wait for it
       const checkLoaded = () => {
         if (window.google && window.google.maps) {
-          setIsLoaded(true)
+          setIsLoaded(true);
         } else {
-          setTimeout(checkLoaded, 100)
+          setTimeout(checkLoaded, 100);
         }
-      }
-      checkLoaded()
-      return
+      };
+      checkLoaded();
+      return;
     }
 
     // Load Google Maps script with marker library for AdvancedMarkerElement
-    const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE'}&loading=async&libraries=marker`
-    script.async = true
-    script.defer = true
-    
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyCjA7seTNfSd-MypolPjrg6Q6648TSCvTE'}&loading=async&libraries=marker`;
+    script.async = true;
+    script.defer = true;
+
     script.onload = () => {
-      setIsLoaded(true)
-    }
+      setIsLoaded(true);
+    };
 
     script.onerror = () => {
-      console.error('Failed to load Google Maps script')
-    }
+      console.error('Failed to load Google Maps script');
+    };
 
-    document.head.appendChild(script)
+    document.head.appendChild(script);
 
     return () => {
       // Don't remove script on unmount as other components might need it
-    }
-  }, [isVisible]) // Load when visible
+    };
+  }, [isVisible]); // Load when visible
 
   const initializeMap = useCallback(() => {
-    if (!mapRef.current || !window.google) return
+    if (!mapRef.current || !window.google) return;
 
     const mapInstance = new window.google.maps.Map(mapRef.current, {
       center,
@@ -203,42 +209,42 @@ export default function GoogleMaps({
       mapTypeId: window.google.maps.MapTypeId.ROADMAP,
       styles: [
         {
-          featureType: "poi.business",
-          elementType: "labels",
-          stylers: [{ visibility: "off" }]
+          featureType: 'poi.business',
+          elementType: 'labels',
+          stylers: [{ visibility: 'off' }],
         },
         {
-          featureType: "poi.park",
-          elementType: "labels.text",
-          stylers: [{ visibility: "on" }]
-        }
+          featureType: 'poi.park',
+          elementType: 'labels.text',
+          stylers: [{ visibility: 'on' }],
+        },
       ],
       mapTypeControl: true,
       streetViewControl: true,
       fullscreenControl: true,
-      zoomControl: true
-    })
+      zoomControl: true,
+    });
 
-    setMap(mapInstance)
-  }, [center, zoom])
+    setMap(mapInstance);
+  }, [center, zoom]);
 
   const clearMapElements = useCallback(() => {
     // Clear existing markers
-    markersRef.current.forEach(marker => marker.setMap(null))
-    markersRef.current = []
-    
+    markersRef.current.forEach((marker) => marker.setMap(null));
+    markersRef.current = [];
+
     // Clear existing circle
     if (circleRef.current) {
-      circleRef.current.setMap(null)
-      circleRef.current = null
+      circleRef.current.setMap(null);
+      circleRef.current = null;
     }
-  }, [])
+  }, []);
 
   const updateMapContent = useCallback(() => {
-    if (!map || !window.google) return
+    if (!map || !window.google) return;
 
     // Clear existing elements
-    clearMapElements()
+    clearMapElements();
 
     // Add radius circle
     const newCircle = new window.google.maps.Circle({
@@ -249,9 +255,9 @@ export default function GoogleMaps({
       fillOpacity: 0.1,
       map,
       center,
-      radius: radius * 1000 // Convert km to meters
-    })
-    circleRef.current = newCircle
+      radius: radius * 1000, // Convert km to meters
+    });
+    circleRef.current = newCircle;
 
     // Add center marker for the location
     const centerMarker = new window.google.maps.Marker({
@@ -259,17 +265,19 @@ export default function GoogleMaps({
       map,
       title: `${locationData.name}, ${locationData.province}`,
       icon: {
-        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+        url:
+          'data:image/svg+xml;charset=UTF-8,' +
+          encodeURIComponent(`
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="10" fill="#3b82f6" stroke="#ffffff" stroke-width="2"/>
             <circle cx="12" cy="12" r="4" fill="#ffffff"/>
           </svg>
         `),
         scaledSize: new window.google.maps.Size(32, 32),
-        anchor: new window.google.maps.Point(16, 16)
-      }
-    })
-    markersRef.current.push(centerMarker)
+        anchor: new window.google.maps.Point(16, 16),
+      },
+    });
+    markersRef.current.push(centerMarker);
 
     // Add center info window
     const centerInfoWindow = new window.google.maps.InfoWindow({
@@ -279,46 +287,48 @@ export default function GoogleMaps({
           <p class="text-sm text-gray-600 mb-2">Search Center</p>
           <p class="text-xs text-gray-500">${filteredFarms.length} farm${filteredFarms.length !== 1 ? 's' : ''} within ${radius}km</p>
         </div>
-      `
-    })
+      `,
+    });
 
     centerMarker.addListener('click', () => {
-      centerInfoWindow.open(map, centerMarker)
-    })
+      centerInfoWindow.open(map, centerMarker);
+    });
 
     // Add farm markers
     filteredFarms.forEach((farm) => {
       // Handle both JSON array and plain string formats for categories
-      let farmCategories: string[] = []
+      let farmCategories: string[] = [];
       try {
         // Try to parse as JSON first
-        farmCategories = JSON.parse(farm.categories || '[]')
+        farmCategories = JSON.parse(farm.categories || '[]');
         // If it's a string, wrap it in an array
         if (typeof farmCategories === 'string') {
-          farmCategories = [farmCategories]
+          farmCategories = [farmCategories];
         }
       } catch (error) {
         // If JSON parsing fails, treat as plain string
-        farmCategories = farm.categories ? [farm.categories] : []
-      }
-      
-      // Choose marker color based on farm type
-      const getMarkerColor = (categories: string[]) => {
-        if (categories.some(cat => cat.toLowerCase().includes('apple'))) return '#ef4444' // Red for apples
-        if (categories.some(cat => cat.toLowerCase().includes('pumpkin'))) return '#f97316' // Orange for pumpkins
-        if (categories.some(cat => cat.toLowerCase().includes('berry'))) return '#8b5cf6' // Purple for berries
-        if (categories.some(cat => cat.toLowerCase().includes('christmas'))) return '#059669' // Green for Christmas trees
-        return '#22c55e' // Default green
+        farmCategories = farm.categories ? [farm.categories] : [];
       }
 
-      const markerColor = getMarkerColor(farmCategories)
-      
+      // Choose marker color based on farm type
+      const getMarkerColor = (categories: string[]) => {
+        if (categories.some((cat) => cat.toLowerCase().includes('apple'))) return '#ef4444'; // Red for apples
+        if (categories.some((cat) => cat.toLowerCase().includes('pumpkin'))) return '#f97316'; // Orange for pumpkins
+        if (categories.some((cat) => cat.toLowerCase().includes('berry'))) return '#8b5cf6'; // Purple for berries
+        if (categories.some((cat) => cat.toLowerCase().includes('christmas'))) return '#059669'; // Green for Christmas trees
+        return '#22c55e'; // Default green
+      };
+
+      const markerColor = getMarkerColor(farmCategories);
+
       const marker = new window.google.maps.Marker({
         position: { lat: farm.latitude, lng: farm.longitude },
         map,
         title: farm.name,
         icon: {
-          url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+          url:
+            'data:image/svg+xml;charset=UTF-8,' +
+            encodeURIComponent(`
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="${markerColor}" stroke="#ffffff" stroke-width="1.5"/>
               <circle cx="12" cy="9" r="3" fill="#ffffff"/>
@@ -326,11 +336,11 @@ export default function GoogleMaps({
             </svg>
           `),
           scaledSize: new window.google.maps.Size(36, 36),
-          anchor: new window.google.maps.Point(18, 36)
-        }
-      })
+          anchor: new window.google.maps.Point(18, 36),
+        },
+      });
 
-      markersRef.current.push(marker)
+      markersRef.current.push(marker);
 
       // Add info window for farm
       const infoWindow = new window.google.maps.InfoWindow({
@@ -347,61 +357,70 @@ export default function GoogleMaps({
               <a href="${farm.url}" class="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700">View Details</a>
             </div>
           </div>
-        `
-      })
+        `,
+      });
 
       marker.addListener('click', () => {
-        infoWindow.open(map, marker)
-      })
-    })
+        infoWindow.open(map, marker);
+      });
+    });
 
     // Fit map to show all markers and circle
     if (filteredFarms.length > 0) {
-      const bounds = new window.google.maps.LatLngBounds()
-      
+      const bounds = new window.google.maps.LatLngBounds();
+
       // Include center point
-      bounds.extend(center)
-      
+      bounds.extend(center);
+
       // Include all farm locations
-      filteredFarms.forEach(farm => {
-        bounds.extend({ lat: farm.latitude, lng: farm.longitude })
-      })
+      filteredFarms.forEach((farm) => {
+        bounds.extend({ lat: farm.latitude, lng: farm.longitude });
+      });
 
       // Extend bounds to include circle radius
-      const circleBounds = newCircle.getBounds()
+      const circleBounds = newCircle.getBounds();
       if (circleBounds) {
-        bounds.union(circleBounds)
+        bounds.union(circleBounds);
       }
 
-      map.fitBounds(bounds)
-      
+      map.fitBounds(bounds);
+
       // Set reasonable zoom limits
       const listener = window.google.maps.event.addListener(map, 'idle', () => {
-        const currentZoom = map.getZoom()
-        if (currentZoom > 13) map.setZoom(13)
-        if (currentZoom < 8) map.setZoom(8)
-        window.google.maps.event.removeListener(listener)
-      })
+        const currentZoom = map.getZoom();
+        if (currentZoom > 13) map.setZoom(13);
+        if (currentZoom < 8) map.setZoom(8);
+        window.google.maps.event.removeListener(listener);
+      });
     } else {
       // No farms, just center on location
-      map.setCenter(center)
-      map.setZoom(10)
+      map.setCenter(center);
+      map.setZoom(10);
     }
-  }, [map, center, radius, filteredFarms, locationData.name, locationData.province, locationData.full_location, clearMapElements])
+  }, [
+    map,
+    center,
+    radius,
+    filteredFarms,
+    locationData.name,
+    locationData.province,
+    locationData.full_location,
+    clearMapElements,
+  ]);
 
   // Update map content when dependencies change
   useEffect(() => {
     if (map && isLoaded) {
-      updateMapContent()
+      updateMapContent();
     }
-  }, [map, isLoaded, updateMapContent])
+  }, [map, isLoaded, updateMapContent]);
 
   // Initialize map when loaded
   useEffect(() => {
     if (isLoaded) {
-      initializeMap()
+      initializeMap();
     }
-  }, [isLoaded, initializeMap])
+  }, [isLoaded, initializeMap]);
 
   return (
     <div className={`${className} rounded-lg overflow-hidden border shadow-sm bg-white`}>
@@ -415,5 +434,5 @@ export default function GoogleMaps({
         </div>
       )}
     </div>
-  )
+  );
 }

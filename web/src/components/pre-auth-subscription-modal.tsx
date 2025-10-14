@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -8,19 +8,19 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Bell, UserPlus } from "lucide-react"
-import { SignUpButton } from "@clerk/nextjs"
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Bell, UserPlus } from 'lucide-react';
+import { SignUpButton } from '@clerk/nextjs';
 
 interface PreAuthSubscriptionModalProps {
-  isOpen: boolean
-  onClose: () => void
-  farmId: string
-  farmName: string
-  farmSlug: string
-  onProceedToSignUp: (consent: boolean) => void
+  isOpen: boolean;
+  onClose: () => void;
+  farmId: string;
+  farmName: string;
+  farmSlug: string;
+  onProceedToSignUp: (consent: boolean) => void;
 }
 
 export function PreAuthSubscriptionModal({
@@ -29,9 +29,9 @@ export function PreAuthSubscriptionModal({
   farmId,
   farmName,
   farmSlug,
-  onProceedToSignUp
+  onProceedToSignUp,
 }: PreAuthSubscriptionModalProps) {
-  const [consentGiven, setConsentGiven] = useState(false)
+  const [consentGiven, setConsentGiven] = useState(false);
 
   const handleProceed = () => {
     if (consentGiven) {
@@ -41,25 +41,25 @@ export function PreAuthSubscriptionModal({
         farmName,
         farmSlug,
         consentGiven: true,
-        timestamp: new Date().toISOString()
-      }
-      sessionStorage.setItem('pending_subscription', JSON.stringify(pendingSubscription))
+        timestamp: new Date().toISOString(),
+      };
+      sessionStorage.setItem('pending_subscription', JSON.stringify(pendingSubscription));
 
       // ALSO store the current URL for redirect after sign-up
-      sessionStorage.setItem('clerk_redirect_url', `/farms/${farmSlug}`)
+      sessionStorage.setItem('clerk_redirect_url', `/farms/${farmSlug}`);
 
       // Call the callback
-      onProceedToSignUp(true)
+      onProceedToSignUp(true);
 
       // Reset state
-      setConsentGiven(false)
+      setConsentGiven(false);
     }
-  }
+  };
 
   const handleClose = () => {
-    setConsentGiven(false)
-    onClose()
-  }
+    setConsentGiven(false);
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -112,21 +112,14 @@ export function PreAuthSubscriptionModal({
               onCheckedChange={(checked) => setConsentGiven(checked === true)}
               className="mt-1"
             />
-            <label
-              htmlFor="consent"
-              className="text-sm font-medium leading-relaxed cursor-pointer"
-            >
+            <label htmlFor="consent" className="text-sm font-medium leading-relaxed cursor-pointer">
               I agree to receive email updates from farms I subscribe to
             </label>
           </div>
         </div>
 
         <DialogFooter className="gap-2 sm:gap-0">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleClose}
-          >
+          <Button type="button" variant="outline" onClick={handleClose}>
             Cancel
           </Button>
           <SignUpButton
@@ -147,5 +140,5 @@ export function PreAuthSubscriptionModal({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

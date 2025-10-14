@@ -1,25 +1,25 @@
-"use client"
+'use client';
 
-import { ProtectedRoute } from "@/components/protected-route"
-import { useUser } from "@clerk/nextjs"
-import { FarmNavbar } from "@/components/farm-navbar"
-import { Button } from "@/components/ui/button"
-import { UserCircle, Mail, Calendar, MapPin } from "lucide-react"
-import { useState, useEffect } from "react"
+import { ProtectedRoute } from '@/components/protected-route';
+import { useUser } from '@clerk/nextjs';
+import { FarmNavbar } from '@/components/farm-navbar';
+import { Button } from '@/components/ui/button';
+import { UserCircle, Mail, Calendar, MapPin } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function ProfilePage() {
-  const { user } = useUser()
-  const [savedFarmsCount, setSavedFarmsCount] = useState(0)
+  const { user } = useUser();
+  const [savedFarmsCount, setSavedFarmsCount] = useState(0);
 
   useEffect(() => {
     if (user?.id) {
-      const saved = localStorage.getItem(`saved-farms-${user.id}`)
+      const saved = localStorage.getItem(`saved-farms-${user.id}`);
       if (saved) {
-        const farms = JSON.parse(saved)
-        setSavedFarmsCount(farms.length)
+        const farms = JSON.parse(saved);
+        setSavedFarmsCount(farms.length);
       }
     }
-  }, [user?.id])
+  }, [user?.id]);
 
   return (
     <ProtectedRoute>
@@ -30,9 +30,7 @@ export default function ProfilePage() {
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-4xl font-bold text-foreground">Your Profile</h1>
-              <p className="text-muted-foreground mt-2">
-                Manage your account information
-              </p>
+              <p className="text-muted-foreground mt-2">Manage your account information</p>
             </div>
           </div>
 
@@ -41,9 +39,9 @@ export default function ProfilePage() {
             <div className="flex items-center space-x-6 mb-8">
               <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center">
                 {user?.imageUrl ? (
-                  <img 
-                    src={user.imageUrl} 
-                    alt={user.fullName || "User"} 
+                  <img
+                    src={user.imageUrl}
+                    alt={user.fullName || 'User'}
                     className="w-24 h-24 rounded-full object-cover"
                   />
                 ) : (
@@ -52,11 +50,9 @@ export default function ProfilePage() {
               </div>
               <div>
                 <h2 className="text-2xl font-semibold text-foreground">
-                  {user?.fullName || "User"}
+                  {user?.fullName || 'User'}
                 </h2>
-                <p className="text-muted-foreground">
-                  @{user?.username || user?.id?.slice(0, 8)}
-                </p>
+                <p className="text-muted-foreground">@{user?.username || user?.id?.slice(0, 8)}</p>
               </div>
             </div>
 
@@ -69,7 +65,7 @@ export default function ProfilePage() {
                     Email
                   </div>
                   <p className="text-foreground font-medium">
-                    {user?.primaryEmailAddress?.emailAddress || "Not provided"}
+                    {user?.primaryEmailAddress?.emailAddress || 'Not provided'}
                   </p>
                 </div>
 
@@ -79,11 +75,13 @@ export default function ProfilePage() {
                     Member Since
                   </div>
                   <p className="text-foreground font-medium">
-                    {user?.createdAt ? new Date(user.createdAt).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    }) : "N/A"}
+                    {user?.createdAt
+                      ? new Date(user.createdAt).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })
+                      : 'N/A'}
                   </p>
                 </div>
 
@@ -92,9 +90,7 @@ export default function ProfilePage() {
                     <UserCircle className="w-4 h-4 mr-2" />
                     First Name
                   </div>
-                  <p className="text-foreground font-medium">
-                    {user?.firstName || "Not provided"}
-                  </p>
+                  <p className="text-foreground font-medium">{user?.firstName || 'Not provided'}</p>
                 </div>
 
                 <div className="space-y-2">
@@ -102,9 +98,7 @@ export default function ProfilePage() {
                     <UserCircle className="w-4 h-4 mr-2" />
                     Last Name
                   </div>
-                  <p className="text-foreground font-medium">
-                    {user?.lastName || "Not provided"}
-                  </p>
+                  <p className="text-foreground font-medium">{user?.lastName || 'Not provided'}</p>
                 </div>
               </div>
             </div>
@@ -144,5 +138,5 @@ export default function ProfilePage() {
         </div>
       </div>
     </ProtectedRoute>
-  )
+  );
 }

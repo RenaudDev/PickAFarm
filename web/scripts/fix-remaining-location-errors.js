@@ -29,7 +29,11 @@ function main() {
     let fixed = false;
 
     // Fix 1: Cape Breton - Nova Scotia is "ns" not "sc"
-    if (loc.name === 'Cape Breton' && loc.province === 'Nova Scotia' && loc.province_slug === 'sc') {
+    if (
+      loc.name === 'Cape Breton' &&
+      loc.province === 'Nova Scotia' &&
+      loc.province_slug === 'sc'
+    ) {
       console.log(`✏️  Fixing Cape Breton: sc → ns`);
       loc.province_slug = 'ns';
       loc.location_slug = 'cape-breton-ns-ca';
@@ -47,7 +51,11 @@ function main() {
     }
 
     // Fix 3: Charlottetown - PEI is "pe" not "pei"
-    if (loc.name === 'Charlottetown' && loc.province === 'Prince Edward Island' && loc.province_slug === 'pei') {
+    if (
+      loc.name === 'Charlottetown' &&
+      loc.province === 'Prince Edward Island' &&
+      loc.province_slug === 'pei'
+    ) {
       console.log(`✏️  Fixing Charlottetown: pei → pe`);
       loc.province_slug = 'pe';
       loc.location_slug = 'charlottetown-pe-ca';
@@ -55,7 +63,11 @@ function main() {
     }
 
     // Fix 4: Yellowknife - NWT is "nt" not "nwt"
-    if (loc.name === 'Yellowknife' && loc.province === 'Northwest Territories' && loc.province_slug === 'nwt') {
+    if (
+      loc.name === 'Yellowknife' &&
+      loc.province === 'Northwest Territories' &&
+      loc.province_slug === 'nwt'
+    ) {
       console.log(`✏️  Fixing Yellowknife: nwt → nt`);
       loc.province_slug = 'nt';
       loc.location_slug = 'yellowknife-nt-ca';
