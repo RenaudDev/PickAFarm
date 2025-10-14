@@ -1,12 +1,21 @@
-# CI Pipeline Documentation
+# GitHub Actions Workflows Documentation
 
-This document describes the Continuous Integration (CI) pipeline for PickAFarm.
+This document describes all GitHub Actions workflows for the PickAFarm project, including CI/CD and preview deployment automation.
 
 ## Overview
 
-The CI pipeline automatically runs on every pull request to the `main-clean` branch. It ensures code quality, test coverage, and build integrity before merging changes.
+PickAFarm uses multiple GitHub Actions workflows to automate:
+- **Continuous Integration** - Code quality and testing on every PR
+- **Preview Deployments** - Automatic preview URLs for every PR
+- **Deployment Automation** - Scheduled and webhook-triggered rebuilds
 
-## Workflow Jobs
+---
+
+## Workflows
+
+### 1. CI Pipeline (`ci.yml`)
+
+**Trigger**: Pull requests and pushes to `main-clean`
 
 The CI pipeline consists of 4 parallel jobs:
 
@@ -176,9 +185,168 @@ git commit -m "docs: update README [skip ci]"
 - Ensure `src/index.js` exists
 - Check Worker source code for syntax errors
 
+---
+
+### 2. Preview Deployment Comment (`preview-comment.yml`)
+
+**Trigger**: Pull requests opened, synchronized, or reopened against `main-clean`
+
+**Purpose**: Automatically posts preview deployment URLs as PR comments
+
+**How it works**:
+1. Waits 30 seconds for Cloudflare Pages deployment to start
+2. Generates preview URL based on branch name
+3. Posts or updates PR comment with preview URL and deployment information
+
+**Preview URL Format**:
+- Branch alias: `https://<branch-name>.pickafarm.pages.dev`
+- Hash-based: `https://<random-hash>.pickafarm.pages.dev`
+
+**Branch name sanitization**:
+- Lowercase conversion
+- Special characters replaced with hyphens
+- Example: `feature/New-Feature` → `feature-new-feature.pickafarm.pages.dev`
+
+**Comment includes**:
+- Preview URL
+- Branch name
+- Commit SHA
+- Timestamp
+- Deployment information
+- Testing checklist
+
+**Permissions**:
+- `contents: read` - Read repository content
+- `pull-requests: write` - Post and update PR comments
+
+---
+
+### 3. Cleanup Preview Deployment (`cleanup-preview.yml`)
+
+**Trigger**: Pull requests closed (merged or not) against `main-clean`
+
+**Purpose**: Posts notification about preview deployment cleanup
+
+**How it works**:
+1. Detects PR closure event
+2. Generates preview URL that was used
+3. Posts cleanup notification comment
+
+**Note**: Cloudflare Pages automatically deletes preview deployments when PRs are closed. This workflow only posts a notification comment. The actual cleanup is handled by Cloudflare.
+
+**Manual cleanup option**: The workflow includes a commented-out job for manual cleanup via Cloudflare API if needed in the future.
+
+**Permissions**:
+- `contents: read` - Read repository content
+- `pull-requests: write` - Post cleanup notification comments
+
+---
+
+### 4. Rebuild Farms (`rebuild-farms.yml`)
+
+**Trigger**:
+- Manual workflow dispatch
+- Repository dispatch event (`rebuild-farms`)
+- Scheduled (if configured)
+
+**Purpose**: Triggers full site rebuild to fetch latest farm data
+
+**Note**: This workflow is part of Story 1.1 implementation.
+
+---
+
+## Preview Deployment System
+
+### Overview
+
+PickAFarm uses **Cloudflare Pages automatic preview deployments** combined with GitHub Actions for PR comment automation.
+
+### Preview Deployment Flow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ 1. Developer creates PR → GitHub Actions CI runs                │
+│ 2. CI passes → Cloudflare Pages builds preview automatically    │
+│ 3. GitHub Actions posts preview URL to PR comment               │
+│ 4. Developer reviews changes at preview URL                     │
+│ 5. New commits → Preview auto-updates                           │
+│ 6. PR closed/merged → Preview deleted automatically             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Preview Environment Characteristics
+
+- **Data**: Uses production D1 database (read-only)
+- **Webhooks**: Disabled (no production side effects)
+- **Emails**: Disabled (no Resend API key)
+- **Rebuilds**: Cannot trigger (no GitHub token)
+- **Build time**: 5-10 minutes typically
+- **URL stability**: Branch alias URL remains constant for the branch
+- **Cleanup**: Automatic after PR close (30-day retention before permanent deletion)
+
+### Preview URL Examples
+
+**Branch alias URL** (recommended):
+```
+https://feature-farmer-dashboard.pickafarm.pages.dev
+```
+
+**Hash-based URL** (unique per deployment):
+```
+https://abc123def.pickafarm.pages.dev
+```
+
+### Testing Preview Deployments
+
+1. Create test branch: `git checkout -b test/preview-deployment`
+2. Make code changes and commit
+3. Push to GitHub: `git push origin test/preview-deployment`
+4. Open pull request against `main-clean`
+5. Wait 5-10 minutes for Cloudflare Pages to build
+6. Check PR comment for preview URL
+7. Access preview URL and verify changes
+8. Push additional commits to test auto-update
+9. Close or merge PR to verify cleanup notification
+
+---
+
+## Configuration
+
+### Cloudflare Pages Setup
+
+**Configuration guide**: `docs/CLOUDFLARE_PAGES_PREVIEW_SETUP.md`
+
+Key configuration:
+- **Production branch**: `main-clean`
+- **Preview branches**: All non-production branches
+- **Build command**: `npm run build`
+- **Output directory**: `web/out/`
+- **Node version**: 18
+
+### Environment Variables (Preview)
+
+Required for preview builds:
+- `NEXT_PUBLIC_API_URL` - Worker API endpoint
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk authentication
+- `CLOUDFLARE_D1_TOKEN` - D1 database read-only access
+- `CLOUDFLARE_D1_URL` - D1 REST API endpoint
+
+**Do NOT set** in preview environment:
+- `GITHUB_TOKEN` - Prevents triggering production rebuilds
+- `RESEND_API_KEY` - Prevents sending production emails
+- Zoho webhook tokens - Prevents processing CRM updates
+
+---
+
 ## Additional Resources
 
+- [Preview Deployment Setup Guide](../../docs/CLOUDFLARE_PAGES_PREVIEW_SETUP.md)
+- [Cloudflare Pages Preview Deployments](https://developers.cloudflare.com/pages/configuration/preview-deployments/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Vitest Documentation](https://vitest.dev)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Wrangler Documentation](https://developers.cloudflare.com/workers/wrangler/)
+
+---
+
+**Last Updated**: January 2025 (Story 1.3 - Preview Deployment Configuration)
