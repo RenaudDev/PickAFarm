@@ -15,7 +15,6 @@ jobs:
     name: Post Preview URL Comment
     runs-on: ubuntu-latest
     timeout-minutes: 3
-    if: github.event_name == 'pull_request'
 
     steps:
       - name: Wait for Cloudflare Pages deployment
