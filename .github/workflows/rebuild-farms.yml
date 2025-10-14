@@ -18,6 +18,9 @@ jobs:
   rebuild:
     runs-on: ubuntu-latest
     timeout-minutes: 15  # Fail if exceeds 15 minutes
+    permissions:
+      contents: read
+      deployments: write
 
     steps:
     - name: Checkout repository
