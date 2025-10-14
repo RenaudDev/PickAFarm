@@ -12,6 +12,8 @@ web/data/
 data/
 *.min.js
 *.min.css
+web/app/critical-css.ts
+web/app/critical.css
 
 # Package files
 package-lock.json
