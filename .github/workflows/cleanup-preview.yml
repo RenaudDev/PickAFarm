@@ -18,6 +18,7 @@ jobs:
     name: Preview Cleanup Notification
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    if: github.event_name == 'pull_request'
 
     steps:
       - name: Generate preview URL
