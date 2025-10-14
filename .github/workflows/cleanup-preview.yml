@@ -40,12 +40,12 @@ jobs:
             const wasMerged = context.payload.pull_request.merged;
             const action = wasMerged ? 'merged' : 'closed';
 
-            const commentBody = `## 🧹 Preview Deployment Cleanup
+            const commentBody = \`## 🧹 Preview Deployment Cleanup
 
 The preview deployment for this PR has been automatically cleaned up by Cloudflare Pages.
 
-**Status**: PR ${action}
-**Preview URL**: ~~${previewUrl}~~ (no longer accessible)
+**Status**: PR \${action}
+**Preview URL**: ~~\${previewUrl}~~ (no longer accessible)
 
 ---
 
