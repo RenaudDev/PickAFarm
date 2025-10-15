@@ -13,7 +13,21 @@
    - Image processing and R2 storage for farm branding
    - Cloudflare D1 database operations
    - Resend email service integration
+   - Structured logging and monitoring
 */
+
+/* === MONITORING & LOGGING UTILITIES === */
+import { createLogger, logEvent, LogLevel } from './utils/logger.js';
+import { sendCliqAlert, Severity } from './utils/cliq.js';
+import { logAuditEvent, AuditAction, ResourceType } from './utils/audit.js';
+import { trackMetric, MetricName } from './utils/metrics.js';
+
+/* === MAGIC LINK AUTHENTICATION (Story 2.2) === */
+import {
+  handleAdminMagicLink,
+  handleValidateToken,
+  handleClerkWebhook
+} from './handlers/magic-link.js';
 
 /* === ZOHO CRM INTEGRATION === */
 
@@ -368,20 +382,249 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
 }
 
 /**
- * Deletes a farm from the D1 database.
+ * Deletes a farm from the D1 database with complete cascade cleanup.
  *
  * Called when a farm is deleted in Zoho CRM via webhook.
- * Note: This does NOT delete related records (saved_farms, notifications).
- * Consider implementing cascade deletion if needed.
+ *
+ * Cascade deletion flow:
+ * 1. Fetch farm details (for image URLs and audit logging)
+ * 2. Delete related records from all junction and dependent tables:
+ *    - saved_farms (user subscriptions)
+ *    - notification_log (email history)
+ *    - in_app_notifications (user notifications)
+ *    - in_app_notifications_archive (archived notifications)
+ *    - marketing_analytics (QR code tracking)
+ *    - qr_codes (marketing materials)
+ *    - wordpress_queue (pending posts)
+ *    - farm_categories_rel, farm_operational_types_rel, farm_varieties_rel,
+ *      farm_amenities_rel, farm_payment_methods_rel (from schema.sql)
+ *    - farm_hours (operating hours)
+ *    - seasonal_availability (crop status)
+ *    - farm_reviews (user reviews)
+ *    - crowdsourced_updates (status reports)
+ * 3. Delete images from R2 storage (logo and background)
+ * 4. Delete the farm record itself
+ * 5. Log audit trail
  *
  * @param {Object} env - Cloudflare Worker environment
  * @param {string} id - Farm ID with 'zcrm_' prefix
- * @returns {Promise<Object>} D1 query result with changes count
+ * @returns {Promise<Object>} Deletion summary with counts
  */
 async function deleteFarm(env, id) {
-  const sql = "DELETE FROM farms WHERE zoho_record_id = ?";
-  const result = await env.DB.prepare(sql).bind(id).run();
-  return result;
+  console.log(`🗑️  Starting cascade deletion for farm: ${id}`);
+
+  const deletionSummary = {
+    farmId: id,
+    deleted: {},
+    errors: []
+  };
+
+  try {
+    // Step 1: Fetch farm details before deletion (for audit log and R2 cleanup)
+    const farm = await env.DB.prepare(
+      "SELECT zoho_record_id, name, logo_url, background_url FROM farms WHERE zoho_record_id = ?"
+    ).bind(id).first();
+
+    if (!farm) {
+      console.warn(`⚠️  Farm ${id} not found in database`);
+      return {
+        ...deletionSummary,
+        notFound: true
+      };
+    }
+
+    deletionSummary.farmName = farm.name;
+    console.log(`📋 Found farm: ${farm.name}`);
+
+    // Step 2: Delete all related records (order matters for foreign key constraints)
+
+    // User-facing tables
+    const savedFarmsResult = await env.DB.prepare(
+      "DELETE FROM saved_farms WHERE farm_id = ?"
+    ).bind(id).run();
+    deletionSummary.deleted.savedFarms = savedFarmsResult.meta.changes || 0;
+    console.log(`  ✓ Deleted ${deletionSummary.deleted.savedFarms} saved farm subscriptions`);
+
+    const notificationLogResult = await env.DB.prepare(
+      "DELETE FROM notification_log WHERE farm_id = ?"
+    ).bind(id).run();
+    deletionSummary.deleted.notificationLog = notificationLogResult.meta.changes || 0;
+    console.log(`  ✓ Deleted ${deletionSummary.deleted.notificationLog} notification logs`);
+
+    // In-app notifications (if tables exist - added in migration 0009)
+    try {
+      const inAppNotificationsResult = await env.DB.prepare(
+        "DELETE FROM in_app_notifications WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.inAppNotifications = inAppNotificationsResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.inAppNotifications} in-app notifications`);
+
+      const archivedNotificationsResult = await env.DB.prepare(
+        "DELETE FROM in_app_notifications_archive WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.archivedNotifications = archivedNotificationsResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.archivedNotifications} archived notifications`);
+    } catch (e) {
+      // Tables may not exist in older schemas
+      console.log(`  ⚠️  Skipping in_app_notifications (table may not exist): ${e.message}`);
+    }
+
+    // Marketing tables (if they exist)
+    try {
+      const marketingResult = await env.DB.prepare(
+        "DELETE FROM marketing_analytics WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.marketingAnalytics = marketingResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.marketingAnalytics} marketing analytics`);
+
+      const qrCodesResult = await env.DB.prepare(
+        "DELETE FROM qr_codes WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.qrCodes = qrCodesResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.qrCodes} QR codes`);
+
+      const wordpressQueueResult = await env.DB.prepare(
+        "DELETE FROM wordpress_queue WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.wordpressQueue = wordpressQueueResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.wordpressQueue} WordPress queue items`);
+    } catch (e) {
+      console.log(`  ⚠️  Skipping marketing tables (may not exist): ${e.message}`);
+    }
+
+    // Junction tables from schema.sql (these have ON DELETE CASCADE but we'll clean explicitly for clarity)
+    try {
+      const categoriesRelResult = await env.DB.prepare(
+        "DELETE FROM farm_categories_rel WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.categoriesRel = categoriesRelResult.meta.changes || 0;
+
+      const opTypesRelResult = await env.DB.prepare(
+        "DELETE FROM farm_operational_types_rel WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.opTypesRel = opTypesRelResult.meta.changes || 0;
+
+      const varietiesRelResult = await env.DB.prepare(
+        "DELETE FROM farm_varieties_rel WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.varietiesRel = varietiesRelResult.meta.changes || 0;
+
+      const amenitiesRelResult = await env.DB.prepare(
+        "DELETE FROM farm_amenities_rel WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.amenitiesRel = amenitiesRelResult.meta.changes || 0;
+
+      const paymentRelResult = await env.DB.prepare(
+        "DELETE FROM farm_payment_methods_rel WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.paymentRel = paymentRelResult.meta.changes || 0;
+
+      const hoursResult = await env.DB.prepare(
+        "DELETE FROM farm_hours WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.farmHours = hoursResult.meta.changes || 0;
+
+      const seasonalResult = await env.DB.prepare(
+        "DELETE FROM seasonal_availability WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.seasonalAvailability = seasonalResult.meta.changes || 0;
+
+      const reviewsResult = await env.DB.prepare(
+        "DELETE FROM farm_reviews WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.farmReviews = reviewsResult.meta.changes || 0;
+
+      const crowdsourcedResult = await env.DB.prepare(
+        "DELETE FROM crowdsourced_updates WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.crowdsourcedUpdates = crowdsourcedResult.meta.changes || 0;
+
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.categoriesRel + deletionSummary.deleted.opTypesRel + deletionSummary.deleted.varietiesRel + deletionSummary.deleted.amenitiesRel + deletionSummary.deleted.paymentRel} junction table records`);
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.farmHours} farm hours, ${deletionSummary.deleted.seasonalAvailability} seasonal records`);
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.farmReviews} reviews, ${deletionSummary.deleted.crowdsourcedUpdates} crowdsourced updates`);
+    } catch (e) {
+      console.log(`  ⚠️  Some schema.sql tables may not exist: ${e.message}`);
+    }
+
+    // Step 3: Delete images from R2 storage
+    if (env.ASSETS_BUCKET) {
+      try {
+        const imagePathsDeleted = [];
+
+        // Delete logo from R2
+        if (farm.logo_url) {
+          const logoPath = `farms/${id}/logo.webp`;
+          await env.ASSETS_BUCKET.delete(logoPath);
+          imagePathsDeleted.push(logoPath);
+          console.log(`  ✓ Deleted logo from R2: ${logoPath}`);
+        }
+
+        // Delete background from R2
+        if (farm.background_url) {
+          const backgroundPath = `farms/${id}/background.webp`;
+          await env.ASSETS_BUCKET.delete(backgroundPath);
+          imagePathsDeleted.push(backgroundPath);
+          console.log(`  ✓ Deleted background from R2: ${backgroundPath}`);
+        }
+
+        // Also delete any other potential files in the farm's directory
+        // R2 doesn't have native "delete folder" so we list and delete
+        const farmPrefix = `farms/${id}/`;
+        const listed = await env.ASSETS_BUCKET.list({ prefix: farmPrefix });
+
+        for (const object of listed.objects) {
+          await env.ASSETS_BUCKET.delete(object.key);
+          imagePathsDeleted.push(object.key);
+        }
+
+        deletionSummary.deleted.r2Images = imagePathsDeleted.length;
+        if (imagePathsDeleted.length > 0) {
+          console.log(`  ✓ Deleted ${imagePathsDeleted.length} files from R2 storage`);
+        }
+      } catch (e) {
+        console.error(`  ❌ R2 image cleanup failed: ${e.message}`);
+        deletionSummary.errors.push(`R2 cleanup: ${e.message}`);
+      }
+    } else {
+      console.log(`  ⚠️  R2 bucket not configured, skipping image cleanup`);
+    }
+
+    // Step 4: Delete the farm record itself
+    const farmResult = await env.DB.prepare(
+      "DELETE FROM farms WHERE zoho_record_id = ?"
+    ).bind(id).run();
+    deletionSummary.deleted.farm = farmResult.meta.changes || 0;
+    console.log(`  ✓ Deleted farm record`);
+
+    // Step 5: Audit logging
+    try {
+      const { logAuditEvent, AuditAction, ResourceType } = await import('./utils/audit.js');
+      await logAuditEvent(
+        env,
+        null, // System action, no specific user
+        AuditAction.FARM_DELETED,
+        ResourceType.FARM,
+        id,
+        {
+          farmName: farm.name,
+          deletionSummary: deletionSummary.deleted,
+          triggeredBy: 'zoho_webhook'
+        }
+      );
+      console.log(`  ✓ Logged audit trail`);
+    } catch (e) {
+      console.error(`  ⚠️  Audit logging failed: ${e.message}`);
+      deletionSummary.errors.push(`Audit log: ${e.message}`);
+    }
+
+    console.log(`✅ Cascade deletion completed for ${farm.name}`);
+    return deletionSummary;
+
+  } catch (error) {
+    console.error(`❌ Cascade deletion failed for ${id}:`, error);
+    deletionSummary.errors.push(error.message);
+    throw error;
+  }
 }
 
 /**
@@ -2642,12 +2885,34 @@ async function handleSendNotifications(request, env, method) {
 
 export default {
   async fetch(request, env, ctx) {
+    // Generate correlation ID for request tracing
+    const correlationId = crypto.randomUUID();
+    const requestStartTime = Date.now();
+
+    // Create a simple context object for passing correlationId to utilities
+    const requestContext = {
+      get: (key) => key === 'correlationId' ? correlationId : undefined,
+      correlationId
+    };
+
+    // Create logger bound to this request
+    const logger = createLogger(requestContext);
+
     const url = new URL(request.url);
     const method = request.method;
 
+    // Log incoming request
+    logger.info('Incoming request', {
+      method,
+      path: url.pathname,
+      userAgent: request.headers.get('user-agent')
+    });
+
     // Handle CORS preflight requests (OPTIONS method)
     if (method === "OPTIONS") {
-      return new Response(null, { headers: corsHeaders });
+      const response = new Response(null, { headers: corsHeaders });
+      response.headers.set('X-Correlation-ID', correlationId);
+      return response;
     }
 
     /* === ROUTE DEFINITIONS === */
@@ -2755,6 +3020,19 @@ export default {
       return handleZohoDelete(request, env, method);
     }
 
+    // MAGIC LINK AUTHENTICATION ENDPOINTS (Story 2.2)
+    if (url.pathname === "/api/admin/magic-link") {
+      return handleAdminMagicLink(request, env, method);
+    }
+
+    if (url.pathname === "/api/claim/validate-token") {
+      return handleValidateToken(request, env, method);
+    }
+
+    if (url.pathname === "/api/webhooks/clerk") {
+      return handleClerkWebhook(request, env, method);
+    }
+
     // ZOHO DEBUG ENDPOINTS
     if (url.pathname === "/api/zoho-debug") {
       return handleZohoDebug(request, env, method);
@@ -2797,6 +3075,71 @@ export default {
           error: "Test fetch failed",
           message: error.message
         }, null, 2), {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+    }
+
+    // MONITORING DASHBOARD ENDPOINT
+    // Provides monitoring metrics and statistics for admin dashboard
+    if (url.pathname === "/api/admin/monitoring") {
+      if (method !== "GET") {
+        return new Response(JSON.stringify({ error: "Method not allowed" }), {
+          status: 405,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+
+      // Require admin API key for authentication
+      const apiKey = request.headers.get('X-API-Key');
+      const adminApiKey = env.ADMIN_API_KEY || env.GITHUB_TOKEN; // Fallback to GITHUB_TOKEN for now
+
+      if (!adminApiKey || apiKey !== adminApiKey) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+
+      try {
+        // Import metrics module
+        const { getBroadcastStats, getErrorRateStats, getActiveFarmerCount } = await import('./utils/metrics.js');
+
+        // Get last successful build time from KV or env (placeholder for now)
+        const lastSuccessfulBuild = env.LAST_BUILD_TIME || new Date().toISOString();
+
+        // Get active farmer count
+        const activeFarmerCount = await getActiveFarmerCount(env);
+
+        // Get broadcast volume stats
+        const broadcastVolume = await getBroadcastStats(env);
+
+        // Get error rate stats for last 24h
+        const errorRateStats = await getErrorRateStats(env, '24h');
+
+        return new Response(JSON.stringify({
+          lastSuccessfulBuild,
+          activeFarmerCount,
+          broadcastVolume,
+          errorRate: {
+            current: parseFloat(errorRateStats.errorRatePercent) / 100,
+            trend: 'stable', // TODO: Calculate trend from historical data
+            last24h: errorRateStats.trend.map(point => ({
+              hour: point.timestamp,
+              rate: point.value
+            }))
+          },
+          averageRecipientsPerBroadcast: broadcastVolume.averageRecipientsPerBroadcast
+        }), {
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      } catch (error) {
+        console.error('❌ Monitoring dashboard error:', error);
+        return new Response(JSON.stringify({
+          error: "Failed to fetch monitoring data",
+          message: error.message
+        }), {
           status: 500,
           headers: { "Content-Type": "application/json", ...corsHeaders }
         });
@@ -2909,6 +3252,9 @@ export default {
           debug: {
             zoho_debug: "/api/zoho-debug",
             token_debug: "/api/token-debug"
+          },
+          admin: {
+            monitoring: "GET /api/admin/monitoring"
           }
         }
       }), {
