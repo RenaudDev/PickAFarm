@@ -13,6 +13,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ClaimSignUpForm, ClerkLoadingSkeleton } from './claim-signup-form';
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Claim Your Farm Listing | PickAFarm',
   description: 'Complete your farm listing claim and access your farmer dashboard.',

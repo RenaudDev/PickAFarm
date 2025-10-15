@@ -17,6 +17,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { currentUser } from '@clerk/nextjs/server';
 
+export const runtime = 'edge';
+
 /**
  * GET /api/clerk-callback
  *
