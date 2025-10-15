@@ -33,7 +33,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(new URL('/sign-in', request.url));
     }
 
-    console.log(`✅ Clerk callback: User authenticated - ${user.id} (${user.emailAddresses[0]?.emailAddress})`);
+    console.log(
+      `✅ Clerk callback: User authenticated - ${user.id} (${user.emailAddresses[0]?.emailAddress})`
+    );
 
     // Extract role and farmId from unsafe metadata
     const farmId = user.unsafeMetadata?.farmId as string | undefined;
@@ -56,7 +58,6 @@ export async function GET(request: NextRequest) {
     // Regular user - redirect to general dashboard
     console.log(`👤 Redirecting regular user to dashboard: /dashboard`);
     return NextResponse.redirect(new URL('/dashboard', request.url));
-
   } catch (error) {
     console.error('Clerk callback error:', error);
 

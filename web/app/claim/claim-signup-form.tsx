@@ -10,7 +10,7 @@ import { SignUp } from '@clerk/nextjs';
 export function ClaimSignUpForm({
   email,
   farmId,
-  claimToken
+  claimToken,
 }: {
   email: string;
   farmId: string;
@@ -26,16 +26,16 @@ export function ClaimSignUpForm({
           headerSubtitle: 'text-gray-600',
           socialButtonsBlockButton: 'border-gray-300 hover:bg-gray-50',
           formButtonPrimary: 'bg-green-700 hover:bg-green-800',
-          footerActionLink: 'text-green-700 hover:text-green-800'
-        }
+          footerActionLink: 'text-green-700 hover:text-green-800',
+        },
       }}
       initialValues={{
-        emailAddress: email
+        emailAddress: email,
       }}
       unsafeMetadata={{
         farmId,
         role: 'farmer',
-        claimToken
+        claimToken,
       }}
       redirectUrl="/dashboard/farmer"
       routing="hash"

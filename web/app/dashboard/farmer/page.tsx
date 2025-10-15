@@ -15,7 +15,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Farmer Dashboard | PickAFarm',
   description: 'Manage your farm listing and engage with customers.',
-  robots: 'noindex, nofollow' // Don't index dashboard pages
+  robots: 'noindex, nofollow', // Don't index dashboard pages
 };
 
 export default async function FarmerDashboardPage() {
@@ -40,12 +40,8 @@ export default async function FarmerDashboardPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">
-            Error: No Farm Associated
-          </h1>
-          <p className="text-gray-600 mb-6">
-            Your account is not associated with a farm listing.
-          </p>
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Error: No Farm Associated</h1>
+          <p className="text-gray-600 mb-6">Your account is not associated with a farm listing.</p>
           <a
             href="mailto:support@pickafarm.com"
             className="inline-block bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800"
@@ -66,24 +62,14 @@ export default async function FarmerDashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Farmer Dashboard
-              </h1>
-              <p className="text-sm text-gray-600 mt-1">
-                Welcome back, {userName}!
-              </p>
+              <h1 className="text-2xl font-bold text-gray-900">Farmer Dashboard</h1>
+              <p className="text-sm text-gray-600 mt-1">Welcome back, {userName}!</p>
             </div>
             <div className="flex items-center space-x-4">
-              <a
-                href="/profile"
-                className="text-gray-600 hover:text-gray-900"
-              >
+              <a href="/profile" className="text-gray-600 hover:text-gray-900">
                 Profile
               </a>
-              <a
-                href="/sign-out"
-                className="text-red-600 hover:text-red-700"
-              >
+              <a href="/sign-out" className="text-red-600 hover:text-red-700">
                 Sign Out
               </a>
             </div>
@@ -116,7 +102,8 @@ export default async function FarmerDashboardPage() {
                 🎉 Welcome to Your Farmer Dashboard!
               </h3>
               <p className="mt-2 text-green-800">
-                You've successfully claimed your farm listing. Your dashboard is currently under construction.
+                You've successfully claimed your farm listing. Your dashboard is currently under
+                construction.
               </p>
               <p className="mt-2 text-sm text-green-700">
                 Farm ID: <code className="bg-green-100 px-2 py-1 rounded">{farmId}</code>
@@ -145,16 +132,12 @@ export default async function FarmerDashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">
-                Farm Profile
-              </h3>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">Farm Profile</h3>
             </div>
             <p className="text-gray-600 mb-4">
               Edit your farm information, hours, and contact details.
             </p>
-            <p className="text-sm text-gray-500 italic">
-              Coming in Story 2.5
-            </p>
+            <p className="text-sm text-gray-500 italic">Coming in Story 2.5</p>
           </div>
 
           {/* Photos Card */}
@@ -175,16 +158,10 @@ export default async function FarmerDashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">
-                Photo Gallery
-              </h3>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">Photo Gallery</h3>
             </div>
-            <p className="text-gray-600 mb-4">
-              Upload and manage your farm photos and logos.
-            </p>
-            <p className="text-sm text-gray-500 italic">
-              Coming in Story 2.6
-            </p>
+            <p className="text-gray-600 mb-4">Upload and manage your farm photos and logos.</p>
+            <p className="text-sm text-gray-500 italic">Coming in Story 2.6</p>
           </div>
 
           {/* Broadcast Messages Card */}
@@ -205,16 +182,12 @@ export default async function FarmerDashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">
-                Broadcasts
-              </h3>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">Broadcasts</h3>
             </div>
             <p className="text-gray-600 mb-4">
               Send updates to your subscribers about opening dates and events.
             </p>
-            <p className="text-sm text-gray-500 italic">
-              Coming in Story 2.7
-            </p>
+            <p className="text-sm text-gray-500 italic">Coming in Story 2.7</p>
           </div>
 
           {/* Analytics Card */}
@@ -235,16 +208,12 @@ export default async function FarmerDashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">
-                Analytics
-              </h3>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">Analytics</h3>
             </div>
             <p className="text-gray-600 mb-4">
               View subscriber counts, page views, and engagement metrics.
             </p>
-            <p className="text-sm text-gray-500 italic">
-              Coming in Story 2.4
-            </p>
+            <p className="text-sm text-gray-500 italic">Coming in Story 2.4</p>
           </div>
 
           {/* Subscribers Card */}
@@ -265,16 +234,12 @@ export default async function FarmerDashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">
-                Subscribers
-              </h3>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">Subscribers</h3>
             </div>
             <p className="text-gray-600 mb-4">
               Manage your subscriber list and notification preferences.
             </p>
-            <p className="text-sm text-gray-500 italic">
-              Coming in Story 2.4
-            </p>
+            <p className="text-sm text-gray-500 italic">Coming in Story 2.4</p>
           </div>
 
           {/* Settings Card */}
@@ -301,24 +266,16 @@ export default async function FarmerDashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">
-                Settings
-              </h3>
+              <h3 className="ml-3 text-lg font-semibold text-gray-900">Settings</h3>
             </div>
-            <p className="text-gray-600 mb-4">
-              Configure your account settings and preferences.
-            </p>
-            <p className="text-sm text-gray-500 italic">
-              Coming in Story 2.5+
-            </p>
+            <p className="text-gray-600 mb-4">Configure your account settings and preferences.</p>
+            <p className="text-sm text-gray-500 italic">Coming in Story 2.5+</p>
           </div>
         </div>
 
         {/* Help Section */}
         <div className="mt-12 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
-            Need Help?
-          </h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Need Help?</h2>
           <p className="text-gray-600 mb-4">
             We're here to help you get the most out of your farmer dashboard.
           </p>
@@ -327,12 +284,7 @@ export default async function FarmerDashboardPage() {
               href="mailto:support@pickafarm.com"
               className="inline-flex items-center text-green-700 hover:text-green-800 font-medium"
             >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

@@ -16,16 +16,16 @@ import { ClaimSignUpForm, ClerkLoadingSkeleton } from './claim-signup-form';
 export const metadata: Metadata = {
   title: 'Claim Your Farm Listing | PickAFarm',
   description: 'Complete your farm listing claim and access your farmer dashboard.',
-  robots: 'noindex, nofollow' // Don't index claim pages
+  robots: 'noindex, nofollow', // Don't index claim pages
 };
 
 /**
  * Server Component - validates token server-side
  */
 export default async function ClaimPage({
-  searchParams
+  searchParams,
 }: {
-  searchParams: Promise<{ token?: string; expires?: string }>
+  searchParams: Promise<{ token?: string; expires?: string }>;
 }) {
   const params = await searchParams;
   const { token, expires } = params;
@@ -46,16 +46,14 @@ export default async function ClaimPage({
   // Validate token server-side
   let farmContext;
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
-    const response = await fetch(
-      `${apiUrl}/api/claim/validate-token`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, expires }),
-        cache: 'no-store' // Don't cache validation responses
-      }
-    );
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+    const response = await fetch(`${apiUrl}/api/claim/validate-token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, expires }),
+      cache: 'no-store', // Don't cache validation responses
+    });
 
     if (!response.ok) {
       throw new Error('Token validation failed');
@@ -100,25 +98,17 @@ export default async function ClaimPage({
               />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Claim Your Farm Listing
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Claim Your Farm Listing</h1>
           <p className="text-gray-600 mb-4">
             Complete your account setup to manage your farm dashboard
           </p>
 
           {/* Farm Info Card */}
           <div className="bg-white border-2 border-green-200 rounded-lg p-4 mt-6 text-left">
-            <p className="text-sm text-gray-500 uppercase tracking-wide mb-1">
-              Your Farm
-            </p>
-            <p className="text-xl font-bold text-green-800">
-              {farmContext.farmName}
-            </p>
+            <p className="text-sm text-gray-500 uppercase tracking-wide mb-1">Your Farm</p>
+            <p className="text-xl font-bold text-green-800">{farmContext.farmName}</p>
             {farmContext.farmLocation && (
-              <p className="text-sm text-gray-600 mt-1">
-                📍 {farmContext.farmLocation}
-              </p>
+              <p className="text-sm text-gray-600 mt-1">📍 {farmContext.farmLocation}</p>
             )}
           </div>
         </div>
@@ -171,9 +161,7 @@ function TokenExpiredError() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-red-600 mb-4">
-          Link Expired
-        </h1>
+        <h1 className="text-3xl font-bold text-red-600 mb-4">Link Expired</h1>
         <p className="text-gray-600 mb-8">
           This claim link has expired. Magic links are valid for 24 hours.
         </p>
@@ -213,9 +201,7 @@ function TokenAlreadyUsedError({ claimedAt }: { claimedAt?: string }) {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-yellow-700 mb-4">
-          Link Already Used
-        </h1>
+        <h1 className="text-3xl font-bold text-yellow-700 mb-4">Link Already Used</h1>
         <p className="text-gray-600 mb-8">
           This farm listing has already been claimed.
           {claimedAt && (
@@ -268,12 +254,8 @@ function TokenInvalidError() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-red-600 mb-4">
-          Invalid Link
-        </h1>
-        <p className="text-gray-600 mb-8">
-          This claim link is invalid or has been tampered with.
-        </p>
+        <h1 className="text-3xl font-bold text-red-600 mb-4">Invalid Link</h1>
+        <p className="text-gray-600 mb-8">This claim link is invalid or has been tampered with.</p>
         <p className="text-gray-600 mb-8">
           If you need assistance claiming your farm, please contact support.
         </p>
