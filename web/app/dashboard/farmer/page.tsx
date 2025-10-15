@@ -12,6 +12,9 @@ import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 
+// Cloudflare Pages requires edge runtime for dynamic routes
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Farmer Dashboard | PickAFarm',
   description: 'Manage your farm listing and engage with customers.',

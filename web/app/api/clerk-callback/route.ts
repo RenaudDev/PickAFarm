@@ -17,6 +17,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { currentUser } from '@clerk/nextjs/server';
 
+// Cloudflare Pages requires edge runtime for dynamic routes
+export const runtime = 'edge';
+
 /**
  * GET /api/clerk-callback
  *
