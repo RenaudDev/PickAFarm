@@ -24,7 +24,8 @@ export default clerkMiddleware(async (auth, request) => {
     }
 
     // Extract role from session claims
-    const role = sessionClaims?.unsafeMetadata?.role as string | undefined;
+    const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
+    const role = unsafeMetadata?.role;
 
     // Role-based routing logic for farmers
     if (role === USER_ROLES.FARMER) {
