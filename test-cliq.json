@@ -1,0 +1,3 @@
+{
+  "text": "🧪 **PickAFarm Monitoring Test**\n\n**Status:** Testing Cliq integration from QA review\n**Components:** Structured logging, correlation IDs, metrics tracking\n**Time:** 2025-10-14T21:40:00Z\n**Environment:** production\n\n✅ If you see this message, the Cliq webhook is working correctly!"
+}
