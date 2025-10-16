@@ -18,6 +18,9 @@
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
+// Cloudflare Pages requires edge runtime
+export const runtime = 'edge';
+
 export async function POST() {
   try {
     // Check authentication
