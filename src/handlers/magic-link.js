@@ -453,8 +453,10 @@ export async function handleClerkWebhook(request, env, method) {
       }
 
       // === STEP 5b: Update Clerk publicMetadata via Backend API ===
-      // Move validated role/farmId from unsafeMetadata to publicMetadata
-      // This makes them accessible in session tokens after Clerk Dashboard config
+      // SECURITY: Client signup form sets unsafeMetadata (client-accessible, user-modifiable)
+      // This webhook validates the claim token, then migrates role/farmId to publicMetadata
+      // publicMetadata is server-controlled (secure) and exposed in session tokens via Clerk Dashboard config
+      // This allows middleware to read sessionClaims.metadata.role for RBAC
       if (role === 'farmer' && tokenValid && farmId) {
         try {
           const clerkApiUrl = `https://api.clerk.com/v1/users/${clerkUserId}`;
