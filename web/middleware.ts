@@ -35,6 +35,15 @@ export default clerkMiddleware(async (auth, request) => {
       return NextResponse.next();
     }
 
+    // Story 2.2.2: Handle POST requests from Clerk's router.refresh()
+    // Clerk's __unstable__onBeforeSetActive calls router.refresh() after auth state changes
+    // This makes POST requests to the current route to revalidate server components
+    // Since page routes only handle GET requests, we catch POSTs here and return 200
+    // This prevents 405 Method Not Allowed errors during login/logout
+    if (request.method === 'POST' && !pathname.startsWith('/api/')) {
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
+
     const { userId, sessionClaims } = await auth();
 
     // Skip role-based routing if user is not authenticated
