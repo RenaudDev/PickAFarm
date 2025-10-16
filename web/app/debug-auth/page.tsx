@@ -51,8 +51,14 @@ export default async function DebugAuthPage() {
         <div className="bg-gray-100 rounded-lg shadow p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Session Info</h2>
           <div className="space-y-2">
-            <p><strong>Session ID:</strong> <code className="bg-white px-2 py-1 rounded">{authState.sessionId || 'N/A'}</code></p>
-            <p><strong>Timestamp:</strong> <code className="bg-white px-2 py-1 rounded">{timestamp}</code></p>
+            <p>
+              <strong>Session ID:</strong>{' '}
+              <code className="bg-white px-2 py-1 rounded">{authState.sessionId || 'N/A'}</code>
+            </p>
+            <p>
+              <strong>Timestamp:</strong>{' '}
+              <code className="bg-white px-2 py-1 rounded">{timestamp}</code>
+            </p>
           </div>
         </div>
 
@@ -67,10 +73,18 @@ export default async function DebugAuthPage() {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">User Info</h2>
           <div className="space-y-2">
-            <p><strong>User ID:</strong> {user.id}</p>
-            <p><strong>Email:</strong> {user.emailAddresses[0]?.emailAddress}</p>
-            <p><strong>First Name:</strong> {user.firstName || 'N/A'}</p>
-            <p><strong>Last Name:</strong> {user.lastName || 'N/A'}</p>
+            <p>
+              <strong>User ID:</strong> {user.id}
+            </p>
+            <p>
+              <strong>Email:</strong> {user.emailAddresses[0]?.emailAddress}
+            </p>
+            <p>
+              <strong>First Name:</strong> {user.firstName || 'N/A'}
+            </p>
+            <p>
+              <strong>Last Name:</strong> {user.lastName || 'N/A'}
+            </p>
           </div>
         </div>
 
@@ -96,9 +110,7 @@ export default async function DebugAuthPage() {
 
         {/* User.publicMetadata */}
         <div className="bg-purple-50 border-2 border-purple-500 rounded-lg shadow p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-purple-900">
-            🌐 user.publicMetadata
-          </h2>
+          <h2 className="text-xl font-semibold mb-4 text-purple-900">🌐 user.publicMetadata</h2>
           <pre className="bg-white p-4 rounded overflow-auto text-sm">
             {JSON.stringify(publicMetadata, null, 2)}
           </pre>
@@ -112,36 +124,41 @@ export default async function DebugAuthPage() {
           <div className="space-y-3">
             <div>
               <p className="font-semibold">sessionClaims.unsafeMetadata.role:</p>
-              <code className={`px-3 py-2 rounded block mt-2 ${unsafeMetadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
+              <code
+                className={`px-3 py-2 rounded block mt-2 ${unsafeMetadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}
+              >
                 {unsafeMetadataRole ? `✅ FOUND: "${unsafeMetadataRole}"` : '❌ NOT FOUND'}
               </code>
             </div>
 
             <div>
               <p className="font-semibold">sessionClaims.metadata.role (CORRECT PATH):</p>
-              <code className={`px-3 py-2 rounded block mt-2 ${metadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
+              <code
+                className={`px-3 py-2 rounded block mt-2 ${metadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}
+              >
                 {metadataRole ? `✅ FOUND: "${metadataRole}"` : '❌ NOT FOUND'}
               </code>
             </div>
 
             <div>
               <p className="font-semibold">sessionClaims.publicMetadata.role:</p>
-              <code className={`px-3 py-2 rounded block mt-2 ${publicMetadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
+              <code
+                className={`px-3 py-2 rounded block mt-2 ${publicMetadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}
+              >
                 {publicMetadataRole ? `✅ FOUND: "${publicMetadataRole}"` : '❌ NOT FOUND'}
               </code>
             </div>
 
             <div className="mt-4 p-4 bg-white rounded border-2 border-green-500">
               <p className="font-semibold text-lg">✅ Expected Role (from user.publicMetadata):</p>
-              <code className="text-2xl text-green-700">
-                {expectedRole || 'user (default)'}
-              </code>
+              <code className="text-2xl text-green-700">{expectedRole || 'user (default)'}</code>
             </div>
 
             <div className="mt-4 p-4 bg-blue-50 rounded">
               <p className="text-sm text-blue-900">
-                <strong>Note:</strong> After Clerk Dashboard configuration, role should appear in <code>sessionClaims.metadata.role</code>.
-                If you see ❌ NOT FOUND, the Clerk session token customization is not configured yet.
+                <strong>Note:</strong> After Clerk Dashboard configuration, role should appear in{' '}
+                <code>sessionClaims.metadata.role</code>. If you see ❌ NOT FOUND, the Clerk session
+                token customization is not configured yet.
               </p>
             </div>
           </div>
@@ -149,8 +166,12 @@ export default async function DebugAuthPage() {
 
         {/* Navigation */}
         <div className="mt-8 text-center">
-          <a href="/dashboard" className="text-blue-600 hover:underline mr-4">← Back to Dashboard</a>
-          <a href="/dashboard/farmer" className="text-green-600 hover:underline">Farmer Dashboard →</a>
+          <a href="/dashboard" className="text-blue-600 hover:underline mr-4">
+            ← Back to Dashboard
+          </a>
+          <a href="/dashboard/farmer" className="text-green-600 hover:underline">
+            Farmer Dashboard →
+          </a>
         </div>
       </div>
     </div>

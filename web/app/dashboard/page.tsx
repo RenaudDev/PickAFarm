@@ -43,9 +43,7 @@ export default async function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-6">
           <div>
-            <h1 className="text-4xl font-bold text-foreground">
-              Welcome back, {userName}!
-            </h1>
+            <h1 className="text-4xl font-bold text-foreground">Welcome back, {userName}!</h1>
             <p className="text-muted-foreground mt-2">This is your personal dashboard</p>
           </div>
 

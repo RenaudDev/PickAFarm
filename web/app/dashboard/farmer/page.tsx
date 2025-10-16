@@ -22,7 +22,7 @@ import DashboardLayout from '@/components/farmer/dashboard-layout';
 // Lazy-load chart component (Recharts is ~200KB, load only when needed)
 const PageViewsChart = dynamic(() => import('@/components/farmer/page-views-chart'), {
   loading: () => <ChartSkeleton />,
-  ssr: false // Chart requires DOM
+  ssr: false, // Chart requires DOM
 });
 
 interface DashboardData {
@@ -61,15 +61,12 @@ export default function FarmerDashboardPage() {
     async function fetchData() {
       try {
         const token = await getToken();
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/farmer/overview`,
-          {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            }
-          }
-        );
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/farmer/overview`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
@@ -111,9 +108,7 @@ export default function FarmerDashboardPage() {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Error Loading Dashboard</h1>
             <p className="text-gray-600 mb-6">{error}</p>
-            <Button onClick={() => window.location.reload()}>
-              Try Again
-            </Button>
+            <Button onClick={() => window.location.reload()}>Try Again</Button>
           </div>
         </div>
       </DashboardLayout>
@@ -137,9 +132,7 @@ export default function FarmerDashboardPage() {
           <h1 className="text-3xl font-bold text-gray-900">
             Welcome back, {user?.firstName || 'Farmer'}!
           </h1>
-          <p className="text-gray-600 mt-1">
-            Here's what's happening with {data.farm.name}
-          </p>
+          <p className="text-gray-600 mt-1">Here's what's happening with {data.farm.name}</p>
         </div>
 
         {/* Metrics Cards */}
@@ -165,7 +158,9 @@ export default function FarmerDashboardPage() {
           />
           <MetricCard
             title="Days Until Opening"
-            value={data.metrics.daysUntilOpening !== null ? data.metrics.daysUntilOpening : 'Not set'}
+            value={
+              data.metrics.daysUntilOpening !== null ? data.metrics.daysUntilOpening : 'Not set'
+            }
             icon={Calendar}
             color="purple"
           />
@@ -236,7 +231,8 @@ export default function FarmerDashboardPage() {
                   <span className="font-semibold text-green-600">
                     {data.recentActivity.newSubscribersThisWeek}
                   </span>{' '}
-                  new subscriber{data.recentActivity.newSubscribersThisWeek !== 1 ? 's' : ''} this week
+                  new subscriber{data.recentActivity.newSubscribersThisWeek !== 1 ? 's' : ''} this
+                  week
                 </p>
               </div>
             </CardContent>
@@ -261,24 +257,20 @@ function MetricCard({ title, value, icon: Icon, color, subtitle }: MetricCardPro
     blue: 'text-blue-600 bg-blue-50',
     green: 'text-green-600 bg-green-50',
     yellow: 'text-yellow-600 bg-yellow-50',
-    purple: 'text-purple-600 bg-purple-50'
+    purple: 'text-purple-600 bg-purple-50',
   };
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
         <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
           <Icon className="h-4 w-4" />
         </div>
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        {subtitle && (
-          <p className="text-xs text-gray-500 mt-1">{subtitle}</p>
-        )}
+        {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
       </CardContent>
     </Card>
   );

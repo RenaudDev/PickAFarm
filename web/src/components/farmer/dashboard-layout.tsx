@@ -16,17 +16,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useUser } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
-import {
-  Home,
-  Info,
-  Image,
-  Send,
-  BarChart,
-  TrendingUp,
-  Settings,
-  Menu,
-  X
-} from 'lucide-react';
+import { Home, Info, Image, Send, BarChart, TrendingUp, Settings, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
@@ -72,18 +62,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   href={item.disabled ? '#' : item.href}
                   className={cn(
                     'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
-                    isActive
-                      ? 'bg-[#2D5016] text-white'
-                      : 'text-gray-700 hover:bg-gray-100',
+                    isActive ? 'bg-[#2D5016] text-white' : 'text-gray-700 hover:bg-gray-100',
                     item.disabled && 'opacity-50 cursor-not-allowed'
                   )}
                   onClick={(e) => item.disabled && e.preventDefault()}
                 >
                   <Icon className="h-5 w-5 flex-shrink-0" />
                   <span className="font-medium">{item.name}</span>
-                  {item.disabled && (
-                    <span className="ml-auto text-xs">Soon</span>
-                  )}
+                  {item.disabled && <span className="ml-auto text-xs">Soon</span>}
                 </Link>
               );
             })}
@@ -147,9 +133,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     href={item.disabled ? '#' : item.href}
                     className={cn(
                       'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
-                      isActive
-                        ? 'bg-[#2D5016] text-white'
-                        : 'text-gray-700 hover:bg-gray-100',
+                      isActive ? 'bg-[#2D5016] text-white' : 'text-gray-700 hover:bg-gray-100',
                       item.disabled && 'opacity-50 cursor-not-allowed'
                     )}
                     onClick={(e) => {
@@ -162,9 +146,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   >
                     <Icon className="h-5 w-5 flex-shrink-0" />
                     <span className="font-medium">{item.name}</span>
-                    {item.disabled && (
-                      <span className="ml-auto text-xs">Soon</span>
-                    )}
+                    {item.disabled && <span className="ml-auto text-xs">Soon</span>}
                   </Link>
                 );
               })}
@@ -187,9 +169,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </Dialog>
 
       {/* Main Content */}
-      <main className="lg:ml-60 pt-16 lg:pt-0">
-        {children}
-      </main>
+      <main className="lg:ml-60 pt-16 lg:pt-0">{children}</main>
     </div>
   );
 }

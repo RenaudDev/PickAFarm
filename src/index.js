@@ -3170,16 +3170,12 @@ export default {
         try {
           farmData = await env.DB.prepare(`
             SELECT
-              zoho_record_id as id,
+              id,
               name,
               slug,
-              logo_url as logoUrl,
-              status,
-              rating,
-              review_count as reviewCount,
-              opening_date as openingDate
+              logo_url as logoUrl
             FROM farms
-            WHERE zoho_record_id = ?
+            WHERE id = ?
           `).bind(farmer.farmId).first();
         } catch (dbError) {
           logger.error('Database query failed for farm data', { error: dbError.message });
@@ -3233,17 +3229,8 @@ export default {
           // Non-critical, continue with 0
         }
 
-        // Calculate days until opening (if opening_date set)
-        let daysUntilOpening = null;
-        if (farmData.openingDate) {
-          try {
-            const now = new Date();
-            const opening = new Date(farmData.openingDate);
-            daysUntilOpening = Math.ceil((opening - now) / (1000 * 60 * 60 * 24));
-          } catch (dateError) {
-            logger.warn('Failed to calculate days until opening', { error: dateError.message });
-          }
-        }
+        // Calculate days until opening (TODO: Add opening_date column to farms table)
+        const daysUntilOpening = null;
 
         // Mock chart data (TODO: Replace with real analytics data in Story 2.12)
         const chartData = Array.from({ length: 30 }, (_, i) => {
@@ -3262,14 +3249,14 @@ export default {
             name: farmData.name,
             slug: farmData.slug,
             logoUrl: farmData.logoUrl || null,
-            status: farmData.status || 'Active',
-            rating: farmData.rating || 0,
-            reviewCount: farmData.reviewCount || 0
+            status: 'Active', // TODO: Add status column to farms table
+            rating: 0, // TODO: Calculate from reviews table
+            reviewCount: 0 // TODO: Count from reviews table
           },
           metrics: {
             subscribers: subscriberCount,
             pageViews: 0, // TODO: Implement analytics tracking (Story 2.12)
-            rating: farmData.rating || 0,
+            rating: 0, // TODO: Calculate from reviews table
             daysUntilOpening
           },
           recentActivity: {
