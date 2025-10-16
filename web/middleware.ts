@@ -27,8 +27,15 @@ function logRedirect(message: string) {
 
 export default clerkMiddleware(async (auth, request) => {
   try {
-    const { userId, sessionClaims } = await auth();
     const { pathname } = request.nextUrl;
+
+    // CRITICAL: Let Clerk handle its own API routes first
+    // Don't interfere with Clerk's internal authentication endpoints
+    if (pathname.startsWith('/api/__clerk') || pathname.startsWith('/api/clerk')) {
+      return NextResponse.next();
+    }
+
+    const { userId, sessionClaims } = await auth();
 
     // Skip role-based routing if user is not authenticated
     if (!userId) {
