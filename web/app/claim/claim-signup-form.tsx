@@ -32,11 +32,9 @@ export function ClaimSignUpForm({
       initialValues={{
         emailAddress: email,
       }}
-      publicMetadata={{
+      unsafeMetadata={{
         farmId,
         role: 'farmer',
-      }}
-      unsafeMetadata={{
         claimToken,
       }}
       redirectUrl="/dashboard/farmer"

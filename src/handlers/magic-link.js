@@ -390,10 +390,10 @@ export async function handleClerkWebhook(request, env, method) {
       const firstName = data.first_name || null;
       const lastName = data.last_name || null;
 
-      // Extract farm context from public_metadata (role, farmId)
-      // and unsafe_metadata (claimToken - sensitive)
-      const farmId = data.public_metadata?.farmId;
-      const role = data.public_metadata?.role || 'user';
+      // Extract farm context from unsafe_metadata (client-provided)
+      // We'll move these to publicMetadata via Clerk API after validation
+      const farmId = data.unsafe_metadata?.farmId;
+      const role = data.unsafe_metadata?.role || 'user';
       const claimToken = data.unsafe_metadata?.claimToken;
 
       if (!email) {
@@ -450,6 +450,38 @@ export async function handleClerkWebhook(request, env, method) {
           status: 200,
           headers: { "Content-Type": "application/json", ...corsHeaders }
         });
+      }
+
+      // === STEP 5b: Update Clerk publicMetadata via Backend API ===
+      // Move validated role/farmId from unsafeMetadata to publicMetadata
+      // This makes them accessible in session tokens after Clerk Dashboard config
+      if (role === 'farmer' && tokenValid && farmId) {
+        try {
+          const clerkApiUrl = `https://api.clerk.com/v1/users/${clerkUserId}`;
+          const clerkResponse = await fetch(clerkApiUrl, {
+            method: 'PATCH',
+            headers: {
+              'Authorization': `Bearer ${env.CLERK_SECRET_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              public_metadata: {
+                role: 'farmer',
+                farmId: farmId
+              }
+            })
+          });
+
+          if (!clerkResponse.ok) {
+            const errorText = await clerkResponse.text();
+            console.error(`Failed to update Clerk publicMetadata: ${clerkResponse.status} - ${errorText}`);
+          } else {
+            console.log(`✅ Clerk publicMetadata updated for user: ${clerkUserId}`);
+          }
+        } catch (clerkError) {
+          console.error('Failed to call Clerk API:', clerkError);
+          // Don't fail the webhook - publicMetadata update is not critical
+        }
       }
 
       // === STEP 6: Mark claim token as used (if farmer) ===
