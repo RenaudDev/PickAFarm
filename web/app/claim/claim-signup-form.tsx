@@ -32,13 +32,16 @@ export function ClaimSignUpForm({
       initialValues={{
         emailAddress: email,
       }}
+      // IMPORTANT: Client components can only set unsafeMetadata (client-accessible)
+      // The Clerk webhook will validate and migrate role/farmId to publicMetadata (server-controlled)
+      // claimToken stays in unsafeMetadata (not exposed in session token)
       unsafeMetadata={{
         farmId,
         role: 'farmer',
         claimToken,
       }}
       redirectUrl="/dashboard/farmer"
-      routing="hash"
+      routing="hash" // Required for Next.js static export compatibility
     />
   );
 }

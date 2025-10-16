@@ -285,6 +285,9 @@
     "location": "lowville-ny-us"
   },
   {
+    "location": "saint-jean-sur-richelieu-qc-ca"
+  },
+  {
     "location": "victoria-bc-ca"
   },
   {
@@ -295,6 +298,9 @@
   },
   {
     "location": "atlanta-ga-us"
+  },
+  {
+    "location": "brossard-qc-ca"
   },
   {
     "location": "chicago-il-us"
@@ -318,6 +324,9 @@
     "location": "portland-me-us"
   },
   {
+    "location": "repentigny-qc-ca"
+  },
+  {
     "location": "windsor-on-ca"
   },
   {
@@ -339,10 +348,13 @@
     "location": "greenwood-sc-us"
   },
   {
-    "location": "ottawa-on-ca"
+    "location": "longueuil-qc-ca"
   },
   {
-    "location": "saint-jean-sur-richelieu-qc-ca"
+    "location": "mirabel-qc-ca"
+  },
+  {
+    "location": "ottawa-on-ca"
   },
   {
     "location": "san-jose-ca-us"
@@ -357,22 +369,28 @@
     "location": "binghamton-ny-us"
   },
   {
-    "location": "brossard-qc-ca"
+    "location": "laval-qc-ca"
   },
   {
     "location": "lincoln-ne-us"
   },
   {
-    "location": "nanaimo-bc-ca"
+    "location": "montreal-qc-ca"
   },
   {
-    "location": "repentigny-qc-ca"
+    "location": "nanaimo-bc-ca"
   },
   {
     "location": "saint-hyacinthe-qc-ca"
   },
   {
+    "location": "saint-jrme-qc-ca"
+  },
+  {
     "location": "sherbrooke-qc-ca"
+  },
+  {
+    "location": "terrebonne-qc-ca"
   },
   {
     "location": "the-dalles-or-us"
@@ -381,13 +399,10 @@
     "location": "bangor-me-us"
   },
   {
+    "location": "blainville-qc-ca"
+  },
+  {
     "location": "fort-wayne-in-us"
-  },
-  {
-    "location": "longueuil-qc-ca"
-  },
-  {
-    "location": "mirabel-qc-ca"
   },
   {
     "location": "oak-ridge-tn-us"
@@ -426,16 +441,10 @@
     "location": "kingston-on-ca"
   },
   {
-    "location": "laval-qc-ca"
-  },
-  {
     "location": "long-beach-ca-us"
   },
   {
     "location": "manistee-mi-us"
-  },
-  {
-    "location": "montreal-qc-ca"
   },
   {
     "location": "moreno-valley-ca-us"
@@ -462,16 +471,10 @@
     "location": "rochester-mn-us"
   },
   {
-    "location": "saint-jrme-qc-ca"
-  },
-  {
     "location": "san-bernardino-ca-us"
   },
   {
     "location": "santa-ana-ca-us"
-  },
-  {
-    "location": "terrebonne-qc-ca"
   },
   {
     "location": "west-terre-haute-in-us"
@@ -481,9 +484,6 @@
   },
   {
     "location": "blacksburg-va-us"
-  },
-  {
-    "location": "blainville-qc-ca"
   },
   {
     "location": "chatham-kent-on-ca"

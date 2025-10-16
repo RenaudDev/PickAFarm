@@ -4,11 +4,16 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, UserButton, useAuth, useUser } from '@clerk/nextjs';
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
+
+  // Extract role from publicMetadata (Story 2.2.3: Role-aware navbar)
+  const role = user?.publicMetadata?.role as string | undefined;
+  const isFarmer = role === 'farmer';
 
   return (
     <nav className="bg-background border-b border-border sticky top-0 z-50">
@@ -69,31 +74,58 @@ function FarmNavbar() {
                 </SignUpButton>
               </>
             ) : (
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{
-                  elements: {
-                    avatarBox: 'w-10 h-10 rounded-full',
-                    userButtonPopoverCard: 'shadow-lg',
-                    userButtonPopoverActionButton: 'hover:bg-muted',
-                  },
-                }}
-              >
+              <div className="flex items-center gap-3">
+                {isFarmer && (
+                  <span className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 border border-green-200 rounded-full text-sm font-medium">
+                    <span className="text-base">🌾</span>
+                    Farmer Account
+                  </span>
+                )}
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      avatarBox: 'w-10 h-10 rounded-full',
+                      userButtonPopoverCard: 'shadow-lg',
+                      userButtonPopoverActionButton: 'hover:bg-muted',
+                    },
+                  }}
+                >
                 <UserButton.MenuItems>
-                  <UserButton.Link
-                    label="Dashboard"
-                    labelIcon={<span>📊</span>}
-                    href="/dashboard"
-                  />
-                  <UserButton.Link
-                    label="Subscriptions"
-                    labelIcon={<span>🔔</span>}
-                    href="/saved-farms"
-                  />
+                  {isFarmer ? (
+                    // Farmer-specific menu (Story 2.2.3: Role-aware navbar)
+                    <>
+                      <UserButton.Link
+                        label="Farm Dashboard"
+                        labelIcon={<span>🌾</span>}
+                        href="/dashboard/farmer"
+                      />
+                      <UserButton.Link
+                        label="Farm Analytics"
+                        labelIcon={<span>📊</span>}
+                        href="/dashboard/farmer/analytics"
+                      />
+                    </>
+                  ) : (
+                    // Regular user menu
+                    <>
+                      <UserButton.Link
+                        label="Dashboard"
+                        labelIcon={<span>📊</span>}
+                        href="/dashboard"
+                      />
+                      <UserButton.Link
+                        label="Subscriptions"
+                        labelIcon={<span>🔔</span>}
+                        href="/saved-farms"
+                      />
+                    </>
+                  )}
                   <UserButton.Action label="manageAccount" />
                   <UserButton.Action label="signOut" />
                 </UserButton.MenuItems>
-              </UserButton>
+                </UserButton>
+              </div>
             )}
           </div>
         </div>
@@ -170,18 +202,39 @@ function FarmNavbar() {
                   </>
                 ) : (
                   <>
-                    <a
-                      href="/dashboard"
-                      className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
-                    >
-                      📊 Dashboard
-                    </a>
-                    <a
-                      href="/saved-farms"
-                      className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
-                    >
-                      🔔 Subscriptions
-                    </a>
+                    {isFarmer ? (
+                      // Farmer mobile menu (Story 2.2.3: Role-aware mobile menu)
+                      <>
+                        <a
+                          href="/dashboard/farmer"
+                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
+                        >
+                          🌾 Farm Dashboard
+                        </a>
+                        <a
+                          href="/dashboard/farmer/analytics"
+                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
+                        >
+                          📊 Analytics
+                        </a>
+                      </>
+                    ) : (
+                      // Regular user mobile menu
+                      <>
+                        <a
+                          href="/dashboard"
+                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
+                        >
+                          📊 Dashboard
+                        </a>
+                        <a
+                          href="/saved-farms"
+                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
+                        >
+                          🔔 Subscriptions
+                        </a>
+                      </>
+                    )}
                     <div className="px-4 py-2 flex items-center justify-center">
                       <UserButton
                         afterSignOutUrl="/"
