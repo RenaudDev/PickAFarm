@@ -29,6 +29,17 @@ import {
   handleClerkWebhook
 } from './handlers/magic-link.js';
 
+/* === CLERK JWT AUTHENTICATION (Story 2.3) === */
+import {
+  verifyJWTSignature,
+  authenticateUser,
+  authenticateFarmer,
+  InvalidTokenError,
+  UserNotFoundError,
+  NotAFarmerError,
+  DatabaseError
+} from './lib/clerk-auth.js';
+
 /* === ZOHO CRM INTEGRATION === */
 
 /**
@@ -710,61 +721,98 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, x-webhook-token",
 };
 
-/* === CLERK AUTHENTICATION === */
+/* === ERROR RESPONSE UTILITIES === */
 
 /**
- * Decodes a base64url-encoded string (used in JWT tokens).
+ * Create standardized error response
  *
- * Base64url encoding replaces '+' with '-' and '/' with '_' to make
- * the string URL-safe. This function reverses that encoding.
+ * Returns a consistent JSON error response format for all API endpoints.
+ * Includes timestamp and optional details for debugging.
  *
- * @param {string} str - Base64url-encoded string
- * @returns {string} Decoded string
- * @throws {Error} If decoding fails
+ * @param {number} statusCode - HTTP status code (401, 403, 404, 500, etc.)
+ * @param {string} message - Error message (user-facing)
+ * @param {string} [details] - Optional additional details for debugging
+ * @param {string} [correlationId] - Optional correlation ID for request tracing
+ * @returns {Response} HTTP response with JSON error body
  */
-function base64UrlDecode(str) {
-  // Replace URL-safe characters with standard base64 characters
-  let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
-  
-  // Add padding if needed
-  const padding = base64.length % 4;
-  if (padding > 0) {
-    base64 += '='.repeat(4 - padding);
+function errorResponse(statusCode, message, details = null, correlationId = null) {
+  const body = {
+    error: message,
+    timestamp: new Date().toISOString()
+  };
+
+  if (details) {
+    body.details = details;
   }
-  
-  try {
-    // Use atob for base64 decoding (available in Workers)
-    const decoded = atob(base64);
-    return decoded;
-  } catch (e) {
-    throw new Error(`Base64 decode failed: ${e.message}`);
+
+  if (correlationId) {
+    body.correlationId = correlationId;
   }
+
+  const headers = {
+    "Content-Type": "application/json",
+    ...corsHeaders
+  };
+
+  if (correlationId) {
+    headers['X-Correlation-ID'] = correlationId;
+  }
+
+  return new Response(JSON.stringify(body), {
+    status: statusCode,
+    headers
+  });
 }
 
 /**
- * Verifies and decodes a Clerk JWT session token.
+ * Handle authentication errors for farmer endpoints
  *
- * SECURITY NOTE: This is a simplified JWT verification that only checks:
- * - Token structure (3 parts: header.payload.signature)
- * - Expiration time
- * - Payload format
+ * Maps authentication error types to appropriate HTTP responses.
  *
- * PRODUCTION WARNING: This does NOT verify the signature cryptographically.
- * For true security, use Clerk's official verification methods or verify
- * the signature against Clerk's public keys (JWKS endpoint).
+ * @param {Error} error - Authentication error
+ * @param {string} correlationId - Request correlation ID
+ * @returns {Response} HTTP error response
+ */
+function handleAuthenticationError(error, correlationId) {
+  if (error.name === 'InvalidTokenError') {
+    return errorResponse(401, "Missing or invalid authentication token", error.message, correlationId);
+  }
+  if (error.name === 'NotAFarmerError') {
+    return errorResponse(403, "User is not authorized to access farmer resources", error.message, correlationId);
+  }
+  if (error.name === 'UserNotFoundError') {
+    return errorResponse(403, "User not found in database", error.message, correlationId);
+  }
+  if (error.name === 'DatabaseError') {
+    return errorResponse(500, "Authentication service unavailable", "Database error occurred", correlationId);
+  }
+  // Generic error fallback
+  return errorResponse(500, "Internal server error", error.message, correlationId);
+}
+
+/* === CLERK AUTHENTICATION === */
+
+/**
+ * Verify Clerk JWT token with cryptographic signature verification
  *
- * The current implementation is acceptable because:
- * 1. Worker is behind Cloudflare's security
- * 2. Tokens are short-lived (typically 1 hour)
- * 3. Worst case: user can access their own data only
+ * ✅ UPDATED (Story 2.3): Now uses proper RS256 signature verification with Clerk JWKS
+ * (Previously only decoded and checked expiration - security vulnerability FIXED)
  *
- * @param {Request} request - Incoming HTTP request with Authorization header
+ * This function now verifies:
+ * 1. JWT signature using Clerk's public keys (RS256 cryptographic verification)
+ * 2. Token expiration
+ * 3. Token format and structure
+ *
+ * @deprecated For farmer endpoints, use authenticateFarmer() from clerk-auth module
+ * @deprecated For general user endpoints, use authenticateUser() from clerk-auth module
+ *
+ * @param {Request} request - HTTP request with Authorization header
  * @param {Object} env - Cloudflare Worker environment
- * @returns {Promise<Object>} Decoded user info: {userId, email, sessionId}
- * @throws {Error} If token is missing, malformed, or expired
+ * @returns {Promise<Object>} User context: { userId, email, sessionId }
+ * @throws {Error} If token is missing, invalid, expired, or signature verification fails
  */
 async function verifyClerkToken(request, env) {
-  console.log("🔐 Verifying Clerk token...");
+  console.log("🔐 Verifying Clerk token (with signature verification)...");
 
   const authHeader = request.headers.get("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -776,48 +824,15 @@ async function verifyClerkToken(request, env) {
   console.log(`📋 Token received, length: ${token.length}`);
 
   try {
-    // JWT format: header.payload.signature
-    const parts = token.split('.');
+    // Verify JWT signature cryptographically using Clerk JWKS
+    // (verifyJWTSignature imported at top of file)
+    const payload = await verifyJWTSignature(token, env);
 
-    if (parts.length !== 3) {
-      console.error(`❌ Invalid JWT format: ${parts.length} parts instead of 3`);
-      throw new Error("Invalid JWT format");
-    }
-
-    // Decode payload (second part) - base64url encoded JSON
-    console.log("🔓 Decoding JWT payload...");
-    let payloadStr;
-    try {
-      payloadStr = base64UrlDecode(parts[1]);
-    } catch (decodeError) {
-      console.error("❌ Base64 decode error:", decodeError.message);
-      throw new Error(`Failed to decode JWT payload: ${decodeError.message}`);
-    }
-
-    // Parse JSON payload
-    let payload;
-    try {
-      payload = JSON.parse(payloadStr);
-    } catch (parseError) {
-      console.error("❌ JSON parse error:", parseError.message);
-      throw new Error(`Failed to parse JWT payload: ${parseError.message}`);
-    }
-
-    console.log("✅ JWT decoded successfully:", {
+    console.log("✅ JWT signature verified and decoded successfully:", {
       sub: payload.sub?.substring(0, 20) + '...',
       exp: payload.exp,
       iss: payload.iss
     });
-
-    // Verify token hasn't expired (exp claim is Unix timestamp)
-    if (payload.exp) {
-      const now = Math.floor(Date.now() / 1000);
-      if (payload.exp < now) {
-        console.error(`❌ Token expired: exp=${payload.exp}, now=${now}`);
-        throw new Error("Token expired");
-      }
-      console.log(`✅ Token valid, expires in ${payload.exp - now} seconds`);
-    }
 
     // Extract user information from standard JWT claims
     return {
@@ -3031,6 +3046,111 @@ export default {
 
     if (url.pathname === "/api/webhooks/clerk") {
       return handleClerkWebhook(request, env, method);
+    }
+
+    // FARMER DASHBOARD ENDPOINTS (Story 2.3 - Protected with farmer authentication)
+    if (url.pathname === "/api/farmer/dashboard") {
+      // Test endpoint for farmer authentication middleware
+      try {
+        // Authenticate farmer (throws if not authorized)
+        // (authenticateFarmer imported at top of file)
+        const farmer = await authenticateFarmer(request, env);
+
+        logger.info('Farmer authenticated successfully', {
+          userId: farmer.userId,
+          farmId: farmer.farmId,
+          email: farmer.email
+        });
+
+        // Return farmer context
+        return new Response(JSON.stringify({
+          success: true,
+          message: "Farmer dashboard access granted",
+          farmer: {
+            userId: farmer.userId,
+            farmId: farmer.farmId,
+            email: farmer.email,
+            role: farmer.role
+          },
+          timestamp: new Date().toISOString()
+        }), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+            'X-Correlation-ID': correlationId
+          }
+        });
+      } catch (error) {
+        logger.error('Farmer authentication failed', {
+          error: error.message,
+          errorName: error.name
+        });
+
+        return handleAuthenticationError(error, correlationId);
+      }
+    }
+
+    if (url.pathname === "/api/farmer/farm") {
+      // Test endpoint - Returns farm data for authenticated farmer
+      try {
+        // Authenticate farmer
+        // (authenticateFarmer imported at top of file)
+        const farmer = await authenticateFarmer(request, env);
+
+        logger.info('Fetching farm data for farmer', {
+          userId: farmer.userId,
+          farmId: farmer.farmId
+        });
+
+        // Query D1 for farm data
+        let farm;
+        try {
+          farm = await env.DB.prepare(
+            'SELECT zoho_record_id, name, city, state, country FROM farms WHERE zoho_record_id = ?'
+          ).bind(farmer.farmId).first();
+        } catch (dbError) {
+          logger.error('Database query failed', { error: dbError.message });
+          return errorResponse(500, "Failed to fetch farm data", "Database error occurred", correlationId);
+        }
+
+        if (!farm) {
+          logger.error('Farm not found', { farmId: farmer.farmId });
+          return errorResponse(404, "Farm not found", `No farm found with ID: ${farmer.farmId}`, correlationId);
+        }
+
+        // Return farm data
+        return new Response(JSON.stringify({
+          success: true,
+          message: "Farm data retrieved successfully",
+          farmer: {
+            userId: farmer.userId,
+            email: farmer.email
+          },
+          farm: {
+            id: farm.zoho_record_id,
+            name: farm.name,
+            city: farm.city,
+            state: farm.state,
+            country: farm.country
+          },
+          timestamp: new Date().toISOString()
+        }), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+            'X-Correlation-ID': correlationId
+          }
+        });
+      } catch (error) {
+        logger.error('Farmer farm fetch failed', {
+          error: error.message,
+          errorName: error.name
+        });
+
+        return handleAuthenticationError(error, correlationId);
+      }
     }
 
     // ZOHO DEBUG ENDPOINTS

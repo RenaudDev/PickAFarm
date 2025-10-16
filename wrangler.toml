@@ -11,6 +11,7 @@ GITHUB_EVENT = "rebuild-farms"
 ZOHO_DC = "ca"
 FROM_EMAIL = "PickAFarm Notifications <updates@notifications.pickafarm.com>"
 CDN_DOMAIN = "https://cdn.pickafarm.com" # Custom domain for R2 bucket (fallback: https://pub-326783be0962429fb08c8a70c6b02503.r2.dev)
+CLERK_FRONTEND_API = "https://clerk.pickafarm.com" # Clerk JWKS endpoint domain
 
 [[d1_databases]]
 binding = "DB"
