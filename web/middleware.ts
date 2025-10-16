@@ -44,8 +44,9 @@ export default clerkMiddleware(async (auth, request) => {
 
     // Extract role from session claims
     // NOTE: Custom claims are configured in Clerk Dashboard -> Sessions -> Customize session token
-    // We expose unsafeMetadata.role as a custom claim named "role"
-    const role = sessionClaims?.role as string | undefined;
+    // We expose publicMetadata as a custom claim named "metadata"
+    // This gives us access to user.publicMetadata.role in middleware
+    const role = sessionClaims?.metadata?.role as string | undefined;
 
     // Role-based routing logic for farmers
     if (role === USER_ROLES.FARMER) {

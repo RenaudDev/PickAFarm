@@ -390,9 +390,10 @@ export async function handleClerkWebhook(request, env, method) {
       const firstName = data.first_name || null;
       const lastName = data.last_name || null;
 
-      // Extract farm context from unsafe_metadata
-      const farmId = data.unsafe_metadata?.farmId;
-      const role = data.unsafe_metadata?.role || 'user';
+      // Extract farm context from public_metadata (role, farmId)
+      // and unsafe_metadata (claimToken - sensitive)
+      const farmId = data.public_metadata?.farmId;
+      const role = data.public_metadata?.role || 'user';
       const claimToken = data.unsafe_metadata?.claimToken;
 
       if (!email) {

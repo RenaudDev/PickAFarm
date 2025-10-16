@@ -29,9 +29,9 @@ export default async function FarmerDashboardPage() {
     redirect('/sign-in');
   }
 
-  // Extract farm context from metadata
-  const farmId = user.unsafeMetadata?.farmId as string | undefined;
-  const role = user.unsafeMetadata?.role as string | undefined;
+  // Extract farm context from publicMetadata (secure, server-controlled)
+  const farmId = user.publicMetadata?.farmId as string | undefined;
+  const role = user.publicMetadata?.role as string | undefined;
 
   // Verify user has farmer role
   if (role !== 'farmer') {

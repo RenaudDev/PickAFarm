@@ -40,9 +40,9 @@ export async function GET(request: NextRequest) {
       `✅ Clerk callback: User authenticated - ${user.id} (${user.emailAddresses[0]?.emailAddress})`
     );
 
-    // Extract role and farmId from unsafe metadata
-    const farmId = user.unsafeMetadata?.farmId as string | undefined;
-    const role = user.unsafeMetadata?.role as string | undefined;
+    // Extract role and farmId from publicMetadata (secure, server-controlled)
+    const farmId = user.publicMetadata?.farmId as string | undefined;
+    const role = user.publicMetadata?.role as string | undefined;
 
     console.log(`📋 User metadata: role=${role}, farmId=${farmId}`);
 

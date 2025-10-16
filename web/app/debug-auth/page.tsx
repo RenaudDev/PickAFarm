@@ -27,10 +27,28 @@ export default async function DebugAuthPage() {
   const unsafeMetadata = user.unsafeMetadata;
   const publicMetadata = user.publicMetadata;
 
+  // Check metadata paths for role
+  const unsafeMetadataRole = (sessionClaims as any)?.unsafeMetadata?.role;
+  const metadataRole = (sessionClaims as any)?.metadata?.role;
+  const publicMetadataRole = (sessionClaims as any)?.publicMetadata?.role;
+  const expectedRole = (publicMetadata as any)?.role;
+
+  // Timestamp for debugging
+  const timestamp = new Date().toISOString();
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">🔍 Auth Debug Info</h1>
+
+        {/* Debug Session Info */}
+        <div className="bg-gray-100 rounded-lg shadow p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4">Session Info</h2>
+          <div className="space-y-2">
+            <p><strong>Session ID:</strong> <code className="bg-white px-2 py-1 rounded">{authState.sessionId || 'N/A'}</code></p>
+            <p><strong>Timestamp:</strong> <code className="bg-white px-2 py-1 rounded">{timestamp}</code></p>
+          </div>
+        </div>
 
         {/* User Info */}
         <div className="bg-white rounded-lg shadow p-6 mb-6">
@@ -76,35 +94,42 @@ export default async function DebugAuthPage() {
         {/* Middleware Access Test */}
         <div className="bg-yellow-50 border-2 border-yellow-500 rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-4 text-yellow-900">
-            ⚠️ Middleware Access Test
+            ⚠️ Middleware Access Test (What Middleware Can See)
           </h2>
           <div className="space-y-3">
             <div>
-              <p className="font-semibold">Attempting to access role via sessionClaims.unsafeMetadata:</p>
-              <code className="bg-white px-3 py-2 rounded block mt-2">
-                {(sessionClaims as any)?.unsafeMetadata?.role || '❌ NOT FOUND'}
+              <p className="font-semibold">sessionClaims.unsafeMetadata.role:</p>
+              <code className={`px-3 py-2 rounded block mt-2 ${unsafeMetadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
+                {unsafeMetadataRole ? `✅ FOUND: "${unsafeMetadataRole}"` : '❌ NOT FOUND'}
               </code>
             </div>
 
             <div>
-              <p className="font-semibold">Attempting to access role via sessionClaims.metadata:</p>
-              <code className="bg-white px-3 py-2 rounded block mt-2">
-                {(sessionClaims as any)?.metadata?.role || '❌ NOT FOUND'}
+              <p className="font-semibold">sessionClaims.metadata.role (CORRECT PATH):</p>
+              <code className={`px-3 py-2 rounded block mt-2 ${metadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
+                {metadataRole ? `✅ FOUND: "${metadataRole}"` : '❌ NOT FOUND'}
               </code>
             </div>
 
             <div>
-              <p className="font-semibold">Attempting to access role via sessionClaims.publicMetadata:</p>
-              <code className="bg-white px-3 py-2 rounded block mt-2">
-                {(sessionClaims as any)?.publicMetadata?.role || '❌ NOT FOUND'}
+              <p className="font-semibold">sessionClaims.publicMetadata.role:</p>
+              <code className={`px-3 py-2 rounded block mt-2 ${publicMetadataRole ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`}>
+                {publicMetadataRole ? `✅ FOUND: "${publicMetadataRole}"` : '❌ NOT FOUND'}
               </code>
             </div>
 
-            <div className="mt-4 p-4 bg-white rounded">
-              <p className="font-semibold text-lg">✅ Expected Role:</p>
+            <div className="mt-4 p-4 bg-white rounded border-2 border-green-500">
+              <p className="font-semibold text-lg">✅ Expected Role (from user.publicMetadata):</p>
               <code className="text-2xl text-green-700">
-                {(unsafeMetadata as any)?.role || 'undefined'}
+                {expectedRole || 'user (default)'}
               </code>
+            </div>
+
+            <div className="mt-4 p-4 bg-blue-50 rounded">
+              <p className="text-sm text-blue-900">
+                <strong>Note:</strong> After Clerk Dashboard configuration, role should appear in <code>sessionClaims.metadata.role</code>.
+                If you see ❌ NOT FOUND, the Clerk session token customization is not configured yet.
+              </p>
             </div>
           </div>
         </div>
