@@ -3170,12 +3170,12 @@ export default {
         try {
           farmData = await env.DB.prepare(`
             SELECT
-              id,
+              zoho_record_id as id,
               name,
               slug,
               logo_url as logoUrl
             FROM farms
-            WHERE id = ?
+            WHERE zoho_record_id = ?
           `).bind(farmer.farmId).first();
         } catch (dbError) {
           logger.error('Database query failed for farm data', { error: dbError.message });
