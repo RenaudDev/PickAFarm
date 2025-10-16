@@ -9,6 +9,7 @@
 
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import { MigrateButton } from './migrate-button';
 
 // Cloudflare Pages requires edge runtime
 export const runtime = 'edge';
@@ -33,6 +34,11 @@ export default async function DebugAuthPage() {
   const publicMetadataRole = (sessionClaims as any)?.publicMetadata?.role;
   const expectedRole = (publicMetadata as any)?.role;
 
+  // Check if migration is needed
+  const hasPublicMetadata = !!expectedRole;
+  const hasUnsafeMetadata = !!(unsafeMetadata as any)?.role;
+  const unsafeRole = (unsafeMetadata as any)?.role;
+
   // Timestamp for debugging
   const timestamp = new Date().toISOString();
 
@@ -49,6 +55,13 @@ export default async function DebugAuthPage() {
             <p><strong>Timestamp:</strong> <code className="bg-white px-2 py-1 rounded">{timestamp}</code></p>
           </div>
         </div>
+
+        {/* Migration Button - Shows only if migration needed */}
+        <MigrateButton
+          hasPublicMetadata={hasPublicMetadata}
+          hasUnsafeMetadata={hasUnsafeMetadata}
+          role={unsafeRole}
+        />
 
         {/* User Info */}
         <div className="bg-white rounded-lg shadow p-6 mb-6">
