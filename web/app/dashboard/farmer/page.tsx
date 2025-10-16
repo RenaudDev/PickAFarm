@@ -71,38 +71,6 @@ export default async function FarmerDashboardPage() {
             <h1 className="text-3xl font-bold text-gray-900">Farmer Dashboard</h1>
             <p className="text-gray-600 mt-2">Welcome back, {userName}!</p>
           </div>
-        {/* Success Message */}
-        <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 rounded-r-lg">
-          <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <svg
-                className="h-6 w-6 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <h3 className="text-lg font-medium text-green-900">
-                🎉 Welcome to Your Farmer Dashboard!
-              </h3>
-              <p className="mt-2 text-green-800">
-                You've successfully claimed your farm listing. Your dashboard is currently under
-                construction.
-              </p>
-              <p className="mt-2 text-sm text-green-700">
-                Farm ID: <code className="bg-green-100 px-2 py-1 rounded">{farmId}</code>
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* Coming Soon Cards */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
