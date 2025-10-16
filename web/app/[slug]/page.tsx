@@ -40,11 +40,45 @@ import { StateMapSection } from '@/components/state-map-section';
 import { CategoryMapSection } from '@/components/category-map-section';
 import { getStateName } from '@/lib/state-utils';
 
-// Make state overview pages dynamic (category pages are more specific)
-export const runtime = 'edge'; // Required for Cloudflare Pages
-export const dynamic = 'force-dynamic';
-export const dynamicParams = true;
-export const revalidate = 3600; // Cache for 1 hour
+// Generate static params for BOTH categories AND state pages
+export async function generateStaticParams() {
+  try {
+    // Get category slugs
+    const validCategories = Object.values(categoriesData)
+      .filter((category: any) => {
+        return category &&
+               typeof category === 'object' &&
+               category.slug &&
+               typeof category.slug === 'string' &&
+               category.slug.length > 0 &&
+               !category.slug.includes('.') &&
+               !category.slug.startsWith('_') &&
+               category.slug !== 'favicon'
+      })
+      .map((category: any) => ({
+        slug: category.slug
+      }))
+
+    // Get state slugs
+    const stateParams = statesData.map(state => ({
+      slug: state.state_slug
+    }))
+
+    // Combine both
+    const allParams = [...validCategories, ...stateParams]
+
+    console.log('Generated static params:', {
+      categories: validCategories.length,
+      states: stateParams.length,
+      total: allParams.length
+    })
+
+    return allParams
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
+}
 
 // Generate metadata for SEO
 export async function generateMetadata({
