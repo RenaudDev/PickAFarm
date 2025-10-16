@@ -1,6 +1,18 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
+/**
+ * Role-Based Route Guards Middleware
+ * Story 2.2.1: Farmer/User UX Separation
+ *
+ * IMPORTANT SETUP REQUIRED:
+ * This middleware requires Clerk session token customization to work.
+ * See web/CLERK_SETUP.md for configuration instructions.
+ *
+ * Without session token customization, middleware cannot detect farmer role
+ * and all users will be treated as regular users.
+ */
+
 // Role constants for type safety and maintainability
 const USER_ROLES = {
   FARMER: 'farmer',
@@ -24,9 +36,9 @@ export default clerkMiddleware(async (auth, request) => {
     }
 
     // Extract role from session claims
-    // NOTE: publicMetadata IS included in session claims, unsafeMetadata is NOT
-    const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
-    const role = publicMetadata?.role;
+    // NOTE: Custom claims are configured in Clerk Dashboard -> Sessions -> Customize session token
+    // We expose unsafeMetadata.role as a custom claim named "role"
+    const role = sessionClaims?.role as string | undefined;
 
     // Role-based routing logic for farmers
     if (role === USER_ROLES.FARMER) {
