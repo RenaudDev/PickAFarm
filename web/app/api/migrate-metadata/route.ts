@@ -89,7 +89,9 @@ export async function POST() {
 
     if (!clerkResponse.ok) {
       const errorText = await clerkResponse.text();
-      console.error(`Failed to update Clerk publicMetadata: ${clerkResponse.status} - ${errorText}`);
+      console.error(
+        `Failed to update Clerk publicMetadata: ${clerkResponse.status} - ${errorText}`
+      );
       return NextResponse.json(
         {
           error: 'Failed to update metadata',

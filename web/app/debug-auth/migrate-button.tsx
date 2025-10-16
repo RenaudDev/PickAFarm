@@ -80,21 +80,24 @@ export function MigrateButton({ hasPublicMetadata, hasUnsafeMetadata, role }: Mi
       <div className="space-y-4">
         <div className="bg-white p-4 rounded">
           <p className="text-gray-900 mb-2">
-            <strong>Issue Detected:</strong> Your account has role information in <code>unsafeMetadata</code> but not in <code>publicMetadata</code>.
+            <strong>Issue Detected:</strong> Your account has role information in{' '}
+            <code>unsafeMetadata</code> but not in <code>publicMetadata</code>.
           </p>
           <p className="text-gray-700 mb-2">
-            This happens for accounts created before the recent authentication update. Your role is stored in the wrong location,
-            which causes routing issues (e.g., farmers being redirected to regular user dashboard).
+            This happens for accounts created before the recent authentication update. Your role is
+            stored in the wrong location, which causes routing issues (e.g., farmers being
+            redirected to regular user dashboard).
           </p>
           <p className="text-gray-700">
-            <strong>Your role:</strong> <code className="bg-gray-100 px-2 py-1 rounded">{role}</code>
+            <strong>Your role:</strong>{' '}
+            <code className="bg-gray-100 px-2 py-1 rounded">{role}</code>
           </p>
         </div>
 
         <div className="bg-yellow-50 p-4 rounded border border-yellow-400">
           <p className="text-yellow-900">
-            <strong>Solution:</strong> Click the button below to migrate your metadata to the correct location.
-            This is a one-time fix that will enable proper role-based routing.
+            <strong>Solution:</strong> Click the button below to migrate your metadata to the
+            correct location. This is a one-time fix that will enable proper role-based routing.
           </p>
         </div>
 
@@ -109,7 +112,9 @@ export function MigrateButton({ hasPublicMetadata, hasUnsafeMetadata, role }: Mi
         {result && (
           <div
             className={`p-4 rounded ${
-              result.success ? 'bg-green-50 border border-green-500' : 'bg-red-50 border border-red-500'
+              result.success
+                ? 'bg-green-50 border border-green-500'
+                : 'bg-red-50 border border-red-500'
             }`}
           >
             {result.success ? (

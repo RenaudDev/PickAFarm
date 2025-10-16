@@ -8,7 +8,15 @@
 
 'use client';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 interface PageViewsChartProps {
   data: Array<{ date: string; views: number }>;
@@ -33,14 +41,14 @@ export default function PageViewsChart({ data }: PageViewsChartProps) {
             backgroundColor: 'white',
             border: '1px solid #e5e7eb',
             borderRadius: '8px',
-            padding: '8px 12px'
+            padding: '8px 12px',
           }}
           labelFormatter={(value) => {
             const date = new Date(value as string);
             return date.toLocaleDateString('en-US', {
               month: 'short',
               day: 'numeric',
-              year: 'numeric'
+              year: 'numeric',
             });
           }}
         />
