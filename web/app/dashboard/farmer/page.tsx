@@ -1,6 +1,7 @@
 /**
  * Farmer Dashboard Home Page
  * Story 2.2: Clerk Farmer Role & Magic Link Authentication
+ * Story 2.2.3: Farmer/User UX Polish & Dashboard Page Fixes
  *
  * Route: /dashboard/farmer
  *
@@ -11,6 +12,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
+import { FarmNavbar } from '@/components/farm-navbar';
 
 // Cloudflare Pages requires edge runtime for dynamic routes
 export const runtime = 'edge';
@@ -59,29 +61,16 @@ export default async function FarmerDashboardPage() {
   const userName = user.firstName || user.emailAddresses[0]?.emailAddress || 'Farmer';
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Farmer Dashboard</h1>
-              <p className="text-sm text-gray-600 mt-1">Welcome back, {userName}!</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <a href="/profile" className="text-gray-600 hover:text-gray-900">
-                Profile
-              </a>
-              <a href="/sign-out" className="text-red-600 hover:text-red-700">
-                Sign Out
-              </a>
-            </div>
+    <>
+      <FarmNavbar />
+      <div className="min-h-screen bg-gray-50">
+        {/* Main Content */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Welcome Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">Farmer Dashboard</h1>
+            <p className="text-gray-600 mt-2">Welcome back, {userName}!</p>
           </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Success Message */}
         <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 rounded-r-lg">
           <div className="flex items-start">
@@ -299,7 +288,8 @@ export default async function FarmerDashboardPage() {
             </a>
           </div>
         </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
