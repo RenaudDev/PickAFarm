@@ -3153,6 +3153,158 @@ export default {
       }
     }
 
+    if (url.pathname === "/api/farmer/overview") {
+      // Story 2.4: Farmer Dashboard Overview Endpoint
+      // Returns metrics, chart data, and quick stats for farmer dashboard home page
+      try {
+        // Authenticate farmer
+        const farmer = await authenticateFarmer(request, env);
+
+        logger.info('Fetching dashboard overview for farmer', {
+          userId: farmer.userId,
+          farmId: farmer.farmId
+        });
+
+        // Query farm data
+        let farmData;
+        try {
+          farmData = await env.DB.prepare(`
+            SELECT
+              zoho_record_id as id,
+              name,
+              slug,
+              logo_url as logoUrl,
+              status,
+              rating,
+              review_count as reviewCount,
+              opening_date as openingDate
+            FROM farms
+            WHERE zoho_record_id = ?
+          `).bind(farmer.farmId).first();
+        } catch (dbError) {
+          logger.error('Database query failed for farm data', { error: dbError.message });
+          return errorResponse(500, "Failed to fetch farm data", "Database error occurred", correlationId);
+        }
+
+        if (!farmData) {
+          logger.error('Farm not found', { farmId: farmer.farmId });
+          return errorResponse(404, "Farm not found", `No farm found with ID: ${farmer.farmId}`, correlationId);
+        }
+
+        // Query subscriber count
+        let subscriberCount = 0;
+        try {
+          const subscribersResult = await env.DB.prepare(`
+            SELECT COUNT(*) as count
+            FROM saved_farms
+            WHERE farm_id = ? AND active = 1
+          `).bind(farmer.farmId).first();
+          subscriberCount = subscribersResult?.count || 0;
+        } catch (dbError) {
+          logger.warn('Failed to query subscriber count', { error: dbError.message });
+          // Non-critical, continue with 0
+        }
+
+        // Query recent broadcasts (Story 2.8+ - table may not exist yet)
+        let broadcastCount = 0;
+        let newSubscribersThisWeek = 0;
+        try {
+          const broadcastsResult = await env.DB.prepare(`
+            SELECT COUNT(*) as count
+            FROM broadcasts
+            WHERE farm_id = ? AND created_at >= datetime('now', '-7 days')
+          `).bind(farmer.farmId).first();
+          broadcastCount = broadcastsResult?.count || 0;
+        } catch (dbError) {
+          logger.info('Broadcasts table not yet created (expected for Story 2.4)', { error: dbError.message });
+          // Non-critical, table will be created in Story 2.8
+        }
+
+        // Query new subscribers this week
+        try {
+          const newSubsResult = await env.DB.prepare(`
+            SELECT COUNT(*) as count
+            FROM saved_farms
+            WHERE farm_id = ? AND active = 1 AND created_at >= datetime('now', '-7 days')
+          `).bind(farmer.farmId).first();
+          newSubscribersThisWeek = newSubsResult?.count || 0;
+        } catch (dbError) {
+          logger.warn('Failed to query new subscribers', { error: dbError.message });
+          // Non-critical, continue with 0
+        }
+
+        // Calculate days until opening (if opening_date set)
+        let daysUntilOpening = null;
+        if (farmData.openingDate) {
+          try {
+            const now = new Date();
+            const opening = new Date(farmData.openingDate);
+            daysUntilOpening = Math.ceil((opening - now) / (1000 * 60 * 60 * 24));
+          } catch (dateError) {
+            logger.warn('Failed to calculate days until opening', { error: dateError.message });
+          }
+        }
+
+        // Mock chart data (TODO: Replace with real analytics data in Story 2.12)
+        const chartData = Array.from({ length: 30 }, (_, i) => {
+          const date = new Date();
+          date.setDate(date.getDate() - (29 - i));
+          return {
+            date: date.toISOString().split('T')[0],
+            views: Math.floor(Math.random() * 150) + 50 // Mock data: 50-200 views per day
+          };
+        });
+
+        // Return dashboard overview response
+        const response = {
+          farm: {
+            id: farmData.id,
+            name: farmData.name,
+            slug: farmData.slug,
+            logoUrl: farmData.logoUrl || null,
+            status: farmData.status || 'Active',
+            rating: farmData.rating || 0,
+            reviewCount: farmData.reviewCount || 0
+          },
+          metrics: {
+            subscribers: subscriberCount,
+            pageViews: 0, // TODO: Implement analytics tracking (Story 2.12)
+            rating: farmData.rating || 0,
+            daysUntilOpening
+          },
+          recentActivity: {
+            broadcasts: broadcastCount,
+            lastBroadcastDate: null, // TODO: Query last broadcast timestamp (Story 2.8)
+            newSubscribersThisWeek
+          },
+          chartData
+        };
+
+        logger.info('Dashboard overview retrieved successfully', {
+          farmId: farmer.farmId,
+          subscribers: subscriberCount,
+          broadcasts: broadcastCount
+        });
+
+        return new Response(JSON.stringify(response), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+            'X-Correlation-ID': correlationId
+          }
+        });
+      } catch (error) {
+        logger.error('Farmer dashboard overview fetch failed', {
+          error: error.message,
+          errorName: error.name,
+          stack: error.stack
+        });
+
+        return handleAuthenticationError(error, correlationId);
+      }
+    }
+
     // ZOHO DEBUG ENDPOINTS
     if (url.pathname === "/api/zoho-debug") {
       return handleZohoDebug(request, env, method);

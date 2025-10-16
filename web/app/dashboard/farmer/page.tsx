@@ -1,263 +1,328 @@
 /**
- * Farmer Dashboard Home Page
- * Story 2.2: Clerk Farmer Role & Magic Link Authentication
- * Story 2.2.3: Farmer/User UX Polish & Dashboard Page Fixes
+ * Farmer Dashboard Overview Page
+ * Story 2.4: Farmer Dashboard Layout & Overview Page
  *
  * Route: /dashboard/farmer
  *
- * This is a placeholder page for the farmer dashboard.
- * Full dashboard implementation will be in Story 2.4+
+ * Displays key metrics, chart, and quick actions for authenticated farmers.
+ * Replaces placeholder page from Story 2.2.
  */
 
-import { currentUser } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
-import type { Metadata } from 'next';
-import { FarmNavbar } from '@/components/farm-navbar';
+'use client';
 
-// Cloudflare Pages requires edge runtime for dynamic routes
-export const runtime = 'edge';
+import { useEffect, useState } from 'react';
+import { useAuth, useUser } from '@clerk/nextjs';
+import dynamic from 'next/dynamic';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Users, Eye, Star, Calendar, ExternalLink, PenSquare, Upload, Send } from 'lucide-react';
+import DashboardLayout from '@/components/farmer/dashboard-layout';
 
-export const metadata: Metadata = {
-  title: 'Farmer Dashboard | PickAFarm',
-  description: 'Manage your farm listing and engage with customers.',
-  robots: 'noindex, nofollow', // Don't index dashboard pages
-};
+// Lazy-load chart component (Recharts is ~200KB, load only when needed)
+const PageViewsChart = dynamic(() => import('@/components/farmer/page-views-chart'), {
+  loading: () => <ChartSkeleton />,
+  ssr: false // Chart requires DOM
+});
 
-export default async function FarmerDashboardPage() {
-  // Verify user is authenticated
-  const user = await currentUser();
+interface DashboardData {
+  farm: {
+    id: string;
+    name: string;
+    slug: string;
+    logoUrl: string | null;
+    status: string;
+    rating: number;
+    reviewCount: number;
+  };
+  metrics: {
+    subscribers: number;
+    pageViews: number;
+    rating: number;
+    daysUntilOpening: number | null;
+  };
+  recentActivity: {
+    broadcasts: number;
+    lastBroadcastDate: string | null;
+    newSubscribersThisWeek: number;
+  };
+  chartData: Array<{ date: string; views: number }>;
+}
 
-  if (!user) {
-    redirect('/sign-in');
-  }
+export default function FarmerDashboardPage() {
+  const { getToken } = useAuth();
+  const { user } = useUser();
+  const [data, setData] = useState<DashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Extract farm context from publicMetadata (secure, server-controlled)
-  const farmId = user.publicMetadata?.farmId as string | undefined;
-  const role = user.publicMetadata?.role as string | undefined;
+  // Fetch dashboard data on mount
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const token = await getToken();
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/farmer/overview`,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
 
-  // Verify user has farmer role
-  if (role !== 'farmer') {
-    redirect('/dashboard'); // Redirect to general dashboard
-  }
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+        }
 
-  // Verify user has farm association
-  if (!farmId) {
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error('Dashboard fetch error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch dashboard data');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [getToken]);
+
+  // Loading state
+  if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Error: No Farm Associated</h1>
-          <p className="text-gray-600 mb-6">Your account is not associated with a farm listing.</p>
-          <a
-            href="mailto:support@pickafarm.com"
-            className="inline-block bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800"
-          >
-            Contact Support
-          </a>
-        </div>
-      </div>
+      <DashboardLayout>
+        <DashboardSkeleton />
+      </DashboardLayout>
     );
   }
 
-  const userName = user.firstName || user.emailAddresses[0]?.emailAddress || 'Farmer';
+  // Error state
+  if (error) {
+    return (
+      <DashboardLayout>
+        <div className="p-6">
+          <div className="max-w-2xl mx-auto text-center py-12">
+            <div className="mb-6">
+              <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                <span className="text-3xl">⚠️</span>
+              </div>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Error Loading Dashboard</h1>
+            <p className="text-gray-600 mb-6">{error}</p>
+            <Button onClick={() => window.location.reload()}>
+              Try Again
+            </Button>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  // Empty state (no data)
+  if (!data) {
+    return (
+      <DashboardLayout>
+        <EmptyState />
+      </DashboardLayout>
+    );
+  }
 
   return (
-    <>
-      <FarmNavbar />
-      <div className="min-h-screen bg-gray-50">
-        {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Welcome Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Farmer Dashboard</h1>
-            <p className="text-gray-600 mt-2">Welcome back, {userName}!</p>
-          </div>
-
-        {/* Coming Soon Cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Farm Profile Card */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-dashed border-gray-300">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-green-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg>
-              </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Farm Profile</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Edit your farm information, hours, and contact details.
-            </p>
-            <p className="text-sm text-gray-500 italic">Coming in Story 2.5</p>
-          </div>
-
-          {/* Photos Card */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-dashed border-gray-300">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-blue-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Photo Gallery</h3>
-            </div>
-            <p className="text-gray-600 mb-4">Upload and manage your farm photos and logos.</p>
-            <p className="text-sm text-gray-500 italic">Coming in Story 2.6</p>
-          </div>
-
-          {/* Broadcast Messages Card */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-dashed border-gray-300">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-purple-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
-                  />
-                </svg>
-              </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Broadcasts</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Send updates to your subscribers about opening dates and events.
-            </p>
-            <p className="text-sm text-gray-500 italic">Coming in Story 2.7</p>
-          </div>
-
-          {/* Analytics Card */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-dashed border-gray-300">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-yellow-100 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-yellow-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Analytics</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              View subscriber counts, page views, and engagement metrics.
-            </p>
-            <p className="text-sm text-gray-500 italic">Coming in Story 2.4</p>
-          </div>
-
-          {/* Subscribers Card */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-dashed border-gray-300">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-red-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Subscribers</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Manage your subscriber list and notification preferences.
-            </p>
-            <p className="text-sm text-gray-500 italic">Coming in Story 2.4</p>
-          </div>
-
-          {/* Settings Card */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-dashed border-gray-300">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-gray-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="ml-3 text-lg font-semibold text-gray-900">Settings</h3>
-            </div>
-            <p className="text-gray-600 mb-4">Configure your account settings and preferences.</p>
-            <p className="text-sm text-gray-500 italic">Coming in Story 2.5+</p>
-          </div>
-        </div>
-
-        {/* Help Section */}
-        <div className="mt-12 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Need Help?</h2>
-          <p className="text-gray-600 mb-4">
-            We're here to help you get the most out of your farmer dashboard.
+    <DashboardLayout>
+      <div className="p-6 space-y-6">
+        {/* Page Header */}
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Welcome back, {user?.firstName || 'Farmer'}!
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Here's what's happening with {data.farm.name}
           </p>
-          <div className="space-y-2">
-            <a
-              href="mailto:support@pickafarm.com"
-              className="inline-flex items-center text-green-700 hover:text-green-800 font-medium"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              Email Support
-            </a>
-          </div>
         </div>
-        </main>
+
+        {/* Metrics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <MetricCard
+            title="Total Subscribers"
+            value={data.metrics.subscribers}
+            icon={Users}
+            color="blue"
+          />
+          <MetricCard
+            title="Page Views"
+            value={data.metrics.pageViews || 'N/A'}
+            icon={Eye}
+            color="green"
+            subtitle={data.metrics.pageViews === 0 ? 'Coming in Story 2.12' : undefined}
+          />
+          <MetricCard
+            title="Average Rating"
+            value={data.metrics.rating ? `${data.metrics.rating} ⭐` : 'No reviews yet'}
+            icon={Star}
+            color="yellow"
+          />
+          <MetricCard
+            title="Days Until Opening"
+            value={data.metrics.daysUntilOpening !== null ? data.metrics.daysUntilOpening : 'Not set'}
+            icon={Calendar}
+            color="purple"
+          />
+        </div>
+
+        {/* Chart */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Page Views (Last 30 Days)</CardTitle>
+            <p className="text-sm text-gray-500 mt-1">
+              Mock data for development (real analytics coming in Story 2.12)
+            </p>
+          </CardHeader>
+          <CardContent>
+            {data.chartData && data.chartData.length > 0 ? (
+              <PageViewsChart data={data.chartData} />
+            ) : (
+              <div className="h-80 flex items-center justify-center text-gray-500">
+                <p>No chart data available yet</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Quick Actions */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col md:flex-row gap-4">
+              <Button variant="outline" asChild>
+                <a
+                  href={`/farms/${data.farm.slug}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  View My Listing
+                </a>
+              </Button>
+              <Button variant="outline" disabled title="Coming in Story 2.5">
+                <PenSquare className="mr-2 h-4 w-4" />
+                Edit Farm Info
+              </Button>
+              <Button variant="outline" disabled title="Coming in Story 2.6">
+                <Upload className="mr-2 h-4 w-4" />
+                Upload Images
+              </Button>
+              <Button variant="outline" disabled title="Coming in Story 2.8">
+                <Send className="mr-2 h-4 w-4" />
+                Send Broadcast
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recent Activity Summary */}
+        {data.recentActivity.newSubscribersThisWeek > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent Activity</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <p className="text-gray-700">
+                  <span className="font-semibold text-green-600">
+                    {data.recentActivity.newSubscribersThisWeek}
+                  </span>{' '}
+                  new subscriber{data.recentActivity.newSubscribersThisWeek !== 1 ? 's' : ''} this week
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
-    </>
+    </DashboardLayout>
   );
+}
+
+// Metric Card Component
+interface MetricCardProps {
+  title: string;
+  value: string | number;
+  icon: React.ElementType;
+  color: 'blue' | 'green' | 'yellow' | 'purple';
+  subtitle?: string;
+}
+
+function MetricCard({ title, value, icon: Icon, color, subtitle }: MetricCardProps) {
+  const colorClasses = {
+    blue: 'text-blue-600 bg-blue-50',
+    green: 'text-green-600 bg-green-50',
+    yellow: 'text-yellow-600 bg-yellow-50',
+    purple: 'text-purple-600 bg-purple-50'
+  };
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="text-sm font-medium text-gray-600">
+          {title}
+        </CardTitle>
+        <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
+          <Icon className="h-4 w-4" />
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{value}</div>
+        {subtitle && (
+          <p className="text-xs text-gray-500 mt-1">{subtitle}</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+// Empty State Component
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] p-6">
+      <div className="text-center space-y-4">
+        <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+          <span className="text-3xl">🌾</span>
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900">Welcome to Your Dashboard!</h2>
+        <p className="text-gray-600 max-w-md">
+          Complete your farm profile to start managing your listing and engaging with customers.
+        </p>
+        <Button className="mt-6" disabled>
+          Complete Your Profile (Coming in Story 2.5)
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// Loading Skeleton
+function DashboardSkeleton() {
+  return (
+    <div className="p-6 space-y-6">
+      <div className="space-y-2">
+        <Skeleton className="h-8 w-64" />
+        <Skeleton className="h-4 w-96" />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[1, 2, 3, 4].map((i) => (
+          <Skeleton key={i} className="h-32" />
+        ))}
+      </div>
+      <Skeleton className="h-96" />
+      <Skeleton className="h-48" />
+    </div>
+  );
+}
+
+function ChartSkeleton() {
+  return <Skeleton className="h-80 w-full" />;
 }
