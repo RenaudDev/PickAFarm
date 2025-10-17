@@ -489,11 +489,11 @@ function getBaseLocations(locsRaw) {
     // Debug logging
     if (center.name === 'Eau Claire') {
       console.log(`DEBUG ${center.name}:`, {
-        farms: center.farms.map(f => ({ name: f.name, lat: f.latitude, lon: f.longitude })),
+        farms: center.farms.map((f) => ({ name: f.name, lat: f.latitude, lon: f.longitude })),
         latSum,
         lonSum,
         avgLat: latSum / center.farms.length,
-        avgLon: lonSum / center.farms.length
+        avgLon: lonSum / center.farms.length,
       });
     }
 

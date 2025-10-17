@@ -11,12 +11,12 @@ const nextConfig = {
       {
         source: '/:path*-united-states/',
         destination: '/:path*-us/',
-        permanent: true
+        permanent: true,
       },
       {
         source: '/:path*-united-states',
         destination: '/:path*-us/',
-        permanent: true
+        permanent: true,
       },
 
       // Pattern 0: Legacy route - all-farms-near/near/* → farms-near/*

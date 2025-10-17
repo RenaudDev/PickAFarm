@@ -22,25 +22,40 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2, Save, AlertCircle } from 'lucide-react';
 
 // Zod validation schema for farm data
 const farmSchema = z.object({
-  name: z.string().min(1, "Farm name is required"),
-  description: z.union([
-    z.string().min(10, "Description must be at least 10 characters"),
-    z.literal('')
-  ]).optional(),
-  street: z.string().min(1, "Street address is required"),
-  city: z.string().min(1, "City is required"),
-  state: z.string().min(1, "State is required"),
-  postal_code: z.string().regex(/^\d{5}(-\d{4})?$/, "Invalid ZIP code (use format: 12345 or 12345-6789)").optional().or(z.literal('')),
+  name: z.string().min(1, 'Farm name is required'),
+  description: z
+    .union([z.string().min(10, 'Description must be at least 10 characters'), z.literal('')])
+    .optional(),
+  street: z.string().min(1, 'Street address is required'),
+  city: z.string().min(1, 'City is required'),
+  state: z.string().min(1, 'State is required'),
+  postal_code: z
+    .string()
+    .regex(/^\d{5}(-\d{4})?$/, 'Invalid ZIP code (use format: 12345 or 12345-6789)')
+    .optional()
+    .or(z.literal('')),
   country: z.string().optional().or(z.literal('')),
-  phone: z.string().regex(/^[\d\s\-()+ ]*$/, "Invalid phone number").optional().or(z.literal('')),
-  email: z.string().email("Invalid email").optional().or(z.literal('')),
-  website: z.string().url("Invalid URL").optional().or(z.literal('')),
+  phone: z
+    .string()
+    .regex(/^[\d\s\-()+ ]*$/, 'Invalid phone number')
+    .optional()
+    .or(z.literal('')),
+  email: z.string().email('Invalid email').optional().or(z.literal('')),
+  website: z.string().url('Invalid URL').optional().or(z.literal('')),
   monday_hours: z.string().optional().or(z.literal('')),
   tuesday_hours: z.string().optional().or(z.literal('')),
   wednesday_hours: z.string().optional().or(z.literal('')),
@@ -272,7 +287,8 @@ export default function FarmInfoPage() {
                         />
                       </FormControl>
                       <FormDescription>
-                        A detailed description helps visitors understand what makes your farm special.
+                        A detailed description helps visitors understand what makes your farm
+                        special.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -367,7 +383,8 @@ export default function FarmInfoPage() {
                 {farmData?.latitude && farmData?.longitude && (
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <p className="text-sm text-gray-600">
-                      <strong>Coordinates (read-only):</strong> {farmData.latitude.toFixed(6)}, {farmData.longitude.toFixed(6)}
+                      <strong>Coordinates (read-only):</strong> {farmData.latitude.toFixed(6)},{' '}
+                      {farmData.longitude.toFixed(6)}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
                       Coordinates are automatically updated when you change the address.
@@ -437,28 +454,39 @@ export default function FarmInfoPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
-                  <FormField
-                    key={day}
-                    control={form.control}
-                    name={`${day}_hours` as keyof FarmFormData}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="capitalize">{day}</FormLabel>
-                        <FormControl>
-                          <Input placeholder="9:00 AM - 5:00 PM or Closed" {...field} value={field.value as string || ''} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                ))}
+                {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map(
+                  (day) => (
+                    <FormField
+                      key={day}
+                      control={form.control}
+                      name={`${day}_hours` as keyof FarmFormData}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="capitalize">{day}</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="9:00 AM - 5:00 PM or Closed"
+                              {...field}
+                              value={(field.value as string) || ''}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )
+                )}
               </CardContent>
             </Card>
 
             {/* Submit Button */}
             <div className="flex justify-end gap-4">
-              <Button type="button" variant="outline" onClick={() => router.push('/dashboard/farmer')} disabled={submitting}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.push('/dashboard/farmer')}
+                disabled={submitting}
+              >
                 Cancel
               </Button>
               <Button type="submit" disabled={submitting}>

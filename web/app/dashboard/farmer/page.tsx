@@ -154,11 +154,7 @@ export default function FarmerDashboardPage() {
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a
-                    href={`/farms/${data.farm.slug}/`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={`/farms/${data.farm.slug}/`} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="mr-2 h-4 w-4" />
                     View My Listing
                   </a>
@@ -190,8 +186,8 @@ export default function FarmerDashboardPage() {
             </CardHeader>
             <CardContent>
               <p className="text-orange-800 mb-4">
-                Your farm listing needs a few more details to be verified. Complete your profile
-                to increase visibility and attract more visitors!
+                Your farm listing needs a few more details to be verified. Complete your profile to
+                increase visibility and attract more visitors!
               </p>
               <div className="mb-4">
                 <p className="font-semibold text-orange-900 mb-2">Missing information:</p>
@@ -253,13 +249,23 @@ export default function FarmerDashboardPage() {
                   <span className="text-sm font-medium">Edit Farm Info</span>
                 </a>
               </Button>
-              <Button variant="outline" className="h-auto py-4" disabled title="Coming in Story 2.6">
+              <Button
+                variant="outline"
+                className="h-auto py-4"
+                disabled
+                title="Coming in Story 2.6"
+              >
                 <div className="flex flex-col items-center gap-2">
                   <Upload className="h-5 w-5" />
                   <span className="text-sm font-medium">Upload Images</span>
                 </div>
               </Button>
-              <Button variant="outline" className="h-auto py-4" disabled title="Coming in Story 2.8">
+              <Button
+                variant="outline"
+                className="h-auto py-4"
+                disabled
+                title="Coming in Story 2.8"
+              >
                 <div className="flex flex-col items-center gap-2">
                   <Send className="h-5 w-5" />
                   <span className="text-sm font-medium">Send Broadcast</span>

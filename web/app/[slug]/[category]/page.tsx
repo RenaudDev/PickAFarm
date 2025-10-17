@@ -34,26 +34,26 @@ interface StateCategoryPageProps {
 
 // Generate static params for all state+category combinations
 export async function generateStaticParams() {
-  const params: Array<{ slug: string; category: string }> = []
+  const params: Array<{ slug: string; category: string }> = [];
 
   // For each state
-  statesData.forEach(state => {
+  statesData.forEach((state) => {
     // For each category
     Object.values(categoriesData).forEach((category: any) => {
       // Check if this state has farms in this category
-      const farmCount = getStateCategoryCount(state, category)
+      const farmCount = getStateCategoryCount(state, category);
 
       if (farmCount > 0) {
         params.push({
-          slug: state.state_slug,  // State slug goes in 'slug' param
-          category: category.slug   // Category slug goes in 'category' param
-        })
+          slug: state.state_slug, // State slug goes in 'slug' param
+          category: category.slug, // Category slug goes in 'category' param
+        });
       }
-    })
-  })
+    });
+  });
 
-  console.log(`Generated ${params.length} state+category combinations`)
-  return params
+  console.log(`Generated ${params.length} state+category combinations`);
+  return params;
 }
 
 // Generate metadata for SEO

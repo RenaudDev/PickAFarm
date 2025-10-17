@@ -46,37 +46,39 @@ export async function generateStaticParams() {
     // Get category slugs
     const validCategories = Object.values(categoriesData)
       .filter((category: any) => {
-        return category &&
-               typeof category === 'object' &&
-               category.slug &&
-               typeof category.slug === 'string' &&
-               category.slug.length > 0 &&
-               !category.slug.includes('.') &&
-               !category.slug.startsWith('_') &&
-               category.slug !== 'favicon'
+        return (
+          category &&
+          typeof category === 'object' &&
+          category.slug &&
+          typeof category.slug === 'string' &&
+          category.slug.length > 0 &&
+          !category.slug.includes('.') &&
+          !category.slug.startsWith('_') &&
+          category.slug !== 'favicon'
+        );
       })
       .map((category: any) => ({
-        slug: category.slug
-      }))
+        slug: category.slug,
+      }));
 
     // Get state slugs
-    const stateParams = statesData.map(state => ({
-      slug: state.state_slug
-    }))
+    const stateParams = statesData.map((state) => ({
+      slug: state.state_slug,
+    }));
 
     // Combine both
-    const allParams = [...validCategories, ...stateParams]
+    const allParams = [...validCategories, ...stateParams];
 
     console.log('Generated static params:', {
       categories: validCategories.length,
       states: stateParams.length,
-      total: allParams.length
-    })
+      total: allParams.length,
+    });
 
-    return allParams
+    return allParams;
   } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
+    console.error('Error generating static params:', error);
+    return [];
   }
 }
 
