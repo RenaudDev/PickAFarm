@@ -260,6 +260,63 @@ function slugify(name) {
 /* === DATABASE OPERATIONS === */
 
 /**
+ * Auto-discover and populate field options from farm data.
+ *
+ * Extracts unique values from multi-select fields and stores them in
+ * the farm_field_options table. Called after each farm upsert to ensure
+ * new values from Zoho become available as form options immediately.
+ *
+ * @param {Object} env - Cloudflare Worker environment bindings
+ * @param {Object} record - Farm record data from Zoho
+ * @param {string} farmId - Farm ID (zoho_record_id)
+ */
+async function discoverFieldOptions(env, record, farmId) {
+  // Multi-select fields to extract options from
+  const multiSelectFields = {
+    'categories': record.Type_of_Farm,
+    'amenities': record.Amenities,
+    'varieties': record.Varieties,
+    'payment_methods': record.Payment_Methods,
+  };
+
+  try {
+    for (const [fieldName, fieldValue] of Object.entries(multiSelectFields)) {
+      if (!fieldValue) continue;
+
+      // Parse CSV or array format
+      const values = Array.isArray(fieldValue)
+        ? fieldValue
+        : String(fieldValue).split(',').map(v => v.trim());
+
+      for (const value of values) {
+        if (!value) continue;
+
+        try {
+          // Insert option if not exists
+          await env.DB.prepare(`
+            INSERT OR IGNORE INTO farm_field_options
+            (field_name, option_value, option_label, sort_order)
+            VALUES (?, ?, ?, ?)
+          `).bind(fieldName, value, value, 0).run();
+
+          // Track usage
+          await env.DB.prepare(`
+            INSERT OR REPLACE INTO farm_field_option_usage
+            (farm_id, field_name, option_value, last_used)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+          `).bind(farmId, fieldName, value).run();
+        } catch (err) {
+          console.warn(`Failed to discover option ${fieldName}=${value}:`, err);
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Field option discovery error:', error);
+    // Non-critical: don't fail the sync if auto-discovery fails
+  }
+}
+
+/**
  * Inserts or updates a farm record in D1 database.
  *
  * This is the main function for syncing Zoho data to D1. Handles all field
@@ -1136,6 +1193,10 @@ async function handleZohoWebhook(request, env, method) {
     // STEP 3: Save farm data to D1 database
     await upsertFarm(env, record);
 
+    // STEP 3.3: Auto-discover field options from farm data
+    // This ensures new Zoho values become available as form options immediately
+    await discoverFieldOptions(env, record, record.id);
+
     // STEP 3.5: Process farm branding images (Logo1 and Cover fields)
     // This downloads images from Zoho and uploads to R2 bucket with CDN URLs
     const { processImage } = await import('./lib/image-processor.js');
@@ -1675,6 +1736,109 @@ async function handleCities(request, env, method) {
     console.error("Cities API Error:", error);
     return new Response(
       JSON.stringify({ error: "Failed to fetch cities", message: error.message }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+}
+
+/**
+ * GET /api/field-options/:fieldName - Get options for a specific multi-select field
+ * GET /api/field-options - Batch fetch all field options
+ *
+ * Returns options for form fields with usage counts and sorting.
+ * Cached for 1 hour at CDN level.
+ */
+async function handleFieldOptions(request, env, method, url) {
+  if (method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
+    // Extract field name from path: /api/field-options/:fieldName
+    const pathParts = url.pathname.split('/');
+    const fieldName = pathParts[3]; // Index 3 is the field name after /api/field-options/
+
+    // Valid field names for validation
+    const validFields = [
+      'categories', 'activities', 'amenities', 'products',
+      'payment_methods', 'seasonal_activities',
+      'christmas_trees_available', 'christmas_activities', 'christmas_products'
+    ];
+
+    // Single field fetch
+    if (fieldName && fieldName.length > 0) {
+      if (!validFields.includes(fieldName)) {
+        return new Response(JSON.stringify({ error: 'Invalid field name' }), {
+          status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+
+      const result = await env.DB.prepare(`
+        SELECT
+          option_value,
+          option_label,
+          sort_order,
+          (SELECT COUNT(DISTINCT farm_id)
+           FROM farm_field_option_usage
+           WHERE field_name = ? AND option_value = ffo.option_value) as usage_count
+        FROM farm_field_options ffo
+        WHERE field_name = ? AND is_active = 1
+        ORDER BY sort_order ASC, usage_count DESC, option_label ASC
+      `).bind(fieldName, fieldName).all();
+
+      return new Response(
+        JSON.stringify({
+          field: fieldName,
+          options: result.results || [],
+          count: (result.results || []).length
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "public, max-age=3600",
+            ...corsHeaders
+          }
+        }
+      );
+    }
+
+    // Batch fetch all field options
+    const result = await env.DB.prepare(`
+      SELECT field_name, option_value, option_label, sort_order
+      FROM farm_field_options
+      WHERE is_active = 1
+      ORDER BY field_name, sort_order, option_label
+    `).all();
+
+    // Group by field name
+    const grouped = {};
+    for (const row of result.results || []) {
+      if (!grouped[row.field_name]) {
+        grouped[row.field_name] = [];
+      }
+      grouped[row.field_name].push({
+        value: row.option_value,
+        label: row.option_label,
+        sort_order: row.sort_order
+      });
+    }
+
+    return new Response(
+      JSON.stringify(grouped),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "public, max-age=3600",
+          ...corsHeaders
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Field Options API Error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch field options", message: error.message }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
@@ -2945,6 +3109,11 @@ export default {
 
     if (url.pathname === "/api/cities") {
       return handleCities(request, env, method);
+    }
+
+    // Field options endpoints: /api/field-options or /api/field-options/:fieldName
+    if (url.pathname.startsWith("/api/field-options")) {
+      return handleFieldOptions(request, env, method, url);
     }
 
     if (url.pathname === "/api/search") {

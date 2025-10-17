@@ -42,6 +42,7 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { DynamicMultiSelect } from '@/components/forms/DynamicMultiSelect';
 
 // Farm form validation schema
 const farmSchema = z.object({
@@ -589,45 +590,20 @@ export default function FarmerDashboardPage() {
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-gray-900">Farm Details</h3>
 
-                  {/* Categories */}
+                  {/* Categories - Now using Dynamic Multi-Select */}
                   <FormField
                     control={form.control}
                     name="categories"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Categories / Type of Farms</FormLabel>
-                        <div className="space-y-3 mt-2">
-                          {[
-                            'Christmas Tree',
-                            'Pumpkin Patch',
-                            'Apple Orchard',
-                            'Berry Farm',
-                            'Vegetable Farm',
-                            'Sunflower Field',
-                            'Corn Maze',
-                            'Petting Zoo',
-                          ].map((option) => (
-                            <div key={option} className="flex items-center space-x-2">
-                              <Checkbox
-                                id={`category-${option}`}
-                                checked={field.value?.includes(option) ?? false}
-                                onCheckedChange={(checked) => {
-                                  const newValue = checked
-                                    ? [...(field.value || []), option]
-                                    : (field.value || []).filter((item) => item !== option);
-                                  field.onChange(newValue);
-                                }}
-                              />
-                              <Label
-                                htmlFor={`category-${option}`}
-                                className="font-normal cursor-pointer"
-                              >
-                                {option}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                        <FormMessage />
+                        <DynamicMultiSelect
+                          fieldName="categories"
+                          label="Categories / Type of Farms"
+                          description="Select all that apply to your farm"
+                          value={field.value || []}
+                          onChange={field.onChange}
+                          error={form.formState.errors.categories?.message}
+                        />
                       </FormItem>
                     )}
                   />
@@ -658,90 +634,38 @@ export default function FarmerDashboardPage() {
                     )}
                   />
 
-                  {/* Varieties */}
+                  {/* Varieties - Now using Dynamic Multi-Select */}
                   <FormField
                     control={form.control}
                     name="varieties"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Varieties / Products</FormLabel>
-                        <div className="space-y-3 mt-2">
-                          {[
-                            'Balsam Fir',
-                            'Douglas Fir',
-                            'Blue Spruce',
-                            'Honeycrisp Apple',
-                            'Granny Smith Apple',
-                            'Blueberry',
-                            'Strawberry',
-                            'Pumpkin',
-                            'Corn',
-                            'Sunflower',
-                          ].map((option) => (
-                            <div key={option} className="flex items-center space-x-2">
-                              <Checkbox
-                                id={`variety-${option}`}
-                                checked={field.value?.includes(option) ?? false}
-                                onCheckedChange={(checked) => {
-                                  const newValue = checked
-                                    ? [...(field.value || []), option]
-                                    : (field.value || []).filter((item) => item !== option);
-                                  field.onChange(newValue);
-                                }}
-                              />
-                              <Label
-                                htmlFor={`variety-${option}`}
-                                className="font-normal cursor-pointer"
-                              >
-                                {option}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                        <FormMessage />
+                        <DynamicMultiSelect
+                          fieldName="varieties"
+                          label="Varieties / Products"
+                          description="Select all varieties your farm offers"
+                          value={field.value || []}
+                          onChange={field.onChange}
+                          error={form.formState.errors.varieties?.message}
+                        />
                       </FormItem>
                     )}
                   />
 
-                  {/* Amenities */}
+                  {/* Amenities - Now using Dynamic Multi-Select */}
                   <FormField
                     control={form.control}
                     name="amenities"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Amenities</FormLabel>
-                        <div className="space-y-3 mt-2">
-                          {[
-                            'Restrooms',
-                            'Gift Shop',
-                            'Wagon Rides',
-                            'Picnic Area',
-                            'Playground',
-                            'Food Service',
-                            'Parking',
-                            'Wheelchair Accessible',
-                          ].map((option) => (
-                            <div key={option} className="flex items-center space-x-2">
-                              <Checkbox
-                                id={`amenity-${option}`}
-                                checked={field.value?.includes(option) ?? false}
-                                onCheckedChange={(checked) => {
-                                  const newValue = checked
-                                    ? [...(field.value || []), option]
-                                    : (field.value || []).filter((item) => item !== option);
-                                  field.onChange(newValue);
-                                }}
-                              />
-                              <Label
-                                htmlFor={`amenity-${option}`}
-                                className="font-normal cursor-pointer"
-                              >
-                                {option}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                        <FormMessage />
+                        <DynamicMultiSelect
+                          fieldName="amenities"
+                          label="Amenities"
+                          description="Select amenities available at your farm"
+                          value={field.value || []}
+                          onChange={field.onChange}
+                          error={form.formState.errors.amenities?.message}
+                        />
                       </FormItem>
                     )}
                   />
@@ -785,44 +709,20 @@ export default function FarmerDashboardPage() {
                     )}
                   />
 
-                  {/* Payment Methods */}
+                  {/* Payment Methods - Now using Dynamic Multi-Select */}
                   <FormField
                     control={form.control}
                     name="payment_methods"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Payment Methods</FormLabel>
-                        <div className="space-y-3 mt-2">
-                          {[
-                            'Cash',
-                            'Credit Card',
-                            'Debit Card',
-                            'Venmo',
-                            'PayPal',
-                            'Apple Pay',
-                            'Google Pay',
-                          ].map((option) => (
-                            <div key={option} className="flex items-center space-x-2">
-                              <Checkbox
-                                id={`payment-${option}`}
-                                checked={field.value?.includes(option) ?? false}
-                                onCheckedChange={(checked) => {
-                                  const newValue = checked
-                                    ? [...(field.value || []), option]
-                                    : (field.value || []).filter((item) => item !== option);
-                                  field.onChange(newValue);
-                                }}
-                              />
-                              <Label
-                                htmlFor={`payment-${option}`}
-                                className="font-normal cursor-pointer"
-                              >
-                                {option}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                        <FormMessage />
+                        <DynamicMultiSelect
+                          fieldName="payment_methods"
+                          label="Payment Methods"
+                          description="Select all payment methods you accept"
+                          value={field.value || []}
+                          onChange={field.onChange}
+                          error={form.formState.errors.payment_methods?.message}
+                        />
                       </FormItem>
                     )}
                   />
