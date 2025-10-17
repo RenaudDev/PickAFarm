@@ -11,6 +11,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useAuth, useUser } from '@clerk/nextjs';
 import dynamic from 'next/dynamic';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -148,10 +149,10 @@ export default function FarmerDashboardPage() {
               </div>
               <div className="flex flex-col gap-3">
                 <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
-                  <a href="/dashboard/farmer/farm-info">
+                  <Link href="/dashboard/farmer/farm-info">
                     <PenSquare className="mr-2 h-4 w-4" />
                     Edit Farm Info
-                  </a>
+                  </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
                   <a href={`/farms/${data.farm.slug}/`} target="_blank" rel="noopener noreferrer">
@@ -165,7 +166,7 @@ export default function FarmerDashboardPage() {
         </Card>
 
         {/* Verification Status Card (Story 2.5) */}
-        {data.verification.status === 'Pending' && (
+        {data.verification?.status === 'Pending' && (
           <Card className="border-orange-200 bg-orange-50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-900">
@@ -192,7 +193,7 @@ export default function FarmerDashboardPage() {
               <div className="mb-4">
                 <p className="font-semibold text-orange-900 mb-2">Missing information:</p>
                 <ul className="list-disc list-inside space-y-1 text-orange-800">
-                  {data.verification.missingFields.map((field) => (
+                  {data.verification?.missingFields?.map((field) => (
                     <li key={field} className="capitalize">
                       {field.replace('_', ' ')}
                     </li>
@@ -200,16 +201,16 @@ export default function FarmerDashboardPage() {
                 </ul>
               </div>
               <Button asChild className="bg-orange-600 hover:bg-orange-700">
-                <a href="/dashboard/farmer/farm-info">
+                <Link href="/dashboard/farmer/farm-info">
                   <PenSquare className="mr-2 h-4 w-4" />
                   Complete Profile
-                </a>
+                </Link>
               </Button>
             </CardContent>
           </Card>
         )}
 
-        {data.verification.status === 'Active' && (
+        {data.verification?.status === 'Active' && (
           <Card className="border-green-200 bg-green-50">
             <CardContent className="pt-6">
               <div className="flex items-center gap-3">
@@ -244,10 +245,10 @@ export default function FarmerDashboardPage() {
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <Button variant="outline" className="h-auto py-4" asChild>
-                <a href="/dashboard/farmer/farm-info" className="flex flex-col items-center gap-2">
+                <Link href="/dashboard/farmer/farm-info" className="flex flex-col items-center gap-2">
                   <PenSquare className="h-5 w-5" />
                   <span className="text-sm font-medium">Edit Farm Info</span>
-                </a>
+                </Link>
               </Button>
               <Button
                 variant="outline"
