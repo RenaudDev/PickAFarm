@@ -1,11 +1,11 @@
 /**
  * Farmer Dashboard Overview Page
- * Story 2.5: Dashboard UX Restructure - Overview with Inline Farm Information Editor
+ * Story 2.5: Dashboard UX Restructure - Inline Farm Information Editor
  *
  * Route: /dashboard/farmer
  *
- * Displays farm information form (editable) with verification badge.
- * Replaces separate farm-info page with inline editing.
+ * Single unified page for all farm information editing.
+ * Displays comprehensive farm information form with verification badge and all editable fields.
  */
 
 'use client';
