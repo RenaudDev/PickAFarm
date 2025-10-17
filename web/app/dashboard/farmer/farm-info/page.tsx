@@ -152,10 +152,22 @@ export default function FarmInfoPage() {
         const data = await response.json();
         setFarmData(data.farm);
 
+        // Debug: log the entire response to see what's being returned
+        console.log('API Response:', JSON.stringify(data.farm, null, 2));
+
         // Populate form with fetched data
         Object.keys(data.farm).forEach((key) => {
           if (key !== 'slug' && key !== 'latitude' && key !== 'longitude') {
-            form.setValue(key as keyof FarmFormData, data.farm[key]);
+            const value = data.farm[key];
+
+            // Convert 0/1 to boolean for pet_friendly
+            if (key === 'pet_friendly' && typeof value === 'number') {
+              form.setValue(key as keyof FarmFormData, Boolean(value) as any);
+              console.log(`Setting ${key} to ${Boolean(value)}`);
+            } else {
+              form.setValue(key as keyof FarmFormData, value);
+              console.log(`Setting ${key}:`, value);
+            }
           }
         });
       } catch (err) {
