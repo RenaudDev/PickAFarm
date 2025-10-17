@@ -48,19 +48,21 @@ jobs:
         echo "Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
         echo "Farm updated: ${{ github.event.client_payload.zoho_record_id || 'N/A' }}"
 
-    - name: Run prebuild scripts
-      run: cd web && npm run prebuild
-      env:
-        CLOUDFLARE_D1_TOKEN: ${{ secrets.CLOUDFLARE_D1_TOKEN }}
-        CLOUDFLARE_D1_URL: ${{ secrets.CLOUDFLARE_D1_URL }}
-        NODE_ENV: production
-
     - name: Build with Cloudflare Pages adapter
       run: cd web && npx @cloudflare/next-on-pages@1
       env:
         NODE_ENV: production
+        # Database credentials for prebuild scripts
+        CLOUDFLARE_D1_TOKEN: ${{ secrets.CLOUDFLARE_D1_TOKEN }}
+        CLOUDFLARE_D1_URL: ${{ secrets.CLOUDFLARE_D1_URL }}
+        # Clerk authentication
         NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
         CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+        # Google Maps
+        NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+        GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        # API URL
+        NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
     - name: Deploy to Cloudflare Pages
       uses: cloudflare/pages-action@v1
