@@ -15,5 +15,158 @@
     "full_location": "Eau Claire, WI, United States",
     "seo_title": "U-Pick Farms near Eau Claire, Wisconsin",
     "meta_description": "Find the best U-Pick farms near Eau Claire, Wisconsin. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Ukiah",
+    "slug": "ukiah",
+    "population": null,
+    "coordinates": {
+      "latitude": 39.048819,
+      "longitude": -123.165622
+    },
+    "province": "California",
+    "province_slug": "ca",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "ukiah-ca-us",
+    "full_location": "Ukiah, CA, United States",
+    "seo_title": "U-Pick Farms near Ukiah, California",
+    "meta_description": "Find the best U-Pick farms near Ukiah, California. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Winnsboro",
+    "slug": "winnsboro",
+    "population": null,
+    "coordinates": {
+      "latitude": 32.151569,
+      "longitude": -91.655607
+    },
+    "province": "Louisiana",
+    "province_slug": "la",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "winnsboro-la-us",
+    "full_location": "Winnsboro, LA, United States",
+    "seo_title": "U-Pick Farms near Winnsboro, Louisiana",
+    "meta_description": "Find the best U-Pick farms near Winnsboro, Louisiana. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Meridian",
+    "slug": "meridian",
+    "population": null,
+    "coordinates": {
+      "latitude": 31.877491,
+      "longitude": -97.607028
+    },
+    "province": "Texas",
+    "province_slug": "tx",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "meridian-tx-us",
+    "full_location": "Meridian, TX, United States",
+    "seo_title": "U-Pick Farms near Meridian, Texas",
+    "meta_description": "Find the best U-Pick farms near Meridian, Texas. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Enid",
+    "slug": "enid",
+    "population": null,
+    "coordinates": {
+      "latitude": 36.483011,
+      "longitude": -97.874101
+    },
+    "province": "Oklahoma",
+    "province_slug": "ok",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "enid-ok-us",
+    "full_location": "Enid, OK, United States",
+    "seo_title": "U-Pick Farms near Enid, Oklahoma",
+    "meta_description": "Find the best U-Pick farms near Enid, Oklahoma. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Cashmere",
+    "slug": "cashmere",
+    "population": null,
+    "coordinates": {
+      "latitude": 47.471375,
+      "longitude": -120.490266
+    },
+    "province": "Washington",
+    "province_slug": "wa",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "cashmere-wa-us",
+    "full_location": "Cashmere, WA, United States",
+    "seo_title": "U-Pick Farms near Cashmere, Washington",
+    "meta_description": "Find the best U-Pick farms near Cashmere, Washington. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Florence",
+    "slug": "florence",
+    "population": null,
+    "coordinates": {
+      "latitude": 34.915159,
+      "longitude": -87.737556
+    },
+    "province": "Alabama",
+    "province_slug": "al",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "florence-al-us",
+    "full_location": "Florence, AL, United States",
+    "seo_title": "U-Pick Farms near Florence, Alabama",
+    "meta_description": "Find the best U-Pick farms near Florence, Alabama. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Troy",
+    "slug": "troy",
+    "population": null,
+    "coordinates": {
+      "latitude": 46.756208,
+      "longitude": -116.734672
+    },
+    "province": "Idaho",
+    "province_slug": "id",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "troy-id-us",
+    "full_location": "Troy, ID, United States",
+    "seo_title": "U-Pick Farms near Troy, Idaho",
+    "meta_description": "Find the best U-Pick farms near Troy, Idaho. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Boonville",
+    "slug": "boonville",
+    "population": null,
+    "coordinates": {
+      "latitude": 38.873056,
+      "longitude": -92.661981
+    },
+    "province": "Missouri",
+    "province_slug": "mo",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "boonville-mo-us",
+    "full_location": "Boonville, MO, United States",
+    "seo_title": "U-Pick Farms near Boonville, Missouri",
+    "meta_description": "Find the best U-Pick farms near Boonville, Missouri. Fresh apples, berries, pumpkins and Christmas trees."
+  },
+  {
+    "name": "Bryan",
+    "slug": "bryan",
+    "population": null,
+    "coordinates": {
+      "latitude": 30.896248,
+      "longitude": -96.249968
+    },
+    "province": "Texas",
+    "province_slug": "tx",
+    "country": "United States",
+    "country_slug": "us",
+    "location_slug": "bryan-tx-us",
+    "full_location": "Bryan, TX, United States",
+    "seo_title": "U-Pick Farms near Bryan, Texas",
+    "meta_description": "Find the best U-Pick farms near Bryan, Texas. Fresh apples, berries, pumpkins and Christmas trees."
   }
 ]
