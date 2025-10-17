@@ -33,6 +33,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { ExternalLink, PenSquare, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import DashboardLayout from '@/components/farmer/dashboard-layout';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 // Farm form validation schema
 const farmSchema = z.object({
@@ -59,6 +68,15 @@ const farmSchema = z.object({
   friday_hours: z.string().optional().or(z.literal('')),
   saturday_hours: z.string().optional().or(z.literal('')),
   sunday_hours: z.string().optional().or(z.literal('')),
+  categories: z.array(z.string()).optional(),
+  type: z.string().optional().or(z.literal('')),
+  amenities: z.array(z.string()).optional(),
+  varieties: z.array(z.string()).optional(),
+  pet_friendly: z.boolean().optional(),
+  price_range: z.string().optional().or(z.literal('')),
+  payment_methods: z.array(z.string()).optional(),
+  opening_date: z.string().optional().nullable(),
+  closing_date: z.string().optional().nullable(),
 });
 
 type FarmFormData = z.infer<typeof farmSchema>;
@@ -121,6 +139,15 @@ export default function FarmerDashboardPage() {
       friday_hours: '',
       saturday_hours: '',
       sunday_hours: '',
+      categories: [],
+      type: '',
+      amenities: [],
+      varieties: [],
+      pet_friendly: false,
+      price_range: '',
+      payment_methods: [],
+      opening_date: null,
+      closing_date: null,
     },
   });
 
@@ -149,8 +176,16 @@ export default function FarmerDashboardPage() {
 
         // Populate form with fetched data
         if (result.farm) {
+          console.log('Dashboard - API Response:', JSON.stringify(result.farm, null, 2));
           Object.keys(result.farm).forEach((key) => {
-            form.setValue(key as keyof FarmFormData, result.farm[key] || '');
+            const value = result.farm[key];
+
+            // Handle pet_friendly boolean conversion
+            if (key === 'pet_friendly' && typeof value === 'number') {
+              form.setValue(key as keyof FarmFormData, Boolean(value) as any);
+            } else {
+              form.setValue(key as keyof FarmFormData, value || '');
+            }
           });
         }
       } catch (err) {
@@ -536,13 +571,305 @@ export default function FarmerDashboardPage() {
                           <FormItem>
                             <FormLabel>{label}</FormLabel>
                             <FormControl>
-                              <Input placeholder="e.g., 9:00 AM - 5:00 PM" {...field} />
+                              <Input
+                                placeholder="e.g., 9:00 AM - 5:00 PM"
+                                {...field}
+                                value={(field.value as string) || ''}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
                     ))}
+                  </div>
+                </div>
+
+                {/* Farm Details Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Farm Details</h3>
+
+                  {/* Categories */}
+                  <FormField
+                    control={form.control}
+                    name="categories"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Categories / Type of Farms</FormLabel>
+                        <div className="space-y-3 mt-2">
+                          {[
+                            'Christmas Tree',
+                            'Pumpkin Patch',
+                            'Apple Orchard',
+                            'Berry Farm',
+                            'Vegetable Farm',
+                            'Sunflower Field',
+                            'Corn Maze',
+                            'Petting Zoo',
+                          ].map((option) => (
+                            <div key={option} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`category-${option}`}
+                                checked={field.value?.includes(option) ?? false}
+                                onCheckedChange={(checked) => {
+                                  const newValue = checked
+                                    ? [...(field.value || []), option]
+                                    : (field.value || []).filter((item) => item !== option);
+                                  field.onChange(newValue);
+                                }}
+                              />
+                              <Label
+                                htmlFor={`category-${option}`}
+                                className="font-normal cursor-pointer"
+                              >
+                                {option}
+                              </Label>
+                            </div>
+                          ))}
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Service Type */}
+                  <FormField
+                    control={form.control}
+                    name="type"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Service Type</FormLabel>
+                        <Select value={field.value || ''} onValueChange={field.onChange}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a service type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="U-Pick">U-Pick</SelectItem>
+                            <SelectItem value="Pre-Cut">Pre-Cut</SelectItem>
+                            <SelectItem value="Cut Your Own">Cut Your Own</SelectItem>
+                            <SelectItem value="Retail">Retail</SelectItem>
+                            <SelectItem value="Pick Your Own">Pick Your Own</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Varieties */}
+                  <FormField
+                    control={form.control}
+                    name="varieties"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Varieties / Products</FormLabel>
+                        <div className="space-y-3 mt-2">
+                          {[
+                            'Balsam Fir',
+                            'Douglas Fir',
+                            'Blue Spruce',
+                            'Honeycrisp Apple',
+                            'Granny Smith Apple',
+                            'Blueberry',
+                            'Strawberry',
+                            'Pumpkin',
+                            'Corn',
+                            'Sunflower',
+                          ].map((option) => (
+                            <div key={option} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`variety-${option}`}
+                                checked={field.value?.includes(option) ?? false}
+                                onCheckedChange={(checked) => {
+                                  const newValue = checked
+                                    ? [...(field.value || []), option]
+                                    : (field.value || []).filter((item) => item !== option);
+                                  field.onChange(newValue);
+                                }}
+                              />
+                              <Label
+                                htmlFor={`variety-${option}`}
+                                className="font-normal cursor-pointer"
+                              >
+                                {option}
+                              </Label>
+                            </div>
+                          ))}
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Amenities */}
+                  <FormField
+                    control={form.control}
+                    name="amenities"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Amenities</FormLabel>
+                        <div className="space-y-3 mt-2">
+                          {[
+                            'Restrooms',
+                            'Gift Shop',
+                            'Wagon Rides',
+                            'Picnic Area',
+                            'Playground',
+                            'Food Service',
+                            'Parking',
+                            'Wheelchair Accessible',
+                          ].map((option) => (
+                            <div key={option} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`amenity-${option}`}
+                                checked={field.value?.includes(option) ?? false}
+                                onCheckedChange={(checked) => {
+                                  const newValue = checked
+                                    ? [...(field.value || []), option]
+                                    : (field.value || []).filter((item) => item !== option);
+                                  field.onChange(newValue);
+                                }}
+                              />
+                              <Label
+                                htmlFor={`amenity-${option}`}
+                                className="font-normal cursor-pointer"
+                              >
+                                {option}
+                              </Label>
+                            </div>
+                          ))}
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Pet Friendly */}
+                  <FormField
+                    control={form.control}
+                    name="pet_friendly"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center space-x-2">
+                        <FormControl>
+                          <Checkbox
+                            id="pet-friendly"
+                            checked={field.value ?? false}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="pet-friendly" className="font-normal cursor-pointer">
+                          Are pets allowed on the premises?
+                        </Label>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Price Range */}
+                  <FormField
+                    control={form.control}
+                    name="price_range"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Price Range</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g., $25 - $75 or $10 per person"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Payment Methods */}
+                  <FormField
+                    control={form.control}
+                    name="payment_methods"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Payment Methods</FormLabel>
+                        <div className="space-y-3 mt-2">
+                          {[
+                            'Cash',
+                            'Credit Card',
+                            'Debit Card',
+                            'Venmo',
+                            'PayPal',
+                            'Apple Pay',
+                            'Google Pay',
+                          ].map((option) => (
+                            <div key={option} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`payment-${option}`}
+                                checked={field.value?.includes(option) ?? false}
+                                onCheckedChange={(checked) => {
+                                  const newValue = checked
+                                    ? [...(field.value || []), option]
+                                    : (field.value || []).filter((item) => item !== option);
+                                  field.onChange(newValue);
+                                }}
+                              />
+                              <Label
+                                htmlFor={`payment-${option}`}
+                                className="font-normal cursor-pointer"
+                              >
+                                {option}
+                              </Label>
+                            </div>
+                          ))}
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Operating Dates Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Operating Dates</h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Opening Date */}
+                    <FormField
+                      control={form.control}
+                      name="opening_date"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Next Season Opening Date</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="date"
+                              {...field}
+                              value={field.value || ''}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Closing Date */}
+                    <FormField
+                      control={form.control}
+                      name="closing_date"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Next Season Closing Date</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="date"
+                              {...field}
+                              value={field.value || ''}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
                 </div>
 
