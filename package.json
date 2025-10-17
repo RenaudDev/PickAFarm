@@ -3,13 +3,17 @@
     "version": "1.0.2",
     "private": true,
     "scripts": {
-      "build": "cd web && npm ci && npm run build",
-      "test:worker": "vitest --config vitest.config.worker.js",
-      "test:worker:ui": "vitest --config vitest.config.worker.js --ui",
-      "test:worker:coverage": "vitest --config vitest.config.worker.js --coverage"
+        "build": "cd web && npm ci && npm run build",
+        "test:worker": "vitest --config vitest.config.worker.js",
+        "test:worker:ui": "vitest --config vitest.config.worker.js --ui",
+        "test:worker:coverage": "vitest --config vitest.config.worker.js --coverage"
     },
     "devDependencies": {
-      "vitest": "^3.2.4",
-      "@vitest/coverage-v8": "^3.2.4"
+        "@vitest/coverage-v8": "^3.2.4",
+        "vitest": "^3.2.4"
+    },
+    "dependencies": {
+        "csv-parse": "^6.1.0",
+        "googleapis": "^163.0.0"
     }
-  }
+}

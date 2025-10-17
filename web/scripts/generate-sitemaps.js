@@ -78,9 +78,12 @@ function generateMainSitemap() {
   let xml = generateXmlHeader();
 
   const mainPages = [
-    { url: '', priority: '1.0', changefreq: 'daily' },
-    { url: 'about/', priority: '0.7', changefreq: 'monthly' },
-    { url: 'blog/', priority: '0.8', changefreq: 'weekly' },
+    { url: '', priority: '1.0', changefreq: 'daily' }, // Homepage - highest priority
+    { url: 'christmas-tree-farms/', priority: '0.95', changefreq: 'weekly' }, // Popular category
+    { url: 'pumpkin-patches/', priority: '0.95', changefreq: 'weekly' }, // Popular category
+    { url: 'farms-near/', priority: '0.9', changefreq: 'weekly' }, // Location finder
+    { url: 'blog/', priority: '0.8', changefreq: 'weekly' }, // Blog
+    { url: 'about/', priority: '0.7', changefreq: 'monthly' }, // About page
   ];
 
   mainPages.forEach((page) => {
@@ -97,15 +100,46 @@ function generateFarmsSitemap() {
 
   const activeFarms = farmsData.filter((farm) => farm.active === 1);
 
-  activeFarms.forEach((farm) => {
-    const priority = farm.featured === 1 ? '0.8' : farm.verified === 1 ? '0.7' : '0.6';
-    const changefreq = farm.featured === 1 ? 'weekly' : 'monthly';
-    const lastmod = farm.updated_at || currentDate;
+  // Sort farms by priority: featured first, then verified, then by subscriber count
+  const sortedFarms = activeFarms.sort((a, b) => {
+    if (a.featured !== b.featured) return b.featured - a.featured;
+    if (a.verified !== b.verified) return b.verified - a.verified;
+    return (b.subscriber_count || 0) - (a.subscriber_count || 0);
+  });
+
+  sortedFarms.forEach((farm) => {
+    // Dynamic priority based on multiple factors
+    let priority = '0.5'; // base priority
+    if (farm.featured === 1) priority = '0.9';
+    else if (farm.verified === 1) priority = '0.8';
+    else if (farm.reviews > 10) priority = '0.7';
+    else if (farm.subscriber_count > 5) priority = '0.6';
+
+    // More frequent updates for popular farms
+    let changefreq = 'monthly';
+    if (farm.featured === 1 || farm.subscriber_count > 20) changefreq = 'weekly';
+    else if (farm.verified === 1 || farm.reviews > 5) changefreq = 'weekly';
+
+    // Use actual update date if available, ensure valid ISO format
+    let lastmod = currentDate;
+    if (farm.updated_at) {
+      try {
+        // Ensure it's a valid date
+        const date = new Date(farm.updated_at);
+        if (!isNaN(date.getTime())) {
+          lastmod = date.toISOString();
+        }
+      } catch (e) {
+        // Use current date if parsing fails
+      }
+    }
 
     xml += generateUrlEntry(`${baseUrl}/farms/${farm.slug}/`, lastmod, changefreq, priority);
   });
 
   xml += generateXmlFooter();
+
+  console.log(`  ✅ Added ${sortedFarms.length} active farms to sitemap`);
   return xml;
 }
 
@@ -264,14 +298,54 @@ function generateRobotsTxt() {
   return `User-agent: *
 Allow: /
 
+# Important farm content
+Allow: /farms/
+Allow: /christmas-tree-farms/
+Allow: /pumpkin-patches/
+Allow: /maple-syrup-farms/
+Allow: /berry-farms/
+Allow: /farms-near/
+
+# Static assets
+Allow: *.js
+Allow: *.css
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp
+Allow: *.avif
+
 # Disallow admin and private pages
 Disallow: /admin/
 Disallow: /api/
+Disallow: /dashboard/
+Disallow: /saved-farms/
+Disallow: /claim/
+
+# Block search pages (these should have noindex anyway)
+Disallow: /search
+Disallow: /search/
+Disallow: /search?
+
+# Block WordPress/CMS artifacts (if any leaked from old site)
+Disallow: /wp-
+Disallow: *.php
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-content/
+
+# Block development/test pages
+Disallow: /test/
+Disallow: /dev/
+Disallow: /_next/
+Disallow: /node_modules/
 
 # Sitemap
 Sitemap: ${baseUrl}/sitemap.xml
 
-# Crawl-delay
+# Crawl-delay (be nice to Google)
 Crawl-delay: 1`;
 }
 
