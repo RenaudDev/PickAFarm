@@ -482,6 +482,21 @@ function getBaseLocations(locsRaw) {
           ? 'Canada'
           : 'United States'; // Default to US for new locations
 
+    // Calculate the average of FARM coordinates, not city center coordinates
+    const latSum = center.farms.reduce((sum, farm) => sum + farm.latitude, 0);
+    const lonSum = center.farms.reduce((sum, farm) => sum + farm.longitude, 0);
+
+    // Debug logging
+    if (center.name === 'Eau Claire') {
+      console.log(`DEBUG ${center.name}:`, {
+        farms: center.farms.map(f => ({ name: f.name, lat: f.latitude, lon: f.longitude })),
+        latSum,
+        lonSum,
+        avgLat: latSum / center.farms.length,
+        avgLon: lonSum / center.farms.length
+      });
+    }
+
     clusters.set(key, {
       city: center.name,
       province: center.province || center.farms[0]?.province || 'Unknown',
@@ -493,8 +508,8 @@ function getBaseLocations(locsRaw) {
         lat: f.latitude,
         lon: f.longitude,
       })),
-      latSum: center.latitude * center.farms.length,
-      lonSum: center.longitude * center.farms.length,
+      latSum: latSum,
+      lonSum: lonSum,
     });
   }
 
