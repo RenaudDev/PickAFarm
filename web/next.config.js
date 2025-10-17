@@ -7,6 +7,18 @@ const nextConfig = {
   // Fix malformed location URLs from data generation bug
   async redirects() {
     return [
+      // FIX: "united-states" → "us" pattern (fixes ~300+ 404s)
+      {
+        source: '/:path*-united-states/',
+        destination: '/:path*-us/',
+        permanent: true
+      },
+      {
+        source: '/:path*-united-states',
+        destination: '/:path*-us/',
+        permanent: true
+      },
+
       // Pattern 0: Legacy route - all-farms-near/near/* → farms-near/*
       // Old route structure that no longer exists
       {
