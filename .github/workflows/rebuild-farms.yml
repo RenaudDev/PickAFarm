@@ -55,8 +55,8 @@ jobs:
         CLOUDFLARE_D1_URL: ${{ secrets.CLOUDFLARE_D1_URL }}
         NODE_ENV: production
 
-    - name: Build Next.js site
-      run: cd web && npm run build
+    - name: Build with Cloudflare Pages adapter
+      run: cd web && npx @cloudflare/next-on-pages@1
       env:
         NODE_ENV: production
         NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
@@ -68,7 +68,7 @@ jobs:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         projectName: pickafarm
-        directory: web/out
+        directory: web/.vercel/output/static
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Notify success
