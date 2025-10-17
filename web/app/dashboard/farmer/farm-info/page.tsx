@@ -32,6 +32,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import { Loader2, Save, AlertCircle } from 'lucide-react';
 
 // Zod validation schema for farm data
@@ -476,6 +485,309 @@ export default function FarmInfoPage() {
                     />
                   )
                 )}
+              </CardContent>
+            </Card>
+
+            {/* Farm Details */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Farm Details</CardTitle>
+                <CardDescription>Categories, products, and farm features</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Categories */}
+                <FormField
+                  control={form.control}
+                  name="categories"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Categories / Type of Farms</FormLabel>
+                      <div className="space-y-3 mt-2">
+                        {[
+                          'Christmas Tree',
+                          'Pumpkin Patch',
+                          'Apple Orchard',
+                          'Berry Farm',
+                          'Vegetable Farm',
+                          'Sunflower Field',
+                          'Corn Maze',
+                          'Petting Zoo',
+                        ].map((option) => (
+                          <div key={option} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`category-${option}`}
+                              checked={field.value?.includes(option) ?? false}
+                              onCheckedChange={(checked) => {
+                                const newValue = checked
+                                  ? [...(field.value || []), option]
+                                  : (field.value || []).filter((item) => item !== option);
+                                field.onChange(newValue);
+                              }}
+                            />
+                            <Label
+                              htmlFor={`category-${option}`}
+                              className="font-normal cursor-pointer"
+                            >
+                              {option}
+                            </Label>
+                          </div>
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Service Type */}
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Service Type</FormLabel>
+                      <Select value={field.value || ''} onValueChange={field.onChange}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a service type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="U-Pick">U-Pick</SelectItem>
+                          <SelectItem value="Pre-Cut">Pre-Cut</SelectItem>
+                          <SelectItem value="Cut Your Own">Cut Your Own</SelectItem>
+                          <SelectItem value="Retail">Retail</SelectItem>
+                          <SelectItem value="Pick Your Own">Pick Your Own</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Varieties */}
+                <FormField
+                  control={form.control}
+                  name="varieties"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Varieties / Products</FormLabel>
+                      <div className="space-y-3 mt-2">
+                        {[
+                          'Balsam Fir',
+                          'Douglas Fir',
+                          'Blue Spruce',
+                          'Honeycrisp Apple',
+                          'Granny Smith Apple',
+                          'Blueberry',
+                          'Strawberry',
+                          'Pumpkin',
+                          'Corn',
+                          'Sunflower',
+                        ].map((option) => (
+                          <div key={option} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`variety-${option}`}
+                              checked={field.value?.includes(option) ?? false}
+                              onCheckedChange={(checked) => {
+                                const newValue = checked
+                                  ? [...(field.value || []), option]
+                                  : (field.value || []).filter((item) => item !== option);
+                                field.onChange(newValue);
+                              }}
+                            />
+                            <Label
+                              htmlFor={`variety-${option}`}
+                              className="font-normal cursor-pointer"
+                            >
+                              {option}
+                            </Label>
+                          </div>
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Amenities */}
+                <FormField
+                  control={form.control}
+                  name="amenities"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Amenities</FormLabel>
+                      <div className="space-y-3 mt-2">
+                        {[
+                          'Restrooms',
+                          'Gift Shop',
+                          'Wagon Rides',
+                          'Picnic Area',
+                          'Playground',
+                          'Food Service',
+                          'Parking',
+                          'Wheelchair Accessible',
+                        ].map((option) => (
+                          <div key={option} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`amenity-${option}`}
+                              checked={field.value?.includes(option) ?? false}
+                              onCheckedChange={(checked) => {
+                                const newValue = checked
+                                  ? [...(field.value || []), option]
+                                  : (field.value || []).filter((item) => item !== option);
+                                field.onChange(newValue);
+                              }}
+                            />
+                            <Label
+                              htmlFor={`amenity-${option}`}
+                              className="font-normal cursor-pointer"
+                            >
+                              {option}
+                            </Label>
+                          </div>
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Pet Friendly */}
+                <FormField
+                  control={form.control}
+                  name="pet_friendly"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center space-x-2">
+                      <FormControl>
+                        <Checkbox
+                          id="pet-friendly"
+                          checked={field.value ?? false}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <Label htmlFor="pet-friendly" className="font-normal cursor-pointer">
+                        Are pets allowed on the premises?
+                      </Label>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Price Range */}
+                <FormField
+                  control={form.control}
+                  name="price_range"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price Range</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., $25 - $75 or $10 per person"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter your price range in any format (e.g., "$50 - $150" or "$10 per person")
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Payment Methods */}
+                <FormField
+                  control={form.control}
+                  name="payment_methods"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Payment Methods</FormLabel>
+                      <div className="space-y-3 mt-2">
+                        {[
+                          'Cash',
+                          'Credit Card',
+                          'Debit Card',
+                          'Venmo',
+                          'PayPal',
+                          'Apple Pay',
+                          'Google Pay',
+                        ].map((option) => (
+                          <div key={option} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`payment-${option}`}
+                              checked={field.value?.includes(option) ?? false}
+                              onCheckedChange={(checked) => {
+                                const newValue = checked
+                                  ? [...(field.value || []), option]
+                                  : (field.value || []).filter((item) => item !== option);
+                                field.onChange(newValue);
+                              }}
+                            />
+                            <Label
+                              htmlFor={`payment-${option}`}
+                              className="font-normal cursor-pointer"
+                            >
+                              {option}
+                            </Label>
+                          </div>
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Operating Dates */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Operating Dates</CardTitle>
+                <CardDescription>Seasonal dates for your farm</CardDescription>
+              </CardHeader>
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Opening Date */}
+                <FormField
+                  control={form.control}
+                  name="opening_date"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Next Season Opening Date</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="date"
+                          {...field}
+                          value={field.value || ''}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Format: YYYY-MM-DD (e.g., 2025-06-01)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Closing Date */}
+                <FormField
+                  control={form.control}
+                  name="closing_date"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Next Season Closing Date</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="date"
+                          {...field}
+                          value={field.value || ''}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Format: YYYY-MM-DD (e.g., 2025-12-31)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </CardContent>
             </Card>
 
