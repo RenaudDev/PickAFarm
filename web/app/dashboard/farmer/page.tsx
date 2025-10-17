@@ -1,11 +1,11 @@
 /**
  * Farmer Dashboard Overview Page
- * Story 2.4: Farmer Dashboard Layout & Overview Page
+ * Story 2.5: Dashboard UX Restructure - Overview with Inline Farm Information Editor
  *
  * Route: /dashboard/farmer
  *
- * Displays key metrics, chart, and quick actions for authenticated farmers.
- * Replaces placeholder page from Story 2.2.
+ * Displays farm information form (editable) with verification badge.
+ * Replaces separate farm-info page with inline editing.
  */
 
 'use client';
@@ -13,60 +13,126 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth, useUser } from '@clerk/nextjs';
-import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { Users, Eye, Star, Calendar, ExternalLink, PenSquare, Upload, Send } from 'lucide-react';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { ExternalLink, PenSquare, Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 import DashboardLayout from '@/components/farmer/dashboard-layout';
 
-// Lazy-load chart component (Recharts is ~200KB, load only when needed)
-const PageViewsChart = dynamic(() => import('@/components/farmer/page-views-chart'), {
-  loading: () => <ChartSkeleton />,
-  ssr: false, // Chart requires DOM
+// Farm form validation schema
+const farmSchema = z.object({
+  name: z.string().min(1, 'Farm name is required'),
+  description: z
+    .union([z.string().min(10, 'Description must be at least 10 characters'), z.literal('')])
+    .optional(),
+  street: z.string().optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  postal_code: z.string().optional(),
+  country: z.string().optional(),
+  phone: z
+    .string()
+    .regex(/^[\d\s\-()+ ]*$/, 'Invalid phone number')
+    .optional()
+    .or(z.literal('')),
+  email: z.string().email('Invalid email').optional().or(z.literal('')),
+  website: z.string().url('Invalid URL').optional().or(z.literal('')),
+  monday_hours: z.string().optional().or(z.literal('')),
+  tuesday_hours: z.string().optional().or(z.literal('')),
+  wednesday_hours: z.string().optional().or(z.literal('')),
+  thursday_hours: z.string().optional().or(z.literal('')),
+  friday_hours: z.string().optional().or(z.literal('')),
+  saturday_hours: z.string().optional().or(z.literal('')),
+  sunday_hours: z.string().optional().or(z.literal('')),
 });
+
+type FarmFormData = z.infer<typeof farmSchema>;
 
 interface DashboardData {
   farm: {
-    id: string;
     name: string;
     slug: string;
-    logoUrl: string | null;
-    status: string;
-    rating: number;
-    reviewCount: number;
+    description?: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    postal_code?: string;
+    country?: string;
+    phone?: string;
+    email?: string;
+    website?: string;
+    monday_hours?: string;
+    tuesday_hours?: string;
+    wednesday_hours?: string;
+    thursday_hours?: string;
+    friday_hours?: string;
+    saturday_hours?: string;
+    sunday_hours?: string;
+    latitude?: number;
+    longitude?: number;
   };
   verification: {
-    status: 'Active' | 'Pending';
+    status: 'Active' | 'Pending' | 'Suspended';
     missingFields: string[];
   };
-  metrics: {
-    subscribers: number;
-    pageViews: number;
-    rating: number;
-    daysUntilOpening: number | null;
-  };
-  recentActivity: {
-    broadcasts: number;
-    lastBroadcastDate: string | null;
-    newSubscribersThisWeek: number;
-  };
-  chartData: Array<{ date: string; views: number }>;
 }
 
 export default function FarmerDashboardPage() {
   const { getToken } = useAuth();
   const { user } = useUser();
+  const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
-  // Fetch dashboard data on mount
+  const form = useForm<FarmFormData>({
+    resolver: zodResolver(farmSchema),
+    defaultValues: {
+      name: '',
+      description: '',
+      street: '',
+      city: '',
+      state: '',
+      postal_code: '',
+      country: '',
+      phone: '',
+      email: '',
+      website: '',
+      monday_hours: '',
+      tuesday_hours: '',
+      wednesday_hours: '',
+      thursday_hours: '',
+      friday_hours: '',
+      saturday_hours: '',
+      sunday_hours: '',
+    },
+  });
+
+  // Fetch farm data on mount
   useEffect(() => {
     async function fetchData() {
       try {
         const token = await getToken();
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/farmer/overview`, {
+
+        // Fetch farm data
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/farmer/farm`, {
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -80,16 +146,60 @@ export default function FarmerDashboardPage() {
 
         const result = await response.json();
         setData(result);
+
+        // Populate form with fetched data
+        if (result.farm) {
+          Object.keys(result.farm).forEach((key) => {
+            form.setValue(key as keyof FarmFormData, result.farm[key] || '');
+          });
+        }
       } catch (err) {
-        console.error('Dashboard fetch error:', err);
-        setError(err instanceof Error ? err.message : 'Failed to fetch dashboard data');
+        console.error('Data fetch error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch farm data');
       } finally {
         setLoading(false);
       }
     }
 
     fetchData();
-  }, [getToken]);
+  }, [getToken, form]);
+
+  const onSubmit = async (formData: FarmFormData) => {
+    setIsSaving(true);
+    try {
+      const token = await getToken();
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/farmer/farm`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save farm information');
+      }
+
+      const result = await response.json();
+
+      // Update verification status
+      if (result.verification) {
+        setData((prev) => (prev ? { ...prev, verification: result.verification } : null));
+      }
+
+      toast.success('Farm information saved successfully!');
+
+      if (result.verification?.status === 'Active') {
+        toast.success('🎉 Your farm is now verified!');
+      }
+    } catch (err) {
+      console.error('Save error:', err);
+      toast.error('Failed to save farm information');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   // Loading state
   if (loading) {
@@ -131,41 +241,22 @@ export default function FarmerDashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6">
-        {/* Hero Section (Story 2.5) */}
+      <div className="p-6 space-y-6 max-w-4xl mx-auto">
+        {/* Hero Section */}
         <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-blue-50">
           <CardContent className="pt-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex-1 text-center md:text-left">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  Welcome back, {user?.firstName || 'Farmer'}!
-                </h1>
-                <p className="text-lg text-gray-700 mb-4">
-                  Managing <strong>{data.farm.name}</strong>
-                </p>
-                <p className="text-gray-600">
-                  Keep your farm information up to date and engage with your subscribers.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
-                  <Link href="/dashboard/farmer/farm-info">
-                    <PenSquare className="mr-2 h-4 w-4" />
-                    Edit Farm Info
-                  </Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href={`/farms/${data.farm.slug}/`} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    View My Listing
-                  </a>
-                </Button>
-              </div>
+            <div className="text-center md:text-left">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                Welcome back, {user?.firstName || 'Farmer'}!
+              </h1>
+              <p className="text-lg text-gray-700">
+                Managing <strong>{data.farm.name}</strong>
+              </p>
             </div>
           </CardContent>
         </Card>
 
-        {/* Verification Status Card (Story 2.5) */}
+        {/* Verification Status Badge */}
         {data.verification?.status === 'Pending' && (
           <Card className="border-orange-200 bg-orange-50">
             <CardHeader>
@@ -182,30 +273,25 @@ export default function FarmerDashboardPage() {
                     clipRule="evenodd"
                   />
                 </svg>
-                Farm Verification Pending
+                Farm Pending Verification
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-orange-800 mb-4">
-                Your farm listing needs a few more details to be verified. Complete your profile to
-                increase visibility and attract more visitors!
+              <p className="text-orange-800 mb-3">
+                Complete the fields below to get your farm verified and increase visibility!
               </p>
-              <div className="mb-4">
-                <p className="font-semibold text-orange-900 mb-2">Missing information:</p>
-                <ul className="list-disc list-inside space-y-1 text-orange-800">
-                  {data.verification?.missingFields?.map((field) => (
-                    <li key={field} className="capitalize">
-                      {field.replace('_', ' ')}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Button asChild className="bg-orange-600 hover:bg-orange-700">
-                <Link href="/dashboard/farmer/farm-info">
-                  <PenSquare className="mr-2 h-4 w-4" />
-                  Complete Profile
-                </Link>
-              </Button>
+              {data.verification?.missingFields?.length > 0 && (
+                <div>
+                  <p className="font-semibold text-orange-900 mb-2">Missing information:</p>
+                  <ul className="list-disc list-inside space-y-1 text-orange-800">
+                    {data.verification.missingFields.map((field) => (
+                      <li key={field} className="capitalize">
+                        {field.replace('_', ' ')}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </CardContent>
           </Card>
         )}
@@ -229,7 +315,7 @@ export default function FarmerDashboardPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-green-900">Farm Verified</h3>
+                  <h3 className="font-semibold text-green-900">Farm Verified ✓</h3>
                   <p className="text-green-800">Your farm profile is complete and verified!</p>
                 </div>
               </div>
@@ -237,160 +323,261 @@ export default function FarmerDashboardPage() {
           </Card>
         )}
 
-        {/* Quick Actions */}
+        {/* Farm Information Form */}
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              <Button variant="outline" className="h-auto py-4" asChild>
-                <Link href="/dashboard/farmer/farm-info" className="flex flex-col items-center gap-2">
-                  <PenSquare className="h-5 w-5" />
-                  <span className="text-sm font-medium">Edit Farm Info</span>
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                className="h-auto py-4"
-                disabled
-                title="Coming in Story 2.6"
-              >
-                <div className="flex flex-col items-center gap-2">
-                  <Upload className="h-5 w-5" />
-                  <span className="text-sm font-medium">Upload Images</span>
-                </div>
-              </Button>
-              <Button
-                variant="outline"
-                className="h-auto py-4"
-                disabled
-                title="Coming in Story 2.8"
-              >
-                <div className="flex flex-col items-center gap-2">
-                  <Send className="h-5 w-5" />
-                  <span className="text-sm font-medium">Send Broadcast</span>
-                </div>
-              </Button>
-              <Button variant="outline" className="h-auto py-4" asChild>
-                <a
-                  href={`/farms/${data.farm.slug}/`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-2"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  <span className="text-sm font-medium">View Listing</span>
-                </a>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <MetricCard
-            title="Total Subscribers"
-            value={data.metrics.subscribers}
-            icon={Users}
-            color="blue"
-          />
-          <MetricCard
-            title="Page Views"
-            value={data.metrics.pageViews || 'N/A'}
-            icon={Eye}
-            color="green"
-            subtitle={data.metrics.pageViews === 0 ? 'Coming in Story 2.12' : undefined}
-          />
-          <MetricCard
-            title="Average Rating"
-            value={data.metrics.rating ? `${data.metrics.rating} ⭐` : 'No reviews yet'}
-            icon={Star}
-            color="yellow"
-          />
-          <MetricCard
-            title="Days Until Opening"
-            value={
-              data.metrics.daysUntilOpening !== null ? data.metrics.daysUntilOpening : 'Not set'
-            }
-            icon={Calendar}
-            color="purple"
-          />
-        </div>
-
-        {/* Chart */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Page Views (Last 30 Days)</CardTitle>
-            <p className="text-sm text-gray-500 mt-1">
-              Mock data for development (real analytics coming in Story 2.12)
+            <CardTitle>Farm Information</CardTitle>
+            <p className="text-sm text-gray-600 mt-1">
+              Keep your farm information up to date. Your changes will be synced immediately.
             </p>
           </CardHeader>
           <CardContent>
-            {data.chartData && data.chartData.length > 0 ? (
-              <PageViewsChart data={data.chartData} />
-            ) : (
-              <div className="h-80 flex items-center justify-center text-gray-500">
-                <p>No chart data available yet</p>
-              </div>
-            )}
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                {/* Basic Information Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
+
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Farm Name *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your farm name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell customers about your farm (minimum 10 characters when provided)"
+                            className="resize-none"
+                            rows={5}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Location Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Location</h3>
+
+                  <FormField
+                    control={form.control}
+                    name="street"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Street Address</FormLabel>
+                        <FormControl>
+                          <Input placeholder="123 Farm Lane" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="city"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>City</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Anytown" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="state"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>State</FormLabel>
+                          <FormControl>
+                            <Input placeholder="CA" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="postal_code"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>ZIP Code</FormLabel>
+                          <FormControl>
+                            <Input placeholder="12345" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="country"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Country</FormLabel>
+                          <FormControl>
+                            <Input placeholder="United States" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Coordinates (Read-only) */}
+                  {(data.farm.latitude || data.farm.longitude) && (
+                    <div className="bg-gray-50 p-3 rounded-md border border-gray-200">
+                      <p className="text-sm text-gray-600">
+                        <span className="font-semibold">Coordinates:</span> {data.farm.latitude},{' '}
+                        {data.farm.longitude}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Contact support to change your farm's location
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Contact Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Contact Information</h3>
+
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone</FormLabel>
+                        <FormControl>
+                          <Input placeholder="(555) 123-4567" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="farm@example.com" type="email" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="website"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Website</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://yourfarm.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Operating Hours Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Operating Hours</h3>
+                  <p className="text-sm text-gray-600">
+                    Enter hours for each day (e.g., "9:00 AM - 5:00 PM")
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                      { day: 'monday_hours', label: 'Monday' },
+                      { day: 'tuesday_hours', label: 'Tuesday' },
+                      { day: 'wednesday_hours', label: 'Wednesday' },
+                      { day: 'thursday_hours', label: 'Thursday' },
+                      { day: 'friday_hours', label: 'Friday' },
+                      { day: 'saturday_hours', label: 'Saturday' },
+                      { day: 'sunday_hours', label: 'Sunday' },
+                    ].map(({ day, label }) => (
+                      <FormField
+                        key={day}
+                        control={form.control}
+                        name={day as keyof FarmFormData}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{label}</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., 9:00 AM - 5:00 PM" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    type="submit"
+                    disabled={isSaving}
+                    className="bg-green-800 hover:bg-green-900"
+                  >
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <PenSquare className="mr-2 h-4 w-4" />
+                        Save Changes
+                      </>
+                    )}
+                  </Button>
+                  <Button variant="outline" size="lg" asChild>
+                    <a href={`/farms/${data.farm.slug}/`} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      View My Listing
+                    </a>
+                  </Button>
+                </div>
+              </form>
+            </Form>
           </CardContent>
         </Card>
-
-        {/* Recent Activity Summary */}
-        {data.recentActivity.newSubscribersThisWeek > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p className="text-gray-700">
-                  <span className="font-semibold text-green-600">
-                    {data.recentActivity.newSubscribersThisWeek}
-                  </span>{' '}
-                  new subscriber{data.recentActivity.newSubscribersThisWeek !== 1 ? 's' : ''} this
-                  week
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </DashboardLayout>
-  );
-}
-
-// Metric Card Component
-interface MetricCardProps {
-  title: string;
-  value: string | number;
-  icon: React.ElementType;
-  color: 'blue' | 'green' | 'yellow' | 'purple';
-  subtitle?: string;
-}
-
-function MetricCard({ title, value, icon: Icon, color, subtitle }: MetricCardProps) {
-  const colorClasses = {
-    blue: 'text-blue-600 bg-blue-50',
-    green: 'text-green-600 bg-green-50',
-    yellow: 'text-yellow-600 bg-yellow-50',
-    purple: 'text-purple-600 bg-purple-50',
-  };
-
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
-        <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
-          <Icon className="h-4 w-4" />
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
-      </CardContent>
-    </Card>
   );
 }
 
@@ -402,13 +589,10 @@ function EmptyState() {
         <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
           <span className="text-3xl">🌾</span>
         </div>
-        <h2 className="text-2xl font-bold text-gray-900">Welcome to Your Dashboard!</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Welcome to Your Farm Dashboard!</h2>
         <p className="text-gray-600 max-w-md">
           Complete your farm profile to start managing your listing and engaging with customers.
         </p>
-        <Button className="mt-6" disabled>
-          Complete Your Profile (Coming in Story 2.5)
-        </Button>
       </div>
     </div>
   );
@@ -417,22 +601,15 @@ function EmptyState() {
 // Loading Skeleton
 function DashboardSkeleton() {
   return (
-    <div className="p-6 space-y-6">
-      <div className="space-y-2">
-        <Skeleton className="h-8 w-64" />
-        <Skeleton className="h-4 w-96" />
+    <div className="p-6 space-y-6 max-w-4xl mx-auto">
+      <Skeleton className="h-24 w-full" />
+      <Skeleton className="h-20 w-full" />
+      <div className="space-y-4">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-12 w-full" />
+        <Skeleton className="h-32 w-full" />
+        <Skeleton className="h-12 w-32" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[1, 2, 3, 4].map((i) => (
-          <Skeleton key={i} className="h-32" />
-        ))}
-      </div>
-      <Skeleton className="h-96" />
-      <Skeleton className="h-48" />
     </div>
   );
-}
-
-function ChartSkeleton() {
-  return <Skeleton className="h-80 w-full" />;
 }

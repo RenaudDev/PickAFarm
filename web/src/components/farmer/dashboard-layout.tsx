@@ -14,16 +14,25 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
-import { Home, Info, Image, Send, BarChart, TrendingUp, Settings, Menu, X } from 'lucide-react';
+import {
+  Home,
+  Image as ImageIcon,
+  Send,
+  BarChart,
+  TrendingUp,
+  Settings,
+  Menu,
+  X,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const navItems = [
   { name: 'Overview', href: '/dashboard/farmer', icon: Home },
-  { name: 'Farm Info', href: '/dashboard/farmer/farm-info', icon: Info, disabled: true },
-  { name: 'Images', href: '/dashboard/farmer/images', icon: Image, disabled: true },
+  { name: 'Images', href: '/dashboard/farmer/images', icon: ImageIcon, disabled: true },
   { name: 'Broadcasts', href: '/dashboard/farmer/broadcasts', icon: Send, disabled: true },
   { name: 'Analytics', href: '/dashboard/farmer/analytics', icon: BarChart, disabled: true },
   { name: 'Marketing', href: '/dashboard/farmer/marketing', icon: TrendingUp, disabled: true },
@@ -45,9 +54,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <aside className="fixed left-0 top-0 h-full w-60 bg-white border-r border-gray-200 hidden lg:block z-30">
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-[#2D5016]">PickAFarm</h1>
-            <p className="text-sm text-gray-600 mt-1">Farmer Dashboard</p>
+          <div className="p-6 border-b border-gray-200 flex items-center justify-center">
+            <Image
+              src="/images/navbarlogo1.webp"
+              alt="PickAFarm Logo"
+              width={180}
+              height={60}
+              className="object-contain"
+            />
           </div>
 
           {/* Navigation */}
@@ -100,7 +114,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           >
             <Menu className="h-6 w-6" />
           </button>
-          <h1 className="text-lg font-bold text-[#2D5016]">PickAFarm</h1>
+          <Image
+            src="/images/navbarlogo1.webp"
+            alt="PickAFarm Logo"
+            width={120}
+            height={40}
+            className="object-contain"
+          />
           <UserButton afterSignOutUrl="/" />
         </div>
       </header>
