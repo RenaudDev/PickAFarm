@@ -14,10 +14,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-// Select imports removed - Service Types now uses DynamicMultiSelect
+// Smart Tag Input for multi-select fields with Zoho sync
 import { CollapsibleFormSection } from '@/components/ui/collapsible-form-section';
 import { FormProgressIndicator } from '@/components/ui/form-progress-indicator';
-import { DynamicMultiSelect } from '@/components/forms/DynamicMultiSelect';
+import { SmartTagInput } from '@/components/forms/SmartTagInput';
 import { PenSquare, Loader2, ExternalLink } from 'lucide-react';
 
 /**
@@ -499,13 +499,15 @@ export function FarmerFormImproved({
             name="categories"
             render={({ field }) => (
               <FormItem>
-                <DynamicMultiSelect
+                <SmartTagInput
                   fieldName="categories"
                   label="Categories / Type of Farms"
                   description="Select all that apply to your farm"
                   value={field.value || []}
                   onChange={field.onChange}
-                  error={form.formState.errors.categories?.message as string}
+                  error={form.formState.errors.categories?.message as string | undefined}
+                  placeholder="Search categories..."
+                  maxTags={10}
                 />
               </FormItem>
             )}
@@ -517,13 +519,15 @@ export function FarmerFormImproved({
             name="type"
             render={({ field }) => (
               <FormItem>
-                <DynamicMultiSelect
+                <SmartTagInput
                   fieldName="service_types"
                   label="Service Types"
                   description="Select all service types your farm offers"
                   value={field.value || []}
                   onChange={field.onChange}
-                  error={form.formState.errors.type?.message as string}
+                  error={form.formState.errors.type?.message as string | undefined}
+                  placeholder="Search service types..."
+                  maxTags={8}
                 />
               </FormItem>
             )}
@@ -548,13 +552,15 @@ export function FarmerFormImproved({
             name="varieties"
             render={({ field }) => (
               <FormItem>
-                <DynamicMultiSelect
+                <SmartTagInput
                   fieldName="varieties"
                   label="Varieties / Products"
                   description="Select all varieties your farm offers"
                   value={field.value || []}
                   onChange={field.onChange}
-                  error={form.formState.errors.varieties?.message as string}
+                  error={form.formState.errors.varieties?.message as string | undefined}
+                  placeholder="Search varieties..."
+                  maxTags={20}
                 />
               </FormItem>
             )}
@@ -597,13 +603,15 @@ export function FarmerFormImproved({
             name="amenities"
             render={({ field }) => (
               <FormItem>
-                <DynamicMultiSelect
+                <SmartTagInput
                   fieldName="amenities"
                   label="Amenities"
                   description="Select amenities available at your farm"
                   value={field.value || []}
                   onChange={field.onChange}
-                  error={form.formState.errors.amenities?.message as string}
+                  error={form.formState.errors.amenities?.message as string | undefined}
+                  placeholder="Search amenities..."
+                  maxTags={15}
                 />
               </FormItem>
             )}
@@ -636,13 +644,15 @@ export function FarmerFormImproved({
             name="payment_methods"
             render={({ field }) => (
               <FormItem>
-                <DynamicMultiSelect
+                <SmartTagInput
                   fieldName="payment_methods"
                   label="Payment Methods"
                   description="Select all payment methods you accept"
                   value={field.value || []}
                   onChange={field.onChange}
-                  error={form.formState.errors.payment_methods?.message as string}
+                  error={form.formState.errors.payment_methods?.message as string | undefined}
+                  placeholder="Search payment methods..."
+                  maxTags={10}
                 />
               </FormItem>
             )}
