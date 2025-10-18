@@ -1,143 +1,274 @@
+/**
+ * useFieldOptions Hook
+ * Story 2.5.2: Dynamic Form Field Options System
+ *
+ * Fetches and caches field options from the API with localStorage caching.
+ * Provides fallback to hardcoded options if API fails.
+ */
+
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 const CACHE_KEY = 'farm-field-options';
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
-export interface FieldOption {
+interface FieldOption {
   option_value: string;
   option_label: string;
-  sort_order?: number;
   usage_count?: number;
 }
 
-export interface UseFieldOptionsResult {
-  data: FieldOption[] | null;
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
+interface CachedData {
+  data: FieldOption[];
+  timestamp: number;
 }
 
 /**
- * Hook to fetch and cache form field options from the API.
- *
- * Features:
- * - localStorage caching for offline support (24-hour TTL)
- * - Automatic cache invalidation on stale data
- * - Error handling with fallback to cached data
- * - TypeScript support for all options
- *
- * Usage:
- * ```tsx
- * const { data: options, isLoading, isError } = useFieldOptions('categories');
- *
- * if (isLoading) return <Skeleton />;
- * if (isError) return <div>Failed to load options</div>;
- *
- * return options.map(option => (
- *   <Checkbox key={option.option_value} value={option.option_value}>
- *     {option.option_label}
- *   </Checkbox>
- * ));
- * ```
- *
- * @param fieldName - The field name to fetch options for (e.g., 'categories', 'amenities')
- * @returns Object with data, isLoading, isError, and error
+ * Hook to fetch field options for dynamic multi-select fields
+ * @param fieldName - The name of the field to fetch options for
+ * @returns Query result with field options, loading state, and error state
  */
-export function useFieldOptions(fieldName: string): UseFieldOptionsResult {
-  const [data, setData] = useState<FieldOption[] | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+export function useFieldOptions(fieldName: string) {
+  return useQuery<FieldOption[]>({
+    queryKey: ['field-options', fieldName],
+    queryFn: async () => {
+      // Check localStorage cache first
+      const cacheKey = `${CACHE_KEY}-${fieldName}`;
 
-  useEffect(() => {
-    async function fetchOptions() {
       try {
-        setIsLoading(true);
-        setIsError(false);
-        setError(null);
-
-        // Check localStorage cache first
-        const cacheKey = `${CACHE_KEY}-${fieldName}`;
-        const cached = typeof window !== 'undefined' ? localStorage.getItem(cacheKey) : null;
+        const cached = localStorage.getItem(cacheKey);
 
         if (cached) {
-          try {
-            const { data: cachedData, timestamp } = JSON.parse(cached);
-            if (Date.now() - timestamp < CACHE_DURATION) {
-              setData(cachedData);
-              setIsLoading(false);
-              return;
-            }
-          } catch (err) {
-            console.warn('Failed to parse cached field options:', err);
+          const { data, timestamp }: CachedData = JSON.parse(cached);
+
+          // Check if cache is still valid
+          if (Date.now() - timestamp < CACHE_DURATION) {
+            console.log(`Using cached options for ${fieldName}`);
+            return data;
           }
         }
-
-        // Fetch from API
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
-        const response = await fetch(`${apiUrl}/api/field-options/${fieldName}`);
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch field options for ${fieldName}`);
-        }
-
-        const result = await response.json();
-        const options = result.options || [];
-
-        // Cache in localStorage
-        if (typeof window !== 'undefined') {
-          try {
-            localStorage.setItem(
-              cacheKey,
-              JSON.stringify({
-                data: options,
-                timestamp: Date.now(),
-              })
-            );
-          } catch (err) {
-            console.warn('Failed to cache field options:', err);
-          }
-        }
-
-        setData(options);
-      } catch (err) {
-        setIsError(true);
-        setError(err instanceof Error ? err : new Error('Unknown error'));
-        // Still try to return cached data even on error
-        const cacheKey = `${CACHE_KEY}-${fieldName}`;
-        const cached = typeof window !== 'undefined' ? localStorage.getItem(cacheKey) : null;
-        if (cached) {
-          try {
-            const { data: cachedData } = JSON.parse(cached);
-            setData(cachedData);
-          } catch (parseErr) {
-            console.warn('Failed to parse fallback cached data:', parseErr);
-          }
-        }
-      } finally {
-        setIsLoading(false);
+      } catch (error) {
+        // Ignore cache errors and fetch fresh data
+        console.warn('Error reading cache:', error);
       }
-    }
 
-    fetchOptions();
-  }, [fieldName]);
+      // Fetch from API
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const response = await fetch(
+        `${apiUrl}/api/field-options/${fieldName}`,
+        {
+          headers: {
+            'Accept': 'application/json',
+          },
+        }
+      );
 
-  return { data, isLoading, isError, error };
-}
+      if (!response.ok) {
+        throw new Error(`Failed to fetch field options: ${response.statusText}`);
+      }
 
-/**
- * Clear all cached field options from localStorage.
- * Useful for force-refreshing when options change.
- */
-export function clearFieldOptionsCache() {
-  if (typeof window === 'undefined') return;
+      const result = await response.json();
+      const options: FieldOption[] = result.options || [];
 
-  const keys = Object.keys(localStorage);
-  keys.forEach((key) => {
-    if (key.startsWith(CACHE_KEY)) {
-      localStorage.removeItem(key);
-    }
+      // Cache in localStorage
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify({
+          data: options,
+          timestamp: Date.now()
+        }));
+      } catch (error) {
+        // Ignore cache write errors (e.g., localStorage full)
+        console.warn('Error writing cache:', error);
+      }
+
+      return options;
+    },
+    staleTime: CACHE_DURATION,
+    gcTime: CACHE_DURATION,
+    retry: 2,
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
+
+/**
+ * Batch fetch multiple field options in one request
+ * @param fieldNames - Array of field names to fetch options for
+ * @returns Query result with grouped field options
+ */
+export function useFieldOptionsBatch(fieldNames: string[]) {
+  return useQuery<Record<string, FieldOption[]>>({
+    queryKey: ['field-options-batch', ...fieldNames],
+    queryFn: async () => {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const fieldsParam = fieldNames.join(',');
+
+      const response = await fetch(
+        `${apiUrl}/api/field-options?fields=${encodeURIComponent(fieldsParam)}`,
+        {
+          headers: {
+            'Accept': 'application/json',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch field options: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      const grouped: Record<string, FieldOption[]> = result.grouped || {};
+
+      // Cache each field separately
+      Object.entries(grouped).forEach(([field, options]) => {
+        const cacheKey = `${CACHE_KEY}-${field}`;
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify({
+            data: options,
+            timestamp: Date.now()
+          }));
+        } catch (error) {
+          console.warn('Error writing cache:', error);
+        }
+      });
+
+      return grouped;
+    },
+    staleTime: CACHE_DURATION,
+    gcTime: CACHE_DURATION,
+    retry: 2,
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
+  });
+}
+
+/**
+ * Clear all field options from localStorage cache
+ */
+export function clearFieldOptionsCache() {
+  try {
+    const keys = Object.keys(localStorage);
+    keys.forEach(key => {
+      if (key.startsWith(CACHE_KEY)) {
+        localStorage.removeItem(key);
+      }
+    });
+    console.log('Field options cache cleared');
+  } catch (error) {
+    console.warn('Error clearing cache:', error);
+  }
+}
+
+/**
+ * Get fallback options for when API fails
+ * These are the hardcoded options from the original implementation
+ */
+export function getFallbackOptions(fieldName: string): FieldOption[] {
+  const fallbacks: Record<string, string[]> = {
+    categories: [
+      "Christmas Tree Farm",
+      "Pumpkin Patch",
+      "Apple Orchard",
+      "Berry Farm",
+      "Vegetable Farm",
+      "Sunflower Field",
+      "Corn Maze",
+      "Petting Zoo"
+    ],
+    amenities: [
+      "Restrooms",
+      "Gift Shop",
+      "Wagon Rides",
+      "Picnic Area",
+      "Playground",
+      "Food Service",
+      "Parking",
+      "Wheelchair Accessible"
+    ],
+    varieties: [
+      "Douglas Fir",
+      "Fraser Fir",
+      "Noble Fir",
+      "Nordmann Fir",
+      "Blue Spruce",
+      "Norway Spruce",
+      "White Pine",
+      "Scotch Pine"
+    ],
+    payment_methods: [
+      "Cash",
+      "Credit Card",
+      "Debit Card",
+      "Check",
+      "Venmo",
+      "PayPal",
+      "Apple Pay",
+      "Google Pay"
+    ],
+    activities: [
+      "U-Pick",
+      "Pre-Cut Trees",
+      "Cut Your Own",
+      "Hayrides",
+      "Corn Maze",
+      "Petting Zoo",
+      "Farm Tours",
+      "Special Events"
+    ],
+    seasonal_activities: [
+      "Christmas Trees",
+      "Pumpkin Picking",
+      "Apple Picking",
+      "Berry Picking",
+      "Sunflower Fields",
+      "Easter Egg Hunts",
+      "Fall Festivals",
+      "Holiday Markets"
+    ],
+    christmas_trees_available: [
+      "Douglas Fir",
+      "Fraser Fir",
+      "Noble Fir",
+      "Nordmann Fir",
+      "Blue Spruce",
+      "Norway Spruce",
+      "White Pine",
+      "Scotch Pine",
+      "Concolor Fir",
+      "Balsam Fir"
+    ],
+    christmas_activities: [
+      "Santa Visits",
+      "Hot Cocoa",
+      "Wreaths For Sale",
+      "Garlands For Sale",
+      "Tree Netting",
+      "Tree Drilling",
+      "Tree Wrapping",
+      "Gift Shop"
+    ],
+    christmas_products: [
+      "Wreaths",
+      "Garlands",
+      "Ornaments",
+      "Tree Stands",
+      "Tree Preservative",
+      "Holiday Decorations",
+      "Gift Baskets",
+      "Hot Cocoa"
+    ]
+  };
+
+  const options = fallbacks[fieldName] || [];
+
+  // Convert to FieldOption format
+  return options.map(option => ({
+    option_value: option,
+    option_label: option,
+    usage_count: 0
+  }));
+}
+
+/**
+ * Type export for use in components
+ */
+export type { FieldOption };

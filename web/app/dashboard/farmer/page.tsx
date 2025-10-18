@@ -184,7 +184,11 @@ export default function FarmerDashboardPage() {
             // Handle pet_friendly boolean conversion
             if (key === 'pet_friendly' && typeof value === 'number') {
               form.setValue(key as keyof FarmFormData, Boolean(value) as any);
+            } else if (Array.isArray(value)) {
+              // Preserve array type for multi-select fields
+              form.setValue(key as keyof FarmFormData, value);
             } else {
+              // For non-array values, use empty string fallback
               form.setValue(key as keyof FarmFormData, value || '');
             }
           });
