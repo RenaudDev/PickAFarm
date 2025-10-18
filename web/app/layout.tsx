@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { DeferredComponents } from '@/components/deferred-components';
 import { GeistSans } from 'geist/font/sans';
+import { ReactQueryClientProvider } from '@/components/providers/react-query-provider';
 import './globals.css';
 
 // Critical CSS embedded directly to avoid module resolution issues
@@ -36,11 +37,12 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html lang="en" className={GeistSans.className}>
-        <head>
-          {/* Inline Critical CSS for instant first paint */}
-          <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+    <ReactQueryClientProvider>
+      <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+        <html lang="en" className={GeistSans.className}>
+          <head>
+            {/* Inline Critical CSS for instant first paint */}
+            <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
 
           {/* Defer non-critical CSS - will be injected by Next.js but we make it async */}
           <script
@@ -92,7 +94,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <DeferredComponents />
           {children}
         </body>
-      </html>
-    </ClerkProvider>
+        </html>
+      </ClerkProvider>
+    </ReactQueryClientProvider>
   );
 }
