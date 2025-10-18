@@ -1795,7 +1795,7 @@ async function handleFieldOptions(request, env, method, url) {
 
     // Valid field names for validation
     const validFields = [
-      'categories', 'activities', 'amenities', 'products',
+      'categories', 'activities', 'amenities', 'varieties', 'products',
       'payment_methods', 'seasonal_activities',
       'christmas_trees_available', 'christmas_activities', 'christmas_products'
     ];
