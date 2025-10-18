@@ -1,0 +1,261 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+// This script exports all amenities from the database for review
+
+const amenities = [
+  "ATM",
+  "ATM Available",
+  "Accepted",
+  "Activities",
+  "Animal Viewing",
+  "Bakery",
+  "Balloon Artist",
+  "Barnyard Animals",
+  "Barrel Train",
+  "Basketball",
+  "Baskets",
+  "Bonfire",
+  "Bottom Pruning",
+  "Boughs",
+  "Boughs For Decoration",
+  "Bow Saws Provided",
+  "Breakfast with Santa",
+  "Brush & Greenery",
+  "Campfires",
+  "Candy Canes",
+  "Carrying Assistance",
+  "Carryout Bags",
+  "Checks",
+  "Chestnuts",
+  "Christmas Barn",
+  "Christmas Cactus",
+  "Christmas Decor",
+  "Christmas Shop",
+  "Christmas Store",
+  "Christmas Tree Stands",
+  "Coffee",
+  "Concessions",
+  "Contactless Payments",
+  "Corn Hole",
+  "Corn Maze",
+  "Corn Pit",
+  "Craft Market",
+  "Craft Shop",
+  "Crafts",
+  "Cutting Assistance",
+  "Espresso",
+  "Family Photos",
+  "Farm Animal Safari",
+  "Farm Animals",
+  "Farm Friends",
+  "Farm Hoppers",
+  "Farm Shop",
+  "Farm Stand",
+  "Farmers Market",
+  "Firepit",
+  "Flocked Trees",
+  "Food Available",
+  "Food Truck",
+  "Free Hayride",
+  "Free Netting",
+  "Free Parking",
+  "Free Popcorn",
+  "Free Twine",
+  "Free street parking",
+  "Fresh Greenery",
+  "Garland For Sale",
+  "Garlands For Sale",
+  "Gender-neutral restroom",
+  "Gift Baskets",
+  "Gift Shop",
+  "Grave Blankets",
+  "Grave Saddles",
+  "Greenery",
+  "Handicap Accessible",
+  "Handmade Ornaments",
+  "Hay Bale Movie Theater",
+  "Hay Rides",
+  "Hayrack Rides",
+  "Hayrides",
+  "Holiday Decorations",
+  "Honey",
+  "Horse Drawn Carriage Rides",
+  "Horse Rides",
+  "Horse-drawn wagons",
+  "Hot Chocolate",
+  "Hot Cider",
+  "Hot Dogs",
+  "Hot Drinks",
+  "Jumper for Kids",
+  "Kids Make-a-Wreath",
+  "Kids Play Area",
+  "Kissing Balls",
+  "Letters to Santa",
+  "Live Music",
+  "Live Trees",
+  "Loading Assistance",
+  "Manger Scene with Live Animals",
+  "Maple Products",
+  "Maple Syrup",
+  "Maple Syrup Products",
+  "Market",
+  "Marshmallow Roasting",
+  "Marshmallow Toasting",
+  "Measuring",
+  "Mistletoe",
+  "Mistletoe Market",
+  "Mulch",
+  "NFC mobile payments",
+  "Nature Paths",
+  "Nature Trail",
+  "Netting Available",
+  "Online Estimates",
+  "Open market",
+  "Organic",
+  "Ornaments",
+  "Packaging Materials",
+  "Painted Trees",
+  "Parking",
+  "Petting Zoo",
+  "Photography",
+  "Photography Allowed",
+  "Picnic Area",
+  "Picnic Areas",
+  "Picnic Tables",
+  "Pine Roping",
+  "Play Area",
+  "Playground",
+  "Poinsettias",
+  "Pony Rides",
+  "Popcorn",
+  "Potted Trees",
+  "Pre-Tagging",
+  "Recycling Service",
+  "Refreshments",
+  "Restrooms",
+  "SNAP/EBT",
+  "Santa Visits",
+  "Saw Included",
+  "Saws Provided",
+  "Scavenger Hunt",
+  "Sleds",
+  "Sleds Provided",
+  "Sleds/Tree Carts",
+  "Sleigh Rides",
+  "Slide",
+  "Snack Bar",
+  "Snacks",
+  "Snowman Contest",
+  "Stand Drilling",
+  "Sugar Cookies",
+  "Swags",
+  "Swings",
+  "Tarps Available",
+  "Tobogganing",
+  "Toboggans for Children",
+  "Tractor Rides",
+  "Train Rides",
+  "Transport Sleds",
+  "Tree Bags",
+  "Tree Bailing",
+  "Tree Baling",
+  "Tree Cleaning",
+  "Tree Cutting",
+  "Tree Cutting Assistance",
+  "Tree Drill System",
+  "Tree Drilling",
+  "Tree Hauling",
+  "Tree Loading",
+  "Tree Maze",
+  "Tree Netting",
+  "Tree Packaging",
+  "Tree Pickup",
+  "Tree Processing",
+  "Tree Shaking",
+  "Tree Stands",
+  "Tree Stands For Sale",
+  "Tree Tagging",
+  "Tree Wagons",
+  "Tree Wrapping",
+  "Trolley Rides",
+  "Tube Slide",
+  "Twine Provided",
+  "Vendors",
+  "Veteran-Owned",
+  "Wagon Rides",
+  "Wedding Venue",
+  "Wheelchair Accessible",
+  "Wheelchair Accessible Entrance",
+  "Wheelchair Accessible Parking",
+  "Wheelchair Accessible Restroom",
+  "Wheelchair Accessible Seating",
+  "Wine Tasting",
+  "Women-Owned",
+  "Wreath For Sale",
+  "Wreaths",
+  "Wreaths For Sale",
+  "Zip Lines",
+  "Ziplines"
+];
+
+// Your Zoho list
+const zohoList = [
+  "Wreaths For Sale",
+  "Garlands For Sale",
+  "Fire Pit/Bonfire",
+  "Hot Chocolate",
+  "Tree Stands",
+  "Free Parking",
+  "Hot Cider",
+  "Gift Shop",
+  "Photography",
+  "Restrooms",
+  "Saw Included",
+  "Wagon Rides",
+  "Santa Visits",
+  "Sleigh Rides",
+  "Wheelchair Accessible",
+  "Playground",
+  "Activities",
+  "Nature Trails"
+];
+
+// Find differences
+const inCurrentButNotZoho = amenities.filter(a => !zohoList.includes(a));
+const inZohoButNotCurrent = zohoList.filter(z => !amenities.includes(z));
+
+const output = `# Amenities Audit Report
+
+## Current Database (185 items)
+${amenities.map((a, i) => `${i + 1}. ${a}`).join('\n')}
+
+## Your Zoho Reference List (18 items)
+${zohoList.map((a, i) => `${i + 1}. ${a}`).join('\n')}
+
+## Analysis
+
+### Items in DATABASE but NOT in Zoho list (${inCurrentButNotZoho.length} items) ⚠️
+${inCurrentButNotZoho.map(a => `- ${a}`).join('\n')}
+
+### Items in Zoho list but NOT in DATABASE (${inZohoButNotCurrent.length} items)
+${inZohoButNotCurrent.map(a => `- ${a}`).join('\n')}
+
+### Items in BOTH (${amenities.filter(a => zohoList.includes(a)).length} items) ✓
+${amenities.filter(a => zohoList.includes(a)).map(a => `- ${a}`).join('\n')}
+
+## Summary
+- Database has ${amenities.length} total amenities
+- Zoho reference list has ${zohoList.length} amenities
+- Match: ${amenities.filter(a => zohoList.includes(a)).length} items
+- Extra in database: ${inCurrentButNotZoho.length} items (likely junk/typos)
+`;
+
+fs.writeFileSync(
+  path.join(__dirname, '../.agent/Tasks/AUDIT_Amenities.md'),
+  output
+);
+
+console.log('✅ Amenities audit exported to .agent/Tasks/AUDIT_Amenities.md');

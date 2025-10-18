@@ -259,12 +259,39 @@ function slugify(name) {
 
 /* === DATABASE OPERATIONS === */
 
+// ===== AMENITIES WHITELIST =====
+// Only these 18 canonical amenities are allowed from Zoho CRM.
+// Any other values will be rejected to prevent data contamination.
+const APPROVED_AMENITIES = new Set([
+  'Activities',
+  'Fire Pit/Bonfire',
+  'Free Parking',
+  'Garlands For Sale',
+  'Gift Shop',
+  'Hot Chocolate',
+  'Hot Cider',
+  'Nature Trails',
+  'Photography',
+  'Playground',
+  'Restrooms',
+  'Santa Visits',
+  'Saw Included',
+  'Sleigh Rides',
+  'Tree Stands',
+  'Wagon Rides',
+  'Wheelchair Accessible',
+  'Wreaths For Sale',
+]);
+
 /**
  * Auto-discover and populate field options from farm data.
  *
  * Extracts unique values from multi-select fields and stores them in
  * the farm_field_options table. Called after each farm upsert to ensure
  * new values from Zoho become available as form options immediately.
+ *
+ * WHITELIST FILTER: Amenities are filtered against APPROVED_AMENITIES to
+ * prevent garbage data from being discovered. Only approved values are inserted.
  *
  * @param {Object} env - Cloudflare Worker environment bindings
  * @param {Object} record - Farm record data from Zoho
@@ -290,6 +317,12 @@ async function discoverFieldOptions(env, record, farmId) {
 
       for (const value of values) {
         if (!value) continue;
+
+        // WHITELIST FILTER: Reject amenities that aren't approved
+        if (fieldName === 'amenities' && !APPROVED_AMENITIES.has(value)) {
+          console.warn(`[AMENITIES WHITELIST] Rejected "${value}" for farm ${farmId} - not in approved list`);
+          continue;
+        }
 
         try {
           // Insert option if not exists
