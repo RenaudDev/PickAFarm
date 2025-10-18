@@ -1797,7 +1797,8 @@ async function handleFieldOptions(request, env, method, url) {
     const validFields = [
       'categories', 'activities', 'amenities', 'varieties', 'products',
       'payment_methods', 'seasonal_activities',
-      'christmas_trees_available', 'christmas_activities', 'christmas_products'
+      'christmas_trees_available', 'christmas_activities', 'christmas_products',
+      'service_types', 'type' // Added service_types and type as valid fields
     ];
 
     // Single field fetch
@@ -1806,6 +1807,72 @@ async function handleFieldOptions(request, env, method, url) {
         return new Response(JSON.stringify({ error: 'Invalid field name' }), {
           status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
         });
+      }
+
+      // Special handling for service types - return hardcoded approved values
+      if (fieldName === 'service_types' || fieldName === 'type') {
+        const serviceTypes = [
+          { option_value: 'U-Pick', option_label: 'U-Pick', sort_order: 1, usage_count: 0 },
+          { option_value: 'Pre-Cut', option_label: 'Pre-Cut', sort_order: 2, usage_count: 0 },
+          { option_value: 'You Choose, We Cut', option_label: 'You Choose, We Cut', sort_order: 3, usage_count: 0 },
+          { option_value: 'Retail', option_label: 'Retail', sort_order: 4, usage_count: 0 },
+          { option_value: 'Delivery', option_label: 'Delivery', sort_order: 5, usage_count: 0 }
+        ];
+
+        return new Response(
+          JSON.stringify({
+            field: fieldName,
+            options: serviceTypes,
+            count: serviceTypes.length
+          }),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Cache-Control": "public, max-age=3600",
+              ...corsHeaders
+            }
+          }
+        );
+      }
+
+      // Special handling for varieties - return hardcoded approved values (19 total)
+      if (fieldName === 'varieties') {
+        const varieties = [
+          { option_value: 'Balsam Fir', option_label: 'Balsam Fir', sort_order: 1, usage_count: 0 },
+          { option_value: 'Black Hills Spruce', option_label: 'Black Hills Spruce', sort_order: 2, usage_count: 0 },
+          { option_value: 'Canaan Fir', option_label: 'Canaan Fir', sort_order: 3, usage_count: 0 },
+          { option_value: 'Colorado Blue Spruce', option_label: 'Colorado Blue Spruce', sort_order: 4, usage_count: 0 },
+          { option_value: 'Concolor Fir', option_label: 'Concolor Fir', sort_order: 5, usage_count: 0 },
+          { option_value: 'Cook Blue Fir', option_label: 'Cook Blue Fir', sort_order: 6, usage_count: 0 },
+          { option_value: 'Douglas Fir', option_label: 'Douglas Fir', sort_order: 7, usage_count: 0 },
+          { option_value: 'Fraser Fir', option_label: 'Fraser Fir', sort_order: 8, usage_count: 0 },
+          { option_value: 'Grand Fir', option_label: 'Grand Fir', sort_order: 9, usage_count: 0 },
+          { option_value: 'Leyland Cypress', option_label: 'Leyland Cypress', sort_order: 10, usage_count: 0 },
+          { option_value: 'Lodgepole Pine', option_label: 'Lodgepole Pine', sort_order: 11, usage_count: 0 },
+          { option_value: 'Monterrey Pines', option_label: 'Monterrey Pines', sort_order: 12, usage_count: 0 },
+          { option_value: 'Noble Fir', option_label: 'Noble Fir', sort_order: 13, usage_count: 0 },
+          { option_value: 'Nordmann Fir', option_label: 'Nordmann Fir', sort_order: 14, usage_count: 0 },
+          { option_value: 'Scotch Pine', option_label: 'Scotch Pine', sort_order: 15, usage_count: 0 },
+          { option_value: 'Serbian Spruce', option_label: 'Serbian Spruce', sort_order: 16, usage_count: 0 },
+          { option_value: 'Virginia Pine', option_label: 'Virginia Pine', sort_order: 17, usage_count: 0 },
+          { option_value: 'White Pine', option_label: 'White Pine', sort_order: 18, usage_count: 0 },
+          { option_value: 'White Spruce', option_label: 'White Spruce', sort_order: 19, usage_count: 0 }
+        ];
+
+        return new Response(
+          JSON.stringify({
+            field: fieldName,
+            options: varieties,
+            count: varieties.length
+          }),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Cache-Control": "public, max-age=3600",
+              ...corsHeaders
+            }
+          }
+        );
       }
 
       const result = await env.DB.prepare(`
@@ -1847,16 +1914,51 @@ async function handleFieldOptions(request, env, method, url) {
 
     // Group by field name
     const grouped = {};
+
     for (const row of result.results || []) {
       if (!grouped[row.field_name]) {
         grouped[row.field_name] = [];
       }
+
       grouped[row.field_name].push({
         value: row.option_value,
         label: row.option_label,
         sort_order: row.sort_order
       });
     }
+
+    // Add hardcoded service types to the batch response
+    grouped['service_types'] = [
+      { value: 'U-Pick', label: 'U-Pick', sort_order: 1 },
+      { value: 'Pre-Cut', label: 'Pre-Cut', sort_order: 2 },
+      { value: 'You Choose, We Cut', label: 'You Choose, We Cut', sort_order: 3 },
+      { value: 'Retail', label: 'Retail', sort_order: 4 },
+      { value: 'Delivery', label: 'Delivery', sort_order: 5 }
+    ];
+    grouped['type'] = grouped['service_types']; // Alias for backward compatibility
+
+    // Add hardcoded varieties to the batch response (19 approved varieties)
+    grouped['varieties'] = [
+      { value: 'Balsam Fir', label: 'Balsam Fir', sort_order: 1 },
+      { value: 'Black Hills Spruce', label: 'Black Hills Spruce', sort_order: 2 },
+      { value: 'Canaan Fir', label: 'Canaan Fir', sort_order: 3 },
+      { value: 'Colorado Blue Spruce', label: 'Colorado Blue Spruce', sort_order: 4 },
+      { value: 'Concolor Fir', label: 'Concolor Fir', sort_order: 5 },
+      { value: 'Cook Blue Fir', label: 'Cook Blue Fir', sort_order: 6 },
+      { value: 'Douglas Fir', label: 'Douglas Fir', sort_order: 7 },
+      { value: 'Fraser Fir', label: 'Fraser Fir', sort_order: 8 },
+      { value: 'Grand Fir', label: 'Grand Fir', sort_order: 9 },
+      { value: 'Leyland Cypress', label: 'Leyland Cypress', sort_order: 10 },
+      { value: 'Lodgepole Pine', label: 'Lodgepole Pine', sort_order: 11 },
+      { value: 'Monterrey Pines', label: 'Monterrey Pines', sort_order: 12 },
+      { value: 'Noble Fir', label: 'Noble Fir', sort_order: 13 },
+      { value: 'Nordmann Fir', label: 'Nordmann Fir', sort_order: 14 },
+      { value: 'Scotch Pine', label: 'Scotch Pine', sort_order: 15 },
+      { value: 'Serbian Spruce', label: 'Serbian Spruce', sort_order: 16 },
+      { value: 'Virginia Pine', label: 'Virginia Pine', sort_order: 17 },
+      { value: 'White Pine', label: 'White Pine', sort_order: 18 },
+      { value: 'White Spruce', label: 'White Spruce', sort_order: 19 }
+    ];
 
     return new Response(
       JSON.stringify(grouped),
@@ -3293,67 +3395,9 @@ export default {
       }
     }
 
-    if (url.pathname === "/api/farmer/farm") {
-      // Test endpoint - Returns farm data for authenticated farmer
-      try {
-        // Authenticate farmer
-        // (authenticateFarmer imported at top of file)
-        const farmer = await authenticateFarmer(request, env);
-
-        logger.info('Fetching farm data for farmer', {
-          userId: farmer.userId,
-          farmId: farmer.farmId
-        });
-
-        // Query D1 for farm data
-        let farm;
-        try {
-          farm = await env.DB.prepare(
-            'SELECT zoho_record_id, name, city, state, country FROM farms WHERE zoho_record_id = ?'
-          ).bind(farmer.farmId).first();
-        } catch (dbError) {
-          logger.error('Database query failed', { error: dbError.message });
-          return errorResponse(500, "Failed to fetch farm data", "Database error occurred", correlationId);
-        }
-
-        if (!farm) {
-          logger.error('Farm not found', { farmId: farmer.farmId });
-          return errorResponse(404, "Farm not found", `No farm found with ID: ${farmer.farmId}`, correlationId);
-        }
-
-        // Return farm data
-        return new Response(JSON.stringify({
-          success: true,
-          message: "Farm data retrieved successfully",
-          farmer: {
-            userId: farmer.userId,
-            email: farmer.email
-          },
-          farm: {
-            id: farm.zoho_record_id,
-            name: farm.name,
-            city: farm.city,
-            state: farm.state,
-            country: farm.country
-          },
-          timestamp: new Date().toISOString()
-        }), {
-          status: 200,
-          headers: {
-            "Content-Type": "application/json",
-            ...corsHeaders,
-            'X-Correlation-ID': correlationId
-          }
-        });
-      } catch (error) {
-        logger.error('Farmer farm fetch failed', {
-          error: error.message,
-          errorName: error.name
-        });
-
-        return handleAuthenticationError(error, correlationId);
-      }
-    }
+    // REMOVED: Old test endpoint that was intercepting GET requests
+    // This was causing a bug where only name, city, state, country were returned
+    // The proper GET handler at line ~3540 returns ALL fields including description, postal_code, etc.
 
     if (url.pathname === "/api/farmer/overview") {
       // Story 2.4: Farmer Dashboard Overview Endpoint
@@ -3577,6 +3621,18 @@ export default {
           return errorResponse(404, "Farm not found", `No farm found with ID: ${farmer.farmId}`, correlationId);
         }
 
+        // Debug logging for TEST FARM 2
+        if (farmer.farmId === 'zcrm_38729000000440064' || farmData.name === 'TEST FARM 2') {
+          logger.info('DEBUG: TEST FARM raw data from DB', {
+            farmId: farmer.farmId,
+            name: farmData.name,
+            description: farmData.description,
+            descriptionLength: farmData.description ? farmData.description.length : 0,
+            descriptionType: typeof farmData.description,
+            allFields: Object.keys(farmData).join(', ')
+          });
+        }
+
         // Format response for form population
         // Convert CSV strings to arrays for multi-select fields
         const response = {
@@ -3613,9 +3669,57 @@ export default {
           }
         };
 
+        // Calculate verification status for the form
+        const missingFields = [];
+
+        // Check description
+        if (!farmData.description || farmData.description.trim().length === 0) {
+          missingFields.push('description');
+        }
+
+        // Check operating hours (at least one day should have hours)
+        const hasOperatingHours = farmData.monday_hours || farmData.tuesday_hours ||
+          farmData.wednesday_hours || farmData.thursday_hours ||
+          farmData.friday_hours || farmData.saturday_hours || farmData.sunday_hours;
+        if (!hasOperatingHours) {
+          missingFields.push('operating_hours');
+        }
+
+        // Check contact info (at least one contact method required)
+        const hasContactInfo = farmData.phone || farmData.email || farmData.website;
+        if (!hasContactInfo) {
+          missingFields.push('contact_info');
+        }
+
+        // Determine verification status
+        const verificationStatus = missingFields.length === 0 ? 'Active' : 'Pending';
+
+        // Add verification to response
+        response.verification = {
+          status: verificationStatus,
+          missingFields: missingFields
+        };
+
+        // Debug logging for TEST FARM 2 response
+        if (farmer.farmId === 'zcrm_38729000000440064' || farmData.name === 'TEST FARM 2') {
+          logger.info('DEBUG: TEST FARM response being sent', {
+            farmId: farmer.farmId,
+            hasDescription: !!response.farm.description,
+            descriptionValue: response.farm.description,
+            hasCategories: response.farm.categories.length > 0,
+            categoriesCount: response.farm.categories.length,
+            hasVarieties: response.farm.varieties.length > 0,
+            varietiesValues: response.farm.varieties.join(', '),
+            hasAmenities: response.farm.amenities.length > 0,
+            amenitiesValues: response.farm.amenities.join(', ')
+          });
+        }
+
         logger.info('Farm data retrieved successfully for editing', {
           farmId: farmer.farmId,
-          farmName: farmData.name
+          farmName: farmData.name,
+          verificationStatus,
+          missingFieldsCount: missingFields.length
         });
 
         return new Response(JSON.stringify(response), {
@@ -3753,7 +3857,9 @@ export default {
         try {
           const accessToken = await zohoAccessToken(env);
           const dc = env.ZOHO_DC || 'com';
-          const zohoApiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${farmer.farmId}`;
+          // Remove 'zcrm_' prefix from farmId for Zoho API
+          const zohoId = farmer.farmId.replace('zcrm_', '');
+          const zohoApiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${zohoId}`;
 
           const zohoData = {
             Account_Name: data.name,
@@ -3773,13 +3879,14 @@ export default {
             Friday: data.friday_hours,
             Saturday: data.saturday_hours,
             Sunday: data.sunday_hours,
-            Type_of_Farm: categoriesCSV,
-            Services_Type: data.type,
-            Amenities: amenitiesCSV,
-            Varieties: varietiesCSV,
+            // Zoho expects arrays for these multi-select fields
+            Type_of_Farm: data.categories || [],
+            Services_Type: data.type ? [data.type] : [],
+            Amenities: data.amenities || [],
+            Varieties: data.varieties || [],
             Pet_Friendly: data.pet_friendly ? 'TRUE' : 'FALSE',
             Price_Range: data.price_range,
-            Payment_Methods: paymentMethodsCSV
+            Payment_Methods: data.payment_methods || []
           };
 
           const zohoResponse = await fetch(zohoApiUrl, {
@@ -3881,11 +3988,60 @@ export default {
         }
 
         const verificationStatus = missingFields.length === 0 ? 'Active' : 'Pending';
+        const isVerified = missingFields.length === 0;
+
+        // Update the verified field in D1 if farm is now complete
+        if (isVerified) {
+          try {
+            await env.DB.prepare(`
+              UPDATE farms SET
+                verified = 1,
+                featured = 1
+              WHERE zoho_record_id = ?
+            `).bind(farmer.farmId).run();
+
+            logger.info('Farm marked as verified and featured', { farmId: farmer.farmId });
+
+            // Also update Zoho CRM with verification status
+            try {
+              const accessToken = await zohoAccessToken(env);
+              const dc = env.ZOHO_DC || 'com';
+              const zohoId = farmer.farmId.replace('zcrm_', '');
+              const zohoApiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${zohoId}`;
+
+              const zohoVerificationUpdate = {
+                Verified: true,
+                Featured: true
+              };
+
+              await fetch(zohoApiUrl, {
+                method: 'PUT',
+                headers: {
+                  'Authorization': `Zoho-oauthtoken ${accessToken}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: [zohoVerificationUpdate] })
+              });
+
+              logger.info('Zoho CRM updated with verified status', { farmId: farmer.farmId });
+            } catch (zohoError) {
+              logger.error('Failed to update Zoho verification status', {
+                error: zohoError.message,
+                farmId: farmer.farmId
+              });
+              // Don't fail the request, D1 update succeeded
+            }
+          } catch (dbError) {
+            logger.error('Failed to update verified status in D1', { error: dbError.message });
+            // Don't fail the main request
+          }
+        }
 
         logger.info('Farm update completed', {
           farmId: farmer.farmId,
           verificationStatus,
-          missingFieldsCount: missingFields.length
+          missingFieldsCount: missingFields.length,
+          isVerified
         });
 
         // Return success response with updated verification status
