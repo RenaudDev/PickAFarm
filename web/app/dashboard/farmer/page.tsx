@@ -71,7 +71,7 @@ const farmSchema = z.object({
   saturday_hours: z.string().optional().or(z.literal('')),
   sunday_hours: z.string().optional().or(z.literal('')),
   categories: z.array(z.string()).optional(),
-  type: z.string().optional().or(z.literal('')),
+  type: z.array(z.string()).optional(), // Service types (multi-select)
   amenities: z.array(z.string()).optional(),
   varieties: z.array(z.string()).optional(),
   pet_friendly: z.boolean().optional(),
@@ -142,7 +142,7 @@ export default function FarmerDashboardPage() {
       saturday_hours: '',
       sunday_hours: '',
       categories: [],
-      type: '',
+      type: [], // Service types (multi-select)
       amenities: [],
       varieties: [],
       pet_friendly: false,

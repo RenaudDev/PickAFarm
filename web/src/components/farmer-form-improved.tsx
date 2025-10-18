@@ -14,13 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+// Select imports removed - Service Types now uses DynamicMultiSelect
 import { CollapsibleFormSection } from '@/components/ui/collapsible-form-section';
 import { FormProgressIndicator } from '@/components/ui/form-progress-indicator';
 import { DynamicMultiSelect } from '@/components/forms/DynamicMultiSelect';
@@ -517,28 +511,20 @@ export function FarmerFormImproved({
             )}
           />
 
-          {/* Service Type */}
+          {/* Service Types - Multi-Select */}
           <FormField
             control={form.control}
             name="type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Service Type</FormLabel>
-                <Select value={field.value || ''} onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a service type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="U-Pick">U-Pick</SelectItem>
-                    <SelectItem value="Pre-Cut">Pre-Cut</SelectItem>
-                    <SelectItem value="You Choose, We Cut">You Choose, We Cut</SelectItem>
-                    <SelectItem value="Retail">Retail</SelectItem>
-                    <SelectItem value="Delivery">Delivery</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
+                <DynamicMultiSelect
+                  fieldName="service_types"
+                  label="Service Types"
+                  description="Select all service types your farm offers"
+                  value={field.value || []}
+                  onChange={field.onChange}
+                  error={form.formState.errors.type?.message as string}
+                />
               </FormItem>
             )}
           />
