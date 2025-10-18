@@ -14,7 +14,8 @@
       "Bash(curl -s \"https://pickafarm-api.94623956quebecinc.workers.dev/api/test-zoho-fetch?id=38729000000292133\")",
       "Bash(curl -X POST \"https://pickafarm-api.94623956quebecinc.workers.dev/api/zoho-webhook?token=$WEBHOOK_SHARED_SECRET\" -H \"Content-Type: application/json\" -d '{\"\"data\"\":[{\"\"id\"\":\"\"38729000000292133\"\"}]}')",
       "Bash(curl -X POST \"https://pickafarm-api.94623956quebecinc.workers.dev/api/zoho-webhook\" -H \"Content-Type: application/json\" -H \"x-webhook-token: test-secret-token-123\" -d '{\"\"\"\"data\"\"\"\":[{\"\"\"\"id\"\"\"\":\"\"\"\"38729000000292133\"\"\"\"}]}')",
-      "Bash(wrangler deploy:*)"
+      "Bash(wrangler deploy:*)",
+      "mcp__chrome-devtools__take_snapshot"
     ],
     "deny": [],
     "ask": []

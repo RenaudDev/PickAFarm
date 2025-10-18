@@ -32,9 +32,9 @@ export function FarmMapSection() {
   }, []);
 
   // Get active farms for static map
-  const activeFarms = farmsData
-    .filter((f: any) => f.active === 1 && f.latitude && f.longitude)
-    .slice(0, 100); // Limit for performance
+  const activeFarms = farmsData.filter(
+    (f: any) => f.active === 1 && f.latitude && f.longitude
+  );
 
   // Show skeleton while loading location
   if (isLoadingLocation) {
