@@ -54,7 +54,7 @@ export function useFieldOptions(fieldName: string) {
       }
 
       // Fetch from API
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
       const response = await fetch(
         `${apiUrl}/api/field-options/${fieldName}`,
         {
@@ -100,7 +100,7 @@ export function useFieldOptionsBatch(fieldNames: string[]) {
   return useQuery<Record<string, FieldOption[]>>({
     queryKey: ['field-options-batch', ...fieldNames],
     queryFn: async () => {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
       const fieldsParam = fieldNames.join(',');
 
       const response = await fetch(

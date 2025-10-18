@@ -158,8 +158,11 @@ export default function FarmerDashboardPage() {
       try {
         const token = await getToken();
 
+        // Use environment variable or fallback to production API URL
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+
         // Fetch farm data
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/farmer/farm`, {
+        const response = await fetch(`${apiUrl}/api/farmer/farm`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -175,23 +178,58 @@ export default function FarmerDashboardPage() {
         const result = await response.json();
         setData(result);
 
+        // DEBUG: Log the entire API response
+        console.log('=== FULL API RESPONSE ===');
+        console.log(JSON.stringify(result, null, 2));
+
         // Populate form with fetched data
         if (result.farm) {
-          console.log('Dashboard - API Response:', JSON.stringify(result.farm, null, 2));
+          console.log('=== POPULATING FORM FIELDS ===');
+
+          // Log each field as we process it
           Object.keys(result.farm).forEach((key) => {
             const value = result.farm[key];
+            console.log(`Processing field "${key}":`, value);
 
+            // Special handling for multi-select fields that come as CSV strings
+            if (key === 'categories' || key === 'varieties' || key === 'amenities' || key === 'payment_methods') {
+              // Convert CSV string to array
+              const arrayValue = typeof value === 'string' && value
+                ? value.split(',').map(v => v.trim()).filter(Boolean)
+                : [];
+              console.log(`  Converted "${key}" to array:`, arrayValue);
+              form.setValue(key as keyof FarmFormData, arrayValue);
+            }
             // Handle pet_friendly boolean conversion
-            if (key === 'pet_friendly' && typeof value === 'number') {
-              form.setValue(key as keyof FarmFormData, Boolean(value) as any);
-            } else if (Array.isArray(value)) {
-              // Preserve array type for multi-select fields
-              form.setValue(key as keyof FarmFormData, value);
-            } else {
-              // For non-array values, use empty string fallback
-              form.setValue(key as keyof FarmFormData, value || '');
+            else if (key === 'pet_friendly') {
+              const boolValue = value === 1 || value === true || value === 'true';
+              console.log(`  Converted "${key}" to boolean:`, boolValue);
+              form.setValue(key as keyof FarmFormData, boolValue as any);
+            }
+            // Handle description specifically
+            else if (key === 'description') {
+              console.log(`  Setting description: "${value}"`);
+              form.setValue('description', value || '');
+            }
+            // Handle dates
+            else if (key === 'opening_date' || key === 'closing_date') {
+              form.setValue(key as keyof FarmFormData, value || null);
+            }
+            // All other string fields
+            else if (typeof value === 'string' || typeof value === 'number') {
+              form.setValue(key as keyof FarmFormData, (value || '') as any);
             }
           });
+
+          // Log final form values
+          console.log('=== FINAL FORM VALUES ===');
+          console.log('Description:', form.getValues('description'));
+          console.log('Categories:', form.getValues('categories'));
+          console.log('Varieties:', form.getValues('varieties'));
+          console.log('Amenities:', form.getValues('amenities'));
+          console.log('Payment Methods:', form.getValues('payment_methods'));
+        } else {
+          console.log('ERROR: No farm data in response!');
         }
       } catch (err) {
         console.error('Data fetch error:', err);
@@ -208,7 +246,10 @@ export default function FarmerDashboardPage() {
     setIsSaving(true);
     try {
       const token = await getToken();
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/farmer/farm`, {
+      // Use environment variable or fallback to production API URL
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+
+      const response = await fetch(`${apiUrl}/api/farmer/farm`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -628,9 +669,9 @@ export default function FarmerDashboardPage() {
                           <SelectContent>
                             <SelectItem value="U-Pick">U-Pick</SelectItem>
                             <SelectItem value="Pre-Cut">Pre-Cut</SelectItem>
-                            <SelectItem value="Cut Your Own">Cut Your Own</SelectItem>
+                            <SelectItem value="You Choose, We Cut">You Choose, We Cut</SelectItem>
                             <SelectItem value="Retail">Retail</SelectItem>
-                            <SelectItem value="Pick Your Own">Pick Your Own</SelectItem>
+                            <SelectItem value="Delivery">Delivery</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
