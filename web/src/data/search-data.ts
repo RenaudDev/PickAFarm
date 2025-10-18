@@ -1,5 +1,5 @@
 // Auto-generated search data - do not edit manually
-// Generated at: 2025-10-18T12:54:18.095Z
+// Generated at: 2025-10-18T19:08:19.189Z
 
 export const farmCategories = [
   "Apple Orchards",
@@ -7,6 +7,7 @@ export const farmCategories = [
   "Christmas Tree Farms",
   "Corn Farms",
   "Corn Mazes",
+  "Cut Your Own, Pre-Cut, Wholesale, Delivery",
   "Delivery, Pre-Cut, U-Pick",
   "Delivery, U-Pick",
   "Maple Syrup Farms",
