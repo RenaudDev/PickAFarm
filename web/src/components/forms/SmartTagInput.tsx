@@ -51,7 +51,7 @@ export function SmartTagInput({
   fieldName,
   label,
   description,
-  value = [],
+  value,
   onChange,
   placeholder = 'Start typing to search...',
   error,
@@ -60,6 +60,8 @@ export function SmartTagInput({
   required = false,
   disabled = false,
 }: SmartTagInputProps) {
+  // Ensure value is always an array
+  const safeValue = Array.isArray(value) ? value : [];
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<FieldOption[]>([]);
@@ -197,17 +199,17 @@ export function SmartTagInput({
   }, []);
 
   const addTag = (option: FieldOption) => {
-    if (value.includes(option.value)) return;
-    if (maxTags && value.length >= maxTags) return;
+    if (safeValue.includes(option.value)) return;
+    if (maxTags && safeValue.length >= maxTags) return;
 
-    onChange([...value, option.value]);
+    onChange([...safeValue, option.value]);
     setInputValue('');
     setIsOpen(false);
     inputRef.current?.focus();
   };
 
   const removeTag = (tagValue: string) => {
-    onChange(value.filter(v => v !== tagValue));
+    onChange(safeValue.filter(v => v !== tagValue));
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -218,8 +220,8 @@ export function SmartTagInput({
         addTag(filteredOptions[selectedIndex]);
       } else if (allowCustom && inputValue.trim()) {
         // Add custom value
-        if (!value.includes(inputValue.trim())) {
-          onChange([...value, inputValue.trim()]);
+        if (!safeValue.includes(inputValue.trim())) {
+          onChange([...safeValue, inputValue.trim()]);
           setInputValue('');
           setIsOpen(false);
         }
@@ -234,9 +236,9 @@ export function SmartTagInput({
       setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
     } else if (e.key === 'Escape') {
       setIsOpen(false);
-    } else if (e.key === 'Backspace' && !inputValue && value.length > 0) {
+    } else if (e.key === 'Backspace' && !inputValue && safeValue.length > 0) {
       // Remove last tag when backspace pressed on empty input
-      removeTag(value[value.length - 1]);
+      removeTag(safeValue[safeValue.length - 1]);
     }
   };
 
@@ -257,9 +259,9 @@ export function SmartTagInput({
 
       <div className="relative">
         {/* Selected tags */}
-        {value.length > 0 && (
+        {safeValue.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-2">
-            {value.map(tagValue => (
+            {safeValue.map(tagValue => (
               <Badge
                 key={tagValue}
                 variant="secondary"
@@ -294,11 +296,11 @@ export function SmartTagInput({
             onFocus={() => setIsOpen(true)}
             onKeyDown={handleKeyDown}
             placeholder={
-              maxTags && value.length >= maxTags
+              maxTags && safeValue.length >= maxTags
                 ? `Maximum ${maxTags} items selected`
                 : placeholder
             }
-            disabled={disabled || (maxTags && value.length >= maxTags)}
+            disabled={disabled || (maxTags && safeValue.length >= maxTags)}
             className={cn(
               'pr-8',
               error && 'border-destructive focus-visible:ring-destructive'
@@ -348,13 +350,13 @@ export function SmartTagInput({
                     className={cn(
                       'w-full px-3 py-2 text-left text-sm hover:bg-accent',
                       index === selectedIndex && 'bg-accent',
-                      value.includes(option.value) && 'opacity-50'
+                      safeValue.includes(option.value) && 'opacity-50'
                     )}
                     onClick={() => addTag(option)}
-                    disabled={value.includes(option.value)}
+                    disabled={safeValue.includes(option.value)}
                   >
                     {option.label}
-                    {value.includes(option.value) && (
+                    {safeValue.includes(option.value) && (
                       <span className="ml-2 text-xs text-muted-foreground">
                         (selected)
                       </span>
@@ -377,7 +379,7 @@ export function SmartTagInput({
       {/* Selected count */}
       {maxTags && (
         <p className="text-xs text-muted-foreground">
-          {value.length} / {maxTags} selected
+          {safeValue.length} / {maxTags} selected
         </p>
       )}
 
