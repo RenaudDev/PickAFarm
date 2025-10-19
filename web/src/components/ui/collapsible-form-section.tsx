@@ -98,14 +98,20 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
       }
     }, [id, storageKey]);
 
-    // Save state to localStorage when it changes
+    // Save state to localStorage when it changes (non-blocking)
     const handleOpenChange = (open: boolean) => {
       setIsOpen(open);
-      try {
-        localStorage.setItem(storageKey, JSON.stringify(open));
-      } catch (error) {
-        console.warn(`Failed to save section state for ${id}:`, error);
-      }
+      // Defer localStorage write to avoid blocking UI
+      requestIdleCallback(
+        () => {
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(open));
+          } catch (error) {
+            console.warn(`Failed to save section state for ${id}:`, error);
+          }
+        },
+        { timeout: 100 }
+      );
     };
 
     return (
@@ -118,9 +124,9 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
         {/* Section Header/Trigger */}
         <CollapsiblePrimitive.Trigger
           className={cn(
-            'w-full px-5 py-3.5 flex items-center justify-between hover:bg-gray-50/50 transition-colors',
+            'w-full px-5 py-3.5 flex items-center justify-between hover:bg-gray-50/50 transition-colors duration-150',
             'focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-green-500',
-            'rounded-t-lg',
+            'rounded-t-lg will-change-colors',
             isOpen && 'bg-gray-50/30 border-b border-gray-300'
           )}
           aria-expanded={isOpen}
@@ -171,7 +177,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
           {/* Chevron Icon */}
           <ChevronDown
             className={cn(
-              'h-5 w-5 text-gray-400 transition-transform duration-300 ml-2 flex-shrink-0',
+              'h-5 w-5 text-gray-400 transition-transform duration-200 ml-2 flex-shrink-0 will-change-transform',
               isOpen && 'rotate-180'
             )}
           />
@@ -181,7 +187,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
         <CollapsiblePrimitive.Content
           id={`section-content-${id}`}
           className={cn(
-            'transition-all duration-300 overflow-visible',
+            'transition-all duration-200 overflow-visible',
             'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
           )}
           role="region"
