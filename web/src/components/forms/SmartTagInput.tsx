@@ -122,8 +122,10 @@ export function SmartTagInput({
 
           console.log(`[SmartTagInput] API Response for ${fieldName}:`, data);
 
-          // Handle different response structures and ensure options exists
-          const rawOptions = data.options || data || [];
+          // The API returns an object with field names as keys
+          // e.g., { "categories": [...], "varieties": [...], ... }
+          // We need to access the specific field's options
+          const rawOptions = data[fieldName] || data.options || data || [];
 
           // Ensure we have an array
           const optionsArray = Array.isArray(rawOptions) ? rawOptions : [];
