@@ -1,42 +1,53 @@
 /**
  * Farmer Dashboard Layout Component
- * Story 2.4: Farmer Dashboard Layout & Overview Page
  *
- * Provides consistent layout wrapper for all farmer dashboard pages with:
- * - Sidebar navigation (desktop)
- * - Mobile hamburger menu
- * - Responsive header
- * - PickAFarm branding
+ * Provides layout wrapper for farmer dashboard pages with:
+ * - Standard site navbar at the top
+ * - Horizontal tabs for navigation
+ * - Standard page width container
  */
 
 'use client';
 
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useUser } from '@clerk/nextjs';
-import { UserButton } from '@clerk/nextjs';
-import {
-  Home,
-  Image as ImageIcon,
-  Send,
-  BarChart,
-  TrendingUp,
-  Settings,
-  Menu,
-  X,
-} from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import FarmNavbar from '@/components/farm-navbar';
 import { cn } from '@/lib/utils';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import {
+  FileText,
+  Send,
+  TrendingUp,
+  BarChart3
+} from 'lucide-react';
 
-const navItems = [
-  { name: 'Overview', href: '/dashboard/farmer', icon: Home },
-  { name: 'Images', href: '/dashboard/farmer/images', icon: ImageIcon, disabled: true },
-  { name: 'Broadcasts', href: '/dashboard/farmer/broadcasts', icon: Send, disabled: true },
-  { name: 'Analytics', href: '/dashboard/farmer/analytics', icon: BarChart, disabled: true },
-  { name: 'Marketing', href: '/dashboard/farmer/marketing', icon: TrendingUp, disabled: true },
-  { name: 'Settings', href: '/dashboard/farmer/settings', icon: Settings, disabled: true },
+const tabs = [
+  {
+    name: 'Information',
+    href: '/dashboard/farmer',
+    icon: FileText,
+    description: 'Manage your farm information'
+  },
+  {
+    name: 'Broadcast',
+    href: '/dashboard/farmer/broadcasts',
+    icon: Send,
+    description: 'Send updates to subscribers',
+    disabled: true
+  },
+  {
+    name: 'Marketing',
+    href: '/dashboard/farmer/marketing',
+    icon: TrendingUp,
+    description: 'Promote your farm',
+    disabled: true
+  },
+  {
+    name: 'Analytics',
+    href: '/dashboard/farmer/analytics',
+    icon: BarChart3,
+    description: 'View your farm analytics',
+    disabled: true
+  },
 ];
 
 interface DashboardLayoutProps {
@@ -45,151 +56,86 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname();
-  const { user } = useUser();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleTabClick = (href: string, disabled?: boolean) => {
+    if (!disabled) {
+      router.push(href);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Desktop Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-60 bg-white border-r border-gray-200 hidden lg:block z-30">
-        <div className="flex flex-col h-full">
-          {/* Logo */}
-          <div className="p-6 border-b border-gray-200 flex items-center justify-center">
-            <Image
-              src="/images/navbarlogo1.webp"
-              alt="PickAFarm Logo"
-              width={180}
-              height={60}
-              className="object-contain"
-            />
+    <>
+      {/* Standard Site Navbar */}
+      <FarmNavbar />
+
+      {/* Dashboard Content with Standard Width */}
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Dashboard Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">Farmer Dashboard</h1>
+            <p className="mt-2 text-gray-600">Manage your farm listing and connect with customers</p>
           </div>
 
-          {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname === item.href;
+          {/* Horizontal Tabs */}
+          <div className="mb-8">
+            <div className="border-b border-gray-200 overflow-x-auto">
+              <nav className="-mb-px flex space-x-4 sm:space-x-8 min-w-max" aria-label="Tabs">
+                {tabs.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = pathname === tab.href;
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.disabled ? '#' : item.href}
-                  className={cn(
-                    'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
-                    isActive ? 'bg-[#2D5016] text-white' : 'text-gray-700 hover:bg-gray-100',
-                    item.disabled && 'opacity-50 cursor-not-allowed'
-                  )}
-                  onClick={(e) => item.disabled && e.preventDefault()}
-                >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  <span className="font-medium">{item.name}</span>
-                  {item.disabled && <span className="ml-auto text-xs">Soon</span>}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* User Section */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex items-center gap-3">
-              <UserButton afterSignOutUrl="/" />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">
-                  {user?.firstName} {user?.lastName}
-                </p>
-                <p className="text-xs text-gray-500 truncate">Farmer Account</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      {/* Mobile Header */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 lg:hidden z-40">
-        <div className="flex items-center justify-between h-full px-4">
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="p-2 rounded-lg hover:bg-gray-100"
-            aria-label="Open menu"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-          <Image
-            src="/images/navbarlogo1.webp"
-            alt="PickAFarm Logo"
-            width={120}
-            height={40}
-            className="object-contain"
-          />
-          <UserButton afterSignOutUrl="/" />
-        </div>
-      </header>
-
-      {/* Mobile Menu Dialog */}
-      <Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <DialogContent className="fixed inset-0 bg-white p-0 lg:hidden max-w-full">
-          <div className="flex flex-col h-full">
-            {/* Mobile Menu Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#2D5016]">Menu</h2>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-lg hover:bg-gray-100"
-                aria-label="Close menu"
-              >
-                <X className="h-6 w-6" />
-              </button>
+                  return (
+                    <button
+                      key={tab.href}
+                      onClick={() => handleTabClick(tab.href, tab.disabled)}
+                      className={cn(
+                        'group inline-flex items-center py-3 sm:py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap',
+                        isActive
+                          ? 'border-green-800 text-green-800'
+                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                        tab.disabled && 'opacity-50 cursor-not-allowed'
+                      )}
+                      disabled={tab.disabled}
+                    >
+                      <Icon
+                        className={cn(
+                          'mr-2 h-5 w-5',
+                          isActive ? 'text-green-800' : 'text-gray-400 group-hover:text-gray-500'
+                        )}
+                      />
+                      <span className="block sm:inline">{tab.name}</span>
+                      {tab.disabled && (
+                        <span className="hidden sm:inline-flex ml-2 items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600">
+                          Soon
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </nav>
             </div>
 
-            {/* Mobile Navigation */}
-            <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href;
-
+            {/* Tab Description (shows for active tab) */}
+            {tabs.map((tab) => {
+              if (pathname === tab.href) {
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.disabled ? '#' : item.href}
-                    className={cn(
-                      'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
-                      isActive ? 'bg-[#2D5016] text-white' : 'text-gray-700 hover:bg-gray-100',
-                      item.disabled && 'opacity-50 cursor-not-allowed'
-                    )}
-                    onClick={(e) => {
-                      if (item.disabled) {
-                        e.preventDefault();
-                      } else {
-                        setMobileMenuOpen(false);
-                      }
-                    }}
-                  >
-                    <Icon className="h-5 w-5 flex-shrink-0" />
-                    <span className="font-medium">{item.name}</span>
-                    {item.disabled && <span className="ml-auto text-xs">Soon</span>}
-                  </Link>
+                  <div key={tab.href} className="mt-4">
+                    <p className="text-sm text-gray-600">{tab.description}</p>
+                  </div>
                 );
-              })}
-            </nav>
-
-            {/* Mobile User Section */}
-            <div className="p-4 border-t border-gray-200">
-              <div className="flex items-center gap-3">
-                <UserButton afterSignOutUrl="/" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">
-                    {user?.firstName} {user?.lastName}
-                  </p>
-                  <p className="text-xs text-gray-500 truncate">Farmer Account</p>
-                </div>
-              </div>
-            </div>
+              }
+              return null;
+            })}
           </div>
-        </DialogContent>
-      </Dialog>
 
-      {/* Main Content */}
-      <main className="lg:ml-60 pt-16 lg:pt-0">{children}</main>
-    </div>
+          {/* Main Content Area */}
+          <div className="bg-white rounded-lg shadow-sm">
+            {children}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

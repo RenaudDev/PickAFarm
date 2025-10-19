@@ -341,7 +341,7 @@ export default function FarmerDashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6 max-w-4xl mx-auto">
+      <div className="p-6 space-y-6">
         {/* Hero Section */}
         <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-blue-50">
           <CardContent className="pt-6">
@@ -468,7 +468,7 @@ function EmptyState() {
 // Loading Skeleton
 function DashboardSkeleton() {
   return (
-    <div className="p-6 space-y-6 max-w-4xl mx-auto">
+    <div className="p-6 space-y-6">
       <Skeleton className="h-24 w-full" />
       <Skeleton className="h-20 w-full" />
       <div className="space-y-4">
