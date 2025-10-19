@@ -186,10 +186,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
         {/* Section Content */}
         <CollapsiblePrimitive.Content
           id={`section-content-${id}`}
-          className={cn(
-            'transition-all duration-200 overflow-visible',
-            'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
-          )}
+          className="overflow-visible"
           role="region"
           aria-labelledby={`section-header-${id}`}
         >
