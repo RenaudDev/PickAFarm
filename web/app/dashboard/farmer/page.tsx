@@ -22,6 +22,7 @@ import { ExternalLink, PenSquare, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import DashboardLayout from '@/components/farmer/dashboard-layout';
 import { FarmerFormImproved } from '@/components/farmer-form-improved';
+import { FarmMediaSection } from '@/components/farmer/farm-media-section';
 
 // Farm form validation schema
 const farmSchema = z.object({
@@ -392,6 +393,10 @@ export default function FarmerDashboardPage() {
 
         {/* Farm Information Form */}
         <div>
+          {/* Media Section - At the Top */}
+          <FarmMediaSection farmName={data.farm.name} />
+
+          {/* Farm Information Header */}
           <div className="mb-6">
             <h2 className="text-xl font-semibold text-gray-900">Farm Information</h2>
             <p className="text-sm text-gray-600 mt-1">
