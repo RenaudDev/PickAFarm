@@ -323,12 +323,15 @@ export function SmartTagInput({
         {safeValue.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-2">
             {safeValue.map((tagValue) => (
-              <Badge key={tagValue} variant="secondary" className="px-2 py-1">
+              <Badge
+                key={tagValue}
+                className="px-2 py-1 bg-green-800 hover:bg-green-900 text-white border-green-800"
+              >
                 <span className="text-xs">{getDisplayLabel(tagValue)}</span>
                 <button
                   type="button"
                   onClick={() => removeTag(tagValue)}
-                  className="ml-1 hover:text-destructive"
+                  className="ml-1 hover:text-red-200 text-white/90"
                   aria-label={`Remove ${getDisplayLabel(tagValue)}`}
                   disabled={disabled}
                 >
@@ -396,7 +399,7 @@ export function SmartTagInput({
             ref={dropdownRef}
             id={`${fieldName}-listbox`}
             role="listbox"
-            className="absolute z-50 mt-1 w-full rounded-md border bg-white dark:bg-gray-800 shadow-lg max-h-60 overflow-auto"
+            className="absolute z-[100] mt-1 w-full rounded-md border bg-white dark:bg-gray-800 shadow-lg max-h-60 overflow-auto"
           >
             {(() => {
               console.log(`[SmartTagInput] Rendering dropdown for ${fieldName}`);

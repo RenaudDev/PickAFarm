@@ -10,7 +10,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 // Smart Tag Input for multi-select fields with Zoho sync
 import { CollapsibleFormSection } from '@/components/ui/collapsible-form-section';
-import { FormProgressIndicator } from '@/components/ui/form-progress-indicator';
 import { SmartTagInput } from '@/components/forms/SmartTagInput';
 import { PenSquare, Loader2, ExternalLink } from 'lucide-react';
 
@@ -19,9 +18,7 @@ import { PenSquare, Loader2, ExternalLink } from 'lucide-react';
  *
  * Features:
  * - Organized into 7 collapsible sections with new hierarchy
- * - Form progress indicator showing % complete
  * - Expand All / Collapse All controls
- * - Section completion indicators
  * - Full keyboard navigation and accessibility
  * - localStorage persistence for section state
  * - Mobile-responsive design
@@ -43,80 +40,6 @@ export function FarmerFormImproved({
   farmSlug,
 }: FarmerFormImprovedProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-  const [formProgress, setFormProgress] = useState(0);
-
-  // Calculate form progress based on filled fields
-  const calculateProgress = useCallback(() => {
-    const formValues = form.getValues();
-    const requiredFields = ['name', 'city', 'street'];
-    const allFields = Object.keys(formValues);
-
-    let filledCount = 0;
-    let totalCount = 0;
-
-    // Count filled required fields
-    requiredFields.forEach((field) => {
-      totalCount++;
-      const value = formValues[field];
-      if (value && value !== '' && (Array.isArray(value) ? value.length > 0 : true)) {
-        filledCount++;
-      }
-    });
-
-    // Count filled optional fields
-    const optionalFields = allFields.filter((f) => !requiredFields.includes(f));
-    optionalFields.forEach((field) => {
-      const value = formValues[field];
-      if (value && value !== '' && (Array.isArray(value) ? value.length > 0 : true)) {
-        filledCount++;
-      }
-    });
-
-    totalCount += optionalFields.length;
-
-    const progress = totalCount > 0 ? Math.round((filledCount / totalCount) * 100) : 0;
-    setFormProgress(progress);
-  }, [form]);
-
-  // Recalculate progress when form values change
-  useEffect(() => {
-    const subscription = form.watch(() => {
-      calculateProgress();
-    });
-
-    return () => subscription.unsubscribe();
-  }, [form, calculateProgress]);
-
-  // Check if a section is complete
-  const isSectionComplete = (section: string): boolean => {
-    const formValues = form.getValues();
-
-    const sections: Record<string, string[]> = {
-      basic: ['name'],
-      operations: [
-        'monday_hours',
-        'tuesday_hours',
-        'wednesday_hours',
-        'thursday_hours',
-        'friday_hours',
-        'saturday_hours',
-        'sunday_hours',
-      ],
-      location: ['city', 'street'],
-      categories: ['categories'],
-      products: [], // Optional
-      amenities: [], // Optional
-      media: [], // Optional
-    };
-
-    const requiredFields = sections[section] || [];
-    if (requiredFields.length === 0) return false; // Optional sections always show incomplete
-
-    return requiredFields.every((field) => {
-      const value = formValues[field];
-      return value && value !== '' && (Array.isArray(value) ? value.length > 0 : true);
-    });
-  };
 
   // Handle Expand All
   const handleExpandAll = () => {
@@ -144,7 +67,7 @@ export function FarmerFormImproved({
 
     // Trigger re-render by forcing a state update
     // This allows CollapsibleFormSection components to pick up the new localStorage values
-    setFormProgress((prev) => prev);
+    setExpandedSections({});
   };
 
   // Handle Collapse All (keep basic expanded)
@@ -176,36 +99,31 @@ export function FarmerFormImproved({
 
     // Trigger re-render by forcing a state update
     // This allows CollapsibleFormSection components to pick up the new localStorage values
-    setFormProgress((prev) => prev);
+    setExpandedSections({});
   };
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       {/* Form Controls */}
-      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between sticky top-0 bg-white z-10 py-4 -mx-6 px-6 border-b border-gray-200">
-        <div className="flex-1 w-full">
-          <FormProgressIndicator percentage={formProgress} />
-        </div>
-        <div className="flex gap-2 shrink-0">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={handleExpandAll}
-            className="text-xs"
-          >
-            Expand All
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={handleCollapseAll}
-            className="text-xs"
-          >
-            Collapse All
-          </Button>
-        </div>
+      <div className="flex gap-2 justify-end sticky top-0 bg-white z-10 py-4 -mx-6 px-6 border-b border-gray-200">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={handleExpandAll}
+          className="text-xs"
+        >
+          Expand All
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={handleCollapseAll}
+          className="text-xs"
+        >
+          Collapse All
+        </Button>
       </div>
 
       {/* Section 1: Basic Information */}
@@ -215,7 +133,6 @@ export function FarmerFormImproved({
         icon="📍"
         description="Farm name, description, and contact details"
         isRequired={true}
-        isComplete={isSectionComplete('basic')}
         defaultExpanded={true}
       >
         <div className="space-y-4">
@@ -308,7 +225,6 @@ export function FarmerFormImproved({
         icon="⏰"
         description="Operating hours, opening and closing dates"
         isRequired={true}
-        isComplete={isSectionComplete('operations')}
         defaultExpanded={false}
       >
         <div className="space-y-6">
@@ -396,7 +312,6 @@ export function FarmerFormImproved({
         icon="📍"
         description="Address and location information"
         isRequired={true}
-        isComplete={isSectionComplete('location')}
         defaultExpanded={false}
       >
         <div className="space-y-4">
@@ -499,7 +414,6 @@ export function FarmerFormImproved({
         icon="🏷️"
         description="Farm type and service offerings"
         isRequired={false}
-        isComplete={isSectionComplete('categories')}
         defaultExpanded={false}
       >
         <div className="space-y-4">
@@ -552,7 +466,6 @@ export function FarmerFormImproved({
         icon="🌾"
         description="Products offered and pricing"
         isRequired={false}
-        isComplete={false}
         defaultExpanded={false}
       >
         <div className="space-y-4">
@@ -600,7 +513,6 @@ export function FarmerFormImproved({
         icon="✨"
         description="Available amenities and features"
         isRequired={false}
-        isComplete={false}
         defaultExpanded={false}
       >
         <div className="space-y-4">
@@ -674,7 +586,6 @@ export function FarmerFormImproved({
         icon="📸"
         description="Images and additional notes"
         isRequired={false}
-        isComplete={false}
         defaultExpanded={false}
       >
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
