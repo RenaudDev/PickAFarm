@@ -11,38 +11,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useAuth, useUser } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Form } from '@/components/ui/form';
 import { ExternalLink, PenSquare, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import DashboardLayout from '@/components/farmer/dashboard-layout';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { DynamicMultiSelect } from '@/components/forms/DynamicMultiSelect';
 import { FarmerFormImproved } from '@/components/farmer-form-improved';
 
 // Farm form validation schema
@@ -114,8 +92,6 @@ interface DashboardData {
 
 export default function FarmerDashboardPage() {
   const { getToken } = useAuth();
-  const { user } = useUser();
-  const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -415,24 +391,22 @@ export default function FarmerDashboardPage() {
         </div>
 
         {/* Farm Information Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Farm Information</CardTitle>
+        <div>
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Farm Information</h2>
             <p className="text-sm text-gray-600 mt-1">
               Keep your farm information up to date. Your changes will be synced immediately.
             </p>
-          </CardHeader>
-          <CardContent>
-            <Form {...form}>
-              <FarmerFormImproved
-                form={form}
-                onSubmit={onSubmit}
-                isSaving={isSaving}
-                farmData={data.farm}
-              />
-            </Form>
-          </CardContent>
-        </Card>
+          </div>
+          <Form {...form}>
+            <FarmerFormImproved
+              form={form}
+              onSubmit={onSubmit}
+              isSaving={isSaving}
+              farmData={data.farm}
+            />
+          </Form>
+        </div>
       </div>
     </DashboardLayout>
   );
