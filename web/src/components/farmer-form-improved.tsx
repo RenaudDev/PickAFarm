@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -39,93 +39,9 @@ export function FarmerFormImproved({
   farmData,
   farmSlug,
 }: FarmerFormImprovedProps) {
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-
-  // Handle Expand All
-  const handleExpandAll = () => {
-    const sections = [
-      'basic',
-      'operations',
-      'location',
-      'categories',
-      'products',
-      'amenities',
-      'media',
-    ];
-    sections.forEach((section) => {
-      localStorage.setItem(`pickafarm_form_section_${section}`, 'true');
-    });
-
-    // Announce to screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.textContent = 'All sections expanded';
-    announcement.className = 'sr-only';
-    document.body.appendChild(announcement);
-    setTimeout(() => announcement.remove(), 1000);
-
-    // Trigger re-render by forcing a state update
-    // This allows CollapsibleFormSection components to pick up the new localStorage values
-    setExpandedSections({});
-  };
-
-  // Handle Collapse All (keep basic expanded)
-  const handleCollapseAll = () => {
-    const sections = [
-      'basic',
-      'operations',
-      'location',
-      'categories',
-      'products',
-      'amenities',
-      'media',
-    ];
-    sections.forEach((section) => {
-      localStorage.setItem(
-        `pickafarm_form_section_${section}`,
-        section === 'basic' ? 'true' : 'false'
-      );
-    });
-
-    // Announce to screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.textContent = 'Sections collapsed, Basic Information section remains expanded';
-    announcement.className = 'sr-only';
-    document.body.appendChild(announcement);
-    setTimeout(() => announcement.remove(), 1000);
-
-    // Trigger re-render by forcing a state update
-    // This allows CollapsibleFormSection components to pick up the new localStorage values
-    setExpandedSections({});
-  };
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-      {/* Form Controls */}
-      <div className="flex gap-2 justify-end sticky top-0 bg-white z-10 py-4 -mx-6 px-6 border-b border-gray-200">
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          onClick={handleExpandAll}
-          className="text-xs"
-        >
-          Expand All
-        </Button>
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          onClick={handleCollapseAll}
-          className="text-xs"
-        >
-          Collapse All
-        </Button>
-      </div>
-
       {/* Section 1: Basic Information */}
       <CollapsibleFormSection
         id="basic"

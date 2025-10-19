@@ -80,8 +80,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
           {/* Horizontal Tabs */}
           <div className="mb-8">
-            <div className="border-b border-gray-200 overflow-x-auto">
-              <nav className="-mb-px flex space-x-4 sm:space-x-8 min-w-max" aria-label="Tabs">
+            <div className="border-b border-gray-200">
+              <nav className="-mb-px flex space-x-4 sm:space-x-8 flex-wrap" aria-label="Tabs">
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
                   const isActive = pathname === tab.href;
