@@ -160,7 +160,8 @@ export default function FarmerDashboardPage() {
         const token = await getToken();
 
         // Use environment variable or fallback to production API URL
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+        const apiUrl =
+          process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
 
         // Fetch farm data
         const response = await fetch(`${apiUrl}/api/farmer/farm`, {
@@ -193,7 +194,13 @@ export default function FarmerDashboardPage() {
             console.log(`Processing field "${key}":`, value);
 
             // Special handling for multi-select fields that come as CSV strings
-            if (key === 'categories' || key === 'type' || key === 'varieties' || key === 'amenities' || key === 'payment_methods') {
+            if (
+              key === 'categories' ||
+              key === 'type' ||
+              key === 'varieties' ||
+              key === 'amenities' ||
+              key === 'payment_methods'
+            ) {
               // Convert CSV string to array - handle both string CSV and arrays
               let arrayValue: string[] = [];
 
@@ -202,7 +209,10 @@ export default function FarmerDashboardPage() {
                 arrayValue = value.filter(Boolean);
               } else if (typeof value === 'string' && value) {
                 // CSV string, split and clean
-                arrayValue = value.split(',').map(v => v.trim()).filter(Boolean);
+                arrayValue = value
+                  .split(',')
+                  .map((v) => v.trim())
+                  .filter(Boolean);
               }
 
               console.log(`  Converted "${key}" to array:`, arrayValue);
@@ -255,7 +265,8 @@ export default function FarmerDashboardPage() {
     try {
       const token = await getToken();
       // Use environment variable or fallback to production API URL
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+      const apiUrl =
+        process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
 
       const response = await fetch(`${apiUrl}/api/farmer/farm`, {
         method: 'PUT',

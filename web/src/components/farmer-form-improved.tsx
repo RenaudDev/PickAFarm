@@ -3,13 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -99,7 +93,15 @@ export function FarmerFormImproved({
 
     const sections: Record<string, string[]> = {
       basic: ['name'],
-      operations: ['monday_hours', 'tuesday_hours', 'wednesday_hours', 'thursday_hours', 'friday_hours', 'saturday_hours', 'sunday_hours'],
+      operations: [
+        'monday_hours',
+        'tuesday_hours',
+        'wednesday_hours',
+        'thursday_hours',
+        'friday_hours',
+        'saturday_hours',
+        'sunday_hours',
+      ],
       location: ['city', 'street'],
       categories: ['categories'],
       products: [], // Optional
@@ -118,7 +120,15 @@ export function FarmerFormImproved({
 
   // Handle Expand All
   const handleExpandAll = () => {
-    const sections = ['basic', 'operations', 'location', 'categories', 'products', 'amenities', 'media'];
+    const sections = [
+      'basic',
+      'operations',
+      'location',
+      'categories',
+      'products',
+      'amenities',
+      'media',
+    ];
     sections.forEach((section) => {
       localStorage.setItem(`pickafarm_form_section_${section}`, 'true');
     });
@@ -134,12 +144,20 @@ export function FarmerFormImproved({
 
     // Trigger re-render by forcing a state update
     // This allows CollapsibleFormSection components to pick up the new localStorage values
-    setFormProgress(prev => prev);
+    setFormProgress((prev) => prev);
   };
 
   // Handle Collapse All (keep basic expanded)
   const handleCollapseAll = () => {
-    const sections = ['basic', 'operations', 'location', 'categories', 'products', 'amenities', 'media'];
+    const sections = [
+      'basic',
+      'operations',
+      'location',
+      'categories',
+      'products',
+      'amenities',
+      'media',
+    ];
     sections.forEach((section) => {
       localStorage.setItem(
         `pickafarm_form_section_${section}`,
@@ -158,7 +176,7 @@ export function FarmerFormImproved({
 
     // Trigger re-render by forcing a state update
     // This allows CollapsibleFormSection components to pick up the new localStorage values
-    setFormProgress(prev => prev);
+    setFormProgress((prev) => prev);
   };
 
   return (
@@ -345,11 +363,7 @@ export function FarmerFormImproved({
                   <FormItem>
                     <FormLabel>Next Season Opening Date</FormLabel>
                     <FormControl>
-                      <Input
-                        type="date"
-                        {...field}
-                        value={field.value || ''}
-                      />
+                      <Input type="date" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -364,11 +378,7 @@ export function FarmerFormImproved({
                   <FormItem>
                     <FormLabel>Next Season Closing Date</FormLabel>
                     <FormControl>
-                      <Input
-                        type="date"
-                        {...field}
-                        value={field.value || ''}
-                      />
+                      <Input type="date" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -574,10 +584,7 @@ export function FarmerFormImproved({
               <FormItem>
                 <FormLabel>Price Range</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="e.g., $25 - $75 or $10 per person"
-                    {...field}
-                  />
+                  <Input placeholder="e.g., $25 - $75 or $10 per person" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -679,11 +686,7 @@ export function FarmerFormImproved({
 
       {/* Submit Buttons */}
       <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
-        <Button
-          type="submit"
-          disabled={isSaving}
-          className="bg-green-800 hover:bg-green-900"
-        >
+        <Button type="submit" disabled={isSaving} className="bg-green-800 hover:bg-green-900">
           {isSaving ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

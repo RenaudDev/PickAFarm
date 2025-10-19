@@ -44,10 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Inline Critical CSS for instant first paint */}
             <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
 
-          {/* Defer non-critical CSS - will be injected by Next.js but we make it async */}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+            {/* Defer non-critical CSS - will be injected by Next.js but we make it async */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
                 (function() {
                   var loadDeferredStyles = function() {
                     var addStylesNode = document.getElementById("deferred-styles");
@@ -64,36 +64,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   else window.addEventListener('load', loadDeferredStyles);
                 })();
               `,
-            }}
-          />
+              }}
+            />
 
-          {/* Critical resource hints for performance */}
-          <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
-          <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />
-          <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="anonymous" />
-          <link
-            rel="preconnect"
-            href="https://pickafarm-api.94623956quebecinc.workers.dev"
-            crossOrigin="anonymous"
-          />
-          <link rel="dns-prefetch" href="https://ipapi.co" />
-          <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
+            {/* Critical resource hints for performance */}
+            <link rel="preconnect" href="https://clerk.pickafarm.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://admin.pickafarm.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="anonymous" />
+            <link
+              rel="preconnect"
+              href="https://pickafarm-api.94623956quebecinc.workers.dev"
+              crossOrigin="anonymous"
+            />
+            <link rel="dns-prefetch" href="https://ipapi.co" />
+            <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
 
-          {/* Preload LCP image for homepage - first blog post image */}
-          <link
-            rel="preload"
-            as="image"
-            href="/blog-images/best-christmas-trees-800.avif"
-            type="image/avif"
-            fetchPriority="high"
-          />
+            {/* Preload LCP image for homepage - first blog post image */}
+            <link
+              rel="preload"
+              as="image"
+              href="/blog-images/best-christmas-trees-800.avif"
+              type="image/avif"
+              fetchPriority="high"
+            />
 
-          {/* Font will be loaded by Next.js automatically - removed preload to avoid unused preload warning */}
-        </head>
-        <body>
-          <DeferredComponents />
-          {children}
-        </body>
+            {/* Font will be loaded by Next.js automatically - removed preload to avoid unused preload warning */}
+          </head>
+          <body>
+            <DeferredComponents />
+            {children}
+          </body>
         </html>
       </ClerkProvider>
     </ReactQueryClientProvider>

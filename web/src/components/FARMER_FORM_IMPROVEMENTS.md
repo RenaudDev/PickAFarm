@@ -11,6 +11,7 @@ This document describes the farmer form improvements implemented in Story 2.5.4,
 A reusable collapsible section wrapper for organizing form fields.
 
 **Key Features:**
+
 - Smooth expand/collapse animations (300ms Tailwind transitions)
 - Completion indicator (green checkmark badge)
 - Required indicator (subtle orange dot)
@@ -20,6 +21,7 @@ A reusable collapsible section wrapper for organizing form fields.
 - Screen reader friendly
 
 **Usage:**
+
 ```tsx
 <CollapsibleFormSection
   id="basic-info"
@@ -36,6 +38,7 @@ A reusable collapsible section wrapper for organizing form fields.
 ```
 
 **localStorage Key Pattern:**
+
 - `pickafarm_form_section_<sectionId>` - Stores boolean indicating if section is expanded
 
 ### 2. FormProgressIndicator (`ui/form-progress-indicator.tsx`)
@@ -43,6 +46,7 @@ A reusable collapsible section wrapper for organizing form fields.
 Displays form completion progress with a visual progress bar.
 
 **Key Features:**
+
 - Radix UI Progress component
 - Smooth animated transitions
 - Gradient green progress bar
@@ -51,11 +55,9 @@ Displays form completion progress with a visual progress bar.
 - Accessible ARIA labels
 
 **Usage:**
+
 ```tsx
-<FormProgressIndicator
-  percentage={calculateProgress(formValues)}
-  showPercentage={true}
-/>
+<FormProgressIndicator percentage={calculateProgress(formValues)} showPercentage={true} />
 ```
 
 ### 3. FarmerFormImproved (`farmer-form-improved.tsx`)
@@ -101,6 +103,7 @@ The main improved form component with 7 collapsible sections.
    - Placeholder for future image/media management
 
 **Key Features:**
+
 - Form progress indicator at top
 - Expand All / Collapse All buttons
 - Section completion detection
@@ -112,6 +115,7 @@ The main improved form component with 7 collapsible sections.
 ## Accessibility Features
 
 ### ARIA Labels & Attributes
+
 - `aria-expanded` - Indicates section state (open/closed)
 - `aria-controls` - Links button to content region
 - `aria-labelledby` - Associates section with header
@@ -121,6 +125,7 @@ The main improved form component with 7 collapsible sections.
 - `aria-live="polite"` - Announces state changes to screen readers
 
 ### Keyboard Navigation
+
 - **Tab/Shift+Tab** - Navigate between sections
 - **Enter/Space** - Toggle section expand/collapse
 - **Escape** - Collapse current section (future enhancement)
@@ -128,6 +133,7 @@ The main improved form component with 7 collapsible sections.
 - **Ctrl+C** - Collapse All (future enhancement)
 
 ### Visual Accessibility
+
 - Green focus rings (WCAG AA compliant)
 - Sufficient color contrast (text colors meet WCAG standards)
 - Touch targets are 44x44px minimum (mobile)
@@ -135,6 +141,7 @@ The main improved form component with 7 collapsible sections.
 - Section icons for visual hierarchy
 
 ### Screen Reader Support
+
 - Semantic HTML structure
 - Live region announcements for state changes
 - sr-only class for screen reader-only content
@@ -152,22 +159,25 @@ The main improved form component with 7 collapsible sections.
 ## Data Persistence
 
 ### Section State Storage
+
 ```javascript
 // localStorage key pattern
-`pickafarm_form_section_${sectionId}`
+`pickafarm_form_section_${sectionId}`;
 
 // Example keys
-pickafarm_form_section_basic
-pickafarm_form_section_operations
-pickafarm_form_section_location
-pickafarm_form_section_categories
-pickafarm_form_section_products
-pickafarm_form_section_amenities
-pickafarm_form_section_media
+pickafarm_form_section_basic;
+pickafarm_form_section_operations;
+pickafarm_form_section_location;
+pickafarm_form_section_categories;
+pickafarm_form_section_products;
+pickafarm_form_section_amenities;
+pickafarm_form_section_media;
 ```
 
 ### Progress Calculation
+
 Progress is calculated based on:
+
 - Required fields: name, city, street
 - At least one day of operating hours for operations section
 - Selected categories for categories section
@@ -192,6 +202,7 @@ Progress is calculated based on:
 ## Testing Checklist
 
 ### Manual Testing
+
 - [ ] All sections expand/collapse smoothly
 - [ ] Section state persists on page refresh
 - [ ] Progress indicator updates accurately
@@ -203,6 +214,7 @@ Progress is calculated based on:
 - [ ] No console errors
 
 ### Accessibility Testing
+
 - [ ] WAVE WebAIM accessibility audit passes
 - [ ] Screen reader navigation (NVDA, JAWS)
 - [ ] Keyboard-only navigation works
@@ -211,6 +223,7 @@ Progress is calculated based on:
 - [ ] Touch targets are 44x44px minimum
 
 ### Browser Testing
+
 - [ ] Chrome (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (latest)
@@ -221,6 +234,7 @@ Progress is calculated based on:
 ## Integration Guide
 
 ### In the Dashboard
+
 The form is integrated into `/app/dashboard/farmer/page.tsx`:
 
 ```tsx
@@ -234,10 +248,13 @@ The form is integrated into `/app/dashboard/farmer/page.tsx`:
 ```
 
 ### Form Schema
+
 Uses the existing `farmSchema` Zod validation from the page component. No changes needed to backend APIs.
 
 ### Styling
+
 All styling uses Tailwind CSS v4 utilities from the existing project setup:
+
 - Color variables: Green theme (#2D5016)
 - Spacing: Standard Tailwind scale
 - Animations: Tailwind animate-accordion-down/up
@@ -272,16 +289,19 @@ All styling uses Tailwind CSS v4 utilities from the existing project setup:
 ## Troubleshooting
 
 ### Section Not Persisting State
+
 - Check browser localStorage is enabled
 - Verify section ID is unique
 - Clear localStorage and try again
 
 ### Accessibility Issues
-- Verify aria-* attributes are correct
+
+- Verify aria-\* attributes are correct
 - Check focus ring visibility
 - Test with screen readers directly
 
 ### Performance Issues
+
 - Check for excessive re-renders (React DevTools)
 - Verify CSS animations aren't janky
 - Test on lower-end devices

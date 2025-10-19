@@ -39,7 +39,7 @@ export function DynamicMultiSelect({
   onChange,
   error,
   disabled = false,
-  className
+  className,
 }: DynamicMultiSelectProps) {
   const { data: options, isLoading, isError } = useFieldOptions(fieldName);
 
@@ -48,18 +48,18 @@ export function DynamicMultiSelect({
     if (checked) {
       onChange([...value, optionValue]);
     } else {
-      onChange(value.filter(v => v !== optionValue));
+      onChange(value.filter((v) => v !== optionValue));
     }
   };
 
   // Loading state
   if (isLoading) {
     return (
-      <div className={cn("space-y-3", className)}>
+      <div className={cn('space-y-3', className)}>
         <Label>{label}</Label>
         {description && <p className="text-sm text-muted-foreground">{description}</p>}
         <div className="space-y-2 max-h-48 overflow-y-auto border rounded-md p-3">
-          {[1, 2, 3].map(i => (
+          {[1, 2, 3].map((i) => (
             <Skeleton key={i} className="h-5 w-full" />
           ))}
         </div>
@@ -72,7 +72,7 @@ export function DynamicMultiSelect({
     const fallbackOptions = getFallbackOptions(fieldName);
 
     return (
-      <div className={cn("space-y-3", className)}>
+      <div className={cn('space-y-3', className)}>
         <Label>{label}</Label>
         {description && <p className="text-sm text-muted-foreground">{description}</p>}
         <div className="mb-3 p-3 border border-yellow-300 bg-yellow-50 rounded-md flex gap-2">
@@ -82,7 +82,7 @@ export function DynamicMultiSelect({
           </p>
         </div>
         <div className="space-y-2 max-h-48 overflow-y-auto border rounded-md p-3">
-          {fallbackOptions.map(option => (
+          {fallbackOptions.map((option) => (
             <CheckboxOption
               key={option.option_value}
               option={option.option_value}
@@ -101,21 +101,21 @@ export function DynamicMultiSelect({
   // Combine API options with any existing values not in the options
   const allOptions = options || [];
   const existingValuesNotInOptions = value.filter(
-    v => !allOptions.some(opt => opt.option_value === v)
+    (v) => !allOptions.some((opt) => opt.option_value === v)
   );
 
   // Add existing values as options to prevent data loss
   const combinedOptions = [
     ...allOptions,
-    ...existingValuesNotInOptions.map(v => ({
+    ...existingValuesNotInOptions.map((v) => ({
       option_value: v,
       option_label: v,
-      usage_count: 0
-    }))
+      usage_count: 0,
+    })),
   ];
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn('space-y-3', className)}>
       <Label htmlFor={`${fieldName}-multiselect`}>{label}</Label>
       {description && <p className="text-sm text-muted-foreground">{description}</p>}
 
@@ -127,7 +127,7 @@ export function DynamicMultiSelect({
         {combinedOptions.length === 0 ? (
           <p className="text-sm text-muted-foreground">No options available</p>
         ) : (
-          combinedOptions.map(option => (
+          combinedOptions.map((option) => (
             <CheckboxOption
               key={option.option_value}
               option={option.option_value}
@@ -159,13 +159,7 @@ interface CheckboxOptionProps {
   disabled: boolean;
 }
 
-function CheckboxOption({
-  option,
-  label,
-  checked,
-  onChange,
-  disabled
-}: CheckboxOptionProps) {
+function CheckboxOption({ option, label, checked, onChange, disabled }: CheckboxOptionProps) {
   // Generate stable ID for the checkbox
   const id = `checkbox-${option.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
 
@@ -181,8 +175,8 @@ function CheckboxOption({
       <Label
         htmlFor={id}
         className={cn(
-          "flex-1 font-normal cursor-pointer select-none",
-          disabled && "cursor-not-allowed opacity-50"
+          'flex-1 font-normal cursor-pointer select-none',
+          disabled && 'cursor-not-allowed opacity-50'
         )}
       >
         <span>{label}</span>

@@ -111,8 +111,11 @@ export function SmartTagInput({
       // Fetch from API
       setIsLoading(true);
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
-        console.log(`[SmartTagInput] Fetching from: ${apiUrl}/api/field-options?field=${fieldName}`);
+        const apiUrl =
+          process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+        console.log(
+          `[SmartTagInput] Fetching from: ${apiUrl}/api/field-options?field=${fieldName}`
+        );
         const response = await fetch(`${apiUrl}/api/field-options?field=${fieldName}`);
         if (response.ok) {
           const data = await response.json();
@@ -133,7 +136,7 @@ export function SmartTagInput({
               return {
                 value: opt,
                 label: opt,
-                sort_order: 0
+                sort_order: 0,
               };
             }
 
@@ -148,14 +151,19 @@ export function SmartTagInput({
 
           setOptions(formattedOptions);
           setFilteredOptions(formattedOptions); // Also set filtered options immediately
-          console.log(`[SmartTagInput] Set ${formattedOptions.length} options and filtered options for ${fieldName}`);
+          console.log(
+            `[SmartTagInput] Set ${formattedOptions.length} options and filtered options for ${fieldName}`
+          );
 
           // Cache the options (with quota exceeded handling)
           try {
-            localStorage.setItem(cacheKey, JSON.stringify({
-              data: formattedOptions,
-              timestamp: Date.now(),
-            }));
+            localStorage.setItem(
+              cacheKey,
+              JSON.stringify({
+                data: formattedOptions,
+                timestamp: Date.now(),
+              })
+            );
           } catch (storageError) {
             // Handle quota exceeded error silently
             console.warn('Failed to cache field options:', storageError);
@@ -187,14 +195,20 @@ export function SmartTagInput({
 
   // Filter options based on input (with implicit debounce via React's batching)
   useEffect(() => {
-    console.log(`[SmartTagInput] Filter effect for ${fieldName}: inputValue="${inputValue}", options=${options.length}`);
+    console.log(
+      `[SmartTagInput] Filter effect for ${fieldName}: inputValue="${inputValue}", options=${options.length}`
+    );
 
     // Reset selected index when filtering
     setSelectedIndex(-1);
 
     if (!inputValue) {
       // Show all options when input is empty
-      console.log(`[SmartTagInput] Setting all options as filtered for ${fieldName}:`, options.length, 'options');
+      console.log(
+        `[SmartTagInput] Setting all options as filtered for ${fieldName}:`,
+        options.length,
+        'options'
+      );
       setFilteredOptions(options);
       return;
     }
@@ -204,15 +218,25 @@ export function SmartTagInput({
       if (fuseRef.current) {
         // Use fuzzy search
         const results = fuseRef.current.search(inputValue);
-        const filtered = results.map(r => r.item);
-        console.log(`[SmartTagInput] Fuzzy search for ${fieldName} with "${inputValue}":`, filtered.length, 'results', filtered.slice(0, 3));
+        const filtered = results.map((r) => r.item);
+        console.log(
+          `[SmartTagInput] Fuzzy search for ${fieldName} with "${inputValue}":`,
+          filtered.length,
+          'results',
+          filtered.slice(0, 3)
+        );
         setFilteredOptions(filtered);
       } else {
         // Fallback to simple filter
-        const filtered = options.filter(
-          opt => opt.label.toLowerCase().includes(inputValue.toLowerCase())
+        const filtered = options.filter((opt) =>
+          opt.label.toLowerCase().includes(inputValue.toLowerCase())
         );
-        console.log(`[SmartTagInput] Simple filter for ${fieldName} with "${inputValue}":`, filtered.length, 'results', filtered.slice(0, 3));
+        console.log(
+          `[SmartTagInput] Simple filter for ${fieldName} with "${inputValue}":`,
+          filtered.length,
+          'results',
+          filtered.slice(0, 3)
+        );
         setFilteredOptions(filtered);
       }
     }, 100); // 100ms debounce for search
@@ -248,7 +272,7 @@ export function SmartTagInput({
   };
 
   const removeTag = (tagValue: string) => {
-    onChange(safeValue.filter(v => v !== tagValue));
+    onChange(safeValue.filter((v) => v !== tagValue));
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -267,12 +291,10 @@ export function SmartTagInput({
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex(prev =>
-        prev < filteredOptions.length - 1 ? prev + 1 : prev
-      );
+      setSelectedIndex((prev) => (prev < filteredOptions.length - 1 ? prev + 1 : prev));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
     } else if (e.key === 'Escape') {
       setIsOpen(false);
     } else if (e.key === 'Backspace' && !inputValue && safeValue.length > 0) {
@@ -282,7 +304,7 @@ export function SmartTagInput({
   };
 
   const getDisplayLabel = (tagValue: string) => {
-    const option = options.find(opt => opt.value === tagValue);
+    const option = options.find((opt) => opt.value === tagValue);
     return option ? option.label : tagValue;
   };
 
@@ -292,20 +314,14 @@ export function SmartTagInput({
         {label}
       </Label>
 
-      {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
-      )}
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
 
       <div className="relative">
         {/* Selected tags */}
         {safeValue.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-2">
-            {safeValue.map(tagValue => (
-              <Badge
-                key={tagValue}
-                variant="secondary"
-                className="px-2 py-1"
-              >
+            {safeValue.map((tagValue) => (
+              <Badge key={tagValue} variant="secondary" className="px-2 py-1">
                 <span className="text-xs">{getDisplayLabel(tagValue)}</span>
                 <button
                   type="button"
@@ -338,7 +354,7 @@ export function SmartTagInput({
                 options: options.length,
                 filteredOptions: filteredOptions.length,
                 filteredOptionsContent: filteredOptions.slice(0, 5),
-                isLoading
+                isLoading,
               });
               setIsOpen(true);
             }}
@@ -349,10 +365,7 @@ export function SmartTagInput({
                 : placeholder
             }
             disabled={disabled || (maxTags && safeValue.length >= maxTags)}
-            className={cn(
-              'pr-8',
-              error && 'border-destructive focus-visible:ring-destructive'
-            )}
+            className={cn('pr-8', error && 'border-destructive focus-visible:ring-destructive')}
             aria-label={label}
             aria-invalid={!!error}
             aria-describedby={error ? `${fieldName}-error` : undefined}
@@ -371,7 +384,9 @@ export function SmartTagInput({
 
         {/* Dropdown */}
         {(() => {
-          console.log(`[SmartTagInput] Dropdown check for ${fieldName}: isOpen=${isOpen}, isLoading=${isLoading}, filteredOptions=${filteredOptions.length}`);
+          console.log(
+            `[SmartTagInput] Dropdown check for ${fieldName}: isOpen=${isOpen}, isLoading=${isLoading}, filteredOptions=${filteredOptions.length}`
+          );
           return null;
         })()}
         {isOpen && (
@@ -391,9 +406,7 @@ export function SmartTagInput({
               </div>
             ) : filteredOptions.length === 0 ? (
               <div className="p-2 text-center text-sm text-muted-foreground">
-                {inputValue && allowCustom
-                  ? 'Press Enter to add custom value'
-                  : 'No options found'}
+                {inputValue && allowCustom ? 'Press Enter to add custom value' : 'No options found'}
               </div>
             ) : (
               <div>
@@ -413,9 +426,7 @@ export function SmartTagInput({
                   >
                     {option.label}
                     {safeValue.includes(option.value) && (
-                      <span className="ml-2 text-xs text-muted-foreground">
-                        (selected)
-                      </span>
+                      <span className="ml-2 text-xs text-muted-foreground">(selected)</span>
                     )}
                   </button>
                 ))}
@@ -442,12 +453,15 @@ export function SmartTagInput({
       {/* Screen reader announcements */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         {isLoading && 'Loading options...'}
-        {!isLoading && filteredOptions.length > 0 && (
-          `${filteredOptions.length} options available. Use arrow keys to navigate.`
-        )}
-        {!isLoading && filteredOptions.length === 0 && inputValue && (
-          allowCustom ? 'No matches found. Press Enter to add custom value.' : 'No matches found.'
-        )}
+        {!isLoading &&
+          filteredOptions.length > 0 &&
+          `${filteredOptions.length} options available. Use arrow keys to navigate.`}
+        {!isLoading &&
+          filteredOptions.length === 0 &&
+          inputValue &&
+          (allowCustom
+            ? 'No matches found. Press Enter to add custom value.'
+            : 'No matches found.')}
       </div>
     </div>
   );
