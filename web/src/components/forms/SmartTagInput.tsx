@@ -399,7 +399,7 @@ export function SmartTagInput({
             ref={dropdownRef}
             id={`${fieldName}-listbox`}
             role="listbox"
-            className="absolute z-[9999] mt-1 w-full rounded-md border bg-white dark:bg-gray-800 shadow-lg max-h-60 overflow-auto"
+            className="absolute z-[999999] mt-1 w-full rounded-md border bg-white dark:bg-gray-800 shadow-lg max-h-60 overflow-auto"
           >
             {(() => {
               console.log(`[SmartTagInput] Rendering dropdown for ${fieldName}`);

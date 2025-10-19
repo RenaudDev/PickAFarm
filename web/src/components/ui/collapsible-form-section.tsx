@@ -112,7 +112,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
       <CollapsiblePrimitive.Root
         open={isOpen}
         onOpenChange={handleOpenChange}
-        className={cn('border border-gray-200 rounded-lg overflow-hidden', className)}
+        className={cn('border border-gray-200 rounded-lg overflow-visible', className)}
         ref={ref}
       >
         {/* Section Header/Trigger */}
@@ -181,13 +181,13 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
         <CollapsiblePrimitive.Content
           id={`section-content-${id}`}
           className={cn(
-            'overflow-hidden transition-all duration-300',
+            'transition-all duration-300 overflow-visible',
             'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
           )}
           role="region"
           aria-labelledby={`section-header-${id}`}
         >
-          <div className="px-6 py-4 space-y-6 border-t border-gray-100">{children}</div>
+          <div className="px-6 py-4 space-y-6 border-t border-gray-100 overflow-visible">{children}</div>
         </CollapsiblePrimitive.Content>
       </CollapsiblePrimitive.Root>
     );
