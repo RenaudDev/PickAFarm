@@ -325,7 +325,7 @@ export function SmartTagInput({
             {safeValue.map((tagValue) => (
               <Badge
                 key={tagValue}
-                className="px-2 py-1 bg-green-800 hover:bg-green-900 text-white border-green-800"
+                className="px-2 py-1 bg-green-600 hover:bg-green-700 text-white border-green-600"
               >
                 <span className="text-xs">{getDisplayLabel(tagValue)}</span>
                 <button

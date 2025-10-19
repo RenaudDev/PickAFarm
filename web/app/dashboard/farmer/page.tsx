@@ -391,7 +391,7 @@ export default function FarmerDashboardPage() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3">
-          <Button type="submit" form="farm-form" disabled={isSaving} className="bg-green-800 hover:bg-green-900">
+          <Button type="submit" form="farm-form" disabled={isSaving} className="bg-green-600 hover:bg-green-700">
             {isSaving ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

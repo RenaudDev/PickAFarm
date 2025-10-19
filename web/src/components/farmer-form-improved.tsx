@@ -37,7 +37,7 @@ export function FarmerFormImproved({
 }: FarmerFormImprovedProps) {
 
   return (
-    <form id="farm-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <form id="farm-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
       {/* Section 1: Basic Information */}
       <CollapsibleFormSection
         id="basic"
@@ -47,7 +47,7 @@ export function FarmerFormImproved({
         isRequired={true}
         defaultExpanded={true}
       >
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           {/* Farm Name */}
           <FormField
             control={form.control}
@@ -226,7 +226,7 @@ export function FarmerFormImproved({
         isRequired={true}
         defaultExpanded={false}
       >
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           {/* Street Address */}
           <FormField
             control={form.control}
@@ -328,7 +328,7 @@ export function FarmerFormImproved({
         isRequired={false}
         defaultExpanded={false}
       >
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           {/* Categories - Dynamic Multi-Select */}
           <FormField
             control={form.control}
@@ -380,7 +380,7 @@ export function FarmerFormImproved({
         isRequired={false}
         defaultExpanded={false}
       >
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           {/* Varieties - Dynamic Multi-Select */}
           <FormField
             control={form.control}
@@ -427,7 +427,7 @@ export function FarmerFormImproved({
         isRequired={false}
         defaultExpanded={false}
       >
-        <div className="space-y-4">
+        <div className="space-y-3.5">
           {/* Amenities - Dynamic Multi-Select */}
           <FormField
             control={form.control}

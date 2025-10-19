@@ -112,16 +112,16 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
       <CollapsiblePrimitive.Root
         open={isOpen}
         onOpenChange={handleOpenChange}
-        className={cn('border border-gray-200 rounded-lg overflow-visible', className)}
+        className={cn('border border-gray-300 rounded-lg overflow-visible', className)}
         ref={ref}
       >
         {/* Section Header/Trigger */}
         <CollapsiblePrimitive.Trigger
           className={cn(
-            'w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors',
+            'w-full px-5 py-3.5 flex items-center justify-between hover:bg-gray-50/50 transition-colors',
             'focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-green-500',
             'rounded-t-lg',
-            isOpen && 'bg-gray-50 border-b border-gray-200'
+            isOpen && 'bg-gray-50/30 border-b border-gray-300'
           )}
           aria-expanded={isOpen}
           aria-controls={`section-content-${id}`}
@@ -131,12 +131,12 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
         >
           <div className="flex items-center gap-3 flex-1 text-left">
             {/* Icon */}
-            {icon && <span className="text-xl">{icon}</span>}
+            {icon && <span className="text-lg">{icon}</span>}
 
             {/* Title and Description */}
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+                <h3 className="text-base font-semibold text-gray-900">{title}</h3>
 
                 {/* Completion Badge */}
                 {isComplete && (
@@ -157,21 +157,21 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
                 {/* Required Badge */}
                 {isRequired && !isComplete && (
                   <span
-                    className="inline-block w-2 h-2 bg-orange-500 rounded-full"
+                    className="inline-block w-2 h-2 bg-orange-400 rounded-full"
                     aria-label="Required section"
                   />
                 )}
               </div>
 
               {/* Description */}
-              {description && <p className="text-sm text-gray-600 mt-1">{description}</p>}
+              {description && <p className="text-xs text-gray-600 mt-1">{description}</p>}
             </div>
           </div>
 
           {/* Chevron Icon */}
           <ChevronDown
             className={cn(
-              'h-5 w-5 text-gray-500 transition-transform duration-300 ml-2 flex-shrink-0',
+              'h-5 w-5 text-gray-400 transition-transform duration-300 ml-2 flex-shrink-0',
               isOpen && 'rotate-180'
             )}
           />
@@ -187,7 +187,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
           role="region"
           aria-labelledby={`section-header-${id}`}
         >
-          <div className="px-6 py-4 space-y-6 border-t border-gray-100 overflow-visible">{children}</div>
+          <div className="px-5 py-5 space-y-6 border-t border-gray-200 overflow-visible">{children}</div>
         </CollapsiblePrimitive.Content>
       </CollapsiblePrimitive.Root>
     );
