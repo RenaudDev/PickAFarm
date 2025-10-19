@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,7 +10,6 @@ import { Label } from '@/components/ui/label';
 // Smart Tag Input for multi-select fields with Zoho sync
 import { CollapsibleFormSection } from '@/components/ui/collapsible-form-section';
 import { SmartTagInput } from '@/components/forms/SmartTagInput';
-import { PenSquare, Loader2, ExternalLink } from 'lucide-react';
 
 /**
  * Improved Farmer Form Component
@@ -29,7 +27,6 @@ interface FarmerFormImprovedProps {
   onSubmit: (data: any) => Promise<void>;
   isSaving?: boolean;
   farmData?: any;
-  farmSlug?: string;
 }
 
 export function FarmerFormImproved({
@@ -37,11 +34,10 @@ export function FarmerFormImproved({
   onSubmit,
   isSaving = false,
   farmData,
-  farmSlug,
 }: FarmerFormImprovedProps) {
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <form id="farm-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       {/* Section 1: Basic Information */}
       <CollapsibleFormSection
         id="basic"
@@ -510,31 +506,6 @@ export function FarmerFormImproved({
           </p>
         </div>
       </CollapsibleFormSection>
-
-      {/* Submit Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
-        <Button type="submit" disabled={isSaving} className="bg-green-800 hover:bg-green-900">
-          {isSaving ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Saving...
-            </>
-          ) : (
-            <>
-              <PenSquare className="mr-2 h-4 w-4" />
-              Save Changes
-            </>
-          )}
-        </Button>
-        {farmSlug && (
-          <Button variant="outline" asChild>
-            <a href={`/farms/${farmSlug}/`} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="mr-2 h-4 w-4" />
-              View My Listing
-            </a>
-          </Button>
-        )}
-      </div>
     </form>
   );
 }
