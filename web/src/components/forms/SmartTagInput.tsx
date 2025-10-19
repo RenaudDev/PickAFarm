@@ -377,7 +377,6 @@ export function SmartTagInput({
         </div>
 
         {/* Dropdown */}
-        {isOpen && process.env.NODE_ENV === 'development' && console.log(`Rendering dropdown for ${fieldName}: isLoading=${isLoading}, filteredOptions=${filteredOptions.length}`)}
         {isOpen && (
           <div
             ref={dropdownRef}
