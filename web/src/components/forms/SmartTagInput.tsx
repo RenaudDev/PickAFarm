@@ -88,7 +88,13 @@ export function SmartTagInput({
           const { data, timestamp } = JSON.parse(cached);
           // Use cache if less than 30 minutes old
           if (Date.now() - timestamp < 30 * 60 * 1000) {
+            if (process.env.NODE_ENV === 'development') {
+              console.log(`Using cached options for ${fieldName}:`, data.length, 'options');
+            }
+
             setOptions(data);
+            setFilteredOptions(data); // Also set filtered options immediately
+
             // Initialize Fuse.js for fuzzy search
             fuseRef.current = new Fuse(data, {
               keys: ['label', 'value'],
@@ -124,19 +130,29 @@ export function SmartTagInput({
             console.log(`Options array for ${fieldName}:`, optionsArray);
           }
 
-          const formattedOptions: FieldOption[] = optionsArray.map((opt: {
-            value?: string;
-            option_value?: string;
-            label?: string;
-            option_label?: string;
-            sort_order?: number;
-          }) => ({
-            value: opt.value || opt.option_value || '',
-            label: opt.label || opt.option_label || '',
-            sort_order: opt.sort_order || 0,
-          }));
+          const formattedOptions: FieldOption[] = optionsArray.map((opt: any) => {
+            // Handle both object format and string format
+            if (typeof opt === 'string') {
+              return {
+                value: opt,
+                label: opt,
+                sort_order: 0
+              };
+            }
+
+            return {
+              value: opt.value || opt.option_value || '',
+              label: opt.label || opt.option_label || '',
+              sort_order: opt.sort_order || 0,
+            };
+          });
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`Formatted options for ${fieldName}:`, formattedOptions);
+          }
 
           setOptions(formattedOptions);
+          setFilteredOptions(formattedOptions); // Also set filtered options immediately
 
           // Cache the options (with quota exceeded handling)
           try {
@@ -179,7 +195,12 @@ export function SmartTagInput({
     setSelectedIndex(-1);
 
     if (!inputValue) {
+      // Show all options when input is empty
       setFilteredOptions(options);
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`Setting filtered options for ${fieldName} (empty input):`, options.length, 'options');
+      }
       return;
     }
 
@@ -188,13 +209,22 @@ export function SmartTagInput({
       if (fuseRef.current) {
         // Use fuzzy search
         const results = fuseRef.current.search(inputValue);
-        setFilteredOptions(results.map(r => r.item));
+        const filtered = results.map(r => r.item);
+        setFilteredOptions(filtered);
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Fuzzy search for ${fieldName} with "${inputValue}":`, filtered.length, 'results');
+        }
       } else {
         // Fallback to simple filter
         const filtered = options.filter(
           opt => opt.label.toLowerCase().includes(inputValue.toLowerCase())
         );
         setFilteredOptions(filtered);
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Simple filter for ${fieldName} with "${inputValue}":`, filtered.length, 'results');
+        }
       }
     }, 100); // 100ms debounce for search
 
@@ -313,7 +343,12 @@ export function SmartTagInput({
               setInputValue(e.target.value);
               setIsOpen(true);
             }}
-            onFocus={() => setIsOpen(true)}
+            onFocus={() => {
+              setIsOpen(true);
+              if (process.env.NODE_ENV === 'development') {
+                console.log(`Focus on ${fieldName}: isOpen=true, filteredOptions=`, filteredOptions.length);
+              }
+            }}
             onKeyDown={handleKeyDown}
             placeholder={
               maxTags && safeValue.length >= maxTags
@@ -342,12 +377,13 @@ export function SmartTagInput({
         </div>
 
         {/* Dropdown */}
+        {isOpen && process.env.NODE_ENV === 'development' && console.log(`Rendering dropdown for ${fieldName}: isLoading=${isLoading}, filteredOptions=${filteredOptions.length}`)}
         {isOpen && (
           <div
             ref={dropdownRef}
             id={`${fieldName}-listbox`}
             role="listbox"
-            className="absolute z-10 mt-1 w-full rounded-md border bg-popover shadow-md"
+            className="absolute z-50 mt-1 w-full rounded-md border bg-white dark:bg-gray-800 shadow-lg max-h-60 overflow-auto"
           >
             {isLoading ? (
               <div className="p-2 text-center text-sm text-muted-foreground">
@@ -360,7 +396,7 @@ export function SmartTagInput({
                   : 'No options found'}
               </div>
             ) : (
-              <div className="max-h-60 overflow-auto">
+              <div>
                 {filteredOptions.map((option, index) => (
                   <button
                     key={option.value}
