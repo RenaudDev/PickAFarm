@@ -193,11 +193,18 @@ export default function FarmerDashboardPage() {
             console.log(`Processing field "${key}":`, value);
 
             // Special handling for multi-select fields that come as CSV strings
-            if (key === 'categories' || key === 'varieties' || key === 'amenities' || key === 'payment_methods') {
-              // Convert CSV string to array
-              const arrayValue = typeof value === 'string' && value
-                ? value.split(',').map(v => v.trim()).filter(Boolean)
-                : [];
+            if (key === 'categories' || key === 'type' || key === 'varieties' || key === 'amenities' || key === 'payment_methods') {
+              // Convert CSV string to array - handle both string CSV and arrays
+              let arrayValue: string[] = [];
+
+              if (Array.isArray(value)) {
+                // Already an array, use as-is
+                arrayValue = value.filter(Boolean);
+              } else if (typeof value === 'string' && value) {
+                // CSV string, split and clean
+                arrayValue = value.split(',').map(v => v.trim()).filter(Boolean);
+              }
+
               console.log(`  Converted "${key}" to array:`, arrayValue);
               form.setValue(key as keyof FarmFormData, arrayValue);
             }

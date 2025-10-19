@@ -62,6 +62,11 @@ export function SmartTagInput({
 }: SmartTagInputProps) {
   // Ensure value is always an array
   const safeValue = Array.isArray(value) ? value : [];
+
+  // Debug logging
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`SmartTagInput[${fieldName}] - value:`, value, '→ safeValue:', safeValue);
+  }
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<FieldOption[]>([]);
@@ -104,7 +109,22 @@ export function SmartTagInput({
         const response = await fetch(`${apiUrl}/api/field-options?field=${fieldName}`);
         if (response.ok) {
           const data = await response.json();
-          const formattedOptions: FieldOption[] = data.options.map((opt: {
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`API Response for ${fieldName}:`, data);
+          }
+
+          // Handle different response structures and ensure options exists
+          const rawOptions = data.options || data || [];
+
+          // Ensure we have an array
+          const optionsArray = Array.isArray(rawOptions) ? rawOptions : [];
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`Options array for ${fieldName}:`, optionsArray);
+          }
+
+          const formattedOptions: FieldOption[] = optionsArray.map((opt: {
             value?: string;
             option_value?: string;
             label?: string;
