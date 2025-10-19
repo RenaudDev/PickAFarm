@@ -124,10 +124,12 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
         {/* Section Header/Trigger */}
         <CollapsiblePrimitive.Trigger
           className={cn(
-            'w-full px-5 py-3.5 flex items-center justify-between hover:bg-gray-50/50 transition-colors duration-150',
+            'w-full px-5 py-4 flex items-center justify-between transition-all duration-150',
             'focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-green-500',
             'rounded-t-lg will-change-colors',
-            isOpen && 'bg-gray-50/30 border-b border-gray-300'
+            isOpen
+              ? 'bg-green-600/90 border-b-0 text-white'
+              : 'bg-white hover:bg-green-50 text-gray-900 border-b border-gray-300'
           )}
           aria-expanded={isOpen}
           aria-controls={`section-content-${id}`}
@@ -142,15 +144,18 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
             {/* Title and Description */}
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-semibold text-gray-900">{title}</h3>
+                <h3 className={cn('text-base font-semibold', isOpen ? 'text-white' : 'text-gray-900')}>{title}</h3>
 
                 {/* Completion Badge */}
                 {isComplete && (
                   <span
-                    className="inline-flex items-center justify-center w-5 h-5 bg-green-100 rounded-full"
+                    className={cn(
+                      'inline-flex items-center justify-center w-5 h-5 rounded-full',
+                      isOpen ? 'bg-white/20' : 'bg-green-100'
+                    )}
                     aria-label="Section complete"
                   >
-                    <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className={cn('w-3 h-3', isOpen ? 'text-white' : 'text-green-600')} fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -163,22 +168,29 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
                 {/* Required Badge */}
                 {isRequired && !isComplete && (
                   <span
-                    className="inline-block w-2 h-2 bg-orange-400 rounded-full"
+                    className={cn(
+                      'inline-block w-2 h-2 rounded-full',
+                      isOpen ? 'bg-white/60' : 'bg-orange-400'
+                    )}
                     aria-label="Required section"
                   />
                 )}
               </div>
 
               {/* Description */}
-              {description && <p className="text-xs text-gray-600 mt-1">{description}</p>}
+              {description && (
+                <p className={cn('text-xs mt-1', isOpen ? 'text-green-50/80' : 'text-gray-600')}>
+                  {description}
+                </p>
+              )}
             </div>
           </div>
 
           {/* Chevron Icon */}
           <ChevronDown
             className={cn(
-              'h-5 w-5 text-gray-400 transition-transform duration-200 ml-2 flex-shrink-0 will-change-transform',
-              isOpen && 'rotate-180'
+              'h-5 w-5 transition-transform duration-200 ml-2 flex-shrink-0 will-change-transform',
+              isOpen ? 'text-white rotate-180' : 'text-gray-400'
             )}
           />
         </CollapsiblePrimitive.Trigger>
@@ -190,7 +202,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
           role="region"
           aria-labelledby={`section-header-${id}`}
         >
-          <div className="px-5 py-5 space-y-6 border-t border-gray-200 overflow-visible">{children}</div>
+          <div className="px-5 py-5 space-y-4 bg-green-50/30 border-t border-green-200 rounded-b-lg overflow-visible">{children}</div>
         </CollapsiblePrimitive.Content>
       </CollapsiblePrimitive.Root>
     );

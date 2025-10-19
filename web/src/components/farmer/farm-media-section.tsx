@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Upload, Image as ImageIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 interface FarmMediaSectionProps {
   farmName?: string;
@@ -10,33 +9,30 @@ interface FarmMediaSectionProps {
 
 export function FarmMediaSection({ farmName = 'Your Farm' }: FarmMediaSectionProps) {
   return (
-    <div className="mb-8 space-y-6">
-      {/* Section Header */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900">Your Farm's First Impression</h2>
-        <p className="text-sm text-gray-600 mt-1">
-          Upload your farm's logo and cover photo. This is what customers see first.
-        </p>
-      </div>
+    <div className="mb-8 space-y-4">
+      {/* Section Title */}
+      <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Media</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Logo Upload */}
-        <div className="space-y-3">
-          <label className="block text-sm font-medium text-gray-900">
-            Farm Logo
+      <div className="flex gap-6 items-flex-start">
+        {/* Logo Upload - 250x250px */}
+        <div className="flex flex-col gap-2">
+          <label className="text-xs font-medium text-gray-900">
+            Logo
             <span className="text-green-600 ml-1">•</span>
           </label>
           <div className="relative group">
-            <div className="w-full aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-green-500 transition-colors duration-200 flex items-center justify-center cursor-pointer group-hover:bg-gray-100">
+            <div
+              className="w-[250px] h-[250px] bg-gradient-to-br from-green-50 to-green-50/50 rounded-lg border-2 border-dashed border-green-300 hover:border-green-600 hover:bg-green-100/30 transition-all duration-200 flex items-center justify-center cursor-pointer group"
+              style={{ aspectRatio: '1/1' }}
+            >
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-3 group-hover:bg-green-200 transition-colors">
-                  <Upload className="w-6 h-6 text-green-600" />
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-green-600/90 rounded-lg mb-2 group-hover:scale-110 transition-transform">
+                  <Upload className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-sm font-medium text-gray-900">Click or drag to upload</p>
-                <p className="text-xs text-gray-600 mt-1">PNG, JPG up to 5MB</p>
+                <p className="text-xs font-medium text-gray-900">Drag or click</p>
+                <p className="text-xs text-gray-600 mt-0.5">PNG, JPG • 5MB max</p>
               </div>
             </div>
-            {/* Hidden input for future functionality */}
             <input
               type="file"
               accept="image/*"
@@ -45,29 +41,28 @@ export function FarmMediaSection({ farmName = 'Your Farm' }: FarmMediaSectionPro
               aria-label="Upload farm logo"
             />
           </div>
-          <p className="text-xs text-gray-600">
-            Square format recommended (1:1). Shows as circular badge on your listing.
-          </p>
+          <p className="text-xs text-gray-600">Square (1:1)</p>
         </div>
 
-        {/* Cover Photo Upload */}
-        <div className="space-y-3">
-          <label className="block text-sm font-medium text-gray-900">
+        {/* Cover Photo Upload - 8x5 ratio, compact */}
+        <div className="flex flex-col gap-2 flex-1">
+          <label className="text-xs font-medium text-gray-900">
             Cover Photo
             <span className="text-green-600 ml-1">•</span>
           </label>
           <div className="relative group">
-            <div className="w-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-green-500 transition-colors duration-200 flex items-center justify-center cursor-pointer group-hover:bg-gray-100"
-              style={{ aspectRatio: '16/9' }}>
+            <div
+              className="w-full bg-gradient-to-br from-green-50 to-green-50/50 rounded-lg border-2 border-dashed border-green-300 hover:border-green-600 hover:bg-green-100/30 transition-all duration-200 flex items-center justify-center cursor-pointer"
+              style={{ aspectRatio: '8/5' }}
+            >
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-3 group-hover:bg-green-200 transition-colors">
-                  <ImageIcon className="w-6 h-6 text-green-600" />
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-green-600/90 rounded-lg mb-2 group-hover:scale-110 transition-transform">
+                  <ImageIcon className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-sm font-medium text-gray-900">Click or drag to upload</p>
-                <p className="text-xs text-gray-600 mt-1">PNG, JPG up to 10MB</p>
+                <p className="text-xs font-medium text-gray-900">Drag or click</p>
+                <p className="text-xs text-gray-600 mt-0.5">PNG, JPG • 10MB max</p>
               </div>
             </div>
-            {/* Hidden input for future functionality */}
             <input
               type="file"
               accept="image/*"
@@ -76,33 +71,12 @@ export function FarmMediaSection({ farmName = 'Your Farm' }: FarmMediaSectionPro
               aria-label="Upload cover photo"
             />
           </div>
-          <p className="text-xs text-gray-600">
-            Landscape format recommended (16:9). First thing customers see on your listing.
-          </p>
-        </div>
-      </div>
-
-      {/* Info Banner */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-        <div className="flex gap-3">
-          <div className="flex-shrink-0 mt-0.5">
-            <div className="flex items-center justify-center h-5 w-5 rounded-full bg-green-100">
-              <span className="text-green-600 text-xs font-bold">i</span>
-            </div>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-green-900">
-              Pro tip: A high-quality cover photo increases listing views by up to 40%
-            </p>
-            <p className="text-xs text-green-700 mt-1">
-              Use bright, clear images that showcase your farm's best features.
-            </p>
-          </div>
+          <p className="text-xs text-gray-600">Landscape (8:5)</p>
         </div>
       </div>
 
       {/* Divider */}
-      <div className="pt-4 border-t border-gray-200" />
+      <div className="pt-2 border-t border-gray-300" />
     </div>
   );
 }
