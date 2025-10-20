@@ -128,7 +128,7 @@ const CollapsibleFormSection = React.forwardRef<HTMLDivElement, CollapsibleFormS
             'focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-green-500',
             'rounded-t-lg will-change-colors',
             isOpen
-              ? 'bg-green-600/90 border-b-0 text-white'
+              ? '[background-color:oklch(35%_.15_142)] border-b-0 text-white'
               : 'bg-white hover:bg-green-50 text-gray-900 border-b border-gray-300'
           )}
           aria-expanded={isOpen}

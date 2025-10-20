@@ -490,22 +490,6 @@ export function FarmerFormImproved({
           />
         </div>
       </CollapsibleFormSection>
-
-      {/* Section 7: Media & Additional Info */}
-      <CollapsibleFormSection
-        id="media"
-        title="Media & Additional Info"
-        icon="📸"
-        description="Images and additional notes"
-        isRequired={false}
-        defaultExpanded={false}
-      >
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-          <p className="text-sm text-blue-800">
-            Image management and additional notes coming soon in a future update.
-          </p>
-        </div>
-      </CollapsibleFormSection>
     </form>
   );
 }

@@ -78,7 +78,8 @@ export function FarmHeader({
             type="submit"
             form="farm-form"
             disabled={isSaving}
-            className="bg-green-600 hover:bg-green-700 text-white"
+            className="text-white"
+            style={{ backgroundColor: 'oklch(35% .15 142)' }}
           >
             {isSaving ? (
               <>
