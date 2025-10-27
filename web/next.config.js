@@ -19,6 +19,22 @@ const nextConfig = {
         permanent: true,
       },
 
+      // FIX: US states with wrong country code -ca instead of -us
+      // Catches malformed URLs like "phoenix-ny-ca" → "phoenix-ny-us"
+      {
+        source: '/:category/near/:city-:state(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|pr|dc)-ca/',
+        destination: '/:category/near/:city-:state-us/',
+        permanent: true,
+      },
+
+      // Catch-all for non-trailing-slash URLs (add trailing slash)
+      // This handles URLs like /category/near/location without trailing slash
+      {
+        source: '/:category/near/:location([a-z0-9-]+)$',
+        destination: '/:category/near/:location/',
+        permanent: true,
+      },
+
       // Pattern 0: Legacy route - all-farms-near/near/* → farms-near/*
       // Old route structure that no longer exists
       {

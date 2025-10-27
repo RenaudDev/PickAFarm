@@ -159,10 +159,19 @@ async function generateLocationData() {
     console.log(`💾 Saved filtered locations with nearby farms to ${filteredLocationsPath}`);
 
     // Params for Next.js generateStaticParams (city/near pages)
-    const params = filtered.map((l) => ({
-      location:
-        l.location_slug || generateSlug(`${l.name}-${l.province}-${l.country_slug || 'ca'}`),
-    }));
+    const US_STATES = ['al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy', 'pr', 'dc'];
+    const params = filtered.map((l) => {
+      // Determine correct country code
+      let countrySlug = l.country_slug;
+      if (!countrySlug) {
+        // If country_slug is missing, check if province_slug is a US state
+        countrySlug = US_STATES.includes((l.province_slug || '').toLowerCase()) ? 'us' : 'ca';
+      }
+      return {
+        location:
+          l.location_slug || generateSlug(`${l.name}-${l.province}-${countrySlug}`),
+      };
+    });
     const paramsPath = path.join(dataDir, 'location-params-filtered.json');
     fs.writeFileSync(paramsPath, JSON.stringify(params, null, 2));
     console.log(`📋 Generated static params for ${params.length} filtered location pages`);
