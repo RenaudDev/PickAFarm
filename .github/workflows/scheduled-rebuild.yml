@@ -1,12 +1,12 @@
 # .github/workflows/scheduled-rebuild.yml
-# Automated rebuild every 2 hours to keep farm data fresh
+# Automated rebuild twice daily (00:00 and 12:00 UTC) to keep farm data fresh
 
 name: Scheduled Rebuild
 
 on:
-  # Run every 2 hours at :00 minutes (UTC)
+  # Run twice daily at 00:00 and 12:00 UTC
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 0,12 * * *'
 
   # Allow manual triggers for testing and emergency rebuilds
   workflow_dispatch:
