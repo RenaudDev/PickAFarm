@@ -27,14 +27,6 @@ const nextConfig = {
         permanent: true,
       },
 
-      // Catch-all for non-trailing-slash URLs (add trailing slash)
-      // This handles URLs like /category/near/location without trailing slash
-      {
-        source: '/:category/near/:location([a-z0-9-]+)$',
-        destination: '/:category/near/:location/',
-        permanent: true,
-      },
-
       // Pattern 0: Legacy route - all-farms-near/near/* → farms-near/*
       // Old route structure that no longer exists
       {
