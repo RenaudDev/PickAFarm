@@ -40,7 +40,8 @@ export function ClaimSignUpForm({
         role: 'farmer',
         claimToken,
       }}
-      redirectUrl="/dashboard/farmer"
+      // NOTE: redirectUrl removed - Clerk Dashboard afterSignUp URL handles redirect
+      // Configure in Clerk Dashboard: Paths → After sign up URL → /api/clerk-callback
       routing="hash" // Required for Next.js static export compatibility
     />
   );

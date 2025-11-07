@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
  *
  * IMPORTANT SETUP REQUIRED:
  * This middleware requires Clerk session token customization to work.
- * See web/CLERK_SETUP.md for configuration instructions.
+ * See docs/CLERK_SETUP.md for configuration instructions.
  *
  * Without session token customization, middleware cannot detect farmer role
  * and all users will be treated as regular users.
@@ -56,7 +56,7 @@ export default clerkMiddleware(async (auth, request) => {
     // Add custom claim: name="metadata", value="{{user.public_metadata}}"
     // This exposes user.publicMetadata in the JWT as sessionClaims.metadata
     // Without this config, sessionClaims.metadata will be undefined
-    // See: web/CLERK_SETUP.md for detailed setup instructions
+    // See: docs/CLERK_SETUP.md for detailed setup instructions
     const role = sessionClaims?.metadata?.role as string | undefined;
 
     // Role-based routing logic for farmers
