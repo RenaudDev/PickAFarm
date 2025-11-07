@@ -369,7 +369,38 @@ async function discoverFieldOptions(env, record, farmId) {
 async function upsertFarm(env, rec) {
   const d1Id = rec.id; // Primary key: zcrm_<zoho_account_id>
   const name = rec.Account_Name || "";
-  const slug = slugify(name);
+  let slug = slugify(name);
+
+  // Handle slug collisions: check if slug already exists and append number if needed
+  try {
+    let slugExists = await env.DB.prepare(
+      "SELECT COUNT(*) as count FROM farms WHERE slug = ?"
+    ).bind(slug).first();
+
+    let counter = 1;
+    let originalSlug = slug;
+
+    while (slugExists && slugExists.count > 0) {
+      slug = `${originalSlug}-${counter}`;
+      counter++;
+
+      if (counter > 100) {
+        // Fallback: use zoho ID to make it truly unique
+        slug = `${originalSlug}-${d1Id.substring(0, 8)}`;
+        break;
+      }
+
+      slugExists = await env.DB.prepare(
+        "SELECT COUNT(*) as count FROM farms WHERE slug = ?"
+      ).bind(slug).first();
+    }
+
+    if (slug !== originalSlug) {
+      console.log(`⚠️ Slug collision detected for "${name}". Using: ${slug}`);
+    }
+  } catch (slugCheckError) {
+    console.warn(`Could not check for slug collision: ${slugCheckError.message}. Using original slug.`);
+  }
 
   // Transform Zoho multi-select fields to CSV strings for D1 TEXT columns
   const categories = toCSV(rec.Type_of_Farm);      // e.g., ["Christmas Trees", "Pumpkins"] -> "Christmas Trees, Pumpkins"
@@ -465,21 +496,35 @@ ON CONFLICT(zoho_record_id) DO UPDATE SET
   const logoUpdatedAt = rec.logo_updated_at || null;
   const backgroundUpdatedAt = rec.background_updated_at || null;
 
-  const result = await env.DB.prepare(sql).bind(
-    d1Id, name, slug,
-    rec.Website, rec.Phone, rec.Email, rec.Description,
-    rec.Billing_Street, rec.Billing_City, rec.Billing_Code,
-    rec.Billing_State, rec.Billing_Country, lat, lng,
-    rec.Facebook, rec.Instagram,
-    categories, type, amenities, varieties,
-    petFriendly, rec.Price_Range,
-    new Date().toISOString(), new Date().toISOString(),
-    paymentMethods, openingDate, closingDate,
-    mondayHours, tuesdayHours, wednesdayHours,
-    thursdayHours, fridayHours, saturdayHours, sundayHours,
-    featured, verified,
-    logoUrl, backgroundUrl, logoUpdatedAt, backgroundUpdatedAt
-  ).run();
+  try {
+    const result = await env.DB.prepare(sql).bind(
+      d1Id, name, slug,
+      rec.Website, rec.Phone, rec.Email, rec.Description,
+      rec.Billing_Street, rec.Billing_City, rec.Billing_Code,
+      rec.Billing_State, rec.Billing_Country, lat, lng,
+      rec.Facebook, rec.Instagram,
+      categories, type, amenities, varieties,
+      petFriendly, rec.Price_Range,
+      new Date().toISOString(), new Date().toISOString(),
+      paymentMethods, openingDate, closingDate,
+      mondayHours, tuesdayHours, wednesdayHours,
+      thursdayHours, fridayHours, saturdayHours, sundayHours,
+      featured, verified,
+      logoUrl, backgroundUrl, logoUpdatedAt, backgroundUpdatedAt
+    ).run();
+    console.log(`✅ Farm upserted successfully: ${d1Id}`);
+  } catch (sqlError) {
+    console.error(`❌ SQL UPSERT ERROR for farm ${d1Id}:`, {
+      errorMessage: sqlError.message,
+      errorName: sqlError.name,
+      errorCause: sqlError.cause,
+      sqlAttempted: "INSERT INTO farms (...) ON CONFLICT...",
+      farmName: name,
+      farmSlug: slug,
+      fullError: String(sqlError)
+    });
+    throw sqlError;
+  }
 }
 
 /**
@@ -690,12 +735,85 @@ async function deleteFarm(env, id) {
       console.log(`  ⚠️  R2 bucket not configured, skipping image cleanup`);
     }
 
-    // Step 4: Delete the farm record itself
-    const farmResult = await env.DB.prepare(
-      "DELETE FROM farms WHERE zoho_record_id = ?"
-    ).bind(id).run();
-    deletionSummary.deleted.farm = farmResult.meta.changes || 0;
-    console.log(`  ✓ Deleted farm record`);
+    // Step 3.5: Delete from tables without FK constraints or without CASCADE
+    console.log(`  🧹 Cleaning up tables without FK constraints or CASCADE...`);
+    
+    try {
+      const adminAuditResult = await env.DB.prepare(
+        "DELETE FROM admin_audit_log WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.adminAuditLog = adminAuditResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.adminAuditLog} admin audit log entries`);
+    } catch (e) {
+      console.log(`  ⚠️  admin_audit_log may not exist: ${e.message}`);
+    }
+
+    try {
+      const fieldUsageResult = await env.DB.prepare(
+        "DELETE FROM farm_field_option_usage WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.farmFieldOptionUsage = fieldUsageResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.farmFieldOptionUsage} field option usage records`);
+    } catch (e) {
+      console.log(`  ⚠️  farm_field_option_usage may not exist: ${e.message}`);
+    }
+
+    try {
+      const farmersResult = await env.DB.prepare(
+        "DELETE FROM farmers WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.farmers = farmersResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.farmers} farmer records`);
+    } catch (e) {
+      console.log(`  ⚠️  farmers table may not exist: ${e.message}`);
+    }
+
+    // CRITICAL: Delete pending_farmer_claims (has FK without CASCADE)
+    try {
+      const pendingClaimsResult = await env.DB.prepare(
+        "DELETE FROM pending_farmer_claims WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.pendingFarmerClaims = pendingClaimsResult.meta.changes || 0;
+      console.log(`  ✓ Deleted ${deletionSummary.deleted.pendingFarmerClaims} pending farmer claims`);
+    } catch (e) {
+      console.log(`  ⚠️  pending_farmer_claims may not exist: ${e.message}`);
+    }
+
+    // Delete users with this farm_id (no FK constraint, but should be cleaned)
+    try {
+      const usersResult = await env.DB.prepare(
+        "UPDATE users SET farm_id = NULL WHERE farm_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.usersUnlinked = usersResult.meta.changes || 0;
+      console.log(`  ✓ Unlinked ${deletionSummary.deleted.usersUnlinked} users from farm`);
+    } catch (e) {
+      console.log(`  ⚠️  users table update failed: ${e.message}`);
+    }
+
+    // Step 4: Delete from FTS table first (FTS5 content= creates implicit FK constraint)
+    console.log(`  🔍 Deleting from FTS table first...`);
+    try {
+      await env.DB.prepare(
+        "INSERT INTO farms_fts(farms_fts, rowid, name, description, street) VALUES('delete', ?, NULL, NULL, NULL)"
+      ).bind(id).run();
+      console.log(`  ✓ Deleted from FTS index`);
+    } catch (ftsError) {
+      console.log(`  ⚠️  FTS deletion failed (non-critical): ${ftsError.message}`);
+    }
+
+    // Step 5: Delete the farm record itself
+    console.log(`  🎯 About to delete farm record from farms table...`);
+    try {
+      const farmResult = await env.DB.prepare(
+        "DELETE FROM farms WHERE zoho_record_id = ?"
+      ).bind(id).run();
+      deletionSummary.deleted.farm = farmResult.meta.changes || 0;
+      console.log(`  ✓ Deleted farm record (${deletionSummary.deleted.farm} rows affected)`);
+    } catch (farmDeleteError) {
+      console.error(`  ❌ FARM DELETION FAILED:`, farmDeleteError);
+      throw farmDeleteError;
+    }
+
 
     // Step 5: Audit logging
     try {
@@ -1224,7 +1342,18 @@ async function handleZohoWebhook(request, env, method) {
     }
 
     // STEP 3: Save farm data to D1 database
-    await upsertFarm(env, record);
+    try {
+      await upsertFarm(env, record);
+    } catch (dbError) {
+      console.error("❌ UPSERT FAILED - Database Error:", {
+        name: dbError.name,
+        message: dbError.message,
+        cause: dbError.cause,
+        farmId: d1Id,
+        farmName: record.Account_Name
+      });
+      throw dbError; // Re-throw to be caught by outer catch
+    }
 
     // STEP 3.3: Auto-discover field options from farm data
     // This ensures new Zoho values become available as form options immediately
@@ -1459,11 +1588,21 @@ async function handleZohoWebhook(request, env, method) {
 
   } catch (e) {
     console.error("Webhook FAILED:", e);
-    return new Response(JSON.stringify({ 
-      error: "Zoho webhook failed", 
+    console.error("Error details:", {
+      name: e.name,
+      message: e.message,
+      cause: e.cause,
+      stack: e.stack,
+      fullError: JSON.stringify(e, null, 2)
+    });
+    return new Response(JSON.stringify({
+      error: "Zoho webhook failed",
       message: String(e),
+      errorName: e.name,
+      errorDetails: e.message,
       zoho_id: apiId,
-      d1_id: d1Id
+      d1_id: d1Id,
+      fullError: String(e)
     }), {
       status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
