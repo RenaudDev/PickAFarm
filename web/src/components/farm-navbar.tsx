@@ -58,7 +58,7 @@ function FarmNavbar() {
                 Contact
               </Link>
             </div>
-            {/* Show "List Your Farm" only if not a farmer */}
+            {/* Show "List Your Farm" only if user is not a farmer */}
             {!isFarmer && (
               <a
                 href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3"
@@ -84,26 +84,32 @@ function FarmNavbar() {
                 </SignUpButton>
               </>
             ) : (
-              <div className="flex items-center gap-3">
-                {/* Show "Dashboard" button only for farmers */}
-                {isFarmer && (
+              <div className="flex items-center gap-4">
+                {isFarmer ? (
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      Personal Dashboard
+                    </Link>
+                    <Link
+                      href="/dashboard/farmer"
+                      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
+                    >
+                      Farm Dashboard
+                    </Link>
+                  </>
+                ) : (
                   <Link
-                    href="/dashboard/farmer"
-                    className="hidden lg:inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
+                    href="/dashboard"
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
                   >
                     Dashboard
                   </Link>
                 )}
                 <UserButton
                   afterSignOutUrl="/"
-                  userProfileProps={{
-                    additionalMenuItems: [
-                      {
-                        label: isFarmer ? 'Personal Dashboard' : 'Dashboard',
-                        url: '/dashboard',
-                      },
-                    ],
-                  }}
                   appearance={{
                     elements: {
                       avatarBox: 'w-10 h-10 rounded-full',
@@ -192,7 +198,7 @@ function FarmNavbar() {
                   </>
                 ) : (
                   <>
-                    {isFarmer && (
+                    {isFarmer ? (
                       // Farmer mobile menu
                       <>
                         <Link
@@ -207,15 +213,8 @@ function FarmNavbar() {
                         >
                           Personal Dashboard
                         </Link>
-                        <Link
-                          href="/dashboard/farmer/analytics"
-                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
-                        >
-                          Analytics
-                        </Link>
                       </>
-                    )}
-                    {!isFarmer && (
+                    ) : (
                       // Regular user mobile menu
                       <>
                         <Link
