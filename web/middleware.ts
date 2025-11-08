@@ -61,12 +61,6 @@ export default clerkMiddleware(async (auth, request) => {
 
     // Role-based routing logic for farmers
     if (role === USER_ROLES.FARMER) {
-      // Farmers: redirect /dashboard → /dashboard/farmer
-      if (pathname === '/dashboard' || pathname === '/dashboard/') {
-        logRedirect(`Redirecting farmer from ${pathname} to /dashboard/farmer`);
-        return NextResponse.redirect(new URL('/dashboard/farmer', request.url));
-      }
-
       // Farmers: block /saved-farms
       if (pathname.startsWith('/saved-farms')) {
         logRedirect(`Blocking farmer from ${pathname}, redirecting to /dashboard/farmer`);

@@ -11,7 +11,6 @@ import {
   useAuth,
   useUser,
 } from '@clerk/nextjs';
-import Link from 'next/link';
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -85,27 +84,12 @@ function FarmNavbar() {
               </>
             ) : (
               <div className="flex items-center gap-4">
-                {isFarmer ? (
-                  <>
-                    <Link
-                      href="/dashboard"
-                      className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      Personal Dashboard
-                    </Link>
-                    <Link
-                      href="/dashboard/farmer"
-                      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
-                    >
-                      Farm Dashboard
-                    </Link>
-                  </>
-                ) : (
+                {isFarmer && (
                   <Link
-                    href="/dashboard"
+                    href="/dashboard/farmer"
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
                   >
-                    Dashboard
+                    Farm Dashboard
                   </Link>
                 )}
                 <UserButton
@@ -117,7 +101,15 @@ function FarmNavbar() {
                       userButtonPopoverActionButton: 'hover:bg-muted',
                     },
                   }}
-                />
+                >
+                  <UserButton.MenuItems>
+                    <UserButton.Link
+                      label="Dashboard"
+                      labelIcon={<span>📊</span>}
+                      href="/dashboard"
+                    />
+                  </UserButton.MenuItems>
+                </UserButton>
               </div>
             )}
           </div>
@@ -218,12 +210,6 @@ function FarmNavbar() {
                       // Regular user mobile menu
                       <>
                         <Link
-                          href="/dashboard"
-                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
-                        >
-                          Dashboard
-                        </Link>
-                        <Link
                           href="/saved-farms"
                           className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                         >
@@ -239,7 +225,15 @@ function FarmNavbar() {
                             avatarBox: 'w-10 h-10 rounded-full',
                           },
                         }}
-                      />
+                      >
+                        <UserButton.MenuItems>
+                          <UserButton.Link
+                            label="Dashboard"
+                            labelIcon={<span>📊</span>}
+                            href="/dashboard"
+                          />
+                        </UserButton.MenuItems>
+                      </UserButton>
                     </div>
                   </>
                 )}
