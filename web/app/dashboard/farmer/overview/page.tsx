@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import { DashboardLayout } from '@/components/farmer/dashboard-layout';
+import DashboardLayout from '@/components/farmer/dashboard-layout';
 import { StatCard } from '@/components/dashboard/stat-card';
 import { ProgressBar } from '@/components/dashboard/progress-bar';
 import { TaskChecklistItem } from '@/components/dashboard/task-checklist-item';
