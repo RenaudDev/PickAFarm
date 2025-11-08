@@ -11,6 +11,7 @@ import {
   useAuth,
   useUser,
 } from '@clerk/nextjs';
+import Link from 'next/link';
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
