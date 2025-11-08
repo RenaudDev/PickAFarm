@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { getAuth, clerkClient } from '@clerk/nextjs/server';
 
 // Cloudflare Pages requires edge runtime for dynamic routes
@@ -11,7 +11,7 @@ export const runtime = 'edge';
  * This is called when the farmer's associated farm is found to be deleted.
  * It clears the farmId and updates the role in the user's publicMetadata.
  */
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const { userId } = getAuth(request);
 
