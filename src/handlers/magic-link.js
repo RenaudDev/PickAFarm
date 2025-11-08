@@ -425,12 +425,28 @@ export async function handleClerkWebhook(request, env, method) {
       }
 
       // === STEP 5: Create user in D1 database ===
+      // Idempotent: handles duplicate email/clerk_user_id from repeated webhook calls
+      // or when user is deleted from Clerk but D1 record remains
       try {
+        // Generate UUID for primary key (D1 doesn't auto-generate TEXT primary keys)
+        const userId = crypto.randomUUID();
+        
+        // Use UPSERT to handle duplicate email (e.g., user deleted from Clerk, re-signs up)
+        // SQLite only supports one ON CONFLICT clause, so we handle email conflicts
+        // (most common case: user deleted from Clerk but D1 record remains)
         await env.DB.prepare(`
           INSERT INTO users (
-            clerk_user_id, email, first_name, last_name, role, farm_id, created_at
-          ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+            id, clerk_user_id, email, first_name, last_name, role, farm_id, created_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+          ON CONFLICT(email) DO UPDATE SET
+            clerk_user_id = excluded.clerk_user_id,
+            first_name = excluded.first_name,
+            last_name = excluded.last_name,
+            role = excluded.role,
+            farm_id = excluded.farm_id,
+            updated_at = CURRENT_TIMESTAMP
         `).bind(
+          userId,
           clerkUserId,
           email,
           firstName,
@@ -439,7 +455,7 @@ export async function handleClerkWebhook(request, env, method) {
           role === 'farmer' && tokenValid ? farmId : null
         ).run();
 
-        console.log(`✅ User created in D1: ${clerkUserId} (${email})`);
+        console.log(`✅ User created/updated in D1: ${clerkUserId} (${email})`);
       } catch (dbError) {
         console.error('Failed to create user in D1:', dbError);
         // Return 200 to Clerk anyway (idempotency - retry later)
@@ -477,12 +493,15 @@ export async function handleClerkWebhook(request, env, method) {
           if (!clerkResponse.ok) {
             const errorText = await clerkResponse.text();
             console.error(`Failed to update Clerk publicMetadata: ${clerkResponse.status} - ${errorText}`);
+            // THROW an error to make the failure visible in Clerk Dashboard
+            throw new Error(`Clerk API Error: ${clerkResponse.status} - ${errorText}`);
           } else {
             console.log(`✅ Clerk publicMetadata updated for user: ${clerkUserId}`);
           }
         } catch (clerkError) {
           console.error('Failed to call Clerk API:', clerkError);
-          // Don't fail the webhook - publicMetadata update is not critical
+          // Re-throw the error to ensure the entire webhook fails loudly
+          throw clerkError;
         }
       }
 

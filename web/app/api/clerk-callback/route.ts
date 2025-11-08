@@ -45,8 +45,8 @@ export async function GET(request: NextRequest) {
     );
 
     // Poll for metadata availability (webhook may still be processing)
-    // Max 5 retries with 500ms intervals = 2.5 seconds total wait time
-    const maxRetries = 5;
+    // Max 10 retries with 500ms intervals = 5 seconds total wait time
+    const maxRetries = 10;
     const retryDelay = 500; // milliseconds
     let retries = 0;
     let role = user.publicMetadata?.role as string | undefined;
