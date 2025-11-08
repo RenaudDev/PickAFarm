@@ -105,8 +105,8 @@ function FarmNavbar() {
                 >
                   <UserButton.MenuItems>
                     <UserButton.Link
-                      label="Dashboard"
-                      labelIcon={<span>📊</span>}
+                      label="My Subscriptions"
+                      labelIcon={<span>🔖</span>}
                       href="/dashboard"
                     />
                   </UserButton.MenuItems>
