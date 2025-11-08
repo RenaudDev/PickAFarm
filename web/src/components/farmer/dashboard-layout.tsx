@@ -14,6 +14,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import FarmNavbar from '@/components/farm-navbar';
 import { cn } from '@/lib/utils';
 import {
+  LayoutDashboard,
   FileText,
   Send,
   TrendingUp,
@@ -22,8 +23,14 @@ import {
 
 const tabs = [
   {
+    name: 'Overview',
+    href: '/dashboard/farmer/overview',
+    icon: LayoutDashboard,
+    description: 'Your dashboard overview and quick actions'
+  },
+  {
     name: 'Information',
-    href: '/dashboard/farmer',
+    href: '/dashboard/farmer/information',
     icon: FileText,
     description: 'Manage your farm information'
   },

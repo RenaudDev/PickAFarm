@@ -3925,6 +3925,187 @@ export default {
       }
     }
 
+    if (url.pathname === "/api/farmer/dashboard/stats" && method === "GET") {
+      // Dashboard Stats Endpoint
+      // Returns aggregated statistics for farmer dashboard overview
+      try {
+        const farmer = await authenticateFarmer(request, env);
+        
+        logger.info('Fetching dashboard stats', {
+          userId: farmer.userId,
+          farmId: farmer.farmId
+        });
+
+        // Step 1: Get farm data for completion calculation
+        const farm = await env.DB.prepare(`
+          SELECT 
+            zoho_record_id,
+            name,
+            description,
+            logo_url,
+            background_url,
+            monday_hours, 
+            tuesday_hours, 
+            wednesday_hours, 
+            thursday_hours,
+            friday_hours, 
+            saturday_hours, 
+            sunday_hours,
+            amenities,
+            phone, 
+            email, 
+            website,
+            verified
+          FROM farms
+          WHERE zoho_record_id = ?
+        `).bind(farmer.farmId).first();
+
+        if (!farm) {
+          logger.error('Farm not found for stats', { farmId: farmer.farmId });
+          return errorResponse(404, "Farm not found", `No farm found with ID: ${farmer.farmId}`, correlationId);
+        }
+
+        // Step 2: Calculate profile completion (5 critical tasks)
+        const tasks = [
+          { 
+            id: 'description',
+            completed: !!farm.description && farm.description.length >= 10 
+          },
+          { 
+            id: 'photos',
+            completed: !!farm.logo_url && !!farm.background_url 
+          },
+          { 
+            id: 'hours',
+            completed: [
+              farm.monday_hours, farm.tuesday_hours, farm.wednesday_hours,
+              farm.thursday_hours, farm.friday_hours, farm.saturday_hours, farm.sunday_hours
+            ].some(h => h && h.length > 0)
+          },
+          { 
+            id: 'contact',
+            completed: !!farm.phone || !!farm.email || !!farm.website 
+          },
+          { 
+            id: 'amenities',
+            completed: !!farm.amenities && farm.amenities.length > 0 
+          }
+        ];
+        
+        const completedCount = tasks.filter(t => t.completed).length;
+        const completionPercentage = Math.round((completedCount / tasks.length) * 100);
+
+        // Step 3: Get subscriber count
+        const subscriberResult = await env.DB.prepare(`
+          SELECT COUNT(*) as subscriber_count
+          FROM saved_farms
+          WHERE farm_id = ?
+        `).bind(farmer.farmId).first();
+        
+        const subscriberCount = subscriberResult?.subscriber_count || 0;
+
+        // Step 4: Get views with trend (last 30 days vs previous 30 days)
+        const viewsData = await env.DB.prepare(`
+          SELECT 
+            SUM(CASE 
+              WHEN created_at >= datetime('now', '-30 days') 
+              THEN 1 ELSE 0 
+            END) as views_last_30,
+            SUM(CASE 
+              WHEN created_at >= datetime('now', '-60 days') 
+               AND created_at < datetime('now', '-30 days') 
+              THEN 1 ELSE 0 
+            END) as views_prev_30
+          FROM marketing_analytics
+          WHERE farm_id = ? AND event_type = 'profile_view'
+        `).bind(farmer.farmId).first();
+
+        const viewsLast30 = viewsData?.views_last_30 || 0;
+        const viewsPrev30 = viewsData?.views_prev_30 || 0;
+        
+        // Calculate trend percentage
+        let viewsTrend = null;
+        if (viewsPrev30 > 0) {
+          const percentChange = ((viewsLast30 - viewsPrev30) / viewsPrev30) * 100;
+          viewsTrend = percentChange > 0 
+            ? `+${Math.round(percentChange)}%` 
+            : `${Math.round(percentChange)}%`;
+        } else if (viewsLast30 > 0) {
+          viewsTrend = '+100%';
+        }
+
+        // Step 5: Determine verification status
+        const missingFields = [];
+        
+        if (!farm.description || farm.description.length < 10) {
+          missingFields.push('description');
+        }
+        
+        if (!tasks[2].completed) {
+          missingFields.push('operating_hours');
+        }
+        
+        if (!tasks[3].completed) {
+          missingFields.push('contact_info');
+        }
+        
+        const verificationStatus = farm.verified === 1 
+          ? 'Active' 
+          : missingFields.length === 0 
+            ? 'Active' 
+            : 'Pending';
+
+        // Step 6: Build response
+        const response = {
+          profileCompletion: {
+            percentage: completionPercentage,
+            completedTasks: completedCount,
+            totalTasks: tasks.length
+          },
+          verification: {
+            status: verificationStatus,
+            missingFields: missingFields.length > 0 ? missingFields : null
+          },
+          views: {
+            total: viewsLast30,
+            trend: viewsTrend,
+            period: 'last 30 days'
+          },
+          subscribers: {
+            total: subscriberCount,
+            period: 'all time'
+          }
+        };
+
+        logger.info('Dashboard stats retrieved successfully', {
+          farmId: farmer.farmId,
+          farmName: farm.name,
+          completionPercentage,
+          verificationStatus,
+          subscriberCount,
+          viewsLast30
+        });
+
+        return new Response(JSON.stringify(response), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+            'X-Correlation-ID': correlationId,
+            'Cache-Control': 'private, max-age=60' // Cache for 1 minute
+          }
+        });
+
+      } catch (error) {
+        logger.error('Dashboard stats fetch failed', {
+          error: error.message,
+          errorName: error.name
+        });
+
+        return handleAuthenticationError(error, correlationId);
+      }
+    }
+
     if (url.pathname === "/api/farmer/farm" && method === "PUT") {
       // Story 2.5: Update Farm Data
       // Updates farm information from farmer dashboard and syncs to Zoho CRM
