@@ -40,7 +40,7 @@ export function FarmerFormImproved({
     <form id="farm-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
       
       {/* Section 1: Basic Information */}
-      <Card>
+      <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Basic Information</CardTitle>
           <CardDescription>Tell visitors about your farm</CardDescription>
@@ -87,7 +87,7 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 2: Contact Information */}
-      <Card>
+      <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Contact Information</CardTitle>
           <CardDescription>How visitors can reach you</CardDescription>
@@ -143,7 +143,7 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 3: Operating Hours */}
-      <Card>
+      <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Operating Hours</CardTitle>
           <CardDescription>When visitors can visit your farm</CardDescription>
@@ -224,7 +224,7 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 4: Location */}
-      <Card>
+      <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Location</CardTitle>
           <CardDescription>Help visitors find you</CardDescription>
@@ -320,7 +320,7 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 5: Products & Activities */}
-      <Card>
+      <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Products & Activities</CardTitle>
           <CardDescription>What you offer to visitors</CardDescription>
@@ -413,7 +413,7 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 6: Amenities & Accessibility */}
-      <Card>
+      <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Amenities & Accessibility</CardTitle>
           <CardDescription>Facilities available at your farm</CardDescription>
@@ -442,28 +442,27 @@ export function FarmerFormImproved({
           />
 
           {/* Pet Friendly */}
-          <FormField
-            control={form.control}
-            name="pet_friendly"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value ?? false}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel className="cursor-pointer">
-                    Pet Friendly
-                  </FormLabel>
-                  <p className="text-xs text-muted-foreground">
-                    Are pets allowed on your premises?
-                  </p>
-                </div>
-              </FormItem>
-            )}
-          />
+          <div className="flex items-center space-x-2">
+            <FormField
+              control={form.control}
+              name="pet_friendly"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Checkbox
+                      id="pet-friendly"
+                      checked={field.value ?? false}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Label htmlFor="pet-friendly" className="text-sm font-normal cursor-pointer">
+              Pet Friendly - Are pets allowed on your premises?
+            </Label>
+          </div>
 
           {/* Payment Methods */}
           <FormField

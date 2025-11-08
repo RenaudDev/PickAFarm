@@ -166,7 +166,7 @@ export default function FarmerDashboardOverviewPage() {
         {stats && !loading && (
           <>
             {/* Stats Cards Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               
               {/* Profile Completion */}
               <StatCard
@@ -175,6 +175,7 @@ export default function FarmerDashboardOverviewPage() {
                 progressPercent={stats.profileCompletion.percentage}
                 icon={CheckCircle}
                 onClick={() => router.push('/dashboard/farmer/information')}
+                className="bg-green-50"
               />
               
               {/* Verification Status */}
@@ -182,6 +183,7 @@ export default function FarmerDashboardOverviewPage() {
                 title="Verification Status"
                 value={stats.verification.status}
                 status={stats.verification.status}
+                className="bg-green-50"
               />
               
               {/* Views */}
@@ -193,6 +195,7 @@ export default function FarmerDashboardOverviewPage() {
                   value: stats.views.trend,
                   direction: stats.views.trend.startsWith('+') ? 'up' : 'down'
                 } : undefined}
+                className="bg-green-50"
               />
               
               {/* Subscribers */}
@@ -200,6 +203,7 @@ export default function FarmerDashboardOverviewPage() {
                 title="Subscribers"
                 value={stats.subscribers.total}
                 icon={Users}
+                className="bg-green-50"
               />
               
             </div>
@@ -212,7 +216,7 @@ export default function FarmerDashboardOverviewPage() {
                 
                 {/* Complete Your Listing Widget */}
                 {stats.profileCompletion.percentage < 100 && (
-                  <section className="bg-white border border-gray-200 rounded-lg p-6">
+                  <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <h2 className="text-xl font-bold text-gray-900">
@@ -318,7 +322,7 @@ export default function FarmerDashboardOverviewPage() {
                 )}
 
                 {/* Quick Actions */}
-                <section className="bg-white border border-gray-200 rounded-lg p-6">
+                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-4">
                     Quick Actions
                   </h2>
@@ -367,7 +371,7 @@ export default function FarmerDashboardOverviewPage() {
               <div className="space-y-8">
                 
                 {/* Farm Media Upload Widget */}
-                <section className="bg-white border border-gray-200 rounded-lg p-6">
+                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
                   <h2 className="text-lg font-bold text-gray-900 mb-4">
                     Farm Photos
                   </h2>
@@ -389,7 +393,7 @@ export default function FarmerDashboardOverviewPage() {
                 </section>
 
                 {/* Recent Activity */}
-                <section className="bg-white border border-gray-200 rounded-lg p-6">
+                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-bold text-gray-900">
                       Recent Activity
@@ -432,7 +436,7 @@ export default function FarmerDashboardOverviewPage() {
                 </section>
 
                 {/* Help & Support */}
-                <section className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
                   <h2 className="text-lg font-bold text-gray-900 mb-2">
                     Need Help?
                   </h2>
