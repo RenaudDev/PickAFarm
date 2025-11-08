@@ -779,15 +779,61 @@ async function deleteFarm(env, id) {
       console.log(`  ⚠️  pending_farmer_claims may not exist: ${e.message}`);
     }
 
-    // Delete users with this farm_id (no FK constraint, but should be cleaned)
+    // Step 3.6: Find and demote associated users in Clerk before local cleanup
     try {
+      const usersToDemote = await env.DB.prepare(
+        "SELECT clerk_user_id FROM users WHERE farm_id = ?"
+      ).bind(id).all();
+
+      if (usersToDemote.results && usersToDemote.results.length > 0) {
+        console.log(`  - Found ${usersToDemote.results.length} user(s) to demote from farmer role.`);
+        let demotedCount = 0;
+
+        for (const user of usersToDemote.results) {
+          if (!user.clerk_user_id) continue;
+
+          try {
+            const clerkApiUrl = `https://api.clerk.com/v1/users/${user.clerk_user_id}`;
+            const clerkResponse = await fetch(clerkApiUrl, {
+              method: 'PATCH',
+              headers: {
+                'Authorization': `Bearer ${env.CLERK_SECRET_KEY}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                public_metadata: {
+                  role: 'user',
+                  farmId: null
+                }
+              })
+            });
+
+            if (!clerkResponse.ok) {
+              const errorText = await clerkResponse.text();
+              console.error(`  ❌ Failed to demote user ${user.clerk_user_id} in Clerk: ${clerkResponse.status} - ${errorText}`);
+              deletionSummary.errors.push(`Clerk demotion failed for ${user.clerk_user_id}`);
+            } else {
+              console.log(`  ✓ Demoted user ${user.clerk_user_id} in Clerk.`);
+              demotedCount++;
+            }
+          } catch (e) {
+            console.error(`  ❌ Error calling Clerk API for user ${user.clerk_user_id}: ${e.message}`);
+            deletionSummary.errors.push(`Clerk API call failed for ${user.clerk_user_id}`);
+          }
+        }
+        deletionSummary.deleted.usersDemotedInClerk = demotedCount;
+      }
+
+      // Unlink users from the farm in the local D1 database and reset role
       const usersResult = await env.DB.prepare(
-        "UPDATE users SET farm_id = NULL WHERE farm_id = ?"
+        "UPDATE users SET farm_id = NULL, role = 'user' WHERE farm_id = ?"
       ).bind(id).run();
       deletionSummary.deleted.usersUnlinked = usersResult.meta.changes || 0;
-      console.log(`  ✓ Unlinked ${deletionSummary.deleted.usersUnlinked} users from farm`);
+      console.log(`  ✓ Unlinked ${deletionSummary.deleted.usersUnlinked} users from farm in D1.`);
+
     } catch (e) {
-      console.log(`  ⚠️  users table update failed: ${e.message}`);
+      console.log(`  ⚠️  User demotion/unlinking failed: ${e.message}`);
+      deletionSummary.errors.push(`User demotion process failed: ${e.message}`);
     }
 
     // Step 4: Delete from FTS table first (FTS5 content= creates implicit FK constraint)

@@ -23,6 +23,7 @@ import DashboardLayout from '@/components/farmer/dashboard-layout';
 import { FarmerFormImproved } from '@/components/farmer-form-improved';
 import { FarmMediaSection } from '@/components/farmer/farm-media-section';
 import { FarmHeader } from '@/components/farmer/farm-header';
+import { useRouter } from 'next/navigation';
 
 // Farm form validation schema
 const farmSchema = z.object({
@@ -93,6 +94,7 @@ interface DashboardData {
 
 export default function FarmerDashboardPage() {
   const { getToken } = useAuth();
+  const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -148,6 +150,29 @@ export default function FarmerDashboardPage() {
             'Content-Type': 'application/json',
           },
         });
+
+        if (response.status === 404) {
+          // Farm not found. This user is a farmer without a farm.
+          // Demote them and redirect.
+          console.warn('Farm not found for this user. Demoting to regular user.');
+          setError('The farm associated with your account could not be found. You will be redirected to your personal dashboard.');
+
+          // Call the demotion API
+          await fetch('/api/user/demote-farmer', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+
+          // Redirect to the regular user dashboard after a short delay
+          setTimeout(() => {
+            router.push('/dashboard');
+          }, 3000); // 3-second delay to allow user to read the message
+
+          return; // Stop further processing
+        }
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
@@ -235,7 +260,7 @@ export default function FarmerDashboardPage() {
     }
 
     fetchData();
-  }, [getToken, form]);
+  }, [getToken, form, router]);
 
   const onSubmit = async (formData: FarmFormData) => {
     setIsSaving(true);
