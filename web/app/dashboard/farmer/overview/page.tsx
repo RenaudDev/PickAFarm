@@ -81,7 +81,9 @@ export default function FarmerDashboardOverviewPage() {
         return;
       }
 
-      const response = await fetch('/api/farmer/dashboard/stats', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+
+      const response = await fetch(`${apiUrl}/api/farmer/dashboard/stats`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -94,7 +96,8 @@ export default function FarmerDashboardOverviewPage() {
           router.push('/sign-in');
           return;
         }
-        throw new Error(`Failed to fetch dashboard stats: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`Failed to fetch dashboard stats: ${errorData.error || response.statusText || `Server responded with ${response.status}`}`);
       }
 
       const data = await response.json();
