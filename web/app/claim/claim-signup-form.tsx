@@ -40,9 +40,8 @@ export function ClaimSignUpForm({
         role: 'farmer',
         claimToken,
       }}
-      // Redirect to callback route after signup to handle metadata polling
-      // This ensures webhook completes before redirecting to dashboard
-      afterSignUpUrl="/api/clerk-callback"
+      // Redirect to the new processing page after signup
+      afterSignUpUrl="/claim/processing"
       routing="hash" // Required for Next.js static export compatibility
     />
   );
