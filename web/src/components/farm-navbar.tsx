@@ -4,7 +4,14 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { SignInButton, SignUpButton, UserButton, useAuth, useUser } from '@clerk/nextjs';
+import {
+  SignInButton,
+  SignUpButton,
+  UserButton,
+  useAuth,
+  useUser,
+} from '@clerk/nextjs';
+import Link from 'next/link';
 
 function FarmNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,7 +26,7 @@ function FarmNavbar() {
     <nav className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="hidden md:flex items-center justify-between h-24">
-          <a href="/">
+          <Link href="/">
             <div className="flex items-center space-x-3">
               <Image
                 src="/images/navbarlogo1.webp"
@@ -29,34 +36,37 @@ function FarmNavbar() {
                 className="h-20 w-60"
               />
             </div>
-          </a>
+          </Link>
           <div className="flex items-center space-x-6">
             <div className="hidden lg:flex items-center space-x-6">
-              <a
+              <Link
                 href="/"
                 className="text-foreground hover:text-accent font-medium transition-colors"
               >
                 Home
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/about"
                 className="text-foreground hover:text-accent font-medium transition-colors"
               >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact"
                 className="text-foreground hover:text-accent font-medium transition-colors"
               >
                 Contact
-              </a>
+              </Link>
             </div>
-            <a
-              href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3"
-              className="text-foreground hover:text-accent font-medium transition-colors"
-            >
-              List Your Farm
-            </a>
+            {/* Show "List Your Farm" only if not a farmer */}
+            {!isFarmer && (
+              <a
+                href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3"
+                className="text-foreground hover:text-accent font-medium transition-colors"
+              >
+                List Your Farm
+              </a>
+            )}
             {!isSignedIn ? (
               <>
                 <SignInButton mode="modal">
@@ -75,24 +85,25 @@ function FarmNavbar() {
               </>
             ) : (
               <div className="flex items-center gap-3">
+                {/* Show "Dashboard" button only for farmers */}
                 {isFarmer && (
-                  <a
+                  <Link
                     href="/dashboard/farmer"
                     className="hidden lg:inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
                   >
-                    🌾 Dashboard
-                  </a>
-                )}
-                {!isFarmer && isSignedIn && (
-                  <a
-                    href={isFarmer ? '/dashboard/farmer' : '/dashboard'}
-                    className="hidden lg:inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
-                  >
                     Dashboard
-                  </a>
+                  </Link>
                 )}
                 <UserButton
                   afterSignOutUrl="/"
+                  userProfileProps={{
+                    additionalMenuItems: [
+                      {
+                        label: isFarmer ? 'Personal Dashboard' : 'Dashboard',
+                        url: '/dashboard',
+                      },
+                    ],
+                  }}
                   appearance={{
                     elements: {
                       avatarBox: 'w-10 h-10 rounded-full',
@@ -108,7 +119,7 @@ function FarmNavbar() {
 
         <div className="md:hidden">
           <div className="flex items-center justify-between h-20">
-            <a href="/">
+            <Link href="/">
               <div className="flex items-center space-x-2">
                 <Image
                   src="/images/navbarlogo1.webp"
@@ -118,7 +129,7 @@ function FarmNavbar() {
                   className="h-16 w-42"
                 />
               </div>
-            </a>
+            </Link>
             <Button
               variant="ghost"
               size="sm"
@@ -132,30 +143,33 @@ function FarmNavbar() {
           {isMobileMenuOpen && (
             <div className="pb-4 space-y-4 bg-background rounded-b-lg border-t border-border">
               <div className="space-y-2">
-                <a
+                <Link
                   href="/"
                   className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                 >
                   Home
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/about"
                   className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                 >
                   About
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/contact"
                   className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                 >
                   Contact
-                </a>
-                <a
-                  href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3"
-                  className="block px-4 py-2 text-primary hover:bg-muted rounded-md font-semibold"
-                >
-                  List Your Farm
-                </a>
+                </Link>
+                {/* Show "List Your Farm" only if not a farmer */}
+                {!isFarmer && (
+                  <a
+                    href="https://zfrmz.ca/LsxdRy6JtAUjFjuPfRd3"
+                    className="block px-4 py-2 text-primary hover:bg-muted rounded-md font-semibold"
+                  >
+                    List Your Farm
+                  </a>
+                )}
                 {!isSignedIn ? (
                   <>
                     <div className="px-4 py-2">
@@ -179,37 +193,43 @@ function FarmNavbar() {
                 ) : (
                   <>
                     {isFarmer && (
-                      // Farmer mobile menu (Story 2.2.3: Role-aware mobile menu)
+                      // Farmer mobile menu
                       <>
-                        <a
+                        <Link
                           href="/dashboard/farmer"
                           className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                         >
-                          🌾 Farm Dashboard
-                        </a>
-                        <a
+                          Farm Dashboard
+                        </Link>
+                        <Link
+                          href="/dashboard"
+                          className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
+                        >
+                          Personal Dashboard
+                        </Link>
+                        <Link
                           href="/dashboard/farmer/analytics"
                           className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                         >
-                          📊 Analytics
-                        </a>
+                          Analytics
+                        </Link>
                       </>
                     )}
                     {!isFarmer && (
                       // Regular user mobile menu
                       <>
-                        <a
+                        <Link
                           href="/dashboard"
                           className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                         >
-                          📊 Dashboard
-                        </a>
-                        <a
+                          Dashboard
+                        </Link>
+                        <Link
                           href="/saved-farms"
                           className="block px-4 py-2 text-foreground hover:bg-muted rounded-md font-medium"
                         >
-                          🔔 Subscriptions
-                        </a>
+                          Subscriptions
+                        </Link>
                       </>
                     )}
                     <div className="px-4 py-2 flex items-center justify-center">
