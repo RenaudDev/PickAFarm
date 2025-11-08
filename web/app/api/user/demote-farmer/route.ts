@@ -24,17 +24,45 @@ export async function POST(request: NextRequest) {
 
     console.log(`Attempting to demote user: ${userId}`);
 
-    // Update publicMetadata via Clerk Backend API
-    await clerkClient.users.updateUserMetadata(userId, {
-      publicMetadata: {
-        role: 'user',
-        farmId: null, // Explicitly clear the farmId
+    // The clerkClient from @clerk/nextjs/server is not compatible with the Edge runtime.
+    // We must call the Clerk Backend API directly using fetch.
+    const clerkApiUrl = `https://api.clerk.com/v1/users/${userId}`;
+    const clerkSecretKey = process.env.CLERK_SECRET_KEY;
+
+    if (!clerkSecretKey) {
+      console.error('Demotion API error: CLERK_SECRET_KEY is not set.');
+      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const response = await fetch(clerkApiUrl, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${clerkSecretKey}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        public_metadata: {
+          role: 'user',
+          farmId: null, // Explicitly clear the farmId
+        },
+      }),
     });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Clerk API error during demotion: ${response.status} - ${errorText}`);
+      throw new Error(`Failed to demote user in Clerk: ${errorText}`);
+    }
 
     console.log(`✅ Successfully demoted user: ${userId}`);
 
-    return NextResponse.json({ success: true });
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
     console.error('Failed to demote user:', error);
 
