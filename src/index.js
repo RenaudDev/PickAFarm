@@ -4123,6 +4123,16 @@ export default {
 
         // Parse request body
         const data = await request.json();
+        
+        // Log incoming data for debugging
+        logger.info('Incoming farm update data', {
+          farmId: farmer.farmId,
+          fields: Object.keys(data),
+          hasName: 'name' in data,
+          hasDescription: 'description' in data,
+          hasCity: 'city' in data,
+          hasState: 'state' in data
+        });
 
         // Get existing farm data to merge with partial updates
         let existingFarm;
@@ -4181,17 +4191,24 @@ export default {
         };
 
         // Validate required fields only if they're being updated
-        if (data.name !== undefined && !data.name) {
-          logger.warn('Invalid name in farm update', { farmId: farmer.farmId });
-          return errorResponse(400, "Validation error", "Farm name cannot be empty", correlationId);
+        // Check for empty strings, null, or undefined
+        if (data.name !== undefined) {
+          if (!data.name || (typeof data.name === 'string' && data.name.trim().length === 0)) {
+            logger.warn('Invalid name in farm update', { farmId: farmer.farmId, name: data.name });
+            return errorResponse(400, "Validation error", "Farm name cannot be empty", correlationId);
+          }
         }
-        if (data.city !== undefined && !data.city) {
-          logger.warn('Invalid city in farm update', { farmId: farmer.farmId });
-          return errorResponse(400, "Validation error", "City cannot be empty", correlationId);
+        if (data.city !== undefined) {
+          if (!data.city || (typeof data.city === 'string' && data.city.trim().length === 0)) {
+            logger.warn('Invalid city in farm update', { farmId: farmer.farmId, city: data.city });
+            return errorResponse(400, "Validation error", "City cannot be empty", correlationId);
+          }
         }
-        if (data.state !== undefined && !data.state) {
-          logger.warn('Invalid state in farm update', { farmId: farmer.farmId });
-          return errorResponse(400, "Validation error", "State cannot be empty", correlationId);
+        if (data.state !== undefined) {
+          if (!data.state || (typeof data.state === 'string' && data.state.trim().length === 0)) {
+            logger.warn('Invalid state in farm update', { farmId: farmer.farmId, state: data.state });
+            return errorResponse(400, "Validation error", "State cannot be empty", correlationId);
+          }
         }
 
         // Convert arrays to CSV strings for database storage

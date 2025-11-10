@@ -324,7 +324,22 @@ export default function FarmerDashboardInformationPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save farm information');
+        // Parse error response to get specific error message
+        let errorMessage = 'Failed to save farm information';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorData.details || errorMessage;
+          console.error('API Error:', {
+            status: response.status,
+            statusText: response.statusText,
+            error: errorData,
+            requestData: formData
+          });
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          errorMessage = `Server error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
       }
 
       const result = await response.json();

@@ -38,8 +38,9 @@ export function FarmerFormImproved({
   farmData,
 }: FarmerFormImprovedProps) {
   const [savingSection, setSavingSection] = useState<string | null>(null);
+  const [savedSections, setSavedSections] = useState<Set<string>>(new Set());
 
-  // Watch form values to trigger badge updates
+  // Watch form values to trigger badge updates (but badges only show for saved sections)
   const formValues = form.watch();
 
   // Section-specific save handlers
@@ -65,6 +66,10 @@ export function FarmerFormImproved({
 
       // Save section data
       await onSubmit(sectionData);
+      
+      // Mark section as saved
+      setSavedSections(prev => new Set(prev).add(sectionName));
+      
       toast.success(`${sectionName} saved successfully!`);
     } catch (error) {
       toast.error(`Failed to save ${sectionName}`);
@@ -73,9 +78,14 @@ export function FarmerFormImproved({
     }
   };
 
-  // Check section completion status
+  // Check section completion status - only show badge if section was saved AND has valid data
   const checkSectionCompletion = (sectionName: string): boolean => {
-    // Use watched form values for reactive updates
+    // First check if section was saved
+    if (!savedSections.has(sectionName)) {
+      return false;
+    }
+    
+    // Then verify form values are still valid
     const formData = formValues;
     
     switch (sectionName) {

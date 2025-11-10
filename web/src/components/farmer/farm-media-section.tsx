@@ -81,18 +81,42 @@ export function FarmMediaSection({ farmName = 'Your Farm' }: FarmMediaSectionPro
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Upload failed');
+        const errorMessage = errorData.error || errorData.message || `Upload failed: ${response.status} ${response.statusText}`;
+        throw new Error(errorMessage);
       }
 
       const result = await response.json();
       
-      // Update local state with new image URL
+      // Update local state with new image URL immediately
       setFarmData(prev => ({
         ...prev,
         [`${imageType}_url`]: result.url
       }));
 
       toast.success(`${imageType === 'logo' ? 'Logo' : 'Cover photo'} uploaded successfully!`);
+      
+      // Refetch farm data to confirm persistence
+      setTimeout(async () => {
+        try {
+          const refreshResponse = await fetch(`${apiUrl}/api/farmer/farm`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (refreshResponse.ok) {
+            const refreshData = await refreshResponse.json();
+            setFarmData({
+              logo_url: refreshData.farm?.logo_url,
+              background_url: refreshData.farm?.background_url
+            });
+          }
+        } catch (err) {
+          console.error('Error refreshing farm data:', err);
+        }
+      }, 500);
     } catch (error) {
       console.error('Upload error:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to upload image');
