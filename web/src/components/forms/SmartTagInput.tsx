@@ -422,8 +422,8 @@ export function SmartTagInput({
                     role="option"
                     aria-selected={index === selectedIndex}
                     className={cn(
-                      'w-full px-3 py-2 text-left text-sm hover:bg-accent',
-                      index === selectedIndex && 'bg-accent',
+                      'w-full px-3 py-2 text-left text-sm hover:bg-primary hover:text-white',
+                      index === selectedIndex && 'bg-primary text-white',
                       safeValue.includes(option.value) && 'opacity-50'
                     )}
                     onClick={() => addTag(option)}

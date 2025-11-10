@@ -8,12 +8,12 @@ import { StatCard } from '@/components/dashboard/stat-card';
 import { ProgressBar } from '@/components/dashboard/progress-bar';
 import { TaskChecklistItem } from '@/components/dashboard/task-checklist-item';
 import { ActivityFeedItem } from '@/components/dashboard/activity-feed-item';
+import { FarmMediaSection } from '@/components/farmer/farm-media-section';
 import { Button } from '@/components/ui/button';
 import { 
   Eye, 
   Users, 
   CheckCircle, 
-  Upload, 
   Sparkles, 
   TrendingUp,
   FileText,
@@ -214,66 +214,7 @@ export default function FarmerDashboardOverviewPage() {
               {/* Left Column (2/3 width) */}
               <div className="lg:col-span-2 space-y-8">
                 {/* Farm Media - Logo and Cover first */}
-                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h2 className="text-xl font-bold text-gray-900">Farm Media</h2>
-                      <p className="text-sm text-gray-600">Add your farm logo and cover photo</p>
-                    </div>
-                    <Button 
-                      size="sm" 
-                      variant="default"
-                      onClick={() => router.push('/dashboard/farmer/information#media')}
-                      className="bg-primary hover:bg-primary/90 text-white"
-                    >
-                      <Upload className="h-4 w-4 mr-2" />
-                      Add Photos
-                    </Button>
-                  </div>
-
-                  {/* Farm Logo */}
-                  <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                      <span className="inline-block h-3 w-3 rounded-sm border border-gray-300" />
-                      Farm Logo
-                    </h3>
-                    <div className="flex items-start gap-4">
-                      <div className="relative h-20 w-20 rounded-lg overflow-hidden border border-gray-200 bg-white">
-                        {/* Placeholder - replace with actual logo when available */}
-                        <div className="h-full w-full bg-gray-100" />
-                      </div>
-                      <div className="text-xs text-gray-600">
-                        <p className="mb-1">Square format recommended</p>
-                        <p>Appears in search results and listing header</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Cover Photo */}
-                  <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                      <span className="inline-block h-3 w-3 rounded-sm border border-gray-300" />
-                      Cover Photo
-                    </h3>
-                    <div className="space-y-2">
-                      <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-video group">
-                        {/* Placeholder - replace with actual cover when available */}
-                        <div className="h-full w-full bg-gradient-to-br from-orange-100 to-emerald-100" />
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button 
-                            size="sm" 
-                            variant="default"
-                            className="bg-primary hover:bg-primary/90 text-white"
-                            onClick={() => router.push('/dashboard/farmer/information#media')}
-                          >
-                            Change
-                          </Button>
-                        </div>
-                      </div>
-                      <p className="text-xs text-gray-600">Wide format - This is the first image visitors see</p>
-                    </div>
-                  </div>
-                </section>
+                <FarmMediaSection />
                 
                 {/* Complete Your Listing Widget (under pictures) */}
                 {stats.profileCompletion.percentage < 100 && (

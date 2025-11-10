@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SmartTagInput } from '@/components/forms/SmartTagInput';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 /**
  * Farmer Form Component - Card-Based Layout
@@ -34,6 +36,38 @@ export function FarmerFormImproved({
   isSaving = false,
   farmData,
 }: FarmerFormImprovedProps) {
+  const [savingSection, setSavingSection] = useState<string | null>(null);
+
+  // Section-specific save handlers
+  const handleSaveSection = async (sectionName: string, fields: string[]) => {
+    setSavingSection(sectionName);
+    try {
+      const formData = form.getValues();
+      const sectionData: any = {};
+      
+      // Extract only fields for this section
+      fields.forEach(field => {
+        if (formData[field] !== undefined) {
+          sectionData[field] = formData[field];
+        }
+      });
+
+      // Validate section fields
+      const isValid = await form.trigger(fields as any);
+      if (!isValid) {
+        toast.error(`Please fix errors in ${sectionName} before saving`);
+        return;
+      }
+
+      // Save section data
+      await onSubmit(sectionData);
+      toast.success(`${sectionName} saved successfully!`);
+    } catch (error) {
+      toast.error(`Failed to save ${sectionName}`);
+    } finally {
+      setSavingSection(null);
+    }
+  };
 
   return (
     <form id="farm-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -83,6 +117,25 @@ export function FarmerFormImproved({
             )}
           />
         </CardContent>
+        <div className="px-6 pb-6 pt-0 flex justify-end border-t border-gray-200 mt-6">
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            onClick={() => handleSaveSection('Basic Information', ['name', 'description'])}
+            disabled={savingSection === 'Basic Information' || isSaving}
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            {savingSection === 'Basic Information' ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              'Save Section'
+            )}
+          </Button>
+        </div>
       </Card>
 
       {/* Section 2: Contact Information */}
@@ -139,9 +192,26 @@ export function FarmerFormImproved({
             )}
           />
         </CardContent>
+        <div className="px-6 pb-6 pt-0 flex justify-end border-t border-gray-200 mt-6">
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            onClick={() => handleSaveSection('Contact Information', ['phone', 'email', 'website'])}
+            disabled={savingSection === 'Contact Information' || isSaving}
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            {savingSection === 'Contact Information' ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              'Save Section'
+            )}
+          </Button>
+        </div>
       </Card>
-
-      {/* Section 3: Operating Hours */}
       <Card className="bg-green-50">
         <CardHeader>
           <CardTitle className="text-xl">Operating Hours</CardTitle>
@@ -221,6 +291,28 @@ export function FarmerFormImproved({
             </div>
           </div>
         </CardContent>
+        <div className="px-6 pb-6 pt-0 flex justify-end border-t border-gray-200 mt-6">
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            onClick={() => handleSaveSection('Operating Hours', [
+              'monday_hours', 'tuesday_hours', 'wednesday_hours', 'thursday_hours',
+              'friday_hours', 'saturday_hours', 'sunday_hours', 'opening_date', 'closing_date'
+            ])}
+            disabled={savingSection === 'Operating Hours' || isSaving}
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            {savingSection === 'Operating Hours' ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              'Save Section'
+            )}
+          </Button>
+        </div>
       </Card>
 
       {/* Section 4: Location */}
@@ -317,6 +409,25 @@ export function FarmerFormImproved({
             </div>
           )}
         </CardContent>
+        <div className="px-6 pb-6 pt-0 flex justify-end border-t border-gray-200 mt-6">
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            onClick={() => handleSaveSection('Location', ['street', 'city', 'state', 'postal_code', 'country'])}
+            disabled={savingSection === 'Location' || isSaving}
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            {savingSection === 'Location' ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              'Save Section'
+            )}
+          </Button>
+        </div>
       </Card>
 
       {/* Section 5: Products & Activities */}
@@ -410,6 +521,25 @@ export function FarmerFormImproved({
             )}
           />
         </CardContent>
+        <div className="px-6 pb-6 pt-0 flex justify-end border-t border-gray-200 mt-6">
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            onClick={() => handleSaveSection('Products & Activities', ['categories', 'type', 'varieties', 'price_range'])}
+            disabled={savingSection === 'Products & Activities' || isSaving}
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            {savingSection === 'Products & Activities' ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              'Save Section'
+            )}
+          </Button>
+        </div>
       </Card>
 
       {/* Section 6: Amenities & Accessibility */}
@@ -488,9 +618,26 @@ export function FarmerFormImproved({
             )}
           />
         </CardContent>
+        <div className="px-6 pb-6 pt-0 flex justify-end border-t border-gray-200 mt-6">
+          <Button
+            type="button"
+            variant="default"
+            size="sm"
+            onClick={() => handleSaveSection('Amenities & Accessibility', ['amenities', 'pet_friendly', 'payment_methods'])}
+            disabled={savingSection === 'Amenities & Accessibility' || isSaving}
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            {savingSection === 'Amenities & Accessibility' ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              'Save Section'
+            )}
+          </Button>
+        </div>
       </Card>
-
-      {/* Save/Cancel Buttons */}
       <div className="flex justify-end gap-3 pt-4">
         <Button 
           variant="outline" 

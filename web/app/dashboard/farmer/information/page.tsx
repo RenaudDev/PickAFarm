@@ -18,11 +18,10 @@ import { z } from 'zod';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
+import { ProgressBar } from '@/components/dashboard/progress-bar';
 import { toast } from 'sonner';
 import DashboardLayout from '@/components/farmer/dashboard-layout';
 import { FarmerFormImproved } from '@/components/farmer-form-improved';
-import { FarmMediaSection } from '@/components/farmer/farm-media-section';
-import { FarmHeader } from '@/components/farmer/farm-header';
 import { useRouter } from 'next/navigation';
 
 // Farm form validation schema
@@ -99,6 +98,7 @@ export default function FarmerDashboardInformationPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [profileCompletion, setProfileCompletion] = useState<number>(0);
 
   const form = useForm<FarmFormData>({
     resolver: zodResolver(farmSchema),
@@ -262,6 +262,36 @@ export default function FarmerDashboardInformationPage() {
     fetchData();
   }, [getToken, form, router]);
 
+  // Fetch dashboard stats for progress bar
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const token = await getToken();
+        if (!token) return;
+
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pickafarm-api.94623956quebecinc.workers.dev';
+        const response = await fetch(`${apiUrl}/api/farmer/dashboard/stats`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const stats = await response.json();
+          setProfileCompletion(stats.profileCompletion?.percentage || 0);
+        }
+      } catch (err) {
+        console.error('Error fetching stats:', err);
+      }
+    }
+
+    if (data) {
+      fetchStats();
+    }
+  }, [getToken, data]);
+
   const onSubmit = async (formData: FarmFormData) => {
     setIsSaving(true);
     try {
@@ -288,6 +318,19 @@ export default function FarmerDashboardInformationPage() {
       // Update verification status
       if (result.verification) {
         setData((prev) => (prev ? { ...prev, verification: result.verification } : null));
+      }
+
+      // Refresh stats to update progress bar
+      const statsResponse = await fetch(`${apiUrl}/api/farmer/dashboard/stats`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (statsResponse.ok) {
+        const stats = await statsResponse.json();
+        setProfileCompletion(stats.profileCompletion?.percentage || 0);
       }
 
       toast.success('Farm information saved successfully!');
@@ -344,35 +387,35 @@ export default function FarmerDashboardInformationPage() {
   return (
     <DashboardLayout>
       <div className="p-6 space-y-6">
-        {/* Farm Header with Name, Badge, and Actions */}
-        <FarmHeader
-          farmName={data.farm.name}
-          farmSlug={data.farm.slug}
-          verificationStatus={data.verification?.status}
-          isSaving={isSaving}
-        />
-
-        {/* Farm Information Form */}
-        <div>
-          {/* Media Section - At the Top */}
-          <FarmMediaSection farmName={data.farm.name} />
-
-          {/* Farm Information Header */}
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Farm Information</h2>
-            <p className="text-sm text-gray-600 mt-1">
-              Keep your farm information up to date. Your changes will be synced immediately.
-            </p>
+        {/* Progress Bar */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Profile Completion</h2>
+              <p className="text-sm text-gray-600 mt-1">
+                Complete your profile to improve your listing visibility
+              </p>
+            </div>
+            <span className="text-2xl font-bold text-gray-900">{profileCompletion}%</span>
           </div>
-          <Form {...form}>
-            <FarmerFormImproved
-              form={form}
-              onSubmit={onSubmit}
-              isSaving={isSaving}
-              farmData={data.farm}
-            />
-          </Form>
+          <ProgressBar percentage={profileCompletion} className="w-full" />
         </div>
+
+        {/* Farm Information Header */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Farm Information</h2>
+          <p className="text-sm text-gray-600 mt-1">
+            Keep your farm information up to date. Your changes will be synced immediately.
+          </p>
+        </div>
+        <Form {...form}>
+          <FarmerFormImproved
+            form={form}
+            onSubmit={onSubmit}
+            isSaving={isSaving}
+            farmData={data.farm}
+          />
+        </Form>
       </div>
     </DashboardLayout>
   );
