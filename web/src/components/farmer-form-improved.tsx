@@ -168,7 +168,7 @@ export function FarmerFormImproved({
                 control={form.control}
                 name={day}
                 render={({ field }) => (
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                  <FormItem className="flex flex-col sm:flex-row sm:items-center gap-3">
                     <div className="w-full sm:w-24">
                       <FormLabel className="text-sm font-medium">{label}</FormLabel>
                     </div>
@@ -181,7 +181,8 @@ export function FarmerFormImproved({
                         />
                       </FormControl>
                     </div>
-                  </div>
+                    <FormMessage />
+                  </FormItem>
                 )}
               />
             ))}

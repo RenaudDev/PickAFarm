@@ -213,8 +213,69 @@ export default function FarmerDashboardOverviewPage() {
               
               {/* Left Column (2/3 width) */}
               <div className="lg:col-span-2 space-y-8">
+                {/* Farm Media - Logo and Cover first */}
+                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-xl font-bold text-gray-900">Farm Media</h2>
+                      <p className="text-sm text-gray-600">Add your farm logo and cover photo</p>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="default"
+                      onClick={() => router.push('/dashboard/farmer/information#media')}
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      <Upload className="h-4 w-4 mr-2" />
+                      Add Photos
+                    </Button>
+                  </div>
+
+                  {/* Farm Logo */}
+                  <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      <span className="inline-block h-3 w-3 rounded-sm border border-gray-300" />
+                      Farm Logo
+                    </h3>
+                    <div className="flex items-start gap-4">
+                      <div className="relative h-20 w-20 rounded-lg overflow-hidden border border-gray-200 bg-white">
+                        {/* Placeholder - replace with actual logo when available */}
+                        <div className="h-full w-full bg-gray-100" />
+                      </div>
+                      <div className="text-xs text-gray-600">
+                        <p className="mb-1">Square format recommended</p>
+                        <p>Appears in search results and listing header</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cover Photo */}
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      <span className="inline-block h-3 w-3 rounded-sm border border-gray-300" />
+                      Cover Photo
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-video group">
+                        {/* Placeholder - replace with actual cover when available */}
+                        <div className="h-full w-full bg-gradient-to-br from-orange-100 to-emerald-100" />
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button 
+                            size="sm" 
+                            variant="default"
+                            className="bg-green-600 hover:bg-green-700 text-white"
+                            onClick={() => router.push('/dashboard/farmer/information#media')}
+                          >
+                            Change
+                          </Button>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-600">Wide format - This is the first image visitors see</p>
+                    </div>
+                  </div>
+                </section>
                 
-                {/* Complete Your Listing Widget */}
+                {/* Complete Your Listing Widget (under pictures) */}
                 {stats.profileCompletion.percentage < 100 && (
                   <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
                     <div className="flex items-center justify-between mb-4">
@@ -321,33 +382,39 @@ export default function FarmerDashboardOverviewPage() {
                   </section>
                 )}
 
-                {/* Quick Actions */}
+                {/* (Quick Actions moved to right column) */}
+              </div>
+
+              {/* Right Column (1/3 width) */}
+              <div className="space-y-8">
+
+                {/* Quick Actions (right column) */}
                 <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-lg font-bold text-gray-900 mb-4">
                     Quick Actions
                   </h2>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-3">
                     <Button 
-                      variant="outline" 
-                      className="justify-start"
+                      variant="default" 
+                      className="w-full justify-start bg-green-600 hover:bg-green-700 text-white"
                       onClick={() => router.push('/dashboard/farmer/information')}
                     >
                       <FileText className="h-4 w-4 mr-2" />
-                      Edit Information
+                      Edit Farm Details
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="justify-start"
+                      className="w-full justify-start"
                       onClick={() => window.open('/farms/your-farm-slug', '_blank')}
                     >
                       <Eye className="h-4 w-4 mr-2" />
-                      View Listing
+                      View Live Listing
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="justify-start"
+                      className="w-full justify-start"
                       onClick={() => router.push('/dashboard/farmer/broadcast')}
                       disabled
                     >
@@ -357,38 +424,12 @@ export default function FarmerDashboardOverviewPage() {
                     
                     <Button 
                       variant="outline" 
-                      className="justify-start"
+                      className="w-full justify-start"
                       onClick={() => toast.info('Share feature coming soon!')}
                     >
                       <Share2 className="h-4 w-4 mr-2" />
                       Share Farm
                     </Button>
-                  </div>
-                </section>
-              </div>
-
-              {/* Right Column (1/3 width) */}
-              <div className="space-y-8">
-                
-                {/* Farm Media Upload Widget */}
-                <section className="bg-green-50 border border-gray-200 rounded-lg p-6">
-                  <h2 className="text-lg font-bold text-gray-900 mb-4">
-                    Farm Photos
-                  </h2>
-                  <div className="space-y-4">
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                      <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                      <p className="text-sm text-gray-600 mb-3">
-                        Add logo and cover photos
-                      </p>
-                      <Button 
-                        size="sm" 
-                        variant="outline"
-                        onClick={() => router.push('/dashboard/farmer/information#media')}
-                      >
-                        Upload Photos
-                      </Button>
-                    </div>
                   </div>
                 </section>
 
