@@ -10,6 +10,7 @@ import { TaskChecklistItem } from '@/components/dashboard/task-checklist-item';
 import { ActivityFeedItem } from '@/components/dashboard/activity-feed-item';
 import { FarmMediaSection } from '@/components/farmer/farm-media-section';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { 
   Eye, 
   Users, 
@@ -36,10 +37,15 @@ import { toast } from 'sonner';
  */
 
 interface DashboardStats {
+  farmSlug?: string;
   profileCompletion: {
     percentage: number;
     completedTasks: number;
     totalTasks: number;
+    tasks?: Array<{
+      id: string;
+      completed: boolean;
+    }>;
   };
   verification: {
     status: 'Active' | 'Pending' | 'Suspended';
@@ -67,6 +73,18 @@ export default function FarmerDashboardOverviewPage() {
   // Fetch dashboard stats on mount
   useEffect(() => {
     fetchDashboardStats();
+  }, []);
+
+  // Refresh stats when page becomes visible (user navigates back)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchDashboardStats();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
   async function fetchDashboardStats() {
@@ -103,6 +121,8 @@ export default function FarmerDashboardOverviewPage() {
       const data = await response.json();
       setStats(data);
       
+      // Refresh stats after a short delay to ensure any recent saves are reflected
+      // This helps when navigating back from information page
     } catch (err) {
       console.error('Error fetching dashboard stats:', err);
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
@@ -116,13 +136,19 @@ export default function FarmerDashboardOverviewPage() {
   const handleCompleteTask = (taskId: string) => {
     switch (taskId) {
       case 'description':
-      case 'hours':
-      case 'contact':
-      case 'amenities':
-        router.push('/dashboard/farmer/information');
+        router.push('/dashboard/farmer/information#section-basic-info');
         break;
       case 'photos':
         router.push('/dashboard/farmer/information#media');
+        break;
+      case 'hours':
+        router.push('/dashboard/farmer/information#section-hours');
+        break;
+      case 'contact':
+        router.push('/dashboard/farmer/information#section-contact');
+        break;
+      case 'amenities':
+        router.push('/dashboard/farmer/information#section-amenities');
         break;
       default:
         router.push('/dashboard/farmer/information');
@@ -135,7 +161,23 @@ export default function FarmerDashboardOverviewPage() {
         
         {/* Page Header */}
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-wrap">
+            <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
+            {stats && (
+              <Badge 
+                variant={stats.verification.status === 'Active' ? 'default' : 'secondary'}
+                className={
+                  stats.verification.status === 'Active' 
+                    ? 'bg-green-600 text-white w-fit' 
+                    : stats.verification.status === 'Pending'
+                    ? 'bg-yellow-500 text-white w-fit'
+                    : 'bg-red-500 text-white w-fit'
+                }
+              >
+                {stats.verification.status}
+              </Badge>
+            )}
+          </div>
           <p className="text-gray-600 mt-1">
             Manage your farm listing and track your performance
           </p>
@@ -144,8 +186,8 @@ export default function FarmerDashboardOverviewPage() {
         {/* Loading State */}
         {loading && (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(3)].map((_, i) => (
                 <StatCard key={i} title="Loading..." value={undefined} />
               ))}
             </div>
@@ -166,7 +208,7 @@ export default function FarmerDashboardOverviewPage() {
         {stats && !loading && (
           <>
             {/* Stats Cards Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               
               {/* Profile Completion */}
               <StatCard
@@ -178,11 +220,11 @@ export default function FarmerDashboardOverviewPage() {
                 className="bg-green-50"
               />
               
-              {/* Verification Status */}
+              {/* Subscribers */}
               <StatCard
-                title="Verification Status"
-                value={stats.verification.status}
-                status={stats.verification.status}
+                title="Subscribers"
+                value={stats.subscribers.total}
+                icon={Users}
                 className="bg-green-50"
               />
               
@@ -195,14 +237,6 @@ export default function FarmerDashboardOverviewPage() {
                   value: stats.views.trend,
                   direction: stats.views.trend.startsWith('+') ? 'up' : 'down'
                 } : undefined}
-                className="bg-green-50"
-              />
-              
-              {/* Subscribers */}
-              <StatCard
-                title="Subscribers"
-                value={stats.subscribers.total}
-                icon={Users}
                 className="bg-green-50"
               />
               
@@ -251,9 +285,9 @@ export default function FarmerDashboardOverviewPage() {
                         id="photos"
                         title="Upload high-quality photos"
                         description="Farms with great photos get 40% more views"
-                        completed={stats.profileCompletion.percentage >= 40} // Proxy for photos
-                        quickWin={stats.profileCompletion.percentage < 40}
-                        badge={stats.profileCompletion.percentage < 40 ? "High Impact" : undefined}
+                        completed={stats.profileCompletion.tasks?.find(t => t.id === 'photos')?.completed || false}
+                        quickWin={!stats.profileCompletion.tasks?.find(t => t.id === 'photos')?.completed}
+                        badge={!stats.profileCompletion.tasks?.find(t => t.id === 'photos')?.completed ? "High Impact" : undefined}
                         onComplete={() => handleCompleteTask('photos')}
                       />
                       
@@ -261,7 +295,7 @@ export default function FarmerDashboardOverviewPage() {
                         id="hours"
                         title="Set your operating hours"
                         description="Helps visitors plan their trip"
-                        completed={!stats.verification.missingFields?.includes('operating_hours')}
+                        completed={stats.profileCompletion.tasks?.find(t => t.id === 'hours')?.completed || false}
                         onComplete={() => handleCompleteTask('hours')}
                       />
                       
@@ -269,7 +303,7 @@ export default function FarmerDashboardOverviewPage() {
                         id="contact"
                         title="Add contact information"
                         description="Phone, email, or website required"
-                        completed={!stats.verification.missingFields?.includes('contact_info')}
+                        completed={stats.profileCompletion.tasks?.find(t => t.id === 'contact')?.completed || false}
                         onComplete={() => handleCompleteTask('contact')}
                       />
                       
@@ -277,9 +311,9 @@ export default function FarmerDashboardOverviewPage() {
                         id="amenities"
                         title="List your amenities"
                         description="Parking, restrooms, wheelchair access, etc."
-                        completed={stats.profileCompletion.percentage >= 80} // Proxy for amenities
-                        quickWin={stats.profileCompletion.percentage < 80}
-                        badge={stats.profileCompletion.percentage < 80 ? "Quick Win" : undefined}
+                        completed={stats.profileCompletion.tasks?.find(t => t.id === 'amenities')?.completed || false}
+                        quickWin={!stats.profileCompletion.tasks?.find(t => t.id === 'amenities')?.completed}
+                        badge={!stats.profileCompletion.tasks?.find(t => t.id === 'amenities')?.completed ? "Quick Win" : undefined}
                         onComplete={() => handleCompleteTask('amenities')}
                       />
                     </div>
@@ -347,7 +381,14 @@ export default function FarmerDashboardOverviewPage() {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start"
-                      onClick={() => window.open('/farms/your-farm-slug', '_blank')}
+                      onClick={() => {
+                        if (stats.farmSlug) {
+                          window.open(`/farms/${stats.farmSlug}/`, '_blank');
+                        } else {
+                          toast.error('Farm slug not available');
+                        }
+                      }}
+                      disabled={!stats.farmSlug}
                     >
                       <Eye className="h-4 w-4 mr-2" />
                       View Live Listing
@@ -366,7 +407,21 @@ export default function FarmerDashboardOverviewPage() {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start"
-                      onClick={() => toast.info('Share feature coming soon!')}
+                      onClick={async () => {
+                        if (stats.farmSlug) {
+                          const farmUrl = `${window.location.origin}/farms/${stats.farmSlug}/`;
+                          try {
+                            await navigator.clipboard.writeText(farmUrl);
+                            toast.success('Farm link copied to clipboard!');
+                          } catch (err) {
+                            console.error('Failed to copy:', err);
+                            toast.error('Failed to copy link');
+                          }
+                        } else {
+                          toast.error('Farm slug not available');
+                        }
+                      }}
+                      disabled={!stats.farmSlug}
                     >
                       <Share2 className="h-4 w-4 mr-2" />
                       Share Farm

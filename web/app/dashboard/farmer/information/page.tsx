@@ -292,6 +292,20 @@ export default function FarmerDashboardInformationPage() {
     }
   }, [getToken, data]);
 
+  // Scroll to section on hash change
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
   const onSubmit = async (formData: FarmFormData) => {
     setIsSaving(true);
     try {
@@ -386,7 +400,7 @@ export default function FarmerDashboardInformationPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6">
+      <div className="p-4 sm:p-6 space-y-6">
         {/* Progress Bar */}
         <div className="bg-white border border-gray-200 rounded-lg p-6">
           <div className="flex items-center justify-between mb-4">
@@ -396,7 +410,6 @@ export default function FarmerDashboardInformationPage() {
                 Complete your profile to improve your listing visibility
               </p>
             </div>
-            <span className="text-2xl font-bold text-gray-900">{profileCompletion}%</span>
           </div>
           <ProgressBar percentage={profileCompletion} className="w-full" />
         </div>

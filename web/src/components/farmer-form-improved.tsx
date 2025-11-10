@@ -8,9 +8,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { SmartTagInput } from '@/components/forms/SmartTagInput';
 import { toast } from 'sonner';
-import { Loader2 } from 'lucide-react';
+import { Loader2, CheckCircle } from 'lucide-react';
 
 /**
  * Farmer Form Component - Card-Based Layout
@@ -37,6 +38,9 @@ export function FarmerFormImproved({
   farmData,
 }: FarmerFormImprovedProps) {
   const [savingSection, setSavingSection] = useState<string | null>(null);
+
+  // Watch form values to trigger badge updates
+  const formValues = form.watch();
 
   // Section-specific save handlers
   const handleSaveSection = async (sectionName: string, fields: string[]) => {
@@ -69,14 +73,49 @@ export function FarmerFormImproved({
     }
   };
 
+  // Check section completion status
+  const checkSectionCompletion = (sectionName: string): boolean => {
+    // Use watched form values for reactive updates
+    const formData = formValues;
+    
+    switch (sectionName) {
+      case 'Basic Information':
+        return !!(formData.name && formData.description && formData.description.length >= 10);
+      case 'Contact Information':
+        return !!(formData.phone || formData.email || formData.website);
+      case 'Operating Hours':
+        return !!(formData.monday_hours || formData.tuesday_hours || formData.wednesday_hours ||
+                  formData.thursday_hours || formData.friday_hours || formData.saturday_hours || formData.sunday_hours);
+      case 'Location':
+        return !!(formData.street && formData.city && formData.state && formData.postal_code);
+      case 'Products & Activities':
+        return !!((Array.isArray(formData.categories) && formData.categories.length > 0) ||
+                  (Array.isArray(formData.varieties) && formData.varieties.length > 0));
+      case 'Amenities & Accessibility':
+        return !!(Array.isArray(formData.amenities) && formData.amenities.length > 0);
+      default:
+        return false;
+    }
+  };
+
   return (
     <form id="farm-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
       
       {/* Section 1: Basic Information */}
-      <Card className="bg-green-50">
+      <Card id="section-basic-info" className="bg-green-50 scroll-mt-8">
         <CardHeader>
-          <CardTitle className="text-xl">Basic Information</CardTitle>
-          <CardDescription>Tell visitors about your farm</CardDescription>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <CardTitle className="text-xl">Basic Information</CardTitle>
+              <CardDescription>Tell visitors about your farm</CardDescription>
+            </div>
+            {checkSectionCompletion('Basic Information') && (
+              <Badge variant="default" className="bg-green-600 text-white flex items-center gap-1 w-fit">
+                <CheckCircle className="w-3 h-3" />
+                Completed
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Farm Name */}
@@ -139,10 +178,20 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 2: Contact Information */}
-      <Card className="bg-green-50">
+      <Card id="section-contact" className="bg-green-50 scroll-mt-8">
         <CardHeader>
-          <CardTitle className="text-xl">Contact Information</CardTitle>
-          <CardDescription>How visitors can reach you</CardDescription>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <CardTitle className="text-xl">Contact Information</CardTitle>
+              <CardDescription>How visitors can reach you</CardDescription>
+            </div>
+            {checkSectionCompletion('Contact Information') && (
+              <Badge variant="default" className="bg-green-600 text-white flex items-center gap-1 w-fit">
+                <CheckCircle className="w-3 h-3" />
+                Completed
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -212,10 +261,20 @@ export function FarmerFormImproved({
           </Button>
         </div>
       </Card>
-      <Card className="bg-green-50">
+      <Card id="section-hours" className="bg-green-50 scroll-mt-8">
         <CardHeader>
-          <CardTitle className="text-xl">Operating Hours</CardTitle>
-          <CardDescription>When visitors can visit your farm</CardDescription>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <CardTitle className="text-xl">Operating Hours</CardTitle>
+              <CardDescription>When visitors can visit your farm</CardDescription>
+            </div>
+            {checkSectionCompletion('Operating Hours') && (
+              <Badge variant="default" className="bg-green-600 text-white flex items-center gap-1 w-fit">
+                <CheckCircle className="w-3 h-3" />
+                Completed
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
@@ -316,10 +375,20 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 4: Location */}
-      <Card className="bg-green-50">
+      <Card id="section-location" className="bg-green-50 scroll-mt-8">
         <CardHeader>
-          <CardTitle className="text-xl">Location</CardTitle>
-          <CardDescription>Help visitors find you</CardDescription>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <CardTitle className="text-xl">Location</CardTitle>
+              <CardDescription>Help visitors find you</CardDescription>
+            </div>
+            {checkSectionCompletion('Location') && (
+              <Badge variant="default" className="bg-green-600 text-white flex items-center gap-1 w-fit">
+                <CheckCircle className="w-3 h-3" />
+                Completed
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Street Address */}
@@ -431,10 +500,20 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 5: Products & Activities */}
-      <Card className="bg-green-50">
+      <Card id="section-products" className="bg-green-50 scroll-mt-8">
         <CardHeader>
-          <CardTitle className="text-xl">Products & Activities</CardTitle>
-          <CardDescription>What you offer to visitors</CardDescription>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <CardTitle className="text-xl">Products & Activities</CardTitle>
+              <CardDescription>What you offer to visitors</CardDescription>
+            </div>
+            {checkSectionCompletion('Products & Activities') && (
+              <Badge variant="default" className="bg-green-600 text-white flex items-center gap-1 w-fit">
+                <CheckCircle className="w-3 h-3" />
+                Completed
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Categories */}
@@ -543,10 +622,20 @@ export function FarmerFormImproved({
       </Card>
 
       {/* Section 6: Amenities & Accessibility */}
-      <Card className="bg-green-50">
+      <Card id="section-amenities" className="bg-green-50 scroll-mt-8">
         <CardHeader>
-          <CardTitle className="text-xl">Amenities & Accessibility</CardTitle>
-          <CardDescription>Facilities available at your farm</CardDescription>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <CardTitle className="text-xl">Amenities & Accessibility</CardTitle>
+              <CardDescription>Facilities available at your farm</CardDescription>
+            </div>
+            {checkSectionCompletion('Amenities & Accessibility') && (
+              <Badge variant="default" className="bg-green-600 text-white flex items-center gap-1 w-fit">
+                <CheckCircle className="w-3 h-3" />
+                Completed
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Amenities */}

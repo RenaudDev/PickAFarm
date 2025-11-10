@@ -3941,6 +3941,7 @@ export default {
           SELECT 
             zoho_record_id,
             name,
+            slug,
             description,
             logo_url,
             background_url,
@@ -4057,10 +4058,12 @@ export default {
 
         // Step 6: Build response
         const response = {
+          farmSlug: farm.slug,
           profileCompletion: {
             percentage: completionPercentage,
             completedTasks: completedCount,
-            totalTasks: tasks.length
+            totalTasks: tasks.length,
+            tasks: tasks // Include individual task completion status
           },
           verification: {
             status: verificationStatus,
@@ -4121,11 +4124,18 @@ export default {
         // Parse request body
         const data = await request.json();
 
-        // Get existing farm data to detect address changes
+        // Get existing farm data to merge with partial updates
         let existingFarm;
         try {
           existingFarm = await env.DB.prepare(`
-            SELECT street, city, state, postal_code, latitude, longitude
+            SELECT 
+              name, description, street, city, state, postal_code, country,
+              phone, email, website,
+              monday_hours, tuesday_hours, wednesday_hours, thursday_hours,
+              friday_hours, saturday_hours, sunday_hours,
+              categories, type, amenities, varieties, pet_friendly, price_range, payment_methods,
+              opening_date, closing_date,
+              latitude, longitude
             FROM farms
             WHERE zoho_record_id = ?
           `).bind(farmer.farmId).first();
@@ -4139,17 +4149,56 @@ export default {
           return errorResponse(404, "Farm not found", `No farm found with ID: ${farmer.farmId}`, correlationId);
         }
 
-        // Validate required fields
-        if (!data.name || !data.city || !data.state) {
-          logger.warn('Missing required fields in farm update', { farmId: farmer.farmId });
-          return errorResponse(400, "Validation error", "Missing required fields: name, city, state", correlationId);
+        // Merge existing data with incoming partial updates
+        // This allows partial updates while preserving existing values
+        const updateData = {
+          name: data.name !== undefined ? data.name : existingFarm.name,
+          description: data.description !== undefined ? data.description : existingFarm.description,
+          street: data.street !== undefined ? data.street : existingFarm.street,
+          city: data.city !== undefined ? data.city : existingFarm.city,
+          state: data.state !== undefined ? data.state : existingFarm.state,
+          postal_code: data.postal_code !== undefined ? data.postal_code : existingFarm.postal_code,
+          country: data.country !== undefined ? data.country : existingFarm.country,
+          phone: data.phone !== undefined ? data.phone : existingFarm.phone,
+          email: data.email !== undefined ? data.email : existingFarm.email,
+          website: data.website !== undefined ? data.website : existingFarm.website,
+          monday_hours: data.monday_hours !== undefined ? data.monday_hours : existingFarm.monday_hours,
+          tuesday_hours: data.tuesday_hours !== undefined ? data.tuesday_hours : existingFarm.tuesday_hours,
+          wednesday_hours: data.wednesday_hours !== undefined ? data.wednesday_hours : existingFarm.wednesday_hours,
+          thursday_hours: data.thursday_hours !== undefined ? data.thursday_hours : existingFarm.thursday_hours,
+          friday_hours: data.friday_hours !== undefined ? data.friday_hours : existingFarm.friday_hours,
+          saturday_hours: data.saturday_hours !== undefined ? data.saturday_hours : existingFarm.saturday_hours,
+          sunday_hours: data.sunday_hours !== undefined ? data.sunday_hours : existingFarm.sunday_hours,
+          categories: data.categories !== undefined ? data.categories : (existingFarm.categories ? existingFarm.categories.split(', ').filter(Boolean) : []),
+          type: data.type !== undefined ? data.type : existingFarm.type,
+          amenities: data.amenities !== undefined ? data.amenities : (existingFarm.amenities ? existingFarm.amenities.split(', ').filter(Boolean) : []),
+          varieties: data.varieties !== undefined ? data.varieties : (existingFarm.varieties ? existingFarm.varieties.split(', ').filter(Boolean) : []),
+          pet_friendly: data.pet_friendly !== undefined ? data.pet_friendly : existingFarm.pet_friendly,
+          price_range: data.price_range !== undefined ? data.price_range : existingFarm.price_range,
+          payment_methods: data.payment_methods !== undefined ? data.payment_methods : (existingFarm.payment_methods ? existingFarm.payment_methods.split(', ').filter(Boolean) : []),
+          opening_date: data.opening_date !== undefined ? data.opening_date : existingFarm.opening_date,
+          closing_date: data.closing_date !== undefined ? data.closing_date : existingFarm.closing_date,
+        };
+
+        // Validate required fields only if they're being updated
+        if (data.name !== undefined && !data.name) {
+          logger.warn('Invalid name in farm update', { farmId: farmer.farmId });
+          return errorResponse(400, "Validation error", "Farm name cannot be empty", correlationId);
+        }
+        if (data.city !== undefined && !data.city) {
+          logger.warn('Invalid city in farm update', { farmId: farmer.farmId });
+          return errorResponse(400, "Validation error", "City cannot be empty", correlationId);
+        }
+        if (data.state !== undefined && !data.state) {
+          logger.warn('Invalid state in farm update', { farmId: farmer.farmId });
+          return errorResponse(400, "Validation error", "State cannot be empty", correlationId);
         }
 
         // Convert arrays to CSV strings for database storage
-        const categoriesCSV = data.categories ? data.categories.join(', ') : null;
-        const amenitiesCSV = data.amenities ? data.amenities.join(', ') : null;
-        const varietiesCSV = data.varieties ? data.varieties.join(', ') : null;
-        const paymentMethodsCSV = data.payment_methods ? data.payment_methods.join(', ') : null;
+        const categoriesCSV = updateData.categories && Array.isArray(updateData.categories) ? updateData.categories.join(', ') : (updateData.categories || null);
+        const amenitiesCSV = updateData.amenities && Array.isArray(updateData.amenities) ? updateData.amenities.join(', ') : (updateData.amenities || null);
+        const varietiesCSV = updateData.varieties && Array.isArray(updateData.varieties) ? updateData.varieties.join(', ') : (updateData.varieties || null);
+        const paymentMethodsCSV = updateData.payment_methods && Array.isArray(updateData.payment_methods) ? updateData.payment_methods.join(', ') : (updateData.payment_methods || null);
 
         // Update D1 database
         try {
@@ -4184,32 +4233,32 @@ export default {
               updated_at = CURRENT_TIMESTAMP
             WHERE zoho_record_id = ?
           `).bind(
-            data.name,
-            data.description,
-            data.street,
-            data.city,
-            data.state,
-            data.postal_code,
-            data.country,
-            data.phone,
-            data.email,
-            data.website,
-            data.monday_hours,
-            data.tuesday_hours,
-            data.wednesday_hours,
-            data.thursday_hours,
-            data.friday_hours,
-            data.saturday_hours,
-            data.sunday_hours,
+            updateData.name,
+            updateData.description,
+            updateData.street,
+            updateData.city,
+            updateData.state,
+            updateData.postal_code,
+            updateData.country,
+            updateData.phone,
+            updateData.email,
+            updateData.website,
+            updateData.monday_hours,
+            updateData.tuesday_hours,
+            updateData.wednesday_hours,
+            updateData.thursday_hours,
+            updateData.friday_hours,
+            updateData.saturday_hours,
+            updateData.sunday_hours,
             categoriesCSV,
-            data.type,
+            updateData.type,
             amenitiesCSV,
             varietiesCSV,
-            data.pet_friendly,
-            data.price_range,
+            updateData.pet_friendly,
+            updateData.price_range,
             paymentMethodsCSV,
-            data.opening_date,
-            data.closing_date,
+            updateData.opening_date,
+            updateData.closing_date,
             farmer.farmId
           ).run();
 
@@ -4227,54 +4276,62 @@ export default {
           const zohoId = farmer.farmId.replace('zcrm_', '');
           const zohoApiUrl = `https://www.zohoapis.${dc}/crm/v3/Accounts/${zohoId}`;
 
-          const zohoData = {
-            Account_Name: data.name,
-            Description: data.description,
-            Billing_Street: data.street,
-            Billing_City: data.city,
-            Billing_State: data.state,
-            Billing_Code: data.postal_code,
-            Billing_Country: data.country,
-            Phone: data.phone,
-            Email: data.email,
-            Website: data.website,
-            Monday: data.monday_hours,
-            Tuesday: data.tuesday_hours,
-            Wednesday: data.wednesday_hours,
-            Thursday: data.thursday_hours,
-            Friday: data.friday_hours,
-            Saturday: data.saturday_hours,
-            Sunday: data.sunday_hours,
-            // Zoho expects arrays for these multi-select fields
-            Type_of_Farm: data.categories || [],
-            Services_Type: data.type ? [data.type] : [],
-            Amenities: data.amenities || [],
-            Varieties: data.varieties || [],
-            Pet_Friendly: data.pet_friendly ? 'TRUE' : 'FALSE',
-            Price_Range: data.price_range,
-            Payment_Methods: data.payment_methods || []
-          };
+          // Build Zoho payload with only fields that were actually updated
+          const zohoData = {};
+          
+          // Only include fields that were in the original request (partial update)
+          if (data.name !== undefined) zohoData.Account_Name = updateData.name;
+          if (data.description !== undefined) zohoData.Description = updateData.description;
+          if (data.street !== undefined) zohoData.Billing_Street = updateData.street;
+          if (data.city !== undefined) zohoData.Billing_City = updateData.city;
+          if (data.state !== undefined) zohoData.Billing_State = updateData.state;
+          if (data.postal_code !== undefined) zohoData.Billing_Code = updateData.postal_code;
+          if (data.country !== undefined) zohoData.Billing_Country = updateData.country;
+          if (data.phone !== undefined) zohoData.Phone = updateData.phone;
+          if (data.email !== undefined) zohoData.Email = updateData.email;
+          if (data.website !== undefined) zohoData.Website = updateData.website;
+          if (data.monday_hours !== undefined) zohoData.Monday = updateData.monday_hours;
+          if (data.tuesday_hours !== undefined) zohoData.Tuesday = updateData.tuesday_hours;
+          if (data.wednesday_hours !== undefined) zohoData.Wednesday = updateData.wednesday_hours;
+          if (data.thursday_hours !== undefined) zohoData.Thursday = updateData.thursday_hours;
+          if (data.friday_hours !== undefined) zohoData.Friday = updateData.friday_hours;
+          if (data.saturday_hours !== undefined) zohoData.Saturday = updateData.saturday_hours;
+          if (data.sunday_hours !== undefined) zohoData.Sunday = updateData.sunday_hours;
+          
+          // Zoho expects arrays for these multi-select fields
+          if (data.categories !== undefined) zohoData.Type_of_Farm = Array.isArray(updateData.categories) ? updateData.categories : [];
+          if (data.type !== undefined) zohoData.Services_Type = updateData.type ? (Array.isArray(updateData.type) ? updateData.type : [updateData.type]) : [];
+          if (data.amenities !== undefined) zohoData.Amenities = Array.isArray(updateData.amenities) ? updateData.amenities : [];
+          if (data.varieties !== undefined) zohoData.Varieties = Array.isArray(updateData.varieties) ? updateData.varieties : [];
+          if (data.pet_friendly !== undefined) zohoData.Pet_Friendly = updateData.pet_friendly ? 'TRUE' : 'FALSE';
+          if (data.price_range !== undefined) zohoData.Price_Range = updateData.price_range;
+          if (data.payment_methods !== undefined) zohoData.Payment_Methods = Array.isArray(updateData.payment_methods) ? updateData.payment_methods : [];
 
-          const zohoResponse = await fetch(zohoApiUrl, {
-            method: 'PUT',
-            headers: {
-              'Authorization': `Zoho-oauthtoken ${accessToken}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ data: [zohoData] })
-          });
-
-          if (!zohoResponse.ok) {
-            const errorText = await zohoResponse.text();
-            logger.error('Zoho CRM sync failed', {
-              status: zohoResponse.status,
-              error: errorText,
-              farmId: farmer.farmId
+          // Only sync to Zoho if there are fields to update
+          if (Object.keys(zohoData).length > 0) {
+            const zohoResponse = await fetch(zohoApiUrl, {
+              method: 'PUT',
+              headers: {
+                'Authorization': `Zoho-oauthtoken ${accessToken}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ data: [zohoData] })
             });
-            // Don't fail the request, just log the error
-            // D1 update succeeded, which is the primary concern
+
+            if (!zohoResponse.ok) {
+              const errorText = await zohoResponse.text();
+              logger.error('Zoho CRM sync failed', {
+                status: zohoResponse.status,
+                error: errorText,
+                farmId: farmer.farmId
+              });
+              // Don't fail the request, just log the error
+              // D1 update succeeded, which is the primary concern
+            } else {
+              logger.info('Farm data synced to Zoho CRM', { farmId: farmer.farmId });
+            }
           } else {
-            logger.info('Farm data synced to Zoho CRM', { farmId: farmer.farmId });
+            logger.info('No fields to sync to Zoho CRM (partial update with no changes)', { farmId: farmer.farmId });
           }
         } catch (zohoError) {
           logger.error('Zoho CRM sync error', {
@@ -4286,16 +4343,16 @@ export default {
 
         // Check if address changed (trigger geocoding if needed)
         const addressChanged =
-          existingFarm.street !== data.street ||
-          existingFarm.city !== data.city ||
-          existingFarm.state !== data.state ||
-          existingFarm.postal_code !== data.postal_code;
+          (data.street !== undefined && existingFarm.street !== updateData.street) ||
+          (data.city !== undefined && existingFarm.city !== updateData.city) ||
+          (data.state !== undefined && existingFarm.state !== updateData.state) ||
+          (data.postal_code !== undefined && existingFarm.postal_code !== updateData.postal_code);
 
         if (addressChanged && env.GOOGLE_MAPS_API_KEY) {
           logger.info('Address changed, triggering geocoding', { farmId: farmer.farmId });
 
           try {
-            const address = `${data.street}, ${data.city}, ${data.state} ${data.postal_code}`;
+            const address = `${updateData.street || ''}, ${updateData.city || ''}, ${updateData.state || ''} ${updateData.postal_code || ''}`.trim();
             const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${env.GOOGLE_MAPS_API_KEY}`;
 
             const geocodeResponse = await fetch(geocodeUrl);
@@ -4337,18 +4394,18 @@ export default {
           }
         }
 
-        // Calculate updated verification status
+        // Calculate updated verification status (use merged data)
         const missingFields = [];
-        if (!data.description || data.description.trim().length === 0) {
+        if (!updateData.description || updateData.description.trim().length === 0) {
           missingFields.push('description');
         }
-        const hasOperatingHours = data.monday_hours || data.tuesday_hours ||
-          data.wednesday_hours || data.thursday_hours ||
-          data.friday_hours || data.saturday_hours || data.sunday_hours;
+        const hasOperatingHours = updateData.monday_hours || updateData.tuesday_hours ||
+          updateData.wednesday_hours || updateData.thursday_hours ||
+          updateData.friday_hours || updateData.saturday_hours || updateData.sunday_hours;
         if (!hasOperatingHours) {
           missingFields.push('operating_hours');
         }
-        const hasContactInfo = data.phone || data.email || data.website;
+        const hasContactInfo = updateData.phone || updateData.email || updateData.website;
         if (!hasContactInfo) {
           missingFields.push('contact_info');
         }
@@ -4430,6 +4487,98 @@ export default {
           error: error.message,
           errorName: error.name,
           stack: error.stack
+        });
+
+        return handleAuthenticationError(error, correlationId);
+      }
+    }
+
+    // FARMER IMAGE UPLOAD ENDPOINT
+    if (url.pathname === "/api/farmer/farm/images" && method === "POST") {
+      // Story 2.5: Upload Farm Images (Logo and Cover Photo)
+      // Uploads images to R2 and updates D1 database
+      try {
+        // Authenticate farmer
+        const farmer = await authenticateFarmer(request, env);
+
+        logger.info('Uploading farm image', {
+          userId: farmer.userId,
+          farmId: farmer.farmId
+        });
+
+        // Parse multipart form data
+        const formData = await request.formData();
+        const file = formData.get('file');
+        const imageType = formData.get('imageType'); // 'logo' or 'background'
+
+        if (!file || !(file instanceof File)) {
+          return errorResponse(400, "Validation error", "File is required", correlationId);
+        }
+
+        if (!imageType || !['logo', 'background'].includes(imageType)) {
+          return errorResponse(400, "Validation error", "imageType must be 'logo' or 'background'", correlationId);
+        }
+
+        // Validate file size (logo: 5MB max, background: 10MB max)
+        const maxSize = imageType === 'logo' ? 5 * 1024 * 1024 : 10 * 1024 * 1024;
+        if (file.size > maxSize) {
+          return errorResponse(400, "Validation error", `File size exceeds ${imageType === 'logo' ? '5MB' : '10MB'} limit`, correlationId);
+        }
+
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+        if (!validTypes.includes(file.type)) {
+          return errorResponse(400, "Validation error", "Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed", correlationId);
+        }
+
+        // Convert File to ArrayBuffer
+        const imageBuffer = await file.arrayBuffer();
+
+        // Process and upload image using existing pipeline
+        const { processImage } = await import('./lib/image-processor.js');
+        const result = await processImage({
+          imageBuffer: imageBuffer,
+          farmId: farmer.farmId,
+          imageType: imageType,
+          bucket: env.ASSETS_BUCKET,
+          cdnDomain: env.CDN_DOMAIN
+        });
+
+        // Update D1 database with new image URL
+        const updateField = imageType === 'logo' ? 'logo_url' : 'background_url';
+        const timestampField = imageType === 'logo' ? 'logo_updated_at' : 'background_updated_at';
+
+        await env.DB.prepare(`
+          UPDATE farms SET
+            ${updateField} = ?,
+            ${timestampField} = ?
+          WHERE zoho_record_id = ?
+        `).bind(result.url, new Date().toISOString(), farmer.farmId).run();
+
+        logger.info('Farm image uploaded successfully', {
+          farmId: farmer.farmId,
+          imageType,
+          url: result.url
+        });
+
+        return new Response(JSON.stringify({
+          success: true,
+          imageType,
+          url: result.url,
+          size: result.size
+        }), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+            'X-Correlation-ID': correlationId
+          }
+        });
+
+      } catch (error) {
+        logger.error('Farm image upload failed', {
+          error: error.message,
+          errorName: error.name
         });
 
         return handleAuthenticationError(error, correlationId);
