@@ -224,7 +224,7 @@ export default function FarmerDashboardOverviewPage() {
                       size="sm" 
                       variant="default"
                       onClick={() => router.push('/dashboard/farmer/information#media')}
-                      className="bg-green-600 hover:bg-green-700 text-white"
+                      className="bg-primary hover:bg-primary/90 text-white"
                     >
                       <Upload className="h-4 w-4 mr-2" />
                       Add Photos
@@ -263,7 +263,7 @@ export default function FarmerDashboardOverviewPage() {
                           <Button 
                             size="sm" 
                             variant="default"
-                            className="bg-green-600 hover:bg-green-700 text-white"
+                            className="bg-primary hover:bg-primary/90 text-white"
                             onClick={() => router.push('/dashboard/farmer/information#media')}
                           >
                             Change
@@ -396,7 +396,7 @@ export default function FarmerDashboardOverviewPage() {
                   <div className="space-y-3">
                     <Button 
                       variant="default" 
-                      className="w-full justify-start bg-green-600 hover:bg-green-700 text-white"
+                      className="w-full justify-start bg-primary hover:bg-primary/90 text-white"
                       onClick={() => router.push('/dashboard/farmer/information')}
                     >
                       <FileText className="h-4 w-4 mr-2" />

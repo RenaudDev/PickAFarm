@@ -132,7 +132,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
 
           {/* Main Content Area */}
-          <div className="rounded-lg shadow-sm overflow-visible">
+          <div className="rounded-lg overflow-visible">
             {children}
           </div>
         </div>

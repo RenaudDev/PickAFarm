@@ -46,6 +46,17 @@ export default clerkMiddleware(async (auth, request) => {
 
     const { userId, sessionClaims } = await auth();
 
+    // SECURITY: Block unauthenticated access to farmer dashboard routes early
+    // This prevents any page load before redirecting to sign-in
+    if (pathname.startsWith('/dashboard/farmer')) {
+      if (!userId) {
+        logRedirect(`Blocking unauthenticated access to ${pathname}, redirecting to sign-in`);
+        const signInUrl = new URL('/sign-in', request.url);
+        signInUrl.searchParams.set('redirect_url', pathname);
+        return NextResponse.redirect(signInUrl);
+      }
+    }
+
     // Skip role-based routing if user is not authenticated
     if (!userId) {
       return NextResponse.next(); // Let Clerk handle auth redirect

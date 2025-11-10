@@ -6,7 +6,6 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SmartTagInput } from '@/components/forms/SmartTagInput';
@@ -443,27 +442,29 @@ export function FarmerFormImproved({
           />
 
           {/* Pet Friendly */}
-          <div className="flex items-center space-x-2">
-            <FormField
-              control={form.control}
-              name="pet_friendly"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Checkbox
-                      id="pet-friendly"
-                      checked={field.value ?? false}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Label htmlFor="pet-friendly" className="text-sm font-normal cursor-pointer">
-              Pet Friendly - Are pets allowed on your premises?
-            </Label>
-          </div>
+          <FormField
+            control={form.control}
+            name="pet_friendly"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value ?? false}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel className="cursor-pointer">
+                    Pet Friendly
+                  </FormLabel>
+                  <p className="text-xs text-muted-foreground">
+                    Are pets allowed on your premises?
+                  </p>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           {/* Payment Methods */}
           <FormField

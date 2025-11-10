@@ -120,7 +120,7 @@ export function TaskChecklistItem({
           size="sm" 
           variant="default"
           onClick={onComplete}
-          className="flex-shrink-0 bg-green-600 hover:bg-green-700 text-white"
+          className="flex-shrink-0 bg-primary hover:bg-primary/90 text-white"
         >
           Complete Task
         </Button>
